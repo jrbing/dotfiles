@@ -14,6 +14,6 @@ My dotfiles
 ### Create symlinks ###
 
 OSX:
-  ln -s ~/.dotfiles/vimrc.local ~/.vimrc.local
-  ln -s ~/.dotfiles/gvimrc.local ~/.gvimrc.local
+    ln -s ~/.dotfiles/vimrc.local ~/.vimrc.local
+    ln -s ~/.dotfiles/gvimrc.local ~/.gvimrc.local
 

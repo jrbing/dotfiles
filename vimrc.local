@@ -6,6 +6,8 @@
 " --------------------------------
 
 " Map the leader key to comma
+" <Note> This actually has to be copied to the top of Janus's vimrc file
+" in order to work with Janus-defined leader key customizations
 let mapleader = ","
 
 " Tab Stuff
@@ -17,7 +19,7 @@ set softtabstop=4
 au FocusLost * :wa
 
 " Have vim automatically reload the file in the buffer if the source file changes
-set autoread
+set autoreak
 
 " Tab completion
 set wildmenu
