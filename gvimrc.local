@@ -1,0 +1,125 @@
+" My gvimrc configuration file
+" --------------------------------
+
+" Set the colorscheme
+colorscheme mustang
+
+" Set the Transparency
+set transparency=15
+
+" Remove the scroll bars
+set guioptions=aAce
+
+" Enable folding method, but disable by default
+set foldmethod=syntax
+set nofoldenable
+
+" --------------------------------
+" OS Specific Settings
+" --------------------------------
+
+" OSX
+if has('gui_macvim')
+
+    " Set the font
+    set guifont=Inconsolata:h14
+
+" Windows
+elseif has('gui_win32')
+
+    " Set the font
+    set guifont=Droid\ Sans\ Mono\:h10:cANSI
+
+    " Change the location of the viminfo file
+    set viminfo+=n$USERPROFILE\\_viminfo
+
+    " Change the location of the bookmarks file
+    let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
+
+    " Show the tab line
+    set stal=1
+
+    " Remove 't' flag from 'guioptions': no tearoff menu entries
+    let &guioptions = substitute(&guioptions, "t", "", "g")
+
+    " Hide the scrollbars
+    set guioptions-=r
+    set guioptions-=l
+
+    " Set to open maximized if running the gui
+    au GUIEnter * simalt ~x
+
+    " Hide the toolbar
+    set guioptions-=T
+
+    " Set the colorscheme
+    colorscheme mustang
+
+    " Switch on syntax highlighting
+    if &t_Co > 2 || has("gui_running")
+       " switch syntax highlighting on, when the terminal has colors
+       syntax on
+    endif
+
+    " Prevent vim from writing backups, due to issues with the home directory
+    " being on a network share
+    " Todo:  enable backups and write them to the "backups" directory
+    set nobackup
+    set nowritebackup
+    set noswapfile
+
+endif
+
+" --------------------------------
+" Custom Key Mappings
+" --------------------------------
+
+" Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
+nnoremap <C-Tab> :call<sid>CycleTabpages(1)<cr> 
+nnoremap <C-S-Tab> :call<sid>CycleTabpages(0)<cr> 
+
+func! <sid>CycleTabpages(forw) 
+    if a:forw 
+        normal! gt 
+    else 
+        normal! gT 
+    endif 
+    while 1 
+        redraw 
+        echo "Cycle Tab pages (Shift-Tab/Tab)" 
+        let c = s:Getchar() 
+        if c == "\t" 
+            normal! gt 
+        elseif c == "\<S-Tab>" 
+            normal! gT 
+        else 
+            exe "norm! :\<C-U>" 
+            call feedkeys(c) 
+            break 
+        endif 
+    endwhile 
+endfunc 
+
+func! s:Getchar() 
+    let c = getchar() 
+    if c != 0 
+        let c = nr2char(c) 
+    endif 
+    return c 
+endfunc 
+
+" --------------------------------
+" Various Settings
+" --------------------------------
+
+" Set the tab label to equal the file name
+set guitablabel=%t
+
+" --------------------------------
+" Plugin-specific settings
+" --------------------------------
+
+" NERDTree
+let NERDChristmasTree=1  "Makes NERDTree use colors
+let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
+let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
