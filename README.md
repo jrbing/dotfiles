@@ -6,8 +6,8 @@ My dotfiles
 
 ### Pull the repository ###
 
-  cd ~
-  git clone git://github.com/jrbing/dotfiles.git
+    cd ~
+    git clone git://github.com/jrbing/dotfiles.git
 
 ### Create symlinks ###
 
@@ -26,6 +26,9 @@ Customizations to the vimrc file.
 * Menu is enabled for tab completion
 * F1 is remapped to the ESC key
 * the ; key is remapped to : in normal mode
+
+Issues: 
+* sourcing the custom markdown snippet file doesn't work
 
 ## gvimrc.local ##
 Additional changes to the gvimrc file. 
