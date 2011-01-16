@@ -4,8 +4,8 @@
 " Set the colorscheme
 colorscheme mustang
 
-" Set the Transparency
-set transparency=15
+" Set the Transparency (disabled, since it's distracting)
+"set transparency=15
 
 " Remove the scroll bars
 set guioptions=aAce

@@ -19,7 +19,7 @@ set softtabstop=4
 au FocusLost * :wa
 
 " Have vim automatically reload the file in the buffer if the source file changes
-set autoreak
+set autoread
 
 " Tab completion
 set wildmenu
@@ -31,4 +31,7 @@ vnoremap <F1> <ESC>
 
 " Remap ; to : to save the keystroke of having to hit shift all the time
 nnoremap ; :
+
+" Expand custom snippets files
+:call ExtractSnipsFile("~/.dotfiles/snippets/markdown.snippets", "markdown")
 
