@@ -1,5 +1,3 @@
-# Dotvim #
-
 My dotfiles
 
 -------------------
