@@ -33,5 +33,5 @@ vnoremap <F1> <ESC>
 nnoremap ; :
 
 " Expand custom snippets files
-:call ExtractSnipsFile("~/.dotfiles/snippets/markdown.snippets", "markdown")
+":call ExtractSnipsFile("~/.dotfiles/snippets/markdown.snippets", "markdown")
 
