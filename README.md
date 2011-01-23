@@ -4,7 +4,7 @@ My dotfiles
 
 ## Installation ##
 
-### Pull the repository ###
+### Clone the repository ###
 
     cd ~
     git clone git://github.com/jrbing/dotfiles.git
@@ -15,11 +15,11 @@ Unix:
     ln -s ~/.dotfiles/vimrc.local ~/.vimrc.local
     ln -s ~/.dotfiles/gvimrc.local ~/.gvimrc.local
     ln -s ~/.dotfiles/bash_profile ~/.bash_profile
+    ln -s ~/.dotfiles/bashrc ~/.bashrc
 
-# Customizations #
+# Notes #
 
 ## vimrc.local ##
-Customizations to the vimrc file.
 
 * Leader Key is mapped to ,
 * Tabs are set to 4 spaces
