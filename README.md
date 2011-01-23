@@ -27,7 +27,8 @@ Customizations to the vimrc file.
 * F1 is remapped to the ESC key
 * the ; key is remapped to : in normal mode
 
-Issues: 
+Issues:
+
 * sourcing the custom markdown snippet file doesn't work
 
 ## gvimrc.local ##
