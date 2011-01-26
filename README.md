@@ -7,7 +7,7 @@ My dotfiles
 ### Clone the repository ###
 
     cd ~
-    git clone git://github.com/jrbing/dotfiles.git
+    git@github.com:jrbing/dotfiles.git
 
 ### Create symlinks ###
 
