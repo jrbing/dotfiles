@@ -14,3 +14,9 @@ alias ls="ls -F"
 alias l="ls -lAh"
 alias ll="ls -l"
 alias la='ls -A'
+
+# use .localrc for settings specific to one system
+if [ -f ~/.localrc ]; then
+  source ~/.localrc
+fi
+
