@@ -211,7 +211,7 @@ endif
 " Custom Settings
 " --------------------------------
 " Set the colorscheme
-colorscheme mustang
+colorscheme ir_black
 
 " Set the Transparency (disabled, since it's distracting)
 "set transparency=15
@@ -231,13 +231,13 @@ set nofoldenable
 if has('gui_macvim')
 
     " Set the font
-    set guifont=Inconsolata:h14
+    set guifont=Consolas:h14
 
 " Windows
 elseif has('gui_win32')
 
     " Set the font
-    set guifont=Droid\ Sans\ Mono\:h10:cANSI
+    set guifont=Droid\ Sans\ Mono\:h10
 
     " Change the location of the viminfo file
     set viminfo+=n$USERPROFILE\\_viminfo
@@ -261,26 +261,22 @@ elseif has('gui_win32')
     " Hide the toolbar
     set guioptions-=T
 
-    " Set the colorscheme
-    colorscheme mustang
-
-    " Switch on syntax highlighting
-    if &t_Co > 2 || has("gui_running")
-       " switch syntax highlighting on, when the terminal has colors
-       syntax on
-    endif
+    "" Switch on syntax highlighting
+    "if &t_Co > 2 || has("gui_running")
+       "" switch syntax highlighting on, when the terminal has colors
+       "syntax on
+    "endif
 
     " Prevent vim from writing backups, due to issues with the home directory
     " being on a network share
-    " Todo:  enable backups and write them to the "backups" directory
-    set nobackup
-    set nowritebackup
-    set noswapfile
+    "set nobackup
+    "set nowritebackup
+    "set noswapfile
 
 endif
 
 " --------------------------------
-" Custom Key Mappings
+" Tab settings
 " --------------------------------
 
 " Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
@@ -317,10 +313,6 @@ func! s:Getchar()
     return c 
 endfunc 
 
-" --------------------------------
-" Various Settings
-" --------------------------------
-
 " Set the tab label to equal the file name
 set guitablabel=%t
 
@@ -328,7 +320,3 @@ set guitablabel=%t
 " Plugin-specific settings
 " --------------------------------
 
-" NERDTree
-let NERDChristmasTree=1  "Makes NERDTree use colors
-let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
-let NERDTreeShowBookmarks=1    "Display the bookmarks on startup

@@ -121,13 +121,8 @@ color desert
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
-" Include user's local vim config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
 " --------------------------------
-" Personal Settings 
+" Personal Settings
 " --------------------------------
 
 " Tab Stuff
@@ -152,6 +147,7 @@ vnoremap <F1> <ESC>
 " Remap ; to : to save the keystroke of having to hit shift all the time
 nnoremap ; :
 
-" Expand custom snippets files
-":call ExtractSnipsFile("~/.dotfiles/snippets/markdown.snippets", "markdown")
-
+" NERDTree
+let NERDChristmasTree=1  "Makes NERDTree use colors
+let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
+let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
