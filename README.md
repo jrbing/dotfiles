@@ -28,7 +28,6 @@ Unix:
 * the ; key is remapped to : in normal mode
 
 Issues:
-
 * sourcing the custom markdown snippet file doesn't work
 
 ## gvimrc.local ##
