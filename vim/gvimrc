@@ -263,9 +263,9 @@ elseif has('gui_win32')
 
     " Prevent vim from writing backups, due to issues with the home directory
     " being on a network share
-    "set nobackup
-    "set nowritebackup
-    "set noswapfile
+    set nobackup
+    set nowritebackup
+    set noswapfile
 
 endif
 
