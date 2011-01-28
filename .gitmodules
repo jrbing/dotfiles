@@ -52,3 +52,9 @@
 [submodule "vim/bundle/irblack"]
 	path = vim/bundle/irblack
 	url = git://github.com/wgibbs/vim-irblack.git
+[submodule "vim/bundle/conque"]
+	path = vim/bundle/conque
+	url = git://github.com/rson/vim-conque.git
+[submodule "vim/bundle/lusty"]
+	path = vim/bundle/lusty
+	url = git://github.com/sjbach/lusty.git
