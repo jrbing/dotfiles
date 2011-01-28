@@ -237,7 +237,7 @@ if has('gui_macvim')
 elseif has('gui_win32')
 
     " Set the font
-    set guifont=Droid\ Sans\ Mono\:h10
+    set guifont=Consolas:h11
 
     " Change the location of the viminfo file
     set viminfo+=n$USERPROFILE\\_viminfo
@@ -260,12 +260,6 @@ elseif has('gui_win32')
 
     " Hide the toolbar
     set guioptions-=T
-
-    "" Switch on syntax highlighting
-    "if &t_Co > 2 || has("gui_running")
-       "" switch syntax highlighting on, when the terminal has colors
-       "syntax on
-    "endif
 
     " Prevent vim from writing backups, due to issues with the home directory
     " being on a network share
