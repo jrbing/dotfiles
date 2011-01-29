@@ -23,7 +23,6 @@
 # Logs and databases #
 ######################
 *.log
-*.sql
 *.sqlite
 
 # OS generated files #
@@ -33,3 +32,11 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
+# Swap Files #
+##############
+*.swp
+*.bak
+.netrwhist
+
+# Directories #
+##############
