@@ -219,7 +219,7 @@ colorscheme ir_black
 " Remove the scroll bars
 set guioptions=aAce
 
-" Enable folding method, but disable by default
+" Set folding method, but disable by default
 set foldmethod=syntax
 set nofoldenable
 
