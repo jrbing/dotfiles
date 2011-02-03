@@ -1,5 +1,5 @@
 " --------------------------------
-" Settings from Janus
+" Settings taken from Janus
 " --------------------------------
 
 if has("gui_macvim")
