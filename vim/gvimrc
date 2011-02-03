@@ -213,9 +213,6 @@ endif
 " Set the colorscheme
 colorscheme ir_black
 
-" Set the Transparency (disabled, since it's distracting)
-"set transparency=15
-
 " Remove the scroll bars
 set guioptions=aAce
 
