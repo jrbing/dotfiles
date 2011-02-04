@@ -19,4 +19,3 @@ alias la='ls -A'
 if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
-
