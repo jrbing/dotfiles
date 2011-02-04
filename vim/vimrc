@@ -127,13 +127,36 @@ set directory=~/.vim/backup
 " Personal Settings
 " --------------------------------
 
-" Tab Stuff
+" Override backup file location
+set backupdir=~/.dotfiles/vim/backup
+set directory=~/.dotfiles/vim/backup
+
+" Override Tab Settings
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
 " Emulate the save on losing focus functionality that TextMate has
-au FocusLost * :wa
+" (disabled)
+" au FocusLost * :wa
+
+" Override text wrapping options
+"set wrap
+"set textwidth=79
+"set formatoptions=qrn1
+"set colorcolumn=85
+
+" Indentation
+set autoindent
+
+" Remap ,v to re-select text that was just pasted
+nnoremap <leader>v V`]
+
+" Map ,ev to open up my vimrc file in a new split
+"nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" Open up a new vertical split and switch over to it
+"nnoremap <leader>w <C-w>v<C-w>l
 
 " Have vim automatically reload the file in the buffer if the source file changes
 set autoread
@@ -148,6 +171,15 @@ vnoremap <F1> <ESC>
 
 " Remap ; to : to save the keystroke of having to hit shift all the time
 nnoremap ; :
+
+" Map Ctrl+h,j,k,l to easily move around splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Prevent Lusty Explorer from showing error messages
+set hidden
 
 " NERDTree
 let NERDChristmasTree=1  "Makes NERDTree use colors
