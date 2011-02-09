@@ -64,3 +64,6 @@
 [submodule "vim/bundle/vimshell"]
 	path = vim/bundle/vimshell
 	url = git://github.com/vim-scripts/shell.vim--Odding.git
+[submodule "vim/bundle/voom"]
+	path = vim/bundle/voom
+	url = git://github.com/vim-scripts/VOoM.git

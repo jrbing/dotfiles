@@ -255,6 +255,9 @@ elseif has('gui_win32')
     " Set to open maximized if running the gui
     au GUIEnter * simalt ~x
 
+    " Set the python path
+    let $PYTHONPATH .= "C:\Python27\libs"
+
     " Hide the toolbar
     set guioptions-=T
 
