@@ -61,6 +61,12 @@
 [submodule "vim/bundle/vorax"]
 	path = vim/bundle/vorax
 	url = git://github.com/vim-scripts/vorax.git
+<<<<<<< HEAD
+=======
+[submodule "vim/bundle/vimshell"]
+	path = vim/bundle/vimshell
+	url = git://github.com/vim-scripts/shell.vim--Odding.git
+>>>>>>> fba08b17d8a5b88e54b2845e6b0e84ac9f9a3fe2
 [submodule "vim/bundle/voom"]
 	path = vim/bundle/voom
 	url = git://github.com/vim-scripts/VOoM.git
