@@ -12,6 +12,9 @@ if has("gui_macvim")
   imap <D-t> <Esc>:CommandT<CR>
   macmenu &File.New\ Tab key=<D-T>
 
+  " Command-Return for fullscreen
+  macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
+
   " Command-Shift-F for Ack
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<nop>
   map <D-F> :Ack<space>
