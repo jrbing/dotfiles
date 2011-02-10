@@ -61,3 +61,6 @@
 [submodule "vim/bundle/vorax"]
 	path = vim/bundle/vorax
 	url = git://github.com/vim-scripts/vorax.git
+[submodule "vim/bundle/voom"]
+	path = vim/bundle/voom
+	url = git://github.com/vim-scripts/VOoM.git
