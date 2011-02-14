@@ -67,3 +67,6 @@
 [submodule "vim/bundle/voom"]
 	path = vim/bundle/voom
 	url = git://github.com/vim-scripts/VOoM.git
+[submodule "vim/bundle/cucumber"]
+	path = vim/bundle/cucumber
+	url = git://github.com/tpope/vim-cucumber.git
