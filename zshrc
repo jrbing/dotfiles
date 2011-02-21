@@ -37,7 +37,7 @@ export TERM EDITOR PAGER RSYNC_RSH CVSROOT FIGNORE DISPLAY LS_COLORS NNTPSERVER 
 # -----------------------------------------------
 
 # compinit initializes various advanced completions for zsh
-autoload -U compinit && compinit 
+autoload -U compinit && compinit
 # zmv is a batch file rename tool; e.g. zmv '(*).text' '$1.txt'
 autoload zmv
 
