@@ -1,12 +1,5 @@
 
 # -----------------------------------------------
-# zsh dummy .zshrc
-# -----------------------------------------------
-
-# Setup RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
-# -----------------------------------------------
 # Set up the Environment
 # -----------------------------------------------
 
@@ -24,6 +17,9 @@ HISTSIZE=3000
 SAVEHIST=3000
 
 export TERM EDITOR PAGER RSYNC_RSH CVSROOT FIGNORE DISPLAY LS_COLORS NNTPSERVER COLORTERM PATH HISTFILE HISTSIZE SAVEHIST
+
+# Setup RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 # -----------------------------------------------
 # Set up the prompt
@@ -140,7 +136,7 @@ alias s=screen
 alias r='screen -R'
 alias vi='vim'
 #alias ls='ls --color=auto -F'
-#alias l='ls -lAF --color=auto'
+alias l='ls -lAF --color=auto'
 alias sls='screen -ls'
 alias zrc='vim /etc/zshrc'
 alias cdw='cd ~/Sites/web'
@@ -157,7 +153,7 @@ alias -g S='|sort'
 
 ## Shell Aliases
 
-# UPenn
+# Servers
 alias srvr='ssh user@server.example.com'
 
 ## Special Root Aliases
