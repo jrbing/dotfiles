@@ -136,7 +136,7 @@ set softtabstop=4
 
 " Emulate the save on losing focus functionality that TextMate has
 " (disabled)
-" au FocusLost * :wa
+au FocusLost * :wa
 
 " Override text wrapping options
 "set wrap

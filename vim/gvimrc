@@ -226,7 +226,7 @@ set nofoldenable
 if has('gui_macvim')
 
     " Set the font
-    set guifont=Consolas:h14
+    set guifont=Consolas:h13
 
 " Windows
 elseif has('gui_win32')
@@ -307,8 +307,4 @@ endfunc
 
 " Set the tab label to equal the file name
 set guitablabel=%t
-
-" --------------------------------
-" Plugin-specific settings
-" --------------------------------
 
