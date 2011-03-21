@@ -130,9 +130,9 @@ set backupdir=~/.dotfiles/vim/backup
 set directory=~/.dotfiles/vim/backup
 
 " Override Tab Settings
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+"set tabstop=4
+"set shiftwidth=4
+"set softtabstop=4
 
 " Emulate the save on losing focus functionality that TextMate has
 " (disabled)
