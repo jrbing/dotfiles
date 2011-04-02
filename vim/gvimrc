@@ -250,14 +250,17 @@ elseif has('gui_win32')
     set guioptions-=r
     set guioptions-=l
 
+    " Hide the toolbar
+    set guioptions-=T
+
+    " Show the menu bar
+    set guioptions+=m
+
     " Set to open maximized if running the gui
     au GUIEnter * simalt ~x
 
     " Set the python path
     let $PYTHONPATH .= "C:\Python27\libs"
-
-    " Hide the toolbar
-    set guioptions-=T
 
     " Prevent vim from writing backups, due to issues with the home directory
     " being on a network share
