@@ -115,7 +115,13 @@ set modeline
 set modelines=10
 
 " Default color scheme
-color desert
+if has ('gui_running')
+  set background=light
+else
+  let g:solarized_termcolors=16
+  set background=dark
+endif 
+colorscheme solarized
 
 "Directories for swp files
 set backupdir=~/.vim/backup
@@ -149,12 +155,6 @@ set autoindent
 
 " Remap ,v to re-select text that was just pasted
 nnoremap <leader>v V`]
-
-" Map ,ev to open up my vimrc file in a new split
-"nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-
-" Open up a new vertical split and switch over to it
-"nnoremap <leader>w <C-w>v<C-w>l
 
 " Have vim automatically reload the file in the buffer if the source file changes
 set autoread
