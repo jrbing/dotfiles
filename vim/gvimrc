@@ -209,7 +209,8 @@ call s:DefineCommand("mkdir", "Mkdir")
 " Custom Settings
 " --------------------------------
 " Set the colorscheme
-colorscheme ir_black
+set background=light
+colorscheme solarized
 
 " Remove the scroll bars
 set guioptions=aAce
