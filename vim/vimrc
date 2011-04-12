@@ -135,11 +135,6 @@ set directory=~/.vim/backup
 set backupdir=~/.dotfiles/vim/backup
 set directory=~/.dotfiles/vim/backup
 
-" Override Tab Settings
-"set tabstop=4
-"set shiftwidth=4
-"set softtabstop=4
-
 " Emulate the save on losing focus functionality that TextMate has
 " (disabled)
 au FocusLost * :wa
@@ -182,6 +177,12 @@ nnoremap <C-l> <C-w>l
 
 " Prevent Lusty Explorer from showing error messages
 set hidden
+
+" Remap easymotion keys
+let g:EasyMotion_leader_key = '\'
+
+" Remap key for command-t
+nnoremap <silent> <C-t> :CommandT<CR>
 
 " NERDTree
 let NERDChristmasTree=1  "Makes NERDTree use colors

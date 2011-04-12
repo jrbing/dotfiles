@@ -50,13 +50,61 @@ if has("gui_macvim")
   imap <D-8> <Esc>8gt
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
+
+  " Set the font
+  set guifont=Consolas:h13
+
+" Windows
+elseif has('gui_win32')
+
+  " Set the font
+  set guifont=Consolas:h11
+
+  " Change the location of the viminfo file
+  set viminfo+=n$USERPROFILE\\_viminfo
+
+  " Change the location of the bookmarks file
+  let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
+
+  " Show the tab line
+  set stal=1
+
+  "Control-S to Save
+  nmap <silent> <C-S> :if expand("%") == ""<CR>:browse confirm w<CR>:else<CR>:confirm w<CR>:endif<CR>
+
+  " Remove 't' flag from 'guioptions': no tearoff menu entries
+  let &guioptions = substitute(&guioptions, "t", "", "g")
+
+  " Hide the scrollbars
+  set guioptions-=r
+  set guioptions-=l
+
+  " Hide the toolbar
+  set guioptions-=T
+
+  " Show the menu bar
+  set guioptions+=m
+
+  " Set to open maximized if running the gui
+  au GUIEnter * simalt ~x
+
+  " Set the python path
+  let $PYTHONPATH .= "C:\Python27\libs"
+
+  " Prevent vim from writing backups, due to issues with the home directory
+  " being on a network share
+  set nobackup
+  set nowritebackup
+  set noswapfile
+
+  " Hides the menu
+  set winaltkeys=no
+  " map <A-t> <ESC>:tabprev<CR>
+
 endif
 
 " Start without the toolbar
 set guioptions-=T
-
-" Default gui color scheme
-color ir_black
 
 " ConqueTerm wrapper
 function StartTerm()
@@ -220,64 +268,16 @@ set foldmethod=syntax
 set nofoldenable
 
 " --------------------------------
-" OS Specific Settings
-" --------------------------------
-
-" OSX
-if has('gui_macvim')
-
-    " Set the font
-    set guifont=Consolas:h13
-
-" Windows
-elseif has('gui_win32')
-
-    " Set the font
-    set guifont=Consolas:h11
-
-    " Change the location of the viminfo file
-    set viminfo+=n$USERPROFILE\\_viminfo
-
-    " Change the location of the bookmarks file
-    let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
-
-    " Show the tab line
-    set stal=1
-
-    " Remove 't' flag from 'guioptions': no tearoff menu entries
-    let &guioptions = substitute(&guioptions, "t", "", "g")
-
-    " Hide the scrollbars
-    set guioptions-=r
-    set guioptions-=l
-
-    " Hide the toolbar
-    set guioptions-=T
-
-    " Show the menu bar
-    set guioptions+=m
-
-    " Set to open maximized if running the gui
-    au GUIEnter * simalt ~x
-
-    " Set the python path
-    let $PYTHONPATH .= "C:\Python27\libs"
-
-    " Prevent vim from writing backups, due to issues with the home directory
-    " being on a network share
-    set nobackup
-    set nowritebackup
-    set noswapfile
-
-endif
-
-" --------------------------------
 " Tab settings
 " --------------------------------
 
 " Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
-nnoremap <C-Tab> :call<sid>CycleTabpages(1)<cr> 
-nnoremap <C-S-Tab> :call<sid>CycleTabpages(0)<cr> 
+nnoremap <C-Tab> :call<sid>CycleTabpages(1)<cr>
+inoremap <C-Tab> :call<sid>CycleTabpages(1)<cr>
+vnoremap <C-Tab> :call<sid>CycleTabpages(1)<cr>
+nnoremap <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
+inoremap <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
+vnoremap <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
 
 func! <sid>CycleTabpages(forw) 
     if a:forw 
