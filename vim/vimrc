@@ -182,7 +182,7 @@ set hidden
 let g:EasyMotion_leader_key = '\'
 
 " Remap key for command-t
-nnoremap <silent> <C-t> :CommandT<CR>
+nnoremap <silent> <A-t> :CommandT<CR>
 
 " NERDTree
 let NERDChristmasTree=1  "Makes NERDTree use colors
