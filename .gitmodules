@@ -22,9 +22,6 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/vividchalk"]
-	path = vim/bundle/vividchalk
-	url = git://github.com/tpope/vim-vividchalk.git
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
@@ -46,24 +43,12 @@
 [submodule "vim/bundle/commandt"]
 	path = vim/bundle/commandt
 	url = git://github.com/wincent/Command-T.git
-[submodule "vim/bundle/color-sampler-pack"]
-	path = vim/bundle/color-sampler-pack
-	url = git://github.com/vim-scripts/Color-Sampler-Pack.git
-[submodule "vim/bundle/irblack"]
-	path = vim/bundle/irblack
-	url = git://github.com/wgibbs/vim-irblack.git
 [submodule "vim/bundle/conque"]
 	path = vim/bundle/conque
 	url = git://github.com/rson/vim-conque.git
-[submodule "vim/bundle/lusty"]
-	path = vim/bundle/lusty
-	url = git://github.com/sjbach/lusty.git
 [submodule "vim/bundle/voom"]
 	path = vim/bundle/voom
 	url = git://github.com/vim-scripts/VOoM.git
-[submodule "vim/bundle/cucumber"]
-	path = vim/bundle/cucumber
-	url = git://github.com/tpope/vim-cucumber.git
 [submodule "vim/bundle/zoomwin"]
 	path = vim/bundle/zoomwin
 	url = git://github.com/vim-scripts/ZoomWin.git
@@ -82,3 +67,6 @@
 [submodule "vim/bundle/taskpaper"]
 	path = vim/bundle/taskpaper
 	url = git://github.com/davidoc/taskpaper.vim.git
+[submodule "vim/bundle/taglist"]
+	path = vim/bundle/taglist
+	url = git://github.com/vim-scripts/taglist.vim.git
