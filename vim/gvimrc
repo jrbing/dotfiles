@@ -227,7 +227,7 @@ set nofoldenable
 if has('gui_macvim')
 
     " Set the font
-    set guifont=Consolas:h13
+    set guifont="Meslo LG L DZ:h12"
 
 " Windows
 elseif has('gui_win32')
