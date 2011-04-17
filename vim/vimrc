@@ -180,4 +180,4 @@ let NERDTreeChDirMode=1  "Changes the current working directory to the one set a
 let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 
 " Automatically set filetype for files without an extension
-autocmd BufEnter * if &filetype == "" | setlocal ft=txt | endif
+autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
