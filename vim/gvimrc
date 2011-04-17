@@ -72,6 +72,9 @@ elseif has('gui_win32')
   "Control-S to Save
   nmap <silent> <C-S> :if expand("%") == ""<CR>:browse confirm w<CR>:else<CR>:confirm w<CR>:endif<CR>
 
+  "Ctrl Shift-f to run Ack
+  nmap <C-F> :Ack<space>
+
   " Remove 't' flag from 'guioptions': no tearoff menu entries
   let &guioptions = substitute(&guioptions, "t", "", "g")
 
