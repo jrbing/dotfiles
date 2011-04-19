@@ -24,3 +24,4 @@ source $ZSH/oh-my-zsh.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 export SOYWIKI_VIM=mvim
+export PATH=$PATH:~/.bin
