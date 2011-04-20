@@ -327,10 +327,10 @@ endif
 " --------------------------------
 
 " Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
-nnoremap <C-Tab> :call<sid>CycleTabpages(1)<cr>
-inoremap <C-Tab> :call<ESC><sid>CycleTabpages(1)<cr>
-nnoremap <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
-inoremap <C-S-Tab> :call<ESC><sid>CycleTabpages(0)<cr>
+nnoremap <silent> <C-Tab> :call<sid>CycleTabpages(1)<cr>
+" inoremap <silent> <C-Tab> :call<ESC><sid>CycleTabpages(1)<cr>
+nnoremap <silent> <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
+" inoremap <silent> <C-S-Tab> :call<ESC><sid>CycleTabpages(0)<cr>
 
 func! <sid>CycleTabpages(forw) 
     if a:forw 
