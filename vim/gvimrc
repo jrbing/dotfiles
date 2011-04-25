@@ -1,7 +1,5 @@
-" --------------------------------
-" Settings taken from Janus
-" --------------------------------
 
+" OSX Specific Settings
 if has("gui_macvim")
   " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
@@ -51,7 +49,10 @@ if has("gui_macvim")
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
 
-" Windows
+  " Set the font
+  set guifont=Meslo\ LG\ L\ DZ:h12
+
+" Windows Specific Settings
 elseif has('gui_win32')
 
   " Set the font
@@ -65,9 +66,6 @@ elseif has('gui_win32')
 
   " Show the tab line
   set stal=1
-
-  "Control-S to Save
-  " nmap <silent> <C-S> :if expand("%") == ""<CR>:browse confirm w<CR>:else<CR>:confirm w<CR>:endif<CR>
 
   "Alt Shift-f to run Ack
   nmap <A-F> :Ack<space>
@@ -110,7 +108,7 @@ elseif has('gui_win32')
 endif
 
 " Start without the toolbar
-set guioptions-=T
+" set guioptions-=T
 
 " ConqueTerm wrapper
 function StartTerm()
@@ -259,71 +257,12 @@ call s:DefineCommand("rm", "Remove")
 call s:DefineCommand("e", "Edit")
 call s:DefineCommand("mkdir", "Mkdir")
 
-" --------------------------------
-" Custom Settings
-" --------------------------------
-" Set the colorscheme
-" set background=dark
-" colorscheme solarized
-
 " Remove the scroll bars
 set guioptions=aAce
 
 " Set folding method, but disable by default
 set foldmethod=syntax
 set nofoldenable
-
-" --------------------------------
-" OS Specific Settings
-" --------------------------------
-
-" OSX
-if has('gui_macvim')
-
-    " Set the font
-    set guifont=Meslo\ LG\ L\ DZ:h12
-
-" Windows
-elseif has('gui_win32')
-
-    " Set the font
-    set guifont=Consolas:h11
-
-    " Change the location of the viminfo file
-    set viminfo+=n$USERPROFILE\\_viminfo
-
-    " Change the location of the bookmarks file
-    let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
-
-    " Show the tab line
-    set stal=1
-
-    " Remove 't' flag from 'guioptions': no tearoff menu entries
-    let &guioptions = substitute(&guioptions, "t", "", "g")
-
-    " Hide the scrollbars
-    set guioptions-=r
-    set guioptions-=l
-
-    " Hide the toolbar
-    set guioptions-=T
-
-    " Show the menu bar
-    set guioptions+=m
-
-    " Set to open maximized if running the gui
-    au GUIEnter * simalt ~x
-
-    " Set the python path
-    let $PYTHONPATH .= "C:\Python27\libs"
-
-    " Prevent vim from writing backups, due to issues with the home directory
-    " being on a network share
-    set nobackup
-    set nowritebackup
-    set noswapfile
-
-endif
 
 " --------------------------------
 " Tab settings
