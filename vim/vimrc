@@ -132,12 +132,6 @@ set directory=~/.dotfiles/vim/backup
 " Emulate the save on losing focus functionality that TextMate has
 au FocusLost * :wa
 
-" Override text wrapping options
-"set wrap
-"set textwidth=79
-"set formatoptions=qrn1
-"set colorcolumn=85
-
 " Indentation
 set autoindent
 
@@ -146,9 +140,6 @@ nnoremap <leader>v V`]
 
 " Have vim automatically reload the file in the buffer if the source file changes
 set autoread
-
-" Tab completion
-set wildmenu
 
 " Insert date and time header
 nmap <F5> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>

@@ -51,9 +51,6 @@ if has("gui_macvim")
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
 
-  " Set the font
-  set guifont=Consolas:h13
-
 " Windows
 elseif has('gui_win32')
 
@@ -70,10 +67,10 @@ elseif has('gui_win32')
   set stal=1
 
   "Control-S to Save
-  nmap <silent> <C-S> :if expand("%") == ""<CR>:browse confirm w<CR>:else<CR>:confirm w<CR>:endif<CR>
+  " nmap <silent> <C-S> :if expand("%") == ""<CR>:browse confirm w<CR>:else<CR>:confirm w<CR>:endif<CR>
 
-  "Ctrl Shift-f to run Ack
-  nmap <C-F> :Ack<space>
+  "Alt Shift-f to run Ack
+  nmap <A-F> :Ack<space>
 
   " Remove 't' flag from 'guioptions': no tearoff menu entries
   let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -102,6 +99,13 @@ elseif has('gui_win32')
 
   " Hides the menu
   set winaltkeys=no
+
+  " Have vim use Windows Ctrl+ keys
+  source $VIMRUNTIME/mswin.vim
+
+  " Map Alt-Shift-P to run markdown to pdf against the current document and
+  " open the resulting document
+  nmap <silent> <A-P> :! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf, && start \%TEMP\%\/%:t:r:s,$,.pdf, 
 
 endif
 
