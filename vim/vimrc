@@ -66,6 +66,8 @@ function s:setupWrapping()
   set wrap
   set wm=2
   set textwidth=72
+  set linebreak
+  set nolist
 endfunction
 
 function s:setupMarkup()
@@ -74,6 +76,13 @@ function s:setupMarkup()
   set tabstop=4
   set shiftwidth=4
   set softtabstop=4
+  set textwidth=0
+  set wrapmargin=0
+  set formatoptions+=1
+  " Spellcheck
+  " set spell
+  set spelllang=en
+  set spellsuggest=9 "show only 9 suggestions for misspelled words
   " Map the markdown preview to leader-p
   map <buffer> <Leader>p :Mm <CR>
 endfunction
@@ -133,6 +142,9 @@ endif
 set backupdir=~/.dotfiles/vim/backup
 set directory=~/.dotfiles/vim/backup
 
+" Highlight the current line
+set cursorline
+
 " Emulate the save on losing focus functionality that TextMate has
 au FocusLost * :wa
 
@@ -146,8 +158,8 @@ nnoremap <leader>v V`]
 set autoread
 
 " Insert date and time header
-nmap <F5> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-imap <F5> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+" nmap <F5> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+" imap <F5> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
 " Remap the help key to the escape key (since I'll be hitting it all the time)
 inoremap <F1> <ESC>
@@ -176,3 +188,32 @@ let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 
 " Automatically set filetype for files without an extension
 " autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
+
+" Table formatting plugin
+command! -range FmtTable python FmtTable(<f-line1>,<f-line2>) 
+
+python << EOS 
+def FmtTable(line1,line2): 
+    import vim, string 
+    inputSeparator='|' 
+    outputSeparator="|" 
+    cb=vim.current.buffer.range(int(line1)-1,int(line2)) 
+    colLen=[] 
+    # first we collect col lengths and calculate the longest 
+    for line in cb[1:]: 
+        spLine=line.split(inputSeparator) 
+        for i in range(len(spLine)): 
+            try: 
+                if len(spLine[i]) > colLen[i]: 
+                    colLen[i] = len(spLine[i]) 
+            except IndexError: 
+                colLen.append(len(spLine[i])) 
+    tmpBuf=[] 
+    # Then we fill the cols with spaces 
+    for line in cb[1:]: 
+        spLine=line.split(inputSeparator) 
+        newLine=outputSeparator.join([spElt.ljust(colLen[i]) for i, spElt in enumerate(spLine)]) + outputSeparator 
+        tmpBuf.append(newLine) 
+    cb[1:]=tmpBuf[:] 
+EOS 
+

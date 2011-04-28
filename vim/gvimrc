@@ -1,5 +1,5 @@
-
 " OSX Specific Settings
+
 if has("gui_macvim")
   " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
@@ -52,6 +52,13 @@ if has("gui_macvim")
   " Set the font
   set guifont=Meslo\ LG\ L\ DZ:h12
 
+  " Insert date and time header
+  nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+  imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+ 
+  " Set the directory for the sessions plugin
+  let g:session_directory = '~/.dotfiles/vim/sessions'
+
 " Windows Specific Settings
 elseif has('gui_win32')
 
@@ -95,20 +102,42 @@ elseif has('gui_win32')
   set nowritebackup
   set noswapfile
 
+  " Use putty for netrw
+  let g:netrw_cygwin = 0
+  let g:netrw_ssh_cmd  = 'C:\tools\putty\plink.exe -batch -T -ssh'
+  " let g:netrw_ssh_cmd="\"c:\\tools\\putty\\plink.exe\" -batch -T -ssh" 
+  " let g:netrw_scp_cmd="\"c:\\tools\\putty\\pscp.exe\" -q -batch -scp" 
+  let g:netrw_scp_cmd  = 'C:\tools\putty\pscp.exe -batch -q -scp'
+  let g:netrw_sftp_cmd = 'C:\tools\putty\pscp.exe -batch -q -sftp'
+
   " Hides the menu
   set winaltkeys=no
 
   " Have vim use Windows Ctrl+ keys
   source $VIMRUNTIME/mswin.vim
 
+  " Set the directory for the sessions plugin
+  let g:session_directory = '~\.dotfiles\vim\sessions'
+
   " Map Alt-Shift-P to run markdown to pdf against the current document and
   " open the resulting document
   nmap <silent> <A-P> :! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf, && start \%TEMP\%\/%:t:r:s,$,.pdf, 
 
+  " Insert date and time header at the top of the file
+  nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+  imap <A-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+
 endif
 
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+imap <Leader>= <Esc> <C-w>=
+
+" Don't beep
+set visualbell
+
 " Start without the toolbar
-" set guioptions-=T
+set guioptions-=T
 
 " ConqueTerm wrapper
 function StartTerm()
