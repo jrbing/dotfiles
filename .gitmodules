@@ -70,3 +70,9 @@
 [submodule "vim/bundle/taskpaper"]
 	path = vim/bundle/taskpaper
 	url = git@github.com:jrbing/taskpaper.vim.git
+[submodule "vim/bundle/vim-ruby"]
+	path = vim/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/bundle/sessions"]
+	path = vim/bundle/sessions
+	url = git://github.com/vim-scripts/session.vim--Odding.git
