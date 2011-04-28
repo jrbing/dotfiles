@@ -1,4 +1,4 @@
-
+﻿
 " OSX Specific Settings
 if has("gui_macvim")
   " Fullscreen takes up entire screen
@@ -103,7 +103,7 @@ elseif has('gui_win32')
 
   " Map Alt-Shift-P to run markdown to pdf against the current document and
   " open the resulting document
-  nmap <silent> <A-P> :! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf, && start \%TEMP\%\/%:t:r:s,$,.pdf, 
+  nmap <silent> <A-P> :! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf, && start \%TEMP\%\/%:t:r:s,$,.pdf, 
 
 endif
 
