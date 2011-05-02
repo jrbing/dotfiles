@@ -133,6 +133,9 @@ endif
 map <Leader>= <C-w>=
 imap <Leader>= <Esc> <C-w>=
 
+" Show the netrw menu 
+let g:netrw_menu = 1
+
 " Don't beep
 set visualbell
 
