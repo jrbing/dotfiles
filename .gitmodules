@@ -10,9 +10,6 @@
 [submodule "vim/bundle/indent_object"]
 	path = vim/bundle/indent_object
 	url = git://github.com/michaeljsmith/vim-indent-object.git
-[submodule "vim/bundle/markdown_preview"]
-	path = vim/bundle/markdown_preview
-	url = git://github.com/robgleeson/vim-markdown-preview.git
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = git://github.com/wycats/nerdtree.git
@@ -67,9 +64,6 @@
 [submodule "vim/bundle/taglist"]
 	path = vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
-[submodule "vim/bundle/taskpaper"]
-	path = vim/bundle/taskpaper
-	url = git@github.com:jrbing/taskpaper.vim.git
 [submodule "vim/bundle/vim-ruby"]
 	path = vim/bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git

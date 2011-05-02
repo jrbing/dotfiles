@@ -1,6 +1,7 @@
 " Remap the leader key
 let mapleader = ","
 
+" Set encoding
 set encoding=utf-8
 
 " Call pathogen
@@ -12,9 +13,6 @@ set nocompatible
 set number
 set ruler
 syntax on
-
-" Set encoding
-set encoding=utf-8
 
 " Whitespace stuff
 set nowrap
@@ -62,15 +60,25 @@ if has("autocmd")
     \| exe "normal g'\"" | endif
 endif
 
-function s:setupWrapping()
+function! s:setupWrapping()
   set wrap
   set wm=2
   set textwidth=72
   set linebreak
   set nolist
+  nnoremap j gj
+  nnoremap k gk
+  vnoremap j gj
+  vnoremap k gk
+  nnoremap <Down> gj
+  nnoremap <Up> gk
+  vnoremap <Down> gj
+  vnoremap <Up> gk
+  inoremap <Down> <C-o>gj
+  inoremap <Up> <C-o>gk
 endfunction
 
-function s:setupMarkup()
+function! s:setupMarkup()
   call s:setupWrapping()
   " Change the tab settings to work properly with Pandoc lists
   set tabstop=4
@@ -129,9 +137,9 @@ vmap <C-Down> ]egv
 set modeline
 set modelines=10
 
-" Default color scheme
 colorscheme solarized
 if has ('gui_running')
+" Default color scheme
   set background=dark
 else
   let g:solarized_termcolors=16
@@ -157,10 +165,6 @@ nnoremap <leader>v V`]
 " Have vim automatically reload the file in the buffer if the source file changes
 set autoread
 
-" Insert date and time header
-" nmap <F5> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-" imap <F5> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-
 " Remap the help key to the escape key (since I'll be hitting it all the time)
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
@@ -168,6 +172,7 @@ vnoremap <F1> <ESC>
 
 " Remap ; to : to save the keystroke of having to hit shift all the time
 nnoremap ; :
+vnoremap ; :
 
 " Map Ctrl+h,j,k,l to easily move around splits
 nnoremap <C-h> <C-w>h
@@ -186,34 +191,6 @@ let NERDChristmasTree=1  "Makes NERDTree use colors
 let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
 let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 
-" Automatically set filetype for files without an extension
-" autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
-
-" Table formatting plugin
-command! -range FmtTable python FmtTable(<f-line1>,<f-line2>) 
-
-python << EOS 
-def FmtTable(line1,line2): 
-    import vim, string 
-    inputSeparator='|' 
-    outputSeparator="|" 
-    cb=vim.current.buffer.range(int(line1)-1,int(line2)) 
-    colLen=[] 
-    # first we collect col lengths and calculate the longest 
-    for line in cb[1:]: 
-        spLine=line.split(inputSeparator) 
-        for i in range(len(spLine)): 
-            try: 
-                if len(spLine[i]) > colLen[i]: 
-                    colLen[i] = len(spLine[i]) 
-            except IndexError: 
-                colLen.append(len(spLine[i])) 
-    tmpBuf=[] 
-    # Then we fill the cols with spaces 
-    for line in cb[1:]: 
-        spLine=line.split(inputSeparator) 
-        newLine=outputSeparator.join([spElt.ljust(colLen[i]) for i, spElt in enumerate(spLine)]) + outputSeparator 
-        tmpBuf.append(newLine) 
-    cb[1:]=tmpBuf[:] 
-EOS 
+" Automatically reload the vimrc file when changed
+autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
