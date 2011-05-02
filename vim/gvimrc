@@ -80,14 +80,14 @@ elseif has('gui_win32')
   let &guioptions = substitute(&guioptions, "t", "", "g")
 
   " Hide the scrollbars
-  set guioptions-=r
-  set guioptions-=l
+  " set guioptions-=r
+  " set guioptions-=l
 
   " Hide the toolbar
-  set guioptions-=T
+  " set guioptions-=T
 
   " Show the menu bar
-  set guioptions+=m
+  " set guioptions+=m
 
   " Set to open maximized if running the gui
   au GUIEnter * simalt ~x
@@ -139,11 +139,8 @@ let g:netrw_menu = 1
 " Don't beep
 set visualbell
 
-" Start without the toolbar
-set guioptions-=T
-
 " Change the menu name for the Align plugin
-let g:DrChipTopLvlMenu= "Align."
+let g:DrChipTopLvlMenu="Align."
 
 " ConqueTerm wrapper
 function! StartTerm()
@@ -292,7 +289,7 @@ call s:DefineCommand("e", "Edit")
 call s:DefineCommand("mkdir", "Mkdir")
 
 " Remove the scroll bars
-set guioptions=aAce
+set guioptions=aAcem
 
 " Set folding method, but disable by default
 set foldmethod=syntax
