@@ -194,3 +194,9 @@ let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 " Automatically reload the vimrc file when changed
 autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
+" Automatically cd to the directory of the currently edited file
+set autochdir
+
+" Hide the menu bar
+set guioptions-=M
+set guioptions-=m
