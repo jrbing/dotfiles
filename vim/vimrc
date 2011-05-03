@@ -120,8 +120,8 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
 map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
 " Inserts the path of the currently edited file into a command
+
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
@@ -194,3 +194,5 @@ let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 " Automatically reload the vimrc file when changed
 autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
+" Set par as the paragraph formatting program to use
+set formatprg=par
