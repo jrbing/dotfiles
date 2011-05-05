@@ -120,8 +120,8 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
 map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
 " Inserts the path of the currently edited file into a command
+
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
@@ -137,16 +137,14 @@ vmap <C-Down> ]egv
 set modeline
 set modelines=10
 
+colorscheme solarized
 if has ('gui_running')
 " Default color scheme
   set background=dark
-  let g:solarized_contrast="low"    "default value is normal
-  let g:solarized_visibility="high"    "default value is low
 else
   let g:solarized_termcolors=16
   set background=dark
 endif
-colorscheme solarized
 
 " Set backup file location
 set backupdir=~/.dotfiles/vim/backup
@@ -196,9 +194,5 @@ let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 " Automatically reload the vimrc file when changed
 autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
-" Automatically cd to the directory of the currently edited file
-set autochdir
-
-" Hide the menu bar
-set guioptions-=M
-set guioptions-=m
+" Set par as the paragraph formatting program to use
+set formatprg=par
