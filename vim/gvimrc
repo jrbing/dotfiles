@@ -62,7 +62,7 @@ if has("gui_macvim")
 elseif has('gui_win32')
 
   " Set the font
-  set guifont=Consolas:h11
+  set guifont=Consolas:h10
 
   " Change the location of the viminfo file
   set viminfo+=n$USERPROFILE\\_viminfo
@@ -106,8 +106,8 @@ elseif has('gui_win32')
   " TODO:  still have to get this working properly
   let g:netrw_cygwin = 0
   let g:netrw_ssh_cmd  = 'C:\tools\putty\plink.exe -batch -T -ssh'
-  " let g:netrw_ssh_cmd="\"c:\\tools\\putty\\plink.exe\" -batch -T -ssh" 
-  " let g:netrw_scp_cmd="\"c:\\tools\\putty\\pscp.exe\" -q -batch -scp" 
+  " let g:netrw_ssh_cmd="\"c:\\tools\\putty\\plink.exe\" -batch -T -ssh"
+  " let g:netrw_scp_cmd="\"c:\\tools\\putty\\pscp.exe\" -q -batch -scp"
   let g:netrw_scp_cmd  = 'C:\tools\putty\pscp.exe -batch -q -scp'
   let g:netrw_sftp_cmd = 'C:\tools\putty\pscp.exe -batch -q -sftp'
 
@@ -290,7 +290,7 @@ call s:DefineCommand("e", "Edit")
 call s:DefineCommand("mkdir", "Mkdir")
 
 " Remove the scroll bars
-" set guioptions=aAcem
+set guioptions=aAce
 
 " Set folding method, but disable by default
 set foldmethod=syntax

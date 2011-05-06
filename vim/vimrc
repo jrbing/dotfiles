@@ -137,14 +137,16 @@ vmap <C-Down> ]egv
 set modeline
 set modelines=10
 
-colorscheme solarized
 if has ('gui_running')
 " Default color scheme
   set background=dark
+  let g:solarized_contrast="low"    "default value is normal
+  let g:solarized_visibility="high"    "default value is low
 else
   let g:solarized_termcolors=16
   set background=dark
 endif
+colorscheme solarized
 
 " Set backup file location
 set backupdir=~/.dotfiles/vim/backup
