@@ -198,3 +198,6 @@ autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
 " Set par as the paragraph formatting program to use
 set formatprg=par
+
+" Settings for hammer.vim
+let g:HammerDirectory = $TEMP

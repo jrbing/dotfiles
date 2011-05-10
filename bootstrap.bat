@@ -1,3 +1,7 @@
 mklink /H "C:\Program Files\Vim\_vimrc" "C:\Program Files\Vim\.dotfiles\vimrc"
 mklink /H "C:\Program Files\Vim\_gvimrc" "C:\Program Files\Vim\.dotfiles\gvimrc"
 mklink /D "C:\Program Files\Vim\vimfiles" "C:\Program Files\Vim\.dotfiles\vim"
+mklink /H "C:\Users\jbing.ISCPROD\.zshrc" "C:\Users\jbing.ISCPROD\.dotfiles\zshrc"
+mklink /H "C:\Users\jbing.ISCPROD\.taskrc" "C:\Users\jbing.ISCPROD\.dotfiles\taskrc"
+mklink /H "C:\Users\jbing.ISCPROD\.tmux.conf" "C:\Users\jbing.ISCPROD\.dotfiles\tmux.conf"
+mklink /D "C:\Users\jbing.ISCPROD\Dropbox" "C:\Users\jbing.ISCPROD\Documents\My Dropbox"
