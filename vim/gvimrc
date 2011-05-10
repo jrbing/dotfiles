@@ -70,6 +70,28 @@ elseif has('gui_win32')
   " Change the location of the bookmarks file
   let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
 
+  " Map Command-# to switch tabs
+  map  <A-0> 0gt
+  imap <A-0> <Esc>0gt
+  map  <A-1> 1gt
+  imap <A-1> <Esc>1gt
+  map  <A-2> 2gt
+  imap <A-2> <Esc>2gt
+  map  <A-3> 3gt
+  imap <A-3> <Esc>3gt
+  map  <A-4> 4gt
+  imap <A-4> <Esc>4gt
+  map  <A-5> 5gt
+  imap <A-5> <Esc>5gt
+  map  <A-6> 6gt
+  imap <A-6> <Esc>6gt
+  map  <A-7> 7gt
+  imap <A-7> <Esc>7gt
+  map  <A-8> 8gt
+  imap <A-8> <Esc>8gt
+  map  <A-9> 9gt
+  imap <A-9> <Esc>9gt
+
   " Show the tab line
   set stal=1
 
@@ -91,7 +113,7 @@ elseif has('gui_win32')
   set guioptions-=m
 
   " Set to open maximized if running the gui
-  au GUIEnter * simalt ~x
+  au! GUIEnter * simalt ~x
 
   " Set the python path
   let $PYTHONPATH .= "C:\Python27\libs"
@@ -104,12 +126,10 @@ elseif has('gui_win32')
 
   " Use putty for netrw
   " TODO:  still have to get this working properly
-  let g:netrw_cygwin = 0
-  let g:netrw_ssh_cmd  = 'C:\tools\putty\plink.exe -batch -T -ssh'
-  " let g:netrw_ssh_cmd="\"c:\\tools\\putty\\plink.exe\" -batch -T -ssh"
-  " let g:netrw_scp_cmd="\"c:\\tools\\putty\\pscp.exe\" -q -batch -scp"
-  let g:netrw_scp_cmd  = 'C:\tools\putty\pscp.exe -batch -q -scp'
-  let g:netrw_sftp_cmd = 'C:\tools\putty\pscp.exe -batch -q -sftp'
+  " let g:netrw_cygwin = 0
+  " let g:netrw_ssh_cmd  = "C:\tools\plink.exe" -batch -T -ssh
+  " let g:netrw_scp_cmd  = "C:\tools\pscp.exe" -batch -q -scp
+  " let g:netrw_sftp_cmd = "C:\tools\pscp.exe" -batch -q -sftp
 
   " Hides the menu
   set winaltkeys=no
@@ -122,7 +142,14 @@ elseif has('gui_win32')
 
   " Map Alt-Shift-P to run markdown to pdf against the current document and
   " open the resulting document
-  nmap <silent> <A-P> :! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf, && start \%TEMP\%\/%:t:r:s,$,.pdf, 
+  function! Pandoc()
+    execute 'silent ! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf,'
+    execute 'silent ! \%TEMP\%\/%:t:r:s,$,.pdf,'
+  endfunction
+
+  command! Pandoc :call Pandoc()
+
+  nmap <silent> <A-P> :call Pandoc()<CR>
 
   " Insert date and time header at the top of the file
   nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -150,9 +177,11 @@ function! StartTerm()
 endfunction
 
 " Project Tree
-autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-autocmd FocusGained * call s:UpdateNERDTree()
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+augroup ProjectTree
+  autocmd! VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+  autocmd! FocusGained * call s:UpdateNERDTree()
+  autocmd! WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+augroup END
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
@@ -342,5 +371,5 @@ set guitablabel=%t
 " Automatically reload the gvimrc file when changed
 " TODO:  figure out why this is throwing errors when used
 " autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
-autocmd BufWritePost ~/.dotfiles/vim/gvimrc source $MYGVIMRC
+autocmd! BufWritePost ~/.dotfiles/vim/gvimrc source $MYGVIMRC
 
