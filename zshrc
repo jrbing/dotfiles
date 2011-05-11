@@ -25,3 +25,4 @@ source $ZSH/oh-my-zsh.sh
 
 export SOYWIKI_VIM=mvim
 export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.dotfiles/bin
