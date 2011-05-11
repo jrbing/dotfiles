@@ -1,0 +1,7 @@
+#!/bin/sh
+#Refresh dotfiles from repo and update submodules
+cd ~/.dotfiles
+echo 'Updating dotfiles from github...'
+git pull origin master
+git submodule foreach git pull origin master
+
