@@ -3,7 +3,7 @@ export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="robbyrussell"
+export ZSH_THEME="dogenpunk"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -16,9 +16,10 @@ export ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby brew bundler gem github osx rails ssh-agent yum)
+plugins=(git ruby brew bundler gem github osx rails ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
+alias tx=tmuxinator
 
 # Customize to your needs...
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
