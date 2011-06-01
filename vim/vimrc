@@ -31,7 +31,7 @@ set smartcase
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc
-set wildmenu
+" set wildmenu
 
 " Status bar
 set laststatus=2
@@ -201,4 +201,5 @@ set formatprg=par
 
 " Settings for hammer.vim
 let g:HammerDirectory = $TEMP
+let g:HammerTemplate = 'custom'
 " let g:HammerBrowser = 'chrome'
