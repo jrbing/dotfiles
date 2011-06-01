@@ -140,8 +140,8 @@ set modelines=10
 if has ('gui_running')
 " Default color scheme
   set background=dark
-  let g:solarized_contrast="low"    "default value is normal
-  let g:solarized_visibility="high"    "default value is low
+  " let g:solarized_contrast="low"    "default value is normal
+  " let g:solarized_visibility="high"    "default value is low
 else
   let g:solarized_termcolors=16
   set background=dark

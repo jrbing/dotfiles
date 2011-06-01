@@ -16,13 +16,15 @@ export ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby brew bundler gem github osx rails ssh-agent yum)
+plugins=(git ruby brew bundler gem github osx rails ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
+alias tx=tmuxinator
 
 # Customize to your needs...
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-# export SOYWIKI_VIM=mvim
+export EDITOR=vim
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
