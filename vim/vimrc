@@ -201,5 +201,5 @@ set formatprg=par
 
 " Settings for hammer.vim
 let g:HammerDirectory = $TEMP
-let g:HammerTemplate = 'custom'
+let g:HammerTemplate = 'merlin'
 " let g:HammerBrowser = 'chrome'

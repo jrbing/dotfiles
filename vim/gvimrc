@@ -49,7 +49,7 @@ if has("gui_macvim")
   imap <D-9> <Esc>9gt
 
   " Set the font
-  set guifont=Meslo\ LG\ L\ DZ:h10
+  set guifont=Inconsolata:h13
 
   " Insert date and time header at the top of the file
   nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
