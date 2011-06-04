@@ -1,0 +1,10 @@
+#!/bin/sh
+#Shutdown teambox, update, and restart
+cd /websites/teambox
+sudo service httpd stop
+sudo service postgresql stop
+sudo git pull origin master
+sudo bundle install --deployment
+sudo service httpd start
+sudo service postgresql start
+cd ~
