@@ -92,7 +92,7 @@ function! s:setupMarkup()
   set spelllang=en
   set spellsuggest=9 "show only 9 suggestions for misspelled words
   " Map the markdown preview to leader-p
-  map <buffer> <Leader>p :Mm <CR>
+  map <buffer> <Leader>p :Hammer <CR>
 endfunction
 
 " make and python use real tabs
@@ -201,5 +201,5 @@ set formatprg=par
 
 " Settings for hammer.vim
 let g:HammerDirectory = $TEMP
-let g:HammerTemplate = 'merlin'
+" let g:HammerTemplate = 'merlin'
 " let g:HammerBrowser = 'chrome'

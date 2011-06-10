@@ -370,6 +370,5 @@ set guitablabel=%t
 
 " Automatically reload the gvimrc file when changed
 " TODO:  figure out why this is throwing errors when used
-" autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 autocmd! BufWritePost ~/.dotfiles/vim/gvimrc source $MYGVIMRC
 

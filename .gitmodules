@@ -70,9 +70,6 @@
 [submodule "vim/bundle/hammer"]
 	path = vim/bundle/hammer
 	url = git://github.com/robgleeson/hammer.vim.git
-[submodule "vim/bundle/vorax"]
-	path = vim/bundle/vorax
-	url = git://github.com/vim-scripts/vorax.git
 [submodule "vim/bundle/xptemplates"]
 	path = vim/bundle/xptemplates
 	url = git://github.com/drmingdrmer/xptemplate-dist.git
