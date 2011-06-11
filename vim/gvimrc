@@ -116,7 +116,7 @@ elseif has('gui_win32')
   au! GUIEnter * simalt ~x
 
   " Set the python path
-  let $PYTHONPATH .= "C:\Python27\libs"
+  let $PYTHONPATH = "C:\\Python27\\libs"
 
   " Prevent vim from writing backups, due to issues with the home directory
   " being on a network share
@@ -126,10 +126,10 @@ elseif has('gui_win32')
 
   " Use putty for netrw
   " TODO:  still have to get this working properly
-  " let g:netrw_cygwin = 0
-  " let g:netrw_ssh_cmd  = "C:\tools\plink.exe" -batch -T -ssh
-  " let g:netrw_scp_cmd  = "C:\tools\pscp.exe" -batch -q -scp
-  " let g:netrw_sftp_cmd = "C:\tools\pscp.exe" -batch -q -sftp
+  let g:netrw_cygwin = 0
+  let g:netrw_ssh_cmd  = "C:\\tools\\plink.exe -batch -T -ssh"
+  let g:netrw_scp_cmd  = "C:\tools\\pscp.exe -batch -q -scp"
+  let g:netrw_sftp_cmd = "C:\\tools\\pscp.exe -batch -q -sftp"
 
   " Hides the menu
   set winaltkeys=no
