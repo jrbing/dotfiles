@@ -115,8 +115,11 @@ elseif has('gui_win32')
   " Set to open maximized if running the gui
   au! GUIEnter * simalt ~x
 
+  " Set the ruby path
+  let g:ruby_path = ':C:\Ruby187\bin'
+
   " Set the python path
-  let $PYTHONPATH = "C:\\Python27\\libs"
+  let g:python_path = ':C:\Python27'
 
   " Prevent vim from writing backups, due to issues with the home directory
   " being on a network share
