@@ -67,6 +67,9 @@ elseif has('gui_win32')
   " Change the location of the viminfo file
   set viminfo+=n$USERPROFILE\\_viminfo
 
+  " Change the temporary directory for Hammer
+  let g:HammerDirectory = 'X:\hammer'
+
   " Change the location of the bookmarks file
   let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
 
