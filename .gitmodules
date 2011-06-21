@@ -73,3 +73,9 @@
 [submodule "vim/bundle/xptemplates"]
 	path = vim/bundle/xptemplates
 	url = git://github.com/drmingdrmer/xptemplate-dist.git
+[submodule "vim/bundle/bufkill"]
+	path = vim/bundle/bufkill
+	url = git://github.com/vim-scripts/bufkill.vim.git
+[submodule "vim/bundle/quickbuf"]
+	path = vim/bundle/quickbuf
+	url = git://github.com/vim-scripts/QuickBuf.git
