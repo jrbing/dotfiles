@@ -1,6 +1,5 @@
 
 # PROMPT
-# export PS1="\w$ "
 
 # ALIASES
 # cd
