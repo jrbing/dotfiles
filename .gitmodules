@@ -37,9 +37,6 @@
 [submodule "vim/bundle/commandt"]
 	path = vim/bundle/commandt
 	url = git://github.com/wincent/Command-T.git
-[submodule "vim/bundle/conque"]
-	path = vim/bundle/conque
-	url = git://github.com/rson/vim-conque.git
 [submodule "vim/bundle/voom"]
 	path = vim/bundle/voom
 	url = git://github.com/vim-scripts/VOoM.git
@@ -64,18 +61,12 @@
 [submodule "vim/bundle/vim-ruby"]
 	path = vim/bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
-[submodule "vim/bundle/sessions"]
-	path = vim/bundle/sessions
-	url = git://github.com/vim-scripts/session.vim--Odding.git
 [submodule "vim/bundle/hammer"]
 	path = vim/bundle/hammer
 	url = git://github.com/robgleeson/hammer.vim.git
 [submodule "vim/bundle/xptemplates"]
 	path = vim/bundle/xptemplates
 	url = git://github.com/drmingdrmer/xptemplate-dist.git
-[submodule "vim/bundle/bufkill"]
-	path = vim/bundle/bufkill
-	url = git://github.com/vim-scripts/bufkill.vim.git
 [submodule "vim/bundle/quickbuf"]
 	path = vim/bundle/quickbuf
 	url = git://github.com/vim-scripts/QuickBuf.git
