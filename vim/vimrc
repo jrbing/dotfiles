@@ -155,7 +155,7 @@ set directory=~/.dotfiles/vim/backup
 set cursorline
 
 " Emulate the save on losing focus functionality that TextMate has
-au FocusLost * :wa
+" au FocusLost * :wa
 
 " Indentation
 set autoindent
