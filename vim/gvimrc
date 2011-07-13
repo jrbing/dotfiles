@@ -116,7 +116,20 @@ elseif has('gui_win32')
   set guioptions-=m
 
   " Set to open maximized if running the gui
-  au! GUIEnter * simalt ~x
+  " au! GUIEnter * simalt ~x
+
+  " To enable the saving and restoring of screen positions.
+  " let g:screen_size_restore_pos = 1
+
+  " To save and restore screen for each Vim instance.
+  " This is useful if you routinely run more than one Vim instance.
+  " For all Vim to use the same settings, change this to 0.
+  " let g:screen_size_by_vim_instance = 1
+
+  " Set size and position
+  set lines=50
+  set columns=135
+  winpos 0 0
 
   " Set the ruby path
   let g:ruby_path = ':C:\Ruby187\bin'
