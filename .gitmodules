@@ -1,12 +1,14 @@
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
+  ignore = dirty
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/git"]
 	path = vim/bundle/git
 	url = git://github.com/tpope/vim-git.git
+  ignore = dirty
 [submodule "vim/bundle/indent_object"]
 	path = vim/bundle/indent_object
 	url = git://github.com/michaeljsmith/vim-indent-object.git
@@ -19,6 +21,7 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
+  ignore = dirty
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
@@ -31,6 +34,7 @@
 [submodule "vim/bundle/unimpaired"]
 	path = vim/bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+  ignore = dirty
 [submodule "vim/bundle/searchfold"]
 	path = vim/bundle/searchfold
 	url = git://github.com/vim-scripts/searchfold.vim.git
@@ -40,9 +44,11 @@
 [submodule "vim/bundle/voom"]
 	path = vim/bundle/voom
 	url = git://github.com/vim-scripts/VOoM.git
+  ignore = dirty
 [submodule "vim/bundle/zoomwin"]
 	path = vim/bundle/zoomwin
 	url = git://github.com/vim-scripts/ZoomWin.git
+  ignore = dirty
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
@@ -58,12 +64,15 @@
 [submodule "vim/bundle/taglist"]
 	path = vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
+  ignore = dirty
 [submodule "vim/bundle/vim-ruby"]
 	path = vim/bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
+  ignore = dirty
 [submodule "vim/bundle/hammer"]
 	path = vim/bundle/hammer
 	url = git://github.com/robgleeson/hammer.vim.git
+  ignore = dirty
 [submodule "vim/bundle/xptemplates"]
 	path = vim/bundle/xptemplates
 	url = git://github.com/drmingdrmer/xptemplate-dist.git
