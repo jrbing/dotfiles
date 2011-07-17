@@ -87,6 +87,7 @@ function! s:setupMarkup()
   set textwidth=0
   set wrapmargin=0
   set formatoptions+=1
+  set formatoptions+=n
   " Spellcheck
   " set spell
   set spelllang=en
@@ -202,3 +203,7 @@ set formatprg=par
 " let g:HammerDirectory = $TEMP
 " let g:HammerBrowser = 'chrome'
 let g:HammerTemplate = 'merlin'
+
+" Reassign mapping for quickbuf
+let g:qb_hotkey = '<F8>'
+
