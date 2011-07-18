@@ -16,10 +16,10 @@ syntax on
 
 " Whitespace stuff
 set nowrap
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set expandtab
 set list listchars=tab:\ \ ,trail:·
 
 " Searching
@@ -81,6 +81,7 @@ endfunction
 function! s:setupMarkup()
   call s:setupWrapping()
   " Change the tab settings to work properly with Pandoc lists
+  set expandtab
   set tabstop=4
   set shiftwidth=4
   set softtabstop=4
