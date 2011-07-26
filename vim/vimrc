@@ -140,7 +140,7 @@ set modelines=10
 
 if has ('gui_running')
 " Default color scheme
-  set background=dark
+  set background=light
   " let g:solarized_contrast="low"    "default value is normal
   " let g:solarized_visibility="high"    "default value is low
 else
@@ -204,6 +204,22 @@ set formatprg=par
 " let g:HammerDirectory = $TEMP
 " let g:HammerBrowser = 'chrome'
 let g:HammerTemplate = 'merlin'
+
+" Trim trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Map whitespace function to F5
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 " Reassign mapping for quickbuf
 let g:qb_hotkey = '<F8>'
