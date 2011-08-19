@@ -33,3 +33,4 @@ export EDITOR=vim
 # Add paths
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
