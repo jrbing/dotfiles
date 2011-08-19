@@ -28,3 +28,10 @@ alias tx=tmuxinator
 export EDITOR=vim
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
+
+# Source z.sh
+. ~/.dotfiles/zsh/z/z.sh
+    function precmd () {
+      _z --add "$(pwd -P)"
+    }
+

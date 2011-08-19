@@ -49,7 +49,7 @@ if has("gui_macvim")
   imap <D-9> <Esc>9gt
 
   " Set the font
-  set guifont=Inconsolata:h13
+  set guifont=Meslo\ LG\ M\ DZ:h11
 
   " Insert date and time header at the top of the file
   nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -63,6 +63,7 @@ elseif has('gui_win32')
 
   " Set the font
   set guifont=Consolas:h10
+  " set guifont=Anonymous\ Pro:h11
 
   " Change the location of the viminfo file
   set viminfo+=n$USERPROFILE\\_viminfo
@@ -161,14 +162,24 @@ elseif has('gui_win32')
 
   " Map Alt-Shift-P to run markdown to pdf against the current document and
   " open the resulting document
-  function! Pandoc()
-    execute 'silent ! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf,'
-    execute 'silent ! \%TEMP\%\/%:t:r:s,$,.pdf,'
+  function! CreatePDF()
+    execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
+    execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
   endfunction
 
-  command! Pandoc :call Pandoc()
+  command! CreatePDF :call CreatePDF()
 
-  nmap <silent> <A-P> :call Pandoc()<CR>
+  nmap <silent> <A-P> :call CreatePDF()<CR>
+
+  " Generate rtf and open in default viewer
+  function! CreateRTF()
+    execute 'silent ! pandoc  -f markdown -t rtf -s -o \%TEMP\%\/%:t:r:s,$,.rtf, "%"'
+    execute 'silent ! \%TEMP\%\/%:t:r:s,$,.rtf,'
+  endfunction
+
+  command! CreateRTF :call CreateRTF()
+
+  nmap <silent> <A-R> :call CreateRTF()<CR>
 
   " Insert date and time header at the top of the file
   nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>

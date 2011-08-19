@@ -126,7 +126,6 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
-" Unimpaired configuration
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
@@ -140,7 +139,7 @@ set modelines=10
 
 if has ('gui_running')
 " Default color scheme
-  set background=dark
+  set background=light
   " let g:solarized_contrast="low"    "default value is normal
   " let g:solarized_visibility="high"    "default value is low
 else
@@ -203,8 +202,29 @@ set formatprg=par
 " Settings for hammer.vim
 " let g:HammerDirectory = $TEMP
 " let g:HammerBrowser = 'chrome'
-let g:HammerTemplate = 'merlin'
+" let g:HammerTemplate = 'merlin'
+
+" Trim trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Map whitespace function to F5
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 " Reassign mapping for quickbuf
 let g:qb_hotkey = '<F8>'
 
+" Settings for ruby-vim
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1
+let ruby_operators = 1
+let ruby_space_errors = 1

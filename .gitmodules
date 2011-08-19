@@ -82,3 +82,9 @@
 [submodule "vim/bundle/vim-haml"]
 	path = vim/bundle/vim-haml
 	url = git://github.com/tpope/vim-haml.git
+[submodule "vim/bundle/vim-slim"]
+	path = vim/bundle/vim-slim
+	url = git://github.com/bbommarito/vim-slim.git
+[submodule "zsh/z"]
+	path = zsh/z
+	url = git://github.com/rupa/z.git
