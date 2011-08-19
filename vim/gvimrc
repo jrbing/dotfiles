@@ -162,14 +162,14 @@ elseif has('gui_win32')
 
   " Map Alt-Shift-P to run markdown to pdf against the current document and
   " open the resulting document
-  function! Pandoc()
-    execute 'silent ! markdown2pdf "%" -o \%TEMP\%\/%:t:r:s,$,.pdf,'
-    execute 'silent ! \%TEMP\%\/%:t:r:s,$,.pdf,'
+  function! CreatePDF()
+    execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
+    execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
   endfunction
 
-  command! Pandoc :call Pandoc()
+  command! CreatePDF :call CreatePDF()
 
-  nmap <silent> <A-P> :call Pandoc()<CR>
+  nmap <silent> <A-P> :call CreatePDF()<CR>
 
   " Generate rtf and open in default viewer
   function! CreateRTF()
