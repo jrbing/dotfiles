@@ -9,3 +9,4 @@ Most likely not useful to anyone other than myself.  Originally posted here as a
 2. Create symlinks
     * Unix: run bootstrap.sh
     * Windows: run bootstrap.bat
+3. Abide
