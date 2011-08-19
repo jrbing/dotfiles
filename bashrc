@@ -34,3 +34,6 @@ export EDITOR=vim
 # Add paths
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
+
+# Source z.sh
+. ~/.dotfiles/zsh/z/z.sh
