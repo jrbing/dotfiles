@@ -34,6 +34,10 @@ export EDITOR=vim
 # Add paths
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
+<<<<<<< HEAD
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+=======
 
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
+>>>>>>> fda6d239065139c21570c95635fcb5ac51c8fa83
