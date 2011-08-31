@@ -1,5 +1,5 @@
 # My Personal Dotfiles #
-Most likely not useful to anyone other than myself.  Originally posted here as a way to synchronize my settings across multiple machines.  
+Originally posted here as a way to synchronize my settings across multiple machines.  Most likely not useful to anyone other than myself.
 
 ## Installation ##
 
