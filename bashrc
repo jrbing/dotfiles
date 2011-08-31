@@ -4,6 +4,7 @@
 # ALIASES
 # cd
 alias ..='cd ..'
+
 # ls
 alias ls="ls -F"
 alias l="ls -lAh"
@@ -23,21 +24,21 @@ alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias pull='git pull origin master'
 
-# use .localrc for settings specific to one system
-if [ -f ~/.localrc ]; then
-  source ~/.localrc
-fi
-
 export EDITOR=vim
 . ~/.dotfiles/bin/bash_colors.sh
 
 # Add paths
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
-<<<<<<< HEAD
+
+# Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-=======
 
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
->>>>>>> fda6d239065139c21570c95635fcb5ac51c8fa83
+
+# use .localrc for settings specific to one system
+if [ -f ~/.localrc ]; then
+  source ~/.localrc
+fi
+

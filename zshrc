@@ -5,15 +5,6 @@ export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="robbyrussell"
 
-# Set to this to use case-sensitive completion
-# export CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# export DISABLE_LS_COLORS="true"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm )
@@ -21,8 +12,10 @@ plugins=(git ruby brew bundler gem github osx rails thor cloudapp git-flow herok
 source $ZSH/oh-my-zsh.sh
 alias tx=tmuxinator
 
-# Customize to your needs...
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+# Load RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+# Load Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 export EDITOR=vim
@@ -35,3 +28,7 @@ export PATH=$PATH:~/.dotfiles/bin
       _z --add "$(pwd -P)"
     }
 
+# use .localrc for settings specific to one system
+if [ -f ~/.localrc ]; then
+  source ~/.localrc
+fi
