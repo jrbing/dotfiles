@@ -1,4 +1,3 @@
-
 # PROMPT
 
 # ALIASES
@@ -32,7 +31,7 @@ export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
 
 # Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
