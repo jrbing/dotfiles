@@ -41,3 +41,5 @@ Thumbs.db
 # Directories #
 ##############
 vim/sessions/*
+
+vim/bundle/commandt
