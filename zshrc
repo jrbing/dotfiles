@@ -18,6 +18,7 @@ alias tx=tmuxinator
 # Load Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+export JRUBY_OPTS=--1.9
 export EDITOR=vim
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
