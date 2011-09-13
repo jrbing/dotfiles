@@ -2,8 +2,9 @@
 #Refresh dotfiles from repo and update submodules
 cd ~/.dotfiles
 echo 'Updating dotfiles from github...'
-git pull origin master
-git submodule foreach git checkout master
-git submodule foreach git pull origin master
+# git pull origin master
+# git submodule foreach git checkout master
+# git submodule foreach git pull origin master
+git pull && git submodule init && git submodule update && git submodule status
 # git submodule init
 # git submodule update
