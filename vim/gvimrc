@@ -48,6 +48,9 @@ if has("gui_macvim")
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
 
+  " Map Command+Shift+p to preview the document in marked
+  :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
+
   " Set the font
   set guifont=Meslo\ LG\ M\ DZ:h12.00
   " set transparency=5
