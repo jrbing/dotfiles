@@ -55,6 +55,9 @@ if has("gui_macvim")
   set guifont=Meslo\ LG\ M\ DZ:h12.00
   " set transparency=5
 
+
+	call togglebg#map("<F4>")
+
   " Insert date and time header at the top of the file
   nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
   imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
