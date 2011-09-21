@@ -110,18 +110,18 @@ elseif has('gui_win32')
   nmap <A-F> :Ack<space>
 
   " Remove 't' flag from 'guioptions': no tearoff menu entries
-  let &guioptions = substitute(&guioptions, "t", "", "g")
+  " let &guioptions = substitute(&guioptions, "t", "", "g")
 
   " Hide the scrollbars
-  set guioptions-=r
-  set guioptions-=l
+  "set guioptions-=r
+  "set guioptions-=l
 
   " Hide the toolbar
-  set guioptions-=T
+  " set guioptions-=T
 
   " Hide the menu bar
-  set guioptions-=M
-  set guioptions-=m
+  " set guioptions-=M
+  " set guioptions-=m
 
   " Set to open maximized if running the gui
   " au! GUIEnter * simalt ~x
@@ -205,7 +205,7 @@ let g:netrw_menu = 1
 set visualbell
 
 " Change the menu name for the Align plugin
-let g:DrChipTopLvlMenu="Plugin."
+let g:DrChipTopLvlMenu="Plugin"
 
 " ConqueTerm wrapper
 function! StartTerm()
