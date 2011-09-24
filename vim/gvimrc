@@ -55,8 +55,8 @@ if has("gui_macvim")
   set guifont=Meslo\ LG\ M\ DZ:h12.00
   " set transparency=5
 
-
-	call togglebg#map("<F4>")
+  " Map F4 to toggle the solarized background
+  call togglebg#map("<F4>")
 
   " Insert date and time header at the top of the file
   nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -140,10 +140,10 @@ elseif has('gui_win32')
   winpos 0 0
 
   " Set the ruby path
-  let g:ruby_path = ':C:\Ruby187\bin'
+  " let g:ruby_path = ':C:\Ruby187\bin'
 
   " Set the python path
-  let g:python_path = ':C:\Python27'
+  " let g:python_path = ':C:\Python27'
 
   " Prevent vim from writing backups, due to issues with the home directory
   " being on a network share
@@ -153,10 +153,10 @@ elseif has('gui_win32')
 
   " Use putty for netrw
   " TODO:  still have to get this working properly
-  let g:netrw_cygwin = 0
-  let g:netrw_ssh_cmd  = "C:\\tools\\plink.exe -batch -T -ssh"
-  let g:netrw_scp_cmd  = "C:\tools\\pscp.exe -batch -q -scp"
-  let g:netrw_sftp_cmd = "C:\\tools\\pscp.exe -batch -q -sftp"
+  " let g:netrw_cygwin = 0
+  " let g:netrw_ssh_cmd  = "C:\\tools\\plink.exe -batch -T -ssh"
+  " let g:netrw_scp_cmd  = "C:\tools\\pscp.exe -batch -q -scp"
+  " let g:netrw_sftp_cmd = "C:\\tools\\pscp.exe -batch -q -sftp"
 
   " Hides the menu
   set winaltkeys=no
