@@ -52,11 +52,12 @@ if has("gui_macvim")
   :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
   " Set the font
-  set guifont=Meslo\ LG\ M\ DZ:h12.00
+  " set guifont=Meslo\ LG\ M\ DZ:h12.00
+  set guifont=Inconsolata:h14.00
   " set transparency=5
 
-
-	call togglebg#map("<F4>")
+  " Map F4 to toggle the solarized background
+  call togglebg#map("<F4>")
 
   " Insert date and time header at the top of the file
   nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -110,18 +111,18 @@ elseif has('gui_win32')
   nmap <A-F> :Ack<space>
 
   " Remove 't' flag from 'guioptions': no tearoff menu entries
-  let &guioptions = substitute(&guioptions, "t", "", "g")
+  " let &guioptions = substitute(&guioptions, "t", "", "g")
 
   " Hide the scrollbars
-  set guioptions-=r
-  set guioptions-=l
+  "set guioptions-=r
+  "set guioptions-=l
 
   " Hide the toolbar
-  set guioptions-=T
+  " set guioptions-=T
 
   " Hide the menu bar
-  set guioptions-=M
-  set guioptions-=m
+  " set guioptions-=M
+  " set guioptions-=m
 
   " Set to open maximized if running the gui
   " au! GUIEnter * simalt ~x
@@ -140,10 +141,10 @@ elseif has('gui_win32')
   winpos 0 0
 
   " Set the ruby path
-  let g:ruby_path = ':C:\Ruby187\bin'
+  " let g:ruby_path = ':C:\Ruby187\bin'
 
   " Set the python path
-  let g:python_path = ':C:\Python27'
+  " let g:python_path = ':C:\Python27'
 
   " Prevent vim from writing backups, due to issues with the home directory
   " being on a network share
@@ -153,10 +154,10 @@ elseif has('gui_win32')
 
   " Use putty for netrw
   " TODO:  still have to get this working properly
-  let g:netrw_cygwin = 0
-  let g:netrw_ssh_cmd  = "C:\\tools\\plink.exe -batch -T -ssh"
-  let g:netrw_scp_cmd  = "C:\tools\\pscp.exe -batch -q -scp"
-  let g:netrw_sftp_cmd = "C:\\tools\\pscp.exe -batch -q -sftp"
+  " let g:netrw_cygwin = 0
+  " let g:netrw_ssh_cmd  = "C:\\tools\\plink.exe -batch -T -ssh"
+  " let g:netrw_scp_cmd  = "C:\tools\\pscp.exe -batch -q -scp"
+  " let g:netrw_sftp_cmd = "C:\\tools\\pscp.exe -batch -q -sftp"
 
   " Hides the menu
   set winaltkeys=no
@@ -205,7 +206,7 @@ let g:netrw_menu = 1
 set visualbell
 
 " Change the menu name for the Align plugin
-let g:DrChipTopLvlMenu="Plugin."
+let g:DrChipTopLvlMenu="Plugin"
 
 " ConqueTerm wrapper
 function! StartTerm()

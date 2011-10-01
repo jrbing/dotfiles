@@ -1,1 +1,11 @@
--a
+# sort filenames
+--sort-files
+
+--type-add=ruby=rake,thor
+--type-add=vim=vimrc,gvimrc
+--type-set=css=sass,less
+
+# add types ack doesn't know about
+--type-set=MARKDOWN=md,mkd,markdown
+--type-set=RDOC=rdoc
+

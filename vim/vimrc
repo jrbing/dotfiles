@@ -137,6 +137,7 @@ vmap <C-Down> ]egv
 set modeline
 set modelines=10
 
+" Set the colorscheme to Solarized
 if has ('gui_running')
 " Default color scheme
   set background=light
