@@ -61,11 +61,11 @@ if has("autocmd")
 endif
 
 function! s:setupWrapping()
-  set wrap
-  set wm=2
-  set textwidth=72
-  set linebreak
-  set nolist
+  setlocal wrap
+  setlocal wm=2
+  setlocal textwidth=72
+  setlocal linebreak
+  setlocal nolist
   nnoremap j gj
   nnoremap k gk
   vnoremap j gj
@@ -81,14 +81,14 @@ endfunction
 function! s:setupMarkup()
   call s:setupWrapping()
   " Change the tab settings to work properly with Pandoc lists
-  set expandtab
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
-  set textwidth=0
-  set wrapmargin=0
-  set formatoptions+=1
-  set formatoptions+=n
+  setlocal expandtab
+  setlocal tabstop=4
+  setlocal shiftwidth=4
+  setlocal softtabstop=4
+  setlocal textwidth=0
+  setlocal wrapmargin=0
+  setlocal formatoptions+=1
+  setlocal formatoptions+=n
   " Spellcheck
   " set spell
   set spelllang=en
