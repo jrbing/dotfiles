@@ -144,7 +144,7 @@ if has ('gui_running')
   " let g:solarized_contrast="low"    "default value is normal
   " let g:solarized_visibility="high"    "default value is low
 else
-  let g:solarized_termcolors=16
+  " let g:solarized_termcolors=16
   set background=dark
 endif
 colorscheme solarized
