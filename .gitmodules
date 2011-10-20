@@ -14,14 +14,6 @@
   path = vim/bundle/indent_object
   url = git://github.com/michaeljsmith/vim-indent-object.git
   ignore = dirty
-[submodule "vim/bundle/nerdtree"]
-  path = vim/bundle/nerdtree
-  url = git://github.com/wycats/nerdtree.git
-  ignore = dirty
-[submodule "vim/bundle/nerdcommenter"]
-  path = vim/bundle/nerdcommenter
-  url = git://github.com/ddollar/nerdcommenter.git
-  ignore = dirty
 [submodule "vim/bundle/surround"]
   path = vim/bundle/surround
   url = git://github.com/tpope/vim-surround.git
@@ -70,10 +62,6 @@
   path = vim/bundle/solarized
   url = git://github.com/altercation/vim-colors-solarized.git
   ignore = dirty
-[submodule "vim/bundle/easymotion"]
-  path = vim/bundle/easymotion
-  url = git://github.com/Lokaltog/vim-easymotion.git
-  ignore = dirty
 [submodule "vim/bundle/taglist"]
   path = vim/bundle/taglist
   url = git://github.com/vim-scripts/taglist.vim.git
@@ -106,3 +94,6 @@
   path = zsh/z
   url = git://github.com/rupa/z.git
   ignore = dirty
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
