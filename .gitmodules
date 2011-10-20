@@ -94,3 +94,19 @@
   path = zsh/z
   url = git://github.com/rupa/z.git
   ignore = dirty
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
+  ignore = dirty
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+  ignore = dirty
+[submodule "vim/bundle/nerdtree-tabs"]
+	path = vim/bundle/nerdtree-tabs
+	url = git://github.com/jistr/vim-nerdtree-tabs.git
+  ignore = dirty
+[submodule "vim/bundle/endwise"]
+	path = vim/bundle/endwise
+	url = git://github.com/tpope/vim-endwise.git
+  ignore = dirty
