@@ -43,7 +43,8 @@ set noequalalways
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
-map <Leader>n :NERDTreeToggle<CR>
+"map <Leader>n :NERDTreeToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " Command-T configuration
 let g:CommandTMaxHeight=20
@@ -140,7 +141,7 @@ set modelines=10
 " Set the colorscheme to Solarized
 if has ('gui_running')
 " Default color scheme
-  set background=light
+  set background=dark
   " let g:solarized_contrast="low"    "default value is normal
   " let g:solarized_visibility="high"    "default value is low
 else
