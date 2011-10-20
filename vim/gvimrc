@@ -16,9 +16,6 @@ if has("gui_macvim")
   " Command-Shift-F for Ack
   map <D-F> :Ack<space>
 
-  " Command-e for ConqueTerm
-  " map <D-e> :call StartTerm()<CR>
-
   " Command-/ to toggle comments
   map <D-/> <plug>NERDCommenterToggle<CR>
 
@@ -48,7 +45,7 @@ if has("gui_macvim")
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
 
-  " Map Command+Shift+p to preview the document in marked
+  " Map Command+Shift+p to preview the document in Marked
   :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
   " Set the font
@@ -62,9 +59,6 @@ if has("gui_macvim")
   " Insert date and time header at the top of the file
   nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
   imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-
-  " Set the directory for the sessions plugin
-  " let g:session_directory = '~/.dotfiles/vim/sessions'
 
 " Windows Specific Settings
 elseif has('gui_win32')
@@ -110,54 +104,16 @@ elseif has('gui_win32')
   "Alt Shift-f to run Ack
   nmap <A-F> :Ack<space>
 
-  " Remove 't' flag from 'guioptions': no tearoff menu entries
-  " let &guioptions = substitute(&guioptions, "t", "", "g")
-
-  " Hide the scrollbars
-  "set guioptions-=r
-  "set guioptions-=l
-
-  " Hide the toolbar
-  " set guioptions-=T
-
-  " Hide the menu bar
-  " set guioptions-=M
-  " set guioptions-=m
-
-  " Set to open maximized if running the gui
-  " au! GUIEnter * simalt ~x
-
-  " To enable the saving and restoring of screen positions.
-  " let g:screen_size_restore_pos = 1
-
-  " To save and restore screen for each Vim instance.
-  " This is useful if you routinely run more than one Vim instance.
-  " For all Vim to use the same settings, change this to 0.
-  " let g:screen_size_by_vim_instance = 1
-
   " Set size and position
   set lines=50
   set columns=135
   winpos 0 0
-
-  " Set the ruby path
-  " let g:ruby_path = ':C:\Ruby187\bin'
-
-  " Set the python path
-  " let g:python_path = ':C:\Python27'
 
   " Prevent vim from writing backups, due to issues with the home directory
   " being on a network share
   set nobackup
   set nowritebackup
   set noswapfile
-
-  " Use putty for netrw
-  " TODO:  still have to get this working properly
-  " let g:netrw_cygwin = 0
-  " let g:netrw_ssh_cmd  = "C:\\tools\\plink.exe -batch -T -ssh"
-  " let g:netrw_scp_cmd  = "C:\tools\\pscp.exe -batch -q -scp"
-  " let g:netrw_sftp_cmd = "C:\\tools\\pscp.exe -batch -q -sftp"
 
   " Hides the menu
   set winaltkeys=no
@@ -207,31 +163,6 @@ set visualbell
 
 " Change the menu name for the Align plugin
 let g:DrChipTopLvlMenu="Plugin"
-
-" ConqueTerm wrapper
-function! StartTerm()
-  execute 'ConqueTerm ' . $SHELL . ' --login'
-  setlocal listchars=tab:\ \ 
-endfunction
-
-" Project Tree
-augroup ProjectTree
-  autocmd! VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-  autocmd! FocusGained * call s:UpdateNERDTree()
-  autocmd! WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-augroup END
-
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
 
 " If the parameter is a directory, cd into it
 function! s:CdIfDirectory(directory)
