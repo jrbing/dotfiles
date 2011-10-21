@@ -23,7 +23,7 @@ set softtabstop=2
 set list listchars=tab:\ \ ,trail:·
 
 " Searching
-set hlsearch
+"set hlsearch
 set incsearch
 set ignorecase
 set smartcase
@@ -113,6 +113,9 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+" Mapping to easily split current window
+"map <Leader>| :vsp <CR>
+
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
 
@@ -122,7 +125,7 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
-" map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+ map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -201,12 +204,7 @@ autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 " Set par as the paragraph formatting program to use
 set formatprg=par
 
-" Settings for hammer.vim
-" let g:HammerDirectory = $TEMP
-" let g:HammerBrowser = 'chrome'
-" let g:HammerTemplate = 'merlin'
-
-" Trim trailing whitespace
+" Trim trailing whitespace function
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -219,7 +217,7 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" Map whitespace function to F5
+" Map whitespace trim function to F5
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 " Reassign mapping for quickbuf
@@ -232,8 +230,7 @@ let ruby_operators = 1
 let ruby_space_errors = 1
 
 " Settings for xptemplates to work with supertab
-
-" avoid key conflict
+" Avoid key conflict:
 let g:SuperTabMappingForward = '<Plug>supertabKey'
 " if nothing matched in xpt, try supertab
 let g:xptemplate_fallback = '<Plug>supertabKey'
