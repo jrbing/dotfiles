@@ -22,6 +22,7 @@ alias tx=tmuxinator
 export EDITOR=vim
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
+export PATH=/usr/local/bin:$PATH
 
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
