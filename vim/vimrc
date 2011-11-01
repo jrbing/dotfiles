@@ -114,7 +114,7 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 set backspace=indent,eol,start
 
 " Mapping to easily split current window
-"map <Leader>| :vsp <CR>
+"map <Leader>| :vsp CR>
 
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
