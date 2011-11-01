@@ -48,6 +48,9 @@ if has("gui_macvim")
   " Map Command+Shift+p to preview the document in Marked
   :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
+  " Map Command+Shift+p to preview the document in Marked
+  :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
+
   " Set the font
   " set guifont=Meslo\ LG\ M\ DZ:h12.00
   set guifont=Inconsolata:h14.00
