@@ -23,7 +23,7 @@ set softtabstop=2
 set list listchars=tab:\ \ ,trail:·
 
 " Searching
-set hlsearch
+"set hlsearch
 set incsearch
 set ignorecase
 set smartcase
@@ -43,7 +43,8 @@ set noequalalways
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
-map <Leader>n :NERDTreeToggle<CR>
+"map <Leader>n :NERDTreeToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " Command-T configuration
 let g:CommandTMaxHeight=20
@@ -61,11 +62,11 @@ if has("autocmd")
 endif
 
 function! s:setupWrapping()
-  set wrap
-  set wm=2
-  set textwidth=72
-  set linebreak
-  set nolist
+  setlocal wrap
+  setlocal wm=2
+  setlocal textwidth=72
+  setlocal linebreak
+  setlocal nolist
   nnoremap j gj
   nnoremap k gk
   vnoremap j gj
@@ -81,14 +82,14 @@ endfunction
 function! s:setupMarkup()
   call s:setupWrapping()
   " Change the tab settings to work properly with Pandoc lists
-  set expandtab
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
-  set textwidth=0
-  set wrapmargin=0
-  set formatoptions+=1
-  set formatoptions+=n
+  setlocal expandtab
+  setlocal tabstop=4
+  setlocal shiftwidth=4
+  setlocal softtabstop=4
+  setlocal textwidth=0
+  setlocal wrapmargin=0
+  setlocal formatoptions+=1
+  setlocal formatoptions+=n
   " Spellcheck
   " set spell
   set spelllang=en
@@ -112,6 +113,9 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+" Mapping to easily split current window
+"map <Leader>| :vsp CR>
+
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
 
@@ -121,7 +125,7 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
-" map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+ map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -137,13 +141,14 @@ vmap <C-Down> ]egv
 set modeline
 set modelines=10
 
+" Set the colorscheme to Solarized
 if has ('gui_running')
 " Default color scheme
-  set background=light
+  set background=dark
   " let g:solarized_contrast="low"    "default value is normal
   " let g:solarized_visibility="high"    "default value is low
 else
-  let g:solarized_termcolors=16
+  " let g:solarized_termcolors=16
   set background=dark
 endif
 colorscheme solarized
@@ -199,12 +204,7 @@ autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 " Set par as the paragraph formatting program to use
 set formatprg=par
 
-" Settings for hammer.vim
-" let g:HammerDirectory = $TEMP
-" let g:HammerBrowser = 'chrome'
-" let g:HammerTemplate = 'merlin'
-
-" Trim trailing whitespace
+" Trim trailing whitespace function
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -217,7 +217,7 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" Map whitespace function to F5
+" Map whitespace trim function to F5
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 " Reassign mapping for quickbuf
@@ -230,8 +230,7 @@ let ruby_operators = 1
 let ruby_space_errors = 1
 
 " Settings for xptemplates to work with supertab
-
-" avoid key conflict
+" Avoid key conflict:
 let g:SuperTabMappingForward = '<Plug>supertabKey'
 " if nothing matched in xpt, try supertab
 let g:xptemplate_fallback = '<Plug>supertabKey'

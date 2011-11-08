@@ -5,9 +5,8 @@ export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="robbyrussell"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm )
+# Oh-my-zsh plugins
+plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm )
 
 source $ZSH/oh-my-zsh.sh
 alias tx=tmuxinator
@@ -18,9 +17,12 @@ alias tx=tmuxinator
 # Load Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+# Editor and PATH settings
+# export JRUBY_OPTS=--1.9
 export EDITOR=vim
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
+export PATH=/usr/local/bin:$PATH
 
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
