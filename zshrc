@@ -3,12 +3,15 @@ export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="robbyrussell"
+#export ZSH_THEME="robbyrussell"
+export ZSH_THEME="sunrise"
 
 # Oh-my-zsh plugins
 plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm )
 
 source $ZSH/oh-my-zsh.sh
+
+# Aliases
 alias tx=tmuxinator
 
 # Load RVM
