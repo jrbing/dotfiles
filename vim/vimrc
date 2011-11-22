@@ -1,17 +1,66 @@
+" .vimrc
+" Author: JR Bing <jr@jrbing.com>
+"
+" My vimrc file.
+" ------------------------------------------------------------------------------
+" Structure
+"
+" * Initial Setup
+" * Basic Options
+" * Settings
+" * Display
+" * Utility Functions
+" * Key Bindings
+"   * ReMappings
+"   * Functions
+" * Abbreviations
+" * Searching and Movement
+" * Filetype Specific Settings
+
+
 " Remap the leader key
 let mapleader = ","
-
-" Set encoding
-set encoding=utf-8
 
 " Call pathogen
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-
 set nocompatible
 
-set number
+set encoding=utf-8
+set modelines=0
+set autoindent
+set showmode
+set showcmd
+set hidden
+set visualbell
+set cursorline
+set ttyfast
 set ruler
+set backspace=indent,eol,start
+set nonumber
+set norelativenumber
+set laststatus=2
+set history=1000
+set undofile
+set undoreload=10000
+set cpoptions+=J
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set shell=/bin/zsh
+set lazyredraw
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+set fillchars=diff:⣿
+set ttimeout
+set notimeout
+set nottimeout
+set autowrite
+set shiftround
+set autoread
+set title
+
 syntax on
 
 " Whitespace stuff
@@ -23,18 +72,23 @@ set softtabstop=2
 set list listchars=tab:\ \ ,trail:·
 
 " Searching
-"set hlsearch
+set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 
-" Tab completion
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc
-" set wildmenu
 
-" Status bar
-set laststatus=2
+set wildmenu
+set wildmode=list:longest
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
@@ -190,9 +244,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Remap easymotion keys
-let g:EasyMotion_leader_key = '\'
-
 " Remap key for command-t
 nnoremap <silent> <A-t> :CommandT<CR>
 
@@ -207,7 +258,7 @@ autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 " Set par as the paragraph formatting program to use
 set formatprg=par
 
-" Trim trailing whitespace function
+" Trim trailing whitespace
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -243,4 +294,52 @@ let g:xptemplate_key = '<Tab>'
 " let g:xptemplate_pum_tab_nav = 1
 " " xpt triggers only when you typed whole name of a snippet. Optional
 " let g:xptemplate_minimal_prefix = 'full'
+
+" Status line ---------------------------------------------------------- {{{1
+
+augroup ft_statuslinecolor
+    au!
+
+    au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
+    au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
+augroup END
+
+set statusline=%f    " Path.
+set statusline+=%m   " Modified flag.
+set statusline+=%r   " Readonly flag.
+set statusline+=%w   " Preview window flag.
+
+set statusline+=\    " Space.
+
+set statusline+=%#redbar#                " Highlight the following as a warning.
+"set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
+set statusline+=%*                           " Reset highlighting.
+
+set statusline+=%=   " Right align.
+
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ff}                        " Format (unix/DOS).
+set statusline+=/
+set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+set statusline+=/
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
+
+" Line and column position and counts.
+set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+
+" }}}
+
+" Visual Mode */# from Scrooloose {{{
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+" }}}
 
