@@ -1,22 +1,12 @@
-" .vimrc
+" Personal preference .vimrc file
 " Author: JR Bing <jr@jrbing.com>
 "
-" My vimrc file.
-" ------------------------------------------------------------------------------
-" Structure
+" Credits:
+"   Much of this is borrowed heavily from Vincent Driessen, Steve Losh, Tim
+"   Pope, and janus
 "
-" * Initial Setup
-" * Basic Options
-" * Settings
-" * Display
-" * Utility Functions
-" * Key Bindings
-"   * ReMappings
-"   * Functions
-" * Abbreviations
-" * Searching and Movement
-" * Filetype Specific Settings
 
+" Foreward {{{1
 
 " Remap the leader key
 let mapleader = ","
@@ -25,6 +15,10 @@ let mapleader = ","
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 set nocompatible
+
+" }}}
+
+" Editing Behavior {{{1
 
 set encoding=utf-8
 set modelines=0
@@ -60,10 +54,43 @@ set autowrite
 set shiftround
 set autoread
 set title
+" Set backup file location
+set backupdir=~/.dotfiles/vim/backup
+set directory=~/.dotfiles/vim/backup
 
 syntax on
 
-" Whitespace stuff
+" load the plugin and indent settings for the detected filetype
+filetype plugin indent on
+
+set wildmenu
+set wildmode=list:longest
+
+set wildignore+=.hg,.git,.svn                    " version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX temp files
+
+" Use modeline overrides
+set modeline
+set modelines=10
+
+" Emulate the save on losing focus functionality that TextMate has
+" au FocusLost * :wa
+
+" Set par as the paragraph formatting program to use
+set formatprg=par
+
+" Set folding method, but disable by default
+set foldmethod=syntax
+set nofoldenable
+
+" }}}
+
+" Whitespace stuff {{{2
 set nowrap
 set expandtab
 set tabstop=2
@@ -71,43 +98,78 @@ set shiftwidth=2
 set softtabstop=2
 set list listchars=tab:\ \ ,trail:·
 
-" Searching
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
+" }}}
 
 
-set wildmenu
-set wildmode=list:longest
+" Display {{{1
 
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
+" Set the colorscheme to Solarized
+if has ('gui_running')
+" Default color scheme
+  set background=dark
+  let g:solarized_menu=0
+  " Change the heading for the Alignmaps plugin
+  let g:DrChipTopLvlMenu= "Plugin."
+  " let g:solarized_contrast="low"    "default value is normal
+  " let g:solarized_visibility="high"    "default value is low
+else
+  " let g:solarized_termcolors=16
+  set background=dark
+endif
+colorscheme solarized
+
+" Highlight the current line
+set cursorline
+
+" Set the tab label to equal the file name
+set guitablabel=%t
+
+" Change the menu name for the Align plugin
+let g:DrChipTopLvlMenu="Plugin"
+
+" Remove the scroll bars
+set guioptions=aAce
+
+" }}}
+
+" Status line {{{2
+
+augroup ft_statuslinecolor
+    au!
+
+    au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
+    au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
+augroup END
+
+set statusline=%f    " Path.
+set statusline+=%m   " Modified flag.
+set statusline+=%r   " Readonly flag.
+set statusline+=%w   " Preview window flag.
+
+set statusline+=\    " Space.
+
+set statusline+=%#redbar#                " Highlight the following as a warning.
+"set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
+set statusline+=%*                           " Reset highlighting.
+
+set statusline+=%=   " Right align.
+
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ff}                        " Format (unix/DOS).
+set statusline+=/
+set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+set statusline+=/
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
+
+" Line and column position and counts.
+set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+
+" }}}
 
 
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
-
-" NERDTree configuration
-let NERDTreeIgnore=['\.rbc$', '\~$']
-"map <Leader>n :NERDTreeToggle<CR>
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
-" Command-T configuration
-let g:CommandTMaxHeight=20
-
-" ZoomWin configuration
-map <Leader><Leader> :ZoomWin<CR>
-
-" CTags
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+" Utility Functions {{{1
 
 " Remember last location in file
 if has("autocmd")
@@ -152,37 +214,175 @@ function! s:setupMarkup()
   map <buffer> <Leader>p :Hammer <CR>
 endfunction
 
-" make and python use real tabs
-au FileType make                                     set noexpandtab
-au FileType python                                   set noexpandtab
+func! <sid>CycleTabpages(forw)
+    if a:forw
+        normal! gt
+    else
+        normal! gT
+    endif
+    while 1
+        redraw
+        echo "Cycle Tab pages (Shift-Tab/Tab)"
+        let c = s:Getchar()
+        if c == "\t"
+            normal! gt
+        elseif c == "\<S-Tab>"
+            normal! gT
+        else
+            exe "norm! :\<C-U>"
+            call feedkeys(c)
+            break
+        endif
+    endwhile
+endfunc
 
-" Thorfile, Rakefile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+func! s:Getchar()
+    let c = getchar()
+    if c != 0
+        let c = nr2char(c)
+    endif
+    return c
+endfunc
 
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+" Trim trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
 
-au BufRead,BufNewFile *.txt call s:setupWrapping()
+" If the parameter is a directory, cd into it
+function! s:CdIfDirectory(directory)
+  let explicitDirectory = isdirectory(a:directory)
+  let directory = explicitDirectory || empty(a:directory)
+  if explicitDirectory
+    exe "cd " . a:directory
+  endif
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+  if directory
+    NERDTree
+    wincmd p
+    bd
+  endif
 
-" Mapping to easily split current window
-"map <Leader>| :vsp CR>
+  if explicitDirectory
+    wincmd p
+  endif
+endfunction
 
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
+" NERDTree utility function
+function! s:UpdateNERDTree(...)
+  let stay = 0
 
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+  if(exists("a:1"))
+    let stay = a:1
+  end
 
-" Opens a tab edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>t
- map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+  if exists("t:NERDTreeBufName")
+    let nr = bufwinnr(t:NERDTreeBufName)
+    if nr != -1
+      exe nr . "wincmd w"
+      exe substitute(mapcheck("R"), "<CR>", "", "")
+      if !stay
+        wincmd p
+      end
+    endif
+  endif
 
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+  if exists(":CommandTFlush") == 2
+    CommandTFlush
+  endif
+endfunction
+
+" Utility functions to create file commands
+function! s:CommandCabbr(abbreviation, expansion)
+  execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
+endfunction
+
+function! s:FileCommand(name, ...)
+  if exists("a:1")
+    let funcname = a:1
+  else
+    let funcname = a:name
+  endif
+
+  execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . funcname . '(<f-args>)'
+endfunction
+
+function! s:DefineCommand(name, destination)
+  call s:FileCommand(a:destination)
+  call s:CommandCabbr(a:name, a:destination)
+endfunction
+
+" Public NERDTree-aware versions of builtin functions
+function! ChangeDirectory(dir, ...)
+  execute "cd " . a:dir
+  let stay = exists("a:1") ? a:1 : 1
+
+  NERDTree
+
+  if !stay
+    wincmd p
+  endif
+endfunction
+
+function! Touch(file)
+  execute "!touch " . a:file
+  call s:UpdateNERDTree()
+endfunction
+
+function! Remove(file)
+  let current_path = expand("%")
+  let removed_path = fnamemodify(a:file, ":p")
+
+  if (current_path == removed_path) && (getbufvar("%", "&modified"))
+    echo "You are trying to remove the file you are editing. Please close the buffer first."
+  else
+    execute "!rm " . a:file
+  endif
+
+  call s:UpdateNERDTree()
+endfunction
+
+function! Mkdir(file)
+  execute "!mkdir " . a:file
+  call s:UpdateNERDTree()
+endfunction
+
+function! Edit(file)
+  if exists("b:NERDTreeRoot")
+    wincmd p
+  endif
+
+  execute "e " . a:file
+
+ruby << RUBY
+  destination = File.expand_path(VIM.evaluate(%{system("dirname " . a:file)}))
+  pwd         = File.expand_path(Dir.pwd)
+  home        = pwd == File.expand_path("~")
+
+  if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
+    VIM.command(%{call ChangeDirectory(system("dirname " . a:file), 0)})
+  end
+RUBY
+endfunction
+
+" Define the NERDTree-aware aliases
+call s:DefineCommand("cd", "ChangeDirectory")
+call s:DefineCommand("touch", "Touch")
+call s:DefineCommand("rm", "Remove")
+call s:DefineCommand("e", "Edit")
+call s:DefineCommand("mkdir", "Mkdir")
+
+" }}}
+
+" Key Bindings {{{1
 
 " Bubble single lines
 nmap <C-Up> [e
@@ -190,44 +390,6 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
-
-" Use modeline overrides
-set modeline
-set modelines=10
-
-" Set the colorscheme to Solarized
-if has ('gui_running')
-" Default color scheme
-  set background=dark
-  let g:solarized_menu=0
-  " Change the heading for the Alignmaps plugin
-  let g:DrChipTopLvlMenu= "Plugin."
-  " let g:solarized_contrast="low"    "default value is normal
-  " let g:solarized_visibility="high"    "default value is low
-else
-  " let g:solarized_termcolors=16
-  set background=dark
-endif
-colorscheme solarized
-
-" Set backup file location
-set backupdir=~/.dotfiles/vim/backup
-set directory=~/.dotfiles/vim/backup
-
-" Highlight the current line
-set cursorline
-
-" Emulate the save on losing focus functionality that TextMate has
-" au FocusLost * :wa
-
-" Indentation
-set autoindent
-
-" Remap ,v to re-select text that was just pasted
-nnoremap <leader>v V`]
-
-" Have vim automatically reload the file in the buffer if the source file changes
-set autoread
 
 " Remap the help key to the escape key (since I'll be hitting it all the time)
 inoremap <F1> <ESC>
@@ -244,38 +406,67 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Remap key for command-t
-nnoremap <silent> <A-t> :CommandT<CR>
+" Opens an edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>e
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-" NERDTree
-let NERDChristmasTree=1  "Makes NERDTree use colors
-let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
-let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
+" Opens a tab edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>t
+ map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
-" Automatically reload the vimrc file when changed
-autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+" Command mode: Ctrl+P
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+" Mapping to easily split current window
+"map <Leader>| :vsp <CR>
 
-" Set par as the paragraph formatting program to use
-set formatprg=par
-
-" Trim trailing whitespace
-function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
+" Remap ,v to re-select text that was just pasted
+nnoremap <leader>v V`]
 
 " Map whitespace trim function to F5
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 " Reassign mapping for quickbuf
 let g:qb_hotkey = '<F8>'
+
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+imap <Leader>= <Esc> <C-w>=
+
+" Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
+nnoremap <silent> <C-Tab> :call<sid>CycleTabpages(1)<cr>
+" inoremap <silent> <C-Tab> :call<ESC><sid>CycleTabpages(1)<cr>
+nnoremap <silent> <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
+" inoremap <silent> <C-S-Tab> :call<ESC><sid>CycleTabpages(0)<cr>
+
+" }}}
+
+" Abbreviations {{{1
+
+
+" }}}
+
+" Searching and Movement {{{1
+
+
+" }}}
+
+" Filetype Specific Settings {{{1
+
+" make and python use real tabs
+au FileType make                                     set noexpandtab
+au FileType python                                   set noexpandtab
+
+" Ruby Files
+au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
+au BufRead,BufNewFile *.txt call s:setupWrapping()
+
+" }}}
+
+" Plugins {{{1
 
 " Settings for ruby-vim
 let g:rubycomplete_buffer_loading = 1
@@ -295,43 +486,212 @@ let g:xptemplate_key = '<Tab>'
 " " xpt triggers only when you typed whole name of a snippet. Optional
 " let g:xptemplate_minimal_prefix = 'full'
 
-" Status line ---------------------------------------------------------- {{{1
+" Remap key for command-t
+nnoremap <silent> <A-t> :CommandT<CR>
 
-augroup ft_statuslinecolor
-    au!
+" NERDTree configuration
+let NERDTreeIgnore=['\.rbc$', '\~$']
+"map <Leader>n :NERDTreeToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
-    au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
-augroup END
+" NERDTree
+let NERDChristmasTree=1  "Makes NERDTree use colors
+let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
+let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
 
-set statusline=%f    " Path.
-set statusline+=%m   " Modified flag.
-set statusline+=%r   " Readonly flag.
-set statusline+=%w   " Preview window flag.
+" Command-T configuration
+let g:CommandTMaxHeight=20
 
-set statusline+=\    " Space.
+" ZoomWin configuration
+map <Leader><Leader> :ZoomWin<CR>
 
-set statusline+=%#redbar#                " Highlight the following as a warning.
-"set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
-set statusline+=%*                           " Reset highlighting.
+" Without setting this, ZoomWin restores windows in a way that causes
+" equalalways behavior to be triggered the next time CommandT is used.
+" This is likely a bludgeon to solve some other issue, but it works
+set noequalalways
 
-set statusline+=%=   " Right align.
-
-" File format, encoding and type.  Ex: "(unix/utf-8/python)"
-set statusline+=(
-set statusline+=%{&ff}                        " Format (unix/DOS).
-set statusline+=/
-set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-set statusline+=/
-set statusline+=%{&ft}                        " Type (python).
-set statusline+=)
-
-" Line and column position and counts.
-set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+" CTags
+map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 
 " }}}
 
-" Visual Mode */# from Scrooloose {{{
+" Platform Specific Settings {{{1
+
+if has("gui_macvim")
+  " Fullscreen takes up entire screen
+  set fuoptions=maxhorz,maxvert
+
+  " Command-T for CommandT
+  macmenu &File.New\ Tab key=<nop>
+  map <D-t> :CommandT<CR>
+  imap <D-t> <Esc>:CommandT<CR>
+  macmenu &File.New\ Tab key=<D-T>
+
+  " Command-Return for fullscreen
+  macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
+
+  " Command-Shift-F for Ack
+  map <D-F> :Ack<space>
+
+  " Command-/ to toggle comments
+  map <D-/> <plug>NERDCommenterToggle<CR>
+
+  " Command-][ to increase/decrease indentation
+  vmap <D-]> >gv
+  vmap <D-[> <gv
+
+  " Map Command-# to switch tabs
+  map  <D-0> 0gt
+  imap <D-0> <Esc>0gt
+  map  <D-1> 1gt
+  imap <D-1> <Esc>1gt
+  map  <D-2> 2gt
+  imap <D-2> <Esc>2gt
+  map  <D-3> 3gt
+  imap <D-3> <Esc>3gt
+  map  <D-4> 4gt
+  imap <D-4> <Esc>4gt
+  map  <D-5> 5gt
+  imap <D-5> <Esc>5gt
+  map  <D-6> 6gt
+  imap <D-6> <Esc>6gt
+  map  <D-7> 7gt
+  imap <D-7> <Esc>7gt
+  map  <D-8> 8gt
+  imap <D-8> <Esc>8gt
+  map  <D-9> 9gt
+  imap <D-9> <Esc>9gt
+
+  " Map Command+Shift+p to preview the document in Marked
+  :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
+
+  " Map Command+Shift+p to preview the document in Marked
+  :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
+
+  " Set the font
+  " set guifont=Meslo\ LG\ M\ DZ:h12.00
+  set guifont=Inconsolata:h14.00
+  " set transparency=5
+
+  " Map F4 to toggle the solarized background
+  call togglebg#map("<F4>")
+
+  " Insert date and time header at the top of the file
+  nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+  imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+
+" Windows Specific Settings
+elseif has('gui_win32')
+
+  " Set the font
+  set guifont=Consolas:h10
+  " set guifont=Anonymous\ Pro:h11
+
+  " Change the location of the viminfo file
+  set viminfo+=n$USERPROFILE\\_viminfo
+
+  " Change the temporary directory for Hammer
+  let g:HammerDirectory = 'X:\hammer'
+
+  " Change the location of the bookmarks file
+  let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
+
+  " Map Command-# to switch tabs
+  map  <A-0> 0gt
+  imap <A-0> <Esc>0gt
+  map  <A-1> 1gt
+  imap <A-1> <Esc>1gt
+  map  <A-2> 2gt
+  imap <A-2> <Esc>2gt
+  map  <A-3> 3gt
+  imap <A-3> <Esc>3gt
+  map  <A-4> 4gt
+  imap <A-4> <Esc>4gt
+  map  <A-5> 5gt
+  imap <A-5> <Esc>5gt
+  map  <A-6> 6gt
+  imap <A-6> <Esc>6gt
+  map  <A-7> 7gt
+  imap <A-7> <Esc>7gt
+  map  <A-8> 8gt
+  imap <A-8> <Esc>8gt
+  map  <A-9> 9gt
+  imap <A-9> <Esc>9gt
+
+  " Show the tab line
+  set stal=1
+
+  "Alt Shift-f to run Ack
+  nmap <A-F> :Ack<space>
+
+  " Set size and position
+  set lines=50
+  set columns=135
+  winpos 0 0
+
+  " Prevent vim from writing backups, due to issues with the home directory
+  " being on a network share
+  set nobackup
+  set nowritebackup
+  set noswapfile
+
+  " Hides the menu
+  set winaltkeys=no
+
+  " Have vim use Windows Ctrl+ keys
+  source $VIMRUNTIME/mswin.vim
+
+  " Set the directory for the sessions plugin
+  let g:session_directory = '~\.dotfiles\vim\sessions'
+
+  " Map Alt-Shift-P to run markdown to pdf against the current document and
+  " open the resulting document
+  function! CreatePDF()
+    execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
+    execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
+  endfunction
+
+  command! CreatePDF :call CreatePDF()
+
+  nmap <silent> <A-P> :call CreatePDF()<CR>
+
+  " Generate rtf and open in default viewer
+  function! CreateRTF()
+    execute 'silent ! pandoc  -f markdown -t rtf -s -o \%TEMP\%\/%:t:r:s,$,.rtf, "%"'
+    execute 'silent ! \%TEMP\%\/%:t:r:s,$,.rtf,'
+  endfunction
+
+  command! CreateRTF :call CreateRTF()
+
+  nmap <silent> <A-R> :call CreateRTF()<CR>
+
+  " Insert date and time header at the top of the file
+  nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+  imap <A-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+
+endif
+
+" }}}
+
+" Searching {{{1
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" }}}
+
+" Miscellaneous {{{1
+
+" Automatically reload the vimrc file when changed
+"autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+
+" Show the netrw menu
+"let g:netrw_menu = 1
+
+" }}}
+
+" Visual Mode */# from Scrooloose {{{1
 function! s:VSetSearch()
   let temp = @@
   norm! gvy
@@ -342,4 +702,11 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 " }}}
+
+
+
+
+
+
+
 
