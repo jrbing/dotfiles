@@ -1,4 +1,4 @@
 #!/bin/sh
-#Refresh dotfiles from repo and update submodules
+# cd to the dotfiles directory and start vim
 cd ~/.dotfiles
 vim
