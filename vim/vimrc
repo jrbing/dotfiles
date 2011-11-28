@@ -723,7 +723,7 @@ endif
 
   if !exists("autocommands_loaded")
     let autocommands_loaded = 1
-    au ...
+    "au ...
   endif
 
 " }}}
