@@ -233,8 +233,11 @@
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
 
-  " Map whitespace trim function to F5
+  " Whitespace trim function
   nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+
+  " Toggle the Gundo panel
+  nnoremap <F3> :GundoToggle<CR>
 
   " Reassign mapping for quickbuf
   let g:qb_hotkey = '<F8>'
