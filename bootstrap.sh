@@ -1,5 +1,6 @@
 #!/bin/bash
 # Create symlinks for dotfiles
+
 ln -s ~/.dotfiles/ackrc ~/.ackrc
 ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -s ~/.dotfiles/vim/gvimrc ~/.gvimrc
@@ -10,3 +11,4 @@ ln -s ~/.dotfiles/zshrc ~/.zshrc
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/sqlplus_completions ~/.sqlplus_completions
 ln -s ~/.dotfiles/wrkrc ~/.localrc
+ln -s ~/.dotfiles/zsh/dircolors-solarized/dircolors.ansi-universal ~/.dir_colors

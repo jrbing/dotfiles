@@ -3,11 +3,11 @@ export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-#export ZSH_THEME="robbyrussell"
-export ZSH_THEME="sunrise"
+export ZSH_THEME="robbyrussell"
+#export ZSH_THEME="sunrise"
 
 # Oh-my-zsh plugins
-plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm )
+plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm gnu-utils )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -27,13 +27,16 @@ export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
 export PATH=/usr/local/bin:$PATH
 
+# Set colors for ls
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
     function precmd () {
       _z --add "$(pwd -P)"
     }
 
-# use .localrc for settings specific to one system
+# Use .localrc for settings specific to one system
 if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
