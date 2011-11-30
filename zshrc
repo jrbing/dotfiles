@@ -27,6 +27,9 @@ export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.dotfiles/bin
 export PATH=/usr/local/bin:$PATH
 
+# Set colors for ls
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
     function precmd () {
