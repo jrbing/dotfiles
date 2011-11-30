@@ -37,7 +37,7 @@
   set undoreload=10000
   set cpoptions+=J
   set list
-  set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+  set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
   set shell=/bin/zsh
   set lazyredraw
   set matchtime=3
@@ -56,8 +56,10 @@
   syntax on
 
   " Set backup file location
-  set backupdir=~/.dotfiles/vim/backup
-  set directory=~/.dotfiles/vim/backup
+  set undodir=~/.vim/tmp/undo//     " undo files
+  set backupdir=~/.vim/tmp/backup// " backups
+  set directory=~/.vim/tmp/swap//   " swap files
+  set backup                        " enable backups
 
   set wildmenu
   set wildmode=list:longest
@@ -93,7 +95,9 @@
   set tabstop=2
   set shiftwidth=2
   set softtabstop=2
-  set list listchars=tab:\ \ ,trail:·
+  set textwidth=80
+  set colorcolumn=+1
+  "set list listchars=tab:\ \ ,trail:·
 
 " }}}
 
@@ -190,6 +194,11 @@
 
   noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
+  " Keep search matches in the middle of the window and pulse the line when moving
+  " to them.
+  nnoremap n nzzzv:call PulseCursorLine()<cr>
+  nnoremap N Nzzzv:call PulseCursorLine()<cr>
+
 " }}}
 
 " Key Mappings {{{1
@@ -252,6 +261,14 @@
   nnoremap <silent> <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
   " inoremap <silent> <C-S-Tab> :call<ESC><sid>CycleTabpages(0)<cr>
 
+  " Align text
+  nnoremap <leader>Al :left<cr>
+  nnoremap <leader>Ac :center<cr>
+  nnoremap <leader>Ar :right<cr>
+  vnoremap <leader>Al :left<cr>
+  vnoremap <leader>Ac :center<cr>
+  vnoremap <leader>Ar :right<cr>
+
 " }}}
 
 " Abbreviations {{{1
@@ -277,13 +294,22 @@
   au FileType python                                   set noexpandtab
 
   " Ruby
-  au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+  augroup ft_ruby
+    au!
+    au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+  augroup END
 
   " Markdown
-  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+  augroup ft_markdown
+    au!
+    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+  augroup END
 
   " Textfiles
-  au BufRead,BufNewFile *.txt call s:setupWrapping()
+  augroup ft_txt
+    au!
+    au BufRead,BufNewFile *.txt call s:setupWrapping()
+  augroup END
 
 " }}}
 
@@ -328,11 +354,28 @@
   map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 
   " Syntastic
-
   let g:syntastic_enable_signs = 1
   let g:syntastic_disabled_filetypes = ['html']
   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
 
+" Fugitive
+  nnoremap <leader>gd :Gdiff<cr>
+  nnoremap <leader>gs :Gstatus<cr>
+  nnoremap <leader>gw :Gwrite<cr>
+  nnoremap <leader>ga :Gadd<cr>
+  nnoremap <leader>gb :Gblame<cr>
+  nnoremap <leader>gco :Gcheckout<cr>
+  nnoremap <leader>gci :Gcommit<cr>
+  nnoremap <leader>gm :Gmove<cr>
+  nnoremap <leader>gr :Gremove<cr>
+  nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+
+  augroup ft_fugitive
+      au!
+
+      au BufNewFile,BufRead .git/index setlocal nolist
+  augroup END
+  
 
 " }}}
 
@@ -347,7 +390,7 @@
   function! s:setupWrapping()
     setlocal wrap
     setlocal wm=2
-    setlocal textwidth=72
+    setlocal textwidth=80
     setlocal linebreak
     setlocal nolist
     nnoremap j gj
@@ -548,6 +591,56 @@ RUBY
   call s:DefineCommand("e", "Edit")
   call s:DefineCommand("mkdir", "Mkdir")
 
+  " Pulse
+
+  function! PulseCursorLine()
+      let current_window = winnr()
+
+      windo set nocursorline
+      execute current_window . 'wincmd w'
+
+      setlocal cursorline
+
+      redir => old_hi
+          silent execute 'hi CursorLine'
+      redir END
+      let old_hi = split(old_hi, '\n')[0]
+      let old_hi = substitute(old_hi, 'xxx', '', '')
+
+      hi CursorLine guibg=#2a2a2a ctermbg=233
+      redraw
+      sleep 20m
+
+      hi CursorLine guibg=#333333 ctermbg=235
+      redraw
+      sleep 20m
+
+      hi CursorLine guibg=#3a3a3a ctermbg=237
+      redraw
+      sleep 20m
+
+      hi CursorLine guibg=#444444 ctermbg=239
+      redraw
+      sleep 20m
+
+      hi CursorLine guibg=#3a3a3a ctermbg=237
+      redraw
+      sleep 20m
+
+      hi CursorLine guibg=#333333 ctermbg=235
+      redraw
+      sleep 20m
+
+      hi CursorLine guibg=#2a2a2a ctermbg=233
+      redraw
+      sleep 20m
+
+      execute 'hi ' . old_hi
+
+      windo set cursorline
+      execute current_window . 'wincmd w'
+  endfunction
+
 " }}}
 
 " Platform Specific Settings {{{1
@@ -729,12 +822,18 @@ endif
 " Miscellaneous {{{1
 
   " Automatically reload the vimrc file when changed
-  autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+  "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
   if !exists("autocommands_loaded")
     let autocommands_loaded = 1
     "au ...
   endif
+
+  " Better Completion
+  set completeopt=longest,menuone,preview
+
+  " Sudo to write
+  cmap w!! w !sudo tee % >/dev/null
 
 " }}}
 
