@@ -6,6 +6,9 @@ export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 export ZSH_THEME="robbyrussell"
 #export ZSH_THEME="sunrise"
 
+# Disable auto updates
+DISABLE_AUTO_UPDATE="true"
+
 # Oh-my-zsh plugins
 plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm gnu-utils )
 
