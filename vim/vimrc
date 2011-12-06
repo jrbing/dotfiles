@@ -333,18 +333,18 @@
   " " xpt triggers only when you typed whole name of a snippet. Optional
   " let g:xptemplate_minimal_prefix = 'full'
 
-  " Remap key for command-t
+  " Command-T configuration
+  let g:CommandTMaxHeight=20
   noremap <silent> <A-t> :CommandT<CR>
 
   " NERDTree configuration
-  let NERDTreeIgnore=['\.rbc$', '\~$']
   map <Leader>n <plug>NERDTreeTabsToggle<CR>
-  let NERDChristmasTree=1  "Makes NERDTree use colors
-  let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
-  let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
-
-  " Command-T configuration
-  let g:CommandTMaxHeight=20
+  let NERDTreeIgnore=['\.rbc$', '\~$']
+  let NERDChristmasTree=1 "Makes NERDTree use colors
+  let NERDTreeChDirMode=1 "Changes the current working directory to the one set as the root in NERDTree
+  let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
+  let NERDTreeMinimalUI=1 "Minimal UI elements
+  let NERDTreeDirArrows=1 "Use arrows for directory folding
 
   " ZoomWin configuration
   map <Leader><Leader> :ZoomWin<CR>
@@ -352,6 +352,7 @@
 
   " CTags
   map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+  nnoremap <silent> <F9> :TlistToggle<CR>
 
   " Syntastic
   let g:syntastic_enable_signs = 1
@@ -668,6 +669,9 @@ if has ('gui_running')
     if has("gui_macvim")
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
+
+      " Set correct path for taglist plugin
+      "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
       " Command-T for CommandT
       "macmenu &File.New\ Tab key=<nop>
