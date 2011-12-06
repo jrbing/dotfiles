@@ -376,7 +376,7 @@
 
       au BufNewFile,BufRead .git/index setlocal nolist
   augroup END
-  
+
 
 " }}}
 
