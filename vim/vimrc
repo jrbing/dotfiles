@@ -359,7 +359,7 @@
   let g:syntastic_disabled_filetypes = ['html']
   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
 
-" Fugitive
+  " Fugitive
   nnoremap <leader>gd :Gdiff<cr>
   nnoremap <leader>gs :Gstatus<cr>
   nnoremap <leader>gw :Gwrite<cr>
@@ -377,6 +377,9 @@
       au BufNewFile,BufRead .git/index setlocal nolist
   augroup END
 
+  " Yankring
+  nnoremap <silent> <F6> :YRShow<cr>
+  let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
 
 " }}}
 
