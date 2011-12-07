@@ -121,9 +121,16 @@
 [submodule "zsh/dircolors-solarized"]
 	path = zsh/dircolors-solarized
 	url = git://github.com/seebi/dircolors-solarized.git
+  ignore = dirty
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+  ignore = dirty
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = git://github.com/sjl/gundo.vim.git
+  ignore = dirty
+[submodule "vim/bundle/yankring"]
+	path = vim/bundle/yankring
+	url = git://github.com/vim-scripts/YankRing.vim.git
+  ignore = dirty
