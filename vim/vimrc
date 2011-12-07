@@ -132,9 +132,6 @@
   " Change the menu name for the Align plugin
   let g:DrChipTopLvlMenu="Plugin."
 
-  " Remove the scroll bars
-  "set guioptions=aAce
-
 " }}}
 
 " Status line {{{2
@@ -378,7 +375,7 @@
   augroup END
 
   " Yankring
-  nnoremap <silent> <F6> :YRShow<cr>
+  nnoremap <silent> <F4> :YRShow<cr>
   let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
 
 " }}}
@@ -729,7 +726,7 @@ if has ('gui_running')
       "set guifont=Consolas:h14
 
       " Map F4 to toggle the solarized background
-      call togglebg#map("<F4>")
+      "call togglebg#map("<F4>")
 
       " Insert date and time header at the top of the file
       nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
