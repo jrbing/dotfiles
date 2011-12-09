@@ -138,3 +138,7 @@
 	path = vim/bundle/dbext
 	url = git://github.com/vim-scripts/dbext.vim.git
   ignore = dirty
+[submodule "vim/bundle/sqlutilities"]
+	path = vim/bundle/sqlutilities
+	url = git://github.com/vim-scripts/SQLUtilities.git
+  ignore = dirty
