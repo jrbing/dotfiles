@@ -134,3 +134,7 @@
 	path = vim/bundle/yankring
 	url = git://github.com/vim-scripts/YankRing.vim.git
   ignore = dirty
+[submodule "vim/bundle/dbext"]
+	path = vim/bundle/dbext
+	url = git://github.com/vim-scripts/dbext.vim.git
+  ignore = dirty
