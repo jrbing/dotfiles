@@ -1,6 +1,9 @@
 # sort filenames
 --sort-files
 
+# ignore case
+--ignore-case
+
 # add types ack doesn't know about
 --type-set=ruby=rake,thor
 --type-set=vim=vimrc,gvimrc
