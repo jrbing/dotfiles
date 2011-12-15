@@ -2,6 +2,9 @@
 " JR Bing <jr@jrbing.com>
 " -------------------------------------------------------------------------
 
+"set linespace=2
+set antialias
+
 if has ("gui_macvim")
   " Command-T for CommandT
   macmenu &File.New\ Tab key=<nop>

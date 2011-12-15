@@ -840,5 +840,10 @@ endif
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
 
+  " Include vim configuration specific to a machine
+  if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+  endif
+
 " }}}
 
