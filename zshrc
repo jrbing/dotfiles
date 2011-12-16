@@ -17,12 +17,6 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 alias tx=tmuxinator
 
-# Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-# Load Tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-
 # Editor and PATH settings
 # export JRUBY_OPTS=--1.9
 export EDITOR=vim
@@ -43,3 +37,9 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
+
+# Load RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# Load Tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
