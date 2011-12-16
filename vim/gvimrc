@@ -3,7 +3,7 @@
 " -------------------------------------------------------------------------
 
 "set linespace=2
-set antialias
+"set antialias
 
 if has ("gui_macvim")
   " Command-T for CommandT
