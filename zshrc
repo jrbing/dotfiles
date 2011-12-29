@@ -10,7 +10,7 @@ export ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE="true"
 
 # Oh-my-zsh plugins
-plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor cloudapp git-flow heroku pow powder rvm gnu-utils )
+plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor git-flow heroku rvm )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -43,3 +43,15 @@ fi
 
 # Load Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+# Function to search for running processes
+any() {
+    emulate -L zsh
+    unsetopt KSH_ARRAYS
+    if [[ -z "$1" ]] ; then
+        echo "any - grep for process(es) by keyword" >&2
+        echo "Usage: any " >&2 ; return 1
+    else
+        ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
+    fi
+}
