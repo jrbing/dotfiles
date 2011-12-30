@@ -1,0 +1,41 @@
+#!/bin/bash -e
+## Taken from:  https://github.com/kollerma/git-submodule-tools
+
+## Recursive clone
+## clone into $2 directory
+## and attach heads.
+
+## read input, display help if necessary
+if [[ "$@" == "" || "$@" == *--help* ]]; then
+    cat<<EOF
+ Recursive clone
+
+ This command executes a recursive clone, i.e., the repository
+ is cloned as well as all submodules. The submodules HEADs are
+ attached, if possible. See also "git clone --help".
+
+ Usage:
+    git rclone <repository> [<directory>]
+EOF
+    exit 0;
+fi
+
+if [[ "$2" ]]; then
+    name="$2"
+else
+    name=`basename "$1"`
+    name=${name%.git}
+fi
+
+echo "Cloning into $name..."
+git clone --recursive -q "$1" "$name" > /dev/null
+echo "done."
+cd "$name"
+## attach heads
+if [ -f .gitmodules ]; then
+    echo "Attaching heads of submodules..."
+    #git submodule --quiet foreach --recursive git attach-head -w
+    git submodule --quiet foreach --recursive 'echo "$toplevel/$path"' | 
+    xargs -r -n1 -P5 bash -c 'cd "$1"; git attach-head -w' xargs
+    echo "done."
+fi

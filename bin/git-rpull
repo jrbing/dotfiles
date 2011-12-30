@@ -1,0 +1,76 @@
+#!/bin/bash -e
+## Taken from:  https://github.com/kollerma/git-submodule-tools
+
+## Do a recursive pull
+## check for unclean folders
+## and unpushed changes, since this might cause trouble
+## if there are such changes, you have to do it by hand
+## e.g., merge the where there are local and remote changes
+
+## read input, display help if necessary
+if [[ "$@" == *--help* ]]; then
+    cat<<EOF
+ Recursive pull
+
+ This command executes a git-pull and then updates all submodules.
+ Orphaned submodule directories are removed if they are clean. The
+ HEADs of submodules are attached if necessary and possible. 
+ Executes git-rfetch to download possibly existing updates for
+ submodules.
+
+ Usage:
+    git rpull ...
+
+    ...: same arguments as git pull
+EOF
+    exit 0;
+fi
+
+## check for modified content and uncommitted changes
+git check-clean --ignore-submodules=untracked --unstaged --uncommitted --unmerged || exit 1
+## check for untracked files
+if ! git check-clean --untracked --unstaged --exit-code; then
+    cat >&2 <<EOF
+ Error: Untracked files in submodules. Add them to .gitignore
+  in the respective submodules or remove them.
+  Use "git status" to see where they are.
+EOF
+    exit 1
+fi
+
+## ensure that we are in the toplevel directory
+cdup=$(git rev-parse --show-toplevel) &&
+cd "$cdup" || {
+    echo >&2 "Cannot chdir to $cdup, the toplevel of the working tree"
+    exit 1
+}
+
+## check for unpushed commits in submodules
+if [ -f .gitmodules ]; then
+    #unpushed=`git submodule --quiet foreach --recursive git check-unpushed -p`
+    unpushed=`git submodule --quiet foreach --recursive 'echo "$toplevel/$path"' | xargs -r -n1 -P5 bash -c 'cd "$1"; git check-unpushed -p' xargs`
+    if [[ "$unpushed" != "" ]]; then
+	cat >&2 <<EOF 
+ Error: Unpushed commits in submodules.
+$unpushed
+  Try "git rpush" followed by another "git rpull". If that fails, 
+  push them one-by-one before pulling again. 
+  This safety measure ensures that no commits get lost.
+EOF
+	exit 1
+    fi
+fi
+## git check-unpushed # no need to check in master
+
+## do the pull
+git pull "$@" || exit 1
+
+if [ -f .gitmodules ]; then
+    ## fix submodules
+    git fix-submodules --skip-checks
+    ## fetch changes in submodules 
+    ## this is necessary since if the submodule commit did not change
+    ## in the super rep., then the submodule is not updated.
+    ## rfetch does this
+    git rfetch
+fi
