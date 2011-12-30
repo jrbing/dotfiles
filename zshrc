@@ -14,9 +14,6 @@ plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx r
 
 source $ZSH/oh-my-zsh.sh
 
-# Aliases
-alias tx=tmuxinator
-
 # Editor and PATH settings
 # export JRUBY_OPTS=--1.9
 export EDITOR=vim
