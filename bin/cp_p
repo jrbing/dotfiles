@@ -1,4 +1,5 @@
 #!/bin/sh
+# Note: This only works on linux systems with strace installed.
 cp_p()
 {
    strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
