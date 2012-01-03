@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
