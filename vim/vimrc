@@ -29,7 +29,7 @@
   set ttyfast
   set ruler
   set backspace=indent,eol,start
-  set nonumber
+  set number
   set norelativenumber
   set laststatus=2
   set history=1000
