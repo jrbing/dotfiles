@@ -2,7 +2,6 @@
 export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 
 # Set to the name theme to load.
-# Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="robbyrussell"
 #export ZSH_THEME="sunrise"
 
@@ -11,6 +10,11 @@ DISABLE_AUTO_UPDATE="true"
 
 # Oh-my-zsh plugins
 plugins=(vi-mode history-substring-search git ruby brew bundler gem github osx rails thor git-flow heroku rvm )
+
+# Use .localrc for settings specific to one system
+if [ -f ~/.localrc ]; then
+  source ~/.localrc
+fi
 
 # Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -37,10 +41,6 @@ export PATH=/usr/local/bin:$PATH
 # Set colors for ls
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
-# Use .localrc for settings specific to one system
-if [ -f ~/.localrc ]; then
-  source ~/.localrc
-fi
 
 # Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
