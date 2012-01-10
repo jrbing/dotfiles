@@ -1,6 +1,7 @@
-#!/bin/sh
-# Settings for using SQLplus
+#!/usr/bin/env sh
+# Work laptop specific settings
 
+# Settings for using SQLplus
 DYLD_LIBRARY_PATH="/opt/oracle/instantclient_10_2"
 TNS_ADMIN="/opt/oracle/tns"
 ORACLE_HOME="/opt/oracle/instantclient_10_2"
@@ -10,8 +11,3 @@ export TNS_ADMIN
 export ORACLE_HOME
 
 alias sqlplus='/usr/local/bin/rlwrap /opt/oracle/instantclient_10_2/sqlplus'
-
-# Create alias for using the gnu version of ls
-#brew_prefix=`brew --prefix`
-#alias dircolors="$brew_prefix/bin/gdircolors"
-#alias ls="$brew_prefix/bin/gls"

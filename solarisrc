@@ -1,0 +1,2 @@
+
+export DISABLE_LS_COLORS= "true"

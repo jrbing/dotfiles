@@ -29,7 +29,7 @@
   set ttyfast
   set ruler
   set backspace=indent,eol,start
-  set nonumber
+  set number
   set norelativenumber
   set laststatus=2
   set history=1000
@@ -131,9 +131,6 @@
 
   " Change the menu name for the Align plugin
   let g:DrChipTopLvlMenu="Plugin."
-
-  " Remove the scroll bars
-  "set guioptions=aAce
 
 " }}}
 
@@ -333,18 +330,18 @@
   " " xpt triggers only when you typed whole name of a snippet. Optional
   " let g:xptemplate_minimal_prefix = 'full'
 
-  " Remap key for command-t
+  " Command-T configuration
+  let g:CommandTMaxHeight=20
   noremap <silent> <A-t> :CommandT<CR>
 
   " NERDTree configuration
-  let NERDTreeIgnore=['\.rbc$', '\~$']
   map <Leader>n <plug>NERDTreeTabsToggle<CR>
-  let NERDChristmasTree=1  "Makes NERDTree use colors
-  let NERDTreeChDirMode=1  "Changes the current working directory to the one set as the root in NERDTree
-  let NERDTreeShowBookmarks=1    "Display the bookmarks on startup
-
-  " Command-T configuration
-  let g:CommandTMaxHeight=20
+  let NERDTreeIgnore=['\.rbc$', '\~$']
+  let NERDChristmasTree=1 "Makes NERDTree use colors
+  let NERDTreeChDirMode=1 "Changes the current working directory to the one set as the root in NERDTree
+  let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
+  let NERDTreeMinimalUI=1 "Minimal UI elements
+  let NERDTreeDirArrows=1 "Use arrows for directory folding
 
   " ZoomWin configuration
   map <Leader><Leader> :ZoomWin<CR>
@@ -352,13 +349,14 @@
 
   " CTags
   map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+  nnoremap <silent> <F9> :TlistToggle<CR>
 
   " Syntastic
   let g:syntastic_enable_signs = 1
   let g:syntastic_disabled_filetypes = ['html']
   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
 
-" Fugitive
+  " Fugitive
   nnoremap <leader>gd :Gdiff<cr>
   nnoremap <leader>gs :Gstatus<cr>
   nnoremap <leader>gw :Gwrite<cr>
@@ -375,7 +373,10 @@
 
       au BufNewFile,BufRead .git/index setlocal nolist
   augroup END
-  
+
+  " Yankring
+  nnoremap <silent> <F4> :YRShow<cr>
+  let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
 
 " }}}
 
@@ -669,6 +670,9 @@ if has ('gui_running')
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
 
+      " Set correct path for taglist plugin
+      "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+
       " Command-T for CommandT
       "macmenu &File.New\ Tab key=<nop>
       map <D-T> :CommandT<CR>
@@ -719,9 +723,10 @@ if has ('gui_running')
       " Set the font
       " set guifont=Meslo\ LG\ M\ DZ:h12.00
       set guifont=Inconsolata:h14.00
+      "set guifont=Consolas:h14
 
       " Map F4 to toggle the solarized background
-      call togglebg#map("<F4>")
+      "call togglebg#map("<F4>")
 
       " Insert date and time header at the top of the file
       nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -834,6 +839,11 @@ endif
 
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
+
+  " Include vim configuration specific to a machine
+  if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+  endif
 
 " }}}
 
