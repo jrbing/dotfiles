@@ -729,7 +729,8 @@ if has ('gui_running')
 
       " Set the font
       " set guifont=Meslo\ LG\ M\ DZ:h12.00
-      set guifont=Inconsolata:h14.00
+      "set guifont=Inconsolata:h14.00
+      set guifont=Inconsolata-dz:h12.00
       "set guifont=Consolas:h14
 
       " Map F4 to toggle the solarized background
