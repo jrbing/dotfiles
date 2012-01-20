@@ -138,3 +138,6 @@
 	path = vim/bundle/sqlutilities
 	url = git://github.com/vim-scripts/SQLUtilities.git
   ignore = dirty
+[submodule "zsh/zsh-completions"]
+	path = zsh/zsh-completions
+	url = git://github.com/zsh-users/zsh-completions.git
