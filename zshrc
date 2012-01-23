@@ -25,6 +25,10 @@ source $HOME/.dotfiles/zsh/aliases.sh
 #Source functions
 source $HOME/.dotfiles/zsh/functions.sh
 
+export DOTFILES=~/.dotfiles
+
+fpath=($DOTFILES/zsh/zsh-completions $fpath)
+
 # Source z.sh
 . ~/.dotfiles/zsh/z/z.sh
     function precmd () {
@@ -40,7 +44,6 @@ export PATH=/usr/local/bin:$PATH
 
 # Set colors for ls
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-
 
 # Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

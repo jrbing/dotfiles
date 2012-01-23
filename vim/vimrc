@@ -308,6 +308,12 @@
     au BufRead,BufNewFile *.txt call s:setupWrapping()
   augroup END
 
+  " Datamover
+  augroup ft_datamover
+    au!
+    au BufRead,BufNewFile *.{dms}    set ft=sql
+  augroup END
+
 " }}}
 
 " Plugin Settings {{{1
@@ -342,6 +348,7 @@
   let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
   let NERDTreeMinimalUI=1 "Minimal UI elements
   let NERDTreeDirArrows=1 "Use arrows for directory folding
+  let g:nerdtree_tabs_focus_on_files = 0
 
   " ZoomWin configuration
   map <Leader><Leader> :ZoomWin<CR>
@@ -722,7 +729,8 @@ if has ('gui_running')
 
       " Set the font
       " set guifont=Meslo\ LG\ M\ DZ:h12.00
-      set guifont=Inconsolata:h14.00
+      "set guifont=Inconsolata:h14.00
+      set guifont=Inconsolata-dz:h12.00
       "set guifont=Consolas:h14
 
       " Map F4 to toggle the solarized background
