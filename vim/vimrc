@@ -348,7 +348,8 @@
   let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
   let NERDTreeMinimalUI=1 "Minimal UI elements
   let NERDTreeDirArrows=1 "Use arrows for directory folding
-  let g:nerdtree_tabs_focus_on_files = 0
+  "let g:nerdtree_tabs_focus_on_files = 0
+  let g:nerdtree_tabs_smart_startup_focus = 1
 
   " ZoomWin configuration
   map <Leader><Leader> :ZoomWin<CR>
