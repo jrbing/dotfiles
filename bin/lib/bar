@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # bar
 # 'cat' with ASCII progress bar
