@@ -141,3 +141,6 @@
 [submodule "zsh/zsh-completions"]
 	path = zsh/zsh-completions
 	url = git://github.com/zsh-users/zsh-completions.git
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git
