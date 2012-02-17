@@ -106,10 +106,6 @@
 	path = vim/bundle/endwise
 	url = git://github.com/tpope/vim-endwise.git
   ignore = dirty
-[submodule "vim/bundle/utl"]
-	path = vim/bundle/utl
-	url = git://github.com/vim-scripts/utl.vim.git
-  ignore = dirty
 [submodule "vim/bundle/pathogen"]
 	path = vim/bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen.git
