@@ -336,9 +336,8 @@
   " " xpt triggers only when you typed whole name of a snippet. Optional
   " let g:xptemplate_minimal_prefix = 'full'
 
-  " Command-T configuration
-  let g:CommandTMaxHeight=20
-  noremap <silent> <A-t> :CommandT<CR>
+  " CtrlP configuration
+  noremap <silent> <A-t> :CtrlP<CR>
 
   " NERDTree configuration
   map <Leader>n <plug>NERDTreeTabsToggle<CR>
@@ -514,9 +513,6 @@
       endif
     endif
 
-    if exists(":CommandTFlush") == 2
-      CommandTFlush
-    endif
   endfunction
 
   " Utility functions to create file commands
@@ -681,10 +677,10 @@ if has ('gui_running')
       " Set correct path for taglist plugin
       "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
-      " Command-T for CommandT
+      " Command-T for CtrlP
       "macmenu &File.New\ Tab key=<nop>
-      map <D-T> :CommandT<CR>
-      imap <D-T> <Esc>:CommandT<CR>
+      map <D-T> :CtrlP<CR>
+      imap <D-T> <Esc>:CtrlP<CR>
       "macmenu &File.New\ Tab key=<D-t>
 
       " Command-Return for fullscreen
