@@ -38,10 +38,6 @@
   path = vim/bundle/searchfold
   url = git://github.com/vim-scripts/searchfold.vim.git
   ignore = dirty
-[submodule "vim/bundle/commandt"]
-  path = vim/bundle/commandt
-  url = git://github.com/wincent/Command-T.git
-  ignore = dirty
 [submodule "vim/bundle/voom"]
   path = vim/bundle/voom
   url = git://github.com/vim-scripts/VOoM.git
@@ -141,6 +137,8 @@
 [submodule "zsh/zsh-completions"]
 	path = zsh/zsh-completions
 	url = git://github.com/zsh-users/zsh-completions.git
+  ignore = dirty
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
+  ignore = dirty
