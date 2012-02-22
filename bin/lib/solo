@@ -22,19 +22,19 @@
 
 use Socket;
 
-alarm $timeout								if $timeout;
+alarm $timeout                if $timeout;
 
-$port =~ /^\d+$/ or $noport						or die "Usage: $0 -port=PORT COMMAND\n";
+$port =~ /^\d+$/ or $noport           or die "Usage: $0 -port=PORT COMMAND\n";
 
 if ($port)
 {
     $addr = pack(CnC, 127, $<, 1);
-    print "solo: bind ", join(".", unpack(C4, $addr)), ":$port\n"	if $verbose;
+    print "solo: bind ", join(".", unpack(C4, $addr)), ":$port\n" if $verbose;
 
-    $^F = 10;			# unset close-on-exec
+    $^F = 10;     # unset close-on-exec
 
-    socket(SOLO, PF_INET, SOCK_STREAM, getprotobyname('tcp'))		or die "socket: $!";
-    bind(SOLO, sockaddr_in($port, $addr))				or $silent? exit: die "solo($port): $!\n";
+    socket(SOLO, PF_INET, SOCK_STREAM, getprotobyname('tcp'))   or die "socket: $!";
+    bind(SOLO, sockaddr_in($port, $addr))       or $silent? exit: die "solo($port): $!\n";
 }
 
 sleep $sleep if $sleep;
