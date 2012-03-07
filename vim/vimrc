@@ -356,7 +356,7 @@
 
   " CTags
   map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-  nnoremap <silent> <F9> :TlistToggle<CR>
+  nnoremap <silent> <F7> :TlistToggle<CR>
 
   " Syntastic
   let g:syntastic_enable_signs = 1
