@@ -1,3 +1,4 @@
 #!/bin/env sh
 export DISABLE_LS_COLORS= "true"
 export TERM=xterm
+export PATH=$PATH:/usr/cluster/bin
