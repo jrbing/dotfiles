@@ -266,6 +266,9 @@
   vnoremap <leader>Ac :center<cr>
   vnoremap <leader>Ar :right<cr>
 
+  " use ,gf to go to file in a vertical split
+  nnoremap ,gf :vertical botright wincmd f<CR>
+
 " }}}
 
 " Abbreviations {{{1
