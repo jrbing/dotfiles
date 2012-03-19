@@ -432,7 +432,7 @@
     set spelllang=en
     set spellsuggest=9 "show only 9 suggestions for misspelled words
     " Map the markdown preview to leader-p
-    map <buffer> <Leader>p :Hammer <CR>
+    "map <buffer> <Leader>p :Hammer <CR>
   endfunction
 
   func! <sid>CycleTabpages(forw)
@@ -751,7 +751,7 @@ if has ('gui_running')
       set viminfo+=n$USERPROFILE\\_viminfo
 
       " Change the temporary directory for Hammer
-      let g:HammerDirectory = 'X:\hammer'
+      "let g:HammerDirectory = 'X:\hammer'
 
       " Change the location of the bookmarks file
       let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
