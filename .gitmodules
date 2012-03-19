@@ -134,3 +134,7 @@
   path = vim/bundle/ctrlp
   url = git://github.com/kien/ctrlp.vim.git
   ignore = dirty
+[submodule "vim/bundle/taskpaper"]
+  path = vim/bundle/taskpaper
+  url = git://github.com/davidoc/taskpaper.vim.git
+  ignore = dirty
