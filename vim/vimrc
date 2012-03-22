@@ -9,11 +9,13 @@
 
   source ~/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
   filetype off
-  call pathogen#runtime_append_all_bundles()
-  call pathogen#helptags()
+  call pathogen#infect()
+  "call pathogen#runtime_append_all_bundles()
+  "call pathogen#helptags()
   filetype plugin indent on
   set nocompatible
   let mapleader = ","
+
 " }}}
 
 " Editing Behavior {{{1
@@ -97,7 +99,6 @@
   set softtabstop=2
   set textwidth=80
   set colorcolumn=+1
-  "set list listchars=tab:\ \ ,trail:·
 
 " }}}
 
@@ -314,13 +315,13 @@
   " Datamover
   augroup ft_datamover
     au!
-    au BufRead,BufNewFile *.{dms}    set ft=sql
+    au BufRead,BufNewFile *.{dms}    setlocal ft=sql
   augroup END
 
   " TaskPaper
   augroup vimrc_taskpaper
     au!
-    au BufRead,BufNewFile *.{taskpaper}    set list!
+    au BufRead,BufNewFile *.taskpaper    setlocal autoread nolist textwidth=0 wrapmargin=0
   augroup END
 
 " }}}
@@ -393,6 +394,9 @@
   " Yankring
   nnoremap <silent> <F4> :YRShow<cr>
   let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+
+  " Taskpaper
+  let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
 
 " }}}
 
