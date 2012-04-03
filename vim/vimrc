@@ -441,8 +441,6 @@
     " set spell
     set spelllang=en
     set spellsuggest=9 "show only 9 suggestions for misspelled words
-    " Map the markdown preview to leader-p
-    "map <buffer> <Leader>p :Hammer <CR>
   endfunction
 
   func! <sid>CycleTabpages(forw)
@@ -682,7 +680,6 @@ if has ('gui_running')
     "set guicursor+=v:block-vCursor-blinkon0
     "set guicursor+=i-ci:ver20-iCursor
 
-
     if has("gui_macvim")
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
@@ -704,6 +701,10 @@ if has ('gui_running')
 
       " Command-/ to toggle comments
       " map <D-/> <plug>NERDCommenterToggle<CR>
+
+      " Map Command right/left to move tabs
+      nnoremap <silent> <D-Right> :call<sid>CycleTabpages(1)<cr>
+      nnoremap <silent> <D-Left> :call<sid>CycleTabpages(0)<cr>
 
       " Command-][ to increase/decrease indentation
       vmap <D-]> >gv
@@ -734,7 +735,7 @@ if has ('gui_running')
       " Map Command+Shift+p to preview the document in Marked
       :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
-      " Map Command+Shift+p to preview the document in Marked
+      " Map Command+Shift+p to open in Multimarkdown Composer
       :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
 
       " Set the font
@@ -759,9 +760,6 @@ if has ('gui_running')
 
       " Change the location of the viminfo file
       set viminfo+=n$USERPROFILE\\_viminfo
-
-      " Change the temporary directory for Hammer
-      "let g:HammerDirectory = 'X:\hammer'
 
       " Change the location of the bookmarks file
       let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
