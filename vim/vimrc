@@ -393,7 +393,6 @@
 
   " Yankring
   nnoremap <silent> <F4> :YRShow<cr>
-  let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
 
   " Taskpaper
   let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
@@ -747,6 +746,9 @@ if has ('gui_running')
       " Map F4 to toggle the solarized background
       "call togglebg#map("<F4>")
 
+      " Set history file for YankRing
+      let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+
       " Insert date and time header at the top of the file
       nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
       imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -808,6 +810,9 @@ if has ('gui_running')
 
       " Have vim use Windows Ctrl+ keys
       source $VIMRUNTIME/mswin.vim
+
+      " Set history file for YankRing
+      let g:yankring_history_file = 'vimfiles/tmp/swap/yankring.history'
 
       " Map Alt-Shift-P to run markdown to pdf against the current document and
       " open the resulting document
