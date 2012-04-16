@@ -122,7 +122,6 @@
   colorscheme solarized
   set background=dark
   let g:solarized_menu=0
-  let g:DrChipTopLvlMenu= "Plugin."
 
   " Highlight the current line
   set cursorline
@@ -327,6 +326,10 @@
 " }}}
 
 " Plugin Settings {{{1
+
+  " Powerline
+  let g:Powerline_symbols = 'fancy'
+  let g:Powerline_cache_enabled = 1
 
   " Ruby-vim
   let g:rubycomplete_buffer_loading = 1
@@ -738,10 +741,10 @@ if has ('gui_running')
       :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
 
       " Set the font
-      " set guifont=Meslo\ LG\ M\ DZ:h12.00
+      "set guifont=Meslo\ LG\ M\ DZ:h12.00
       "set guifont=Inconsolata:h14.00
-      set guifont=Inconsolata-dz:h12.00
-      "set guifont=Consolas:h14
+      "set guifont=Inconsolata-dz:h12.00
+      set guifont=Inconsolata-dz\ for\ Powerline:h12
 
       " Map F4 to toggle the solarized background
       "call togglebg#map("<F4>")
