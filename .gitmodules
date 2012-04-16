@@ -143,5 +143,6 @@
   url = git://github.com/sjl/vitality.vim.git
   ignore = dirty
 [submodule "vim/bundle/powerline"]
-	path = vim/bundle/powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+  path = vim/bundle/powerline
+  url = git://github.com/Lokaltog/vim-powerline.git
+  ignore = dirty
