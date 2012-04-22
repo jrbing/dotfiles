@@ -16,19 +16,13 @@ if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
 
+export DOTFILES=~/.dotfiles
+
 source $ZSH/oh-my-zsh.sh                 # Source oh-my-zsh
 source $HOME/.dotfiles/zsh/aliases.sh    # Source aliases
 source $HOME/.dotfiles/zsh/functions.sh  # Source functions
 
-export DOTFILES=~/.dotfiles
-
-fpath=($DOTFILES/zsh/zsh-completions $fpath)
-
-# Source z.sh
-#. ~/.dotfiles/zsh/z/z.sh
-    #function precmd () {
-      #_z --add "$(pwd -P)"
-    #}
+fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
 
 # Editor and PATH settings
 # export JRUBY_OPTS=--1.9
@@ -38,15 +32,13 @@ export PATH=$PATH:~/.dotfiles/bin
 export PATH=/usr/local/bin:$PATH
 export PATH=~/bin:$PATH
 
-# Set colors for ls
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
 
-# Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # Load Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
+PATH=$PATH:$DOTFILES/zsh/fasd # Add fasd to PATH
 eval "$(fasd --init auto)"
