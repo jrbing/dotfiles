@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Function to search for running processes
 any() {
     emulate -L zsh
