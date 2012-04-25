@@ -364,12 +364,12 @@
   let g:nerdtree_tabs_smart_startup_focus = 1
 
   " ZoomWin configuration
-  map <Leader><Leader> :ZoomWin<CR>
+  "map <Leader><Leader> :ZoomWin<CR>
   set noequalalways
 
-  " CTags
+  " Tagbar
   map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-  nnoremap <silent> <F7> :TlistToggle<CR>
+  nnoremap <silent> <F7> :TagbarToggle<CR>
 
   " Syntastic
   let g:syntastic_enable_signs = 1

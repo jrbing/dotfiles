@@ -58,10 +58,6 @@
   path = vim/bundle/solarized
   url = git://github.com/altercation/vim-colors-solarized.git
   ignore = dirty
-[submodule "vim/bundle/taglist"]
-  path = vim/bundle/taglist
-  url = git://github.com/vim-scripts/taglist.vim.git
-  ignore = dirty
 [submodule "vim/bundle/vim-ruby"]
   path = vim/bundle/vim-ruby
   url = git://github.com/vim-ruby/vim-ruby.git
@@ -149,4 +145,8 @@
 [submodule "vim/bundle/easymotion"]
   path = vim/bundle/easymotion
   url = git://github.com/Lokaltog/vim-easymotion.git
+  ignore = dirty
+[submodule "vim/bundle/tagbar"]
+  path = vim/bundle/tagbar
+  url = git://github.com/majutsushi/tagbar.git
   ignore = dirty
