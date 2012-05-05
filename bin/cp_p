@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Note: This only works on linux systems with strace installed.
 cp_p()
 {
@@ -18,4 +18,3 @@ cp_p()
         }
         END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
-
