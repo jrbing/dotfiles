@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Create symlinks for dotfiles
 
 ln -s ~/.dotfiles/ackrc ~/.ackrc
