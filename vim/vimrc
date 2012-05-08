@@ -750,7 +750,8 @@ if has ('gui_running')
       "call togglebg#map("<F4>")
 
       " Set history file for YankRing
-      let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+      "let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+      let g:yankring_history_dir = '~/.vim/tmp/swap'
 
       " Insert date and time header at the top of the file
       nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
