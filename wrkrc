@@ -13,3 +13,4 @@ export ORACLE_HOME
 export SQLPATH
 
 alias sqlplus='/usr/local/bin/rlwrap /opt/oracle/instantclient_10_2/sqlplus'
+alias vim='mvim -v'
