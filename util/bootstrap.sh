@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Create symlinks for dotfiles
 
+#TODO:  add a function to clean this mess up
 ln -s ~/.dotfiles/ackrc ~/.ackrc
 ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -s ~/.dotfiles/vim/gvimrc ~/.gvimrc
