@@ -1,5 +1,7 @@
 # My Personal Dotfiles #
-Originally posted here as a way to synchronize my settings across multiple machines.  Most likely not useful to anyone other than myself.
+
+Originally posted here as a way to synchronize my settings across
+multiple machines. Most likely not useful to anyone other than myself.
 
 ## Installation ##
 
@@ -7,6 +9,6 @@ Originally posted here as a way to synchronize my settings across multiple machi
     * cd ~
     * git clone git@github.com:jrbing/dotfiles.git .dotfiles
 2. Create symlinks
-    * Unix: run bootstrap.sh
-    * Windows: run bootstrap.bat
+    * Unix: run util/bootstrap.sh
+    * Windows: run util/bootstrap.bat
 3. Abide

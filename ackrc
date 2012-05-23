@@ -11,4 +11,5 @@
 --type-set=MARKDOWN=md,mkd,markdown
 --type-set=RDOC=rdoc
 --type-set=erb=erb
+--type-set=sql=dms
 

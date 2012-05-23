@@ -9,11 +9,13 @@
 
   source ~/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
   filetype off
-  call pathogen#runtime_append_all_bundles()
-  call pathogen#helptags()
+  call pathogen#infect()
+  "call pathogen#runtime_append_all_bundles()
+  "call pathogen#helptags()
   filetype plugin indent on
   set nocompatible
   let mapleader = ","
+
 " }}}
 
 " Editing Behavior {{{1
@@ -97,7 +99,6 @@
   set softtabstop=2
   set textwidth=80
   set colorcolumn=+1
-  "set list listchars=tab:\ \ ,trail:·
 
 " }}}
 
@@ -118,10 +119,12 @@
 
 " Display Settings {{{1
 
-  colorscheme solarized
   set background=dark
-  let g:solarized_menu=0
-  let g:DrChipTopLvlMenu= "Plugin."
+  let g:solarized_termcolors = 256
+  let g:solarized_visibility = "normal"
+  let g:solarized_contrast = "normal"
+  colorscheme solarized
+  "let g:solarized_menu=0
 
   " Highlight the current line
   set cursorline
@@ -266,6 +269,9 @@
   vnoremap <leader>Ac :center<cr>
   vnoremap <leader>Ar :right<cr>
 
+  " use ,gf to go to file in a vertical split
+  nnoremap ,gf :vertical botright wincmd f<CR>
+
 " }}}
 
 " Abbreviations {{{1
@@ -311,12 +317,22 @@
   " Datamover
   augroup ft_datamover
     au!
-    au BufRead,BufNewFile *.{dms}    set ft=sql
+    au BufRead,BufNewFile *.{dms}    setlocal ft=sql
+  augroup END
+
+  " TaskPaper
+  augroup vimrc_taskpaper
+    au!
+    au BufRead,BufNewFile *.taskpaper    setlocal autoread nolist textwidth=0 wrapmargin=0
   augroup END
 
 " }}}
 
 " Plugin Settings {{{1
+
+  " Powerline
+  let g:Powerline_symbols = 'fancy'
+  let g:Powerline_cache_enabled = 1
 
   " Ruby-vim
   let g:rubycomplete_buffer_loading = 1
@@ -351,12 +367,12 @@
   let g:nerdtree_tabs_smart_startup_focus = 1
 
   " ZoomWin configuration
-  map <Leader><Leader> :ZoomWin<CR>
+  "map <Leader><Leader> :ZoomWin<CR>
   set noequalalways
 
-  " CTags
+  " Tagbar
   map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-  nnoremap <silent> <F9> :TlistToggle<CR>
+  nnoremap <silent> <F7> :TagbarToggle<CR>
 
   " Syntastic
   let g:syntastic_enable_signs = 1
@@ -383,7 +399,9 @@
 
   " Yankring
   nnoremap <silent> <F4> :YRShow<cr>
-  let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+
+  " Taskpaper
+  let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
 
 " }}}
 
@@ -428,8 +446,6 @@
     " set spell
     set spelllang=en
     set spellsuggest=9 "show only 9 suggestions for misspelled words
-    " Map the markdown preview to leader-p
-    map <buffer> <Leader>p :Hammer <CR>
   endfunction
 
   func! <sid>CycleTabpages(forw)
@@ -650,6 +666,18 @@ RUBY
 
 " Platform Specific Settings {{{1
 
+if exists('$TMUX')
+
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+else
+
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+endif
+
 if has ('gui_running')
 
     " Remove all the UI cruft
@@ -669,7 +697,6 @@ if has ('gui_running')
     "set guicursor+=v:block-vCursor-blinkon0
     "set guicursor+=i-ci:ver20-iCursor
 
-
     if has("gui_macvim")
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
@@ -683,14 +710,12 @@ if has ('gui_running')
       imap <D-T> <Esc>:CtrlP<CR>
       "macmenu &File.New\ Tab key=<D-t>
 
-      " Command-Return for fullscreen
-      " macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
-
       " Command-Shift-F for Ack
       map <D-F> :Ack<space>
 
-      " Command-/ to toggle comments
-      " map <D-/> <plug>NERDCommenterToggle<CR>
+      " Map Command right/left to move tabs
+      nnoremap <silent> <D-Right> :call<sid>CycleTabpages(1)<cr>
+      nnoremap <silent> <D-Left> :call<sid>CycleTabpages(0)<cr>
 
       " Command-][ to increase/decrease indentation
       vmap <D-]> >gv
@@ -721,17 +746,21 @@ if has ('gui_running')
       " Map Command+Shift+p to preview the document in Marked
       :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
-      " Map Command+Shift+p to preview the document in Marked
+      " Map Command+Shift+p to open in Multimarkdown Composer
       :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
 
       " Set the font
-      " set guifont=Meslo\ LG\ M\ DZ:h12.00
+      "set guifont=Meslo\ LG\ M\ DZ:h12.00
       "set guifont=Inconsolata:h14.00
-      set guifont=Inconsolata-dz:h12.00
-      "set guifont=Consolas:h14
+      "set guifont=Inconsolata-dz:h12.00
+      set guifont=Inconsolata-dz\ for\ Powerline:h12
 
       " Map F4 to toggle the solarized background
       "call togglebg#map("<F4>")
+
+      " Set history file for YankRing
+      let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+      "let g:yankring_history_dir = '~/.vim/tmp/swap'
 
       " Insert date and time header at the top of the file
       nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -746,9 +775,6 @@ if has ('gui_running')
 
       " Change the location of the viminfo file
       set viminfo+=n$USERPROFILE\\_viminfo
-
-      " Change the temporary directory for Hammer
-      let g:HammerDirectory = 'X:\hammer'
 
       " Change the location of the bookmarks file
       let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
@@ -797,6 +823,9 @@ if has ('gui_running')
 
       " Have vim use Windows Ctrl+ keys
       source $VIMRUNTIME/mswin.vim
+
+      " Set history file for YankRing
+      let g:yankring_history_file = 'vimfiles/tmp/swap/yankring.history'
 
       " Map Alt-Shift-P to run markdown to pdf against the current document and
       " open the resulting document

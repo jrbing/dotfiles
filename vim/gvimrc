@@ -6,7 +6,7 @@
 "set antialias
 
 if has ("gui_macvim")
-  " Command-T for CommandT
+  " Command-T for CtrlP
   macmenu &File.New\ Tab key=<nop>
   map <D-t> :CtrlP<CR>
   imap <D-t> <Esc>:CtrlP<CR>
@@ -14,6 +14,9 @@ if has ("gui_macvim")
 
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
+
+  " Set correct path for taglist plugin
+  let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
 elseif has("win32") || has("win64")
 

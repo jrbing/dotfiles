@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # bar
 # 'cat' with ASCII progress bar

@@ -5,9 +5,12 @@
 DYLD_LIBRARY_PATH="/opt/oracle/instantclient_10_2"
 TNS_ADMIN="/opt/oracle/tns"
 ORACLE_HOME="/opt/oracle/instantclient_10_2"
+SQLPATH="/Users/jbing/Dropbox/Code/psadmin-sql"
 
 export DYLD_LIBRARY_PATH
 export TNS_ADMIN
 export ORACLE_HOME
+export SQLPATH
 
 alias sqlplus='/usr/local/bin/rlwrap /opt/oracle/instantclient_10_2/sqlplus'
+alias vim='mvim -v'
