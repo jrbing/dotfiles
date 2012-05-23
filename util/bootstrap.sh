@@ -1,15 +1,28 @@
-#!/usr/bin/env bash
-# Create symlinks for dotfiles
+#!/usr/bin/env zsh
 
-#TODO:  add a function to clean this mess up
-ln -s ~/.dotfiles/ackrc ~/.ackrc
+DOTFILES=$HOME/.dotfiles
+BASE_FILES=( "ackrc" "bash_profile" "bashrc" "gemrc" "gitconfig" "gitignore" "profile" "sqlplus_completions" "tmux.conf" "zprofile" "zshrc" "wgetrc")
+
+createBaseSymlinks () {
+for i in ${BASE_FILES[@]}
+do
+
+  if [ -f ~/.${i} ] || [ -h ~/.${i} ]
+    then
+      echo "Found ~/.${i}... Backing up to ~/.${i}.old";
+      cp ~/.${i} ~/.${i}.old;
+      rm ~/.${i};
+  fi
+
+  echo "Creating alias for ${i}"
+  ln -s ${DOTFILES}/${i} ~/.${i}
+
+done
+}
+
+createSymlinks
+
 ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -s ~/.dotfiles/vim/gvimrc ~/.gvimrc
 ln -s ~/.dotfiles/vim ~/.vim
-ln -s ~/.dotfiles/bash_profile ~/.bash_profile
-ln -s ~/.dotfiles/bashrc ~/.bashrc
-ln -s ~/.dotfiles/zshrc ~/.zshrc
-ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/sqlplus_completions ~/.sqlplus_completions
-ln -s ~/.dotfiles/wrkrc ~/.localrc
-ln -s ~/.dotfiles/zsh/dircolors-solarized/dircolors.ansi-universal ~/.dir_colors
+
