@@ -8,5 +8,3 @@
 alias vim="/c/Program\ Files/vim/vim73/gvim.exe &"
 alias exp="explorer"
 
-# Source z.sh
-. ~/.dotfiles/zsh/z/z.sh
