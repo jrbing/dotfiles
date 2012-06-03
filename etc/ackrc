@@ -1,0 +1,15 @@
+# sort filenames
+--sort-files
+
+# ignore case
+--ignore-case
+
+# add types ack doesn't know about
+--type-set=ruby=rake,thor
+--type-set=vim=vimrc,gvimrc
+--type-set=css=sass,less
+--type-set=MARKDOWN=md,mkd,markdown
+--type-set=RDOC=rdoc
+--type-set=erb=erb
+--type-set=sql=dms
+
