@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # ALIASES
 alias ..='cd ..'
@@ -8,7 +8,7 @@ alias ll="ls -l"
 alias la='ls -A'
 
 export EDITOR=vim
-. ~/.dotfiles/bin/bash_colors.sh
+. ~/.dotfiles/lib/bash_colors.sh
 
 # Add paths
 export PATH=$PATH:~/.bin
@@ -16,9 +16,7 @@ export PATH=$PATH:~/.dotfiles/bin
 
 # Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-# Source z.sh
-. ~/.dotfiles/zsh/z/z.sh
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # Use .localrc for settings specific to one system
 if [ -f ~/.localrc ]; then
@@ -26,4 +24,3 @@ if [ -f ~/.localrc ]; then
 fi
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
