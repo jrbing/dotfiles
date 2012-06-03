@@ -249,7 +249,7 @@
   nnoremap <F3> :GundoToggle<CR>
 
   " Reassign mapping for quickbuf
-  let g:qb_hotkey = '<F8>'
+  let g:qb_hotkey = '<Leader>b'
 
   " Adjust viewports to the same size
   map <Leader>= <C-w>=
