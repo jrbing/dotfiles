@@ -15,8 +15,8 @@ fi
 
 # Sourcing
 source $ZSH/oh-my-zsh.sh                 # Source oh-my-zsh
-source $HOME/.dotfiles/zsh/aliases.sh    # Source aliases
-source $HOME/.dotfiles/zsh/functions.sh  # Source functions
+source $DOTFILES/zsh/aliases.sh    # Source aliases
+source $DOTFILES/zsh/functions.sh  # Source functions
 
 # Completion
 fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
@@ -38,7 +38,7 @@ case $(uname) in
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
   ;;
   (SunOS)
-    # Solaris specific settings
+    source $DOTFILES/env/solarisrc
   ;;
 esac
 
