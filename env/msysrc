@@ -1,9 +1,6 @@
 #!/bin/sh
 #Settings specific for using git shell on windows
 
-# Use pik for ruby management
-# [[ -s $USERPROFILE/.pik/.pikrc ]] && source $USERPROFILE/.pik/.pikrc
-
 # Aliases
 alias vim="/c/Program\ Files/vim/vim73/gvim.exe &"
 alias exp="explorer"
