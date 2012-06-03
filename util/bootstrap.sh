@@ -4,7 +4,7 @@ DOTFILES=$HOME/.dotfiles
 BASE_FILES=( "bash_profile" "bashrc" "profile" "zprofile" "zshrc")
 ETC_FILES=("ackrc" "gemrc" "sqlplus_completions" "tmux.conf" "wgetrc")
 GIT_FILES=("gitconfig" "gitignore")
-VIM_FILES=("vimrc" "gvimrc" "vim")
+VIM_FILES=("vimrc" "gvimrc")
 
 createBaseSymlinks () {
 for i in ${BASE_FILES[@]}
@@ -35,7 +35,7 @@ done
 }
 
 createGitSymlinks () {
-for i in ${BASE_FILES[@]}
+for i in ${GIT_FILES[@]}
 do
   if [ -f ~/.${i} ] || [ -h ~/.${i} ]
     then
@@ -44,12 +44,12 @@ do
       rm ~/.${i};
   fi
   printf "Creating alias for ${i}\n"
-  ln -s ${DOTFILES}/${i} ~/.${i}
+  ln -s ${DOTFILES}/git/${i} ~/.${i}
 done
 }
 
 createVimSymlinks () {
-for i in ${BASE_FILES[@]}
+for i in ${VIM_FILES[@]}
 do
   if [ -f ~/.${i} ] || [ -h ~/.${i} ]
     then
@@ -58,8 +58,11 @@ do
       rm ~/.${i};
   fi
   printf "Creating alias for ${i}\n"
-  ln -s ${DOTFILES}/${i} ~/.${i}
+  ln -s ${DOTFILES}/vim/${i} ~/.${i}
 done
+
+#Create symlink for vim directory
+ln -s $DOTFILES/vim/ ~/.vim
 }
 
 createBaseSymlinks
@@ -67,6 +70,6 @@ createEtcSymlinks
 createGitSymlinks
 createVimSymlinks
 
-printf "Copying ssh_default settings...\n"
-cp $DOTFILES/etc/ssh_config $HOME/.ssh/config
+# Only copy ssh config if it doesn't already exist
+[[ -f $HOME/.ssh/config ]] || cp $DOTFILES/etc/ssh_config $HOME/.ssh/config
 
