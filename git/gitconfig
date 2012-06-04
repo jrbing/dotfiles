@@ -1,24 +1,25 @@
 [user]
-    name = JR Bing
-    email = jrbing@gmail.com
+  name = JR Bing
+  email = jrbing@gmail.com
+  editor = vim
 
 [github]
-    user = jrbing
+  user = jrbing
 
 [core]
-    quotepath = false
-    excludesfile = /Users/jrbing/.gitignore
-    pager = cat
-    editor = vim
+  quotepath = false
+  pager = cat
+  editor = vim
+  excludesfile = ~/.gitignore_global
 
 [alias]
-    shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
+  shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
 
 [color]
-    branch = auto
-    diff = auto
-    interactive = auto
-    status = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
 
 [web]
-    browser = open
+  browser = open
