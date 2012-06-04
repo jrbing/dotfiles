@@ -759,7 +759,7 @@ if has ('gui_running')
       "call togglebg#map("<F4>")
 
       " Set history file for YankRing
-      let g:yankring_history_file = '.vim/tmp/swap/yankring.history'
+      let g:yankring_history_dir = '~/.vim/tmp/swap'
       "let g:yankring_history_dir = '~/.vim/tmp/swap'
 
       " Insert date and time header at the top of the file
@@ -825,7 +825,7 @@ if has ('gui_running')
       source $VIMRUNTIME/mswin.vim
 
       " Set history file for YankRing
-      let g:yankring_history_file = 'vimfiles/tmp/swap/yankring.history'
+      let g:yankring_history_file = '~/vimfiles/tmp/swap/yankring.history'
 
       " Map Alt-Shift-P to run markdown to pdf against the current document and
       " open the resulting document
