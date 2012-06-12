@@ -51,3 +51,4 @@ PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM t
 PATH=$PATH:$DOTFILES/zsh/fasd # Add fasd to PATH
 eval "$(fasd --init auto)"
 
+source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
