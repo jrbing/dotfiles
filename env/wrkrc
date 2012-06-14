@@ -8,6 +8,7 @@ export ORACLE_HOME="/opt/oracle/instantclient_10_2"
 export SQLPATH="/Users/jbing/Dropbox/Code/psadmin-sql"
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=$JAVA_HOME/bin:$PATH
+export PATH=/opt/oracle/swingbench/bin:$PATH
 
 # Aliases
 alias sqlplus='/usr/local/bin/rlwrap /opt/oracle/instantclient_10_2/sqlplus'
