@@ -1,9 +1,6 @@
 #!/usr/bin/env sh
 # Note: This only works on linux systems with strace installed.
 case $(uname) in
-  Darwin*)
-    echo "Sorry, this only works in Linux"
-  ;;
   Linux*)
     cp_p()
     {
@@ -22,7 +19,11 @@ case $(uname) in
               }
             }
             END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+            break
     }
+  ;;
+  *)
+    rsync -WavP "${1}" "${2}" 2>&1
   ;;
 
 esac
