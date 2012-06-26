@@ -26,22 +26,6 @@ export EDITOR=vim
 export PAGER=less
 export PATH=$PATH:$HOME/.dotfiles/bin
 
-# OS Specific Settings
-case $(uname) in
-  (Darwin)
-    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
-  ;;
-  (Linux)
-    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
-  ;;
-  (SunOS)
-    source $DOTFILES/env/solarisrc
-  ;;
-  (CYGWIN*)
-    source $DOTFILES/env/msysrc
-  ;;
-esac
-
 # Additional 3rd party stuff
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
 PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM to PATH for scripting
@@ -51,4 +35,21 @@ PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM t
 PATH=$PATH:$DOTFILES/zsh/fasd # Add fasd to PATH
 eval "$(fasd --init auto)"
 
-source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
+# OS Specific Settings
+case $(uname) in
+  (Darwin)
+    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
+    source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
+  ;;
+  (Linux)
+    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
+    source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
+  ;;
+  (SunOS)
+    source $DOTFILES/env/solarisrc
+  ;;
+  (CYGWIN*)
+    source $DOTFILES/env/msysrc
+  ;;
+esac
+
