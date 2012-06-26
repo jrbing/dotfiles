@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # ZSH settings file
 
-# oh-my-zsh settings
+# OH-MY-ZSH settings
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/zsh/oh-my-zsh    #Path to oh-my-zsh configuration.
 export ZSH_THEME="robbyrussell"       #Theme
@@ -14,7 +14,7 @@ if [ -f ~/.localrc ]; then
 fi
 
 # Sourcing
-source $ZSH/oh-my-zsh.sh                 # Source oh-my-zsh
+source $ZSH/oh-my-zsh.sh           # Source oh-my-zsh
 source $DOTFILES/zsh/aliases.sh    # Source aliases
 source $DOTFILES/zsh/functions.sh  # Source functions
 
@@ -25,9 +25,6 @@ fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
 export EDITOR=vim
 export PAGER=less
 export PATH=$PATH:$HOME/.dotfiles/bin
-#export PATH=$PATH:$HOME/.bin
-#export PATH=/usr/local/bin:$PATH
-#export PATH=$HOME/bin:$PATH
 
 # OS Specific Settings
 case $(uname) in
@@ -39,6 +36,9 @@ case $(uname) in
   ;;
   (SunOS)
     source $DOTFILES/env/solarisrc
+  ;;
+  (CYGWIN*)
+    source $DOTFILES/env/msysrc
   ;;
 esac
 
