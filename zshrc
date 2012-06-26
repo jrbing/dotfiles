@@ -24,10 +24,10 @@ fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
 # Editor and PATH settings
 export EDITOR=vim
 export PAGER=less
-export PATH=$PATH:$HOME/.bin
 export PATH=$PATH:$HOME/.dotfiles/bin
-export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/bin:$PATH
+#export PATH=$PATH:$HOME/.bin
+#export PATH=/usr/local/bin:$PATH
+#export PATH=$HOME/bin:$PATH
 
 # OS Specific Settings
 case $(uname) in
