@@ -237,7 +237,7 @@
   cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
   " Mapping to easily split current window
-  map <Leader>| :vsp <CR>
+  "map <Leader>| :vsp <CR>
 
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
@@ -783,7 +783,7 @@ if has ('gui_running')
       " Change the location of the bookmarks file
       let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
 
-      " Map Command-# to switch tabs
+      " Map Alt-# to switch tabs
       map  <A-0> 0gt
       imap <A-0> <Esc>0gt
       map  <A-1> 1gt
