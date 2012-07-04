@@ -237,7 +237,7 @@
   cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
   " Mapping to easily split current window
-  "map <Leader>| :vsp <CR>
+  map <Leader>| :vsp <CR>
 
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
@@ -293,13 +293,16 @@
   augroup END
 
   " Make and Python
-  au FileType make                                     set noexpandtab
-  au FileType python                                   set noexpandtab
+  au FileType make    setlocal noexpandtab
+  au FileType python  setlocal softtabstop=4 tabstop=4 shiftwidth=4
+
+  " JSON
+  au BufNewFile,BufRead *.json set ft=javascript
 
   " Ruby
   augroup ft_ruby
     au!
-    au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+    au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake}    set ft=ruby
   augroup END
 
   " Markdown
