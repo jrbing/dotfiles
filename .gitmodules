@@ -172,3 +172,6 @@
 [submodule "vim/bundle/vim-javascript"]
 	path = vim/bundle/vim-javascript
 	url = git://github.com/pangloss/vim-javascript.git
+[submodule "vim/bundle/plsql"]
+	path = vim/bundle/plsql
+	url = git://github.com/vim-scripts/plsql.vim-syntax.git
