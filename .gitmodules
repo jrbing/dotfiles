@@ -167,8 +167,18 @@
   url = git://github.com/kchmck/vim-coffee-script.git
   ignore = dirty
 [submodule "zsh/zsh-syntax-highlighting"]
-	path = zsh/zsh-syntax-highlighting
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+  path = zsh/zsh-syntax-highlighting
+  url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+  ignore = dirty
 [submodule "vim/bundle/less"]
-	path = vim/bundle/less
-	url = git://github.com/groenewege/vim-less.git
+  path = vim/bundle/less
+  url = git://github.com/groenewege/vim-less.git
+  ignore = dirty
+[submodule "vim/bundle/vim-javascript"]
+  path = vim/bundle/vim-javascript
+  url = git://github.com/pangloss/vim-javascript.git
+  ignore = dirty
+[submodule "vim/bundle/plsql"]
+  path = vim/bundle/plsql
+  url = git://github.com/vim-scripts/plsql.vim-syntax.git
+  ignore = dirty
