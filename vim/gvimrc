@@ -2,10 +2,16 @@
 " JR Bing <jr@jrbing.com>
 " -------------------------------------------------------------------------
 
-"set linespace=2
-"set antialias
-
 if has ("gui_macvim")
+
+  " Map Command right/left to move tabs
+  nnoremap <silent> <D-Right> :tabnext<cr>
+  nnoremap <silent> <D-Left> :tabprevious<cr>
+
+  " Command-][ to increase/decrease indentation
+  vmap <D-]> >gv
+  vmap <D-[> <gv
+
   " Command-T for CtrlP
   macmenu &File.New\ Tab key=<nop>
   map <D-t> :CtrlP<CR>
@@ -19,5 +25,9 @@ if has ("gui_macvim")
   let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
 elseif has("win32") || has("win64")
+
+  " Map Alt right/left to move tabs
+  nnoremap <silent> <A-Right> :tabnext<cr>
+  nnoremap <silent> <A-Left> :tabprevious<cr>
 
 endif

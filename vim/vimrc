@@ -7,11 +7,9 @@
 
 " Foreward {{{1
 
-  source ~/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
+  source $HOME/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
   filetype off
   call pathogen#infect()
-  "call pathogen#runtime_append_all_bundles()
-  "call pathogen#helptags()
   filetype plugin indent on
   set nocompatible
   let mapleader = ","
@@ -40,7 +38,7 @@
   set cpoptions+=J
   set list
   set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
-  set shell=/bin/zsh
+  set shell=/usr/bin/env zsh
   set lazyredraw
   set matchtime=3
   set showbreak=↪
@@ -58,10 +56,10 @@
   syntax on
 
   " Set backup file location
-  set undodir=~/.vim/tmp/undo//     " undo files
-  set backupdir=~/.vim/tmp/backup// " backups
-  set directory=~/.vim/tmp/swap//   " swap files
-  set backup                        " enable backups
+  set undodir=$HOME/.vim/tmp/undo//     " undo files
+  set backupdir=$HOME/.vim/tmp/backup// " backups
+  set directory=$HOME/.vim/tmp/swap//   " swap files
+  set backup                            " enable backups
 
   set wildmenu
   set wildmode=list:longest
@@ -619,51 +617,52 @@ RUBY
   " Pulse
 
   function! PulseCursorLine()
-      let current_window = winnr()
+    let current_window = winnr()
 
-      windo set nocursorline
-      execute current_window . 'wincmd w'
+    windo set nocursorline
+    execute current_window . 'wincmd w'
 
-      setlocal cursorline
+    setlocal cursorline
 
-      redir => old_hi
-          silent execute 'hi CursorLine'
-      redir END
-      let old_hi = split(old_hi, '\n')[0]
-      let old_hi = substitute(old_hi, 'xxx', '', '')
+    redir => old_hi
+        silent execute 'hi CursorLine'
+    redir END
+    let old_hi = split(old_hi, '\n')[0]
+    let old_hi = substitute(old_hi, 'xxx', '', '')
 
-      hi CursorLine guibg=#2a2a2a ctermbg=233
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#2a2a2a ctermbg=233
+    redraw
+    sleep 20m
 
-      hi CursorLine guibg=#333333 ctermbg=235
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#333333 ctermbg=235
+    redraw
+    sleep 20m
 
-      hi CursorLine guibg=#3a3a3a ctermbg=237
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#3a3a3a ctermbg=237
+    redraw
+    sleep 20m
 
-      hi CursorLine guibg=#444444 ctermbg=239
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#444444 ctermbg=239
+    redraw
+    sleep 20m
 
-      hi CursorLine guibg=#3a3a3a ctermbg=237
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#3a3a3a ctermbg=237
+    redraw
+    sleep 20m
 
-      hi CursorLine guibg=#333333 ctermbg=235
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#333333 ctermbg=235
+    redraw
+    sleep 20m
 
-      hi CursorLine guibg=#2a2a2a ctermbg=233
-      redraw
-      sleep 20m
+    hi CursorLine guibg=#2a2a2a ctermbg=233
+    redraw
+    sleep 20m
 
-      execute 'hi ' . old_hi
+    execute 'hi ' . old_hi
 
-      windo set cursorline
-      execute current_window . 'wincmd w'
+    windo set cursorline
+    execute current_window . 'wincmd w'
+
   endfunction
 
 " }}}
@@ -684,179 +683,170 @@ endif
 
 if has ('gui_running')
 
-    " Remove all the UI cruft
-    set go-=T
-    set go-=l
-    set go-=L
-    set go-=r
-    set go-=R
+  " Remove all the UI cruft
+  set go-=T
+  set go-=l
+  set go-=L
+  set go-=r
+  set go-=R
 
-    highlight SpellBad term=underline gui=undercurl guisp=Orange
+  highlight SpellBad term=underline gui=undercurl guisp=Orange
 
-    " Use a line-drawing char for pretty vertical splits.
-    set fillchars+=vert:│
+  " Use a line-drawing char for pretty vertical splits.
+  set fillchars+=vert:│
 
-    " Different cursors for different modes.
-    "set guicursor=n-c:block-Cursor-blinkon0
-    "set guicursor+=v:block-vCursor-blinkon0
-    "set guicursor+=i-ci:ver20-iCursor
+  " Different cursors for different modes.
+  "set guicursor=n-c:block-Cursor-blinkon0
+  "set guicursor+=v:block-vCursor-blinkon0
+  "set guicursor+=i-ci:ver20-iCursor
 
-    if has("gui_macvim")
-      " Fullscreen takes up entire screen
-      set fuoptions=maxhorz,maxvert
+  if has("gui_macvim")
+    " Fullscreen takes up entire screen
+    set fuoptions=maxhorz,maxvert
 
-      " Set correct path for taglist plugin
-      "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+    " Set correct path for taglist plugin
+    "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
-      " Command-T for CtrlP
-      "macmenu &File.New\ Tab key=<nop>
-      map <D-T> :CtrlP<CR>
-      imap <D-T> <Esc>:CtrlP<CR>
-      "macmenu &File.New\ Tab key=<D-t>
+    " Command-T for CtrlP
+    "macmenu &File.New\ Tab key=<nop>
+    map <D-T> :CtrlP<CR>
+    imap <D-T> <Esc>:CtrlP<CR>
+    "macmenu &File.New\ Tab key=<D-t>
 
-      " Command-Shift-F for Ack
-      map <D-F> :Ack<space>
+    " Command-Shift-F for Ack
+    map <D-F> :Ack<space>
 
-      " Map Command right/left to move tabs
-      nnoremap <silent> <D-Right> :call<sid>CycleTabpages(1)<cr>
-      nnoremap <silent> <D-Left> :call<sid>CycleTabpages(0)<cr>
+    " Map Command-# to switch tabs
+    map  <D-0> 0gt
+    imap <D-0> <Esc>0gt
+    map  <D-1> 1gt
+    imap <D-1> <Esc>1gt
+    map  <D-2> 2gt
+    imap <D-2> <Esc>2gt
+    map  <D-3> 3gt
+    imap <D-3> <Esc>3gt
+    map  <D-4> 4gt
+    imap <D-4> <Esc>4gt
+    map  <D-5> 5gt
+    imap <D-5> <Esc>5gt
+    map  <D-6> 6gt
+    imap <D-6> <Esc>6gt
+    map  <D-7> 7gt
+    imap <D-7> <Esc>7gt
+    map  <D-8> 8gt
+    imap <D-8> <Esc>8gt
+    map  <D-9> 9gt
+    imap <D-9> <Esc>9gt
 
-      " Command-][ to increase/decrease indentation
-      vmap <D-]> >gv
-      vmap <D-[> <gv
+    " Map Command+Shift+p to preview the document in Marked
+    :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
-      " Map Command-# to switch tabs
-      map  <D-0> 0gt
-      imap <D-0> <Esc>0gt
-      map  <D-1> 1gt
-      imap <D-1> <Esc>1gt
-      map  <D-2> 2gt
-      imap <D-2> <Esc>2gt
-      map  <D-3> 3gt
-      imap <D-3> <Esc>3gt
-      map  <D-4> 4gt
-      imap <D-4> <Esc>4gt
-      map  <D-5> 5gt
-      imap <D-5> <Esc>5gt
-      map  <D-6> 6gt
-      imap <D-6> <Esc>6gt
-      map  <D-7> 7gt
-      imap <D-7> <Esc>7gt
-      map  <D-8> 8gt
-      imap <D-8> <Esc>8gt
-      map  <D-9> 9gt
-      imap <D-9> <Esc>9gt
+    " Map Command+Shift+p to open in Multimarkdown Composer
+    :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
 
-      " Map Command+Shift+p to preview the document in Marked
-      :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
+    " Set the font
+    "set guifont=Meslo\ LG\ M\ DZ:h12.00
+    "set guifont=Inconsolata:h14.00
+    "set guifont=Inconsolata-dz:h12.00
+    set guifont=Inconsolata-dz\ for\ Powerline:h12
 
-      " Map Command+Shift+p to open in Multimarkdown Composer
-      :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
+    " Map F4 to toggle the solarized background
+    "call togglebg#map("<F4>")
 
-      " Set the font
-      "set guifont=Meslo\ LG\ M\ DZ:h12.00
-      "set guifont=Inconsolata:h14.00
-      "set guifont=Inconsolata-dz:h12.00
-      set guifont=Inconsolata-dz\ for\ Powerline:h12
+    " Set history file for YankRing
+    let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
 
-      " Map F4 to toggle the solarized background
-      "call togglebg#map("<F4>")
-
-      " Set history file for YankRing
-      let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
-      "let g:yankring_history_dir = '~/.vim/tmp/swap'
-
-      " Insert date and time header at the top of the file
-      nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-      imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+    " Insert date and time header at the top of the file
+    nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+    imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
     " Windows Specific Settings
-    elseif has("win32") || has("win64")
+  elseif has("win32") || has("win64")
 
-      " Set the font
-      set guifont=Consolas:h10
-      " set guifont=Anonymous\ Pro:h11
+    " Set the font
+    set guifont=Consolas:h10
+    " set guifont=Anonymous\ Pro:h11
 
-      " Change the location of the viminfo file
-      set viminfo+=n$USERPROFILE\\_viminfo
+    " Change the location of the viminfo file
+    set viminfo+=n$USERPROFILE\\_viminfo
 
-      " Change the location of the bookmarks file
-      let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
+    " Change the location of the bookmarks file
+    let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
 
-      " Map Alt-# to switch tabs
-      map  <A-0> 0gt
-      imap <A-0> <Esc>0gt
-      map  <A-1> 1gt
-      imap <A-1> <Esc>1gt
-      map  <A-2> 2gt
-      imap <A-2> <Esc>2gt
-      map  <A-3> 3gt
-      imap <A-3> <Esc>3gt
-      map  <A-4> 4gt
-      imap <A-4> <Esc>4gt
-      map  <A-5> 5gt
-      imap <A-5> <Esc>5gt
-      map  <A-6> 6gt
-      imap <A-6> <Esc>6gt
-      map  <A-7> 7gt
-      imap <A-7> <Esc>7gt
-      map  <A-8> 8gt
-      imap <A-8> <Esc>8gt
-      map  <A-9> 9gt
-      imap <A-9> <Esc>9gt
+    " Map Alt-# to switch tabs
+    map  <A-0> 0gt
+    imap <A-0> <Esc>0gt
+    map  <A-1> 1gt
+    imap <A-1> <Esc>1gt
+    map  <A-2> 2gt
+    imap <A-2> <Esc>2gt
+    map  <A-3> 3gt
+    imap <A-3> <Esc>3gt
+    map  <A-4> 4gt
+    imap <A-4> <Esc>4gt
+    map  <A-5> 5gt
+    imap <A-5> <Esc>5gt
+    map  <A-6> 6gt
+    imap <A-6> <Esc>6gt
+    map  <A-7> 7gt
+    imap <A-7> <Esc>7gt
+    map  <A-8> 8gt
+    imap <A-8> <Esc>8gt
+    map  <A-9> 9gt
+    imap <A-9> <Esc>9gt
 
-      " Show the tab line
-      set stal=1
+    " Show the tab line
+    set stal=1
 
-      "Alt Shift-f to run Ack
-      nmap <A-F> :Ack<space>
+    "Alt Shift-f to run Ack
+    nmap <A-F> :Ack<space>
 
-      " Set size and position
-      set lines=50
-      set columns=135
-      winpos 0 0
+    " Set size and position
+    set lines=50
+    set columns=135
+    winpos 0 0
 
-      " Prevent vim from writing backups, due to issues with the home directory
-      " being on a network share
-      set nobackup
-      set nowritebackup
-      set noswapfile
+    " Prevent vim from writing backups, due to issues with the home directory
+    " being on a network share
+    set nobackup
+    set nowritebackup
+    set noswapfile
 
-      " Hides the menu
-      set winaltkeys=no
+    " Hides the menu
+    set winaltkeys=no
 
-      " Have vim use Windows Ctrl+ keys
-      source $VIMRUNTIME/mswin.vim
+    " Have vim use Windows Ctrl+ keys
+    source $VIMRUNTIME/mswin.vim
 
-      " Set history file for YankRing
-      let g:yankring_history_file = '$HOME/vimfiles/tmp/swap/yankring.history'
+    " Set history file for YankRing
+    let g:yankring_history_file = '$HOME/vimfiles/tmp/swap/yankring.history'
 
-      " Map Alt-Shift-P to run markdown to pdf against the current document and
-      " open the resulting document
-      function! CreatePDF()
-        execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
-        execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
-      endfunction
+    " Map Alt-Shift-P to run markdown to pdf against the current document and
+    " open the resulting document
+    function! CreatePDF()
+      execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
+      execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
+    endfunction
 
-      command! CreatePDF :call CreatePDF()
+    command! CreatePDF :call CreatePDF()
 
-      nmap <silent> <A-P> :call CreatePDF()<CR>
+    nmap <silent> <A-P> :call CreatePDF()<CR>
 
-      " Generate rtf and open in default viewer
-      function! CreateRTF()
-        execute 'silent ! pandoc  -f markdown -t rtf -s -o \%TEMP\%\/%:t:r:s,$,.rtf, "%"'
-        execute 'silent ! \%TEMP\%\/%:t:r:s,$,.rtf,'
-      endfunction
+    " Generate rtf and open in default viewer
+    function! CreateRTF()
+      execute 'silent ! pandoc  -f markdown -t rtf -s -o \%TEMP\%\/%:t:r:s,$,.rtf, "%"'
+      execute 'silent ! \%TEMP\%\/%:t:r:s,$,.rtf,'
+    endfunction
 
-      command! CreateRTF :call CreateRTF()
+    command! CreateRTF :call CreateRTF()
 
-      nmap <silent> <A-R> :call CreateRTF()<CR>
+    nmap <silent> <A-R> :call CreateRTF()<CR>
 
-      " Insert date and time header at the top of the file
-      nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-      imap <A-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+    " Insert date and time header at the top of the file
+    nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+    imap <A-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
-    endif
+  endif
 
 endif
 
