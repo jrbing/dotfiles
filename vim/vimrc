@@ -342,16 +342,9 @@
   let ruby_space_errors = 1
 
   " XPTemplates
-  " Avoid key conflict:
-  let g:SuperTabMappingForward = '<Plug>supertabKey'
-  " if nothing matched in xpt, try supertab
-  let g:xptemplate_fallback = '<Plug>supertabKey'
-  " xpt uses <Tab> as trigger key
-  let g:xptemplate_key = '<Tab>'
-  " " use <tab>/<S-tab> to navigate through pum. Optional
-  " let g:xptemplate_pum_tab_nav = 1
-  " " xpt triggers only when you typed whole name of a snippet. Optional
-  " let g:xptemplate_minimal_prefix = 'full'
+  let g:SuperTabMappingForward = '<Plug>supertabKey' " avoid key conflict
+  let g:xptemplate_fallback = '<Plug>supertabKey'    " if nothing matched in xpt, try supertab
+  let g:xptemplate_key = '<Tab>'                     " xpt uses <Tab> as trigger key
 
   " CtrlP configuration
   noremap <silent> <A-t> :CtrlP<CR>
@@ -364,11 +357,9 @@
   let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
   let NERDTreeMinimalUI=1 "Minimal UI elements
   let NERDTreeDirArrows=1 "Use arrows for directory folding
-  "let g:nerdtree_tabs_focus_on_files = 0
   let g:nerdtree_tabs_smart_startup_focus = 1
 
   " ZoomWin configuration
-  "map <Leader><Leader> :ZoomWin<CR>
   set noequalalways
 
   " Tagbar
