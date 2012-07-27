@@ -182,3 +182,7 @@
   path = vim/bundle/plsql
   url = git://github.com/vim-scripts/plsql.vim-syntax.git
   ignore = dirty
+[submodule "vim/bundle/dbext"]
+  path = vim/bundle/dbext
+  url = git://github.com/vim-scripts/dbext.vim.git
+  ignore = dirty
