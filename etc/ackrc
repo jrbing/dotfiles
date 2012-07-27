@@ -12,4 +12,4 @@
 --type-set=RDOC=rdoc
 --type-set=erb=erb
 --type-set=sql=dms
-
+--type-set=javascript=js,cljs

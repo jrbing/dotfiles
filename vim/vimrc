@@ -38,7 +38,7 @@
   set cpoptions+=J
   set list
   set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
-  set shell=/usr/bin/env zsh
+  set shell=/bin/zsh
   set lazyredraw
   set matchtime=3
   set showbreak=↪
