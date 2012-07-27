@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# Note: This only works on linux systems with strace installed.
 case $(uname) in
   Linux*)
     cp_p()
