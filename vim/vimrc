@@ -405,6 +405,13 @@
   " Taskpaper
   let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
 
+  " SQLUtilities
+  let g:sqlutil_align_comma = 1
+  let g:sqlutil_keyword_case = '\L'
+
+  " dbext
+  :let  g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
+
 " }}}
 
 " Utility Functions {{{1
