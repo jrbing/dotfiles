@@ -702,12 +702,10 @@ if has ('gui_running')
   " Use a line-drawing char for pretty vertical splits.
   set fillchars+=vert:│
 
-  " Different cursors for different modes.
-  "set guicursor=n-c:block-Cursor-blinkon0
-  "set guicursor+=v:block-vCursor-blinkon0
-  "set guicursor+=i-ci:ver20-iCursor
 
+  " Macvim specific settings
   if has("gui_macvim")
+
     " Fullscreen takes up entire screen
     set fuoptions=maxhorz,maxvert
 
@@ -866,7 +864,6 @@ endif
 
   if !exists("autocommands_loaded")
     let autocommands_loaded = 1
-    "au ...
   endif
 
   " Better Completion
