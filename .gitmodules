@@ -186,3 +186,6 @@
   path = vim/bundle/dbext
   url = git://github.com/vim-scripts/dbext.vim.git
   ignore = dirty
+[submodule "vim/bundle/scratch"]
+	path = vim/bundle/scratch
+	url = git://github.com/vim-scripts/scratch.vim.git
