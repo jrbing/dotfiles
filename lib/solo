@@ -1,4 +1,4 @@
-#!/usr/bin/perl -s
+#!/usr/bin/env perl -s
 #
 # solo v1.5
 # Prevents multiple cron instances from running simultaneously.
