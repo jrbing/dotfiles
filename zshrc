@@ -12,7 +12,7 @@ case $(uname) in
   (Darwin)
     plugins=( vi-mode history-substring-search ruby brew gem thor git-flow rvm ) # oh-my-zsh plugins
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
-    source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
+    #source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
     alias vim='mvim -v'
     export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # necessary for homebrew
   ;;
