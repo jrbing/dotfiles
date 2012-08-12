@@ -5,7 +5,7 @@ if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
 
-# ALIASES
+# Aliases
 alias ..='cd ..'
 alias ls="ls -F"
 alias l="ls -lAh"
@@ -14,10 +14,9 @@ alias la='ls -A'
 
 export EDITOR=vim
 . ~/.dotfiles/lib/bash_colors.sh
+. ~/.dotfiles/lib/bash_prompt.sh
 
-# Add paths
-export PATH=$PATH:~/.dotfiles/bin
+export PATH=$PATH:~/.dotfiles/bin # Add paths
 
-# Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
