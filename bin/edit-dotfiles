@@ -1,4 +1,0 @@
-#!/bin/sh
-# cd to the dotfiles directory and start vim
-cd ~/.dotfiles
-vim
