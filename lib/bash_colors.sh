@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 DULL=0
 BRIGHT=1
 
@@ -23,9 +25,10 @@ BG_WHITE=47
 
 BG_NULL=00
 
-##
+######################
 # ANSI Escape Commands
-##
+######################
+
 ESC="\033"
 NORMAL="$ESC[m"
 RESET="$ESC[${DULL};${FG_WHITE};${BG_NULL}m"
@@ -48,5 +51,3 @@ BRIGHT_BLUE="$ESC[${BRIGHT};${FG_BLUE}m"
 BRIGHT_VIOLET="$ESC[${BRIGHT};${FG_VIOLET}m"
 BRIGHT_CYAN="$ESC[${BRIGHT};${FG_CYAN}m"
 BRIGHT_WHITE="$ESC[${BRIGHT};${FG_WHITE}m"
-
-
