@@ -4,7 +4,9 @@
 # OH-MY-ZSH settings
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/zsh/oh-my-zsh    #Path to oh-my-zsh configuration.
-export ZSH_THEME="robbyrussell"       #Theme
+#export ZSH_THEME="robbyrussell"      #Theme
+#export ZSH_THEME="sammy"             #Theme
+export ZSH_THEME="sorin"              #Theme
 DISABLE_AUTO_UPDATE="true"            #Disable auto updates
 
 # OS Specific Settings
@@ -12,15 +14,16 @@ case $(uname) in
   (Darwin)
     plugins=( vi-mode history-substring-search ruby brew gem thor git-flow rvm ) # oh-my-zsh plugins
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
-    #source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  #zsh-syntax-highlighting
+    #source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  # zsh-syntax-highlighting
     alias vim='mvim -v'
-    export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # necessary for homebrew
+    export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
   ;;
   (Linux)
     plugins=( vi-mode ) # oh-my-zsh plugins
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
   ;;
   (SunOS)
+    plugins=( vi-mode gnu-utils ) # oh-my-zsh plugins
     source $DOTFILES/env/solarisrc
   ;;
   (CYGWIN*)
