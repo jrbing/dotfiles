@@ -76,9 +76,6 @@
   set modeline
   set modelines=10
 
-  " Emulate the save on losing focus functionality that TextMate has
-  " au FocusLost * :wa
-
   " Set par as the paragraph formatting program to use
   set formatprg=par
 
@@ -122,7 +119,7 @@
   let g:solarized_visibility = "normal"
   let g:solarized_contrast = "normal"
   colorscheme solarized
-  "let g:solarized_menu=0
+  let g:solarized_menu=0
 
   " Highlight the current line
   set cursorline
@@ -234,9 +231,6 @@
   " Command mode: Ctrl+P
   cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
-  " Mapping to easily split current window
-  "map <Leader>| :vsp <CR>
-
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
 
@@ -267,18 +261,8 @@
   vnoremap <leader>Ac :center<cr>
   vnoremap <leader>Ar :right<cr>
 
-  " use ,gf to go to file in a vertical split
+  " Use ,gf to go to file in a vertical split
   nnoremap ,gf :vertical botright wincmd f<CR>
-
-" }}}
-
-" Abbreviations {{{1
-
-
-" }}}
-
-" Searching and Movement {{{1
-
 
 " }}}
 
@@ -341,22 +325,20 @@
   let ruby_operators = 1
   let ruby_space_errors = 1
 
-  " CtrlP configuration
+  " CtrlP
   noremap <silent> <A-t> :CtrlP<CR>
 
-  " NERDTree configuration
+  " NERDTree
   map <Leader>n <plug>NERDTreeTabsToggle<CR>
   let NERDTreeIgnore=['\.rbc$', '\~$']
-  let NERDChristmasTree=1 "Makes NERDTree use colors
-  let NERDTreeChDirMode=1 "Changes the current working directory to the one set as the root in NERDTree
-  let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
-  let NERDTreeMinimalUI=1 "Minimal UI elements
-  let NERDTreeDirArrows=1 "Use arrows for directory folding
-  "let g:nerdtree_tabs_focus_on_files = 0
+  let NERDChristmasTree=1           "Makes NERDTree use colors
+  let NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
+  let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
+  let NERDTreeMinimalUI=1           "Minimal UI elements
+  let NERDTreeDirArrows=1           "Use arrows for directory folding
   let g:nerdtree_tabs_smart_startup_focus = 1
 
-  " ZoomWin configuration
-  "map <Leader><Leader> :ZoomWin<CR>
+  " ZoomWin
   set noequalalways
 
   " Tagbar
@@ -400,8 +382,8 @@
   let g:sqlutil_align_comma = 1
   let g:sqlutil_keyword_case = '\L'
 
-  " dbext
-  :let  g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
+  " DBEXT
+  let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
 
   " Neocomplecache {{{2
     let g:neocomplcache_enable_at_startup = 1
@@ -668,8 +650,7 @@ RUBY
   call s:DefineCommand("e", "Edit")
   call s:DefineCommand("mkdir", "Mkdir")
 
-  " Pulse
-
+  " Pulse Cursor
   function! PulseCursorLine()
     let current_window = winnr()
 
@@ -756,14 +737,12 @@ if has ('gui_running')
     " Fullscreen takes up entire screen
     set fuoptions=maxhorz,maxvert
 
-    " Set correct path for taglist plugin
-    "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+    " Make the window slightly transparent
+    set transparency=4
 
     " Command-T for CtrlP
-    "macmenu &File.New\ Tab key=<nop>
     map <D-T> :CtrlP<CR>
     imap <D-T> <Esc>:CtrlP<CR>
-    "macmenu &File.New\ Tab key=<D-t>
 
     " Command-Shift-F for Ack
     map <D-F> :Ack<space>
@@ -797,13 +776,7 @@ if has ('gui_running')
     :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
 
     " Set the font
-    "set guifont=Meslo\ LG\ M\ DZ:h12.00
-    "set guifont=Inconsolata:h14.00
-    "set guifont=Inconsolata-dz:h12.00
     set guifont=Inconsolata-dz\ for\ Powerline:h12
-
-    " Map F4 to toggle the solarized background
-    "call togglebg#map("<F4>")
 
     " Set history file for YankRing
     let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
@@ -873,15 +846,12 @@ if has ('gui_running')
     " Set history file for YankRing
     let g:yankring_history_file = '$HOME/vimfiles/tmp/swap/yankring.history'
 
-    " Map Alt-Shift-P to run markdown to pdf against the current document and
-    " open the resulting document
+    " Run markdown to pdf against the current document
     function! CreatePDF()
       execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
       execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
     endfunction
-
     command! CreatePDF :call CreatePDF()
-
     nmap <silent> <A-P> :call CreatePDF()<CR>
 
     " Generate rtf and open in default viewer
@@ -889,9 +859,7 @@ if has ('gui_running')
       execute 'silent ! pandoc  -f markdown -t rtf -s -o \%TEMP\%\/%:t:r:s,$,.rtf, "%"'
       execute 'silent ! \%TEMP\%\/%:t:r:s,$,.rtf,'
     endfunction
-
     command! CreateRTF :call CreateRTF()
-
     nmap <silent> <A-R> :call CreateRTF()<CR>
 
     " Insert date and time header at the top of the file
@@ -905,9 +873,6 @@ endif
 " }}}
 
 " Miscellaneous {{{1
-
-  " Automatically reload the vimrc file when changed
-  "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
   if !exists("autocommands_loaded")
     let autocommands_loaded = 1
