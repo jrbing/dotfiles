@@ -18,10 +18,6 @@
   path = vim/bundle/surround
   url = git://github.com/tpope/vim-surround.git
   ignore = dirty
-[submodule "vim/bundle/supertab"]
-  path = vim/bundle/supertab
-  url = git://github.com/ervandew/supertab.git
-  ignore = dirty
 [submodule "vim/bundle/markdown"]
   path = vim/bundle/markdown
   url = git://github.com/tpope/vim-markdown.git
@@ -62,10 +58,6 @@
   path = vim/bundle/vim-ruby
   url = git://github.com/vim-ruby/vim-ruby.git
   ignore = dirty
-[submodule "vim/bundle/xptemplates"]
-  path = vim/bundle/xptemplates
-  url = git://github.com/drmingdrmer/xptemplate-dist.git
-  ignore = dirty
 [submodule "vim/bundle/quickbuf"]
   path = vim/bundle/quickbuf
   url = git://github.com/vim-scripts/QuickBuf.git
@@ -89,10 +81,6 @@
 [submodule "vim/bundle/nerdtree-tabs"]
   path = vim/bundle/nerdtree-tabs
   url = git://github.com/jistr/vim-nerdtree-tabs.git
-  ignore = dirty
-[submodule "vim/bundle/endwise"]
-  path = vim/bundle/endwise
-  url = git://github.com/tpope/vim-endwise.git
   ignore = dirty
 [submodule "vim/bundle/pathogen"]
   path = vim/bundle/pathogen
@@ -187,5 +175,23 @@
   url = git://github.com/vim-scripts/dbext.vim.git
   ignore = dirty
 [submodule "vim/bundle/scratch"]
-	path = vim/bundle/scratch
-	url = git://github.com/vim-scripts/scratch.vim.git
+  path = vim/bundle/scratch
+  url = git://github.com/vim-scripts/scratch.vim.git
+  ignore = dirty
+[submodule "vim/bundle/neocomplcache"]
+  path = vim/bundle/neocomplcache
+  url = git://github.com/Shougo/neocomplcache.git
+  ignore = dirty
+[submodule "vim/bundle/snipmate"]
+  path = vim/bundle/snipmate
+  url = git://github.com/garbas/vim-snipmate.git
+  ignore = dirty
+[submodule "vim/bundle/tlib"]
+	path = vim/bundle/tlib
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim/bundle/mv-utils"]
+	path = vim/bundle/mv-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "vim/bundle/snipmate-snippets"]
+	path = vim/bundle/snipmate-snippets
+	url = https://github.com/honza/snipmate-snippets.git
