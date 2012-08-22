@@ -712,6 +712,9 @@ if has ('gui_running')
     " Set correct path for taglist plugin
     "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
+    " Make the window slightly transparent
+    set transparency=4
+
     " Command-T for CtrlP
     "macmenu &File.New\ Tab key=<nop>
     map <D-T> :CtrlP<CR>
