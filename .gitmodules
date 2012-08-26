@@ -187,5 +187,14 @@
   url = git://github.com/vim-scripts/dbext.vim.git
   ignore = dirty
 [submodule "vim/bundle/scratch"]
-	path = vim/bundle/scratch
-	url = git://github.com/vim-scripts/scratch.vim.git
+  path = vim/bundle/scratch
+  url = git://github.com/vim-scripts/scratch.vim.git
+  ignore = dirty
+[submodule "vim/bundle/eunuch"]
+  path = vim/bundle/eunuch
+  url = git://github.com/tpope/vim-eunuch.git
+  ignore = dirty
+[submodule "vim/bundle/tabular"]
+  path = vim/bundle/tabular
+  url = git://github.com/godlygeek/tabular.git
+  ignore = dirty
