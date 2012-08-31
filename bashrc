@@ -13,6 +13,7 @@ alias ll="ls -l"
 alias la='ls -A'
 
 export EDITOR=vim
+export JRUBY_OPTS=--1.9
 . ~/.dotfiles/lib/bash_colors.sh
 . ~/.dotfiles/lib/bash_prompt.sh
 

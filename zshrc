@@ -17,6 +17,7 @@ case $(uname) in
     #source $DOTFILES/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  # zsh-syntax-highlighting
     alias vim='mvim -v'
     export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
+    export JRUBY_OPTS=--1.9
   ;;
   (Linux)
     plugins=( vi-mode ) # oh-my-zsh plugins
