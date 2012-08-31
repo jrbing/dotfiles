@@ -36,6 +36,9 @@ if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
 
+# Autoload
+autoload zmv
+
 # Sourcing
 source $ZSH/oh-my-zsh.sh           # Source oh-my-zsh
 source $DOTFILES/zsh/aliases.sh    # Source aliases
