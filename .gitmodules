@@ -174,3 +174,6 @@
   path = vim/bundle/tabular
   url = git://github.com/godlygeek/tabular.git
   ignore = dirty
+[submodule "vim/bundle/alignmaps"]
+	path = vim/bundle/alignmaps
+	url = git://github.com/vim-scripts/Align.git
