@@ -177,3 +177,6 @@
 [submodule "vim/bundle/alignmaps"]
 	path = vim/bundle/alignmaps
 	url = git://github.com/vim-scripts/Align.git
+[submodule "vim/bundle/mustache"]
+	path = vim/bundle/mustache
+	url = git://github.com/juvenn/mustache.vim.git
