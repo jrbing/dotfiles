@@ -175,8 +175,10 @@
   url = git://github.com/godlygeek/tabular.git
   ignore = dirty
 [submodule "vim/bundle/alignmaps"]
-	path = vim/bundle/alignmaps
-	url = git://github.com/vim-scripts/Align.git
+  path = vim/bundle/alignmaps
+  url = git://github.com/vim-scripts/Align.git
+  ignore = dirty
 [submodule "vim/bundle/mustache"]
-	path = vim/bundle/mustache
-	url = git://github.com/juvenn/mustache.vim.git
+  path = vim/bundle/mustache
+  url = git://github.com/juvenn/mustache.vim.git
+  ignore = dirty
