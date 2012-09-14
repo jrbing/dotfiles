@@ -7,7 +7,7 @@
   user = jrbing
 
 [core]
-  quotepath = false
+	quotepath = false
   pager = cat
   editor = vim
   excludesfile = $HOME/.gitignore_global
