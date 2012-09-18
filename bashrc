@@ -18,6 +18,7 @@ export JRUBY_OPTS=--1.9
 . ~/.dotfiles/lib/bash_prompt.sh
 
 export PATH=$PATH:~/.dotfiles/bin # Add paths
+export SQLPATH="~/.dotfiles/sql"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

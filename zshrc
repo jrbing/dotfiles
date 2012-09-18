@@ -45,10 +45,11 @@ source $ZSH/oh-my-zsh.sh           # Source oh-my-zsh
 source $DOTFILES/zsh/aliases.sh    # Source aliases
 source $DOTFILES/zsh/functions.sh  # Source functions
 
-# Editor and PATH settings
+# Environment Variables
 export EDITOR=vim
 export PAGER=less
 export PATH=$PATH:$HOME/.dotfiles/bin
+export SQLPATH="$DOTFILES/sql"
 
 # Additional 3rd party stuff
 fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
