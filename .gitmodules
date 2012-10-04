@@ -182,3 +182,6 @@
   path = vim/bundle/mustache
   url = git://github.com/juvenn/mustache.vim.git
   ignore = dirty
+[submodule "vim/bundle/vim-minitest"]
+	path = vim/bundle/vim-minitest
+	url = git://github.com/sunaku/vim-ruby-minitest.git
