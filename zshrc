@@ -49,7 +49,7 @@ source $DOTFILES/zsh/functions.sh  # Source functions
 export EDITOR=vim
 export PAGER=less
 export PATH=$PATH:$HOME/.dotfiles/bin
-export SQLPATH="$DOTFILES/sql"
+export SQLPATH="$DOTFILES/oracle/sql"
 
 # Additional 3rd party stuff
 fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
