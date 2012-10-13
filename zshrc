@@ -57,8 +57,6 @@ fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
 PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM to PATH for scripting
 
-[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc" # Load pythonbrew
-
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator # Tmuxinator
 
 PATH=$PATH:$DOTFILES/zsh/fasd # Add fasd to PATH
