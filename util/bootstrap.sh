@@ -2,7 +2,7 @@
 
 DOTFILES=$HOME/.dotfiles
 BASE_FILES=( "bash_profile" "bashrc" "profile" "zprofile" "zshrc")
-ETC_FILES=("ackrc" "gemrc" "sqlplus_completions" "tmux.conf" "wgetrc")
+ETC_FILES=("ackrc" "psqlrc" "gemrc" "sqlplus_completions" "tmux.conf" "wgetrc")
 GIT_FILES=("gitconfig" "gitignore_global")
 VIM_FILES=("vimrc" "gvimrc")
 
