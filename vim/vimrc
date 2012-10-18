@@ -170,7 +170,6 @@
 
 " }}}
 
-
 " Searching {{{1
 
   " Use sane regexes.
@@ -234,9 +233,6 @@
   " Command mode: Ctrl+P
   cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
-  " Mapping to easily split current window
-  "map <Leader>| :vsp <CR>
-
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
 
@@ -267,22 +263,12 @@
   vnoremap <leader>Ac :center<cr>
   vnoremap <leader>Ar :right<cr>
 
-  " use ,gf to go to file in a vertical split
+  " Use ,gf to go to file in a vertical split
   nnoremap ,gf :vertical botright wincmd f<CR>
 
 " }}}
 
-" Abbreviations {{{1
-
-
-" }}}
-
-" Searching and Movement {{{1
-
-
-" }}}
-
-" Filetype Specific Settings {{{1
+" Filetype Autocommands {{{1
 
   augroup filetype_handling
     au!
@@ -300,7 +286,7 @@
   " Ruby
   augroup ft_ruby
     au!
-    au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake}    set ft=ruby
+    au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake}    setlocal ft=ruby
   augroup END
 
   " Markdown
@@ -342,16 +328,9 @@
   let ruby_space_errors = 1
 
   " XPTemplates
-  " Avoid key conflict:
-  let g:SuperTabMappingForward = '<Plug>supertabKey'
-  " if nothing matched in xpt, try supertab
-  let g:xptemplate_fallback = '<Plug>supertabKey'
-  " xpt uses <Tab> as trigger key
-  let g:xptemplate_key = '<Tab>'
-  " " use <tab>/<S-tab> to navigate through pum. Optional
-  " let g:xptemplate_pum_tab_nav = 1
-  " " xpt triggers only when you typed whole name of a snippet. Optional
-  " let g:xptemplate_minimal_prefix = 'full'
+  let g:SuperTabMappingForward = '<Plug>supertabKey' " Avoid key conflict:
+  let g:xptemplate_fallback = '<Plug>supertabKey'    " If nothing matched in xpt, try supertab
+  let g:xptemplate_key = '<Tab>'                     " xpt uses <Tab> as trigger key
 
   " CtrlP configuration
   noremap <silent> <A-t> :CtrlP<CR>
@@ -359,16 +338,16 @@
   " NERDTree configuration
   map <Leader>n <plug>NERDTreeTabsToggle<CR>
   let NERDTreeIgnore=['\.rbc$', '\~$']
-  let NERDChristmasTree=1 "Makes NERDTree use colors
-  let NERDTreeChDirMode=1 "Changes the current working directory to the one set as the root in NERDTree
-  let NERDTreeShowBookmarks=1 "Display the bookmarks on startup
-  let NERDTreeMinimalUI=1 "Minimal UI elements
-  let NERDTreeDirArrows=1 "Use arrows for directory folding
+  let NERDChristmasTree=1           "Makes NERDTree use colors
+  let NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
+  let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
+  let NERDTreeMinimalUI=1           "Minimal UI elements
+  let NERDTreeDirArrows=1           "Use arrows for directory folding
   "let g:nerdtree_tabs_focus_on_files = 0
   let g:nerdtree_tabs_smart_startup_focus = 1
 
   " ZoomWin configuration
-  "map <Leader><Leader> :ZoomWin<CR>
+  map <Leader><Leader> :ZoomWin<CR>
   set noequalalways
 
   " Tagbar
@@ -501,44 +480,44 @@
   endfunction
 
   " If the parameter is a directory, cd into it
-  function! s:CdIfDirectory(directory)
-    let explicitDirectory = isdirectory(a:directory)
-    let directory = explicitDirectory || empty(a:directory)
-    if explicitDirectory
-      exe "cd " . a:directory
-    endif
+  "function! s:CdIfDirectory(directory)
+    "let explicitDirectory = isdirectory(a:directory)
+    "let directory = explicitDirectory || empty(a:directory)
+    "if explicitDirectory
+      "exe "cd " . a:directory
+    "endif
 
-    if directory
-      NERDTree
-      wincmd p
-      bd
-    endif
+    "if directory
+      "NERDTree
+      "wincmd p
+      "bd
+    "endif
 
-    if explicitDirectory
-      wincmd p
-    endif
-  endfunction
+    "if explicitDirectory
+      "wincmd p
+    "endif
+  "endfunction
 
   " NERDTree utility function
-  function! s:UpdateNERDTree(...)
-    let stay = 0
+  "function! s:UpdateNERDTree(...)
+    "let stay = 0
 
-    if(exists("a:1"))
-      let stay = a:1
-    end
+    "if(exists("a:1"))
+      "let stay = a:1
+    "end
 
-    if exists("t:NERDTreeBufName")
-      let nr = bufwinnr(t:NERDTreeBufName)
-      if nr != -1
-        exe nr . "wincmd w"
-        exe substitute(mapcheck("R"), "<CR>", "", "")
-        if !stay
-          wincmd p
-        end
-      endif
-    endif
+    "if exists("t:NERDTreeBufName")
+      "let nr = bufwinnr(t:NERDTreeBufName)
+      "if nr != -1
+        "exe nr . "wincmd w"
+        "exe substitute(mapcheck("R"), "<CR>", "", "")
+        "if !stay
+          "wincmd p
+        "end
+      "endif
+    "endif
 
-  endfunction
+  "endfunction
 
   " Utility functions to create file commands
   function! s:CommandCabbr(abbreviation, expansion)
@@ -746,20 +725,26 @@ if has ('gui_running')
     map  <D-9> 9gt
     imap <D-9> <Esc>9gt
 
-    " Map Command+Shift+p to preview the document in Marked
+    " Map Command+Shift+P to preview the document in Marked
     :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
-    " Map Command+Shift+p to open in Multimarkdown Composer
+    " Map Command+Shift+M to open in Multimarkdown Composer
     :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
+
+    " Map Alt-Shift-P to run markdown to pdf against the current document and
+    " open the resulting document
+    function! CreatePDF()
+      execute 'silent ! pandoc "%" -o /tmp/%:t:r.pdf'
+      execute 'silent ! open /tmp/%:t:r.pdf'
+    endfunction
+
+    command! CreatePDF :call CreatePDF()
 
     " Set the font
     "set guifont=Meslo\ LG\ M\ DZ:h12.00
     "set guifont=Inconsolata:h14.00
     "set guifont=Inconsolata-dz:h12.00
     set guifont=Inconsolata-dz\ for\ Powerline:h12
-
-    " Map F4 to toggle the solarized background
-    "call togglebg#map("<F4>")
 
     " Set history file for YankRing
     let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
