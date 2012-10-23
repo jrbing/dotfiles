@@ -33,7 +33,7 @@ case $(uname) in
 esac
 
 # Use .localrc for settings specific to one system
-if [ -f ~/.localrc ]; then
+if [[ -f ~/.localrc ]]; then
   source ~/.localrc
 fi
 
@@ -52,13 +52,10 @@ export PATH=$PATH:$HOME/.dotfiles/bin
 export SQLPATH="$DOTFILES/oracle/sql"
 
 # Additional 3rd party stuff
-fpath=($DOTFILES/zsh/zsh-completions $fpath)  #ZSH completion
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
-PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM to PATH for scripting
-
+fpath=($DOTFILES/zsh/zsh-completions $fpath)                                                 # ZSH completion
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"                         # RVM
+PATH=$PATH:$HOME/.rvm/bin
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator # Tmuxinator
-
-PATH=$PATH:$DOTFILES/zsh/fasd # Add fasd to PATH
+PATH=$PATH:$DOTFILES/zsh/fasd                                                                # FASD
 eval "$(fasd --init auto)"
-
+[[ -d /usr/local/heroku ]] && export PATH="/usr/local/heroku/bin:$PATH"                      # Heroku Toolbelt
