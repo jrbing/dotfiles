@@ -30,11 +30,8 @@
   set ruler
   set backspace=indent,eol,start
   set number
-  set norelativenumber
   set laststatus=2
   set history=1000
-  set undofile
-  set undoreload=10000
   set cpoptions+=J
   set list
   set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
@@ -56,7 +53,6 @@
   syntax on
 
   " Set backup file location
-  set undodir=$HOME/.vim/tmp/undo//     " undo files
   set backupdir=$HOME/.vim/tmp/backup// " backups
   set directory=$HOME/.vim/tmp/swap//   " swap files
   set backup                            " enable backups
@@ -96,7 +92,18 @@
   set shiftwidth=2
   set softtabstop=2
   set textwidth=80
-  set colorcolumn=+1
+
+" }}}
+
+" Version Specific Settings {{{2
+
+  if v:version >= 730
+    set norelativenumber
+    set undofile
+    set undoreload=10000
+    set undodir=$HOME/.vim/tmp/undo//     " undo files
+    set colorcolumn=+1
+  endif
 
 " }}}
 
