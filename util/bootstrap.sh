@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-DOTFILES=$HOME/.dotfiles
+cd ~
+DOTFILES=.dotfiles
 BASE_FILES=( "bash_profile" "bashrc" "profile" "zprofile" "zshrc")
 ETC_FILES=("ackrc" "psqlrc" "gemrc" "sqlplus_completions" "tmux.conf" "wgetrc")
 GIT_FILES=("gitconfig" "gitignore_global")
@@ -30,7 +31,7 @@ do
       rm ~/.${i};
   fi
   printf "Creating alias for ${i}\n"
-  ln -s ${DOTFILES}/etc/${i} ~/.${i}
+  ln -s ${DOTFILES}/etc/${i} .${i}
 done
 }
 
@@ -44,7 +45,7 @@ do
       rm ~/.${i};
   fi
   printf "Creating alias for ${i}\n"
-  ln -s ${DOTFILES}/git/${i} ~/.${i}
+  ln -s ${DOTFILES}/git/${i} .${i}
 done
 }
 
@@ -58,11 +59,11 @@ do
       rm ~/.${i};
   fi
   printf "Creating alias for ${i}\n"
-  ln -s ${DOTFILES}/vim/${i} ~/.${i}
+  ln -s ${DOTFILES}/vim/${i} .${i}
 done
 
 #Create symlink for vim directory
-ln -s $DOTFILES/vim/ ~/.vim
+ln -s .dotfiles/vim .vim
 }
 
 createBaseSymlinks
