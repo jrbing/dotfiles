@@ -8,6 +8,7 @@ export ZSH=$DOTFILES/zsh/oh-my-zsh    #Path to oh-my-zsh configuration.
 #export ZSH_THEME="sammy"             #Theme
 export ZSH_THEME="sorin"              #Theme
 DISABLE_AUTO_UPDATE="true"            #Disable auto updates
+unsetopt correct_all
 
 # OS Specific Settings
 case $(uname) in
