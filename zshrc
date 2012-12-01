@@ -59,4 +59,5 @@ PATH=$PATH:$HOME/.rvm/bin
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator # Tmuxinator
 PATH=$PATH:$DOTFILES/zsh/fasd                                                                # FASD
 eval "$(fasd --init auto)"
+
 [[ -d /usr/local/heroku ]] && export PATH="/usr/local/heroku/bin:$PATH"                      # Heroku Toolbelt
