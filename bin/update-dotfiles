@@ -1,12 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #Refresh dotfiles from repo and update submodules
 cd ~/.dotfiles
 
 # Pull down updates to dotfiles from github
-echo 'Updating dotfiles from github...'
+printf 'Updating dotfiles from github...\n'
 git pull origin master
 
 # Update submodules
-echo 'Updating plugins...'
+printf 'Updating plugins...\n'
 git submodule update --init
-git submodule status
