@@ -1,13 +1,13 @@
 [user]
   name = JR Bing
-  email = jrbing@gmail.com
+  email = jr@jrbing.com
   editor = vim
 
 [github]
   user = jrbing
 
 [core]
-	quotepath = false
+  quotepath = false
   pager = cat
   editor = vim
   excludesfile = $HOME/.gitignore_global
