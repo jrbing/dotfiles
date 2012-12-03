@@ -183,11 +183,14 @@
   url = git://github.com/juvenn/mustache.vim.git
   ignore = dirty
 [submodule "vim/bundle/vim-minitest"]
-	path = vim/bundle/vim-minitest
-	url = git://github.com/sunaku/vim-ruby-minitest.git
+  path = vim/bundle/vim-minitest
+  url = git://github.com/sunaku/vim-ruby-minitest.git
+  ignore = dirty
 [submodule "vim/bundle/base16"]
-	path = vim/bundle/base16
-	url = git://github.com/chriskempson/base16-vim.git
+  path = vim/bundle/base16
+  url = git://github.com/chriskempson/base16-vim.git
+  ignore = dirty
 [submodule "vim/bundle/pig"]
-	path = vim/bundle/pig
-	url = git://github.com/vim-scripts/pig.vim.git
+  path = vim/bundle/pig
+  url = git://github.com/vim-scripts/pig.vim.git
+  ignore = dirty
