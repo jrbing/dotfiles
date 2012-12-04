@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+export DOTFILES=$HOME/.dotfiles
+
 # Use .localrc for settings specific to one system
-if [ -f ~/.localrc ]; then
-  source ~/.localrc
+if [[ -f $HOME/.localrc ]]; then
+  source $HOME/.localrc
 fi
 
 # Aliases
@@ -14,11 +16,12 @@ alias la='ls -A'
 
 export EDITOR=vim
 export JRUBY_OPTS=--1.9
-. ~/.dotfiles/lib/bash_colors.sh
-. ~/.dotfiles/lib/bash_prompt.sh
 
-export PATH=$PATH:~/.dotfiles/bin # Add paths
-export SQLPATH="~/.dotfiles/oracle/sql"
+source $DOTFILES/lib/bash_colors.sh
+source $DOTFILES/lib/bash_prompt.sh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=$PATH:$DOTFILES/bin       # Add paths
+export SQLPATH=$DOTFILES/sql/oracle
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # Load RVM
+PATH=$PATH:$HOME/.rvm/bin                                             # Add RVM to PATH for scripting
