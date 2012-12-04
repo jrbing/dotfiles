@@ -62,14 +62,15 @@ do
   ln -s ${DOTFILES}/vim/${i} .${i}
 done
 
-#Create symlink for vim directory
-ln -s .dotfiles/vim .vim
 }
 
 createBaseSymlinks
 createEtcSymlinks
 createGitSymlinks
 createVimSymlinks
+
+#Create symlink for vim directory
+ln -s .dotfiles/vim .vim
 
 # Only copy ssh config if it doesn't already exist
 [[ -f $HOME/.ssh/config ]] || cp $DOTFILES/etc/ssh_config $HOME/.ssh/config
