@@ -42,17 +42,19 @@ source $ZSH/oh-my-zsh.sh           # Source oh-my-zsh
 source $DOTFILES/zsh/aliases.sh    # Source aliases
 source $DOTFILES/zsh/functions.sh  # Source additional functions
 
-# Environment Variables
+# Environment variable setup
 export EDITOR=vim
 export PAGER=less
 export PATH=$PATH:$HOME/.dotfiles/bin
-export SQLPATH="$DOTFILES/oracle/sql"
+export SQLPATH="$DOTFILES/sql/oracle"
 
 # 3rd party addons
 fpath=($DOTFILES/zsh/zsh-completions $fpath)                                                 # ZSH completion
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"                         # RVM
 PATH=$PATH:$HOME/.rvm/bin
+
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator # Tmuxinator
+
 PATH=$PATH:$DOTFILES/zsh/fasd                                                                # FASD
 eval "$(fasd --init auto)"
 
