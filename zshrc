@@ -15,6 +15,7 @@ case $(uname) in
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD       # Set colors for ls
     export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
     alias vim='mvim -v'
+    export JAVA_HOME=$(/usr/libexec/java_home)
   ;;
   (Linux)
     plugins=( vi-mode ) # oh-my-zsh plugins

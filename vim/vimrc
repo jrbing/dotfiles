@@ -285,7 +285,9 @@
 
   " Make and Python
   au FileType make    setlocal noexpandtab
-  au FileType python  setlocal softtabstop=4 tabstop=4 shiftwidth=4
+  au FileType python  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent
+  autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+  autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
   " JSON
   au BufNewFile,BufRead *.json set ft=javascript
