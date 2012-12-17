@@ -16,6 +16,7 @@ case $(uname) in
     export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
     alias vim='mvim -v'
     export JAVA_HOME=$(/usr/libexec/java_home)
+    [[ -d /usr/local/share/npm/bin ]] && export PATH="/usr/local/share/npm/bin:$PATH"      # NPM
   ;;
   (Linux)
     plugins=( vi-mode ) # oh-my-zsh plugins
