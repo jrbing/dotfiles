@@ -7,6 +7,8 @@ export ZSH=$DOTFILES/zsh/oh-my-zsh    #Path to oh-my-zsh configuration.
 export ZSH_THEME="sorin"              #Theme
 DISABLE_AUTO_UPDATE="true"            #Disable auto updates
 unsetopt correct_all
+export EDITOR=vim
+export PAGER=less
 
 # OS Specific Settings
 case $(uname) in
@@ -17,6 +19,7 @@ case $(uname) in
     alias vim='mvim -v'
     export JAVA_HOME=$(/usr/libexec/java_home)
     [[ -d /usr/local/share/npm/bin ]] && export PATH="/usr/local/share/npm/bin:$PATH"      # NPM
+    export EDITOR=mvim
   ;;
   (Linux)
     plugins=( vi-mode ) # oh-my-zsh plugins
@@ -45,8 +48,6 @@ source $DOTFILES/zsh/aliases.sh    # Source aliases
 source $DOTFILES/zsh/functions.sh  # Source additional functions
 
 # Environment variable setup
-export EDITOR=vim
-export PAGER=less
 export PATH=$PATH:$HOME/.dotfiles/bin
 export SQLPATH="$DOTFILES/sql/oracle"
 
