@@ -7,6 +7,6 @@ set long 5000
 set linesize 131
 set trimspool on
 set pagesize 9999
-set sqlprompt "_user '@' _connect_identifier > "
+set sqlprompt "_user'@'_connect_identifier > "
 set timing on
 set term on
