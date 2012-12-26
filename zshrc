@@ -14,16 +14,11 @@ export PAGER=less
 case $(uname) in
   (Darwin)
     plugins=( vi-mode history-substring-search ) # oh-my-zsh plugins
-    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD       # Set colors for ls
-    export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
-    alias vim='mvim -v'
-    export JAVA_HOME=$(/usr/libexec/java_home)
-    [[ -d /usr/local/share/npm/bin ]] && export PATH="/usr/local/share/npm/bin:$PATH"      # NPM
-    export EDITOR=mvim
+    source $DOTFILES/env/darwinrc
   ;;
   (Linux)
     plugins=( vi-mode ) # oh-my-zsh plugins
-    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
+    source $DOTFILES/env/linuxrc
   ;;
   (SunOS)
     plugins=( vi-mode gnu-utils ) # oh-my-zsh plugins

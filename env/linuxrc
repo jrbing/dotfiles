@@ -1,0 +1,4 @@
+#!/bin/sh
+#Settings specific for Linux
+
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls

@@ -1,0 +1,12 @@
+#!/bin/sh
+#Settings specific for OSX
+
+alias vim='mvim -v'
+
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD            # Set colors for ls
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
+export JAVA_HOME=$(/usr/libexec/java_home)
+export EDITOR=mvim
+
+[[ -d /usr/local/share/npm/bin ]] && export PATH="/usr/local/share/npm/bin:$PATH"    # Add npm bin to path if it exists
+[[ -d /usr/local/share/python ]] && export PATH="/usr/local/share/python:$PATH"      # Add homebrew python scripts to path if it exists
