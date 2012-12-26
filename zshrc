@@ -13,7 +13,7 @@ export PAGER=less
 # OS Specific Settings
 case $(uname) in
   (Darwin)
-    plugins=( vi-mode history-substring-search ) # oh-my-zsh plugins
+    plugins=( vi-mode history-substring-search cp forklift ) # oh-my-zsh plugins
     source $DOTFILES/env/darwinrc
   ;;
   (Linux)
