@@ -1,63 +1,67 @@
+###############
+# Configuration
+###############
 config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
+config secondsBetweenRepeat 0.1
+config checkDefaultsOnLoad true
+config windowHintsShowIcons true
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread true
+#config focusCheckWidthMax 3000
+
+##########
+# Bindings
+##########
+# Push Bindings
+bind right:f19  push right bar-resize:screenSizeX/2
+#bind left:ctrl;cmd   push left  bar-resize:screenSizeX/3
+#bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
+#bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
 
 # Resize Bindings
-bind right:alt       resize +10% +0
-bind left:alt        resize -10% +0
-bind up:alt          resize +0   -10%
-bind down:alt        resize +0   +10%
-bind right:ctrl;alt  resize -10% +0 bottom-right
-bind left:ctrl;alt   resize +10% +0 bottom-right
-bind up:ctrl;alt     resize +0   +10% bottom-right
-bind down:ctrl;alt   resize +0   -10% bottom-right
-
-# Push Bindings
-bind right:ctrl;cmd  push right bar-resize:screenSizeX/3
-bind left:ctrl;cmd   push left  bar-resize:screenSizeX/3
-bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
-bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
+#bind right:alt       resize +10% +0
+#bind left:alt        resize -10% +0
+#bind up:alt          resize +0   -10%
+#bind down:alt        resize +0   +10%
+#bind right:ctrl;alt  resize -10% +0 bottom-right
+#bind left:ctrl;alt   resize +10% +0 bottom-right
+#bind up:ctrl;alt     resize +0   +10% bottom-right
+#bind down:ctrl;alt   resize +0   -10% bottom-right
 
 # Nudge Bindings
-bind right:shift;alt nudge +10% +0
-bind left:shift;alt  nudge -10% +0
-bind up:shift;alt    nudge +0   -10%
-bind down:shift;alt  nudge +0   +10%
+#bind right:shift;alt nudge +10% +0
+#bind left:shift;alt  nudge -10% +0
+#bind up:shift;alt    nudge +0   -10%
+#bind down:shift;alt  nudge +0   +10%
 
 # Throw Bindings
-bind 1:ctrl;alt         throw 0 resize
-bind 2:ctrl;alt         throw 1 resize
-bind 3:ctrl;alt         throw 2 resize
-bind right:ctrl;alt;cmd throw right resize
-bind left:ctrl;alt;cmd  throw left  resize
-bind up:ctrl;alt;cmd    throw up    resize
-bind down:ctrl;alt;cmd  throw down  resize
+#bind 1:ctrl;alt         throw 0 resize
+#bind 2:ctrl;alt         throw 1 resize
+#bind 3:ctrl;alt         throw 2 resize
+#bind right:ctrl;alt;cmd throw right resize
+#bind left:ctrl;alt;cmd  throw left  resize
+#bind up:ctrl;alt;cmd    throw up    resize
+#bind down:ctrl;alt;cmd  throw down  resize
 
 # Focus Bindings
-bind right:cmd    focus right
-bind left:cmd     focus left
-bind up:cmd       focus up
-bind down:cmd     focus down
-bind up:cmd;alt   focus behind
-bind down:cmd;alt focus behind
+#bind right:cmd    focus right
+#bind left:cmd     focus left
+#bind up:cmd       focus up
+#bind down:cmd     focus down
+#bind up:cmd;alt   focus behind
+#bind down:cmd;alt focus behind
 
 # Window Hints
-bind esc:cmd hint
+#bind esc:cmd hint
 
 # Application switcher
-bind tab:cmd switch
+#bind tab:cmd switch
 
-# Configs
-#config defaultToCurrentScreen true
-#config nudgePercentOf screenSize
-#config resizePercentOf screenSize
-#config secondsBetweenRepeat 0.1
-#config checkDefaultsOnLoad true
-#config focusCheckWidthMax 3000
-#config windowHintsShowIcons true
-#config windowHintsIgnoreHiddenWindows false
-#config windowHintsSpread true
-
+#########
+# Aliases
+#########
 # Monitor Aliases
 #alias mon-laptop      0
 #alias mon-samsung    1
@@ -85,6 +89,9 @@ bind tab:cmd switch
 #alias 2-righttop    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2       ${mon-samsung}
 #alias 2-rightbottom move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/2    screenSizeX/2;screenSizeY/2       ${mon-samsung}
 
+#########
+# Layouts
+#########
 # 2 Monitor layout
 #layout 2monitors 'iTerm':MAIN_FIRST                       ${2-rightbottom} | ${1-left}
 #layout 2monitors 'Safari':REPEAT                          ${1-full}
@@ -108,29 +115,6 @@ bind tab:cmd switch
 #layout 1monitor 'Xcode':REPEAT                           ${1-full}
 #layout 1monitor 'Eclipse':REPEAT                         ${1-full}
 #layout 1monitor 'iTunes':REPEAT                          ${1-full}
-
-# Default Layouts
-#default 2monitors resolutions:${mon-laptop};${mon-samsung};
-#default 1monitor  resolutions:${mon-laptop}
-
-# Numpad location Bindings
-#bind pad0 ${showHintsLeftHand}
-#bind pad1 ${leftless}
-#bind pad2 push bottom bar-resize:screenSizeY/2
-#bind pad3 ${rightless}
-#bind pad4 ${lefthalf}
-#bind pad5 ${full}
-#bind pad6 ${righthalf}
-#bind pad7 ${leftmost}
-#bind pad8 push top bar-resize:screenSizeY/2
-#bind pad9 ${rightmost}
-#bind padEnter grid padding:5 ${mon-laptop}:6,2 ${mon-samsung}:8,3
-#bind pad+ throw next
-#bind pad. focus behind
-#bind pad* layout 2monitors
-#bind pad/ layout 1monitor
-
-#bind e:cmd  ${showNormalHint}
 
 # ======================================
 # The HYPER key
@@ -162,4 +146,3 @@ bind tab:cmd switch
 #bind m:${hyper} focus 'Mail'
 #bind i:${hyper} focus 'iTerm'
 #bind o:${hyper} focus 'Path Finder'
-
