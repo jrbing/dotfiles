@@ -5,12 +5,12 @@
 --ignore-case
 
 # add types ack doesn't know about
---type-set=ruby=rake,thor
+--type-set=ruby=rake,thor,haml,builder,rake
 --type-set=vim=vimrc,gvimrc
---type-set=css=sass,less
---type-set=MARKDOWN=md,mkd,markdown
---type-set=RDOC=rdoc
+--type-set=css=sass,less,scss
+--type-set=markdown=md,mkd,markdown
+--type-set=rdoc=rdoc
 --type-set=erb=erb
 --type-set=sql=dms,sql
---type-set=javascript=js,cljs
+--type-set=javascript=js,cljs,coffee
 --type-set=sqr=sqr,sqc
