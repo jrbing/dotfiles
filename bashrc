@@ -17,9 +17,9 @@ alias la='ls -A'
 export EDITOR=vim
 export JRUBY_OPTS=--1.9
 
-source $DOTFILES/lib/bash_prompt.bash
+source $DOTFILES/bash/bash_prompt.bash
 
-export PATH=$PATH:$DOTFILES/bin       # Add paths
+export PATH=$PATH:$DOTFILES/bin       # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # Load RVM
