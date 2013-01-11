@@ -439,8 +439,6 @@
     setlocal wrapmargin=0
     setlocal formatoptions+=1
     setlocal formatoptions+=n
-    " Spellcheck
-    " set spell
     set spelllang=en
     set spellsuggest=9 "show only 9 suggestions for misspelled words
   endfunction
