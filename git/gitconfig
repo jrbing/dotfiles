@@ -23,5 +23,6 @@
 
 [web]
   browser = open
+
 [push]
-	default = matching
+  default = matching
