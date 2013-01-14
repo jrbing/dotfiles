@@ -17,7 +17,7 @@ alias la='ls -A'
 export EDITOR=vim
 export JRUBY_OPTS=--1.9
 
-source $DOTFILES/bash/bash_prompt.bash
+source $DOTFILES/bash/bash_prompt.sh
 
 export PATH=$PATH:$DOTFILES/bin       # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle
