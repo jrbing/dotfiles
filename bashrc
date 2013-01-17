@@ -17,10 +17,12 @@ alias la='ls -A'
 export EDITOR=vim
 export JRUBY_OPTS=--1.9
 
+# Additional sourcing
 source $DOTFILES/bash/bash_prompt.sh
+source $DOTFILES/bash/man_colors.sh.sh
 
 export PATH=$PATH:$DOTFILES/bin       # Add scripts to PATH
-export SQLPATH=$DOTFILES/sql/oracle
+export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # Load RVM
 PATH=$PATH:$HOME/.rvm/bin                                             # Add RVM to PATH for scripting

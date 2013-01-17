@@ -38,9 +38,10 @@ fi
 autoload zmv
 
 # Sourcing
-source $ZSH/oh-my-zsh.sh           # Source oh-my-zsh
-source $DOTFILES/zsh/aliases.sh    # Source aliases
-source $DOTFILES/zsh/functions.sh  # Source additional functions
+source $ZSH/oh-my-zsh.sh            # Source oh-my-zsh
+source $DOTFILES/zsh/aliases.sh     # Source aliases
+source $DOTFILES/zsh/functions.sh   # Source additional functions
+source $DOTFILES/zsh/man_colors.sh  # Source color settings for man pages
 
 # Environment variable setup
 export PATH=$PATH:$HOME/.dotfiles/bin
