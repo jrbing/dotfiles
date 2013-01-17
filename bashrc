@@ -19,7 +19,7 @@ export JRUBY_OPTS=--1.9
 
 # Additional sourcing
 source $DOTFILES/bash/bash_prompt.sh
-source $DOTFILES/bash/man_colors.sh.sh
+source $DOTFILES/bash/man_colors.sh
 
 export PATH=$PATH:$DOTFILES/bin       # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
