@@ -43,6 +43,9 @@ source $DOTFILES/zsh/aliases.sh     # Source aliases
 source $DOTFILES/zsh/functions.sh   # Source additional functions
 source $DOTFILES/zsh/man_colors.sh  # Source color settings for man pages
 
+# Consigliere
+eval "$(~/.dotfiles/bin/consigliere init -)"
+
 # Environment variable setup
 export PATH=$PATH:$HOME/.dotfiles/bin
 export SQLPATH="$DOTFILES/sql/oracle"

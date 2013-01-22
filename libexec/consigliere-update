@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+# Usage: consigliere update
+# Summary: Update dotfiles
+# Help: Use this command to pull down the most recent copy of
+# my dotfiles and update all submodules.
+
+set -e
+
 #Refresh dotfiles from repo and update submodules
 cd ~/.dotfiles
 
