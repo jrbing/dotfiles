@@ -17,6 +17,8 @@ alias la='ls -A'
 export EDITOR=vim
 export JRUBY_OPTS=--1.9
 
+eval "$($HOME/.dotfiles/bin/consigliere init -)"
+
 # Additional sourcing
 source $DOTFILES/bash/bash_prompt.sh
 source $DOTFILES/bash/man_colors.sh
