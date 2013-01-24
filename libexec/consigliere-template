@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: consigliere template
+# Summary: Create script from template
+# Help: Creates script files based on predefined templates
+
+set -e
+
+# TBD
