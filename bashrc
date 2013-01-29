@@ -7,6 +7,22 @@ if [[ -f $HOME/.localrc ]]; then
   source $HOME/.localrc
 fi
 
+# OS Specific Settings
+case $(uname) in
+  (Darwin)
+    source $DOTFILES/env/darwinrc
+  ;;
+  (Linux)
+    source $DOTFILES/env/linuxrc
+  ;;
+  (SunOS)
+    source $DOTFILES/env/solarisrc
+  ;;
+  (CYGWIN*)
+    source $DOTFILES/env/msysrc
+  ;;
+esac
+
 # Aliases
 alias ..='cd ..'
 alias ls="ls -F"
