@@ -2,3 +2,4 @@
 #Settings specific for Linux
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
+export PATH=$PATH:/sbin:/usr/sbin
