@@ -1,6 +1,6 @@
-# My Personal Dotfiles #
+# Dotfiles #
 
-Originally posted here as a way to synchronize my settings across
+Originally posted here as a way to synchronize settings across
 multiple machines. Most likely not useful to anyone other than myself.
 
 ## Installation ##
@@ -9,6 +9,7 @@ multiple machines. Most likely not useful to anyone other than myself.
     * cd ~
     * git clone git@github.com:jrbing/dotfiles.git .dotfiles
 2. Create symlinks
-    * Unix: run util/bootstrap.sh
-    * Windows: run util/bootstrap.bat
-3. Abide
+    * cd ~/.dotfiles
+        * Unix: ./bin/consigliere bootstrap
+        * Windows: util\\bootstrap.bat
+3. [Abide](http://billgreenstudios.com/wp/wp-content/uploads/wpsc/product_images/5508_Abide_600t-2.jpg)
