@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 # Usage: consigliere bootstrap
-# Summary: Create necessary symlinks
-# Help: Use this command to create symlinks to the associated
-# preference files
+# Summary: Create symlinks for dotfiles
+# Help: Use this command to create symlinks to dotfiles
 
 set -e
 
