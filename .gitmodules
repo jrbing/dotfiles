@@ -110,10 +110,6 @@
   path = vim/bundle/powerline
   url = git://github.com/Lokaltog/vim-powerline.git
   ignore = dirty
-[submodule "zsh/fasd"]
-  path = zsh/fasd
-  url = git://github.com/clvv/fasd.git
-  ignore = dirty
 [submodule "vim/bundle/easymotion"]
   path = vim/bundle/easymotion
   url = git://github.com/Lokaltog/vim-easymotion.git
