@@ -16,6 +16,7 @@ task :link_shell do
     file_operation(Dir.glob('zsh/z*'))
     # Link bash files
     file_operation(Dir.glob('bash/bash*'))
+    file_operation(Dir.glob('profile'))
   end
 end
 
@@ -23,12 +24,9 @@ end
 desc "Link vim preference files"
 task :link_vim do
   %w[ vimrc gvimrc ].each do |file|
-    dest = expand("~/.#{file}")
-    unless File.exist?(dest)
-      ln_s(expand("../vim/#{file}", __FILE__), dest)
-    end
-    run %{ ln -nfs "$HOME/.dotfiles/vim" "$HOME/.vim" }
+    file_operation(Dir.glob('vim/' + file))
   end
+  file_operation(Dir.glob('vim'))
 end
 
 # Link various preference files
@@ -41,11 +39,12 @@ task :link_etc do
   # Link git files
   file_operation(Dir.glob('git/git*'))
 
+  # TODO
   # Copy ssh config
-  ssh_config = expand("~/.ssh/config")
-  unless File.exist?(ssh_config)
-    run %{ cp "$HOME/.dotfiles/etc/ssh_config" "$HOME/.ssh/config" }
-  end
+  #ssh_config = expand("~/.ssh/config")
+  #unless File.exist?(ssh_config)
+    #run %{ cp "$HOME/.dotfiles/etc/ssh_config" "$HOME/.ssh/config" }
+  #end
 
 end
 
