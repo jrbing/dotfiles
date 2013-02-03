@@ -2,6 +2,8 @@
 # Environment variables.
 #
 
+export DOTFILES=$HOME/.dotfiles
+
 #
 # Browser
 #
@@ -68,3 +70,35 @@ if [[ -d "$TMPDIR" ]]; then
   fi
 fi
 
+#
+# OS Specific Settings
+#
+
+case $(uname) in
+  (Darwin)
+    source $DOTFILES/env/darwinrc
+  ;;
+  (Linux)
+    source $DOTFILES/env/linuxrc
+  ;;
+  (SunOS)
+    source $DOTFILES/env/solarisrc
+  ;;
+  (CYGWIN*)
+    source $DOTFILES/env/msysrc
+  ;;
+esac
+
+#
+# Consigliere
+#
+
+eval "$($HOME/.dotfiles/bin/consigliere init -)"
+
+#
+# Use .localrc for settings specific to one system
+#
+
+if [[ -f ~/.localrc ]]; then
+  source ~/.localrc
+fi
