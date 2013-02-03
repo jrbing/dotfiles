@@ -6,13 +6,21 @@
 
 set -e
 
-#Refresh dotfiles from repo and update submodules
+#
+# Refresh dotfiles from repo and update submodules
+#
 cd ~/.dotfiles
 
-# Pull down updates to dotfiles from github
-printf 'Updating dotfiles from github...\n'
+#
+# Pull down updates to dotfiles from Github
+#
+printf '#### Updating dotfiles from Github\n'
 git pull origin master
 
+#
 # Update submodules
-printf 'Updating plugins...\n'
-git submodule update --init
+#
+printf '#### Updating plugins'
+git submodule sync
+git submodule update --init --recursive
+git clean -dfx
