@@ -49,16 +49,14 @@ task :link_etc do
 
 end
 
-namespace :dev do
-  desc "Init and update submodules"
-  task :submodules do
-    run %{
-      cd $HOME/.dotfiles
-      git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
-      git clean -dfx
-    }
-    puts
-  end
+desc "Init and update submodules"
+task :submodules do
+  run %{
+    cd $HOME/.dotfiles
+    git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
+    git clean -dfx
+  }
+  puts
 end
 
 desc "Create all symlinks and copy sample files"
