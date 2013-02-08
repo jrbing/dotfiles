@@ -96,6 +96,11 @@ esac
 eval "$($HOME/.dotfiles/bin/consigliere init -)"
 
 #
+# Development
+#
+export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
+
+#
 # Use .localrc for settings specific to one system
 #
 
