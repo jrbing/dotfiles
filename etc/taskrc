@@ -290,6 +290,3 @@ include /usr/local/share/doc/task/rc/holidays.en-US.rc
 #verbose                         yes
 #weekstart                       Sunday
 #xterm.title                     no
-
-Some of your .taskrc variables differ from the default values.
-
