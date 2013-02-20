@@ -1,27 +1,33 @@
-###########################################################
+#
 # Executes commands at the start of an interactive session.
-###########################################################
+#
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-#############
+#
+# Additional ZSH Options
+#
+setopt rmstarsilent
+
+#
 # Development
-#############
+#
 
 alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'"
 
-##########
+#
 # Database
-##########
+#
 
 alias pmons="ps -ef | grep pmon | grep -v grep | wc -l"
+export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
 
-###########
+#
 # Functions
-###########
+#
 
 any() {
     emulate -L zsh
