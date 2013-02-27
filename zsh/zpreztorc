@@ -85,3 +85,9 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # Auto start a session when Zsh is launched.
 #zstyle ':prezto:module:tmux' auto-start 'yes'
 
+#
+# History Substring Search
+#
+
+# Turn on syntax highlighting just for the substring search module
+zstyle ':prezto:module:history-substring-search' color 'yes'
