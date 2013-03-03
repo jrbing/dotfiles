@@ -1,8 +1,121 @@
-#!/usr/bin/env bash
-# Usage: consigliere template
+#!/usr/bin/env ruby
+# Usage: consigliere template <type>
 # Summary: Create script from template
 # Help: Creates script files based on predefined templates
 
-set -e
+$LOAD_PATH.unshift(File.expand_path("../share/consigliere/lib", File.dirname(__FILE__)))
 
-# TBD
+require 'fileutils'
+require 'thor'
+require 'thor/actions'
+require 'consigliere_template'
+
+class Template < Thor
+
+  #
+  # Datafix
+  #
+  desc "datafix [NAME]", "Creates datafix files and folders"
+  def datafix(datafix_name=nil)
+
+    # Get the name for the datafix unless one is specified
+    unless datafix_name
+      datafix_name = ask("Name for datafix folder: ")
+    end
+
+    # Get list of records to be affected
+    records = ask("Records to be affected: ").upcase.split(' ').uniq
+
+    # Create the datafix folder
+    datafix_folder = File.join(Dir.pwd, datafix_name)
+    Dir.mkdir(datafix_folder) unless File.exists?(datafix_folder)
+
+    # Create the sql script
+    script_template = DatafixScript.new
+    script_template.name = datafix_name
+    script_file = File.join(datafix_folder, "#{datafix_name}.sql")
+    say_status("INFO", "Creating sqlplus script #{script_file}")
+    File.open(script_file, 'w') { |file| file.write(script_template.render) }
+
+    # Create the datamover export files for all records
+    records.each do |record|
+      backup_template = DatamoverBackup.new
+      backup_template.name = datafix_name
+      backup_template.record = record
+      backup_file = File.join(datafix_folder, "#{record}_backup.dms")
+      say_status("INFO", "Creating datamover backup script #{backup_file}")
+      File.open(backup_file, 'w') { |file| file.write(backup_template.render) }
+    end
+
+  end
+
+  #
+  # SQLPlus Script
+  #
+  desc "sqlplus [NAME]", "Creates a basic sqlplus script file from template"
+  def sqlplus(script_name=nil)
+
+    # Get the name for the script
+    unless script_name
+      script_name = ask("Name for sqlplus script to be created: ")
+    end
+
+    # Create the sql script
+    script_template = SqlplusScript.new
+    script_template.name = script_name
+    script_file = File.join(Dir.pwd, "#{script_name}.sql")
+    say_status("INFO", "Creating sqlplus script #{script_file}")
+    File.open(script_file, 'w') { |file| file.write(script_template.render) }
+
+  end
+
+  #
+  # Bash Script
+  #
+  desc "bash [NAME]", "Creates a basic bash script from template"
+  def bash(script_name=nil)
+
+    # Get the name for the script
+    unless script_name
+      script_name = ask("Name for bash script to be created: ")
+    end
+
+    # Create the bash script
+    script_template = BashScript.new
+    script_template.name = script_name
+    script_file = File.join(Dir.pwd, "#{script_name}.sh")
+    say_status("INFO", "Creating bash script #{script_file}")
+    file = File.open(script_file, 'w')
+    file.write(script_template.render)
+    file.chmod(0700)
+    file.close
+
+  end
+
+  #
+  # Thor Script
+  #
+  desc "thorfile [NAME]", "Creates a basic thor script file for running under sqlplus"
+  def thorfile(script_name=nil)
+
+    # Get the name for the script
+    unless script_name
+      script_name = ask("Name for thor script to be created: ")
+    end
+
+    # Create the thor script
+    script_template = ThorScript.new
+    script_template.name = script_name
+    script_file = File.join(Dir.pwd, "#{script_name}.rb")
+    say_status("INFO", "Creating thor script #{script_file}")
+    file = File.open(script_file, 'w')
+    file.write(script_template.render)
+    file.chmod(0700)
+    file.close
+
+  end
+
+end
+
+Template.start(ARGV)
+

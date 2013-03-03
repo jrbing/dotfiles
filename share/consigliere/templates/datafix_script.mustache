@@ -1,0 +1,15 @@
+-- Datafix {{ name }}
+-- Created on: {{ date_time }}
+
+spool {{ name }}.log;
+
+-- Environment Information
+select dbname
+     , ownerid
+     , to_char(sysdate,'YYYY/MM/DD HH:MI:SS')
+  from psdbowner;
+
+-- Insert sql inserts/updates/deletes here
+update ...;
+
+spool off;
