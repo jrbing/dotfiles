@@ -39,3 +39,8 @@ any() {
         ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
     fi
 }
+
+#
+# Unalias rm
+#
+unalias rm
