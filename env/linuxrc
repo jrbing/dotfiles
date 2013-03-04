@@ -3,3 +3,4 @@
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
 export PATH=$PATH:/sbin:/usr/sbin
+[[ -d $DOTFILES/zsh/fasd ]] && export PATH="$DOTFILES/zsh/fasd:$PATH"
