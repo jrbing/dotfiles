@@ -128,8 +128,8 @@
   let g:solarized_termcolors = 256
   let g:solarized_visibility = "normal"
   let g:solarized_contrast = "normal"
-  colorscheme solarized
-  "colorscheme base16-default
+  "colorscheme solarized
+  colorscheme base16-default
 
   " Highlight the current line
   set cursorline
@@ -654,8 +654,8 @@ if has ('gui_running')
   if has("gui_macvim")
 
     " Set Colorscheme
-    "colorscheme base16-default
-    colorscheme solarized
+    colorscheme base16-default
+    "colorscheme solarized
 
     " Fullscreen takes up entire screen
     set fuoptions=maxhorz,maxvert
