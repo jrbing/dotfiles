@@ -6,5 +6,5 @@
 :benchmark: false
 :bulk_threshold: 1000
 :backtrace: false
-:verbose: true
+:verbose: false
 gem: --no-ri --no-rdoc

@@ -90,10 +90,10 @@ case $(uname) in
 esac
 
 #
-# Consigliere
+# Valet
 #
 
-eval "$($HOME/.dotfiles/bin/consigliere init -)"
+eval "$($HOME/.dotfiles/bin/valet init -)"
 
 #
 # Use .localrc for settings specific to one system
