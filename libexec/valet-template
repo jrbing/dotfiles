@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
-# Usage: consigliere template <type>
+# Usage: valet template <type>
 # Summary: Create script from template
 # Help: Creates script files based on predefined templates
 
-$LOAD_PATH.unshift(File.expand_path("../share/consigliere/lib", File.dirname(__FILE__)))
+$LOAD_PATH.unshift(File.expand_path("../share/valet/lib", File.dirname(__FILE__)))
 
 require 'fileutils'
 require 'thor'
 require 'thor/actions'
-require 'consigliere_template'
+require 'valet_template'
 
 class Template < Thor
 

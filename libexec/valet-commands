@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Usage: consigliere commands
-# Summary: List all consigliere commands
-# Help: This command is mostly used for autocompletion in various shells, and for `consigliere help`.
+# Usage: valet commands
+# Summary: List all valet commands
+# Help: This command is mostly used for autocompletion in various shells, and for `valet help`.
 # Also, this command helps find commands that are named the same as potentially builtin shell commands (which, cd, etc)
 
 set -e
 
-# Provide consigliere completions
+# Provide valet completions
 if [ "$1" = "--complete" ]; then
   echo --sh
   echo --no-sh
@@ -24,8 +24,8 @@ fi
 shopt -s nullglob
 
 { for path in ${PATH//:/$'\n'}; do
-    for command in "${path}/consigliere-"*; do
-      command="${command##*consigliere-}"
+    for command in "${path}/valet-"*; do
+      command="${command##*valet-}"
       if [ -n "$sh" ]; then
         if [ ${command:0:3} = "sh-" ]; then
           echo ${command##sh-}

@@ -2,17 +2,17 @@ if [[ ! -o interactive ]]; then
     return
 fi
 
-compctl -K _consigliere consigliere
+compctl -K _valet valet
 
-_consigliere() {
+_valet() {
   local word words completions
   read -cA words
   word="${words[2]}"
 
   if [ "${#words}" -eq 2 ]; then
-    completions="$(consigliere commands)"
+    completions="$(valet commands)"
   else
-    completions="$(consigliere completions "${word}")"
+    completions="$(valet completions "${word}")"
   fi
 
   reply=("${(ps:\n:)completions}")

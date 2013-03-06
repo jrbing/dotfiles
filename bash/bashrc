@@ -114,10 +114,10 @@ fi
 PS1="\[$BASE0\]\W\[$BASE0\]\[$ORANGE\] ❯ \[$RESET\]"
 
 #
-# Consigliere
+# Valet
 #
 
-eval "$($HOME/.dotfiles/bin/consigliere init -)"
+eval "$($HOME/.dotfiles/bin/valet init -)"
 
 #
 # Additional Tools

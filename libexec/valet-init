@@ -45,28 +45,28 @@ if [ -z "$print" ]; then
     ;;
   esac
 
-  { echo "# Load consigliere automatically by adding"
+  { echo "# Load valet automatically by adding"
     echo "# the following to ${profile}:"
     echo
-    echo "eval \"\$(${_CONSIGLIERE_ROOT}/bin/consigliere init -)\""
+    echo "eval \"\$(${_VALET_ROOT}/bin/valet init -)\""
     echo
   } >&2
 
   exit 1
 fi
 
-echo "export PATH=\"\${PATH}:${_CONSIGLIERE_ROOT}/bin\""
+echo "export PATH=\"\${PATH}:${_VALET_ROOT}/bin\""
 
 case "$shell" in
 bash | zsh )
-  echo "source \"$root/completions/consigliere.${shell}\""
+  echo "source \"$root/completions/valet.${shell}\""
   ;;
 esac
 
-commands=(`consigliere commands --sh`)
+commands=(`valet commands --sh`)
 IFS="|"
 cat <<EOS
-_consigliere_wrapper() {
+_valet_wrapper() {
   local command="\$1"
   if [ "\$#" -gt 0 ]; then
     shift
@@ -74,9 +74,9 @@ _consigliere_wrapper() {
 
   case "\$command" in
   ${commands[*]})
-    eval \`consigliere "sh-\$command" "\$@"\`;;
+    eval \`valet "sh-\$command" "\$@"\`;;
   *)
-    command consigliere "\$command" "\$@";;
+    command valet "\$command" "\$@";;
   esac
 }
 EOS
@@ -86,9 +86,9 @@ EOS
 # fix both cases here by letting zsh have a function, and bash have its alias.
 case "$shell" in
 bash )
-  echo "alias consigliere=_consigliere_wrapper"
+  echo "alias valet=_valet_wrapper"
   ;;
 zsh )
-  echo "consigliere=_consigliere_wrapper"
+  echo "valet=_valet_wrapper"
   ;;
 esac

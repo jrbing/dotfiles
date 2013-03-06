@@ -23,18 +23,18 @@ abs_dirname() {
 }
 
 libexec_path="$(abs_dirname "$0")"
-export _CONSIGLIERE_ROOT="$(abs_dirname "$libexec_path")"
+export _VALET_ROOT="$(abs_dirname "$libexec_path")"
 export PATH="${libexec_path}:$PATH"
 
 command="$1"
 case "$command" in
 "" | "-h" | "--help" )
-  exec consigliere-help
+  exec valet-help
   ;;
 * )
-  command_path="$(command -v "consigliere-$command" || true)"
+  command_path="$(command -v "valet-$command" || true)"
   if [ ! -x "$command_path" ]; then
-    echo "consigliere: no such command \`$command'" >&2
+    echo "valet: no such command \`$command'" >&2
     exit 1
   fi
 

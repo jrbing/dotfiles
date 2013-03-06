@@ -7,7 +7,7 @@ print_summaries() {
   local longest_command=0
   local command
 
-  for command in $(consigliere-commands); do
+  for command in $(valet-commands); do
     local file="$(command_path "$command")"
     if [ ! -h "$file" ]; then
       local summary="$(summary "$file")"
@@ -47,7 +47,7 @@ print_help() {
 }
 
 command_path() {
-  command -v "consigliere-$command" || command -v "consigliere-sh-$command" || true
+  command -v "valet-$command" || command -v "valet-sh-$command" || true
 }
 
 summary() {
@@ -74,20 +74,20 @@ truncate() {
   fi
 }
 
-# Provide consigliere completions
+# Provide valet completions
 if [ "$1" = "--complete" ]; then
-  exec "consigliere-commands"
+  exec "valet-commands"
   exit
 fi
 
 command="$1"
 case "$command" in
-"") echo "Usage: consigliere <command> [<args>]
+"") echo "Usage: valet <command> [<args>]
 
-Some useful consigliere commands are:
+Some useful valet commands are:
 $(print_summaries)
 
-See 'consigliere help <command>' for information on a specific command."
+See 'valet help <command>' for information on a specific command."
 ;;
 *)
   file="$(command_path "$command")"
@@ -95,7 +95,7 @@ See 'consigliere help <command>' for information on a specific command."
   if [ -n "$file" ]; then
     print_help "$file"
   else
-    echo "consigliere: no such command \`$command'" >&2
+    echo "valet: no such command \`$command'" >&2
     exit 1
   fi
 esac

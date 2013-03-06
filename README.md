@@ -10,6 +10,5 @@ multiple machines. Most likely not useful to anyone other than myself.
     * git clone git@github.com:jrbing/dotfiles.git .dotfiles
 2. Create symlinks
     * cd ~/.dotfiles
-        * Unix: ./bin/consigliere bootstrap
-        * Windows: util\\bootstrap.bat
+    * ./bin/valet bootstrap
 3. [Abide](http://billgreenstudios.com/wp/wp-content/uploads/wpsc/product_images/5508_Abide_600t-2.jpg)
