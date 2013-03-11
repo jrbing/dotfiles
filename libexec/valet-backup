@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Set the script to exit immediately on error
+set -e
+
+cd ~/Backup
+backup perform -t backup

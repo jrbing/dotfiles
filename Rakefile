@@ -48,12 +48,11 @@ task :link_etc do
 
 end
 
-desc "Init and update submodules"
+desc "Update submodules to the latest version"
 task :submodules do
   run %{
     cd $HOME/.dotfiles
     git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
-    git clean -dfx
   }
   puts
 end
