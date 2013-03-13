@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Usage: valet permfix <directory>
+# Summary: Fixes directory permissions
+# Help: Recursively changes the directory permissions to 755 at the specified
+# path
+
+set -e
+
+# Change the permissions at the specified directory
+find $1 -type d -exec chmod 755 {} \;
