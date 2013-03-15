@@ -2,25 +2,31 @@
 # Usage: valet update
 # Summary: Update dotfiles from github
 # Help: Use this command to pull down the most recent copy of
-# my dotfiles and update all submodules.
+# my dotfiles, update rvm, and update homebrew
 
 set -e
 
-#
-# Refresh dotfiles from repo and update submodules
-#
-cd ~/.dotfiles
+source $DOTFILES/share/valet/lib/liboutput.sh
 
 #
 # Pull down updates to dotfiles from Github
 #
-printf '#### Updating dotfiles from Github\n'
-git pull origin master
+log 'Updating dotfiles'
+cd $DOTFILES && git pull origin master && git submodule sync && git submodule update --init --recursive
+#git clean -dfx
 
 #
-# Update submodules
+# Update homebrew (if installed) and upgrade packages
 #
-printf '#### Updating plugins'
-git submodule sync
-git submodule update --init --recursive
-git clean -dfx
+if hash brew 2>/dev/null; then
+  log "Updating homebrew repo, and upgrading installed packages"
+  brew update && brew outdated && brew upgrade && brew cleanup
+fi
+
+#
+# Update rvm (if installed)
+#
+if hash rvm 2>/dev/null; then
+  log "Updating rvm"
+  rvm get head
+fi
