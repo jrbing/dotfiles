@@ -7,4 +7,4 @@
 set -e
 
 # Change the permissions at the specified directory
-find $1 -type d -exec chmod 755 {} \;
+find $1 \! -perm 755 -type d -exec chmod 755 {} \;
