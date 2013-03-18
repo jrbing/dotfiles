@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Usage: valet backup <cheatsheet> (--list --edit)
+# Summary: Runs the backup script
+# Help: Run the backup my drive to the backup-server
 
 # Set the script to exit immediately on error
 set -e
