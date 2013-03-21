@@ -9,7 +9,7 @@
 
   source $HOME/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
   filetype off
-  call pathogen#infect()
+  execute pathogen#infect()
   filetype plugin indent on
   set nocompatible
   let mapleader = ","
