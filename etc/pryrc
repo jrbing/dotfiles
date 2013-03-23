@@ -1,0 +1,4 @@
+VIM = '/Applications/MacVim.app/Contents/MacOS/Vim -f'
+Pry.editor = proc { |file, line| "#{VIM} #{file} +#{line}" }
+
+# vim:filetype=ruby
