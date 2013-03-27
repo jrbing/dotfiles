@@ -187,3 +187,6 @@
 [submodule "vim/bundle/obsession"]
 	path = vim/bundle/obsession
 	url = git://github.com/tpope/vim-obsession.git
+[submodule "pandoc"]
+	path = pandoc
+	url = git@github.com:jrbing/pandoc-templates.git
