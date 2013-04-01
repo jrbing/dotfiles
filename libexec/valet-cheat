@@ -12,12 +12,6 @@ for p in ${req_progs[@]}; do
   { printf >&2 " Required program \"$p\" not installed.\n"; exit 1; }
 done
 
-# Display usage if no parameters given
-if [[ -z "$@" ]]; then
-  valet help cheat
-  exit
-fi
-
 # $# is the number of arguments
 while [ $# -gt 0 ]
 do
