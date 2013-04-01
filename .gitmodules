@@ -190,3 +190,6 @@
 [submodule "pandoc"]
 	path = pandoc
 	url = git@github.com:jrbing/pandoc-templates.git
+[submodule "vim/bundle/nerdtree-chmod"]
+	path = vim/bundle/nerdtree-chmod
+	url = git://github.com/EvanDotPro/nerdtree-chmod.git
