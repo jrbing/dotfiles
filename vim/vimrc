@@ -210,6 +210,7 @@
   " Bubble single lines
   nmap <C-Up> [e
   nmap <C-Down> ]e
+
   " Bubble multiple lines
   vmap <C-Up> [egv
   vmap <C-Down> ]egv
@@ -337,9 +338,9 @@
   let ruby_space_errors = 1
 
   " XPTemplates
-  let g:SuperTabMappingForward = '<Plug>supertabKey' " Avoid key conflict:
-  let g:xptemplate_fallback = '<Plug>supertabKey'    " If nothing matched in xpt, try supertab
-  let g:xptemplate_key = '<Tab>'                     " xpt uses <Tab> as trigger key
+  "let g:SuperTabMappingForward = '<Plug>supertabKey' " Avoid key conflict:
+  "let g:xptemplate_fallback = '<Plug>supertabKey'    " If nothing matched in xpt, try supertab
+  "let g:xptemplate_key = '<Tab>'                     " xpt uses <Tab> as trigger key
 
   " CtrlP configuration
   noremap <silent> <A-t> :CtrlP<CR>
@@ -367,6 +368,7 @@
   let g:syntastic_enable_signs = 1
   let g:syntastic_disabled_filetypes = ['html']
   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
+  let g:syntastic_ruby_exe = "rvm"
 
   " Fugitive
   nnoremap <leader>gd :Gdiff<cr>
@@ -382,7 +384,6 @@
 
   augroup ft_fugitive
       au!
-
       au BufNewFile,BufRead .git/index setlocal nolist
   augroup END
 

@@ -175,17 +175,38 @@
   url = git://github.com/vim-scripts/pig.vim.git
   ignore = dirty
 [submodule "zsh/prezto"]
-	path = zsh/prezto
-	url = git://github.com/sorin-ionescu/prezto.git
+  path = zsh/prezto
+  url = git://github.com/sorin-ionescu/prezto.git
+  ignore = dirty
 [submodule "zsh/fasd"]
-	path = zsh/fasd
-	url = git://github.com/clvv/fasd.git
+  path = zsh/fasd
+  url = git://github.com/clvv/fasd.git
+  ignore = dirty
 [submodule "vim/bundle/obsession"]
-	path = vim/bundle/obsession
-	url = git://github.com/tpope/vim-obsession.git
+  path = vim/bundle/obsession
+  url = git://github.com/tpope/vim-obsession.git
+  ignore = dirty
 [submodule "pandoc"]
-	path = pandoc
-	url = git@github.com:jrbing/pandoc-templates.git
+  path = pandoc
+  url = git://github.com/jrbing/pandoc-templates.git
+  ignore = dirty
 [submodule "vim/bundle/nerdtree-chmod"]
-	path = vim/bundle/nerdtree-chmod
-	url = git://github.com/EvanDotPro/nerdtree-chmod.git
+  path = vim/bundle/nerdtree-chmod
+  url = git://github.com/EvanDotPro/nerdtree-chmod.git
+  ignore = dirty
+[submodule "vim/bundle/snipmate"]
+  path = vim/bundle/snipmate
+  url = git://github.com/garbas/vim-snipmate.git
+  ignore = dirty
+[submodule "vim/bundle/snipmate-snippets"]
+  path = vim/bundle/snipmate-snippets
+  url = git://github.com/honza/snipmate-snippets.git
+  ignore = dirty
+[submodule "vim/bundle/tlib"]
+  path = vim/bundle/tlib
+  url = git://github.com/tomtom/tlib_vim.git
+  ignore = dirty
+[submodule "vim/bundle/mw-utils"]
+  path = vim/bundle/mw-utils
+  url = git://github.com/MarcWeber/vim-addon-mw-utils.git
+  ignore = dirty
