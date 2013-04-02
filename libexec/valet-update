@@ -11,14 +11,13 @@ source $DOTFILES/share/valet/lib/liboutput.sh
 #
 # Pull down updates to dotfiles from Github
 #
-log 'Updating dotfiles'
+log 'Updating dotfiles from Github'
 cd $DOTFILES && git pull origin master && git submodule sync && git submodule update --init --recursive
 #git clean -dfx
 
 #
 # Update homebrew (if installed) and upgrade packages
 #
-log 'Updating homebrew'
 if hash brew 2>/dev/null; then
   log "Updating homebrew repo, and upgrading installed packages"
   brew update && brew outdated && brew upgrade && brew cleanup
@@ -27,7 +26,6 @@ fi
 #
 # Update rvm (if installed)
 #
-log 'Updating rvm'
 if hash rvm 2>/dev/null; then
   log "Updating rvm"
   rvm get head
