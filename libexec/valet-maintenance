@@ -19,4 +19,4 @@ fi
 #
 # Run the maintenance scripts
 #
-periodic daily weekly monthly
+periodic all
