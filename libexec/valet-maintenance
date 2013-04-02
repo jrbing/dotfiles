@@ -6,7 +6,8 @@
 
 set -e
 
-source $DOTFILES/share/valet/lib/liboutput.sh
+#source $DOTFILES/share/valet/lib/liboutput.sh
+source $DOTFILES/share/bsfl.sh
 
 #
 # Check if root

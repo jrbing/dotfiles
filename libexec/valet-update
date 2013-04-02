@@ -6,12 +6,14 @@
 
 set -e
 
-source $DOTFILES/share/valet/lib/liboutput.sh
+#source $DOTFILES/share/valet/lib/liboutput.sh
+source $DOTFILES/share/bsfl.sh
 
 #
 # Pull down updates to dotfiles from Github
 #
-log 'Updating dotfiles from Github'
+#log 'Updating dotfiles from Github'
+msg_status 'Updating dotfiles from Github' 'INFO'
 cd $DOTFILES && git pull origin master && git submodule sync && git submodule update --init --recursive
 #git clean -dfx
 
@@ -19,7 +21,8 @@ cd $DOTFILES && git pull origin master && git submodule sync && git submodule up
 # Update homebrew (if installed) and upgrade packages
 #
 if hash brew 2>/dev/null; then
-  log "Updating homebrew repo, and upgrading installed packages"
+  #log "Updating homebrew repo, and upgrading installed packages"
+  msg_status 'Updating homebrew repo, and upgrading installed packages' 'INFO'
   brew update && brew outdated && brew upgrade && brew cleanup
 fi
 
@@ -27,6 +30,7 @@ fi
 # Update rvm (if installed)
 #
 if hash rvm 2>/dev/null; then
-  log "Updating rvm"
+  #log "Updating rvm"
+  msg_status 'Updating rvm' 'INFO'
   rvm get head
 fi
