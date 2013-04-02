@@ -210,6 +210,3 @@
   path = vim/bundle/mw-utils
   url = git://github.com/MarcWeber/vim-addon-mw-utils.git
   ignore = dirty
-[submodule "share/libui-sh"]
-	path = share/libui-sh
-	url = git://github.com/Dieterbe/libui-sh.git
