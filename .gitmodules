@@ -211,5 +211,6 @@
   url = git://github.com/MarcWeber/vim-addon-mw-utils.git
   ignore = dirty
 [submodule "util/tmuxstart"]
-	path = util/tmuxstart
-	url = git://github.com/treyhunner/tmuxstart.git
+  path = util/tmuxstart
+  url = git://github.com/treyhunner/tmuxstart.git
+  ignore = dirty
