@@ -26,6 +26,25 @@ alias pmons="ps -ef | grep pmon | grep -v grep | wc -l"
 export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
 
 #
+# Miscellaneous aliases
+#
+unalias rm
+alias chrome="open -a \"Google Chrome\""
+alias ax="chmod a+x"                                                  # make executable
+alias cl="fc -e -|pbcopy"                                             # copy output of last command to clipboard
+alias cpwd='pwd|tr -d "\n"|pbcopy'                                    # copy the working directory path
+alias flush="sudo killall -HUP mDNSResponder"                         # DNS
+alias ip="curl icanhazip.com"                                         # current public IP
+alias lt='ls -At1 && echo "------Oldest--"'
+alias ltr='ls -Art1 && echo "------Newest--"'
+alias rmdbc="find . -name *\ \(*conflicted* -exec rm {} \;"           # recursively delete Dropbox conflicted files
+alias stfu="osascript -e 'set volume output muted true'"              # mute the system volume
+alias tn='tr -d "\n"'                                                 # trim newlines
+alias todos="ack -a --nogroup '(TODO|FIX(ME)?):'"                     # list TODO/FIX lines from the current project
+alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper' # create a Taskpaper todo file in the current folder
+alias zi="fasd -e cd -i"                                              # interactive fasd
+
+#
 # Functions
 #
 
@@ -39,8 +58,3 @@ any() {
         ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
     fi
 }
-
-#
-# Unalias rm
-#
-unalias rm

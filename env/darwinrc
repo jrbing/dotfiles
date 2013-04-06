@@ -1,12 +1,10 @@
 #!/bin/sh
 #Settings specific for OSX
 
-#alias vim='mvim -v'
-
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
 export JAVA_HOME=$(/usr/libexec/java_home)
-#export EDITOR=mvim
-export EDITOR=vim
+export EDITOR='mvim'
+export VISUAL='mvim -f'
 
 [[ -d $DOTFILES/zsh/fasd ]] && export PATH="$DOTFILES/zsh/fasd:$PATH"                # Add fasd to PATH
 [[ -d /usr/local/share/npm/bin ]] && export PATH="/usr/local/share/npm/bin:$PATH"    # Add npm bin to path if it exists
