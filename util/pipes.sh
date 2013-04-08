@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-declare -i f=75 s=13 r=2000 t=0 c=1 n=0 l=0
+declare -i f=100 s=13 r=2000 t=0 c=1 n=0 l=0
 declare -ir w=$(tput cols) h=$(tput lines)
 declare -i x=$((w/2)) y=$((h/2))
 declare -ar v=( [00]="\x83" [01]="\x8f" [03]="\x93"
@@ -16,7 +16,7 @@ case $arg in
     r) ((r=($OPTARG>0)?$OPTARG:$r));;
     h) echo -e "Usage: pipes [OPTION]..."
         echo -e "Animated pipes terminal screensaver.\n"
-        echo -e " -f [20-100]\tframerate (D=75)."
+        echo -e " -f [20-100]\tframerate (D=100)."
         echo -e " -s [5-15]\tprobability of a straight fitting (D=13)."
         echo -e " -r LIMIT\treset after x characters (D=2000)."
         echo -e " -h\t\thelp (this screen).\n"
