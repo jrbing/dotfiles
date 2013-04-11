@@ -47,3 +47,11 @@ class BashScript < Mustache
   attr_accessor :name
 
 end
+
+class BatchScript < Mustache
+
+  self.template_path = File.expand_path("../templates", File.dirname(__FILE__))
+
+  attr_accessor :name
+
+end

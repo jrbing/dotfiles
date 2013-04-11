@@ -1,0 +1,30 @@
+@echo off
+rem ****************************************
+rem 
+rem ****************************************
+
+:help_requested
+if /I "%1" == "-?"     call :usage & exit /b 0
+if /I "%1" == "--help" call :usage & exit /b 0
+
+:validate_args
+if "%1" == "" call :missing_arg & exit /b 1
+
+:body
+echo SUCCESS...
+
+:success
+exit /b 0
+
+:missing_arg
+    echo ERROR: One or more arguments are missing
+    echo.
+    call :usage
+goto :eof
+
+:usage
+    echo USAGE: %~n0 [option ^| options...]
+    echo.
+    echo e.g. %~n0
+    echo.
+goto :eof
