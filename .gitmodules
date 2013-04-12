@@ -210,3 +210,6 @@
   path = vim/bundle/mw-utils
   url = git://github.com/MarcWeber/vim-addon-mw-utils.git
   ignore = dirty
+[submodule "vim/bundle/dispatch"]
+	path = vim/bundle/dispatch
+	url = git://github.com/tpope/vim-dispatch.git
