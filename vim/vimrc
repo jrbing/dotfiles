@@ -645,6 +645,7 @@ if has ('gui_running')
   set go-=r
   set go-=R
 
+  " Highlighting for spelling
   highlight SpellBad term=underline gui=undercurl guisp=Orange
 
   " Use a line-drawing char for pretty vertical splits.
@@ -655,8 +656,8 @@ if has ('gui_running')
   if has("gui_macvim")
 
     " Set Colorscheme
-    "colorscheme base16-default
-    colorscheme solarized
+    colorscheme base16-default
+    "colorscheme solarized
 
     " Fullscreen takes up entire screen
     set fuoptions=maxhorz,maxvert
