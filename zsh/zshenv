@@ -77,9 +77,11 @@ fi
 case $(uname) in
   (Darwin)
     source $DOTFILES/env/darwinrc
+    eval "$($HOME/.dotfiles/bin/valet init -)"
   ;;
   (Linux)
     source $DOTFILES/env/linuxrc
+    eval "$($HOME/.dotfiles/bin/valet init -)"
   ;;
   (SunOS)
     source $DOTFILES/env/solarisrc
@@ -89,11 +91,6 @@ case $(uname) in
   ;;
 esac
 
-#
-# Valet
-#
-
-eval "$($HOME/.dotfiles/bin/valet init -)"
 
 #
 # GVM
