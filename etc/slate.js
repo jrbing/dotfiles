@@ -49,13 +49,13 @@ var bottomRight = slate.operation("corner", {
 // Fullscreen
 
 var fullScreen = slate.operation("move", {
-	"x": "screenOriginX",
-	"y": "screenOriginY",
-	"width" : "screenSizeX",
-	"height": "screenSizeY"
+  "x": "screenOriginX",
+  "y": "screenOriginY",
+  "width" : "screenSizeX",
+  "height": "screenSizeY"
 });
 
-// Bindings 
+// Bindings
 
 slate.bind("left:ctrl;cmd;alt", pushLeft);
 slate.bind("right:ctrl;cmd;alt", pushRight);
