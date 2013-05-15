@@ -29,7 +29,6 @@ source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
 
 set wait_key = no        # shut up, mutt
 set timeout = 3          # idle time before scanning
-set mail_check = 0       # minimum time between scans
 unset move               # gmail does that
 set delete               # don't ask, just do
 unset confirmappend      # don't ask, just do!
@@ -40,9 +39,10 @@ set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 set imap_keepalive = 300
 set imap_idle
-set imap_check_subscribed
 unset imap_passive
 unset imap_peek
+#set mail_check = 0       # minimum time between scans
+#set imap_check_subscribed
 
 # }}}
 # Sidebar Patch {{{
@@ -122,21 +122,15 @@ set smtp_pass = `security find-generic-password -w -s mutt -a "jr@jrbing.com"`
 set from = "jr@jrbing.com"
 
 set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set postponed="+[Gmail]/Drafts"
+set spoolfile = imaps://imap.gmail.com:993/INBOX
+set postponed="imaps://imap.gmail.com/[Gmail]/Drafts"
 unset record # Gmail's SMTP servers take care of this
-
-# Default inbox.
-#set spoolfile = "+jr-jrbing.com/INBOX"
 
 # Alternate email addresses.
 alternates jrbing@gmail.com
 
 # Mailboxes to show in the sidebar.
-mailboxes +INBOX \
-          +ARCHIVE \
-          +SENT \
-          +DRAFTS \
+mailboxes =INBOX =[Gmail]/Drafts =[Gmail]/Sent\ Mail =[Gmail]/Trash
 
 # Sending email.
 set from     = "jr@jrbing.com"

@@ -1,6 +1,5 @@
 # Gemfile for keeping track of often-used gems
-#source "https://rubygems.org"
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem "rake"
 gem "thor"
