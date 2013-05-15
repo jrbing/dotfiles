@@ -207,11 +207,14 @@
   url = git://github.com/MarcWeber/vim-addon-mw-utils.git
   ignore = dirty
 [submodule "vim/bundle/dispatch"]
-	path = vim/bundle/dispatch
-	url = git://github.com/tpope/vim-dispatch.git
+  path = vim/bundle/dispatch
+  url = git://github.com/tpope/vim-dispatch.git
+  ignore = dirty
 [submodule "vim/bundle/multiple-cursors"]
-	path = vim/bundle/multiple-cursors
-	url = git://github.com/terryma/vim-multiple-cursors.git
+  path = vim/bundle/multiple-cursors
+  url = git://github.com/terryma/vim-multiple-cursors.git
+  ignore = dirty
 [submodule "vim/bundle/vim-snippets"]
-	path = vim/bundle/vim-snippets
-	url = git://github.com/honza/vim-snippets.git
+  path = vim/bundle/vim-snippets
+  url = git://github.com/honza/vim-snippets.git
+  ignore = dirty
