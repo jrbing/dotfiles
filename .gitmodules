@@ -210,10 +210,6 @@
   path = vim/bundle/multiple-cursors
   url = git://github.com/terryma/vim-multiple-cursors.git
   ignore = dirty
-[submodule "vim/bundle/vim-snippets"]
-  path = vim/bundle/vim-snippets
-  url = git://github.com/honza/vim-snippets.git
-  ignore = dirty
 [submodule "vim/bundle/xptemplate"]
   path = vim/bundle/xptemplate
   url = git://github.com/vim-scripts/xptemplate.git
