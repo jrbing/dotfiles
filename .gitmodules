@@ -214,3 +214,6 @@
   path = vim/bundle/vim-snippets
   url = git://github.com/honza/vim-snippets.git
   ignore = dirty
+[submodule "vim/bundle/xptemplate"]
+	path = vim/bundle/xptemplate
+	url = git://github.com/vim-scripts/xptemplate.git
