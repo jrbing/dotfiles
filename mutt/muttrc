@@ -11,16 +11,12 @@ set signature        = ~/.mutt/sig           # my signature file
 # }}}
 # Editor {{{
 
-# Use Vim to compose email, with a few default options.
-set editor = "/usr/local/bin/vim -c 'normal! }' -c 'redraw'"
+set editor = "/usr/local/bin/vim -c 'normal! }' -c 'redraw'" # Use Vim to compose email, with a few default options.
 
 # }}}
 # Contacts {{{
 
-# Use the OS X address book
-set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
-bind editor <Tab> complete-query
-bind editor ^T    complete
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'" # Use the OS X address book
 
 # }}}
 # Basic Options {{{
@@ -50,9 +46,6 @@ unset imap_peek
 set sidebar_delim   = '  │'
 set sidebar_visible = yes
 set sidebar_width   = 24
-bind index,pager <down>   sidebar-next
-bind index,pager <up>     sidebar-prev
-bind index,pager <right>  sidebar-open
 
 # }}}
 # Status Bar {{{
@@ -141,14 +134,21 @@ unset record
 # }}}
 # Account Hooks {{{
 
-# folder-hook jr-jrbing.com/* source ~/.mutt/jr-jrbing.com.muttrc
+folder-hook +INBOX 'macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive conversation"'
+folder-hook +[Gmail]/Trash macro index,pager y <save-message>=INBOX<enter><enter> "Move to inbox"
+folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"
+
 
 # }}}
 # Key Bindings {{{
 
 # Index {{{
 
-bind index \#       noop
+bind editor <Tab> complete-query
+bind editor ^T    complete
+bind generic     x  tag-entry      #Select Conversation
+bind index       x  tag-thread     #Select Conversation
+#bind index \#       noop
 bind index R        group-reply
 bind index <tab>    sync-mailbox
 bind index k        previous-entry
@@ -158,52 +158,56 @@ bind index G        last-entry
 bind index p        recall-message
 bind index <space>  collapse-thread
 bind index N        search-opposite
+
 macro index s "<pipe-message>cat > ~/Desktop/"  "save message as"
-
-# Mark all as read
-#macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
-
-# Sync email
-#macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
-#macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
-
-# Saner copy/move dialogs
-#macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
-#macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
-
-# Quickly change mailboxes
-#macro index \' "<change-folder>+jr-jrbing.com/INBOX<enter>"   "go to jrbing/INBOX"
-#macro index \" "<change-folder>+jr-jrbing.com/archive<enter>" "go to jrbing/archive"
-
-# Search with notmuch
-#macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py -G ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
-
-# Unlimit (show [a]ll)
-#macro index a "<limit>all\n" "show all messages (undo limit)"
 
 # }}}
 # Pager {{{
-
-bind pager \# noop
+bind pager x  tag-message    #Select Conversation
+#bind pager \# noop
 bind pager k  previous-line
 bind pager j  next-line
 bind pager gg top
 bind pager G  bottom
-
 bind pager R  group-reply
 bind pager N  search-opposite
 
 macro pager \Cu "|urlview<enter>" "call urlview to open links"
 macro pager s "<pipe-message>cat > ~/Desktop/"  "save message as"
 
-# Quickly change mailboxes
-#macro pager \' "<exit><change-folder>+jr-jrbing.com/INBOX<enter>"   "go to jrbing/INBOX"
-#macro pager \" "<exit><change-folder>+jr-jrbing.com/archive<enter>" "go to jrbing/archive"
+# }}}
+
+# Both Index and Pager {{{
+#bind  index,pager <down>   sidebar-next
+#bind  index,pager <up>     sidebar-prev
+#bind  index,pager <right>  sidebar-open
+bind  index,pager c  mail           # Compose
+bind  index,pager s  flag-message   # Star a message
+bind  index,pager a  group-reply    # Reply all
+bind  index,pager \# delete-thread  # Delete
+bind  index,pager l  copy-message   # Label
+bind  index,pager v  save-message   # Move to
+
+macro index,pager y "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
+macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[Gmail]/Bin\"\n <delete-message>" "Gmail delete message"
+macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
+macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index,pager gt "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to sent mail"
+macro index,pager gl <change-folder>?  "Go to 'Label'"
+macro index,pager +  <save-message>=[Gmail]/Important<enter><enter> "Mark as important"
+macro index,pager !  <save-message>=[Gmail]/Spam<enter><enter> "Report spam"
+macro index,pager e  "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive conversation"
+macro index,pager I  <set-flag>O    "Mark as read"
+macro index,pager U  <clear-flag>O  "Mark as unread"
+macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>"              "open in vim"
+macro index,pager M "|mvim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' - >/dev/null<enter>"  "open in macvim"
 
 # }}}
 # Compose {{{
 
-bind compose p postpone-message
+#bind compose p postpone-message
 
 # }}}
 # Attachment {{{
@@ -211,12 +215,3 @@ bind compose p postpone-message
 # View, god dammit!
 bind attach <return> view-mailcap
 
-# }}}
-# "Open in Vim" {{{
-
-macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>"              "open in vim"
-macro index,pager M "|mvim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' - >/dev/null<enter>"  "open in macvim"
-
-# }}}
-
-# }}}
