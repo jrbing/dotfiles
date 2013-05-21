@@ -1,23 +1,26 @@
-# [Created by task 2.1.2 2/8/2013 12:39:29]
-# Taskwarrior program configuration file.
-# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-faq',
-# 'man task-tutorial', 'man task-color', 'man task-sync' or 'man taskrc'
-
-# Here is an example of entries that use the default, override and blank values
-#   variable=foo   -- By specifying a value, this overrides the default
-#   variable=      -- By specifying no value, this means no default
-#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
-
+# taskrc configuration file
 # Use the command 'task show' to see all defaults and overrides
 
-# Files
-data.location=~/Dropbox/.taskwarrior
-
+#
 # Color theme
+#
 include /usr/local/share/doc/task/rc/solarized-dark-256.theme
 
+#
 # Holidays
+#
 include /usr/local/share/doc/task/rc/holidays.en-US.rc
+
+#
+# Files
+#
+data.location=~/Dropbox/.taskwarrior
+
+#
+# Settings
+#
+color=on
+
 
 
 #Config Variable                 Value
@@ -39,7 +42,7 @@ include /usr/local/share/doc/task/rc/holidays.en-US.rc
 #calendar.legend                 yes
 #calendar.offset                 no
 #calendar.offset.value           -1
-#color                           off
+#color                           on
 #color.active                    bold red
 #color.alternate                 on black
 #color.blocked                   color0 on color10
@@ -84,7 +87,6 @@ include /usr/local/share/doc/task/rc/holidays.en-US.rc
 #complete.all.projects           no
 #complete.all.tags               no
 #confirmation                    yes
-#data.location                   ~/Dropbox/.taskwarrior
 #dateformat                      m/d/Y
 #dateformat.annotation           m/d/Y
 #dateformat.edit                 m/d/Y H:N:S
@@ -107,52 +109,6 @@ include /usr/local/share/doc/task/rc/holidays.en-US.rc
 #extensions                      off
 #fontunderline                   yes
 #gc                              on
-#holiday.en-US1.date             20120101
-#holiday.en-US1.name             New Year's Day
-#holiday.en-US10.date            20121008
-#holiday.en-US10.name            Columbus Day
-#holiday.en-US11.date            20121112
-#holiday.en-US11.name            Veterans Day
-#holiday.en-US12.date            20121122
-#holiday.en-US12.name            Thanksgiving Day
-#holiday.en-US13.date            20121225
-#holiday.en-US13.name            Christmas Day
-#holiday.en-US14.date            20130101
-#holiday.en-US14.name            New Year's Day
-#holiday.en-US15.date            20130121
-#holiday.en-US15.name            Birthday of Martin Luther King, Jr.
-#holiday.en-US16.date            20130218
-#holiday.en-US16.name            Washington's Birthday
-#holiday.en-US18.date            20130415
-#holiday.en-US18.name            Patriots' Day
-#holiday.en-US19.date            20130527
-#holiday.en-US19.name            Memorial Day
-#holiday.en-US2.date             20120102
-#holiday.en-US2.name             New Year's Day
-#holiday.en-US20.date            20130704
-#holiday.en-US20.name            Independence Day
-#holiday.en-US21.date            20130902
-#holiday.en-US21.name            Labor Day
-#holiday.en-US22.date            20131014
-#holiday.en-US22.name            Columbus Day
-#holiday.en-US23.date            20131111
-#holiday.en-US23.name            Veterans Day
-#holiday.en-US24.date            20131128
-#holiday.en-US24.name            Thanksgiving Day
-#holiday.en-US25.date            20131225
-#holiday.en-US25.name            Christmas Day
-#holiday.en-US3.date             20120116
-#holiday.en-US3.name             Birthday of Martin Luther King, Jr.
-#holiday.en-US4.date             20120220
-#holiday.en-US4.name             Washington's Birthday
-#holiday.en-US5.date             20120416
-#holiday.en-US5.name             Patriots' Day
-#holiday.en-US7.date             20120528
-#holiday.en-US7.name             Memorial Day
-#holiday.en-US8.date             20120704
-#holiday.en-US8.name             Independence Day
-#holiday.en-US9.date             20120903
-#holiday.en-US9.name             Labor Day
 #hyphenate                       on
 #indent.annotation               2
 #indent.report                   0
