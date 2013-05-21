@@ -24,6 +24,7 @@ alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Han
 
 alias pmons="ps -ef | grep pmon | grep -v grep | wc -l"
 export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
+export PSQL_EDITOR=vim
 
 #
 # Miscellaneous aliases
