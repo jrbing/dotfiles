@@ -1,9 +1,0 @@
--- Change a user's password and re-encrypt it.
--- Modified from: http://www.peoplesoftwiki.com/update-user-password
-
-update PSOPRDEFN
-   set OPERPSWD  = 'new_password'
-     , ENCRYPTED = 0
- where OPRID     = 'YOUR_USER_OPRID';
-
-encrypt_password YOUR_USER_OPRID;
