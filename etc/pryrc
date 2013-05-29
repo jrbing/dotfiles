@@ -10,7 +10,7 @@ end
 Pry.prompt = [proc { |obj, nest_level| "#{RUBY_VERSION} (#{obj}):#{nest_level} > " }, proc { |obj, nest_level| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }]
 
 # Toys methods
-# Stealed from https://gist.github.com/807492
+# Taken from https://gist.github.com/807492
 class Array
   def self.toy(n=10, &block)
     block_given? ? Array.new(n,&block) : Array.new(n) {|i| i+1}
@@ -23,5 +23,5 @@ class Hash
   end
 end
 
-# loading rails configuration if it is running as a rails console
+# Load rails configuration if running as a rails console
 load File.dirname(__FILE__) + '/.railsrc' if defined?(Rails) && Rails.env

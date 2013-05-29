@@ -55,6 +55,33 @@ var fullScreen = slate.operation("move", {
   "height": "screenSizeY"
 });
 
+// 9/10 screen centered
+
+var centered = slate.operation("move", {
+  "x": "screenSizeX*1/20",
+  "y": "screenOriginY",
+  "width" : "screenSizeX*9/10",
+  "height": "screenSizeY"
+});
+
+// 3/4 screen left
+
+var threeQuarterLeft = slate.operation("move", {
+  "x": "screenOriginX",
+  "y": "screenOriginY",
+  "width" : "screenSizeX*3/4",
+  "height": "screenSizeY"
+});
+
+// 1/4 screen right
+
+var oneQuarterRight = slate.operation("move", {
+  "x": "screenSizeX*3/4",
+  "y": "screenOriginY",
+  "width" : "screenSizeX*1/4",
+  "height": "screenSizeY"
+});
+
 // Bindings
 
 slate.bind("left:ctrl;cmd;alt", pushLeft);
@@ -63,8 +90,14 @@ slate.bind("up:ctrl;cmd;alt", pushUp);
 slate.bind("down:ctrl;cmd;alt", pushDown);
 
 slate.bind("m:ctrl;cmd;alt", fullScreen);
+slate.bind("c:ctrl;cmd;alt", centered);
+slate.bind("h:ctrl;cmd;alt", threeQuarterLeft);
+slate.bind("l:ctrl;cmd;alt", oneQuarterRight);
 
 slate.bind("left:ctrl;shift;alt", topLeft);
 slate.bind("right:ctrl;shift;alt", bottomRight);
 slate.bind("up:ctrl;shift;alt", topRight);
 slate.bind("down:ctrl;shift;alt", bottomLeft);
+
+//slate.bind("esc:cmd" : S.op("hint"));
+//slate.bind("esc:ctrl" : S.op("grid"));
