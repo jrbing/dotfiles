@@ -127,4 +127,3 @@ export PATH=$PATH:$DOTFILES/bin       # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # Load RVM
 PATH=$PATH:$HOME/.rvm/bin                                             # Add RVM to PATH for scripting
-[[ -s "$HOME/.gvm/bin/gvm-init.sh" && -z $(which gvm-init.sh | grep '/gvm-init.sh') ]] && source "$HOME/.gvm/bin/gvm-init.sh"
