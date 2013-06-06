@@ -1,22 +1,21 @@
-SET ECHO OFF
--- Do not display commands as they are executed
-SET PAGESIZE 0
--- Set height of the page - 0 supresses all headings, page breaks, and titles
-SET LINES 3000
--- Width of the line before wrapping
-SET LONG 200000
--- Maximum width for displaying LONG values
-SET FEEDBACK OFF
--- Displays the number of records returned
-SET HEADING ON
--- Print Column Headings
-SET TIMING ON
--- Display timing statistics
-SET SERVEROUTPUT ON SIZE 1000000
--- Whether to display the output of stored procedures
-SET TAB OFF
--- {OFF|ON} Format white space in terminal output
---SET FLAGGER
+/*
+ * {{ name }}.sql
+ * JR Bing
+ *
+ * description...
+ */
+
+set echo off
+set lines 3000
+set long 200000
+set feedback off
+set heading on
+set timing on
+set serveroutput on size 1000000
+set tab off
+--set flagger FULL
 -- {OFF|ENTRY|INTERMED[IATE]|FULL} Checks to make sure that SQL statements conform to the ANSI/ISO SQL92 standard
---SET AUTOCOMMIT ON
--- {OFF|ON|IMM[EDIATE]|n} Autocommit commits after each SQL command or PL/SQL block
+
+select name
+  from v$database;
+/
