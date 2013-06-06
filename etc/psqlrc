@@ -12,8 +12,9 @@
 \x auto
 \encoding unicode
 
-\pset null 'NULL'
+\pset linestyle unicode
 \pset border 2
+\pset null ¤
 \set COMP_KEYWORD_CASE preserve-lower
 
 \set QUIET OFF
