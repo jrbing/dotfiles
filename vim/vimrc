@@ -289,6 +289,7 @@
   au FileType python  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent
   autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
   autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+  autocmd FileType python let b:dispatch = 'python %'
 
   " JSON
   au BufNewFile,BufRead *.json set ft=javascript
@@ -298,6 +299,7 @@
     au!
     au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake}    setlocal ft=ruby
   augroup END
+  autocmd FileType ruby let b:dispatch = '~/.rvm/bin/ruby %'
 
   " Markdown
   augroup ft_markdown
