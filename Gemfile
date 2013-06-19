@@ -1,11 +1,13 @@
-# Gemfile for keeping track of often-used gems
 source "https://rubygems.org"
 
-gem "rake"
 gem "thor"
 gem "mustache"
-gem "ghost"
-gem "tmuxinator"
-gem "pry"
-gem "chef"
-gem "knife-github-cookbooks"
+
+group :development do
+  gem "rake"
+  gem "knife-github-cookbooks"
+  gem "chef"
+  gem "pry"
+  gem "tmuxinator"
+  gem "ghost"
+end
