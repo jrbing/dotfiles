@@ -214,3 +214,6 @@
   path = vim/bundle/xptemplate
   url = git://github.com/vim-scripts/xptemplate.git
   ignore = dirty
+[submodule "vim/bundle/pandoc"]
+	path = vim/bundle/pandoc
+	url = git@github.com:vim-pandoc/vim-pandoc.git
