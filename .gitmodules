@@ -217,3 +217,6 @@
 [submodule "vim/bundle/pandoc"]
 	path = vim/bundle/pandoc
 	url = git@github.com:vim-pandoc/vim-pandoc.git
+[submodule "vim/bundle/vim-yaml"]
+	path = vim/bundle/vim-yaml
+	url = git@github.com:avakhov/vim-yaml.git
