@@ -3,14 +3,6 @@
 export DOTFILES=$HOME/.dotfiles
 
 #
-# Local system specific settings
-#
-
-if [[ -f $HOME/.localrc ]]; then
-  source $HOME/.localrc
-fi
-
-#
 # OS Specific Settings
 #
 
@@ -38,7 +30,7 @@ export EDITOR=vim
 #
 # Less
 #
-
+export LESS='-F -g -i -M -R -S -w -X -z-4'
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking-mode
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold-mode
 export LESS_TERMCAP_me=$'\E[0m'           # end (blinking/bold)-mode
@@ -123,7 +115,16 @@ eval "$($HOME/.dotfiles/bin/valet init -)"
 # Additional Tools
 #
 
-export PATH=$PATH:$DOTFILES/bin       # Add scripts to PATH
-export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # Load RVM
-PATH=$PATH:$HOME/.rvm/bin                                             # Add RVM to PATH for scripting
+export PATH=$PATH:$DOTFILES/bin                                      # Add scripts to PATH
+export SQLPATH=$DOTFILES/sql/oracle                                  # SQL script path for sqlplus
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
+PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM to PATH for scripting
+
+#
+# Local system specific settings
+#
+
+if [[ -f $HOME/.localrc ]]; then
+  source $HOME/.localrc
+fi
+

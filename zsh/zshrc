@@ -16,34 +16,25 @@ setopt rmstarsilent
 # Development
 #
 
-alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'"
+alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
+alias todos="ack --nogroup '(TODO|FIX(ME)?):'"                                                                                              # List TODO/FIX lines from the current project
 
 #
 # Database
 #
 
-alias pmons="ps -ef | grep pmon | grep -v grep | wc -l"
-export SQLPATH=$DOTFILES/sql/oracle   # SQL script path for sqlplus
+alias pmons="ps -ef | grep pmon | grep -v grep" # Currently running Oracle pmon processes
+export SQLPATH=$DOTFILES/sql/oracle             # SQL script path for sqlplus
 export PSQL_EDITOR=vim
+export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 
 #
 # Miscellaneous aliases
 #
 unalias rm
-alias chrome="open -a \"Google Chrome\""
-alias ax="chmod a+x"                                                  # make executable
-alias cl="fc -e -|pbcopy"                                             # copy output of last command to clipboard
-alias cpwd='pwd|tr -d "\n"|pbcopy'                                    # copy the working directory path
-alias flush="sudo killall -HUP mDNSResponder"                         # DNS
-alias ip="curl icanhazip.com"                                         # current public IP
-alias lt='ls -At1 && echo "------Oldest--"'
-alias ltr='ls -Art1 && echo "------Newest--"'
-alias rmdbc="find . -name *\ \(*conflicted* -exec rm {} \;"           # recursively delete Dropbox conflicted files
-alias stfu="osascript -e 'set volume output muted true'"              # mute the system volume
-alias tn='tr -d "\n"'                                                 # trim newlines
-alias todos="ack -a --nogroup '(TODO|FIX(ME)?):'"                     # list TODO/FIX lines from the current project
-alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper' # create a Taskpaper todo file in the current folder
-alias zi="fasd -e cd -i"                                              # interactive fasd
+alias ax="chmod a+x"                                # Make executable
+alias lt='echo "------ OLDEST ------" && ls -lAhrt'
+alias ltr='echo "------ NEWEST ------" && ls -lAht'
 
 #
 # Functions

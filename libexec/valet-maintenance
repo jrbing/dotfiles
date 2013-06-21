@@ -12,7 +12,7 @@ source $DOTFILES/share/bsfl.sh
 #
 # Check if root
 #
-if [ $(whoami) != root ]; then
+if [[ $(whoami) != root ]]; then
   log " Must be run as root. "
   exit
 fi
