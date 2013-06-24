@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Usage: valet upgrade
+# Summary: Upgrade installed software
+# Help: Use this command to upgrade the installed software using the
+# environments default package manager
+
+set -e
+
+source $DOTFILES/share/bsfl.sh
+
+#
+# OS Specific Settings
+#
+
+case $(uname) in
+  (Darwin)
+    # Update homebrew (if installed) and upgrade packages
+    if hash brew 2>/dev/null; then
+      msg_status 'Updating homebrew repo, and upgrading installed packages' 'INFO'
+      brew update && brew outdated && brew upgrade && brew cleanup
+    fi
+  ;;
+  (Linux)
+    # Upgrade yum packages
+    if hash yum 2>/dev/null; then
+      msg_status 'Updating yum packages' 'INFO'
+      sudo yum upgrade -y
+    fi
+  ;;
+  (SunOS)
+    # TODO: add opencsw and pkgutil
+  ;;
+esac
+
+#
+# Update rvm (if installed)
+#
+if hash rvm 2>/dev/null; then
+  msg_status 'Updating rvm' 'INFO'
+  rvm get head
+fi
+
+exit 0

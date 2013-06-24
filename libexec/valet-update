@@ -15,22 +15,3 @@ source $DOTFILES/share/bsfl.sh
 #log 'Updating dotfiles from Github'
 msg_status 'Updating dotfiles from Github' 'INFO'
 cd $DOTFILES && git pull origin master && git submodule sync && git submodule update --init --recursive
-#git clean -dfx
-
-#
-# Update homebrew (if installed) and upgrade packages
-#
-if hash brew 2>/dev/null; then
-  #log "Updating homebrew repo, and upgrading installed packages"
-  msg_status 'Updating homebrew repo, and upgrading installed packages' 'INFO'
-  brew update && brew outdated && brew upgrade && brew cleanup
-fi
-
-#
-# Update rvm (if installed)
-#
-if hash rvm 2>/dev/null; then
-  #log "Updating rvm"
-  msg_status 'Updating rvm' 'INFO'
-  rvm get head
-fi
