@@ -41,3 +41,7 @@ Thumbs.db
 # Directories #
 ##############
 .DS_Store
+
+# Develepment temp files #
+##########################
+tags
