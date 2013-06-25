@@ -19,7 +19,6 @@
 " Editing Behavior {{{1
 
   set encoding=utf-8
-"  set modelines=0
   set autoindent
   set showmode
   set showcmd
@@ -389,18 +388,18 @@
       au BufNewFile,BufRead .git/index setlocal nolist
   augroup END
 
-  " Yankring
+  " YankRing
   nnoremap <silent> <F4> :YRShow<cr>
   let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
 
-  " Taskpaper
+  " TaskPaper
   let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
 
   " SQLUtilities
   let g:sqlutil_align_comma = 1
   let g:sqlutil_keyword_case = '\L'
 
-  " dbext
+  " DBExt
   :let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
   :let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
 
