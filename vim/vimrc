@@ -403,6 +403,15 @@
   :let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
   :let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
 
+  " VIM-Notes
+  let g:notes_directories = ['~/Sync/notes']
+  "let g:notes_suffix = '.txt'
+  let g:notes_suffix = '.md'
+  let g:notes_title_sync = 'no'
+  let g:notes_tab_indents = 0
+  let g:notes_alt_indents = 0
+  ":let g:notes_markdown_program
+
 " }}}
 
 " Utility Functions {{{1
@@ -702,7 +711,7 @@ if has ('gui_running')
     :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
     " Map Command+Shift+M to open in Multimarkdown Composer
-    :nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
+    ":nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
 
     " Map Alt-Shift-P to run markdown to pdf against the current document and
     " open the resulting document
@@ -824,23 +833,23 @@ endif
 
 " Miscellaneous {{{1
 
-  " Automatically reload the vimrc file when changed
-  "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+" Automatically reload the vimrc file when changed
+"autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
-  if !exists("autocommands_loaded")
-    let autocommands_loaded = 1
-  endif
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
+endif
 
-  " Better Completion
-  set completeopt=longest,menuone,preview
+" Better Completion
+set completeopt=longest,menuone,preview
 
-  " Sudo to write
-  cmap w!! w !sudo tee % >/dev/null
+" Sudo to write
+cmap w!! w !sudo tee % >/dev/null
 
-  " Include vim configuration specific to a machine
-  if filereadable(expand("~/.vimrc.local"))
-    source ~/.vimrc.local
-  endif
+" Include vim configuration specific to a machine
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
 
 " }}}
 
