@@ -216,19 +216,21 @@
   ignore = dirty
 [submodule "vim/bundle/pandoc"]
   path = vim/bundle/pandoc
-  url = git@github.com:vim-pandoc/vim-pandoc.git
+  url = git://github.com:vim-pandoc/vim-pandoc.git
   ignore = dirty
 [submodule "vim/bundle/vim-yaml"]
   path = vim/bundle/vim-yaml
-  url = git@github.com:avakhov/vim-yaml.git
+  url = git://github.com:avakhov/vim-yaml.git
   ignore = dirty
 [submodule "opt/deliver"]
   path = opt/deliver
-  url = git@github.com:gerhard/deliver.git
+  url = git://github.com:gerhard/deliver.git
   ignore = dirty
 [submodule "vim/bundle/vim-notes"]
-	path = vim/bundle/vim-notes
-	url = git@github.com:xolox/vim-notes.git
+  path = vim/bundle/vim-notes
+  url = git://github.com:xolox/vim-notes.git
+  ignore = dirty
 [submodule "vim/bundle/vim-misc"]
-	path = vim/bundle/vim-misc
-	url = git@github.com:xolox/vim-misc.git
+  path = vim/bundle/vim-misc
+  url = git://github.com:xolox/vim-misc.git
+  ignore = dirty
