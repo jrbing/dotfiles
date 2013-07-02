@@ -715,7 +715,7 @@ if has ('gui_running')
 
     " Create a pdf using pandoc and open it
     function! CreatePDF()
-      execute 'silent ! pandoc "%" --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex --output=/tmp/%:t:r.pdf'
+      execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
       execute 'silent ! open /tmp/%:t:r.pdf'
     endfunction
 
