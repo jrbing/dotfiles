@@ -230,3 +230,11 @@
   path = vim/bundle/vim-misc
   url = git://github.com/xolox/vim-misc.git
   ignore = dirty
+[submodule "vim/bundle/pyte"]
+  path = vim/bundle/pyte
+  url = git://github.com/vim-scripts/pyte.git
+  ignore = dirty
+[submodule "vim/bundle/getafe"]
+  path = vim/bundle/getafe
+  url = git://github.com/larssmit/vim-getafe.git
+  ignore = dirty
