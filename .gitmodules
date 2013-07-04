@@ -238,3 +238,7 @@
   path = vim/bundle/getafe
   url = git://github.com/larssmit/vim-getafe.git
   ignore = dirty
+[submodule "vim/bundle/mayansmoke"]
+  path = vim/bundle/mayansmoke
+  url = git://github.com/vim-scripts/mayansmoke.git
+  ignore = dirty
