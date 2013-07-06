@@ -242,3 +242,6 @@
   path = vim/bundle/mayansmoke
   url = git://github.com/vim-scripts/mayansmoke.git
   ignore = dirty
+[submodule "opt/rainbarf"]
+	path = opt/rainbarf
+	url = git://github.com/creaktive/rainbarf.git
