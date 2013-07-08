@@ -30,13 +30,20 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'prompt' \
-  'rails' \
   'archive' \
   'fasd' \
   'rsync' \
-  'ruby' \
   'tmux' \
+  'history-substring-search' \
   'git'
+
+  #'ruby' \
+  #'rails' \
+
+#
+# History Substring Search
+#
+zstyle ':prezto:module:history-substring-search' color 'yes'
 
 #
 # Editor
