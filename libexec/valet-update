@@ -2,7 +2,7 @@
 # Usage: valet update
 # Summary: Update dotfiles from github
 # Help: Use this command to pull down the most recent copy of
-# my dotfiles, update rvm, and update homebrew
+# my dotfiles
 
 set -e
 
