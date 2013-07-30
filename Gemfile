@@ -9,5 +9,4 @@ group :development do
   gem "chef"
   gem "pry"
   gem "tmuxinator"
-  gem "ghost"
 end
