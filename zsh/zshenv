@@ -91,7 +91,6 @@ case $(uname) in
   ;;
 esac
 
-
 #
 # Use .localrc for settings specific to one system
 #
