@@ -37,7 +37,6 @@ __detect_color_support() {
 }
 __detect_color_support
 
-
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  echoerr
 #   DESCRIPTION:  Echo errors to stderr.
