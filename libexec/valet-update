@@ -6,11 +6,11 @@
 
 set -e
 
-source $DOTFILES/share/bash-functions.sh
+# Source generic bash functions
+source $DOTFILES/share/lib/bash-functions.sh
 
 #
 # Pull down updates to dotfiles from Github
 #
-#log 'Updating dotfiles from Github'
 echoinfo 'Updating dotfiles from Github'
-cd $DOTFILES && git pull origin master && git submodule sync && git submodule update --init --recursive
+cd $DOTFILES && git pull origin master && git submodule update --init --recursive

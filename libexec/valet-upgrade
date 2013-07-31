@@ -6,21 +6,29 @@
 
 set -e
 
-source $DOTFILES/share/bash-functions.sh
+# Source generic bash functions
+source $DOTFILES/share/lib/bash-functions.sh
 
-#
+######################
 # OS Specific Settings
-#
+######################
 
 case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
     if hash brew 2>/dev/null; then
-      echoinfo 'Updating homebrew repo, and upgrading installed packages'
-      brew update && brew outdated && brew upgrade && brew cleanup
+      echoinfo 'Updating homebrew repo'
+      brew update
+      echoinfo 'Outdated packages'
+      brew outdated
+      echoinfo 'Upgrading packages'
+      brew upgrade
+      echoinfo 'Cleaning up'
+      brew cleanup
     fi
   ;;
   (Linux)
+    # TODO: figure out how to do this for debian-based distros
     # Upgrade yum packages
     if hash yum 2>/dev/null; then
       echoinfo 'Updating yum packages'
