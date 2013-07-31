@@ -6,12 +6,11 @@
 
 set -e
 
-#source $DOTFILES/share/valet/lib/liboutput.sh
-source $DOTFILES/share/bsfl.sh
+source $DOTFILES/share/bash-functions.sh
 
 #
 # Pull down updates to dotfiles from Github
 #
 #log 'Updating dotfiles from Github'
-msg_status 'Updating dotfiles from Github' 'INFO'
+echoinfo 'Updating dotfiles from Github'
 cd $DOTFILES && git pull origin master && git submodule sync && git submodule update --init --recursive

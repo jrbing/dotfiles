@@ -6,7 +6,7 @@
 
 set -e
 
-source $DOTFILES/share/bsfl.sh
+source $DOTFILES/share/bash-functions.sh
 
 #
 # OS Specific Settings
@@ -16,14 +16,14 @@ case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
     if hash brew 2>/dev/null; then
-      msg_status 'Updating homebrew repo, and upgrading installed packages' 'INFO'
+      echoinfo 'Updating homebrew repo, and upgrading installed packages'
       brew update && brew outdated && brew upgrade && brew cleanup
     fi
   ;;
   (Linux)
     # Upgrade yum packages
     if hash yum 2>/dev/null; then
-      msg_status 'Updating yum packages' 'INFO'
+      echoinfo 'Updating yum packages'
       sudo yum upgrade -y
     fi
   ;;
@@ -36,7 +36,7 @@ esac
 # Update rvm (if installed)
 #
 if hash rvm 2>/dev/null; then
-  msg_status 'Updating rvm' 'INFO'
+  echoinfo 'Updating rvm'
   rvm get head
 fi
 
