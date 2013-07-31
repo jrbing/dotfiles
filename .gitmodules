@@ -218,10 +218,6 @@
   path = vim/bundle/vim-yaml
   url = git://github.com/avakhov/vim-yaml.git
   ignore = dirty
-[submodule "opt/deliver"]
-  path = opt/deliver
-  url = git://github.com/gerhard/deliver.git
-  ignore = dirty
 [submodule "vim/bundle/vim-notes"]
   path = vim/bundle/vim-notes
   url = git://github.com/xolox/vim-notes.git
