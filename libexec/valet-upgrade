@@ -17,22 +17,23 @@ case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
     if hash brew 2>/dev/null; then
-      echoinfo 'Updating homebrew repo'
-      brew update
-      echoinfo 'Outdated packages'
-      brew outdated
-      echoinfo 'Upgrading packages'
-      brew upgrade
-      echoinfo 'Cleaning up'
-      brew cleanup
+      echoinfo 'Updating OSX' && sudo softwareupdate -i -a
+      echoinfo 'Updating homebrew repo' &&  brew update
+      echoinfo 'Outdated packages' && brew outdated
+      echoinfo 'Upgrading packages' && brew upgrade
+      echoinfo 'Cleaning up' && brew cleanup
     fi
   ;;
   (Linux)
-    # TODO: figure out how to do this for debian-based distros
-    # Upgrade yum packages
+    #local os=$(lsb_release -si)
     if hash yum 2>/dev/null; then
-      echoinfo 'Updating yum packages'
+      echoinfo 'Updating packages'
       sudo yum upgrade -y
+    fi
+
+    if hash aptitude 2>/dev/null; then
+      echoinfo 'Updating packages'
+      sudo aptitude upgrade -y
     fi
   ;;
   (SunOS)

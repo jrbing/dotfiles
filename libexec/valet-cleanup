@@ -6,5 +6,9 @@
 # Set the script to exit immediately on error
 set -e
 
-cd ~/.dotfiles
-git clean -dfx
+#cd ~/.dotfiles
+#git clean -dfx
+
+sudo rm -rfv /Volumes/*/.Trashes
+sudo rm -rfv ~/.Trash
+sudo rm -rfv /private/var/log/asl/*.asl
