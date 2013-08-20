@@ -74,19 +74,19 @@ fi
 # OS Specific Settings
 #
 
-case $(uname) in
-  (Darwin)
+case $OSTYPE in
+  (darwin*)
     source $DOTFILES/env/darwinrc
     eval "$($HOME/.dotfiles/bin/valet init -)"
   ;;
-  (Linux)
+  (linux*)
     source $DOTFILES/env/linuxrc
     eval "$($HOME/.dotfiles/bin/valet init -)"
   ;;
-  (SunOS)
+  (solaris*)
     source $DOTFILES/env/solarisrc
   ;;
-  (CYGWIN*)
+  (cygwin*)
     source $DOTFILES/env/msysrc
   ;;
 esac

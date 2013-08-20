@@ -41,11 +41,6 @@ zstyle ':prezto:load' pmodule \
   #'rails' \
 
 #
-# History Substring Search
-#
-zstyle ':prezto:module:history-substring-search' color 'yes'
-
-#
 # Editor
 #
 
