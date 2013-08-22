@@ -117,8 +117,10 @@ eval "$($HOME/.dotfiles/bin/valet init -)"
 
 export PATH=$PATH:$DOTFILES/bin                                      # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle                                  # SQL script path for sqlplus
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
-PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM to PATH for scripting
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM
+#PATH=$PATH:$HOME/.rvm/bin                                            # Add RVM to PATH for scripting
+export PATH="$HOME/.rbenv/bin:$PATH" # RBENV
+eval "$(rbenv init -)" # RBENV
 
 #
 # Local system specific settings
