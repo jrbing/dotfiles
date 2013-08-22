@@ -5,17 +5,9 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export EDITOR='mvim'
 export VISUAL='mvim -f'
 
-#export PATH=/usr/local/bin:/usr/local/sbin:$PATH  # Necessary for homebrew
 [[ -d $DOTFILES/zsh/fasd ]] && export PATH="$PATH:$DOTFILES/zsh/fasd"                   # Add fasd to PATH
 [[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin"       # Add npm bin to path if it exists
 [[ -d /usr/local/heroku ]] && export PATH="$PATH:/usr/local/heroku/bin"                 # Heroku Toolbelt
-#[[ -d /usr/local/share/python ]] && export PATH="/usr/local/share/python:$PATH"      # Add homebrew python scripts to path if it exists
 
 alias z='fasd_cd -d'                                                  # Alias for FASD
-#alias chrome="open -a \"Google Chrome\""                              # Shortcut for Chrome
-#alias cl="fc -e -|pbcopy"                                             # Copy output of last command to clipboard
-#alias cpwd='pwd|tr -d "\n"|pbcopy'                                    # Copy the working directory path
-#alias flush-dns="sudo killall -HUP mDNSResponder"                     # DNS
-#alias rmdbc="find . -name *\ \(*conflicted* -exec rm {} \;"           # Recursively delete Dropbox conflicted files
-#alias stfu="osascript -e 'set volume output muted true'"              # Mute the system volume
-#alias tp='touch todo.taskpaper && open -a "Taskpaper" todo.taskpaper' # Create a Taskpaper todo file in the current folder
+alias flush-dns="sudo killall -HUP mDNSResponder"                     # DNS
