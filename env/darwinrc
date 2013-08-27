@@ -4,6 +4,7 @@
 export JAVA_HOME=$(/usr/libexec/java_home)
 export EDITOR='mvim'
 export VISUAL='mvim -f'
+export LC_CTYPE="utf-8"
 
 [[ -d $DOTFILES/zsh/fasd ]] && export PATH="$PATH:$DOTFILES/zsh/fasd"                   # Add fasd to PATH
 [[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin"       # Add npm bin to path if it exists
