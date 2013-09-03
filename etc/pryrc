@@ -10,3 +10,7 @@ Pry.prompt = [proc { |obj, nest_level| "#{RUBY_VERSION} (#{obj}):#{nest_level} >
 
 # Load rails configuration if running as a rails console
 load File.dirname(__FILE__) + '/.railsrc' if defined?(Rails) && Rails.env
+
+Pry.commands.alias_command 'c', 'continue'
+Pry.commands.alias_command 's', 'step'
+Pry.commands.alias_command 'n', 'next'
