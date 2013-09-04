@@ -250,3 +250,7 @@
   path = vim/bundle/vim-golang
   url = https://github.com/jnwhiteh/vim-golang.git
   ignore = dirty
+[submodule "vim/bundle/gocode"]
+  path = vim/bundle/gocode
+  url = https://github.com/Blackrush/vim-gocode.git
+  ignore = dirty
