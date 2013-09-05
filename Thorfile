@@ -2,9 +2,13 @@
 # -*- encoding: utf-8 -*-
 
 require 'thor'
+require 'thor/actions'
 require 'fileutils'
 
 class Dotfiles < Thor
+
+  include Thor::Actions
+
   desc "link_shell", "Link shell configuration files"
   def link_shell
     unless File.exists?(File.join(ENV['HOME'], ".zprezto"))
