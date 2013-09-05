@@ -3,50 +3,16 @@
 # Summary: Create script from template
 # Help: Creates script files based on predefined templates
 
-$LOAD_PATH.unshift(File.expand_path("../share/valet/lib", File.dirname(__FILE__)))
-
 require 'fileutils'
 require 'thor'
 require 'thor/actions'
-require 'valet_template'
 
 class Template < Thor
 
-  #
-  # Datafix
-  #
-  desc "datafix [NAME]", "Creates datafix files and folders"
-  def datafix(datafix_name=nil)
+  include Thor::Actions
 
-    # Get the name for the datafix unless one is specified
-    unless datafix_name
-      datafix_name = ask("Name for datafix folder: ")
-    end
-
-    # Get list of records to be affected
-    records = ask("Records to be affected: ").upcase.split(' ').uniq
-
-    # Create the datafix folder
-    datafix_folder = File.join(Dir.pwd, datafix_name)
-    Dir.mkdir(datafix_folder) unless File.exists?(datafix_folder)
-
-    # Create the sql script
-    script_template = DatafixScript.new
-    script_template.name = datafix_name
-    script_file = File.join(datafix_folder, "#{datafix_name}.sql")
-    say_status("INFO", "Creating sqlplus script #{script_file}")
-    File.open(script_file, 'w') { |file| file.write(script_template.render) }
-
-    # Create the datamover export files for all records
-    records.each do |record|
-      backup_template = DatamoverBackup.new
-      backup_template.name = datafix_name
-      backup_template.record = record
-      backup_file = File.join(datafix_folder, "#{record}_backup.dms")
-      say_status("INFO", "Creating datamover backup script #{backup_file}")
-      File.open(backup_file, 'w') { |file| file.write(backup_template.render) }
-    end
-
+  def self.source_root
+    File.dirname(__FILE__)
   end
 
   #
@@ -56,16 +22,16 @@ class Template < Thor
   def sqlplus(script_name=nil)
 
     # Get the name for the script
-    unless script_name
-      script_name = ask("Name for sqlplus script to be created: ")
+    if script_name
+      @script_name = script_name
+    else
+      @script_name = ask("Name for sqlplus script to be created: ")
     end
 
     # Create the sql script
-    script_template = SqlplusScript.new
-    script_template.name = script_name
-    script_file = File.join(Dir.pwd, "#{script_name}.sql")
+    script_file = File.join(Dir.pwd, "#{@script_name}.sql")
     say_status("INFO", "Creating sqlplus script #{script_file}")
-    File.open(script_file, 'w') { |file| file.write(script_template.render) }
+    template("../share/valet/templates/sqlplus_script.erb", script_file)
 
   end
 
@@ -76,17 +42,17 @@ class Template < Thor
   def bash(script_name=nil)
 
     # Get the name for the script
-    unless script_name
-      script_name = ask("Name for bash script to be created: ")
+    if script_name
+      @script_name = script_name
+    else
+      @script_name = ask("Name for bash script to be created: ")
     end
 
     # Create the bash script
-    script_template = BashScript.new
-    script_template.name = script_name
-    script_file = File.join(Dir.pwd, "#{script_name}.sh")
+    script_file = File.join(Dir.pwd, "#{@script_name}.sh")
     say_status("INFO", "Creating bash script #{script_file}")
-    file = File.open(script_file, 'w')
-    file.write(script_template.render)
+    template("../share/valet/templates/bash_script.erb", script_file)
+    file = File.open(script_file, 'r')
     file.chmod(0700)
     file.close
 
@@ -99,17 +65,17 @@ class Template < Thor
   def thorfile(script_name=nil)
 
     # Get the name for the script
-    unless script_name
-      script_name = ask("Name for thor script to be created: ")
+    if script_name
+      @script_name = script_name
+    else
+      @script_name = ask("Name for thor script to be created: ")
     end
 
     # Create the thor script
-    script_template = ThorScript.new
-    script_template.name = script_name
-    script_file = File.join(Dir.pwd, "#{script_name}.rb")
+    script_file = File.join(Dir.pwd, "#{@script_name}.rb")
     say_status("INFO", "Creating thor script #{script_file}")
-    file = File.open(script_file, 'w')
-    file.write(script_template.render)
+    template("../share/valet/templates/thor_script.erb", script_file)
+    file = File.open(script_file, 'r')
     file.chmod(0700)
     file.close
 
@@ -122,19 +88,56 @@ class Template < Thor
   def batch (script_name=nil)
 
     # Get the name for the script
-    unless script_name
-      script_name = ask("Name for batch script to be created: ")
+    if script_name
+      @script_name = script_name
+    else
+      @script_name = ask("Name for batch script to be created: ")
     end
 
     # Create the thor script
-    script_template = BatchScript.new
-    script_template.name = script_name
-    script_file = File.join(Dir.pwd, "#{script_name}.rb")
+    script_file = File.join(Dir.pwd, "#{@script_name}.bat")
     say_status("INFO", "Creating batch script #{script_file}")
-    file = File.open(script_file, 'w')
-    file.write(script_template.render)
+    template("../share/valet/templates/batch_script.erb", script_file)
+    file = File.open(script_file, 'r')
     file.chmod(0700)
     file.close
+
+  end
+
+  #
+  # Datafix
+  #
+  desc "datafix [NAME]", "Creates datafix files and folders"
+  def datafix(datafix_name=nil)
+
+    # Get the name for the datafix unless one is specified
+    if datafix_name
+      @datafix_name = datafix_name
+    else
+      @datafix_name = ask("Name for datafix folder: ")
+    end
+
+    @date = Time.now.localtime.strftime("%m/%d/%Y")
+
+    # Get list of records to be affected
+    records = ask("Records to be affected: ").upcase.split(' ').uniq
+
+    # Create the datafix folder
+    datafix_folder = File.join(Dir.pwd, @datafix_name)
+    Dir.mkdir(datafix_folder) unless File.exists?(datafix_folder)
+
+    # Create the sql script
+    script_file = File.join(datafix_folder, "#{@datafix_name}.sql")
+    say_status("INFO", "Creating sqlplus script #{script_file}")
+    template("../share/valet/templates/datafix_script.erb", script_file)
+
+    # Create the datamover export files for all records
+    records.each do |record|
+      @record = record
+      backup_file = File.join(datafix_folder, "#{record}_backup.dms")
+      say_status("INFO", "Creating datamover backup script #{backup_file}")
+      template("../share/valet/templates/datamover_backup.erb", backup_file)
+    end
 
   end
 

@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
-# Usage: {{ name }} <type>
+# Usage: <%= @script_name %>
 # Summary: ...
 # Help: ...
 
 require 'thor'
+require 'thor/actions'
 
 module GitCLI
   class Remote < Thor

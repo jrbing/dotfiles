@@ -1,7 +1,7 @@
--- Datafix {{ name }}
--- Created on: {{ date_time }}
+-- Datafix <%= @datafix_name %>
+-- Created on: <%= @date %>
 
-spool {{ name }}.log;
+spool <%= @datafix_name %>.log;
 
 -- Environment Information
 select dbname
