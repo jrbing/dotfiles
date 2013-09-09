@@ -44,9 +44,9 @@ esac
 #
 # Update rvm (if installed)
 #
-if hash rvm 2>/dev/null; then
-  echoinfo 'Updating rvm'
-  rvm get head
-fi
+#if hash rvm 2>/dev/null; then
+  #echoinfo 'Updating rvm'
+  #rvm get head
+#fi
 
 exit 0
