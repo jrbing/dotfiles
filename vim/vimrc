@@ -250,7 +250,8 @@
   nnoremap <F3> :GundoToggle<CR>
 
   " Reassign mapping for quickbuf
-  let g:qb_hotkey = '<Leader>b'
+  "let g:qb_hotkey = '<Leader>b'
+  nmap <leader>b :CtrlPBuffer<CR>
 
   " Adjust viewports to the same size
   map <Leader>= <C-w>=
@@ -369,7 +370,8 @@
   let g:syntastic_enable_signs = 1
   let g:syntastic_disabled_filetypes = ['html']
   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
-  let g:syntastic_ruby_exec = '~/.rvm/bin/ruby'
+  "let g:syntastic_ruby_exec = '~/.rvm/bin/ruby'
+  let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
 
   " Fugitive
   nnoremap <leader>gd :Gdiff<cr>
@@ -411,6 +413,17 @@
   let g:notes_tab_indents = 0
   let g:notes_alt_indents = 0
   ":let g:notes_markdown_program
+
+  " The Silver Searcher
+  if executable('ag')
+    let g:ackprg = 'ag --nogroup --column'
+
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  endif
 
   "
   " Neocomplcache
@@ -829,7 +842,7 @@ if has ('gui_running')
     nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
     imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
-    " Windows Specific Settings
+  " Windows Specific Settings
   elseif has("win32") || has("win64")
 
     " Set Colorscheme
