@@ -61,24 +61,19 @@ class Dotfiles < Thor
     }
   end
 
-  #desc "install_rbenv"
-  #def install_rbenv 
+  desc "install_rbenv_plugins", "Installs rbenv plugins"
+  def install_rbenv_plugins
     #run %{ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv }
     #run %{ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build }
-    #run %{ git clone git://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems }
-    #run %{ git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash }
-    #run %{ git clone git://github.com/tpope/rbenv-aliases.git ~/.rbenv/plugins/rbenv-aliases }
-    #run %{ git clone git://github.com/rkh/rbenv-whatis.git ~/.rbenv/plugins/rbenv-whatis }
-    #run %{ git clone git://github.com/rkh/rbenv-use.git ~/.rbenv/plugins/rbenv-use }
-    #run %{ git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update }
-  #end
+    run %{ git clone git://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems }
+    run %{ git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash }
+    run %{ git clone git://github.com/tpope/rbenv-aliases.git ~/.rbenv/plugins/rbenv-aliases }
+    run %{ git clone git://github.com/rkh/rbenv-whatis.git ~/.rbenv/plugins/rbenv-whatis }
+    run %{ git clone git://github.com/rkh/rbenv-use.git ~/.rbenv/plugins/rbenv-use }
+    run %{ git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update }
+  end
 
   private
-
-  #def run(cmd)
-    #puts "[Running] #{cmd}"
-    #`#{cmd}` unless ENV['DEBUG']
-  #end
 
   def file_operation(files, method = :symlink)
     files.each do |f|
