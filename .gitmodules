@@ -50,10 +50,6 @@
   path = vim/bundle/vim-ruby
   url = git://github.com/vim-ruby/vim-ruby.git
   ignore = dirty
-[submodule "vim/bundle/quickbuf"]
-  path = vim/bundle/quickbuf
-  url = git://github.com/vim-scripts/QuickBuf.git
-  ignore = dirty
 [submodule "vim/bundle/nerdtree"]
   path = vim/bundle/nerdtree
   url = git://github.com/scrooloose/nerdtree.git
