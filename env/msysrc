@@ -1,6 +1,8 @@
 #!/bin/sh
-#Settings specific for using git shell on windows
+# Settings specific to using git shell on Windows
 
+#
 # Aliases
+#
 alias vim="/c/Program\ Files/vim/vim73/gvim.exe &"
 alias exp="explorer"
