@@ -1,14 +1,21 @@
 #!/bin/sh
 #Settings specific for OSX
 
-#export JAVA_HOME=$(/usr/libexec/java_home)
-export EDITOR='mvim'
+export JAVA_HOME=$(/usr/libexec/java_home)
+#export EDITOR='mvim'
+export EDITOR='vim'
 export VISUAL='mvim -f'
 export LC_CTYPE="utf-8"
 
-[[ -d $DOTFILES/zsh/fasd ]] && export PATH="$PATH:$DOTFILES/zsh/fasd"                   # Add fasd to PATH
-[[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin"       # Add npm bin to path if it exists
-[[ -d /usr/local/heroku ]] && export PATH="$PATH:/usr/local/heroku/bin"                 # Heroku Toolbelt
+#
+# PATH
+#
+[[ -d $DOTFILES/zsh/fasd ]] && export PATH="$PATH:$DOTFILES/zsh/fasd"             # fasd
+[[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin" # NPM
+[[ -d /usr/local/heroku ]] && export PATH="$PATH:/usr/local/heroku/bin"           # Heroku Toolbelt
 
-alias z='fasd_cd -d'                                                  # Alias for FASD
-alias flush-dns="sudo killall -HUP mDNSResponder"                     # DNS
+#
+# Aliases
+#
+alias z='fasd_cd -d'                              # Alias for FASD
+alias flush-dns="sudo killall -HUP mDNSResponder" # DNS
