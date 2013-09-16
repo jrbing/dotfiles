@@ -5,3 +5,7 @@ ServerAliveCountMax=6
 StrictHostKeyChecking=no
 Compression=yes
 ForwardAgent=yes
+
+ControlMaster auto
+ControlPath /tmp/%r@%h:%p
+ControlPersist yes
