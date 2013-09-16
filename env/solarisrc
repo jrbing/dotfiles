@@ -1,5 +1,5 @@
 #!/bin/env sh
-#Environment settings specifically for Solaris
+# Settings specific to Solaris
 
 export DISABLE_LS_COLORS= "true"
 export PATH=$PATH:/usr/cluster/bin
