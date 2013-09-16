@@ -1,5 +1,5 @@
 #!/bin/sh
-#Settings specific for OSX
+# Settings specific to OSX
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 #export EDITOR='mvim'

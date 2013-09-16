@@ -1,8 +1,12 @@
 #!/bin/sh
-#Settings specific for Linux
+#Settings specific to Linux
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
 export PATH=$PATH:/sbin:/usr/sbin
-[[ -d $DOTFILES/zsh/fasd ]] && export PATH="$DOTFILES/zsh/fasd:$PATH"
 
+[[ -d $DOTFILES/zsh/fasd ]] && export PATH="$DOTFILES/zsh/fasd:$PATH" # fasd
+
+#
+# Aliases
+#
 alias z='fasd_cd -d'
