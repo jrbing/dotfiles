@@ -252,8 +252,7 @@
   " Toggle the Gundo panel
   nnoremap <F3> :GundoToggle<CR>
 
-  " Reassign mapping for quickbuf
-  "let g:qb_hotkey = '<Leader>b'
+  " Bring up the CtrlP buffer window
   nmap <leader>b :CtrlPBuffer<CR>
 
   " Adjust viewports to the same size
