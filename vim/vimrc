@@ -51,6 +51,9 @@
 
   syntax on
 
+  " Don't try to highlight lines longer than 800 characters.
+  set synmaxcol=800
+
   " Set backup file location
   set backupdir=$HOME/.vim/tmp/backup// " backups
   set directory=$HOME/.vim/tmp/swap//   " swap files
