@@ -819,9 +819,6 @@ if has ('gui_running')
     " Map Command+Shift+P to preview the document in Marked
     :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
-    " Map Command+Shift+M to open in Multimarkdown Composer
-    ":nnoremap <D-M> :silent !open -a 'Multimarkdown Composer.app' '%:p'<cr>
-
     " Create a pdf using pandoc and open it
     function! CreatePDF()
       execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
@@ -841,8 +838,8 @@ if has ('gui_running')
     let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
 
     " Insert date and time header at the top of the file
-    nmap <D-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-    imap <D-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+    nmap <D-D> gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+    imap <D-D> <Esc>gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
   " Windows Specific Settings
   elseif has("win32") || has("win64")
