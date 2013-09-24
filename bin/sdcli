@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=4 shiftwidth=4 expandtab fenc=utf-8 spelllang=en
+#===============================================================================
+#
+#          FILE: sdcli
+#
+#   DESCRIPTION: Wrapper script for SQLDeveloper CLI tool on OSX
+#
+#===============================================================================
+
+set -e
+
+cd /Applications/SQLDeveloper.app/Contents/Resources/sqldeveloper/sqldeveloper/bin && ./sdcli "${@}"
