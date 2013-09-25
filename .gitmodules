@@ -250,3 +250,7 @@
   path = vim/bundle/gocode
   url = https://github.com/Blackrush/vim-gocode.git
   ignore = dirty
+[submodule "vim/bundle/vim-rbenv"]
+  path = vim/bundle/vim-rbenv
+  url = git://github.com/tpope/vim-rbenv.git
+  ignore = dirty
