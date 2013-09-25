@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# Source rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 resolve_link() {
   $(type -p greadlink readlink | head -1) "$1"
 }
