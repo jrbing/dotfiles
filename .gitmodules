@@ -250,3 +250,7 @@
   path = vim/bundle/vim-rbenv
   url = git://github.com/tpope/vim-rbenv.git
   ignore = dirty
+[submodule "vim/bundle/airline"]
+  path = vim/bundle/airline
+  url = git://github.com/bling/vim-airline.git
+  ignore = dirty
