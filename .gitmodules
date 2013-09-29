@@ -98,10 +98,6 @@
   path = vim/bundle/vitality
   url = git://github.com/sjl/vitality.vim.git
   ignore = dirty
-[submodule "vim/bundle/powerline"]
-  path = vim/bundle/powerline
-  url = git://github.com/Lokaltog/vim-powerline.git
-  ignore = dirty
 [submodule "vim/bundle/easymotion"]
   path = vim/bundle/easymotion
   url = git://github.com/Lokaltog/vim-easymotion.git
