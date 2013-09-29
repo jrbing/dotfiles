@@ -42,6 +42,7 @@
   set splitright
   set fillchars=diff:⣿
   set ttimeout
+  set ttimeoutlen 50
   set notimeout
   set nottimeout
   set autowrite
@@ -127,11 +128,9 @@
 " Display Settings {{{1
 
   set background=dark
-  "let g:solarized_termcolors = 256
   let g:solarized_visibility = "normal"
   let g:solarized_contrast = "normal"
   colorscheme solarized
-  "colorscheme base16-default
 
   " Highlight the current line
   set cursorline
@@ -261,9 +260,7 @@
 
   " Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
   nnoremap <silent> <C-Tab> :call<sid>CycleTabpages(1)<cr>
-  " inoremap <silent> <C-Tab> :call<ESC><sid>CycleTabpages(1)<cr>
   nnoremap <silent> <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
-  " inoremap <silent> <C-S-Tab> :call<ESC><sid>CycleTabpages(0)<cr>
 
   " Align text
   nnoremap <leader>Al :left<cr>
@@ -334,9 +331,9 @@
 
 " Plugin Settings {{{1
 
-  " Powerline
-  let g:Powerline_symbols = 'fancy'
-  let g:Powerline_cache_enabled = 1
+  " Airline
+  "let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
 
   " Ruby-vim
   let g:rubycomplete_buffer_loading = 1
@@ -390,8 +387,8 @@
   nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 
   augroup ft_fugitive
-      au!
-      au BufNewFile,BufRead .git/index setlocal nolist
+    au!
+    au BufNewFile,BufRead .git/index setlocal nolist
   augroup END
 
   " YankRing
@@ -691,7 +688,6 @@ RUBY
   call s:DefineCommand("mkdir", "Mkdir")
 
   " Pulse
-
   function! PulseCursorLine()
     let current_window = winnr()
 
@@ -851,7 +847,6 @@ if has ('gui_running')
 
     " Set the font
     set guifont=Consolas:h10
-    " set guifont=Anonymous\ Pro:h11
 
     " Change the location of the viminfo file
     set viminfo+=n$USERPROFILE\\_viminfo
