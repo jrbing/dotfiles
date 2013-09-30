@@ -773,7 +773,8 @@ if has ('gui_running')
   if has("gui_macvim")
 
     " Set Colorscheme
-    colorscheme base16-default
+    colorscheme base16-eighties
+    "colorscheme base16-default
     "colorscheme solarized
 
     " Fullscreen takes up entire screen
