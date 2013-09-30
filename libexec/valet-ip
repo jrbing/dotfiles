@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Usage: valet [<if>]
+# Summary: Show current IP address
+# Help: Show IPv4 address for interface <if> or all interfaces with
+# no <if> given.
+
+# Set the script to exit immediately on error
+set -e
+
+ifconfig -a        |
+grep 'inet '       |
+grep broadcast     |
+awk '{ print $2 }'

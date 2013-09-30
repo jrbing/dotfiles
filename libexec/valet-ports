@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Usage: valet ports <options>
+# Summary: Show processes listening on ports
+# Help: Use this command to show which processes are using ports
+# Any <options> are passed to lsof
+
+set -e
+
+exec lsof -iTCP -sTCP:LISTEN -P "$@"
