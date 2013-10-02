@@ -784,7 +784,7 @@ if has ('gui_running')
     "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
     " Make the window slightly transparent
-    set transparency=4
+    "set transparency=4
 
     " Command-T for CtrlP
     map <D-T> :CtrlP<CR>
