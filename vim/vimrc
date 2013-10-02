@@ -327,9 +327,16 @@
     au BufRead,BufNewFile *.taskpaper    setlocal autoread nolist textwidth=0 wrapmargin=0
   augroup END
 
+  " Coffeescript
+  autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
 " }}}
 
 " Plugin Settings {{{1
+
+  " Coffeescript
+  let coffee_compile_vert = 1
+  let coffee_watch_vert = 1
 
   " Airline
   "let g:airline#extensions#tabline#enabled = 1
