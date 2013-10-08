@@ -788,7 +788,7 @@ if has ('gui_running')
     set fuoptions=maxhorz,maxvert
 
     " Set correct path for taglist plugin
-    "let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+    let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
     " Make the window slightly transparent
     "set transparency=4
