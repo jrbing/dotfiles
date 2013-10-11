@@ -106,7 +106,9 @@ fi
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
   # SSH Session
   PS1="\[$BLUE\]☁ \[$BASE0\] \W\[$ORANGE\] ❯ \[$RESET\]"
-  stty sane
+  if [[ -t 0 ]]; then   # Only run if stdin is a terminal
+    stty sane
+  fi
 else
   # Local Session
   PS1="\[$BASE0\]\W\[$BASE0\]\[$ORANGE\] ❯ \[$RESET\]"
