@@ -82,6 +82,8 @@ var oneQuarterRight = slate.operation("move", {
   "height": "screenSizeY"
 });
 
+var switchWindow = slate.operationFromString("switch");
+
 // Bindings
 
 slate.bind("left:ctrl;cmd;alt", pushLeft);
@@ -99,5 +101,6 @@ slate.bind("right:ctrl;shift;alt", bottomRight);
 slate.bind("up:ctrl;shift;alt", topRight);
 slate.bind("down:ctrl;shift;alt", bottomLeft);
 
+//slate.bind("tab:alt", switchWindow);
 //slate.bind("esc:cmd" : S.op("hint"));
 //slate.bind("esc:ctrl" : S.op("grid"));
