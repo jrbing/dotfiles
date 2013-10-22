@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # Usage: valet scan [--full] [host_or_ip_or_wildcard ...]
-# Summary: Cleanup temporary files
+# Summary: Scan machine or subnet using nmap
 # Help: Port-scan one machine or everything on the current subnet
 # Scans your subnet(s) using nmap, displaying results in a pretty format. If *
 # appears at the end of the line, that IP is currently bound to this machine.
