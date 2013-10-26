@@ -17,8 +17,9 @@ case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
     if hash brew 2>/dev/null; then
-      echoinfo 'Updating OSX' && sudo softwareupdate -i -a
-      echoinfo 'Updating homebrew repo' &&  brew update
+      #(sudo softwareupdate -i -a) &
+      #echoinfo 'Updating OSX' && spinner $!
+      echoinfo 'Updating homebrew repo' && brew update
       echoinfo 'Outdated packages' && brew outdated
       echoinfo 'Upgrading packages' && brew upgrade
       echoinfo 'Cleaning up' && brew cleanup
@@ -38,6 +39,8 @@ case $(uname) in
   ;;
   (SunOS)
     # TODO: add opencsw and pkgutil
+    echoinfo 'Updating packages'
+    sudo pkgin update && sudo pkgin upgrade -y
   ;;
 esac
 

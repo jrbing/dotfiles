@@ -12,5 +12,5 @@ source $DOTFILES/share/lib/bash-functions.sh
 #
 # Pull down updates to dotfiles from Github
 #
-echoinfo 'Updating dotfiles from Github'
+echoinfo 'Updating dotfiles'
 cd $DOTFILES && git pull origin master && git submodule update --init --recursive
