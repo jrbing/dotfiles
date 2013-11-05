@@ -2,7 +2,6 @@
 # Settings specific to OSX
 
 export JAVA_HOME=$(/usr/libexec/java_home)
-#export EDITOR='mvim'
 export EDITOR='vim'
 export VISUAL='mvim -f'
 #export LC_CTYPE="utf-8"
