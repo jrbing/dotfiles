@@ -12,4 +12,4 @@ what you like.
 2. Create symlinks
     * cd ~/.dotfiles
     * thor dotfiles:setup
-3. [Abide](http://billgreenstudios.com/wp/wp-content/uploads/wpsc/product_images/5508_Abide_600t-2.jpg)
+3. [Abide](http://en.wikipedia.org/wiki/The_Big_Lebowski)
