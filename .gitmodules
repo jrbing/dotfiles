@@ -254,3 +254,6 @@
   path = vim/bundle/airline
   url = git://github.com/bling/vim-airline.git
   ignore = dirty
+[submodule "vim/bundle/gist"]
+	path = vim/bundle/gist
+	url = git://github.com/mattn/gist-vim.git
