@@ -23,7 +23,6 @@ esac
 #
 # Variables
 #
-
 export EDITOR=vim
 
 #
@@ -118,13 +117,11 @@ fi
 #
 # Valet
 #
-
 eval "$($HOME/.dotfiles/bin/valet init -)"
 
 #
 # Additional Tools
 #
-
 export PATH=$PATH:$DOTFILES/bin                                                               # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle                                                           # SQL script path for sqlplus
 [[ -d "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)" # RBENV
@@ -132,7 +129,6 @@ export SQLPATH=$DOTFILES/sql/oracle                                             
 #
 # Local system specific settings
 #
-
 if [[ -f $HOME/.localrc ]]; then
   source $HOME/.localrc
 fi
