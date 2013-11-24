@@ -837,8 +837,9 @@ if has ('gui_running')
     "set guifont=Meslo\ LG\ M\ DZ:h12.00
     "set guifont=Inconsolata:h14.00
     "set guifont=Inconsolata-dz:h12.00
-    set guifont=Inconsolata-dz\ for\ Powerline:h12
     "set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+    "set guifont=Inconsolata\ XL:h12,Inconsolata:h12,Monaco:h12
+    set guifont=Inconsolata-dz\ for\ Powerline:h12
 
     " Set history file for YankRing
     let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
