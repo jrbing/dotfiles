@@ -2,9 +2,14 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Source Prezto.
+# Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Source bd
+if [[ -s "${DOTFILES}/zsh/bd/bd.zsh" ]]; then
+  source "${DOTFILES}/zsh/bd/bd.zsh"
 fi
 
 #

@@ -258,3 +258,7 @@
   path = vim/bundle/gist
   url = git://github.com/mattn/gist-vim.git
   ignore = dirty
+[submodule "zsh/bd"]
+  path = zsh/bd
+  url = git://github.com/Tarrasch/zsh-bd.git
+  ignore = dirty
