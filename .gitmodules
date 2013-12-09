@@ -262,3 +262,11 @@
   path = zsh/bd
   url = git://github.com/Tarrasch/zsh-bd.git
   ignore = dirty
+[submodule "vim/bundle/metarw"]
+  path = vim/bundle/metarw
+  url = git://github.com/kana/vim-metarw.git
+  ignore = dirty
+[submodule "vim/bundle/etcd"]
+  path = vim/bundle/etcd
+  url = git://github.com/mattn/vim-metarw-etcd.git
+  ignore = dirty
