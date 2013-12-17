@@ -24,6 +24,9 @@ case $(uname) in
       echoinfo 'Upgrading packages' && brew upgrade
       echoinfo 'Cleaning up' && brew cleanup
     fi
+    if hash rbenv 2>/dev/null; then
+      echoinfo 'Updating rbenv' && rbenv update
+    fi
   ;;
   (Linux)
     #local os=$(lsb_release -si)
