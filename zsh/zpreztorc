@@ -34,9 +34,9 @@ zstyle ':prezto:load' pmodule \
   'fasd' \
   'rsync' \
   'tmux' \
-  'history-substring-search' \
   'ruby' \
-  'git'
+  'git' \
+  'history-substring-search'
 
 #
 # Editor
