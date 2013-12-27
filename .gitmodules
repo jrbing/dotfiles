@@ -210,10 +210,6 @@
   path = vim/bundle/vim-yaml
   url = git://github.com/avakhov/vim-yaml.git
   ignore = dirty
-[submodule "vim/bundle/vim-notes"]
-  path = vim/bundle/vim-notes
-  url = git://github.com/xolox/vim-notes.git
-  ignore = dirty
 [submodule "vim/bundle/vim-misc"]
   path = vim/bundle/vim-misc
   url = git://github.com/xolox/vim-misc.git
