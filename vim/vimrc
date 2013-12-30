@@ -744,6 +744,19 @@ RUBY
 
   endfunction
 
+  "Toggle Verbose Mode
+  function! ToggleVerbose()
+    if !&verbose
+        set verbosefile=~/.log/vim/verbose.log
+        set verbose=15
+    else
+        set verbose=0
+        set verbosefile=
+    endif
+  endfunction
+
+  command! ToggleVerbose :call ToggleVerbose()
+
 " }}}
 
 " Platform Specific Settings {{{1
