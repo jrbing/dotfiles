@@ -364,6 +364,8 @@
   let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
   let NERDTreeMinimalUI=1           "Minimal UI elements
   let NERDTreeDirArrows=1           "Use arrows for directory folding
+
+  " NERDTree Tabs
   "let g:nerdtree_tabs_focus_on_files = 0
   let g:nerdtree_tabs_smart_startup_focus = 1
 
@@ -379,8 +381,9 @@
   let g:syntastic_enable_signs = 1
   let g:syntastic_disabled_filetypes = ['html']
   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
-  "let g:syntastic_ruby_exec = '~/.rvm/bin/ruby'
   let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
+  let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
+  let g:syntastic_java_javac_config_file_enabled = 1
 
   " Fugitive
   nnoremap <leader>gd :Gdiff<cr>
@@ -410,17 +413,8 @@
   let g:sqlutil_keyword_case = '\L'
 
   " DBExt
-  :let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
-  :let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
-
-  " VIM-Notes
-  "let g:notes_directories = ['~/Sync/notes']
-  "let g:notes_suffix = '.txt'
-  let g:notes_suffix = '.md'
-  let g:notes_title_sync = 'no'
-  let g:notes_tab_indents = 0
-  let g:notes_alt_indents = 0
-  ":let g:notes_markdown_program
+  let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
+  let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
 
   " The Silver Searcher
   if executable('ag')
