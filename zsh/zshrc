@@ -56,7 +56,3 @@ any() {
     ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
   fi
 }
-
-# Temporary fix for history-substring-search not working
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
