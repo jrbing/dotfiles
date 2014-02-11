@@ -1,6 +1,7 @@
 tap homebrew/dupes
 tap homebrew/science
 tap phinze/cask
+tap thoughtbot/formulae
 
 install ack
 install aria2
