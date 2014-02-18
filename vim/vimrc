@@ -34,7 +34,7 @@
   set cpoptions+=J
   set list
   set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
-  set shell=/bin/zsh
+  set shell=/bin/bash
   set lazyredraw
   set matchtime=3
   set showbreak=↪
@@ -42,7 +42,6 @@
   set splitright
   set fillchars=diff:⣿
   set ttimeout
-  "set ttimeoutlen 50
   set notimeout
   set nottimeout
   set autowrite
@@ -127,6 +126,7 @@
 
 " Display Settings {{{1
 
+  " Use solarized dark by default
   set background=dark
   let g:solarized_visibility = "normal"
   let g:solarized_contrast = "normal"
@@ -301,7 +301,7 @@
     au!
     au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap}    setlocal ft=ruby
   augroup END
-  autocmd FileType ruby let b:dispatch = '~/.rvm/bin/ruby %'
+  autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
 
   " Markdown
   augroup ft_markdown
@@ -328,7 +328,7 @@
   augroup END
 
   " TaskPaper
-  augroup vimrc_taskpaper
+  augroup ft_taskpaper
     au!
     au BufRead,BufNewFile *.taskpaper    setlocal autoread nolist textwidth=0 wrapmargin=0
   augroup END
