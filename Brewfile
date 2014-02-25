@@ -16,4 +16,5 @@ install tree
 install optipng
 install ssh-copy-id
 install packer
-install htop-osx
+install htop
+install direnv
