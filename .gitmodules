@@ -234,10 +234,6 @@
   path = vim/bundle/neocomplcache
   url = git://github.com/Shougo/neocomplcache.vim.git
   ignore = dirty
-[submodule "vim/bundle/vim-golang"]
-  path = vim/bundle/vim-golang
-  url = https://github.com/jnwhiteh/vim-golang.git
-  ignore = dirty
 [submodule "vim/bundle/gocode"]
   path = vim/bundle/gocode
   url = https://github.com/Blackrush/vim-gocode.git
