@@ -358,6 +358,8 @@
   let g:SuperTabMappingForward = '<Plug>supertabKey' " Avoid key conflict:
   let g:xptemplate_fallback = '<Plug>supertabKey'    " If nothing matched in xpt, try supertab
   let g:xptemplate_key = '<Tab>'                     " xpt uses <Tab> as trigger key
+  let g:xptemplate_vars="$author=JR Bing"
+  let g:xptemplate_vars="$email=jr@jrbing.com"
 
   " CtrlP configuration
   noremap <silent> <A-t> :CtrlP<CR>
