@@ -46,6 +46,12 @@ class Dotfiles < Thor
     #end
   end
 
+  desc "link_launchd", "Link launchd plist files"
+  def link_launchd
+    # Link pbcopy launch agent
+    run %{ ln -nfs "$HOME/.dotfiles/launchd/pbcopy.plist" "$HOME/Library/LaunchAgents/pbcopy.plist" }
+  end
+
   desc "setup", "Create all symlinks and copy sample files"
   def setup
     invoke :link_shell

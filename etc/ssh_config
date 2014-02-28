@@ -5,6 +5,7 @@ ServerAliveCountMax=6
 StrictHostKeyChecking=no
 Compression=yes
 ForwardAgent=yes
+RemoteForward 2224 127.0.0.1:2224
 
 ControlMaster auto
 ControlPath /tmp/%r@%h:%p
