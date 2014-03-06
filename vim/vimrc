@@ -5,13 +5,93 @@
 "   Pope, and Janus
 " -------------------------------------------------------------------------
 
-" Foreward {{{1
+" Bundles {{{1
 
-  source $HOME/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
-  filetype off
-  execute pathogen#infect()
-  filetype plugin indent on
+  "source $HOME/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
   set nocompatible
+  filetype off
+  "execute pathogen#infect()
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+
+  " let Vundle manage Vundle, required
+  Bundle 'gmarik/vundle'
+
+  " The following are examples of different formats supported.
+  " Keep bundle commands between here and filetype plugin indent on.
+  " scripts on GitHub repos
+  Bundle 'mileszs/ack.vim'
+
+  Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-git'
+  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-markdown'
+  Bundle 'tpope/vim-unimpaired'
+  Bundle 'tpope/vim-rails'
+  Bundle 'tpope/vim-eunuch'
+  Bundle 'tpope/vim-obsession'
+  Bundle 'tpope/vim-endwise'
+  Bundle 'tpope/vim-dispatch'
+  Bundle 'tpope/vim-rbenv'
+
+  Bundle 'michaeljsmith/vim-indent-object'
+  Bundle 'ervandew/supertab'
+
+  Bundle 'vim-scripts/VOoM'
+  Bundle 'vim-scripts/ZoomWin'
+  Bundle 'vim-scripts/YankRing.vim'
+  Bundle 'vim-scripts/SQLUtilities'
+
+  Bundle 'scrooloose/nerdtree'
+  Bundle 'scrooloose/nerdcommenter'
+  Bundle 'jistr/vim-nerdtree-tabs'
+  Bundle 'EvanDotPro/nerdtree-chmod'
+
+  Bundle 'scrooloose/syntastic'
+  Bundle 'sjl/gundo.vim'
+  Bundle 'kien/ctrlp.vim'
+  Bundle 'sjl/vitality.vim'
+  Bundle 'Lokaltog/vim-easymotion'
+  Bundle 'majutsushi/tagbar'
+  Bundle 'rgarver/Kwbd.vim'
+  Bundle 'mattn/webapi-vim'
+
+  Bundle 'altercation/vim-colors-solarized'
+  Bundle 'vim-scripts/pyte'
+  Bundle 'larssmit/vim-getafe'
+  Bundle 'vim-scripts/mayansmoke'
+  Bundle 'chriskempson/base16-vim'
+
+  Bundle 'Blackrush/vim-gocode'
+  Bundle 'davidoc/taskpaper.vim'
+  Bundle 'vim-ruby/vim-ruby'
+  Bundle 'kchmck/vim-coffee-script'
+  "Bundle 'groenewege/vim-less'
+  Bundle 'pangloss/vim-javascript'
+  Bundle 'vim-scripts/plsql.vim-syntax'
+  Bundle 'juvenn/mustache.vim'
+  "Bundle 'vim-scripts/pig.vim'
+  "Bundle 'avakhov/vim-yaml'
+
+  Bundle 'vim-scripts/dbext.vim'
+  Bundle 'vim-scripts/scratch.vim'
+  Bundle 'godlygeek/tabular'
+  Bundle 'vim-scripts/Align'
+  "Bundle 'sunaku/vim-ruby-minitest'
+  Bundle 'tomtom/tlib_vim'
+  Bundle 'MarcWeber/vim-addon-mw-utils'
+  Bundle 'terryma/vim-multiple-cursors'
+  Bundle 'xolox/vim-misc'
+  Bundle 'bling/vim-airline'
+  Bundle 'mattn/gist-vim'
+  Bundle 'kana/vim-metarw'
+  Bundle 'mattn/vim-metarw-etcd'
+
+  Bundle 'Shougo/neocomplcache.vim'
+  Bundle 'vim-scripts/xptemplate'
+
+  filetype plugin indent on
+  "set nocompatible
   let mapleader = ","
 
 " }}}
