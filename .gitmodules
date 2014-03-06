@@ -262,3 +262,6 @@
   path = vim/bundle/etcd
   url = git://github.com/mattn/vim-metarw-etcd.git
   ignore = dirty
+[submodule "vim/bundle/vundle"]
+	path = vim/bundle/vundle
+	url = git://github.com/gmarik/vundle.git

@@ -1,0 +1,4 @@
+# Ignore everything except vundle
+*
+!.gitignore
+!vundle
