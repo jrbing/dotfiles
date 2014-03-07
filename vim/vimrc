@@ -7,21 +7,33 @@
 
 " Bundles {{{1
 
-  "source $HOME/.dotfiles/vim/bundle/pathogen/autoload/pathogen.vim
   set nocompatible
   filetype off
-  "execute pathogen#infect()
   set rtp+=~/.vim/bundle/vundle/
   call vundle#rc()
 
-  " let Vundle manage Vundle, required
+  " Vundle
   Bundle 'gmarik/vundle'
 
-  " The following are examples of different formats supported.
-  " Keep bundle commands between here and filetype plugin indent on.
-  " scripts on GitHub repos
+  " Utilities
+  Bundle 'artnez/vim-wipeout'
+  Bundle 'bling/vim-airline'
+  Bundle 'godlygeek/tabular'
+  Bundle 'kana/vim-metarw'
+  Bundle 'kien/ctrlp.vim'
+  Bundle 'Lokaltog/vim-easymotion'
+  Bundle 'majutsushi/tagbar'
+  Bundle 'mattn/webapi-vim'
+  Bundle 'mattn/gist-vim'
+  Bundle 'mattn/vim-metarw-etcd'
   Bundle 'mileszs/ack.vim'
-
+  Bundle 'michaeljsmith/vim-indent-object'
+  Bundle 'rgarver/Kwbd.vim'
+  Bundle 'scrooloose/syntastic'
+  Bundle 'sjl/gundo.vim'
+  Bundle 'sjl/vitality.vim'
+  Bundle 'terryma/vim-multiple-cursors'
+  Bundle 'tomtom/tlib_vim'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-surround'
@@ -33,65 +45,46 @@
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-dispatch'
   Bundle 'tpope/vim-rbenv'
-
-  Bundle 'michaeljsmith/vim-indent-object'
-  Bundle 'ervandew/supertab'
-
+  Bundle 'tpope/vim-sleuth'
+  Bundle 'tpope/vim-classpath'
   Bundle 'vim-scripts/VOoM'
   Bundle 'vim-scripts/ZoomWin'
   Bundle 'vim-scripts/YankRing.vim'
   Bundle 'vim-scripts/SQLUtilities'
+  Bundle 'vim-scripts/dbext.vim'
+  Bundle 'vim-scripts/scratch.vim'
+  Bundle 'vim-scripts/Align'
+  "Bundle 'MarcWeber/vim-addon-mw-utils'
+  "Bundle 'xolox/vim-misc'
 
+  " Nerdtree
   Bundle 'scrooloose/nerdtree'
   Bundle 'scrooloose/nerdcommenter'
   Bundle 'jistr/vim-nerdtree-tabs'
   Bundle 'EvanDotPro/nerdtree-chmod'
 
-  Bundle 'scrooloose/syntastic'
-  Bundle 'sjl/gundo.vim'
-  Bundle 'kien/ctrlp.vim'
-  Bundle 'sjl/vitality.vim'
-  Bundle 'Lokaltog/vim-easymotion'
-  Bundle 'majutsushi/tagbar'
-  Bundle 'rgarver/Kwbd.vim'
-  Bundle 'mattn/webapi-vim'
-
+  " Colorschemes
   Bundle 'altercation/vim-colors-solarized'
-  Bundle 'vim-scripts/pyte'
-  Bundle 'larssmit/vim-getafe'
-  Bundle 'vim-scripts/mayansmoke'
   Bundle 'chriskempson/base16-vim'
+  "Bundle 'vim-scripts/pyte'
+  "Bundle 'larssmit/vim-getafe'
+  "Bundle 'vim-scripts/mayansmoke'
 
+  " Filetypes
+  Bundle 'vim-ruby/vim-ruby'
   Bundle 'Blackrush/vim-gocode'
   Bundle 'davidoc/taskpaper.vim'
-  Bundle 'vim-ruby/vim-ruby'
   Bundle 'kchmck/vim-coffee-script'
-  "Bundle 'groenewege/vim-less'
   Bundle 'pangloss/vim-javascript'
   Bundle 'vim-scripts/plsql.vim-syntax'
   Bundle 'juvenn/mustache.vim'
-  "Bundle 'vim-scripts/pig.vim'
-  "Bundle 'avakhov/vim-yaml'
 
-  Bundle 'vim-scripts/dbext.vim'
-  Bundle 'vim-scripts/scratch.vim'
-  Bundle 'godlygeek/tabular'
-  Bundle 'vim-scripts/Align'
-  "Bundle 'sunaku/vim-ruby-minitest'
-  Bundle 'tomtom/tlib_vim'
-  Bundle 'MarcWeber/vim-addon-mw-utils'
-  Bundle 'terryma/vim-multiple-cursors'
-  Bundle 'xolox/vim-misc'
-  Bundle 'bling/vim-airline'
-  Bundle 'mattn/gist-vim'
-  Bundle 'kana/vim-metarw'
-  Bundle 'mattn/vim-metarw-etcd'
-
-  Bundle 'Shougo/neocomplcache.vim'
+  " Completion
+  Bundle 'ervandew/supertab'
   Bundle 'vim-scripts/xptemplate'
+  "Bundle 'Shougo/neocomplcache.vim'
 
   filetype plugin indent on
-  "set nocompatible
   let mapleader = ","
 
 " }}}
@@ -206,7 +199,7 @@
 
 " Display Settings {{{1
 
-  " Use solarized dark by default
+  " Use Solarized dark by default
   set background=dark
   let g:solarized_visibility = "normal"
   let g:solarized_contrast = "normal"
@@ -514,100 +507,6 @@
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   endif
-
-  "
-  " Neocomplcache
-  "
-    " Disable AutoComplPop.
-    "let g:acp_enableAtStartup = 0
-    " Use neocomplcache.
-    "let g:neocomplcache_enable_at_startup = 1
-
-    " Use smartcase.
-    "let g:neocomplcache_enable_smart_case = 1
-
-    " Set minimum syntax keyword length.
-    "let g:neocomplcache_min_syntax_length = 3
-    "let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-    " Enable heavy features.
-    " Use camel case completion.
-    "let g:neocomplcache_enable_camel_case_completion = 1
-    " Use underbar completion.
-    "let g:neocomplcache_enable_underbar_completion = 1
-
-    " Define dictionary.
-    "let g:neocomplcache_dictionary_filetype_lists = {
-        "\ 'default' : '',
-        "\ 'vimshell' : $HOME.'/.vimshell_hist',
-        "\ 'scheme' : $HOME.'/.gosh_completions'
-            "\ }
-
-    " Define keyword.
-    "if !exists('g:neocomplcache_keyword_patterns')
-        "let g:neocomplcache_keyword_patterns = {}
-    "endif
-    "let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-    " Plugin key-mappings.
-    "inoremap <expr><C-g>     neocomplcache#undo_completion()
-    "inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    "inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    "function! s:my_cr_function()
-      "return neocomplcache#smart_close_popup() . "\<CR>"
-      " For no inserting <CR> key.
-      "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-    "endfunction
-    " <TAB>: completion.
-    "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    "inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-    "inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-    "inoremap <expr><C-y>  neocomplcache#close_popup()
-    "inoremap <expr><C-e>  neocomplcache#cancel_popup()
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-
-    " For cursor moving in insert mode(Not recommended)
-    "inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-    "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-    "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
-    "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
-    " Or set this.
-    "let g:neocomplcache_enable_cursor_hold_i = 1
-    " Or set this.
-    "let g:neocomplcache_enable_insert_char_pre = 1
-
-    " AutoComplPop like behavior.
-    "let g:neocomplcache_enable_auto_select = 1
-
-    " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplcache_enable_auto_select = 1
-    "let g:neocomplcache_disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-    " Enable omni completion.
-    "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-    " Enable heavy omni completion.
-    "if !exists('g:neocomplcache_omni_patterns')
-      "let g:neocomplcache_omni_patterns = {}
-    "endif
-    "let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    "let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    "let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    "let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " }}}
 
