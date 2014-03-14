@@ -28,7 +28,6 @@
   Bundle 'mattn/vim-metarw-etcd'
   Bundle 'mileszs/ack.vim'
   Bundle 'michaeljsmith/vim-indent-object'
-  Bundle 'rgarver/Kwbd.vim'
   Bundle 'scrooloose/syntastic'
   Bundle 'sjl/gundo.vim'
   Bundle 'sjl/vitality.vim'
@@ -42,7 +41,6 @@
   Bundle 'tpope/vim-rails'
   Bundle 'tpope/vim-eunuch'
   Bundle 'tpope/vim-obsession'
-  Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-dispatch'
   Bundle 'tpope/vim-rbenv'
   Bundle 'tpope/vim-sleuth'
@@ -54,8 +52,8 @@
   Bundle 'vim-scripts/dbext.vim'
   Bundle 'vim-scripts/scratch.vim'
   Bundle 'vim-scripts/Align'
-  "Bundle 'MarcWeber/vim-addon-mw-utils'
-  "Bundle 'xolox/vim-misc'
+  Bundle 'spf13/vim-preview'
+  Bundle 'spf13/vim-autoclose'
 
   " Nerdtree
   Bundle 'scrooloose/nerdtree'
@@ -66,9 +64,6 @@
   " Colorschemes
   Bundle 'altercation/vim-colors-solarized'
   Bundle 'chriskempson/base16-vim'
-  "Bundle 'vim-scripts/pyte'
-  "Bundle 'larssmit/vim-getafe'
-  "Bundle 'vim-scripts/mayansmoke'
 
   " Filetypes
   Bundle 'vim-ruby/vim-ruby'
@@ -80,12 +75,14 @@
   Bundle 'juvenn/mustache.vim'
 
   " Completion
-  Bundle 'ervandew/supertab'
-  Bundle 'vim-scripts/xptemplate'
-  "Bundle 'Shougo/neocomplcache.vim'
+  Bundle 'Shougo/neocomplcache'
+  Bundle 'Shougo/neosnippet'
+  Bundle 'Shougo/neosnippet-snippets'
+  Bundle 'honza/vim-snippets'
 
   filetype plugin indent on
   let mapleader = ","
+  let maplocalleader = '_'
 
 " }}}
 
@@ -170,7 +167,7 @@
 
 " }}}
 
-" Version Specific Settings {{{2
+" Version specific {{{2
 
   if v:version >= 730
     set norelativenumber
@@ -183,7 +180,7 @@
 " }}}
 
 
-" Visual Mode */# from Scrooloose {{{2
+" Visual mode {{{2
 
   function! s:VSetSearch()
     let temp = @@
@@ -197,7 +194,7 @@
 
 " }}}
 
-" Display Settings {{{1
+" Display {{{1
 
   " Use Solarized dark by default
   set background=dark
@@ -251,7 +248,7 @@
 
 " }}}
 
-" Searching {{{1
+" Search {{{1
 
   " Use sane regexes.
   nnoremap / /\v
@@ -279,7 +276,7 @@
 
 " }}}
 
-" Key Mappings {{{1
+" Key mapping {{{1
 
   " Bubble single lines
   nmap <C-Up> [e
@@ -298,11 +295,15 @@
   nnoremap ; :
   vnoremap ; :
 
+  " Visual shifting (does not exit Visual mode)
+  vnoremap < <gv
+  vnoremap > >gv
+
   " Map Ctrl+h,j,k,l to easily move around splits
-  nnoremap <C-h> <C-w>h
-  nnoremap <C-j> <C-w>j
-  nnoremap <C-k> <C-w>k
-  nnoremap <C-l> <C-w>l
+  nnoremap <C-J> <C-W>j<C-W>_
+  nnoremap <C-K> <C-W>k<C-W>_
+  nnoremap <C-L> <C-W>l<C-W>_
+  nnoremap <C-H> <C-W>h<C-W>_
 
   " Opens an edit command with the path of the currently edited file filled in
   " Normal mode: <Leader>e
@@ -348,7 +349,7 @@
 
 " }}}
 
-" Filetype Autocommands {{{1
+" Filetype autocommands {{{1
 
   augroup filetype_handling
     au!
@@ -411,102 +412,206 @@
 
 " }}}
 
-" Plugin Settings {{{1
+" Plugin configuration/mapping {{{1
 
-  " Coffeescript
-  let coffee_compile_vert = 1
-  let coffee_watch_vert = 1
+  " SnipMate {{{2
+    let g:snips_author = 'JR Bing <jr@jrbing.com>'
+  "}}}
 
-  " Airline
-  "let g:airline#extensions#tabline#enabled = 1
-  let g:airline_powerline_fonts = 1
+  " Coffeescript {{{2
+    let coffee_compile_vert = 1
+    let coffee_watch_vert = 1
+  "}}}
 
-  " Ruby-vim
-  let g:rubycomplete_buffer_loading = 1
-  let g:rubycomplete_classes_in_global = 1
-  let ruby_operators = 1
-  let ruby_space_errors = 1
+  " Airline {{{2
+    "let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+  "}}}
 
-  " XPTemplates
-  let g:SuperTabMappingForward = '<Plug>supertabKey' " Avoid key conflict:
-  let g:xptemplate_fallback = '<Plug>supertabKey'    " If nothing matched in xpt, try supertab
-  let g:xptemplate_key = '<Tab>'                     " xpt uses <Tab> as trigger key
-  let g:xptemplate_vars="$author=JR Bing"
-  let g:xptemplate_vars="$email=jr@jrbing.com"
+  " Ruby-vim {{{2
+    let g:rubycomplete_buffer_loading = 1
+    let g:rubycomplete_classes_in_global = 1
+    let ruby_operators = 1
+    let ruby_space_errors = 1
+  "}}}
 
-  " CtrlP configuration
-  noremap <silent> <A-t> :CtrlP<CR>
+  " CtrlP {{{2
+    noremap <silent> <A-t> :CtrlP<CR>
+  "}}}
 
-  " NERDTree configuration
-  map <Leader>n <plug>NERDTreeTabsToggle<CR>
-  let NERDTreeIgnore=['\.rbc$', '\~$']
-  let NERDChristmasTree=1           "Makes NERDTree use colors
-  let NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
-  let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
-  let NERDTreeMinimalUI=1           "Minimal UI elements
-  let NERDTreeDirArrows=1           "Use arrows for directory folding
+  " NERDTree {{{2
+    map <Leader>n <plug>NERDTreeTabsToggle<CR>
+    let NERDTreeIgnore=['\.rbc$', '\~$']
+    let NERDChristmasTree=1           "Makes NERDTree use colors
+    let NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
+    let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
+    let NERDTreeMinimalUI=1           "Minimal UI elements
+    let NERDTreeDirArrows=1           "Use arrows for directory folding
+  "}}}
 
-  " NERDTree Tabs
-  "let g:nerdtree_tabs_focus_on_files = 0
-  let g:nerdtree_tabs_smart_startup_focus = 1
+  " NERDTree Tabs {{{2
+    "let g:nerdtree_tabs_focus_on_files = 0
+    let g:nerdtree_tabs_smart_startup_focus = 1
+  "}}}
 
-  " ZoomWin configuration
-  map <Leader><Leader> :ZoomWin<CR>
-  set noequalalways
+  " ZoomWin {{{2
+    map <Leader><Leader> :ZoomWin<CR>
+    set noequalalways
+  "}}}
 
-  " Tagbar
-  map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-  nnoremap <silent> <F7> :TagbarToggle<CR>
+  " Tagbar {{{2
+    map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+    nnoremap <silent> <F7> :TagbarToggle<CR>
+  "}}}
 
-  " Syntastic
-  let g:syntastic_enable_signs = 1
-  let g:syntastic_disabled_filetypes = ['html']
-  let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
-  let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
-  let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
-  let g:syntastic_java_javac_config_file_enabled = 1
+  " Syntastic {{{2
+    let g:syntastic_enable_signs = 1
+    let g:syntastic_disabled_filetypes = ['html']
+    let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
+    let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
+    let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
+    let g:syntastic_java_javac_config_file_enabled = 1
+  "}}}
 
-  " Fugitive
-  nnoremap <leader>gd :Gdiff<cr>
-  nnoremap <leader>gs :Gstatus<cr>
-  nnoremap <leader>gw :Gwrite<cr>
-  nnoremap <leader>gb :Gblame<cr>
-  nnoremap <leader>gco :Gcheckout<cr>
-  nnoremap <leader>gci :Gcommit<cr>
-  nnoremap <leader>gm :Gmove<cr>
-  nnoremap <leader>gr :Gremove<cr>
-  nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+  " Fugitive {{{2
+    nnoremap <leader>gd :Gdiff<cr>
+    nnoremap <leader>gs :Gstatus<cr>
+    nnoremap <leader>gw :Gwrite<cr>
+    nnoremap <leader>gb :Gblame<cr>
+    nnoremap <leader>gco :Gcheckout<cr>
+    nnoremap <leader>gci :Gcommit<cr>
+    nnoremap <leader>gm :Gmove<cr>
+    nnoremap <leader>gr :Gremove<cr>
+    nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 
-  augroup ft_fugitive
-    au!
-    au BufNewFile,BufRead .git/index setlocal nolist
-  augroup END
+    augroup ft_fugitive
+      au!
+      au BufNewFile,BufRead .git/index setlocal nolist
+    augroup END
+  "}}}
 
-  " YankRing
-  nnoremap <silent> <F4> :YRShow<cr>
-  let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
+  " YankRing {{{2
+    nnoremap <silent> <F4> :YRShow<cr>
+    let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
+  "}}}
 
-  " TaskPaper
-  let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
+  " TaskPaper {{{2
+    let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
+  "}}}
 
-  " SQLUtilities
-  let g:sqlutil_align_comma = 1
-  let g:sqlutil_keyword_case = '\L'
+  " SQLUtilities {{{2
+    let g:sqlutil_align_comma = 1
+    let g:sqlutil_keyword_case = '\L'
+  "}}}
 
-  " DBExt
-  let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
-  let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
+  " DBExt {{{2
+    let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
+    let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
+  "}}}
 
-  " The Silver Searcher
-  if executable('ag')
-    let g:ackprg = 'ag --nogroup --column'
+  " Ack {{{2
+    if executable('ag')
+      let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+      "let g:ackprg = 'ag --nogroup --column'
 
-    " Use Ag over Grep
-    set grepprg=ag\ --nogroup\ --nocolor
+      " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+      let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  endif
+    endif
+  "}}}
+
+
+  " Neocomplcache {{{2
+    if has("autocmd") && exists("+omnifunc")
+        autocmd Filetype *
+            \if &omnifunc == "" |
+            \setlocal omnifunc=syntaxcomplete#Complete |
+            \endif
+    endif
+
+    hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+    hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+    hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+    " Automatically open and close the popup menu / preview window
+    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    set completeopt=menu,preview,longest
+
+    " Neocomplcache settings
+    let g:acp_enableAtStartup = 0
+    let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_smart_case = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+    let g:neocomplcache_enable_auto_delimiter = 1
+    let g:neocomplcache_max_list = 15
+    let g:neocomplcache_force_overwrite_completefunc = 1
+
+    " Define dictionary.
+    let g:neocomplcache_dictionary_filetype_lists = {
+                \ 'default' : '',
+                \ 'vimshell' : $HOME.'/.vimshell_hist',
+                \ 'scheme' : $HOME.'/.gosh_completions'
+                \ }
+
+    " Define keyword.
+    let g:neocomplcache_keyword_patterns = {}
+    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+
+    " Plugin key-mappings {
+    " These two lines conflict with the default digraph mapping of <C-K>
+    imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+
+    " <ESC> takes you out of insert mode
+    inoremap <expr> <Esc>   pumvisible() ? "\<C-y>\<Esc>" : "\<Esc>"
+
+    " <CR> accepts first, then sends the <CR>
+    inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+
+    " <Down> and <Up> cycle like <Tab> and <S-Tab>
+    inoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+    inoremap <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
+
+    " Jump up and down the list
+    inoremap <expr> <C-d>   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+    inoremap <expr> <C-u>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+    " <TAB>: completion.
+    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+    " Enable heavy omni completion.
+    "let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    "let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    "let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    "let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+    "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+
+    " Use honza's snippets.
+    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+    " Enable neosnippet snipmate compatibility mode
+    let g:neosnippet#enable_snipmate_compatibility = 1
+
+    " For snippet_complete marker.
+    if has('conceal')
+      set conceallevel=2 concealcursor=i
+    endif
+
+    " Disable the neosnippet preview candidate window
+    set completeopt-=preview
+
+  " }}}
 
 " }}}
 
@@ -552,46 +657,46 @@
   endfunction
 
   func! <sid>CycleTabpages(forw)
-      if a:forw
-          normal! gt
+    if a:forw
+      normal! gt
+    else
+      normal! gT
+    endif
+    while 1
+      redraw
+      echo "Cycle Tab pages (Shift-Tab/Tab)"
+      let c = s:Getchar()
+      if c == "\t"
+        normal! gt
+      elseif c == "\<S-Tab>"
+        normal! gT
       else
-          normal! gT
+        exe "norm! :\<C-U>"
+        call feedkeys(c)
+        break
       endif
-      while 1
-          redraw
-          echo "Cycle Tab pages (Shift-Tab/Tab)"
-          let c = s:Getchar()
-          if c == "\t"
-              normal! gt
-          elseif c == "\<S-Tab>"
-              normal! gT
-          else
-              exe "norm! :\<C-U>"
-              call feedkeys(c)
-              break
-          endif
-      endwhile
+    endwhile
   endfunc
 
   func! s:Getchar()
-      let c = getchar()
-      if c != 0
-          let c = nr2char(c)
-      endif
-      return c
+    let c = getchar()
+    if c != 0
+      let c = nr2char(c)
+    endif
+    return c
   endfunc
 
   " Trim trailing whitespace
   function! <SID>StripTrailingWhitespaces()
-      " Preparation: save last search, and cursor position.
-      let _s=@/
-      let l = line(".")
-      let c = col(".")
-      " Do the business:
-      %s/\s\+$//e
-      " Clean up: restore previous search history, and cursor position
-      let @/=_s
-      call cursor(l, c)
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
   endfunction
 
   " Utility functions to create file commands
@@ -946,7 +1051,7 @@ if !exists("autocommands_loaded")
 endif
 
 " Better Completion
-set completeopt=longest,menuone,preview
+"set completeopt=longest,menuone,preview
 
 " Sudo to write
 cmap w!! w !sudo tee % >/dev/null
