@@ -521,7 +521,7 @@
   "}}}
 
 
-  " Neocomplcache {{{2
+  " Neocomplcache / Neosnippet {{{2
     if has("autocmd") && exists("+omnifunc")
         autocmd Filetype *
             \if &omnifunc == "" |
@@ -537,7 +537,6 @@
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
     set completeopt=menu,preview,longest
 
-    " Neocomplcache settings
     let g:acp_enableAtStartup = 0
     let g:neocomplcache_enable_at_startup = 1
     let g:neocomplcache_enable_camel_case_completion = 1
@@ -558,10 +557,23 @@
     let g:neocomplcache_keyword_patterns = {}
     let g:neocomplcache_keyword_patterns._ = '\h\w*'
 
-    " Plugin key-mappings {
-    " These two lines conflict with the default digraph mapping of <C-K>
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+
+    " For snippet_complete marker.
+    if has('conceal')
+      set conceallevel=2 concealcursor=i
+    endif
 
     " <ESC> takes you out of insert mode
     inoremap <expr> <Esc>   pumvisible() ? "\<C-y>\<Esc>" : "\<Esc>"
@@ -577,10 +589,6 @@
     inoremap <expr> <C-d>   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
     inoremap <expr> <C-u>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-    " <TAB>: completion.
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -591,10 +599,6 @@
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
     " Enable heavy omni completion.
-    "let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    "let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-    "let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    "let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
     "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
     " Use honza's snippets.
