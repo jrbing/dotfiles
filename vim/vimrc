@@ -882,7 +882,6 @@ if has ('gui_running')
   " Use a line-drawing char for pretty vertical splits.
   set fillchars+=vert:│
 
-
   " Macvim specific settings
   if has("gui_macvim")
 
