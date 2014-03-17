@@ -1,3 +1,4 @@
+" vim: set sw=2 ts=2 sts=2 et
 " Personal .vimrc file
 " JR Bing <jr@jrbing.com>
 " -------------------------------------------------------------------------
@@ -123,6 +124,9 @@
 
   " Don't try to highlight lines longer than 800 characters.
   set synmaxcol=800
+
+  " Abbrev. of messages (avoids 'hit enter')
+  set shortmess+=filmnrxoOtT
 
   " Set backup file location
   set backupdir=$HOME/.vim/tmp/backup// " backups
@@ -276,7 +280,7 @@
 
 " }}}
 
-" Key mapping {{{1
+" Key mappings {{{1
 
   " Bubble single lines
   nmap <C-Up> [e
@@ -1064,6 +1068,13 @@ cmap w!! w !sudo tee % >/dev/null
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+" Use local gvimrc if available and gui is running
+"if has('gui_running')
+  "if filereadable(expand("~/.gvimrc.local"))
+    "source ~/.gvimrc.local
+  "endif
+"endif
 
 " }}}
 
