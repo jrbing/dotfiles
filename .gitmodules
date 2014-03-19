@@ -22,3 +22,6 @@
 	path = vim/bundle/vundle
 	url = git://github.com/gmarik/vundle.git
   ignore = dirty
+[submodule "opt/resty"]
+	path = opt/resty
+	url = git://github.com/micha/resty.git
