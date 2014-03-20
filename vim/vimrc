@@ -74,6 +74,7 @@
   Bundle 'pangloss/vim-javascript'
   Bundle 'vim-scripts/plsql.vim-syntax'
   Bundle 'juvenn/mustache.vim'
+  Bundle 'vim-scripts/aspnetcs'
 
   " Completion
   Bundle 'Shougo/neocomplcache'
