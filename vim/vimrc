@@ -55,6 +55,7 @@
   Bundle 'vim-scripts/Align'
   Bundle 'spf13/vim-preview'
   Bundle 'spf13/vim-autoclose'
+  Bundle 'Chiel92/vim-autoformat'
 
   " Nerdtree
   Bundle 'scrooloose/nerdtree'
