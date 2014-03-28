@@ -2,7 +2,7 @@
 # Usage: valet update
 # Summary: Update dotfiles from github
 # Help: Use this command to pull down the most recent copy of
-# my dotfiles
+# my dotfiles, update submodules, and update vim plugins
 
 set -e
 
@@ -14,3 +14,9 @@ source $DOTFILES/share/lib/bash-functions.sh
 #
 echoinfo 'Updating dotfiles'
 cd $DOTFILES && git pull origin master && git submodule update --init --recursive
+
+#
+# Update vim plugins
+#
+echoinfo 'Updating vim plugins'
+vim +BundleUpdate +qall
