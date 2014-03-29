@@ -9,10 +9,6 @@ set -e
 # Source generic bash functions
 source $DOTFILES/share/lib/bash-functions.sh
 
-######################
-# OS Specific Settings
-######################
-
 case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
@@ -27,9 +23,11 @@ case $(uname) in
     if hash rbenv 2>/dev/null; then
       echoinfo 'Updating rbenv' && rbenv update
     fi
+    # Update vim plugins
+    echoinfo 'Updating vim plugins'
+    vim +BundleUpdate +qall
   ;;
   (Linux)
-    #local os=$(lsb_release -si)
     if hash yum 2>/dev/null; then
       echoinfo 'Updating packages'
       sudo yum upgrade -y
@@ -39,11 +37,19 @@ case $(uname) in
       echoinfo 'Updating packages'
       sudo aptitude upgrade -y
     fi
+
+    # Update vim plugins
+    echoinfo 'Updating vim plugins'
+    vim +BundleUpdate +qall
   ;;
   (SunOS)
     # TODO: add opencsw and pkgutil
     echoinfo 'Updating packages'
     sudo pkgin update && sudo pkgin upgrade -y
+
+    # Update vim plugins
+    echoinfo 'Updating vim plugins'
+    vim +BundleUpdate +qall
   ;;
 esac
 

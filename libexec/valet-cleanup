@@ -6,9 +6,20 @@
 # Set the script to exit immediately on error
 set -e
 
-#cd ~/.dotfiles
-#git clean -dfx
+case $(uname) in
+  (Darwin)
+    # Update homebrew (if installed) and upgrade packages
+    echoinfo 'Removing trash and temporary files'
+    sudo rm -rfv /Volumes/*/.Trashes
+    sudo rm -rfv ~/.Trash
+    sudo rm -rfv /private/var/log/asl/*.asl
+  ;;
+  (Linux)
+    # TODO
+  ;;
+  (SunOS)
+    # TODO
+  ;;
+esac
 
-sudo rm -rfv /Volumes/*/.Trashes
-sudo rm -rfv ~/.Trash
-sudo rm -rfv /private/var/log/asl/*.asl
+exit 0

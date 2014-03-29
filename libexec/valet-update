@@ -14,9 +14,3 @@ source $DOTFILES/share/lib/bash-functions.sh
 #
 echoinfo 'Updating dotfiles'
 cd $DOTFILES && git pull origin master && git submodule update --init --recursive
-
-#
-# Update vim plugins
-#
-echoinfo 'Updating vim plugins'
-vim +BundleUpdate +qall
