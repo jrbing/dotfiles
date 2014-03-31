@@ -6,6 +6,9 @@
 # Set the script to exit immediately on error
 set -e
 
+# Source generic bash functions
+source $DOTFILES/share/lib/bash-functions.sh
+
 case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
