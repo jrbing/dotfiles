@@ -28,12 +28,8 @@
   Bundle 'mattn/gist-vim'
   Bundle 'mattn/vim-metarw-etcd'
   Bundle 'mileszs/ack.vim'
-  Bundle 'michaeljsmith/vim-indent-object'
   Bundle 'scrooloose/syntastic'
-  Bundle 'sjl/gundo.vim'
-  Bundle 'sjl/vitality.vim'
   Bundle 'terryma/vim-multiple-cursors'
-  Bundle 'tomtom/tlib_vim'
   Bundle 'tpope/vim-fugitive'
   Bundle 'tpope/vim-git'
   Bundle 'tpope/vim-surround'
@@ -41,21 +37,25 @@
   Bundle 'tpope/vim-unimpaired'
   Bundle 'tpope/vim-rails'
   Bundle 'tpope/vim-eunuch'
-  Bundle 'tpope/vim-obsession'
   Bundle 'tpope/vim-dispatch'
   Bundle 'tpope/vim-rbenv'
   Bundle 'tpope/vim-sleuth'
   Bundle 'tpope/vim-classpath'
   Bundle 'vim-scripts/VOoM'
-  Bundle 'vim-scripts/ZoomWin'
   Bundle 'vim-scripts/YankRing.vim'
   Bundle 'vim-scripts/SQLUtilities'
   Bundle 'vim-scripts/dbext.vim'
   Bundle 'vim-scripts/scratch.vim'
   Bundle 'vim-scripts/Align'
-  Bundle 'spf13/vim-preview'
-  Bundle 'spf13/vim-autoclose'
+  Bundle 'greyblake/vim-preview'
   Bundle 'Chiel92/vim-autoformat'
+  "Bundle 'vim-scripts/ZoomWin'
+  "Bundle 'michaeljsmith/vim-indent-object'
+  "Bundle 'sjl/gundo.vim'
+  "Bundle 'sjl/vitality.vim'
+  "Bundle 'tomtom/tlib_vim'
+  "Bundle 'tpope/vim-obsession'
+  "Bundle 'spf13/vim-autoclose'
 
   " Nerdtree
   Bundle 'scrooloose/nerdtree'
@@ -69,13 +69,14 @@
 
   " Filetypes
   Bundle 'vim-ruby/vim-ruby'
-  Bundle 'Blackrush/vim-gocode'
   Bundle 'davidoc/taskpaper.vim'
   Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
   Bundle 'vim-scripts/plsql.vim-syntax'
   Bundle 'juvenn/mustache.vim'
   Bundle 'vim-scripts/aspnetcs'
+  Bundle 'fatih/vim-go.git'
+  "Bundle 'Blackrush/vim-gocode'
 
   " Completion
   Bundle 'Shougo/neocomplcache'
@@ -371,7 +372,7 @@
   autocmd FileType python let b:dispatch = 'python %'
 
   " Go
-  au FileType go  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent nolist
+  "au FileType go  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent nolist
 
   " JSON
   au BufNewFile,BufRead *.json set ft=javascript
@@ -467,33 +468,33 @@
 
   " Tagbar {{{2
     nnoremap <silent> <F8> :TagbarToggle<CR>
-    let g:tagbar_type_go = {
-        \ 'ctagstype' : 'go',
-        \ 'kinds'     : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-        \ ],
-        \ 'sro' : '.',
-        \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-        \ },
-        \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-        \ },
-        \ 'ctagsbin'  : 'gotags',
-        \ 'ctagsargs' : '-sort -silent'
-    \ }
+    "let g:tagbar_type_go = {
+        "\ 'ctagstype' : 'go',
+        "\ 'kinds'     : [
+            "\ 'p:package',
+            "\ 'i:imports:1',
+            "\ 'c:constants',
+            "\ 'v:variables',
+            "\ 't:types',
+            "\ 'n:interfaces',
+            "\ 'w:fields',
+            "\ 'e:embedded',
+            "\ 'm:methods',
+            "\ 'r:constructor',
+            "\ 'f:functions'
+        "\ ],
+        "\ 'sro' : '.',
+        "\ 'kind2scope' : {
+            "\ 't' : 'ctype',
+            "\ 'n' : 'ntype'
+        "\ },
+        "\ 'scope2kind' : {
+            "\ 'ctype' : 't',
+            "\ 'ntype' : 'n'
+        "\ },
+        "\ 'ctagsbin'  : 'gotags',
+        "\ 'ctagsargs' : '-sort -silent'
+    "\ }
   "}}}
 
   " Syntastic {{{2
@@ -509,7 +510,7 @@
     nnoremap <leader>gd :Gdiff<cr>
     nnoremap <leader>gs :Gstatus<cr>
     nnoremap <leader>gw :Gwrite<cr>
-    nnoremap <leader>gb :Gblame<cr>
+    "nnoremap <leader>gb :Gblame<cr>
     nnoremap <leader>gco :Gcheckout<cr>
     nnoremap <leader>gci :Gcommit<cr>
     nnoremap <leader>gm :Gmove<cr>
