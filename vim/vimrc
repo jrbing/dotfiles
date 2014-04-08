@@ -372,7 +372,7 @@
   autocmd FileType python let b:dispatch = 'python %'
 
   " Go
-  "au FileType go  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent nolist
+  au FileType go  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent nolist
 
   " JSON
   au BufNewFile,BufRead *.json set ft=javascript
