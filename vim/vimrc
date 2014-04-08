@@ -41,6 +41,7 @@
   Bundle 'tpope/vim-rbenv'
   Bundle 'tpope/vim-sleuth'
   Bundle 'tpope/vim-classpath'
+  Bundle 'tpope/vim-heroku.git'
   Bundle 'vim-scripts/VOoM'
   Bundle 'vim-scripts/YankRing.vim'
   Bundle 'vim-scripts/SQLUtilities'
