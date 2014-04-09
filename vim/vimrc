@@ -204,11 +204,12 @@
 
 " Display {{{1
 
-  " Use Solarized dark by default
+  " Colorscheme
   set background=dark
-  let g:solarized_visibility = "normal"
-  let g:solarized_contrast = "normal"
-  colorscheme solarized
+  "let g:solarized_visibility = "normal"
+  "let g:solarized_contrast = "normal"
+  "colorscheme solarized
+  colorscheme base16-eighties
 
   " Highlight the current line
   set cursorline
