@@ -77,7 +77,6 @@
   Bundle 'juvenn/mustache.vim'
   Bundle 'vim-scripts/aspnetcs'
   Bundle 'fatih/vim-go.git'
-  "Bundle 'Blackrush/vim-gocode'
 
   " Completion
   Bundle 'Shougo/neocomplcache'
@@ -285,7 +284,7 @@
 
 " }}}
 
-" Key mappings {{{1
+" Mappings {{{1
 
   " Bubble single lines
   nmap <C-Up> [e
@@ -332,7 +331,7 @@
   nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
   " Toggle the Gundo panel
-  nnoremap <F3> :GundoToggle<CR>
+  "nnoremap <F3> :GundoToggle<CR>
 
   " Bring up the CtrlP buffer window
   nmap <leader>b :CtrlPBuffer<CR>
@@ -355,6 +354,13 @@
 
   " Use ,gf to go to file in a vertical split
   nnoremap ,gf :vertical botright wincmd f<CR>
+
+  " Autoformat the current buffer
+  nnoremap <leader>af :Autoformat<CR><CR>
+
+  " Sudo to write
+  cmap w!! w !sudo tee % >/dev/null
+
 
 " }}}
 
@@ -1088,23 +1094,10 @@ if !exists("autocommands_loaded")
   let autocommands_loaded = 1
 endif
 
-" Better Completion
-"set completeopt=longest,menuone,preview
-
-" Sudo to write
-cmap w!! w !sudo tee % >/dev/null
-
 " Include vim configuration specific to a machine
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
-
-" Use local gvimrc if available and gui is running
-"if has('gui_running')
-  "if filereadable(expand("~/.gvimrc.local"))
-    "source ~/.gvimrc.local
-  "endif
-"endif
 
 " }}}
 
