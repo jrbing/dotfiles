@@ -42,6 +42,7 @@
   Bundle 'tpope/vim-sleuth'
   Bundle 'tpope/vim-classpath'
   Bundle 'tpope/vim-heroku.git'
+  Bundle 'tpope/vim-repeat.git'
   Bundle 'vim-scripts/VOoM'
   Bundle 'vim-scripts/YankRing.vim'
   Bundle 'vim-scripts/dbext.vim'
@@ -361,7 +362,6 @@
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
 
-
 " }}}
 
 " Filetype autocommands {{{1
@@ -476,33 +476,6 @@
 
   " Tagbar {{{2
     nnoremap <silent> <F8> :TagbarToggle<CR>
-    "let g:tagbar_type_go = {
-        "\ 'ctagstype' : 'go',
-        "\ 'kinds'     : [
-            "\ 'p:package',
-            "\ 'i:imports:1',
-            "\ 'c:constants',
-            "\ 'v:variables',
-            "\ 't:types',
-            "\ 'n:interfaces',
-            "\ 'w:fields',
-            "\ 'e:embedded',
-            "\ 'm:methods',
-            "\ 'r:constructor',
-            "\ 'f:functions'
-        "\ ],
-        "\ 'sro' : '.',
-        "\ 'kind2scope' : {
-            "\ 't' : 'ctype',
-            "\ 'n' : 'ntype'
-        "\ },
-        "\ 'scope2kind' : {
-            "\ 'ctype' : 't',
-            "\ 'ntype' : 'n'
-        "\ },
-        "\ 'ctagsbin'  : 'gotags',
-        "\ 'ctagsargs' : '-sort -silent'
-    "\ }
   "}}}
 
   " Syntastic {{{2
