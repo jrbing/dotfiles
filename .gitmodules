@@ -19,9 +19,14 @@
   url = git://github.com/Tarrasch/zsh-bd.git
   ignore = dirty
 [submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
-	url = git://github.com/gmarik/vundle.git
+  path = vim/bundle/vundle
+  url = git://github.com/gmarik/vundle.git
   ignore = dirty
 [submodule "opt/resty"]
-	path = opt/resty
-	url = git://github.com/micha/resty.git
+  path = opt/resty
+  url = git://github.com/micha/resty.git
+  ignore = dirty
+[submodule "opt/ansible"]
+  path = opt/ansible
+  url = git://github.com/ansible/ansible.git
+  ignore = dirty
