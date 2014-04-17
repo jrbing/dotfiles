@@ -78,6 +78,7 @@
   Bundle 'juvenn/mustache.vim'
   Bundle 'vim-scripts/aspnetcs'
   Bundle 'fatih/vim-go.git'
+  Bundle 'cespare/vim-toml'
 
   " Completion
   Bundle 'Shougo/neocomplcache'
