@@ -79,6 +79,7 @@
   Bundle 'vim-scripts/aspnetcs'
   Bundle 'fatih/vim-go.git'
   Bundle 'cespare/vim-toml'
+  Bundle 'chase/vim-ansible-yaml'
 
   " Completion
   Bundle 'Shougo/neocomplcache'
