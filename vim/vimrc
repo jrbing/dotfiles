@@ -3,7 +3,7 @@
 " JR Bing <jr@jrbing.com>
 " -------------------------------------------------------------------------
 "   Much of this is borrowed heavily from Vincent Driessen, Steve Losh, Tim
-"   Pope, and Janus
+"   Pope, Janus, and the rest of the internet
 " -------------------------------------------------------------------------
 
 " Bundles {{{1
@@ -51,13 +51,6 @@
   Bundle 'greyblake/vim-preview'
   Bundle 'Chiel92/vim-autoformat'
   Bundle 'SQLUtilities'
-  "Bundle 'vim-scripts/ZoomWin'
-  "Bundle 'michaeljsmith/vim-indent-object'
-  "Bundle 'sjl/gundo.vim'
-  "Bundle 'sjl/vitality.vim'
-  "Bundle 'tomtom/tlib_vim'
-  "Bundle 'tpope/vim-obsession'
-  "Bundle 'spf13/vim-autoclose'
 
   " Nerdtree
   Bundle 'scrooloose/nerdtree'
@@ -224,41 +217,6 @@
 
 " }}}
 
-" Status line {{{2
-
-  "augroup ft_statuslinecolor
-    "au!
-    "au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    "au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
-  "augroup END
-
-  "set statusline=%f                            " Path
-  "set statusline+=%m                           " Modified flag
-  "set statusline+=%r                           " Readonly flag
-  "set statusline+=%w                           " Preview window flag
-
-  "set statusline+=\                            " Space
-
-  "set statusline+=%#redbar#                    " Highlight the following as a warning
-  "set statusline+=%*                           " Reset highlighting
-  "set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors
-
-  "set statusline+=%=                           " Right align.
-
-  " File format, encoding and type.  Ex: "(unix/utf-8/python)"
-  "set statusline+=(
-  "set statusline+=%{&ff}                        " Format (unix/DOS).
-  "set statusline+=/
-  "set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-  "set statusline+=/
-  "set statusline+=%{&ft}                        " Type (python).
-  "set statusline+=)
-
-  " Line and column position and counts.
-  "set statusline+=\ (line\ %l\/%L,\ col\ %03c)
-
-" }}}
-
 " Search {{{1
 
   " Use sane regexes.
@@ -332,9 +290,6 @@
 
   " Whitespace trim function
   nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-
-  " Toggle the Gundo panel
-  "nnoremap <F3> :GundoToggle<CR>
 
   " Bring up the CtrlP buffer window
   nmap <leader>b :CtrlPBuffer<CR>
@@ -941,7 +896,7 @@ if has ('gui_running')
     imap <D-9> <Esc>9gt
 
     " Map Command+Shift+P to preview the document in Marked
-    :nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
+    nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
 
     " Create a pdf using pandoc and open it
     function! CreatePDF()
@@ -1061,6 +1016,9 @@ endif
 " }}}
 
 " Miscellaneous {{{1
+
+" When encrypting any file, use the much stronger blowfish algorithm
+set cryptmethod=blowfish
 
 " Automatically reload the vimrc file when changed
 "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
