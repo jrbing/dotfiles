@@ -17,7 +17,7 @@ class Dotfiles < Thor
       file_operation(Dir.glob('zsh/z*'))
       # Link bash files
       file_operation(Dir.glob('bash/bash*'))
-      file_operation(Dir.glob('profile'))
+      #file_operation(Dir.glob('profile'))
     end
   end
 

@@ -5,3 +5,4 @@
 # install software
 # - homebrew
 # - rbenv
+# - ruby-build
