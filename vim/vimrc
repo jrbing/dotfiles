@@ -1020,6 +1020,9 @@ endif
 " When encrypting any file, use the much stronger blowfish algorithm
 set cryptmethod=blowfish
 
+" Disable additional files that are generated when working with an encrypted file
+autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
+
 " Automatically reload the vimrc file when changed
 "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
