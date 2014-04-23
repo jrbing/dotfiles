@@ -1,0 +1,134 @@
+#!/usr/bin/env ruby
+# Extracted from the fuzzyclock ruby gem
+# at https://github.com/samgrover/fuzzyclock.rb
+
+require 'optparse'
+
+class FuzzyClock
+
+  class UnsupportedLocale < ArgumentError; end
+
+  @@locales ||= {}
+
+  @@locales[:en] = {
+    :about => "it's about %t",
+    :hour => {
+      0  => "twelve",
+      1  => "one",
+      2  => "two",
+      3  => "three",
+      4  => "four",
+      5  => "five",
+      6  => "six",
+      7  => "seven",
+      8  => "eight",
+      9  => "nine",
+      10 => "ten",
+      11 => "eleven",
+      12 => "twelve",
+    },
+    :min => {
+      0..0   => "%0 o'clock",
+      1..2   => "a bit after %0",
+      3..7   => "five past %0",
+      8..12  => "ten past %0",
+      13..17 => "quarter past %0",
+      18..22 => "twenty past %0",
+      23..27 => "twenty five past %0",
+      28..32 => ["half past %0", "%0 thirty"], # randomly picked
+      33..37 => "twenty five to %1",
+      38..42 => "twenty to %1",
+      43..47 => "quarter to %1",
+      48..52 => "ten to %1",
+      53..57 => "five to %1",
+      58..59 => ["almost %1", "nearly %1"] # randomly picked
+    }
+  }
+
+  def self.parse(time, opts = {})
+    self.new(time, opts).to_s
+  end
+
+  attr_accessor :time
+  attr_accessor :locale
+  attr_accessor :about
+  attr_accessor :capitalize
+  attr_accessor :upcase
+
+  def initialize(time = nil, opts = {})
+    @time       = time              || Time.now
+    @locale     = opts[:locale]     || :en
+    @about      = opts[:about]      || false
+    @capitalize = opts[:capitalize] || false
+    @upcase     = opts[:upcase]     || false
+  end
+
+  def parse
+    raise UnsupportedLocale, %Q{Locale "#{@locale}" is not supported.} unless @@locales.has_key?(@locale.to_sym)
+    lang = @@locales[@locale.to_sym]
+
+    this_hour = lang[:hour][@time.hour % 12]
+    next_hour = lang[:hour][@time.hour % 12 + 1]
+
+    fuzz = nil
+    lang[:min].each do |range, value|
+      if range.include?(@time.min)
+        fuzz = value.is_a?(Array) ? value[rand(value.size)] : value
+      end
+    end
+
+    fuzz.gsub!('%0', this_hour)
+    fuzz.gsub!('%1', next_hour)
+
+    fuzz = lang[:about].gsub('%t', fuzz) if @about
+    fuzz.capitalize! if @capitalize
+    fuzz.upcase! if @upcase
+
+    fuzz
+  end
+  alias :to_s :parse
+
+end
+
+class FuzzyClockCommand
+
+  def self.run
+    fc = self.new
+    fc.parse_options
+    fc.execute
+  end
+
+  def options
+    @options ||= {}
+  end
+
+  def execute
+    puts FuzzyClock.parse(nil, options)
+  end
+
+  def parse_options
+    OptionParser.new { |opts|
+      opts.banner = "Usage: #{File.basename(__FILE__)} [options]"
+
+      opts.on("-a", "--about", "it's about [...]") do |v|
+        self.options[:about] = v
+      end
+
+      opts.on("-l", "--locale [lang]", String, "langage") do |v|
+        self.options[:locale] = v
+      end
+
+      opts.on("-U", "--uppercase", "UPPERCASE OUTPUT") do |v|
+        self.options[:upcase] = v
+      end
+
+      opts.on("-C", "--capitalize", "Capitalize output") do |v|
+        self.options[:capitalize] = v
+      end
+
+    }.parse!
+  end
+
+end
+
+FuzzyClockCommand.run
