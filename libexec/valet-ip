@@ -10,9 +10,9 @@ set -e
 # Source generic bash functions
 source $DOTFILES/share/lib/bash-functions.sh
 
-echoinfo 'IP Address'
+internal_ip=`ifconfig -a | grep 'inet ' | grep broadcast | awk '{ print $2 }'`
+external_ip=`curl -s ifconfig.me`
+#spinner $!
 
-ifconfig -a        |
-grep 'inet '       |
-grep broadcast     |
-awk '{ print $2 }'
+echoinfo "Internal IP Address: ${internal_ip}"
+echoinfo "External IP Address: ${external_ip}"

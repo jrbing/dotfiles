@@ -125,6 +125,7 @@ option_enabled () {
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  spinner
 #   DESCRIPTION:  Displays a spinner while a long running job is processing
+#   NOTES:  Taken from http://fitnr.com/showing-a-bash-spinner.html
 #-------------------------------------------------------------------------------
 spinner() {
     local pid=$1
