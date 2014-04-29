@@ -8,5 +8,5 @@ ForwardAgent=yes
 RemoteForward 2224 127.0.0.1:2224
 
 ControlMaster auto
-ControlPath /tmp/%r@%h:%p
+ControlPath ~/.ssh/ssh-%r@%h:%p.sock
 ControlPersist yes
