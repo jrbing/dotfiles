@@ -138,6 +138,7 @@ class Template < Thor
       say_status("INFO", "Creating datamover backup script #{backup_file}")
       template("../share/valet/templates/datamover_backup.erb", backup_file)
     end
+    run "unix2dos #{datafix_folder}/*"
 
   end
 
