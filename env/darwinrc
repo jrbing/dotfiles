@@ -21,3 +21,5 @@ ANSIBLE_SOURCE="$HOME/.dotfiles/opt/ansible"
 #
 alias z='fasd_cd -d'                              # Alias for FASD
 alias flush-dns="sudo killall -HUP mDNSResponder" # DNS
+alias playbook=ansible-playbook
+alias galaxy=ansible-galaxy
