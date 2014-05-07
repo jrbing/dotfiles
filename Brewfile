@@ -1,7 +1,6 @@
 tap homebrew/dupes
 tap homebrew/science
 tap phinze/cask
-tap thoughtbot/formulae
 
 install ack
 install aria2
@@ -15,6 +14,5 @@ install git
 install tree
 install optipng
 install ssh-copy-id
-install packer
 install htop-osx
 install direnv
