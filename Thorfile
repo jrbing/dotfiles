@@ -65,6 +65,10 @@ class Dotfiles < Thor
       cd $HOME/.dotfiles
       git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
     }
+    run %{
+      cd $HOME/.dotfiles/opt/ansible
+      git fetch origin; git checkout devel; git reset --hard origin/devel; git clean -dfx
+    }
   end
 
   desc "install_rbenv_plugins", "Installs rbenv plugins"
