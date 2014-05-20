@@ -1,5 +1,4 @@
 tap homebrew/dupes
-tap homebrew/science
 tap phinze/cask
 
 install ack
