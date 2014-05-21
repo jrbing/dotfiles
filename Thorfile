@@ -38,12 +38,11 @@ class Dotfiles < Thor
     # Link git files
     file_operation(Dir.glob('git/git*'))
 
-    # TODO
     # Copy ssh config
-    #ssh_config = expand("~/.ssh/config")
-    #unless File.exist?(ssh_config)
-      #run %{ cp "$HOME/.dotfiles/etc/ssh_config" "$HOME/.ssh/config" }
-    #end
+    ssh_config = expand("~/.ssh/config")
+    unless File.exist?(ssh_config)
+      run %{ cp "$HOME/.dotfiles/etc/ssh_config" "$HOME/.ssh/config" }
+    end
   end
 
   desc "link_launchd", "Link launchd plist files"
@@ -57,6 +56,7 @@ class Dotfiles < Thor
     invoke :link_shell
     invoke :link_vim
     invoke :link_etc
+    invoke :link_launchd
   end
 
   desc "submodules", "Update submodules to the latest version"
@@ -73,8 +73,6 @@ class Dotfiles < Thor
 
   desc "install_rbenv_plugins", "Installs rbenv plugins"
   def install_rbenv_plugins
-    #run %{ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv }
-    #run %{ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build }
     run %{ git clone git://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems }
     run %{ git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash }
     run %{ git clone git://github.com/tpope/rbenv-aliases.git ~/.rbenv/plugins/rbenv-aliases }
