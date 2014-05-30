@@ -201,10 +201,10 @@
 
   " Colorscheme
   set background=dark
-  let g:solarized_visibility = "normal"
-  let g:solarized_contrast = "normal"
-  colorscheme solarized
-  "colorscheme base16-eighties
+  "let g:solarized_visibility = "normal"
+  "let g:solarized_contrast = "normal"
+  "colorscheme solarized
+  colorscheme base16-eighties
 
   " Highlight the current line
   set cursorline
