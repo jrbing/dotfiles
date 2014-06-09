@@ -13,6 +13,6 @@ source $DOTFILES/share/lib/bash-functions.sh
 # Pull down updates to dotfiles from Github
 #
 message="Updating dotfiles"
-update_command="cd $DOTFILES && git pull origin master 2>/dev/null && git submodule update --init --recursive 2>/dev/null"
+update_command="cd $DOTFILES && git pull origin master > /dev/null 2>&1 && git submodule update --init --recursive > /dev/null 2>&1"
 
 spininfo "${message}" "${update_command}"
