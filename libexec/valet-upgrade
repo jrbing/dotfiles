@@ -13,19 +13,16 @@ case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
     if hash brew 2>/dev/null; then
-      #(sudo softwareupdate -i -a) &
-      #echoinfo 'Updating OSX' && spinner $!
-      echoinfo 'Updating homebrew repo' && brew update
-      echoinfo 'Outdated packages' && brew outdated
-      echoinfo 'Upgrading packages' && brew upgrade
-      echoinfo 'Cleaning up' && brew cleanup
+      spininfo "Updating homebrew repo" "brew update > /dev/null 2>&1"
+      echoinfo "Outdated packages" && brew outdated
+      spininfo "Upgrading packages" "brew upgrade > /dev/null 2>&1"
+      spininfo "Cleaning up" "brew cleanup > /dev/null 2>&1"
     fi
     if hash rbenv 2>/dev/null; then
-      echoinfo 'Updating rbenv' && rbenv update
+      spininfo "Updating rbenv" "rbenv update > /dev/null 2>&1"
     fi
     # Update vim plugins
-    echoinfo 'Updating vim plugins'
-    vim +BundleUpdate +qall
+    spininfo "Updating vim plugins" "vim +BundleUpdate +qall > /dev/null 2>&1"
   ;;
   (Linux)
     if hash yum 2>/dev/null; then

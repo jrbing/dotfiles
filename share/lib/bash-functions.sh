@@ -129,7 +129,7 @@ option_enabled () {
 #-------------------------------------------------------------------------------
 spinner() {
     local pid=$1
-    local delay=0.75
+    local delay=0.5
     local spinstr='|/-\'
     while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
         local temp=${spinstr#?}
@@ -139,6 +139,12 @@ spinner() {
         printf "\b\b\b\b\b\b"
     done
     printf "    \b\b\b\b"
+    if [[ $? -eq 0 ]]; then
+        printf "    ${GC}SUCCESS${EC}"
+    else
+        printf "    ${RC}FAILURE${EC}"
+    fi
+
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -151,7 +157,7 @@ spininfo() {
     local command=$2
 
     printf "${GC} *  INFO${EC}: %s" "${message}";
-    ( eval "${command}" ) &
+    ( eval "${command}" > /dev/null 2>&1 ) &
     spinner $!
     printf "\n"
 
