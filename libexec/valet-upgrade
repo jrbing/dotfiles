@@ -21,8 +21,6 @@ case $(uname) in
     if hash rbenv 2>/dev/null; then
       spininfo "Updating rbenv" "rbenv update > /dev/null 2>&1"
     fi
-    # Update vim plugins
-    spininfo "Updating vim plugins" "vim +BundleUpdate +qall > /dev/null 2>&1"
   ;;
   (Linux)
     if hash yum 2>/dev/null; then
@@ -35,18 +33,11 @@ case $(uname) in
       sudo aptitude upgrade -y
     fi
 
-    # Update vim plugins
-    echoinfo 'Updating vim plugins'
-    vim +BundleUpdate +qall
   ;;
   (SunOS)
     # TODO: add opencsw and pkgutil
     echoinfo 'Updating packages'
     sudo pkgin update && sudo pkgin upgrade -y
-
-    # Update vim plugins
-    echoinfo 'Updating vim plugins'
-    vim +BundleUpdate +qall
   ;;
 esac
 
