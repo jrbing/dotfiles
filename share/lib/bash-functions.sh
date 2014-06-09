@@ -154,12 +154,31 @@ spinner() {
 # TODO: figure out how to right align the success or failure message
 spininfo() {
 
-    local message=$1
+    local message="${GC} *  INFO${EC}: $1"
     local command=$2
 
-    printf "${GC} *  INFO${EC}: %s" "${message}";
+    printf "${message}";
     ( eval "${command}" > /dev/null 2>&1 ) &
-    spinner $!
-    printf "\n"
 
+    local pid=$!
+    local delay=0.5
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+
+    if [[ $? -eq 0 ]]; then
+        let columns=$(tput cols)-${#message}+${#GC}+${#EC}+11
+        printf "%${columns}b" "${GC}[SUCCESS]${EC}"
+    else
+        let columns=$(tput cols)-${#message}+${#GC}+${#EC}+11
+        printf "%${columns}b" "${RC}[FAILURE]${EC}"
+    fi
+
+    printf "\n"
 }
