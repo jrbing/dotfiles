@@ -140,3 +140,20 @@ spinner() {
     done
     printf "    \b\b\b\b"
 }
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  spininfo
+#   DESCRIPTION:  Displays a spinner while a long running job is processing
+#-------------------------------------------------------------------------------
+spininfo() {
+
+    local message=$1
+    local command=$2
+
+    printf "${GC} *  INFO${EC}: %s" "${message}";
+    ( eval "${command}" ) &
+    spinner $!
+    printf "\n"
+
+
+}
