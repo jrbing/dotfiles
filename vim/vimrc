@@ -78,7 +78,7 @@
   Bundle 'cespare/vim-toml'
   Bundle 'chase/vim-ansible-yaml'
 
-  " Completion
+  " Completion / Snippets
   Bundle 'Shougo/neocomplcache'
   Bundle 'Shougo/neosnippet'
   Bundle 'Shougo/neosnippet-snippets'
