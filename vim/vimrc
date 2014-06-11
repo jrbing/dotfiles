@@ -22,7 +22,8 @@
   Bundle 'godlygeek/tabular'
   Bundle 'kana/vim-metarw'
   Bundle 'kien/ctrlp.vim'
-  Bundle 'Lokaltog/vim-easymotion'
+  Bundle 'justinmk/vim-sneak'
+  "Bundle 'Lokaltog/vim-easymotion'
   Bundle 'majutsushi/tagbar'
   Bundle 'mattn/webapi-vim'
   Bundle 'mattn/gist-vim'
@@ -67,6 +68,7 @@
   Bundle 'chriskempson/base16-vim'
 
   " Filetypes
+  "Bundle 'sheerun/vim-polyglot'
   Bundle 'vim-ruby/vim-ruby'
   Bundle 'davidoc/taskpaper.vim'
   Bundle 'kchmck/vim-coffee-script'
@@ -389,6 +391,10 @@
 " }}}
 
 " Plugin configuration/mapping {{{1
+"
+  " vim-sneak {{{2
+    let g:sneak#streak = 1
+  "}}}
 
   " SnipMate {{{2
     let g:snips_author = 'JR Bing <jr@jrbing.com>'
