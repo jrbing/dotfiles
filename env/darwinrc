@@ -13,8 +13,8 @@ export VISUAL='mvim -f'
 [[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin" # NPM
 [[ -d /usr/local/heroku ]] && export PATH="$PATH:/usr/local/heroku/bin"           # Heroku Toolbelt
 
-ANSIBLE_SOURCE="$HOME/.dotfiles/opt/ansible"
-[[ -d $ANSIBLE_SOURCE ]] && source $ANSIBLE_SOURCE/hacking/env-setup -q
+#ANSIBLE_SOURCE="$HOME/.dotfiles/opt/ansible"
+#[[ -d $ANSIBLE_SOURCE ]] && source $ANSIBLE_SOURCE/hacking/env-setup -q
 
 #
 # Aliases
