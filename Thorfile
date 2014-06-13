@@ -15,6 +15,7 @@ class Dotfiles < Thor
       # Link zsh files
       run %{ ln -nfs "$HOME/.dotfiles/zsh/prezto" "$HOME/.zprezto" }
       file_operation(Dir.glob('zsh/z*'))
+
       # Link bash files
       file_operation(Dir.glob('bash/bash*'))
       #file_operation(Dir.glob('profile'))
@@ -31,7 +32,6 @@ class Dotfiles < Thor
 
   desc "link_etc", "Link miscellaneous preference files"
   def link_etc
-
     # Link etc files
     file_operation(Dir.glob('etc/*'))
 
@@ -65,21 +65,17 @@ class Dotfiles < Thor
       cd $HOME/.dotfiles
       git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
     }
-    run %{
-      cd $HOME/.dotfiles/opt/ansible
-      git fetch origin; git checkout devel; git reset --hard origin/devel; git clean -dfx
-    }
   end
 
-  desc "install_rbenv_plugins", "Installs rbenv plugins"
-  def install_rbenv_plugins
-    run %{ git clone git://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems }
-    run %{ git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash }
-    run %{ git clone git://github.com/tpope/rbenv-aliases.git ~/.rbenv/plugins/rbenv-aliases }
-    run %{ git clone git://github.com/rkh/rbenv-whatis.git ~/.rbenv/plugins/rbenv-whatis }
-    run %{ git clone git://github.com/rkh/rbenv-use.git ~/.rbenv/plugins/rbenv-use }
-    run %{ git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update }
-  end
+  #desc "install_rbenv_plugins", "Installs rbenv plugins"
+  #def install_rbenv_plugins
+    #run %{ git clone git://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems }
+    #run %{ git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash }
+    #run %{ git clone git://github.com/tpope/rbenv-aliases.git ~/.rbenv/plugins/rbenv-aliases }
+    #run %{ git clone git://github.com/rkh/rbenv-whatis.git ~/.rbenv/plugins/rbenv-whatis }
+    #run %{ git clone git://github.com/rkh/rbenv-use.git ~/.rbenv/plugins/rbenv-use }
+    #run %{ git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update }
+  #end
 
   private
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #===============================================================================
-# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
 #===============================================================================
 #
 #          FILE: <%= @script_name %>.sh
@@ -12,8 +12,12 @@
 set -e                          # Exit immediately on error
 set -o nounset                  # Treat unset variables as an error
 
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
 # Required program(s)
-req_progs=(prog1 prog2)
+readonly req_progs=(prog1 prog2)
 for p in "${req_progs[@]}"; do
   hash "$p" 2>&- || \
   { echo >&2 " Required program \"$p\" not installed."; exit 1; }

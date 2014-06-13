@@ -151,7 +151,6 @@ spinner() {
 #          NAME:  spininfo
 #   DESCRIPTION:  Displays a spinner while a long running job is processing
 #-------------------------------------------------------------------------------
-# TODO: figure out how to right align the success or failure message
 spininfo() {
 
     local message="${GC} *  INFO${EC}: $1"

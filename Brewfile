@@ -2,7 +2,10 @@ tap homebrew/dupes
 tap phinze/cask
 
 install ack
+install ansible
 install aria2
+install heroku-toolbelt
+install hub
 install imagemagick
 install mosh
 install rlwrap
@@ -15,3 +18,10 @@ install optipng
 install ssh-copy-id
 install htop-osx
 install direnv
+
+install rbenv
+install rbenv-gem-rehash
+install rbenv-ruby-build
+
+install openssl
+link openssl --force
