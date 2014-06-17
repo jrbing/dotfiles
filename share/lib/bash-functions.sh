@@ -162,6 +162,7 @@ spininfo() {
     local pid=$!
     local delay=0.5
     local spinstr='|/-\'
+    #local spinstr='← ↖ ↑ ↗ → ↘ ↓ ↙'
     while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
         local temp=${spinstr#?}
         printf " [%c]  " "$spinstr"
