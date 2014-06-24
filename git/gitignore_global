@@ -45,3 +45,7 @@ tags
 *.un~
 Session.vim
 .sass-cache
+
+# Environment files #
+#####################
+.envrc
