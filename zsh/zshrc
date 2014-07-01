@@ -39,8 +39,8 @@ export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 #
 unalias rm
 alias ax="chmod a+x"                                # Make executable
-#alias lt='echo "------ OLDEST ------" && ls -lAhrt'
-#alias ltr='echo "------ NEWEST ------" && ls -lAht'
+alias lt='ls -lAht && echo "------ OLDEST ------"'
+alias ltr='ls -lAhtr && echo "------ NEWEST ------"'
 
 #
 # Functions
