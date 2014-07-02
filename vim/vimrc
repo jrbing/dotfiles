@@ -47,6 +47,7 @@
   Plugin 'tpope/vim-rake'
   Plugin 'tpope/vim-projectionist'
   Plugin 'tpope/vim-bundler'
+  Plugin 'tpope/vim-obsession'
   Plugin 'vim-scripts/VOoM'
   Plugin 'vim-scripts/YankRing.vim'
   Plugin 'vim-scripts/scratch.vim'
