@@ -21,3 +21,4 @@ alias z='fasd_cd -d'                              # Alias for FASD
 alias flush-dns="sudo killall -HUP mDNSResponder" # DNS
 alias playbook=ansible-playbook
 alias galaxy=ansible-galaxy
+alias sqlplus="export DYLD_LIBRARY_PATH=/opt/oracle/instantclient_11_2 ; /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/instantclient_11_2/sqlplus"
