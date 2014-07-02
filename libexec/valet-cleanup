@@ -7,7 +7,7 @@
 set -e
 
 # Source generic bash functions
-source $DOTFILES/share/lib/bash-functions.sh
+source "$DOTFILES/share/lib/bash-functions.sh"
 
 case $(uname) in
   (Darwin)

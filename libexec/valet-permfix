@@ -7,7 +7,7 @@
 set -e
 
 # Source generic bash functions
-source $DOTFILES/share/lib/bash-functions.sh
+source "$DOTFILES/share/lib/bash-functions.sh"
 
 # Change the permissions at the specified directory
 echoinfo "Modifying directory permissions on $1 to 755"

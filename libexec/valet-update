@@ -7,7 +7,7 @@
 set -e
 
 # Source generic bash functions
-source $DOTFILES/share/lib/bash-functions.sh
+source "$DOTFILES/share/lib/bash-functions.sh"
 
 #
 # Pull down updates to dotfiles from Github

@@ -7,12 +7,12 @@
 set -e
 
 # Source generic bash functions
-source $DOTFILES/share/lib/bash-functions.sh
+source "$DOTFILES/share/lib/bash-functions.sh"
 
 sync_directories=( Sync )
 
 if [[ -d /Volumes/KEYCHAIN ]]; then
-  for directory in ${sync_directories[@]}; do
+  for directory in "${sync_directories[@]}"; do
     echoinfo "Synchronizing ${directory}"
     rsync --archive \
       --delete \
