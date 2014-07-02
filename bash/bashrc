@@ -7,16 +7,16 @@ export DOTFILES=$HOME/.dotfiles
 #
 case $(uname) in
   (Darwin)
-    source $DOTFILES/env/darwinrc
+    source "${DOTFILES}/env/darwinrc"
   ;;
   (Linux)
-    source $DOTFILES/env/linuxrc
+    source "${DOTFILES}/env/linuxrc"
   ;;
   (SunOS)
-    source $DOTFILES/env/solarisrc
+    source "${DOTFILES}/env/solarisrc"
   ;;
   (CYGWIN*)
-    source $DOTFILES/env/msysrc
+    source "${DOTFILES}/env/msysrc"
   ;;
 esac
 
@@ -130,6 +130,6 @@ export SQLPATH=$DOTFILES/sql/oracle                                             
 # Local system specific settings
 #
 if [[ -f $HOME/.localrc ]]; then
-  source $HOME/.localrc
+  source "${HOME}/.localrc"
 fi
 
