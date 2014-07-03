@@ -59,6 +59,22 @@ class Template < Thor
   end
 
   #
+  # envrc
+  #
+  desc "envrc", "Creates a basic .envrc file in the current directory"
+  def envrc
+
+    # Create the envrc file
+    env_file = File.join(Dir.pwd, ".envrc")
+    say_status("INFO", "Creating .envrc file")
+    template("../share/valet/templates/envrc.erb", env_file)
+    file = File.open(env_file, 'r')
+    file.chmod(0700)
+    file.close
+
+  end
+
+  #
   # Thor Script
   #
   desc "thorfile [NAME]", "Creates a basic thor script file"

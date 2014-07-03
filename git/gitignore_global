@@ -49,3 +49,4 @@ Session.vim
 # Environment files #
 #####################
 .envrc
+.direnv

@@ -126,6 +126,11 @@ export PATH=$PATH:$DOTFILES/bin                                                 
 export SQLPATH=$DOTFILES/sql/oracle                                                           # SQL script path for sqlplus
 [[ -d "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)" # RBENV
 
+# direnv
+if hash direnv 2>/dev/null; then
+  eval "$(direnv hook bash)"
+fi
+
 #
 # Local system specific settings
 #
