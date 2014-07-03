@@ -78,6 +78,7 @@
   Plugin 'fatih/vim-go.git'
   Plugin 'cespare/vim-toml'
   Plugin 'chase/vim-ansible-yaml'
+  Plugin 'honza/dockerfile.vim'
 
   " Completion / Snippets
   Plugin 'Shougo/neocomplcache'
