@@ -77,7 +77,7 @@ echoinfo "Configuring Bundler for faster, parallel gem installation ..."
   bundle config --global jobs $((number_of_cores - 1))
 
 echoinfo "Installing thor"
-  gem install bundler --no-document --pre
+  gem install thor --no-document --pre
 
 echoinfo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
   heroku plugins:install git://github.com/ddollar/heroku-config.git
