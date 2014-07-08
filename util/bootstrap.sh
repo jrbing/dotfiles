@@ -69,8 +69,10 @@ update_rubygems() {
   gem update --system
 }
 
-echoinfo "Installing Bundler to install project-specific Ruby gems ..."
+install_bundler() {
+  echoinfo "Installing Bundler to install project-specific Ruby gems ..."
   gem install bundler --no-document --pre
+}
 
 echoinfo "Configuring Bundler for faster, parallel gem installation ..."
   number_of_cores=$(sysctl -n hw.ncpu)
