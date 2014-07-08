@@ -211,7 +211,8 @@
   "let g:solarized_visibility = "normal"
   "let g:solarized_contrast = "normal"
   "colorscheme solarized
-  colorscheme base16-eighties
+  "colorscheme base16-eighties
+  colorscheme gruvbox
 
   " Highlight the current line
   set cursorline
@@ -860,8 +861,8 @@ if has ('gui_running')
   if has("gui_macvim")
 
     " Set Colorscheme
-    colorscheme gruvbox
-    "colorscheme base16-eighties
+    "colorscheme gruvbox
+    colorscheme base16-eighties
     "colorscheme base16-default
     "colorscheme solarized
 
