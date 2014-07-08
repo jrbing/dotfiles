@@ -66,6 +66,7 @@
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'chriskempson/base16-vim'
+  Plugin 'morhetz/gruvbox'
 
   " Filetypes
   Plugin 'vim-ruby/vim-ruby'
@@ -828,15 +829,16 @@ RUBY
 " Platform Specific Settings {{{1
 
 if exists('$TMUX')
-
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-
 else
-
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
+"Gruvbox italic fix
+if !has("gui_running")
+   let g:gruvbox_italic=0
 endif
 
 if has ('gui_running')
@@ -858,7 +860,8 @@ if has ('gui_running')
   if has("gui_macvim")
 
     " Set Colorscheme
-    colorscheme base16-eighties
+    colorscheme gruvbox
+    "colorscheme base16-eighties
     "colorscheme base16-default
     "colorscheme solarized
 
@@ -930,7 +933,8 @@ if has ('gui_running')
   elseif has("win32") || has("win64")
 
     " Set Colorscheme
-    colorscheme base16-default
+    colorscheme gruvbox
+    "colorscheme base16-default
 
     " Set the font
     set guifont=Consolas:h10
