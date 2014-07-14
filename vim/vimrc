@@ -580,11 +580,11 @@
     " Enable heavy omni completion.
     "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 
-    " Use honza's snippets.
-    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
     " Enable neosnippet snipmate compatibility mode
     let g:neosnippet#enable_snipmate_compatibility = 1
+
+    " Use honza's snippets.
+    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/custom/snippets'
 
     " For snippet_complete marker.
     if has('conceal')
