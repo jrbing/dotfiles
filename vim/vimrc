@@ -56,7 +56,7 @@
   Plugin 'Chiel92/vim-autoformat'
   Plugin 'SQLUtilities'
   Plugin 'dbext.vim'
-  Plugin 'editorconfig/editorconfig-vim'
+"  Plugin 'editorconfig/editorconfig-vim'
 
   " Nerdtree
   Plugin 'scrooloose/nerdtree'
