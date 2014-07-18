@@ -36,9 +36,9 @@ zstyle ':prezto:load' pmodule \
   'tmux' \
   'ruby' \
   'git' \
-  'haskell' \
   'history-substring-search'
 
+  #'haskell' \
 #
 # Editor
 #

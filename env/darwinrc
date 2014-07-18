@@ -12,6 +12,7 @@ export VISUAL='mvim -f'
 [[ -d $DOTFILES/zsh/fasd ]] && export PATH="$PATH:$DOTFILES/zsh/fasd"             # fasd
 [[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin" # NPM
 [[ -d /usr/local/heroku ]] && export PATH="$PATH:/usr/local/heroku/bin"           # Heroku Toolbelt
+[[ -d "$HOME/.cabal/bin" ]] && export PATH="$PATH:$HOME/.cabal/bin"               # Cabal binaries
 
 #
 # Aliases

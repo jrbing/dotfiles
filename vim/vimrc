@@ -861,6 +861,9 @@ if has ('gui_running')
   " Macvim specific settings
   if has("gui_macvim")
 
+    " For some reason macvim isn't getting the full path
+    "let $PATH=$PATH . ':~/.cabal/bin'
+
     " Set Colorscheme
     "colorscheme gruvbox
     colorscheme base16-eighties
@@ -1029,10 +1032,10 @@ endif
 " Miscellaneous {{{1
 
 " When encrypting any file, use the much stronger blowfish algorithm
-set cryptmethod=blowfish
+"set cryptmethod=blowfish
 
 " Disable additional files that are generated when working with an encrypted file
-autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
+"autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
 
 " Automatically reload the vimrc file when changed
 "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
