@@ -125,6 +125,7 @@ eval "$($HOME/.dotfiles/bin/valet init -)"
 export PATH=$PATH:$DOTFILES/bin                                                               # Add scripts to PATH
 export SQLPATH=$DOTFILES/sql/oracle                                                           # SQL script path for sqlplus
 [[ -d "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)" # RBENV
+[[ -d "$HOME/.cabal/bin" ]] && export PATH="$PATH:$HOME/.cabal/bin"                           # Cabal binaries
 
 # direnv
 if hash direnv 2>/dev/null; then
