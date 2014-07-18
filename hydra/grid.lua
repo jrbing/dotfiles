@@ -86,6 +86,10 @@ function ext.grid.pushwindow_right()
   ext.grid.adjust_focused_window(function(f) f.x = math.min(f.x + 1, ext.grid.GRIDWIDTH - f.w) end)
 end
 
+function ext.grid.pushwindow_center()
+  --ext.grid.adjust_focused_window(function(f) f.x = math.min(f.x + 1, ext.grid.GRIDWIDTH - f.w) end)
+end
+
 function ext.grid.resizewindow_wider()
   ext.grid.adjust_focused_window(function(f) f.w = math.min(f.w + 1, ext.grid.GRIDWIDTH - f.x) end)
 end

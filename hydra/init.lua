@@ -16,18 +16,18 @@ local ctrlcmd = {"ctrl", "cmd"}
 -- Hotkey bindings
 ------------------
 
-hotkey.bind(mash, ';', function() ext.grid.snap(window.focusedwindow()) end)
-hotkey.bind(mash, "'", function() fnutils.map(window.visiblewindows(), ext.grid.snap) end)
+--hotkey.bind(mash, ';', function() ext.grid.snap(window.focusedwindow()) end)
+--hotkey.bind(mash, "'", function() fnutils.map(window.visiblewindows(), ext.grid.snap) end)
 
-hotkey.bind(mash, '=', function() ext.grid.adjustwidth( 1) end)
-hotkey.bind(mash, '-', function() ext.grid.adjustwidth(-1) end)
+--hotkey.bind(mash, '=', function() ext.grid.adjustwidth( 1) end)
+--hotkey.bind(mash, '-', function() ext.grid.adjustwidth(-1) end)
 
---hotkey.bind(mashshift, 'H', function() window.focusedwindow():focuswindow_west() end)
---hotkey.bind(mashshift, 'L', function() window.focusedwindow():focuswindow_east() end)
---hotkey.bind(mashshift, 'K', function() window.focusedwindow():focuswindow_north() end)
---hotkey.bind(mashshift, 'J', function() window.focusedwindow():focuswindow_south() end)
+hotkey.bind(mashshift, 'H', function() window.focusedwindow():focuswindow_west() end)
+hotkey.bind(mashshift, 'L', function() window.focusedwindow():focuswindow_east() end)
+hotkey.bind(mashshift, 'K', function() window.focusedwindow():focuswindow_north() end)
+hotkey.bind(mashshift, 'J', function() window.focusedwindow():focuswindow_south() end)
 
---hotkey.bind(mash, 'M', ext.grid.maximize_window)
+hotkey.bind(mash, 'M', ext.grid.maximize_window)
 
 --hotkey.bind(mash, 'N', ext.grid.pushwindow_nextscreen)
 --hotkey.bind(mash, 'P', ext.grid.pushwindow_prevscreen)
