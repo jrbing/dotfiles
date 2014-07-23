@@ -18,6 +18,7 @@ install optipng
 install ssh-copy-id
 install htop-osx
 install direnv
+install ttyrec
 
 install rbenv
 install rbenv-gem-rehash
