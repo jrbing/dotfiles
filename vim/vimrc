@@ -910,7 +910,7 @@ if has ('gui_running')
     imap <D-9> <Esc>9gt
 
     " Map Command+Shift+P to preview the document in Marked
-    nnoremap <D-P> :silent !open -a Marked.app '%:p'<cr>
+    nnoremap <D-P> :silent !open -a 'Marked 2.app' '%:p'<cr>
 
     " Create a pdf using pandoc and open it
     function! CreatePDF()
