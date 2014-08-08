@@ -55,6 +55,7 @@
   Plugin 'Chiel92/vim-autoformat'
   Plugin 'SQLUtilities'
   Plugin 'dbext.vim'
+  Plugin 'gcmt/wildfire.vim'
   "Plugin 'mattn/vim-metarw-etcd'
   "Plugin 'editorconfig/editorconfig-vim'
 
@@ -398,6 +399,13 @@
 "
   " vim-sneak {{{2
     let g:sneak#streak = 1
+  "}}}
+
+  " Wildfire {{{2
+  let g:wildfire_objects = {
+    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
+    \ "html,xml" : ["at"],
+    \ }
   "}}}
 
   " SnipMate {{{2
