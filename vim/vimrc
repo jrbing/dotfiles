@@ -57,6 +57,7 @@
   Plugin 'dbext.vim'
   Plugin 'gcmt/wildfire.vim'
   Plugin 'vim-scripts/renamer.vim'
+  Plugin 'rizzatti/dash.vim'
   "Plugin 'mattn/vim-metarw-etcd'
   "Plugin 'editorconfig/editorconfig-vim'
 
