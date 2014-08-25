@@ -15,8 +15,8 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 set -e
 
 readonly RUBY_VERSION="$(curl -sSL http://ruby.thoughtbot.com/latest)"
-readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly PROGNAME="$(basename $0)"
+readonly PROGDIR="$(readlink -m $(dirname $0))"
 
 echoinfo() {
   printf "${GC} *  INFO${EC}: %s\n" "$@";
@@ -74,12 +74,32 @@ install_bundler() {
   gem install bundler --no-document --pre
 }
 
-echoinfo "Configuring Bundler for faster, parallel gem installation ..."
+configure_bundler() {
+  echoinfo "Configuring Bundler for faster, parallel gem installation ..."
   number_of_cores=$(sysctl -n hw.ncpu)
   bundle config --global jobs $((number_of_cores - 1))
+}
 
-echoinfo "Installing thor"
+install_thor() {
+  echoinfo "Installing thor"
   gem install thor --no-document --pre
+}
 
-echoinfo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
+install_heroku_plugins() {
+  echoinfo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
   heroku plugins:install git://github.com/ddollar/heroku-config.git
+}
+
+#change_shell
+#clone_dotfiles
+#configure_bundler
+#default_ruby
+#fix_zsh_bug
+#install_bundler
+#install_heroku_plugins
+#install_homebrew
+#install_ruby
+#install_thor
+#update_homebrew
+#update_rubygems
+
