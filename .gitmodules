@@ -26,3 +26,7 @@
   path = opt/resty
   url = git://github.com/micha/resty.git
   ignore = dirty
+[submodule "opt/bcvi"]
+  path = opt/bcvi
+  url = git://github.com/grantm/bcvi.git
+  ignore = dirty
