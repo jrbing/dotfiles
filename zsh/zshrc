@@ -47,6 +47,15 @@ export PSQL_EDITOR=vim
 export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 
 #
+# bcvi
+#
+test -n "$(which bcvi)" && eval "$(bcvi --unpack-term)"
+test -n "${BCVI_CONF}"  && alias vi="bcvi"
+test -n "${BCVI_CONF}"  && alias suvi="EDITOR='bcvi -c viwait' sudoedit"
+test -n "${BCVI_CONF}"  && alias bcp="bcvi -c scpd"
+alias ssh-bcvi='bcvi --wrap-ssh --'
+
+#
 # Miscellaneous aliases
 #
 unalias rm

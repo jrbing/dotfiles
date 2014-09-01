@@ -131,6 +131,13 @@ if hash direnv 2>/dev/null; then
   eval "$(direnv hook bash)"
 fi
 
+# bcvi
+test -n "$(which bcvi)" && eval "$(bcvi --unpack-term)"
+test -n "${BCVI_CONF}"  && alias vi="bcvi"
+test -n "${BCVI_CONF}"  && alias suvi="EDITOR='bcvi -c viwait' sudoedit"
+test -n "${BCVI_CONF}"  && alias bcp="bcvi -c scpd"
+alias ssh-bcvi='bcvi --wrap-ssh --'
+
 #
 # Local system specific settings
 #
