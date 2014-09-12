@@ -22,4 +22,5 @@ alias flush-dns="sudo killall -HUP mDNSResponder" # DNS
 alias ans=ansible
 alias apb=ansible-playbook
 alias agx=ansible-galaxy
+alias av=ansible-vault
 alias sqlplus="export DYLD_LIBRARY_PATH=/opt/oracle/instantclient_11_2 ; /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/instantclient_11_2/sqlplus"
