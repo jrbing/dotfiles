@@ -4,7 +4,6 @@ tap phinze/cask
 install ack
 install ansible
 install aria2
-install heroku-toolbelt
 install hub
 install imagemagick
 install mosh

@@ -10,10 +10,6 @@
   path = pandoc
   url = git://github.com/jrbing/pandoc-templates.git
   ignore = dirty
-[submodule "opt/rainbarf"]
-  path = opt/rainbarf
-  url = git://github.com/creaktive/rainbarf.git
-  ignore = dirty
 [submodule "zsh/bd"]
   path = zsh/bd
   url = git://github.com/Tarrasch/zsh-bd.git
@@ -21,12 +17,4 @@
 [submodule "vim/bundle/vundle"]
   path = vim/bundle/vundle
   url = git://github.com/gmarik/vundle.git
-  ignore = dirty
-[submodule "opt/resty"]
-  path = opt/resty
-  url = git://github.com/micha/resty.git
-  ignore = dirty
-[submodule "opt/bcvi"]
-  path = opt/bcvi
-  url = git://github.com/grantm/bcvi.git
   ignore = dirty
