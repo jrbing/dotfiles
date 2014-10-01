@@ -51,26 +51,19 @@
   Plugin 'vim-scripts/YankRing.vim'
   Plugin 'vim-scripts/scratch.vim'
   Plugin 'vim-scripts/Align'
-  Plugin 'greyblake/vim-preview'
   Plugin 'Chiel92/vim-autoformat'
   Plugin 'SQLUtilities'
   Plugin 'dbext.vim'
   Plugin 'gcmt/wildfire.vim'
   Plugin 'vim-scripts/renamer.vim'
   Plugin 'rizzatti/dash.vim'
-  "Plugin 'mattn/vim-metarw-etcd'
-  "Plugin 'editorconfig/editorconfig-vim'
-
-  " Nerdtree
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'scrooloose/nerdcommenter'
-  Plugin 'jistr/vim-nerdtree-tabs'
-  Plugin 'EvanDotPro/nerdtree-chmod'
+  "Plugin 'greyblake/vim-preview'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'chriskempson/base16-vim'
   Plugin 'morhetz/gruvbox'
+  Plugin 'MarioRicalde/vim-lucius'
 
   " Filetypes
   Plugin 'vim-ruby/vim-ruby'
@@ -80,17 +73,30 @@
   Plugin 'vim-scripts/plsql.vim-syntax'
   Plugin 'juvenn/mustache.vim'
   Plugin 'vim-scripts/aspnetcs'
-  Plugin 'fatih/vim-go.git'
   Plugin 'cespare/vim-toml'
   Plugin 'stephpy/vim-yaml'
   Plugin 'chase/vim-ansible-yaml'
-  Plugin 'honza/dockerfile.vim'
+  "Plugin 'honza/dockerfile.vim'
 
   " Completion / Snippets
   Plugin 'Shougo/neocomplcache'
   Plugin 'Shougo/neosnippet'
   Plugin 'Shougo/neosnippet-snippets'
   Plugin 'honza/vim-snippets'
+
+  if has("gui_macvim") || has("gui_vimr")
+    Plugin 'fatih/vim-go.git'
+  endif
+
+  if has("gui_vimr")
+    "This feels awkward...there should be a better way to do this
+  else
+    " Nerdtree
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'EvanDotPro/nerdtree-chmod'
+  endif
 
   filetype plugin indent on
   let mapleader = ","
