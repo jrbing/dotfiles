@@ -18,3 +18,7 @@
   path = vim/bundle/vundle
   url = git://github.com/gmarik/vundle.git
   ignore = dirty
+[submodule "share/lib/bats"]
+  path = share/lib/bats
+  url = git://github.com/sstephenson/bats.git
+  ignore = dirty
