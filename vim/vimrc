@@ -71,11 +71,11 @@
   Plugin 'pangloss/vim-javascript'
   Plugin 'vim-scripts/plsql.vim-syntax'
   Plugin 'juvenn/mustache.vim'
-  Plugin 'vim-scripts/aspnetcs'
   Plugin 'cespare/vim-toml'
   Plugin 'stephpy/vim-yaml'
   Plugin 'chase/vim-ansible-yaml'
   Plugin 'wting/rust.vim'
+  Plugin 'PProvost/vim-ps1'
 
   " Completion / Snippets
   Plugin 'Shougo/neocomplcache'
