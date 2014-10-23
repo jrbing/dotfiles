@@ -1,0 +1,19 @@
+["trigger", "<%= Dir.pwd %>", {
+  "name": "notification",
+  "command": [
+    "growlnotify",
+    "-m",
+    "File changed"
+  ]
+}]
+
+["trigger", "<%= Dir.pwd %>", {
+  "name": "synchronization",
+  "command": [
+    "rsync",
+    "-avz",
+    "--delete",
+    "<%= Dir.pwd %>",
+    "user@remote-server:/remote_path"
+  ]
+}]
