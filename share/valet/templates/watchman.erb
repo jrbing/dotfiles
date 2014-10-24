@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+# Usage: <%= @script_name %>
+
+require 'thor'
+require 'thor/actions'
+require 'ruby-watchman'
+require 'socket'
+require 'pathname'
+
+
+class Utils < Thor
+
+  desc "test", "test"
+  def test
+
+    sockname = RubyWatchman.load(
+      %x{watchman --output-encoding=bser get-sockname}
+    )['sockname']
+    raise unless $?.exitstatus.zero?
+
+    UNIXSocket.open(sockname) do |socket|
+      root = Pathname.new('.').realpath.to_s
+      roots = RubyWatchman.query(['watch-list'], socket)['roots']
+      if !roots.include?(root)
+        # this path isn't being watched yet; try to set up watch
+        result = RubyWatchman.query(['watch', root], socket)
+
+        # root_restrict_files setting may prevent Watchman from working
+        raise if result.has_key?('error')
+      end
+
+      query = ['query', root, {
+        'expression' => ['type', 'f'],
+        'fields'     => ['name'],
+      }]
+      paths = RubyWatchman.query(query, socket)
+
+      # could return error if watch is removed
+      raise if paths.has_key?('error')
+
+      p paths['files']
+    end
+  end
+
+end

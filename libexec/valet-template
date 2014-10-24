@@ -77,25 +77,22 @@ class Template < Thor
   #
   # watchman
   #
-  desc "trigger", "Creates a basic trigger.json file for use with watchman"
-  def trigger
+  desc "watchman", "Creates a basic Thorfile for use with ruby-watchman"
+  def watchman
 
-    # Create the trigger file
-    trigger_file = File.join(Dir.pwd, "trigger.json")
-    say_status("INFO", "Creating trigger file")
-    template("../share/valet/templates/trigger.erb", trigger_file)
-    file = File.open(trigger_file, 'r')
+    watch_file = File.join(Dir.pwd, "Thorfile")
+    say_status("INFO", "Creating #{watch_file}")
+    template("../share/valet/templates/watchman.erb", watch_file)
+    file = File.open(watch_file, 'r')
     file.chmod(0700)
     file.close
-    say_status("INFO", "Execute \'watchman watch #{Dir.pwd}\' to add this directory to the watch list")
-    say_status("INFO", "Execute \'watchman -j < trigger.json\' to add the trigger to the trigger list")
 
   end
 
   #
-  # Thor Script
+  # thor
   #
-  desc "thorfile [NAME]", "Creates a basic thor script file"
+  desc "thorfile [NAME]", "Creates a basic thor-based script file"
   def thorfile(script_name=nil)
 
     # Get the name for the script
