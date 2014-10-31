@@ -30,8 +30,10 @@ change_shell() {
 clone_dotfiles() {
   git clone git@github.com:jrbing/dotfiles.git $HOME/.dotfiles
   cd $HOME/.dotfiles
+  #TODO:  pull down submodules
 }
 
+# TODO: is this still necessary?
 fix_zsh_bug() {
   if [[ -f /etc/zshenv ]]; then
   echoinfo "Fixing OSX zsh environment bug ..."
@@ -71,7 +73,7 @@ update_rubygems() {
 
 install_bundler() {
   echoinfo "Installing Bundler to install project-specific Ruby gems ..."
-  gem install bundler --no-document --pre
+  gem install bundler --no-document
 }
 
 configure_bundler() {
@@ -82,12 +84,7 @@ configure_bundler() {
 
 install_thor() {
   echoinfo "Installing thor"
-  gem install thor --no-document --pre
-}
-
-install_heroku_plugins() {
-  echoinfo "Installing the heroku-config plugin to pull config variables locally to be used as ENV variables ..."
-  heroku plugins:install git://github.com/ddollar/heroku-config.git
+  gem install thor --no-document
 }
 
 #change_shell
@@ -96,7 +93,6 @@ install_heroku_plugins() {
 #default_ruby
 #fix_zsh_bug
 #install_bundler
-#install_heroku_plugins
 #install_homebrew
 #install_ruby
 #install_thor
