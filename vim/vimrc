@@ -55,8 +55,8 @@
   Plugin 'SQLUtilities'
   Plugin 'dbext.vim'
   Plugin 'gcmt/wildfire.vim'
-  Plugin 'vim-scripts/renamer.vim'
   Plugin 'rizzatti/dash.vim'
+  Plugin 'c0r73x/vimdir.vim'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
