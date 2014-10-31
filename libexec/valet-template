@@ -200,7 +200,7 @@ class Template < Thor
 
     directories.each do |directory|
       say_status("INFO", "Creating #{directory} directory")
-      Dir.mkdir(project_directory + "/#{directory}") unless File.exists?(project_directory + "/#{directory}")
+      FileUtils.mkdir_p(project_directory + "/_vendor/#{directory}") unless File.exists?(project_directory + "/_vendor/#{directory}")
     end
 
   end

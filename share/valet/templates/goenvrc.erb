@@ -1,3 +1,7 @@
-# direnv environment file
+# direnv environment file for golang project
+# This file assumes that we'll be using the glide dependency
+# management tool instead of simply using the go layout provided
+# by direnv.
 
-layout go
+GOPATH=$(pwd)/_vendor
+PATH=$(pwd)/_vendor/bin:$PATH

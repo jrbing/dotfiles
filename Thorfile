@@ -41,7 +41,7 @@ class Dotfiles < Thor
     # Copy ssh config
     ssh_config = expand("~/.ssh/config")
     unless File.exist?(ssh_config)
-      run %{ cp "$HOME/.dotfiles/etc/ssh_config" "$HOME/.ssh/config" }
+      run %{ cp "$HOME/.dotfiles/ssh/ssh_config" "$HOME/.ssh/config" }
     end
   end
 
