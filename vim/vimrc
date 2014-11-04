@@ -5,7 +5,7 @@
 "   Much of this is borrowed heavily from Vincent Driessen, Steve Losh, Tim
 "   Pope, Janus, and the rest of the internet
 " -------------------------------------------------------------------------
-" Environment {{{1
+" Environment functions {{{1
 
   silent function! OSX()
     return has('macunix')
@@ -15,6 +15,12 @@
   endfunction
   silent function! WINDOWS()
     return  (has('win16') || has('win32') || has('win64'))
+  endfunction
+  silent function! MACVIM()
+    return has('gui_macvim')
+  endfunction
+  silent function! VIMR()
+    return has('gui_vimr')
   endfunction
 
 " }}}
@@ -31,7 +37,6 @@
 
   " Utilities
   Plugin 'artnez/vim-wipeout'
-  Plugin 'bling/vim-airline'
   Plugin 'godlygeek/tabular'
   Plugin 'kana/vim-metarw'
   Plugin 'kien/ctrlp.vim'
@@ -41,6 +46,7 @@
   Plugin 'mattn/gist-vim'
   Plugin 'mileszs/ack.vim'
   Plugin 'scrooloose/syntastic'
+  Plugin 'scrooloose/nerdcommenter'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-git'
@@ -60,8 +66,6 @@
   Plugin 'tpope/vim-projectionist'
   Plugin 'tpope/vim-bundler'
   Plugin 'tpope/vim-obsession'
-  Plugin 'vim-scripts/VOoM'
-  Plugin 'vim-scripts/YankRing.vim'
   Plugin 'vim-scripts/scratch.vim'
   Plugin 'vim-scripts/Align'
   Plugin 'Chiel92/vim-autoformat'
@@ -90,23 +94,20 @@
   Plugin 'wting/rust.vim'
   Plugin 'PProvost/vim-ps1'
 
-  " Completion / Snippets
-  Plugin 'Shougo/neocomplcache'
-  Plugin 'Shougo/neosnippet'
-  Plugin 'Shougo/neosnippet-snippets'
-  Plugin 'honza/vim-snippets'
-
-  if has("gui_macvim") || has("gui_vimr")
+  if OSX()
+    Plugin 'vim-scripts/VOoM'
+    Plugin 'vim-scripts/YankRing.vim'
+    Plugin 'bling/vim-airline'
+    Plugin 'Valloric/YouCompleteMe'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
     Plugin 'fatih/vim-go'
     Plugin 'zimbatm/direnv.vim'
   endif
 
-  if has("gui_vimr")
-    "This feels awkward...there should be a better way to do this
-  else
-    " Nerdtree
+  " Only load Nerdtree if we're not using VimR
+  if !VIMR()
     Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/nerdcommenter'
     Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'EvanDotPro/nerdtree-chmod'
   endif
@@ -149,14 +150,18 @@
   set shiftround
   set autoread
   set title
+  set mouse=a
+  set mousehide
 
   syntax on
 
-  " Don't try to highlight lines longer than 800 characters.
-  set synmaxcol=800
+  set synmaxcol=800                               " Don't try to highlight lines longer than 800 characters.
+  set shortmess+=filmnrxoOtT                      " Abbrev. of messages (avoids 'hit enter')
+  set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 
-  " Abbrev. of messages (avoids 'hit enter')
-  set shortmess+=filmnrxoOtT
+  set iskeyword-=.                    " '.' is an end of word designator
+  set iskeyword-=#                    " '#' is an end of word designator
+  set iskeyword-=-                    " '-' is an end of word designator
 
   " Set backup file location
   set backupdir=$HOME/.vim/tmp/backup// " backups
@@ -351,6 +356,13 @@
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
 
+  " Yank from the cursor to the end of the line, to be consistent with C and D
+  nnoremap Y y$
+
+  " Easier horizontal scrolling
+  map zl zL
+  map zh zH
+
 " }}}
 
 " Filetype autocommands {{{1
@@ -456,7 +468,7 @@
 
   " NERDTree {{{2
     map <Leader>n <plug>NERDTreeTabsToggle<CR>
-    let NERDTreeIgnore=['\.rbc$', '\~$']
+    let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
     let NERDChristmasTree=1           "Makes NERDTree use colors
     let NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
     let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
@@ -471,6 +483,23 @@
 
   " Tagbar {{{2
     nnoremap <silent> <F8> :TagbarToggle<CR>
+    "nnoremap <silent> <leader>tt :TagbarToggle<CR>
+
+    " If using go please install the gotags program using the following
+    " go install github.com/jstemmer/gotags
+    " And make sure gotags is in your path
+    "let g:tagbar_type_go = {
+        "\ 'ctagstype' : 'go',
+        "\ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
+            "\ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
+            "\ 'r:constructor', 'f:functions' ],
+        "\ 'sro' : '.',
+        "\ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
+        "\ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
+        "\ 'ctagsbin'  : 'gotags',
+        "\ 'ctagsargs' : '-sort -silent'
+        "\ }
+
   "}}}
 
   " Syntastic {{{2
@@ -527,81 +556,22 @@
   " Ack {{{2
     if executable('ag')
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-      "let g:ackprg = 'ag --nogroup --column'
 
       " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
       let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     endif
   "}}}
 
-
-  " Neocomplcache / Neosnippet {{{2
-    if has("autocmd") && exists("+omnifunc")
-        autocmd Filetype *
-            \if &omnifunc == "" |
-            \setlocal omnifunc=syntaxcomplete#Complete |
-            \endif
-    endif
-
-    hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-    hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-    hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
-
-    " Automatically open and close the popup menu / preview window
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-    set completeopt=menu,preview,longest
-
+  " YouCompleteMe {{{2
     let g:acp_enableAtStartup = 0
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_smart_case = 1
-    let g:neocomplcache_enable_underbar_completion = 1
-    let g:neocomplcache_enable_auto_delimiter = 1
-    let g:neocomplcache_max_list = 15
-    let g:neocomplcache_force_overwrite_completefunc = 1
 
-    " Define dictionary.
-    let g:neocomplcache_dictionary_filetype_lists = {
-                \ 'default' : '',
-                \ 'vimshell' : $HOME.'/.vimshell_hist',
-                \ 'scheme' : $HOME.'/.gosh_completions'
-                \ }
+    " enable completion from tags
+    let g:ycm_collect_identifiers_from_tags_files = 1
 
-    " Define keyword.
-    let g:neocomplcache_keyword_patterns = {}
-    let g:neocomplcache_keyword_patterns._ = '\h\w*'
-
-    " Plugin key-mappings.
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-    " SuperTab like snippets behavior.
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"
-
-    " For snippet_complete marker.
-    if has('conceal')
-      set conceallevel=2 concealcursor=i
-    endif
-
-    " <ESC> takes you out of insert mode
-    inoremap <expr> <Esc>   pumvisible() ? "\<C-y>\<Esc>" : "\<Esc>"
-
-    " <CR> accepts first, then sends the <CR>
-    inoremap <expr> <CR>    pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-
-    " <Down> and <Up> cycle like <Tab> and <S-Tab>
-    inoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
-    inoremap <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
-
-    " Jump up and down the list
-    inoremap <expr> <C-d>   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-    inoremap <expr> <C-u>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+    " remap Ultisnips for compatibility for YCM
+    let g:UltiSnipsExpandTrigger = '<C-j>'
+    let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -612,23 +582,21 @@
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-    " Enable heavy omni completion.
-    "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-
-    " Enable neosnippet snipmate compatibility mode
-    let g:neosnippet#enable_snipmate_compatibility = 1
-
-    " Use honza's snippets.
-    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/custom/snippets'
-
-    " For snippet_complete marker.
-    if has('conceal')
-      set conceallevel=2 concealcursor=i
+    " Haskell post write lint and check with ghcmod
+    " $ `cabal install ghcmod` if missing and ensure
+    " ~/.cabal/bin is in your $PATH.
+    if !executable("ghcmod")
+        autocmd BufWritePost *.hs GhcModCheckAndLintAsync
     endif
 
-    " Disable the neosnippet preview candidate window
-    set completeopt-=preview
+    " For snippet_complete marker.
+    if !exists("g:spf13_no_conceal")
+        if has('conceal')
+            set conceallevel=2 concealcursor=i
+        endif
+    endif
 
+    set completeopt-=preview
   " }}}
 
 " }}}
@@ -873,7 +841,7 @@ RUBY
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 
-"Gruvbox italic fix
+  "Gruvbox italic fix
   if !has("gui_running")
     let g:gruvbox_italic=0
   endif
@@ -894,16 +862,10 @@ RUBY
     set fillchars+=vert:│
 
     " Macvim specific settings
-    if has("gui_macvim") || has("gui_vimr")
-
-      " For some reason macvim isn't getting the full path
-      "let $PATH=$PATH . ':~/.cabal/bin'
+    if OSX()
 
       " Set Colorscheme
-      "colorscheme gruvbox
       colorscheme base16-eighties
-      "colorscheme base16-default
-      "colorscheme solarized
 
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
@@ -970,11 +932,10 @@ RUBY
       imap <D-D> <Esc>gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
     " Windows Specific Settings
-    elseif has("win32") || has("win64")
+    elseif WINDOWS()
 
       " Set Colorscheme
       colorscheme gruvbox
-      "colorscheme base16-default
 
       " Set the font
       set guifont=Consolas:h10
@@ -1067,7 +1028,7 @@ RUBY
 " Miscellaneous {{{1
 
 " When encrypting any file, use the much stronger blowfish algorithm
-"set cryptmethod=blowfish
+set cryptmethod=blowfish
 
 " Disable additional files that are generated when working with an encrypted file
 "autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
