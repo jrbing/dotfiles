@@ -442,7 +442,7 @@
   "}}}
 
   " SnipMate {{{2
-    let g:snips_author = 'JR Bing <jr@jrbing.com>'
+    "let g:snips_author = 'JR Bing <jr@jrbing.com>'
   "}}}
 
   " Coffeescript {{{2
@@ -562,7 +562,7 @@
     endif
   "}}}
 
-  " YouCompleteMe {{{2
+  " YouCompleteMe / Ultisnips {{{2
     let g:acp_enableAtStartup = 0
 
     " enable completion from tags
@@ -572,6 +572,9 @@
     let g:UltiSnipsExpandTrigger = '<C-j>'
     let g:UltiSnipsJumpForwardTrigger = '<C-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+    " set snippets search path
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom/snippets"]
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -587,13 +590,6 @@
     " ~/.cabal/bin is in your $PATH.
     if !executable("ghcmod")
         autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-    endif
-
-    " For snippet_complete marker.
-    if !exists("g:spf13_no_conceal")
-        if has('conceal')
-            set conceallevel=2 concealcursor=i
-        endif
     endif
 
     set completeopt-=preview
