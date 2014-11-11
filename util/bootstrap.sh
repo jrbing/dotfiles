@@ -16,7 +16,7 @@ set -e
 
 readonly RUBY_VERSION="$(curl -sSL http://ruby.thoughtbot.com/latest)"
 readonly PROGNAME="$(basename $0)"
-readonly PROGDIR="$(readlink -m $(dirname $0))"
+source ./homebrew.sh
 
 echoinfo() {
   printf "${GC} *  INFO${EC}: %s\n" "$@";
@@ -29,8 +29,7 @@ change_shell() {
 
 clone_dotfiles() {
   git clone git@github.com:jrbing/dotfiles.git $HOME/.dotfiles
-  cd $HOME/.dotfiles
-  #TODO:  pull down submodules
+  cd $HOME/.dotfiles && git submodule init && git submodule update
 }
 
 # TODO: is this still necessary?
@@ -44,10 +43,16 @@ fix_zsh_bug() {
 install_homebrew() {
   if ! command -v brew &>/dev/null; then
     echoinfo "Installing Homebrew"
-    ruby <(curl -fsS https://raw.githubusercontent.com/Homebrew/homebrew/go/install)
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   else
     echoinfo "Homebrew already installed"
   fi
+}
+
+install_brews() {
+  brew tap ${TAPS[@]} && brew install ${FORMULAS[@]}
+  brew cask ${CASKS[@]} && brew cask alfred link
+  brew cleanup
 }
 
 update_homebrew() {
@@ -89,13 +94,15 @@ install_thor() {
 
 #change_shell
 #clone_dotfiles
-#configure_bundler
-#default_ruby
 #fix_zsh_bug
-#install_bundler
-#install_homebrew
-#install_ruby
-#install_thor
-#update_homebrew
-#update_rubygems
+install_homebrew
+update_homebrew
+install_brews
+install_ruby
+default_ruby
+update_rubygems
+install_bundler
+configure_bundler
+install_thor
 
+#sudo echo "/usr/local/bin/zsh" >> /etc/shells && chsh -s /usr/local/bin/zsh
