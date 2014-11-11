@@ -24,12 +24,12 @@ echoinfo() {
 
 change_shell() {
   echoinfo "Changing shell to zsh"
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
 }
 
 clone_dotfiles() {
-  git clone git@github.com:jrbing/dotfiles.git $HOME/.dotfiles
-  cd $HOME/.dotfiles && git submodule init && git submodule update
+  git clone git@github.com:jrbing/dotfiles.git "$HOME/.dotfiles"
+  cd "$HOME/.dotfiles" && git submodule init && git submodule update
 }
 
 # TODO: is this still necessary?
@@ -50,8 +50,8 @@ install_homebrew() {
 }
 
 install_brews() {
-  brew tap ${TAPS[@]} && brew install ${FORMULAS[@]}
-  brew cask ${CASKS[@]} && brew cask alfred link
+  brew tap "${TAPS[@]}" && brew install "${FORMULAS[@]}"
+  brew cask "${CASKS[@]}" && brew cask alfred link
   brew cleanup
 }
 
