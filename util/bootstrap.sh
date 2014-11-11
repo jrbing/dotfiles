@@ -94,7 +94,7 @@ install_thor() {
 
 #change_shell
 #clone_dotfiles
-#fix_zsh_bug
+fix_zsh_bug
 install_homebrew
 update_homebrew
 install_brews

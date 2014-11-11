@@ -37,6 +37,7 @@ FORMULAS=(
     the_silver_searcher
     macvim --override-system-vim --custom-icons --with-lua
     ctags
+    shellcheck
 )
 
 # Homebrew casks
