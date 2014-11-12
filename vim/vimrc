@@ -25,7 +25,7 @@
 
 " }}}
 
-" Bundles {{{1
+" Plugins {{{1
 
   set nocompatible
   filetype off
@@ -45,9 +45,7 @@
   Plugin 'mattn/webapi-vim'
   Plugin 'mattn/gist-vim'
   Plugin 'mileszs/ack.vim'
-  Plugin 'scrooloose/syntastic'
   Plugin 'scrooloose/nerdcommenter'
-  Plugin 'terryma/vim-multiple-cursors'
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-git'
   Plugin 'tpope/vim-surround'
@@ -58,8 +56,8 @@
   Plugin 'tpope/vim-dispatch'
   Plugin 'tpope/vim-rbenv'
   Plugin 'tpope/vim-sleuth'
-  Plugin 'tpope/vim-classpath'
-  Plugin 'tpope/vim-heroku'
+  "Plugin 'tpope/vim-classpath'
+  "Plugin 'tpope/vim-heroku'
   Plugin 'tpope/vim-repeat'
   Plugin 'tpope/vim-rsi'
   Plugin 'tpope/vim-rake'
@@ -68,9 +66,6 @@
   Plugin 'tpope/vim-obsession'
   Plugin 'vim-scripts/scratch.vim'
   Plugin 'vim-scripts/Align'
-  Plugin 'Chiel92/vim-autoformat'
-  Plugin 'SQLUtilities'
-  Plugin 'dbext.vim'
   Plugin 'gcmt/wildfire.vim'
   Plugin 'rizzatti/dash.vim'
   Plugin 'c0r73x/vimdir.vim'
@@ -95,8 +90,13 @@
   Plugin 'PProvost/vim-ps1'
 
   if OSX()
+    "Plugin 'vim-scripts/YankRing.vim'
+    Plugin 'Chiel92/vim-autoformat'
+    Plugin 'SQLUtilities'
+    Plugin 'dbext.vim'
+    Plugin 'scrooloose/syntastic'
+    Plugin 'terryma/vim-multiple-cursors'
     Plugin 'vim-scripts/VOoM'
-    Plugin 'vim-scripts/YankRing.vim'
     Plugin 'bling/vim-airline'
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
@@ -312,7 +312,7 @@
   nnoremap <C-H> <C-W>h<C-W>_
 
   " Opens an edit command with the path of the currently edited file filled in
-  " Normal mode: <Leader>e
+  " normal mode: <Leader>e
   map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
   " Opens a tab edit command with the path of the currently edited file filled in
@@ -441,17 +441,12 @@
     \ }
   "}}}
 
-  " SnipMate {{{2
-    "let g:snips_author = 'JR Bing <jr@jrbing.com>'
-  "}}}
-
   " Coffeescript {{{2
     let coffee_compile_vert = 1
     let coffee_watch_vert = 1
   "}}}
 
   " Airline {{{2
-    "let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
   "}}}
 
@@ -477,13 +472,11 @@
   "}}}
 
   " NERDTree Tabs {{{2
-    "let g:nerdtree_tabs_focus_on_files = 0
     let g:nerdtree_tabs_smart_startup_focus = 1
   "}}}
 
   " Tagbar {{{2
     nnoremap <silent> <F8> :TagbarToggle<CR>
-    "nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
     let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
@@ -525,15 +518,15 @@
   "}}}
 
   " Fugitive {{{2
-    nnoremap <leader>gd :Gdiff<cr>
-    nnoremap <leader>gs :Gstatus<cr>
-    nnoremap <leader>gw :Gwrite<cr>
+    "nnoremap <leader>gd :Gdiff<cr>
+    "nnoremap <leader>gs :Gstatus<cr>
+    "nnoremap <leader>gw :Gwrite<cr>
     "nnoremap <leader>gb :Gblame<cr>
-    nnoremap <leader>gco :Gcheckout<cr>
-    nnoremap <leader>gci :Gcommit<cr>
-    nnoremap <leader>gm :Gmove<cr>
-    nnoremap <leader>gr :Gremove<cr>
-    nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+    "nnoremap <leader>gco :Gcheckout<cr>
+    "nnoremap <leader>gci :Gcommit<cr>
+    "nnoremap <leader>gm :Gmove<cr>
+    "nnoremap <leader>gr :Gremove<cr>
+    "nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 
     augroup ft_fugitive
       au!
@@ -542,8 +535,8 @@
   "}}}
 
   " YankRing {{{2
-    nnoremap <silent> <F4> :YRShow<cr>
-    let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
+    "nnoremap <silent> <F4> :YRShow<cr>
+    "let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
   "}}}
 
   " TaskPaper {{{2
@@ -584,6 +577,7 @@
   "}}}
 
   " Ack {{{2
+    " Use ag instead of ack
     if executable('ag')
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 
@@ -595,15 +589,15 @@
   " YouCompleteMe / Ultisnips {{{2
     let g:acp_enableAtStartup = 0
 
-    " enable completion from tags
+    " Enable completion from tags
     let g:ycm_collect_identifiers_from_tags_files = 1
 
-    " remap Ultisnips for compatibility for YCM
+    " Remap Ultisnips for compatibility for YCM
     let g:UltiSnipsExpandTrigger = '<C-j>'
     let g:UltiSnipsJumpForwardTrigger = '<C-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
-    " set snippets search path
+    " Set snippets search path
     let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom/snippets"]
 
     " Enable omni completion.
@@ -846,7 +840,8 @@ RUBY
   function! ToggleVerbose()
     if !&verbose
         set verbosefile=~/.log/vim/verbose.log
-        set verbose=15
+        "set verbose=15
+        set verbose=8
     else
         set verbose=0
         set verbosefile=
