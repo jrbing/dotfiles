@@ -485,20 +485,33 @@
     nnoremap <silent> <F8> :TagbarToggle<CR>
     "nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
-    " If using go please install the gotags program using the following
-    " go install github.com/jstemmer/gotags
-    " And make sure gotags is in your path
-    "let g:tagbar_type_go = {
-        "\ 'ctagstype' : 'go',
-        "\ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
-            "\ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
-            "\ 'r:constructor', 'f:functions' ],
-        "\ 'sro' : '.',
-        "\ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
-        "\ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
-        "\ 'ctagsbin'  : 'gotags',
-        "\ 'ctagsargs' : '-sort -silent'
-        "\ }
+    let g:tagbar_type_go = {
+      \ 'ctagstype' : 'go',
+      \ 'kinds'     : [
+          \ 'p:package',
+          \ 'i:imports:1',
+          \ 'c:constants',
+          \ 'v:variables',
+          \ 't:types',
+          \ 'n:interfaces',
+          \ 'w:fields',
+          \ 'e:embedded',
+          \ 'm:methods',
+          \ 'r:constructor',
+          \ 'f:functions'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+          \ 't' : 'ctype',
+          \ 'n' : 'ntype'
+      \ },
+      \ 'scope2kind' : {
+          \ 'ctype' : 't',
+          \ 'ntype' : 'n'
+      \ },
+      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsargs' : '-sort -silent'
+    \ }
 
   "}}}
 
@@ -551,6 +564,23 @@
   " DBExt {{{2
     let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
     let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
+  "}}}
+
+  " vim-go {{{2
+    "au FileType go nmap <Leader>s <Plug>(go-implements)
+    "au FileType go nmap <Leader>i <Plug>(go-info)
+    "au FileType go nmap <Leader>gd <Plug>(go-doc)
+    "au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    "au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+    "au FileType go nmap <leader>r <Plug>(go-run)
+    "au FileType go nmap <leader>b <Plug>(go-build)
+    "au FileType go nmap <leader>t <Plug>(go-test)
+    "au FileType go nmap <leader>c <Plug>(go-coverage)
+    "au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    "au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+    "au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+    "au FileType go nmap <Leader>e <Plug>(go-rename)
+    "let g:go_bin_path = "/opt/go/bin"
   "}}}
 
   " Ack {{{2
