@@ -4,15 +4,13 @@
 export JAVA_HOME=$(/usr/libexec/java_home)
 export EDITOR='vim'
 export VISUAL='mvim -f'
-#export LC_CTYPE="utf-8"
+export LC_CTYPE="utf-8"
 
 #
 # Path
 #
-[[ -d $DOTFILES/zsh/fasd ]] && export PATH="$PATH:$DOTFILES/zsh/fasd"             # fasd
-[[ -d /usr/local/share/npm/bin ]] && export PATH="$PATH:/usr/local/share/npm/bin" # NPM
-[[ -d /usr/local/heroku ]] && export PATH="$PATH:/usr/local/heroku/bin"           # Heroku Toolbelt
-[[ -d "$HOME/.cabal/bin" ]] && export PATH="$PATH:$HOME/.cabal/bin"               # Cabal binaries
+[[ -d "/usr/local/bin" ]] && export PATH=/usr/local/bin:$PATH # Workaround issue with PATH in yosemite
+[[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
 
 #
 # Aliases
