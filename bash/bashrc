@@ -26,7 +26,6 @@ case $(uname) in
     alias sqlplus="export DYLD_LIBRARY_PATH=/opt/oracle/client ; /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
   ;;
   (Linux)
-    source "${DOTFILES}/env/linuxrc"
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
     export PATH=$PATH:/sbin:/usr/sbin
   ;;
