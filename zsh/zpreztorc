@@ -38,7 +38,6 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'history-substring-search'
 
-  #'haskell' \
 #
 # Editor
 #

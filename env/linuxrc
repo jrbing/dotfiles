@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#Settings specific to Linux
-
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
-export PATH=$PATH:/sbin:/usr/sbin

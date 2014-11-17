@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# Settings specific to Solaris
-
-export DISABLE_LS_COLORS=true
-export PATH=$PATH:/usr/cluster/bin
-export PATH=$PATH:/sbin
