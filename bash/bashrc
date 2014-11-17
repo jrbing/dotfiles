@@ -97,15 +97,10 @@ else
 fi
 
 #
-# Valet
-#
-#eval "$($HOME/.dotfiles/bin/valet init -)"
-
-#
 # Additional Tools
 #
 export SQLPATH=$DOTFILES/sql/oracle                                                           # SQL script path for sqlplus
-[[ -d "$HOME/.rbenv/bin" ]] && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)" # RBENV
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # direnv
 if hash direnv 2>/dev/null; then
