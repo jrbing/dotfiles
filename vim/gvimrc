@@ -22,9 +22,6 @@ if has ("gui_macvim")
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
 
-  " Set correct path for taglist plugin
-  let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-
 elseif has("win32") || has("win64")
 
   " Map Alt right/left to move tabs
