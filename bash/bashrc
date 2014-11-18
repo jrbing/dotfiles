@@ -100,7 +100,7 @@ fi
 #
 # Additional Tools
 #
-export SQLPATH=$DOTFILES/sql/oracle                                                           # SQL script path for sqlplus
+export SQLPATH=$DOTFILES/sql/oracle       # SQL script path for sqlplus
 
 # direnv
 if hash direnv 2>/dev/null; then
