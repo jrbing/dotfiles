@@ -18,9 +18,9 @@ case $(uname) in
       spininfo "Upgrading packages" "brew upgrade > /dev/null 2>&1"
       spininfo "Cleaning up" "brew cleanup > /dev/null 2>&1"
     fi
-    if hash rbenv 2>/dev/null; then
-      spininfo "Updating rbenv" "rbenv update > /dev/null 2>&1"
-    fi
+    #if hash rbenv 2>/dev/null; then
+      #spininfo "Updating rbenv" "rbenv update > /dev/null 2>&1"
+    #fi
   ;;
   (Linux)
     if hash yum 2>/dev/null; then

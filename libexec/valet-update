@@ -13,7 +13,7 @@ source "$DOTFILES/share/lib/bash-functions.sh"
 # Pull down updates to dotfiles from Github
 #
 update_dotfiles="cd $DOTFILES && git pull origin master > /dev/null 2>&1 && git submodule update --init --recursive > /dev/null 2>&1"
-update_vim_plugins="vim +BundleUpdate +qall > /dev/null 2>&1"
+update_vim_plugins="vim +PluginUpdate +qall > /dev/null 2>&1"
 
 spininfo "Updating dotfiles" "${update_dotfiles}"
 spininfo "Updating vim plugins" "${update_vim_plugins}"
