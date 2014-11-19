@@ -11,7 +11,8 @@ case $(uname) in
     export JAVA_HOME=$(/usr/libexec/java_home)
     export EDITOR='vim'
     export VISUAL='mvim -f'
-    export LC_CTYPE="utf-8"
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
 
     if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
