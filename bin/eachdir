@@ -78,7 +78,7 @@ for d in "${dirs[@]}"; do
 done
 
 # List any dirs that had no output.
-if [[ ${#nops[@]} > 0 ]]; then
+if [[ ${#nops[@]} -gt 0 ]]; then
   echo "${h1}no output from${h2}"
   for d in "${nops[@]}"; do echo "$d"; done
 fi

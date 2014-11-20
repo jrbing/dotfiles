@@ -26,16 +26,16 @@ shopt -s nullglob
 { for path in ${PATH//:/$'\n'}; do
     for command in "${path}/valet-"*; do
       command="${command##*valet-}"
-      if [ -n "$sh" ]; then
-        if [ ${command:0:3} = "sh-" ]; then
-          echo ${command##sh-}
+      if [[ -n "$sh" ]]; then
+        if [[ ${command:0:3} = "sh-" ]]; then
+          echo "${command##sh-}"
         fi
-      elif [ -n "$nosh" ]; then
-        if [ ${command:0:3} != "sh-" ]; then
-          echo ${command##sh-}
+      elif [[ -n "$nosh" ]]; then
+        if [[ ${command:0:3} != "sh-" ]]; then
+          echo "${command##sh-}"
         fi
       else
-        echo ${command##sh-}
+        echo "${command##sh-}"
       fi
     done
   done
