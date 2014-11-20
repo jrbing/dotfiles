@@ -502,7 +502,7 @@
           \ 'ctype' : 't',
           \ 'ntype' : 'n'
       \ },
-      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsbin'  : '/opt/go/bin/gotags',
       \ 'ctagsargs' : '-sort -silent'
     \ }
 
@@ -532,11 +532,6 @@
       au!
       au BufNewFile,BufRead .git/index setlocal nolist
     augroup END
-  "}}}
-
-  " YankRing {{{2
-    "nnoremap <silent> <F4> :YRShow<cr>
-    "let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
   "}}}
 
   " TaskPaper {{{2
