@@ -22,7 +22,7 @@ if has ("gui_macvim")
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
 
-  set shell=/bin/bash\ --login
+  "set shell=/bin/bash\ --login
   "set shell=/bin/sh
 
 elseif has("win32") || has("win64")

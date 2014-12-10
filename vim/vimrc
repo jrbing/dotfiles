@@ -881,7 +881,7 @@ RUBY
     " Macvim specific settings
     if OSX()
 
-      "set shell=/bin/bash\ --login
+      set shell=/usr/local/bin/zsh
 
       " Set Colorscheme
       colorscheme base16-eighties
