@@ -5,8 +5,8 @@ ServerAliveCountMax=6
 StrictHostKeyChecking=no
 Compression=yes
 ForwardAgent=yes
-RemoteForward 2224 127.0.0.1:2224
+RemoteForward 8377 localhost:8377
 
 ControlMaster auto
 ControlPath ~/.ssh/ssh-%r@%h:%p.sock
-ControlPersist yes
+ControlPersist 240
