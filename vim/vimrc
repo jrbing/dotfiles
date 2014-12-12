@@ -56,20 +56,19 @@
   Plugin 'tpope/vim-dispatch'
   Plugin 'tpope/vim-rbenv'
   Plugin 'tpope/vim-sleuth'
-  "Plugin 'tpope/vim-classpath'
-  "Plugin 'tpope/vim-heroku'
   Plugin 'tpope/vim-repeat'
   Plugin 'tpope/vim-rsi'
   Plugin 'tpope/vim-rake'
   Plugin 'tpope/vim-projectionist'
   Plugin 'tpope/vim-bundler'
   Plugin 'tpope/vim-obsession'
-  Plugin 'vim-scripts/scratch.vim'
   Plugin 'vim-scripts/Align'
+
   Plugin 'gcmt/wildfire.vim'
   Plugin 'rizzatti/dash.vim'
   Plugin 'c0r73x/vimdir.vim'
   Plugin 'talek/vorax4'
+  Plugin 'mtth/scratch.vim'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
