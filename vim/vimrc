@@ -273,7 +273,7 @@
 
   set virtualedit+=block
 
-  noremap <leader><space> :noh<cr>:call clearmatches()<cr>
+  nnoremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
   " Keep search matches in the middle of the window and pulse the line when moving
   " to them.
@@ -882,8 +882,6 @@ RUBY
 
     " Macvim specific settings
     if OSX()
-
-      set shell=/usr/local/bin/zsh
 
       " Set Colorscheme
       colorscheme base16-eighties
