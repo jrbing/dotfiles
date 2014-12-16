@@ -67,8 +67,8 @@
   Plugin 'gcmt/wildfire.vim'
   Plugin 'rizzatti/dash.vim'
   Plugin 'c0r73x/vimdir.vim'
-  Plugin 'talek/vorax4'
   Plugin 'mtth/scratch.vim'
+  "Plugin 'talek/vorax4'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
