@@ -392,7 +392,7 @@
   " Ruby
   augroup ft_ruby
     au!
-    au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap}    setlocal ft=ruby
+    au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
   augroup END
   autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
 
@@ -405,29 +405,35 @@
   " Textfiles
   augroup ft_txt
     au!
-    au BufRead,BufNewFile *.txt call s:setupWrapping()
+    au BufRead,BufNewFile *.{txt} call s:setupWrapping()
   augroup END
 
   " Datamover
   augroup ft_datamover
     au!
-    au BufRead,BufNewFile *.{dms}    setlocal ft=sql
+    au BufRead,BufNewFile *.{dms} setlocal ft=sql
   augroup END
 
   " Gradle
   augroup ft_gradle
     au!
-    au BufRead,BufNewFile *.{gradle}    setlocal ft=groovy
+    au BufRead,BufNewFile *.{gradle} setlocal ft=groovy
   augroup END
 
   " TaskPaper
   augroup ft_taskpaper
     au!
-    au BufRead,BufNewFile *.taskpaper    setlocal autoread nolist textwidth=0 wrapmargin=0
+    au BufRead,BufNewFile *.{taskpaper} setlocal autoread nolist textwidth=0 wrapmargin=0
   augroup END
 
   " Coffeescript
-  autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+  autocmd BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
+
+  " C Style Indentation
+  augroup ft_cstyle
+    au!
+    au BufRead,BufNewFile *.{c,h,cpp} call s:cStyleIndent()
+  augroup END
 
 " }}}
 
@@ -626,6 +632,13 @@
     au! BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
   endif
+
+  function! s:cStyleIndent()
+    setlocal expandtab
+    setlocal tabstop=4
+    setlocal shiftwidth=4
+    setlocal softtabstop=4
+  endfunction
 
   function! s:setupWrapping()
     setlocal wrap
