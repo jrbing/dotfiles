@@ -41,8 +41,10 @@
   Plugin 'gcmt/wildfire.vim'
   Plugin 'godlygeek/tabular'
   Plugin 'justinmk/vim-sneak'
+  Plugin 'kana/vim-metarw'
   Plugin 'kien/ctrlp.vim'
   Plugin 'majutsushi/tagbar'
+  Plugin 'mattn/webapi-vim'
   Plugin 'mileszs/ack.vim'
   Plugin 'mtth/scratch.vim'
   Plugin 'rizzatti/dash.vim'
@@ -64,8 +66,6 @@
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'vim-scripts/Align'
-  "Plugin 'kana/vim-metarw'
-  "Plugin 'mattn/webapi-vim'
   "Plugin 'mattn/gist-vim'
   "Plugin 'talek/vorax4'
 
@@ -89,7 +89,6 @@
   "Plugin 'PProvost/vim-ps1'
 
   if OSX()
-    "Plugin 'vim-scripts/YankRing.vim'
     Plugin 'Chiel92/vim-autoformat'
     Plugin 'SQLUtilities'
     Plugin 'dbext.vim'
@@ -97,11 +96,14 @@
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'vim-scripts/VOoM'
     Plugin 'bling/vim-airline'
-    Plugin 'Valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'fatih/vim-go'
     Plugin 'zimbatm/direnv.vim'
+    if !VIMR()
+      Plugin 'Valloric/YouCompleteMe'
+    endif
+    "Plugin 'vim-scripts/YankRing.vim'
   endif
 
   " Only load Nerdtree if we're not using VimR
