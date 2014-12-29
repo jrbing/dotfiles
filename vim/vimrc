@@ -91,7 +91,7 @@
   if OSX()
     Plugin 'Chiel92/vim-autoformat'
     Plugin 'SQLUtilities'
-    Plugin 'dbext.vim'
+    Plugin 'jonathanfilip/vim-dbext'
     Plugin 'scrooloose/syntastic'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'vim-scripts/VOoM'
@@ -1063,23 +1063,23 @@ RUBY
 
 " Miscellaneous {{{1
 
-" When encrypting any file, use the much stronger blowfish algorithm
-set cryptmethod=blowfish
+  " When encrypting any file, use the much stronger blowfish algorithm
+  set cryptmethod=blowfish
 
-" Disable additional files that are generated when working with an encrypted file
-"autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
+  " Disable additional files that are generated when working with an encrypted file
+  "autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
 
-" Automatically reload the vimrc file when changed
-"autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+  " Automatically reload the vimrc file when changed
+  "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
-if !exists("autocommands_loaded")
-  let autocommands_loaded = 1
-endif
+  if !exists("autocommands_loaded")
+    let autocommands_loaded = 1
+  endif
 
-" Include vim configuration specific to a machine
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
+  " Include vim configuration specific to a machine
+  if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+  endif
 
 " }}}
 
