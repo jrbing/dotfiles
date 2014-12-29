@@ -706,6 +706,33 @@
     return c
   endfunc
 
+  " Kernel formatting function modified from https://github.com/vivien/vim-addon-linux-coding-style
+  function! SetKernelFormatting()
+    " Whitespace
+    setlocal tabstop=8
+    setlocal shiftwidth=8
+    setlocal softtabstop=8
+    setlocal textwidth=80
+    setlocal noexpandtab
+
+    " Indention
+    setlocal cindent
+    setlocal formatoptions=tcqlron
+    setlocal cinoptions=:0,l1,t0,g0,(0
+
+    " Keywords
+    syn keyword cOperator likely unlikely
+    syn keyword cType u8 u16 u32 u64 s8 s16 s32 s64
+
+    " Highlighting
+    highlight default link LinuxError ErrorMsg
+    syn match LinuxError / \+\ze\t/     " spaces before tab
+    syn match LinuxError /\s\+$/        " trailing whitespaces
+    syn match LinuxError /\%81v.\+/     " virtual column 81 and more
+  endfunction
+
+  command! SetKernelFormatting :call SetKernelFormatting()
+
   " Trim trailing whitespace
   function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
