@@ -87,8 +87,8 @@ case $OSTYPE in
     #
     # Aliases
     #
-    alias z='fasd_cd -d'                              # Alias for FASD
-    alias flush-dns="sudo killall -HUP mDNSResponder" # DNS
+    alias z='fasd_cd -d'                                  # Alias for FASD
+    alias flush-dns= "sudo discoveryutil udnsflushcaches" # DNS
     alias ans=ansible
     alias apb=ansible-playbook
     alias agx=ansible-galaxy
