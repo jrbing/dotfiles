@@ -194,3 +194,40 @@ bincheck() {
         { echoerror >&2 " Required program \"$p\" not installed."; exit 1; }
     done
 }
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  blinker
+#   DESCRIPTION:  Displays uses the blink1-tool application to indicate the
+#                 status of a long running job
+#-------------------------------------------------------------------------------
+blinker() {
+    local req_progs=(blink1-tool)
+    bincheck ${req_progs[*]}
+
+    local command=$*
+
+    echoinfo "Executing \"${command}\""
+    #( eval "${command}" > /dev/null 2>&1 ) &
+    ( eval "${command}" ) &
+
+    local pid=$!
+    local delay=5
+    local fade_delay=5000
+
+    # Pulse blue until the process finishes
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        blink1-tool --blue -m $fade_delay > /dev/null 2>&1
+        sleep $delay
+        blink1-tool --off -m $fade_delay > /dev/null 2>&1
+        sleep $delay
+    done
+
+    if [[ $? -eq 0 ]]; then
+        echoinfo "\"${command}\" has completed successfully"
+        blink1-tool --green> /dev/null 2>&1
+    else
+        echoerror "\"${command}\" has failed"
+        blink1-tool --red> /dev/null 2>&1
+    fi
+
+}
