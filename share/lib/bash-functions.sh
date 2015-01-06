@@ -42,7 +42,7 @@ __detect_color_support
 #   DESCRIPTION:  Echo errors to stderr.
 #-------------------------------------------------------------------------------
 function echoerror() {
-    printf "${RC} * ERROR${EC}: $@\n" 1>&2;
+    printf "${RC} * ERROR${EC}: %s\n" "$@" 1>&2;
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -66,7 +66,7 @@ function echowarn() {
 #   DESCRIPTION:  Echo debug information to stdout.
 #-------------------------------------------------------------------------------
 function echodebug() {
-    if [ $ECHO_DEBUG -eq $BS_TRUE ]; then
+    if [[ "$ECHO_DEBUG" -eq "$BS_TRUE" ]]; then
         printf "${BC} * DEBUG${EC}: %s\n" "$@";
     fi
 }
@@ -103,7 +103,7 @@ function toupper {
 #   DESCRIPTION:  Only returns the first part of a string, delimited by tabs or spaces
 #-------------------------------------------------------------------------------
 function trim {
-    echo $1
+    echo "$1"
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -181,4 +181,16 @@ spininfo() {
     fi
 
     printf "\n"
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  bincheck
+#   DESCRIPTION:  Checks for the existence of specified binaries in the PATH
+#-------------------------------------------------------------------------------
+
+bincheck() {
+    for p in ${1}; do
+        hash "$p" 2>&- || \
+        { echoerror >&2 " Required program \"$p\" not installed."; exit 1; }
+    done
 }

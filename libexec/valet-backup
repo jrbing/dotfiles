@@ -9,5 +9,7 @@ set -e
 # Source generic bash functions
 source "$DOTFILES/share/lib/bash-functions.sh"
 
-cd ~/Backup
-backup perform -t backup
+readonly req_progs=(backup)
+bincheck "$req_progs"
+
+cd ~/Backup && backup perform -t backup
