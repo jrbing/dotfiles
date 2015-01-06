@@ -27,7 +27,7 @@ case $(uname) in
     alias apb=ansible-playbook
     alias agx=ansible-galaxy
     alias anv=ansible-vault
-    alias sqlplus="export DYLD_LIBRARY_PATH=/opt/oracle/client/lib ; /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
+    alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
   ;;
   (Linux)
     eval "$("$HOME"/.dotfiles/bin/valet init -)"
