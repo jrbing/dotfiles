@@ -163,7 +163,8 @@ function spininfo() {
     local delay=0.5
     local spinstr='|/-\'
     #local spinstr='← ↖ ↑ ↗ → ↘ ↓ ↙'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+
+    while ps a | awk '{print $1}' | grep "$pid" > /dev/null 2>&1; do
         local temp=${spinstr#?}
         printf " [%c]  " "$spinstr"
         local spinstr=$temp${spinstr%"$temp"}
@@ -172,7 +173,10 @@ function spininfo() {
     done
     printf "    \b\b\b\b"
 
-    if [[ $? -eq 0 ]]; then
+    wait "$pid"
+    local return_status=$?
+
+    if [[ $return_status -eq 0 ]]; then
         let columns=$(tput cols)-${#message}+${#GC}+${#EC}+11
         printf "%${columns}b" "${GC}[SUCCESS]${EC}"
     else
@@ -200,7 +204,7 @@ function bincheck() {
 #   DESCRIPTION:  Pauses execution of the script
 #-------------------------------------------------------------------------------
 
-function pause(){
+function pause() {
     printf "${BC} * PAUSE${EC}: ";
     read -p "$*"
 }
