@@ -110,7 +110,7 @@ function trim {
 #          NAME:  option_enabled
 #   DESCRIPTION:  Checks if a variable is set to "y" or "yes"
 #-------------------------------------------------------------------------------
-option_enabled () {
+function option_enabled () {
 
     VAR="$1"
     VAR_VALUE=$(eval echo \$$VAR)
@@ -127,7 +127,7 @@ option_enabled () {
 #   DESCRIPTION:  Displays a spinner while a long running job is processing
 #   NOTES:  Taken from http://fitnr.com/showing-a-bash-spinner.html
 #-------------------------------------------------------------------------------
-spinner() {
+function spinner() {
     local pid=$1
     local delay=0.5
     local spinstr='|/-\'
@@ -151,7 +151,7 @@ spinner() {
 #          NAME:  spininfo
 #   DESCRIPTION:  Displays a spinner while a long running job is processing
 #-------------------------------------------------------------------------------
-spininfo() {
+function spininfo() {
 
     local message="${GC} *  INFO${EC}: $1"
     local command=$2
@@ -188,7 +188,7 @@ spininfo() {
 #   DESCRIPTION:  Checks for the existence of specified binaries in the PATH
 #-------------------------------------------------------------------------------
 
-bincheck() {
+function bincheck() {
     for p in ${1}; do
         hash "$p" 2>&- || \
         { echoerror >&2 " Required program \"$p\" not installed."; exit 1; }
@@ -196,38 +196,11 @@ bincheck() {
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  blinker
-#   DESCRIPTION:  Displays uses the blink1-tool application to indicate the
-#                 status of a long running job
+#          NAME:  pause
+#   DESCRIPTION:  Pauses execution of the script
 #-------------------------------------------------------------------------------
-blinker() {
-    local req_progs=(blink1-tool)
-    bincheck ${req_progs[*]}
 
-    local command=$*
-
-    echoinfo "Executing \"${command}\""
-    #( eval "${command}" > /dev/null 2>&1 ) &
-    ( eval "${command}" ) &
-
-    local pid=$!
-    local delay=5
-    local fade_delay=5000
-
-    # Pulse blue until the process finishes
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        blink1-tool --blue -m $fade_delay > /dev/null 2>&1
-        sleep $delay
-        blink1-tool --off -m $fade_delay > /dev/null 2>&1
-        sleep $delay
-    done
-
-    if [[ $? -eq 0 ]]; then
-        echoinfo "\"${command}\" has completed successfully"
-        blink1-tool --green> /dev/null 2>&1
-    else
-        echoerror "\"${command}\" has failed"
-        blink1-tool --red> /dev/null 2>&1
-    fi
-
+function pause(){
+    printf "${BC} * PAUSE${EC}: ";
+    read -p "$*"
 }

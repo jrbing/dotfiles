@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#   FILE: blinksh
+#
+#   DESCRIPTION: Command wrapper which indicates the status of a long running
+#   job using the blink1-tool
+#
+#===============================================================================
+
+set -o nounset                  # Treat unset variables as an error
+
+# Source bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+# Check for the blink1-tool
+req_progs=(blink1-tool)
+bincheck ${req_progs[*]}
+
+function blinkexec() {
+
+  local command=$*
+  echoinfo "Executing \"${command}\""
+  ( eval "${command}" ) &
+
+  local pid=$!
+  local delay=5
+  local fade_delay=5000
+
+  # Pulse blue until the process finishes
+  while ps a | awk '{print $1}' | grep "$pid" > /dev/null 2>&1; do
+    blink1-tool --blue -m $fade_delay > /dev/null 2>&1
+    sleep $delay
+    blink1-tool --off -m $fade_delay > /dev/null 2>&1
+    sleep $delay
+  done
+
+  wait "$pid"
+  local return_status=$?
+
+  if [[ $return_status -eq 0 ]]; then
+    echoinfo "\"${command}\" has completed successfully"
+    blink1-tool --green> /dev/null 2>&1
+  else
+    echoerror "\"${command}\" has failed"
+    blink1-tool --red> /dev/null 2>&1
+  fi
+
+}
+
+function led_off() {
+  pause 'Press [Enter] key to continue...'
+  blink1-tool --off> /dev/null 2>&1
+}
+
+blinkexec "$@"
+led_off

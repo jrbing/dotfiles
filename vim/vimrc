@@ -525,6 +525,15 @@
     let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
     let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
     let g:syntastic_java_javac_config_file_enabled = 1
+
+    "set statusline+=%#warningmsg#
+    "set statusline+=%{SyntasticStatuslineFlag()}
+    "set statusline+=%*
+
+    "let g:syntastic_always_populate_loc_list = 1
+    "let g:syntastic_auto_loc_list = 1
+    "let g:syntastic_check_on_open = 1
+    "let g:syntastic_check_on_wq = 0
   "}}}
 
   " Fugitive {{{2
