@@ -1,3 +1,4 @@
+###################
 # Compiled source #
 ###################
 *.com
@@ -7,6 +8,7 @@
 *.o
 *.so
 
+############
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -20,11 +22,13 @@
 *.tar
 *.zip
 
+######################
 # Logs and databases #
 ######################
 *.log
 *.sqlite
 
+######################
 # OS generated files #
 ######################
 .DS_Store
@@ -37,6 +41,7 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 
+#####################
 # Development files #
 #####################
 TAGS
@@ -46,7 +51,18 @@ tags
 Session.vim
 .sass-cache
 
+#####################
 # Environment files #
 #####################
 .envrc
 .direnv
+
+##########
+# Packer #
+##########
+
+# Cache objects
+packer_cache/
+
+# For built boxes
+*.box
