@@ -165,29 +165,13 @@ class Template < Thor
   desc "golang [NAME]", "Creates golang project files and directories"
   def golang(project_name=nil)
 
-    # Get the name for the project unless one is specified
-    if project_name
-      @project_name = project_name
-    else
-      @project_name = ask("Name for project directory: ")
-    end
+    @project_name = get_project_name(project_name)
+    @project_base_directory = create_project_directory(@project_name)
 
-    # Create the project directory
-    project_directory = File.join(Dir.pwd, @project_name)
-    say_status("info", "Creating project directory at #{project_directory}")
-    Dir.mkdir(project_directory) unless File.exists?(project_directory)
-
-    # Create the direnv file
-    say_status("info", "Creating direnv environment file")
-    env_file = File.join(project_directory, ".envrc")
-    template("../share/valet/templates/goenvrc.erb", env_file)
-
-    directories = ["bin", "pkg", "src"]
-
-    directories.each do |directory|
-      say_status("info", "Creating #{directory} directory")
-      FileUtils.mkdir_p(project_directory + "/_vendor/#{directory}") unless File.exists?(project_directory + "/_vendor/#{directory}")
-    end
+    create_from_template("goenvrc.erb", ".envrc")
+    create_project_subdirectory('_vendor/bin')
+    create_project_subdirectory('_vendor/pkg')
+    create_project_subdirectory('_vendor/src')
 
   end
 
