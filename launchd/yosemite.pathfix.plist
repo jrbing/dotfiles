@@ -9,7 +9,7 @@
     <array>
       <string>sh</string>
       <string>-c</string>
-      <string>launchctl setenv PATH /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+      <string>launchctl setenv PATH /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin</string>
     </array>
     <key>RunAtLoad</key>
     <true />
