@@ -6,18 +6,18 @@
 require 'fileutils'
 require 'thor'
 require 'thor/actions'
+require_relative '../share/valet/util'
+
+TEMPLATE_DIRECTORY = File.expand_path('~/.dotfiles/share/valet/templates')
 
 class Template < Thor
 
   include Thor::Actions
+  include Valet
 
-  def self.source_root
-    File.dirname(__FILE__)
-  end
+  self.source_root(TEMPLATE_DIRECTORY)
 
-  #
-  # SQLPlus Script
-  #
+  # sqlplus script
   desc "sqlplus [NAME]", "Creates a basic sqlplus script file from template"
   def sqlplus(script_name=nil)
 
@@ -30,14 +30,12 @@ class Template < Thor
 
     # Create the sql script
     script_file = File.join(Dir.pwd, "#{@script_name}.sql")
-    say_status("INFO", "Creating sqlplus script #{script_file}")
+    say_status("info", "Creating sqlplus script #{script_file}")
     template("../share/valet/templates/sqlplus_script.erb", script_file)
 
   end
 
-  #
-  # Bash Script
-  #
+  # bash script
   desc "bash [NAME]", "Creates a basic bash script from template"
   def bash(script_name=nil)
 
@@ -50,7 +48,7 @@ class Template < Thor
 
     # Create the bash script
     script_file = File.join(Dir.pwd, "#{@script_name}.sh")
-    say_status("INFO", "Creating bash script #{script_file}")
+    say_status("info", "Creating bash script #{script_file}")
     template("../share/valet/templates/bash_script.erb", script_file)
     file = File.open(script_file, 'r')
     file.chmod(0700)
@@ -58,15 +56,13 @@ class Template < Thor
 
   end
 
-  #
   # envrc
-  #
   desc "envrc", "Creates a basic .envrc file in the current directory"
   def envrc
 
     # Create the envrc file
     env_file = File.join(Dir.pwd, ".envrc")
-    say_status("INFO", "Creating .envrc file")
+    say_status("info", "Creating .envrc file")
     template("../share/valet/templates/envrc.erb", env_file)
     file = File.open(env_file, 'r')
     file.chmod(0700)
@@ -74,14 +70,12 @@ class Template < Thor
 
   end
 
-  #
   # watchman
-  #
   desc "watchman", "Creates a basic Thorfile for use with ruby-watchman"
   def watchman
 
     watch_file = File.join(Dir.pwd, "Thorfile")
-    say_status("INFO", "Creating #{watch_file}")
+    say_status("info", "Creating #{watch_file}")
     template("../share/valet/templates/watchman.erb", watch_file)
     file = File.open(watch_file, 'r')
     file.chmod(0700)
@@ -89,9 +83,7 @@ class Template < Thor
 
   end
 
-  #
   # thor
-  #
   desc "thorfile [NAME]", "Creates a basic thor-based script file"
   def thorfile(script_name=nil)
 
@@ -104,7 +96,7 @@ class Template < Thor
 
     # Create the thor script
     script_file = File.join(Dir.pwd, "#{@script_name}.rb")
-    say_status("INFO", "Creating thor script #{script_file}")
+    say_status("info", "Creating thor script #{script_file}")
     template("../share/valet/templates/thor_script.erb", script_file)
     file = File.open(script_file, 'r')
     file.chmod(0700)
@@ -112,9 +104,7 @@ class Template < Thor
 
   end
 
-  #
-  # Batch Script
-  #
+  # windows batch script
   desc "batch [NAME]", "Creates a basic dos batch script file"
   def batch (script_name=nil)
 
@@ -127,7 +117,7 @@ class Template < Thor
 
     # Create the thor script
     script_file = File.join(Dir.pwd, "#{@script_name}.bat")
-    say_status("INFO", "Creating batch script #{script_file}")
+    say_status("info", "Creating batch script #{script_file}")
     template("../share/valet/templates/batch_script.erb", script_file)
     file = File.open(script_file, 'r')
     file.chmod(0700)
@@ -135,9 +125,7 @@ class Template < Thor
 
   end
 
-  #
-  # Datafix
-  #
+  # datafix
   desc "datafix [NAME]", "Creates datafix files and directories"
   def datafix(datafix_name=nil)
 
@@ -159,27 +147,25 @@ class Template < Thor
 
     # Create the sql script
     script_file = File.join(datafix_directory, "#{@datafix_name}.sql")
-    say_status("INFO", "Creating sqlplus script #{script_file}")
+    say_status("info", "Creating sqlplus script #{script_file}")
     template("../share/valet/templates/datafix_script.erb", script_file)
 
     # Create the datamover export files for all records
     records.each do |record|
       @record = record
       backup_file = File.join(datafix_directory, "#{record}_backup.dms")
-      say_status("INFO", "Creating datamover backup script #{backup_file}")
+      say_status("info", "Creating datamover backup script #{backup_file}")
       template("../share/valet/templates/datamover_backup.erb", backup_file)
     end
     run "unix2dos #{datafix_directory}/*"
 
   end
 
-  #
-  # Golang project
-  #
+  # golang project
   desc "golang [NAME]", "Creates golang project files and directories"
   def golang(project_name=nil)
 
-    # Get the name for the datafix unless one is specified
+    # Get the name for the project unless one is specified
     if project_name
       @project_name = project_name
     else
@@ -188,19 +174,56 @@ class Template < Thor
 
     # Create the project directory
     project_directory = File.join(Dir.pwd, @project_name)
-    say_status("INFO", "Creating project directory at #{project_directory}")
+    say_status("info", "Creating project directory at #{project_directory}")
     Dir.mkdir(project_directory) unless File.exists?(project_directory)
 
     # Create the direnv file
-    say_status("INFO", "Creating direnv environment file")
+    say_status("info", "Creating direnv environment file")
     env_file = File.join(project_directory, ".envrc")
     template("../share/valet/templates/goenvrc.erb", env_file)
 
     directories = ["bin", "pkg", "src"]
 
     directories.each do |directory|
-      say_status("INFO", "Creating #{directory} directory")
+      say_status("info", "Creating #{directory} directory")
       FileUtils.mkdir_p(project_directory + "/_vendor/#{directory}") unless File.exists?(project_directory + "/_vendor/#{directory}")
+    end
+
+  end
+
+  # shellfire project
+  desc "shellfire [NAME]", "Creates shellfire project files and directories"
+  def shellfire(project_name=nil)
+
+    @project_name = get_project_name(project_name)
+    @project_base_directory = create_project_directory(@project_name)
+    initialize_git_repo(@project_base_directory)
+
+    etc_path = create_project_subdirectory('etc/shellfire')
+    lib_path = create_project_subdirectory('lib/shellfire')
+    tools_path = create_project_subdirectory('tools')
+
+    add_submodule("https://github.com/shellfire-dev/paths.d", etc_path)
+    add_submodule("https://github.com/shellfire-dev/core", lib_path)
+    add_submodule("https://github.com/shellfire-dev/jsonreader", lib_path)
+    add_submodule("https://github.com/shellfire-dev/unicode", lib_path)
+    add_submodule("https://github.com/shellfire-dev/xmlwriter", lib_path)
+    add_submodule("https://github.com/shellfire-dev/build", lib_path)
+    add_submodule("https://github.com/shellfire-dev/fatten", tools_path)
+    add_submodule("https://github.com/raphaelcohn/swaddle", tools_path)
+    create_project_subdirectory("lib/shellfire/#{@project_name}")
+
+    update_submodules(@project_base_directory)
+
+    project_file = create_from_template("shellfire.erb", project_name)
+    chmod(project_file, 0755)
+
+    create_from_template("shellfire_functions.erb", "lib/shellfire/#{@project_name}/#{project_name}.functions")
+
+    create_from_template("shellfire_build.erb", "build.shellfire")
+
+    inside(@project_base_directory) do
+      run('ln -s lib/shellfire/build/build')
     end
 
   end
