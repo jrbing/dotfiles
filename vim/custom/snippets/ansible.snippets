@@ -1389,8 +1389,8 @@ endsnippet
 
 snippet command
 - name: ${1:task_description}
-	command:
-		free_form: ${2}
+	command: ${2}
+	#args:
 		#warn: ${3:True}
 		#creates: ${4}
 		#executable: ${5}
@@ -1401,16 +1401,14 @@ endsnippet
 
 snippet raw
 - name: ${1:task_description}
-	raw:
-		free_form: ${2}
+	raw: ${2}
 		#executable: ${3}
 $0
 endsnippet
 
 snippet script
 - name: ${1:task_description}
-	script:
-		free_form: ${2}
+	script: ${2}
 		#creates: ${3}
 		#removes: ${4}
 $0
@@ -1418,8 +1416,7 @@ endsnippet
 
 snippet shell
 - name: ${1:task_description}
-	shell:
-		free_form: ${2}
+	shell: ${2}
 		#warn: ${3:True}
 		#creates: ${4}
 		#executable: ${5}
