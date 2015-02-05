@@ -20,145 +20,64 @@ class Template < Thor
   # sqlplus script
   desc "sqlplus [NAME]", "Creates a basic sqlplus script file from template"
   def sqlplus(script_name=nil)
-
-    # Get the name for the script
-    if script_name
-      @script_name = script_name
-    else
-      @script_name = ask("Name for sqlplus script to be created: ")
-    end
-
-    # Create the sql script
-    script_file = File.join(Dir.pwd, "#{@script_name}.sql")
-    say_status("info", "Creating sqlplus script #{script_file}")
-    template("../share/valet/templates/sqlplus_script.erb", script_file)
-
+    @script_name = get_script_name(script_name)
+    create_from_template("sqlplus_script.erb", "#{@script_name}.sql")
   end
 
   # bash script
   desc "bash [NAME]", "Creates a basic bash script from template"
   def bash(script_name=nil)
-
-    # Get the name for the script
-    if script_name
-      @script_name = script_name
-    else
-      @script_name = ask("Name for bash script to be created: ")
-    end
-
-    # Create the bash script
-    script_file = File.join(Dir.pwd, "#{@script_name}.sh")
-    say_status("info", "Creating bash script #{script_file}")
-    template("../share/valet/templates/bash_script.erb", script_file)
-    file = File.open(script_file, 'r')
-    file.chmod(0700)
-    file.close
-
+    @script_name = get_script_name(script_name)
+    chmod(create_from_template("bash_script.erb", "#{@script_name}.sh"), 0755)
   end
 
   # envrc
   desc "envrc", "Creates a basic .envrc file in the current directory"
   def envrc
-
-    # Create the envrc file
-    env_file = File.join(Dir.pwd, ".envrc")
-    say_status("info", "Creating .envrc file")
-    template("../share/valet/templates/envrc.erb", env_file)
-    file = File.open(env_file, 'r')
-    file.chmod(0700)
-    file.close
-
+    create_from_template("envrc.erb", ".envrc")
   end
 
   # watchman
-  desc "watchman", "Creates a basic Thorfile for use with ruby-watchman"
-  def watchman
+  #desc "watchman", "Creates a basic Thorfile for use with ruby-watchman"
+  #def watchman
+    #watch_file = File.join(Dir.pwd, "Thorfile")
+    #say_status("info", "Creating #{watch_file}")
+    #template("../share/valet/templates/watchman.erb", watch_file)
+    #file = File.open(watch_file, 'r')
+    #file.chmod(0700)
+    #file.close
+  #end
 
-    watch_file = File.join(Dir.pwd, "Thorfile")
-    say_status("info", "Creating #{watch_file}")
-    template("../share/valet/templates/watchman.erb", watch_file)
-    file = File.open(watch_file, 'r')
-    file.chmod(0700)
-    file.close
-
-  end
-
-  # thor
+  # thorfile
   desc "thorfile [NAME]", "Creates a basic thor-based script file"
   def thorfile(script_name=nil)
-
-    # Get the name for the script
-    if script_name
-      @script_name = script_name
-    else
-      @script_name = ask("Name for thor script to be created: ")
-    end
-
-    # Create the thor script
-    script_file = File.join(Dir.pwd, "#{@script_name}.rb")
-    say_status("info", "Creating thor script #{script_file}")
-    template("../share/valet/templates/thor_script.erb", script_file)
-    file = File.open(script_file, 'r')
-    file.chmod(0700)
-    file.close
-
+    chmod(create_from_template("thor_script.erb", "Thorfile"), 0755)
   end
 
   # windows batch script
   desc "batch [NAME]", "Creates a basic dos batch script file"
   def batch (script_name=nil)
-
-    # Get the name for the script
-    if script_name
-      @script_name = script_name
-    else
-      @script_name = ask("Name for batch script to be created: ")
-    end
-
-    # Create the thor script
-    script_file = File.join(Dir.pwd, "#{@script_name}.bat")
-    say_status("info", "Creating batch script #{script_file}")
-    template("../share/valet/templates/batch_script.erb", script_file)
-    file = File.open(script_file, 'r')
-    file.chmod(0700)
-    file.close
-
+    @script_name = get_script_name(script_name)
+    create_from_template("batch_script.erb", "#{@script_name}.bat")
   end
 
   # datafix
   desc "datafix [NAME]", "Creates datafix files and directories"
   def datafix(datafix_name=nil)
-
-    # Get the name for the datafix unless one is specified
-    if datafix_name
-      @datafix_name = datafix_name
-    else
-      @datafix_name = ask("Name for datafix directory: ")
-    end
-
+    @datafix_name = get_datafix_name(datafix_name)
+    records = ask("Records to be affected: ").upcase.split(' ').uniq
     @date = Time.now.localtime.strftime("%m/%d/%Y")
 
-    # Get list of records to be affected
-    records = ask("Records to be affected: ").upcase.split(' ').uniq
-
     # Create the datafix directory
-    datafix_directory = File.join(Dir.pwd, @datafix_name)
-    Dir.mkdir(datafix_directory) unless File.exists?(datafix_directory)
-
-    # Create the sql script
-    script_file = File.join(datafix_directory, "#{@datafix_name}.sql")
-    say_status("info", "Creating sqlplus script #{script_file}")
-    template("../share/valet/templates/datafix_script.erb", script_file)
+    @datafix_base_directory = create_datafix_directory(@datafix_name)
+    create_from_template("datafix_script.erb", "#{@datafix_name}.sql")
 
     # Create the datamover export files for all records
     records.each do |record|
       @record = record
-      backup_file = File.join(datafix_directory, "#{record}_backup.dms")
-      say_status("info", "Creating datamover backup script #{backup_file}")
-      template("../share/valet/templates/datamover_backup.erb", backup_file)
+      create_from_template("datamover_backup.erb", "#{@record}.sql")
     end
-    run "unix2dos #{datafix_directory}/*"
-
+    run "unix2dos #{@datafix_base_directory}/*"
   end
 
   # golang project
