@@ -964,7 +964,10 @@ RUBY
     if OSX()
 
       " Set Colorscheme
-      colorscheme base16-eighties
+      let g:solarized_visibility = "normal"
+      let g:solarized_contrast = "normal"
+      colorscheme solarized
+      "colorscheme base16-eighties
 
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
