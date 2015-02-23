@@ -596,14 +596,16 @@
   "}}}
 
   " vim-go {{{2
-    let g:go_bin_path = "/opt/go/bin"
-    let g:go_fmt_command = "goimports"
-    "let g:go_play_open_browser = 0
-    "let g:go_fmt_fail_silently = 1
-    "let g:go_fmt_autosave = 0
-    "let g:go_highlight_functions = 1
-    "let g:go_highlight_methods = 1
-    "let g:go_highlight_structs = 1
+    if OSX()
+      let g:go_bin_path = "/opt/go/bin"
+      let g:go_fmt_command = "/opt/go/bin/goimports"
+      "let g:go_play_open_browser = 0
+      "let g:go_fmt_fail_silently = 1
+      "let g:go_fmt_autosave = 0
+      "let g:go_highlight_functions = 1
+      "let g:go_highlight_methods = 1
+      "let g:go_highlight_structs = 1
+    endif
   "}}}
 
   " Ack {{{2
@@ -612,8 +614,7 @@
       "let g:ackprg = '/usr/local/bin/ag --nogroup --nocolor --column --smart-case'
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 
-      " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-      "let g:ctrlp_user_command = '/usr/local/bin/ag %s -l --nocolor -g ""'
+      " Use ag in CtrlP for listing files
       let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     endif
   "}}}
@@ -640,13 +641,6 @@
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
     autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-    " Haskell post write lint and check with ghcmod
-    " $ `cabal install ghcmod` if missing and ensure
-    " ~/.cabal/bin is in your $PATH.
-    "if !executable("ghcmod")
-        "autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-    "endif
 
     set completeopt-=preview
   " }}}
