@@ -84,7 +84,7 @@
   Plugin 'vim-scripts/plsql.vim-syntax'
   Plugin 'stephpy/vim-yaml'
   Plugin 'chase/vim-ansible-yaml'
-  Plugin 'wting/rust.vim'
+  Plugin 'rust-lang/rust.vim'
   "Plugin 'juvenn/mustache.vim'
   "Plugin 'cespare/vim-toml'
   "Plugin 'PProvost/vim-ps1'
