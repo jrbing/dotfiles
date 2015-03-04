@@ -5,13 +5,13 @@ TAPS=(
     homebrew/dupes
     caskroom/cask
 )
-#caskroom/fonts
 
 # Homebrew Formulas
 FORMULAS=(
     ack
     ansible
     aria2
+    blink1
     hub
     imagemagick
     mosh
@@ -19,6 +19,7 @@ FORMULAS=(
     readline
     reattach-to-user-namespace
     tmux
+    ngrok
     git
     tree
     optipng
@@ -48,6 +49,7 @@ CASKS=(
     basictex
     pandoc
 )
+
 #font-inconsolata-dz-for-powerline
 #font-inconsolata
 #font-source-code-pro
