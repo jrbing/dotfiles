@@ -547,6 +547,7 @@
     let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
     let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
     let g:syntastic_java_javac_config_file_enabled = 1
+    let g:syntastic_vim_checkers = ['vint']
 
     "set statusline+=%#warningmsg#
     "set statusline+=%{SyntasticStatuslineFlag()}
@@ -559,6 +560,10 @@
   "}}}
 
   " Fugitive {{{2
+    augroup ft_fugitive
+      au!
+      au BufNewFile,BufRead .git/index setlocal nolist
+    augroup END
     "nnoremap <leader>gd :Gdiff<cr>
     "nnoremap <leader>gs :Gstatus<cr>
     "nnoremap <leader>gw :Gwrite<cr>
@@ -569,10 +574,6 @@
     "nnoremap <leader>gr :Gremove<cr>
     "nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 
-    augroup ft_fugitive
-      au!
-      au BufNewFile,BufRead .git/index setlocal nolist
-    augroup END
   "}}}
 
   " TaskPaper {{{2
