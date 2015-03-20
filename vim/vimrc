@@ -101,6 +101,7 @@
     Plugin 'honza/vim-snippets'
     Plugin 'fatih/vim-go'
     Plugin 'zimbatm/direnv.vim'
+    Plugin 'jpalardy/vim-slime'
     if !VIMR()
       Plugin 'Valloric/YouCompleteMe'
     endif
@@ -459,6 +460,11 @@
 
 " Plugin configuration/mapping {{{1
 "
+  " vim-slime {{{2
+    let g:slime_target = "tmux"
+    "let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+  "}}}
+
   " vim-sneak {{{2
     let g:sneak#streak = 1
   "}}}
@@ -573,7 +579,6 @@
     "nnoremap <leader>gm :Gmove<cr>
     "nnoremap <leader>gr :Gremove<cr>
     "nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
-
   "}}}
 
   " TaskPaper {{{2
@@ -612,7 +617,6 @@
   " Ack {{{2
     " Use ag instead of ack
     if executable('ag')
-      "let g:ackprg = '/usr/local/bin/ag --nogroup --nocolor --column --smart-case'
       let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 
       " Use ag in CtrlP for listing files
@@ -657,7 +661,6 @@
   endif
 
   function! s:golangIndent()
-
     setlocal tabstop=4
     setlocal shiftwidth=4
     setlocal softtabstop=4
@@ -665,7 +668,6 @@
     setlocal autoindent
     setlocal nolist
     setlocal smarttab
-
   endfunction
 
   function! s:cStyleIndent()
@@ -695,7 +697,6 @@
 
   function! s:setupMarkup()
     call s:setupWrapping()
-    " Change the tab settings to work properly with Pandoc lists
     setlocal expandtab
     setlocal tabstop=4
     setlocal shiftwidth=4
@@ -789,7 +790,6 @@
     else
       let funcname = a:name
     endif
-
     execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . funcname . '(<f-args>)'
   endfunction
 
@@ -1007,8 +1007,8 @@ RUBY
 
       " Create a pdf using pandoc and open it
       function! CreatePDF()
-        "execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
-        execute '! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        "execute '! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
         execute 'silent ! open /tmp/%:t:r.pdf'
       endfunction
 
