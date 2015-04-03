@@ -39,19 +39,20 @@ class Dotfiles < Thor
     file_operation(Dir.glob('git/git*'))
 
     # Copy ssh config
-    ssh_config = expand("~/.ssh/config")
-    unless File.exist?(ssh_config)
-      run %{ cp "$HOME/.dotfiles/ssh/ssh_config" "$HOME/.ssh/config" }
-    end
+    #ssh_config = expand("~/.ssh/config")
+    #unless File.exist?(ssh_config)
+    #  run %{ cp "$HOME/.dotfiles/ssh/ssh_config" "$HOME/.ssh/config" }
+    #end
   end
 
   desc "link_launchd", "Link launchd plist files"
   def link_launchd
     # Link pbcopy launch agent
     run %{ ln -nfs "$HOME/.dotfiles/launchd/pbcopy.plist" "$HOME/Library/LaunchAgents/pbcopy.plist" }
+    run %{ ln -nfs "$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$HOME/Library/LaunchAgents/yosemite.pathfix.plist" }
   end
 
-  desc "setup", "Create all symlinks and copy sample files"
+  desc "setup", "Create all symlinks"
   def setup
     invoke :link_shell
     invoke :link_vim

@@ -94,15 +94,17 @@ install_thor() {
 
 #change_shell
 #clone_dotfiles
-fix_zsh_bug
-install_homebrew
-update_homebrew
-install_brews
-install_ruby
-default_ruby
+#fix_zsh_bug
+#install_homebrew
+#update_homebrew
+#install_brews
+#install_ruby
+#default_ruby
 update_rubygems
 install_bundler
 configure_bundler
 install_thor
+
+#TODO: add rbenv shims to path
 
 #sudo echo "/usr/local/bin/zsh" >> /etc/shells && chsh -s /usr/local/bin/zsh
