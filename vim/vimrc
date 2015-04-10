@@ -653,6 +653,13 @@
     set completeopt-=preview
   " }}}
 
+  " AutoFormat {{{2
+    if executable('yapf')
+      let g:formatprg_cs = "yapf"
+      let g:formatprg_args_cs = "--style pep8"
+    endif
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
