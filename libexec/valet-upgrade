@@ -2,7 +2,7 @@
 # Usage: valet upgrade
 # Summary: Upgrade installed software
 # Help: Use this command to upgrade the installed software using the
-# environments default package manager
+# environments default package manager(s)
 
 set -e
 
@@ -15,27 +15,24 @@ case $(uname) in
     if hash brew 2>/dev/null; then
       spininfo "Updating homebrew repo" "brew update > /dev/null 2>&1"
       echoinfo "Outdated packages" && brew outdated
-      spininfo "Upgrading packages" "brew upgrade > /dev/null 2>&1"
-      spininfo "Cleaning up" "brew cleanup > /dev/null 2>&1"
+      spininfo "Upgrading homebrew packages" "brew upgrade > /dev/null 2>&1"
+      spininfo "Cleaning up homebrew" "brew cleanup > /dev/null 2>&1"
     fi
-    #if hash rbenv 2>/dev/null; then
-      #spininfo "Updating rbenv" "rbenv update > /dev/null 2>&1"
-    #fi
+    if hash pip > /dev/null 2>&1; then
+      spininfo "Updating pip packages" "pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U > /dev/null 2>&1"
+    fi
   ;;
   (Linux)
     if hash yum 2>/dev/null; then
       echoinfo 'Updating packages'
       sudo yum upgrade -y
     fi
-
     if hash aptitude 2>/dev/null; then
       echoinfo 'Updating packages'
       sudo aptitude upgrade -y
     fi
-
   ;;
   (SunOS)
-    # TODO: add opencsw and pkgutil
     echoinfo 'Updating packages'
     sudo pkgin update && sudo pkgin upgrade -y
   ;;
