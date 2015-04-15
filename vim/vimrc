@@ -7,19 +7,19 @@
 " -------------------------------------------------------------------------
 " Environment functions {{{1
 
-  silent function! OSX()
+  silent function! g:OSX()
     return has('macunix')
   endfunction
-  silent function! LINUX()
+  silent function! g:LINUX()
     return has('unix') && !has('macunix') && !has('win32unix')
   endfunction
-  silent function! WINDOWS()
+  silent function! g:WINDOWS()
     return  (has('win16') || has('win32') || has('win64'))
   endfunction
-  silent function! MACVIM()
+  silent function! g:MACVIM()
     return has('gui_macvim')
   endfunction
-  silent function! VIMR()
+  silent function! g:VIMR()
     return has('gui_vimr')
   endfunction
 
@@ -29,8 +29,8 @@
 
   set nocompatible
   filetype off
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
+  set runtimepath+=~/.vim/bundle/vundle/
+  call g:vundle#rc()
 
   " Vundle
   Plugin 'gmarik/vundle'
@@ -67,8 +67,6 @@
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'vim-scripts/Align'
-  "Plugin 'mattn/gist-vim'
-  "Plugin 'talek/vorax4'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
@@ -89,7 +87,7 @@
   "Plugin 'cespare/vim-toml'
   "Plugin 'PProvost/vim-ps1'
 
-  if OSX()
+  if !OSX()
     Plugin 'Chiel92/vim-autoformat'
     Plugin 'SQLUtilities'
     Plugin 'jonathanfilip/vim-dbext'
@@ -116,8 +114,8 @@
   endif
 
   filetype plugin indent on
-  let mapleader = ","
-  let maplocalleader = '_'
+  let g:mapleader = ','
+  let g:maplocalleader = '_'
 
 " }}}
 
@@ -1017,8 +1015,8 @@ RUBY
 
       " Create a pdf using pandoc and open it
       function! CreatePDF()
-        execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
-        "execute '! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        "execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        execute '! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
         execute 'silent ! open /tmp/%:t:r.pdf'
       endfunction
 
