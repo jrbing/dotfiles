@@ -87,7 +87,7 @@
   "Plugin 'cespare/vim-toml'
   "Plugin 'PProvost/vim-ps1'
 
-  if !OSX()
+  if OSX()
     Plugin 'Chiel92/vim-autoformat'
     Plugin 'SQLUtilities'
     Plugin 'jonathanfilip/vim-dbext'
