@@ -3,7 +3,7 @@
 # vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
 #===============================================================================
 #
-#   FILE: blinksh
+#   FILE: blink
 #
 #   DESCRIPTION: Command wrapper which indicates the status of a long running
 #   job using the blink1-tool
@@ -26,15 +26,17 @@ function blinkexec() {
   ( eval "${command}" ) &
 
   local pid=$!
-  local delay=5
-  local fade_delay=5000
+  #local delay=5
+  #local fade_delay=5000
 
   # Pulse blue until the process finishes
   while ps a | awk '{print $1}' | grep "$pid" > /dev/null 2>&1; do
-    blink1-tool --blue -m $fade_delay > /dev/null 2>&1
-    sleep $delay
-    blink1-tool --off -m $fade_delay > /dev/null 2>&1
-    sleep $delay
+    #blink1-tool --blue -m $fade_delay > /dev/null 2>&1
+    #sleep $delay
+    #blink1-tool --off -m $fade_delay > /dev/null 2>&1
+    #sleep $delay
+    blink1-tool --glimmer=10 --rgb=3300AB > /dev/null 2>&1
+    #sleep $delay
   done
 
   wait "$pid"
