@@ -35,7 +35,7 @@ function blinkexec() {
     #sleep $delay
     #blink1-tool --off -m $fade_delay > /dev/null 2>&1
     #sleep $delay
-    blink1-tool --glimmer=10 --rgb=3300AB > /dev/null 2>&1
+    blink1-tool --rgb=3300AB --glimmer=10 > /dev/null 2>&1
     #sleep $delay
   done
 
