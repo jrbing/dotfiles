@@ -385,7 +385,7 @@
   autocmd FileType python let b:dispatch = 'python %'
 
   " JSON
-  au BufNewFile,BufRead *.json set ft=javascript
+  "au BufNewFile,BufRead *.json set ft=javascript
 
   " Ruby
   augroup ft_ruby
