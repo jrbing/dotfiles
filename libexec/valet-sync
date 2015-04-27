@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Usage: valet sync
 # Summary: Runs the backup script
-# Help: Backup my drive to the backup-server
+# Help: Backup files to keychain drive
 
 # Set the script to exit immediately on error
 set -e
@@ -20,8 +20,8 @@ if [[ -d /Volumes/KEYCHAIN ]]; then
       --progress \
       --whole-file \
       --exclude .sync \
-      ~/$directory/ \
-      /Volumes/KEYCHAIN/$directory/
+      ~/"$directory"/ \
+      /Volumes/KEYCHAIN/"$directory"/
   done
 else
   echoerror "Keychain drive not found"
