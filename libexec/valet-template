@@ -37,17 +37,6 @@ class Template < Thor
     create_from_template("envrc.erb", ".envrc")
   end
 
-  # watchman
-  #desc "watchman", "Creates a basic Thorfile for use with ruby-watchman"
-  #def watchman
-    #watch_file = File.join(Dir.pwd, "Thorfile")
-    #say_status("info", "Creating #{watch_file}")
-    #template("../share/valet/templates/watchman.erb", watch_file)
-    #file = File.open(watch_file, 'r')
-    #file.chmod(0700)
-    #file.close
-  #end
-
   # thorfile
   desc "thorfile [NAME]", "Creates a basic thor-based script file"
   def thorfile(script_name=nil)
@@ -91,43 +80,6 @@ class Template < Thor
     create_project_subdirectory('_vendor/bin')
     create_project_subdirectory('_vendor/pkg')
     create_project_subdirectory('_vendor/src')
-
-  end
-
-  # shellfire project
-  desc "shellfire [NAME]", "Creates shellfire project files and directories"
-  def shellfire(project_name=nil)
-
-    @project_name = get_project_name(project_name)
-    @project_base_directory = create_project_directory(@project_name)
-    initialize_git_repo(@project_base_directory)
-
-    etc_path = create_project_subdirectory('etc/shellfire')
-    lib_path = create_project_subdirectory('lib/shellfire')
-    tools_path = create_project_subdirectory('tools')
-
-    add_submodule("https://github.com/shellfire-dev/paths.d", etc_path)
-    add_submodule("https://github.com/shellfire-dev/core", lib_path)
-    add_submodule("https://github.com/shellfire-dev/jsonreader", lib_path)
-    add_submodule("https://github.com/shellfire-dev/unicode", lib_path)
-    add_submodule("https://github.com/shellfire-dev/xmlwriter", lib_path)
-    add_submodule("https://github.com/shellfire-dev/build", lib_path)
-    add_submodule("https://github.com/shellfire-dev/fatten", tools_path)
-    add_submodule("https://github.com/raphaelcohn/swaddle", tools_path)
-    create_project_subdirectory("lib/shellfire/#{@project_name}")
-
-    update_submodules(@project_base_directory)
-
-    project_file = create_from_template("shellfire.erb", project_name)
-    chmod(project_file, 0755)
-
-    create_from_template("shellfire_functions.erb", "lib/shellfire/#{@project_name}/#{project_name}.functions")
-
-    create_from_template("shellfire_build.erb", "build.shellfire")
-
-    inside(@project_base_directory) do
-      run('ln -s lib/shellfire/build/build')
-    end
 
   end
 
