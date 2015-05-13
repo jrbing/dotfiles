@@ -45,7 +45,6 @@
   Plugin 'kien/ctrlp.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'mattn/webapi-vim'
-  Plugin 'mileszs/ack.vim'
   Plugin 'mtth/scratch.vim'
   Plugin 'rizzatti/dash.vim'
   Plugin 'scrooloose/nerdcommenter'
@@ -67,6 +66,7 @@
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'vim-scripts/Align'
+  Plugin 'gabesoft/vim-ags'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
@@ -100,10 +100,10 @@
     Plugin 'fatih/vim-go'
     Plugin 'zimbatm/direnv.vim'
     Plugin 'jpalardy/vim-slime'
+    "Plugin 'vim-scripts/YankRing.vim'
     if !VIMR()
       Plugin 'Valloric/YouCompleteMe'
     endif
-    "Plugin 'vim-scripts/YankRing.vim'
   endif
 
   " Only load Nerdtree if we're not using VimR
@@ -111,6 +111,8 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'EvanDotPro/nerdtree-chmod'
+    Plugin 'Xuyuanp/nerdtree-git-plugin'
+    Plugin 'low-ghost/nerdtree-fugitive'
   endif
 
   filetype plugin indent on
@@ -196,7 +198,7 @@
 
 " }}}
 
-" Whitespace stuff {{{2
+" Whitespace {{{2
 
   set nowrap
   set expandtab
@@ -615,16 +617,6 @@
     endif
   "}}}
 
-  " Ack {{{2
-    " Use ag instead of ack
-    if executable('ag')
-      let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-
-      " Use ag in CtrlP for listing files
-      let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    endif
-  "}}}
-
   " YouCompleteMe / Ultisnips {{{2
     let g:acp_enableAtStartup = 0
 
@@ -985,8 +977,8 @@ RUBY
       map <D-T> :CtrlP<CR>
       imap <D-T> <Esc>:CtrlP<CR>
 
-      " Command-Shift-F for Ack
-      map <D-F> :Ack<space>
+      " Command-Shift-F for the silver searcher
+      map <D-F> :Ags<space>
 
       " Map Command-# to switch tabs
       map  <D-0> 0gt
