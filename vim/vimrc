@@ -644,6 +644,8 @@
   " }}}
 
   " AutoFormat {{{2
+   nnoremap <F4> :Autoformat<CR><CR>
+
     if executable('yapf')
       let g:formatprg_cs = "yapf"
       let g:formatprg_args_cs = "--style pep8"
