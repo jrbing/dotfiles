@@ -20,7 +20,6 @@ setopt rmstarsilent
 #
 # Development
 #
-
 alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"                                                                                              # List TODO/FIX lines from the current project
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
@@ -59,7 +58,6 @@ alias clip="nc localhost 8377"
 #
 # Functions
 #
-
 any() {
   emulate -L zsh
   unsetopt KSH_ARRAYS

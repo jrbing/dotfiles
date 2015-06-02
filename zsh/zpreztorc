@@ -45,6 +45,9 @@ zstyle ':prezto:load' pmodule \
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' keymap 'emacs'
 
+# Auto convert .... to ../..
+# zstyle ':prezto:module:editor' dot-expansion 'yes'
+
 #
 # Git
 #
@@ -82,14 +85,14 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 zstyle ':prezto:module:prompt' theme 'sorin'
 
 #
-# SSH-Agent
+# SSH
 #
 
 # Enable ssh-agent forwarding.
 # zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 
 # Set ssh-agent identities to load.
-zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_github'
+#zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_github'
 
 #
 # Syntax Highlighting
@@ -131,9 +134,15 @@ zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 # Auto start a session when Zsh is launched.
 #zstyle ':prezto:module:tmux' auto-start 'yes'
 
+# Auto start a session when Zsh is launched in a SSH connection.
+# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+
+# Integrate with iTerm2.
+# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+
 #
 # History Substring Search
 #
 
 # Turn on syntax highlighting just for the substring search module
-zstyle ':prezto:module:history-substring-search' color 'yes'
+#zstyle ':prezto:module:history-substring-search' color 'yes'
