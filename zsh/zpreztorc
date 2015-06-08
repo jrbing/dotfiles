@@ -35,8 +35,8 @@ zstyle ':prezto:load' pmodule \
   'rsync' \
   'tmux' \
   'ruby' \
-  'git' \
   'history-substring-search'
+  #'git' \
 
 #
 # Editor
