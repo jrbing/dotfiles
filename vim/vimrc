@@ -38,6 +38,7 @@
   " Utilities
   Plugin 'artnez/vim-wipeout'
   Plugin 'c0r73x/vimdir.vim'
+  Plugin 'gabesoft/vim-ags'
   Plugin 'gcmt/wildfire.vim'
   Plugin 'godlygeek/tabular'
   Plugin 'justinmk/vim-sneak'
@@ -50,6 +51,7 @@
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'tpope/vim-bundler'
   Plugin 'tpope/vim-dispatch'
+  Plugin 'tpope/vim-dotenv'
   Plugin 'tpope/vim-eunuch'
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-git'
@@ -66,7 +68,6 @@
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'vim-scripts/Align'
-  Plugin 'gabesoft/vim-ags'
 
   " Colorschemes
   Plugin 'altercation/vim-colors-solarized'
