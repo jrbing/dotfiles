@@ -9,15 +9,21 @@
 #
 #===============================================================================
 
-set -e                          # Exit immediately on error
-set -o nounset                  # Treat unset variables as an error
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 readonly PROGNAME=$(basename $0)
 readonly PROGDIR=$(readlink -m $(dirname $0))
 readonly ARGS="$@"
 
 # Required program(s)
-readonly req_progs=(prog1 prog2)
+readonly req_progs=(
+  "prog1"
+  "prog2"
+)
+
 for p in "${req_progs[@]}"; do
   hash "$p" 2>&- || \
   { echo >&2 " Required program \"$p\" not installed."; exit 1; }
