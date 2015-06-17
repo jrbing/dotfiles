@@ -13,7 +13,7 @@
 set -e          # Exit immediately on error
 set -u          # Treat unset variables as an error
 set -o pipefail # Prevent errors in a pipeline from being masked
-IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+IFS=$'\n\t'     # Set the internal field separator to a newline and a tab
 
 # Source bash functions
 source "$DOTFILES/share/lib/bash-functions.sh"
@@ -60,5 +60,5 @@ function led_off() {
   blink1-tool --off> /dev/null 2>&1
 }
 
-blinkexec "$@"
+blinkexec $@
 led_off
