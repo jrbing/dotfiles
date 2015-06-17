@@ -10,14 +10,17 @@
 #
 #===============================================================================
 
-set -o nounset                  # Treat unset variables as an error
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 # Source bash functions
 source "$DOTFILES/share/lib/bash-functions.sh"
 
 # Check for the blink1-tool
 req_progs=(blink1-tool)
-bincheck ${req_progs[*]}
+bincheck "${req_progs[*]}"
 
 function blinkexec() {
 
