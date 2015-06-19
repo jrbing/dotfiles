@@ -43,7 +43,7 @@
   Plugin 'godlygeek/tabular'
   Plugin 'justinmk/vim-sneak'
   Plugin 'kana/vim-metarw'
-  Plugin 'kien/ctrlp.vim'
+  Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'mattn/webapi-vim'
   Plugin 'mtth/scratch.vim'
