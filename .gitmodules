@@ -14,7 +14,7 @@
   path = zsh/bd
   url = git://github.com/Tarrasch/zsh-bd.git
   ignore = dirty
-[submodule "vim/bundle/vundle"]
-  path = vim/bundle/vundle
-  url = git://github.com/gmarik/vundle.git
+[submodule "vim/plug"]
+  path = vim/plug
+  url = git@github.com:junegunn/vim-plug.git
   ignore = dirty
