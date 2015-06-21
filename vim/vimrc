@@ -88,7 +88,7 @@
   if OSX()
     Plug 'Chiel92/vim-autoformat'
     Plug 'SQLUtilities'
-    Plug 'jonathanfilip/vim-dbext'
+    Plug 'vim-scripts/vim-dbext'
     Plug 'scrooloose/syntastic'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-scripts/VOoM'
