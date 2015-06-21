@@ -48,7 +48,6 @@ class Dotfiles < Thor
   desc "link_launchd", "Link launchd plist files"
   def link_launchd
     # Link pbcopy launch agent
-    run %{ ln -nfs "$HOME/.dotfiles/launchd/pbcopy.plist" "$HOME/Library/LaunchAgents/pbcopy.plist" }
     run %{ ln -nfs "$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$HOME/Library/LaunchAgents/yosemite.pathfix.plist" }
   end
 
