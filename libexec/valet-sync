@@ -9,7 +9,7 @@ set -e
 # Source generic bash functions
 source "$DOTFILES/share/lib/bash-functions.sh"
 
-sync_directories=( Sync BTS )
+sync_directories=( BTS )
 
 if [[ -d /Volumes/KEYCHAIN ]]; then
   for directory in "${sync_directories[@]}"; do
