@@ -18,3 +18,6 @@
   path = vim/plug
   url = git@github.com:junegunn/vim-plug.git
   ignore = dirty
+[submodule "zsh/k"]
+	path = zsh/k
+	url = git@github.com:rimraf/k.git

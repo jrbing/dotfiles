@@ -12,6 +12,11 @@ if [[ -s "${DOTFILES}/zsh/bd/bd.zsh" ]]; then
   source "${DOTFILES}/zsh/bd/bd.zsh"
 fi
 
+# Source k
+if [[ -s "${DOTFILES}/zsh/k/k.sh" ]]; then
+  source "${DOTFILES}/zsh/k/k.sh"
+fi
+
 #
 # Additional ZSH Options
 #
