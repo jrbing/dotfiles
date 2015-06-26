@@ -80,6 +80,10 @@ class Template < Thor
     create_project_subdirectory('_vendor/bin')
     create_project_subdirectory('_vendor/pkg')
     create_project_subdirectory('_vendor/src')
+    inside(@project_base_directory) do
+      run("direnv allow")
+      run("glide init")
+    end
 
   end
 
