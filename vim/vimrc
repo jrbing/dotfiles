@@ -81,9 +81,9 @@
   Plug 'stephpy/vim-yaml'
   Plug 'chase/vim-ansible-yaml'
   Plug 'rust-lang/rust.vim'
+  Plug 'PProvost/vim-ps1'
   "Plug 'juvenn/mustache.vim'
   "Plug 'cespare/vim-toml'
-  "Plug 'PProvost/vim-ps1'
 
   if OSX()
     Plug 'Chiel92/vim-autoformat'
