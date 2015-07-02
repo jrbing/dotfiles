@@ -96,7 +96,7 @@
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'fatih/vim-go'
-    Plug 'direnv/direnv.vim'
+    "Plug 'direnv/direnv.vim'
     Plug 'jpalardy/vim-slime'
     "Plug 'vim-scripts/YankRing.vim'
     if !VIMR()
