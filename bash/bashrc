@@ -30,7 +30,9 @@ case $(uname) in
     alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
   ;;
   (Linux)
-    eval "$("$HOME"/.dotfiles/bin/valet init -)"
+    if [[ $(python -c 'import sys; print("%i" % (sys.hexversion<0x02070000))') -eq 0 ]]; then
+      eval "$("$HOME"/.dotfiles/bin/valet init -)"
+    fi
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
     export PATH=$PATH:/sbin:/usr/sbin
   ;;
