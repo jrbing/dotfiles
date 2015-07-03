@@ -8,7 +8,7 @@ export DOTFILES=$HOME/.dotfiles
 case $(uname) in
   (Darwin)
     eval "$("$HOME"/.dotfiles/bin/valet init -)"
-    export JAVA_HOME=$(/usr/libexec/java_home)
+    JAVA_HOME="$(/usr/libexec/java_home)"; export JAVA_HOME
     export EDITOR='vim'
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
@@ -22,7 +22,7 @@ case $(uname) in
     # Aliases
     #
     alias z='fasd_cd -d'                                  # Alias for FASD
-    alias flush-dns="sudo discoveryutil udnsflushcaches" # DNS
+    alias flush-dns="sudo killall -HUP mDNSResponder"     # Flush DNS
     alias ans=ansible
     alias apb=ansible-playbook
     alias agx=ansible-galaxy
@@ -92,16 +92,18 @@ else
   RESET="\033[m"
 fi
 
-# Set prompt based on whether the session is over SSH
-if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-  # SSH Session
-  PS1="\[$BLUE\]☁ \[$BASE0\] \W\[$ORANGE\] ❯ \[$RESET\]"
-  if [[ -t 0 ]]; then   # Only run if stdin is a terminal
-    stty sane
+if [[ $TERM != "dumb" ]]; then
+  # Set prompt based on whether the session is over SSH
+  if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+    # SSH Session
+    PS1="\[$BLUE\]☁ \[$BASE0\] \W\[$ORANGE\] ❯ \[$RESET\]"
+    if [[ -t 0 ]]; then   # Only run if stdin is a terminal
+      stty sane
+    fi
+  else
+    # Local Session
+    PS1="\[$BASE0\]\W\[$BASE0\]\[$ORANGE\] ❯ \[$RESET\]"
   fi
-else
-  # Local Session
-  PS1="\[$BASE0\]\W\[$BASE0\]\[$ORANGE\] ❯ \[$RESET\]"
 fi
 
 #
