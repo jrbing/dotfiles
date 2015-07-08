@@ -87,6 +87,13 @@ class Template < Thor
 
   end
 
+  # windows powershell script
+  desc "powershell [NAME]", "Creates a basic powershell script file"
+  def powershell (script_name=nil)
+    @script_name = get_script_name(script_name)
+    create_from_template("powershell.erb", "#{@script_name}.ps1")
+  end
+
 end
 
 Template.start(ARGV)
