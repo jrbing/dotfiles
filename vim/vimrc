@@ -71,6 +71,7 @@
   Plug 'chriskempson/base16-vim'
   Plug 'morhetz/gruvbox'
   Plug 'MarioRicalde/vim-lucius'
+  Plug 'NLKNguyen/papercolor-theme'
 
   " Filetypes
   Plug 'vim-ruby/vim-ruby'
@@ -965,6 +966,8 @@ RUBY
       let g:solarized_contrast = "normal"
       colorscheme solarized
       "colorscheme base16-eighties
+      "set t_Co=256
+      "colorscheme PaperColor-Dark
 
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
