@@ -380,22 +380,30 @@
     au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
   augroup END
 
-  " Make and Python
-  au FileType make    setlocal noexpandtab
-  au FileType python  setlocal softtabstop=4 tabstop=4 shiftwidth=4 smarttab expandtab autoindent
-  autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
-  autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-  autocmd FileType python let b:dispatch = 'python %'
+  " Make
+  augroup ft_make
+    au!
+    au FileType make    setlocal noexpandtab
+  augroup END
 
-  " JSON
-  "au BufNewFile,BufRead *.json set ft=javascript
+  " Python
+  augroup ft_python
+    au!
+    au FileType python setlocal define=^\s*\\(def\\\\|class\\)
+
+    au FileType python  setlocal tabstop=8 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    au BufWritePre *.py normal m`:%s/\s\+$//e``
+    au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+    au FileType python let b:dispatch = 'python %'
+  augroup END
 
   " Ruby
   augroup ft_ruby
     au!
     au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
+    au FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
   augroup END
-  autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
 
   " Markdown
   augroup ft_markdown
@@ -428,7 +436,10 @@
   augroup END
 
   " Coffeescript
-  autocmd BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
+  augroup ft_coffeescript
+    au!
+    au BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
+  augroup END
 
   " C Style Indentation
   augroup ft_cstyle
@@ -465,7 +476,7 @@
 " Plugin configuration/mapping {{{1
 "
   " vim-slime {{{2
-    let g:slime_target = "tmux"
+    let g:slime_target = 'tmux'
     "let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
   "}}}
 
@@ -481,8 +492,8 @@
   "}}}
 
   " Coffeescript {{{2
-    let coffee_compile_vert = 1
-    let coffee_watch_vert = 1
+    let g:coffee_compile_vert = 1
+    let g:coffee_watch_vert = 1
   "}}}
 
   " Airline {{{2
@@ -492,8 +503,8 @@
   " Ruby-vim {{{2
     let g:rubycomplete_buffer_loading = 1
     let g:rubycomplete_classes_in_global = 1
-    let ruby_operators = 1
-    let ruby_space_errors = 1
+    let g:ruby_operators = 1
+    let g:ruby_space_errors = 1
   "}}}
 
   " CtrlP {{{2
@@ -502,12 +513,12 @@
 
   " NERDTree {{{2
     map <Leader>n <plug>NERDTreeTabsToggle<CR>
-    let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-    let NERDChristmasTree=1           "Makes NERDTree use colors
-    let NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
-    let NERDTreeShowBookmarks=1       "Display the bookmarks on startup
-    let NERDTreeMinimalUI=1           "Minimal UI elements
-    let NERDTreeDirArrows=1           "Use arrows for directory folding
+    let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+    let g:NERDChristmasTree=1           "Makes NERDTree use colors
+    let g:NERDTreeChDirMode=1           "Changes the current working directory to the one set as the root in NERDTree
+    let g:NERDTreeShowBookmarks=1       "Display the bookmarks on startup
+    let g:NERDTreeMinimalUI=1           "Minimal UI elements
+    let g:NERDTreeDirArrows=1           "Use arrows for directory folding
   "}}}
 
   " NERDTree Tabs {{{2
@@ -586,7 +597,7 @@
   "}}}
 
   " TaskPaper {{{2
-    let g:task_paper_date_format = "%Y-%m-%dT%H:%M:%S%z"
+    let g:task_paper_date_format = '%Y-%m-%dT%H:%M:%S%z'
   "}}}
 
   " SQLUtilities {{{2
@@ -601,14 +612,14 @@
   "}}}
 
   " DBExt {{{2
-    let g:dbext_default_history_file = "$HOME/.vim/tmp/swap/dbext_sql_history.txt"
+    let g:dbext_default_history_file = '$HOME/.vim/tmp/swap/dbext_sql_history.txt'
     let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(@\|:\a\)\w\+\>'
   "}}}
 
   " vim-go {{{2
     if OSX()
-      let g:go_bin_path = "/opt/go/bin"
-      let g:go_fmt_command = "/opt/go/bin/goimports"
+      let g:go_bin_path = '/opt/go/bin'
+      let g:go_fmt_command = '/opt/go/bin/goimports'
       "let g:go_play_open_browser = 0
       "let g:go_fmt_fail_silently = 1
       "let g:go_fmt_autosave = 0
@@ -630,16 +641,19 @@
     let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
     " Set snippets search path
-    let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom/snippets"]
+    let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
 
     " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    augroup youcompleteme
+      au!
+      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+      autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+      autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    augroup END
 
     set completeopt-=preview
   " }}}
@@ -647,9 +661,10 @@
   " AutoFormat {{{2
    nnoremap <F4> :Autoformat<CR><CR>
 
+   " TODO: still can't get this to work
     if executable('yapf')
-      let g:formatprg_cs = "yapf"
-      let g:formatprg_args_cs = "--style pep8"
+      let g:formatdef_yapf = "/usr/local/bin/yapf"
+      let g:formatters_python = ['yapf']
     endif
   "}}}
 
@@ -682,7 +697,7 @@
 
   function! s:setupWrapping()
     setlocal wrap
-    setlocal wm=2
+    setlocal wrapmargin=2
     setlocal textwidth=80
     setlocal linebreak
     setlocal nolist
@@ -720,26 +735,26 @@
     endif
     while 1
       redraw
-      echo "Cycle Tab pages (Shift-Tab/Tab)"
-      let c = s:Getchar()
-      if c == "\t"
+      echo 'Cycle Tab pages (Shift-Tab/Tab)'
+      let l:c = s:Getchar()
+      if l:c == "\t"
         normal! gt
-      elseif c == "\<S-Tab>"
+      elseif l:c == "\<S-Tab>"
         normal! gT
       else
         exe "norm! :\<C-U>"
-        call feedkeys(c)
+        call feedkeys(l:c)
         break
       endif
     endwhile
   endfunc
 
   func! s:Getchar()
-    let c = getchar()
-    if c != 0
-      let c = nr2char(c)
+    let l:c = getchar()
+    if l:c != 0
+      let l:c = nr2char(l:c)
     endif
-    return c
+    return l:c
   endfunc
 
   " Kernel formatting function modified from https://github.com/vivien/vim-addon-linux-coding-style
