@@ -46,6 +46,7 @@
   Plug 'mtth/scratch.vim'
   Plug 'rizzatti/dash.vim'
   Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-dotenv'
