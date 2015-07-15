@@ -11,5 +11,5 @@ what you like.
     * git clone git@github.com:jrbing/dotfiles.git .dotfiles
 2. Create symlinks
     * cd ~/.dotfiles
-    * thor dotfiles:setup
+    * make
 3. [Abide](http://en.wikipedia.org/wiki/The_Big_Lebowski)
