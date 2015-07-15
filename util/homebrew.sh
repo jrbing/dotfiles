@@ -2,6 +2,7 @@
 
 # Homebrew taps
 TAPS=(
+    homebrew/binary
     homebrew/dupes
     caskroom/cask
 )
