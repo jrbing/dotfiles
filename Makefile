@@ -1,73 +1,58 @@
 #===============================================================================
 # vim: softtabstop=4 shiftwidth=4 noexpandtab fenc=utf-8 spelllang=en nolist
 #===============================================================================
-# curl https://raw.githubusercontent.com/jrbing/dotfiles/master/Makefile |make -f - all
 
-BASH_FILES := $(shell ls bash)
-ETC_FILES := $(shell ls etc)
-GIT_FILES := $(shell ls git)
-ZSH_FILES := $(shell ls zsh/z*)
+dotfiles=~/.dotfiles
 
-#.PHONY: $(bash_files)
-#.PHONY: $(etc_files)
-#.PHONY: $(git_files)
-#.PHONY: $(vim_files)
-
-#$(bash_files):
-	#test -e $(CURDIR)/$@ && ln $(LN_FLAGS) $(CURDIR)/$@ ~/.$@
-
-#prezto:
-	#test -d ~/.zprezto || \
-		#git clone --quiet --recursive \
-		#https://github.com/sorin-ionescu/prezto.git ~/.zprezto
-	#ln $(LN_FLAGS) \
-		#$(CURDIR)/zprezto/modules/prompt/functions/prompt_debian_setup \
-		#~/.zprezto/modules/prompt/functions/prompt_debian_setup
-
-# Maintenance
-#check-dead:
-	#find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
-
-#clean-dead:
-	#find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
-
-#update:
-	#git pull --rebase
-
-
-######################################################
-
-#dotfiles=git://github.com/jrbing/dotfiles.git
-#destination=~/.dotfiles
-
-#all: clone link
-#link: gemrc-link dir_colors-link tmux.conf-link vimrc-link bashrc-link zshrc-link
-#pull: dotfiles-pull shellrc-pull vimrc-pull
-
-# remove everything
-#purge:
-	#@rm -rf $(destination) ~/.gemrc ~/.dir_colors ~/.tmux.conf
-
-
-# link simple files
-#gemrc-link:
-	#@cd && ln -sf $(destination)/gemrc .gemrc
-#dir_colors-link:
-	#@cd && ln -sf $(destination)/dir_colors .dir_colors
-#tmux.conf-link:
-	#@cd && ln -sf $(destination)/tmux.conf .tmux.conf
-
-# link vim configuration
-#vimrc-link:
-	#@cd && ln -sf $(vimrc_dest)/vimrc .vimrc
-
-# update repositories
-#pull:
-	#@cd $(destination) && git fetch origin master && git reset --hard FETCH_HEAD
-
+BASH_FILES := $(shell cd $(dotfiles)/bash; ls)
+ETC_FILES := $(shell cd $(dotfiles)/etc; ls)
+GIT_FILES := $(shell cd $(dotfiles)/git; ls)
+ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
 
 all:
 	@echo $(ZSH_FILES)
 
+link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-launchd
+
+link-tmux:
+	@cd ~ && ln -nfs $(dotfiles)/tmux/tmux.conf .tmux.conf
+
+link-vim:
+	@cd ~ && ln -nfs $(dotfiles)/vim/ .vim; \
+				ln -nfs $(dotfiles)/vim/vimrc .vimrc; \
+				ln -nfs $(dotfiles)/vim/gvimrc .gvimrc
+
+link-prezto:
+	@cd ~ && ln -nfs $(dotfiles)/zsh/prezto .zprezto
+
+link-etc:
+	@cd ~ && for file in $(ETC_FILES); do ln -nfs .dotfiles/etc/$$file .$$file; done
+
+link-git:
+	@cd ~ && for file in $(GIT_FILES); do ln -nfs .dotfiles/git/$$file .$$file; done
+
+link-bash:
+	@cd ~ && for file in $(BASH_FILES); do ln -nfs .dotfiles/bash/$$file .$$file; done
+
+link-zsh:
+	@cd ~ && for file in $(ZSH_FILES); do ln -nfs .dotfiles/zsh/$$file .$$file; done
+
+link-launchd:
+	@cd ~ && ln -nfs "$$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$$HOME/Library/LaunchAgents/yosemite.pathfix.plist"
+
+check-dead:
+	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
+
+clean-dead:
+	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
+
 submodules:
-	@git submodule foreach 'git fetch origin; git checkout master; git reset --hard origin/master; git submodule update --recursive; git clean -dfx'
+	@git submodule foreach 'git fetch origin; \
+			git checkout master; \
+			git reset --hard origin/master; \
+			git submodule update --recursive; \
+			git clean -dfx'
+
+update:
+	git pull --rebase
+
