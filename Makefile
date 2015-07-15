@@ -9,8 +9,7 @@ ETC_FILES := $(shell cd $(dotfiles)/etc; ls)
 GIT_FILES := $(shell cd $(dotfiles)/git; ls)
 ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
 
-all:
-	@echo $(ZSH_FILES)
+all: update submodules link
 
 link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-launchd
 
