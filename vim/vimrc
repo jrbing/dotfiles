@@ -98,8 +98,9 @@
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'fatih/vim-go'
+    Plug 'epeli/slimux'
+    "Plug 'jpalardy/vim-slime'
     "Plug 'direnv/direnv.vim'
-    Plug 'jpalardy/vim-slime'
     "Plug 'vim-scripts/YankRing.vim'
     if !VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
