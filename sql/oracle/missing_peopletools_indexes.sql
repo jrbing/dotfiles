@@ -1,6 +1,8 @@
 -- Identify indexes that are defined in Application Designer, but not in Oracle
 -- Taken from:  http://peoplesoft.wikidot.com/managing-indexes
 
+whenever sqlerror exit failure;
+
 select R.RECNAME
      , R.RECDESCR
      , R.INDEXCOUNT

@@ -1,6 +1,8 @@
 -- Identify indexes that are defined in Oracle, but not in Application Designer
 -- Taken from:  http://peoplesoft.wikidot.com/managing-indexes
 
+whenever sqlerror exit failure;
+
 select
     DI.OWNER,
     DI.TABLE_NAME,
