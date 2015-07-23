@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#          FILE: pushover.sh
+#
+#   DESCRIPTION: Sends a quick message to pushover via curl
+#
+#===============================================================================
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+# Source bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+PUSHOVER_APP_TOKEN=${PUSHOVER_APP_TOKEN:=x}
+PUSHOVER_USER_KEY=${PUSHOVER_USER_KEY:=x}
+
+if [[ "${PUSHOVER_APP_TOKEN}" == "x" ]]; then
+  echoerror "PUSHOVER_APP_TOKEN needs to be set"
+  exit 1
+fi
+
+if [[ "${PUSHOVER_USER_KEY}" == "x" ]]; then
+  echoerror "PUSHOVER_USER_KEY needs to be set"
+  exit 1
+fi
+
+message=$*
+
+function send_to_pushover() {
+  curl -s \
+    --form-string "token=${PUSHOVER_APP_TOKEN}" \
+    --form-string "user=${PUSHOVER_USER_KEY}" \
+    --form-string "message=$message" \
+    https://api.pushover.net/1/messages.json \
+    > /dev/null 2>&1
+}
+
+send_to_pushover
