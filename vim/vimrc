@@ -99,6 +99,7 @@
     Plug 'honza/vim-snippets'
     Plug 'fatih/vim-go'
     Plug 'epeli/slimux'
+    Plug 'funcodeio/lz4.vim'
     "Plug 'jpalardy/vim-slime'
     "Plug 'direnv/direnv.vim'
     "Plug 'vim-scripts/YankRing.vim'
