@@ -100,6 +100,7 @@
     Plug 'fatih/vim-go'
     Plug 'epeli/slimux'
     Plug 'funcodeio/lz4.vim'
+    Plug 'diepm/vim-rest-console'
     "Plug 'jpalardy/vim-slime'
     "Plug 'direnv/direnv.vim'
     "Plug 'vim-scripts/YankRing.vim'
