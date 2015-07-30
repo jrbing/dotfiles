@@ -1,3 +1,6 @@
+-- Usage: @stale_stats
+-- Summary: Display stale database statistics
+
 col table_name for a30
 
 select owner
