@@ -84,6 +84,7 @@
   Plug 'chase/vim-ansible-yaml'
   Plug 'rust-lang/rust.vim'
   Plug 'PProvost/vim-ps1'
+  Plug 'cespare/vim-toml'
   "Plug 'juvenn/mustache.vim'
   "Plug 'cespare/vim-toml'
 
