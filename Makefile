@@ -11,7 +11,7 @@ ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
 
 all: update submodules link
 
-link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-launchd
+link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/tmux.conf .tmux.conf
