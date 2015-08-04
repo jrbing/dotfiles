@@ -85,6 +85,7 @@
   Plug 'rust-lang/rust.vim'
   Plug 'PProvost/vim-ps1'
   Plug 'cespare/vim-toml'
+  Plug 'markcornick/vim-terraform'
   "Plug 'juvenn/mustache.vim'
   "Plug 'cespare/vim-toml'
 
