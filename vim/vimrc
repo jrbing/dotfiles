@@ -361,7 +361,7 @@
   nnoremap ,gf :vertical botright wincmd f<CR>
 
   " Autoformat the current buffer
-  nnoremap <leader>af :Autoformat<CR><CR>
+  nnoremap <leader>af :Autoformat<CR>
 
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
