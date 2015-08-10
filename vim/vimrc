@@ -35,7 +35,6 @@
   " Utilities
   Plug 'artnez/vim-wipeout'
   Plug 'c0r73x/vimdir.vim'
-  Plug 'gabesoft/vim-ags'
   Plug 'gcmt/wildfire.vim'
   Plug 'godlygeek/tabular'
   Plug 'justinmk/vim-sneak'
@@ -66,6 +65,7 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'vim-scripts/Align'
+  Plug 'wincent/ferret'
 
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
@@ -79,13 +79,14 @@
   Plug 'davidoc/taskpaper.vim'
   Plug 'kchmck/vim-coffee-script'
   Plug 'pangloss/vim-javascript'
-  Plug 'vim-scripts/plsql.vim-syntax'
+  Plug 'plsql.vim'
   Plug 'stephpy/vim-yaml'
   Plug 'chase/vim-ansible-yaml'
   Plug 'rust-lang/rust.vim'
   Plug 'PProvost/vim-ps1'
   Plug 'cespare/vim-toml'
   Plug 'markcornick/vim-terraform'
+  Plug 'funcodeio/lz4.vim'
   "Plug 'juvenn/mustache.vim'
   "Plug 'cespare/vim-toml'
 
@@ -101,11 +102,7 @@
     Plug 'honza/vim-snippets'
     Plug 'fatih/vim-go'
     Plug 'epeli/slimux'
-    Plug 'funcodeio/lz4.vim'
     Plug 'diepm/vim-rest-console'
-    "Plug 'jpalardy/vim-slime'
-    "Plug 'direnv/direnv.vim'
-    "Plug 'vim-scripts/YankRing.vim'
     if !VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
     endif
@@ -1018,14 +1015,14 @@ RUBY
       let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
       " Make the window slightly transparent
-      "set transparency=4
+      set transparency=4
 
       " Command-T for CtrlP
       map <D-T> :CtrlP<CR>
       imap <D-T> <Esc>:CtrlP<CR>
 
-      " Command-Shift-F for the silver searcher
-      map <D-F> :Ags<space>
+      " Command-Shift-F for quick file search
+      map <D-F> :Ack<space>
 
       " Map Command-# to switch tabs
       map  <D-0> 0gt
