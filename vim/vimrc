@@ -471,7 +471,13 @@
 
   " Ansible
   augroup ft_ansible
-    au FileType ansible    setlocal textwidth=0 wrapmargin=0
+    au FileType ansible setlocal textwidth=0 wrapmargin=0
+  augroup END
+
+  " DBEXT Result window
+  " TODO: this no work...
+  augroup results_buffer
+    au BufWritePre,BufRead Result set winheight=10 winminheight=10
   augroup END
 
 " }}}
@@ -639,6 +645,7 @@
     let g:dbext_default_history_file = '$HOME/.vim/tmp/swap/dbext_sql_history.txt'
     let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(\|:\a\)\w\+\>'
     let g:dbext_default_buffer_lines = 10
+    let g:dbext_default_prompt_for_variables = 0
   "}}}
 
   " vim-go {{{2
@@ -1016,7 +1023,7 @@ RUBY
       let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
       " Make the window slightly transparent
-      set transparency=4
+      "set transparency=4
 
       " Command-T for CtrlP
       map <D-T> :CtrlP<CR>
