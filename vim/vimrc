@@ -113,7 +113,6 @@
     Plug 'jistr/vim-nerdtree-tabs'
     Plug 'EvanDotPro/nerdtree-chmod'
     Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'low-ghost/nerdtree-fugitive'
   endif
 
   call plug#end()
