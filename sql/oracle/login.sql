@@ -8,5 +8,5 @@ set pagesize 50000
 -- set pagesize 0
 set long 5000
 define _editor=vim
-set sqlprompt '[0;31m&_user@&_connect_identifier[0;31m > [0;49m'
+set sqlprompt '&_user@&_connect_identifier > '
 set editfile /tmp/afiedt.buf
