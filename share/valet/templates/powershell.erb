@@ -13,12 +13,12 @@
   <Inputs if any, otherwise state None>
 
 .OUTPUTS
-  <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
+  <Outputs if any, otherwise state None>
 
 .NOTES
   Version:        1.0
-  Author:         <Name>
-  Creation Date:  <Date>
+  Author:         < Name >
+  Creation Date:  <%= @date %>
   Purpose/Change: Initial script development
 
 .EXAMPLE
@@ -27,56 +27,90 @@
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
-#Set Error Action to Silently Continue
+# Set Error Action to Silently Continue
 $ErrorActionPreference = "SilentlyContinue"
-
-#Source required Function Libraries
-#. "C:\Scripts\Functions\Logging_Functions.ps1"
+$DebugPreference = "Continue"
 
 #----------------------------------------------------------[Declarations]----------------------------------------------------------
 
-#Script Version
-$sScriptVersion = "1.0"
-
-#Log File Info
-$sLogPath = "C:\Windows\Temp"
-$sLogName = "<%= @script_name %>.log"
-$sLogFile = Join-Path -Path $sLogPath -ChildPath $sLogName
+#$sScriptVersion = "1.0"
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
-<#
+Function Log-Start{
 
+  Process{
+    Write-Host ""
+    Write-Host "*********************************************************"
+    Write-Host "Script began at [$([DateTime]::Now)]."
+    Write-Host "*********************************************************"
+    Write-Host ""
+  }
+
+}
+
+Function Log-Info{
+  Param ([Parameter(Mandatory=$true)][string]$Message)
+  Process{
+    Write-Debug "INFO: [$Message]."
+  }
+}
+
+Function Log-Error{
+  Param (
+    [Parameter(Mandatory=$true)][string]$Message,
+    [Parameter(Mandatory=$false)][boolean]$ExitGracefully
+    )
+  Process{
+    Write-Warning -Message "Error: An error has occurred [$ErrorDesc]."
+    If ($ExitGracefully -eq $True){
+      Break
+    }
+  }
+}
+
+Function Log-Finish{
+  Process{
+    Write-Host ""
+    Write-Host "*********************************************************"
+    Write-Host "Script finished processing at [$([DateTime]::Now)]."
+    Write-Host "*********************************************************"
+  }
+}
+
+<#
 Function <FunctionName>{
   Param()
 
   Begin{
-    Log-Write -LogPath $sLogFile -LineValue "<description of what is going on>..."
+    Log-Info -Message "Entering function ???"
   }
 
   Process{
     Try{
-      <code goes here>
+      Log-Info -Message "Executing..."
     }
 
     Catch{
-      Log-Error -LogPath $sLogFile -ErrorDesc $_.Exception -ExitGracefully $True
+      Log-Error -Message $_.Exception -ExitGracefully $True
       Break
     }
   }
 
   End{
     If($?){
-      Log-Write -LogPath $sLogFile -LineValue "Completed Successfully."
-      Log-Write -LogPath $sLogFile -LineValue " "
+      Log-Info -Message "Completed Successfully."
+      Log-Info -Message " "
     }
   }
 }
-
 #>
+
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-#Log-Start -LogPath $sLogPath -LogName $sLogName -ScriptVersion $sScriptVersion
-#Script Execution goes here
-#Log-Finish -LogPath $sLogFile
+Log-Start
+
+# < call script functions >
+
+Log-Finish
