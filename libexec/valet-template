@@ -48,6 +48,7 @@ class Template < Thor
   def batch (script_name=nil)
     @script_name = get_script_name(script_name)
     create_from_template("batch_script.erb", "#{@script_name}.bat")
+    run "unix2dos #{@script_name}.bat"
   end
 
   # datafix
@@ -72,7 +73,6 @@ class Template < Thor
   # golang project
   desc "golang [NAME]", "Creates golang project files and directories"
   def golang(project_name=nil)
-
     @project_name = get_project_name(project_name)
     @project_base_directory = create_project_directory(@project_name)
 
@@ -84,7 +84,6 @@ class Template < Thor
       run("direnv allow")
       run("glide init")
     end
-
   end
 
   # windows powershell script
@@ -92,6 +91,7 @@ class Template < Thor
   def powershell (script_name=nil)
     @script_name = get_script_name(script_name)
     create_from_template("powershell.erb", "#{@script_name}.ps1")
+    run "unix2dos #{@script_name}.ps1"
   end
 
   # casperjs script
