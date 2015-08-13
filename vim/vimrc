@@ -112,7 +112,6 @@
     Plug 'scrooloose/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
     Plug 'EvanDotPro/nerdtree-chmod'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
   endif
 
   call plug#end()
