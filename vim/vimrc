@@ -639,10 +639,10 @@
   "}}}
 
   " DBExt {{{2
-    let g:dbext_default_history_file = '$HOME/.vim/tmp/swap/dbext_sql_history.txt'
-    let g:dbext_default_variable_def_regex = '\(\w\|'."'".'\)\@<!?\(\w\|'."'".'\)\@<!,\zs\(\|:\a\)\w\+\>'
-    let g:dbext_default_buffer_lines = 10
-    let g:dbext_default_prompt_for_variables = 0
+    let g:dbext_default_history_file='$HOME/.vim/tmp/swap/dbext_sql_history.txt'
+    let g:dbext_default_variable_def_regex='\(\w\|''\)\@<!?\(\w\|''\)\@<!,\zs:\w\+\>'
+    let g:dbext_default_buffer_lines=10
+    let g:dbext_default_prompt_for_variables=0
   "}}}
 
   " vim-go {{{2
