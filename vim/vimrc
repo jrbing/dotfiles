@@ -102,6 +102,7 @@
     Plug 'fatih/vim-go'
     Plug 'epeli/slimux'
     Plug 'diepm/vim-rest-console'
+    Plug 'editorconfig/editorconfig-vim'
     if !VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
     endif
