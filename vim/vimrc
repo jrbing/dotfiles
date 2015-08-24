@@ -92,7 +92,6 @@
   if OSX()
     Plug 'Chiel92/vim-autoformat'
     Plug 'SQLUtilities'
-    Plug 'vim-scripts/dbext.vim'
     Plug 'scrooloose/syntastic'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-scripts/VOoM'
@@ -103,6 +102,7 @@
     Plug 'epeli/slimux'
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
+    Plug 'cosminadrianpopescu/vim-sql-workbench'
     if !VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
     endif
@@ -472,12 +472,6 @@
     au FileType ansible setlocal textwidth=0 wrapmargin=0
   augroup END
 
-  " DBEXT Result window
-  " TODO: this no work...
-  augroup results_buffer
-    au BufWritePre,BufRead Result set winheight=10 winminheight=10
-  augroup END
-
 " }}}
 
 " Plugin configuration/mapping {{{1
@@ -637,13 +631,6 @@
     "nnoremap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
     "nnoremap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
     "nnoremap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
-  "}}}
-
-  " DBExt {{{2
-    let g:dbext_default_history_file='$HOME/.vim/tmp/swap/dbext_sql_history.txt'
-    let g:dbext_default_variable_def_regex='\(\w\|''\)\@<!?\(\w\|''\)\@<!,\zs:\w\+\>'
-    let g:dbext_default_buffer_lines=10
-    let g:dbext_default_prompt_for_variables=0
   "}}}
 
   " vim-go {{{2
@@ -1174,12 +1161,6 @@ RUBY
 " }}}
 
 " Miscellaneous {{{1
-
-  " When encrypting any file, use the much stronger blowfish algorithm
-  "set cryptmethod=blowfish
-
-  " Disable additional files that are generated when working with an encrypted file
-  "autocmd BufReadPost * if &key != "" | set noswapfile nowritebackup viminfo= nobackup noshelltemp history=0 secure | endif
 
   " Automatically reload the vimrc file when changed
   "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
