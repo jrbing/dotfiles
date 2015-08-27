@@ -685,10 +685,6 @@
     endif
   "}}}
 
-  " SQL Workbench {{{2
-  let g:sw_exe = "/opt/oracle/sqlworkbench/sqlwbconsole.sh"
-  "}}}
-
 " }}}
 
 " Utility Functions {{{1
