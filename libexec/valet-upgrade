@@ -9,18 +9,33 @@ set -e
 # Source generic bash functions
 source "$DOTFILES/share/lib/bash-functions.sh"
 
+function update_homebrew_repo() {
+  start_spinner "Updating homebrew repo"
+  brew update > /dev/null 2>&1
+  stop_spinner $?
+}
+
+function upgrade_homebrew_applications() {
+  start_spinner "Updating homebrew applications"
+  brew upgrade > /dev/null 2>&1
+  stop_spinner $?
+}
+
+function clean_homebrew_cache() {
+  start_spinner "Cleaning homebrew cache"
+  brew cleanup > /dev/null 2>&1
+  stop_spinner $?
+}
+
 case $(uname) in
   (Darwin)
     # Update homebrew (if installed) and upgrade packages
     if hash brew 2>/dev/null; then
-      spininfo "Updating homebrew repo" "brew update > /dev/null 2>&1"
-      echoinfo "Outdated packages" && brew outdated
-      spininfo "Upgrading homebrew packages" "brew upgrade > /dev/null 2>&1"
-      spininfo "Cleaning up homebrew" "brew cleanup > /dev/null 2>&1"
+      update_homebrew_repo
+      echoinfo "Outdated packages" && brew outdated #TODO: clean this up
+      upgrade_homebrew_applications
+      clean_homebrew_cache
     fi
-    #if hash pip > /dev/null 2>&1; then
-      #spininfo "Updating pip packages" "pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U > /dev/null 2>&1"
-    #fi
   ;;
   (Linux)
     if hash yum 2>/dev/null; then

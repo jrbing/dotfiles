@@ -2,16 +2,24 @@
 # Usage: valet update
 # Summary: Update dotfiles from github
 # Help: Use this command to pull down the most recent copy of
-# my dotfiles
+# my dotfiles and update all vim plugins
+
+set -e
 
 # Source generic bash functions
 source "$DOTFILES/share/lib/bash-functions.sh"
 
-#
-# Pull down updates to dotfiles from Github
-#
-update_dotfiles='cd $DOTFILES && git pull origin master > /dev/null 2>&1 && git submodule update --init --recursive > /dev/null 2>&1'
-update_vim_plugins='vim +PlugUpdate +qall > /dev/null 2>&1'
+function update_dotfiles() {
+  start_spinner "Updating dotfiles"
+  cd "$DOTFILES" && git pull origin master > /dev/null 2>&1 && git submodule update --init --recursive > /dev/null 2>&1
+  stop_spinner $?
+}
 
-spininfo "Updating dotfiles" "${update_dotfiles}"
-spininfo "Updating vim plugins" "${update_vim_plugins}"
+function update_vim_plugins() {
+  start_spinner "Updating vim plugins"
+  vim +PlugUpdate +qall > /dev/null 2>&1
+  stop_spinner $?
+}
+
+update_dotfiles
+update_vim_plugins

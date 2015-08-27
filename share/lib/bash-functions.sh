@@ -42,7 +42,7 @@ __detect_color_support
 #   DESCRIPTION:  Echo errors to stderr.
 #-------------------------------------------------------------------------------
 function echoerror() {
-    printf "${RC} * ERROR${EC}: %s\n" "$@" 1>&2;
+    printf "${RC} ★  ERROR${EC}: %s\n" "$@" 1>&2;
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -50,7 +50,7 @@ function echoerror() {
 #   DESCRIPTION:  Echo information to stdout.
 #-------------------------------------------------------------------------------
 function echoinfo() {
-    printf "${GC} *  INFO${EC}: %s\n" "$@";
+    printf "${GC} ★  INFO${EC}: %s\n" "$@";
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -58,7 +58,7 @@ function echoinfo() {
 #   DESCRIPTION:  Echo warning informations to stdout.
 #-------------------------------------------------------------------------------
 function echowarn() {
-    printf "${YC} *  WARN${EC}: %s\n" "$@";
+    printf "${YC} ★  WARN${EC}: %s\n" "$@";
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -67,7 +67,7 @@ function echowarn() {
 #-------------------------------------------------------------------------------
 function echodebug() {
     if [[ "$ECHO_DEBUG" -eq "$BS_TRUE" ]]; then
-        printf "${BC} * DEBUG${EC}: %s\n" "$@";
+        printf "${BC} ★ DEBUG${EC}: %s\n" "$@";
     fi
 }
 
@@ -111,7 +111,6 @@ function trim {
 #   DESCRIPTION:  Checks if a variable is set to "y" or "yes"
 #-------------------------------------------------------------------------------
 function option_enabled () {
-
     VAR="$1"
     VAR_VALUE=$(eval echo \$$VAR)
     if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
@@ -123,75 +122,9 @@ function option_enabled () {
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  spinner
-#   DESCRIPTION:  Displays a spinner while a long running job is processing
-#   NOTES:  Taken from http://fitnr.com/showing-a-bash-spinner.html
-#-------------------------------------------------------------------------------
-function spinner() {
-    local pid=$1
-    local delay=0.5
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-    if [[ $? -eq 0 ]]; then
-        printf "    ${GC}SUCCESS${EC}"
-    else
-        printf "    ${RC}FAILURE${EC}"
-    fi
-
-}
-
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  spininfo
-#   DESCRIPTION:  Displays a spinner while a long running job is processing
-#-------------------------------------------------------------------------------
-function spininfo() {
-
-    local message="${GC} *  INFO${EC}: $1"
-    local command=$2
-
-    printf "${message}";
-    ( eval "${command}" > /dev/null 2>&1 ) &
-
-    local pid=$!
-    local delay=0.5
-    local spinstr='|/-\'
-    #local spinstr='← ↖ ↑ ↗ → ↘ ↓ ↙'
-
-    while ps a | awk '{print $1}' | grep "$pid" > /dev/null 2>&1; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-
-    wait "$pid"
-    local return_status=$?
-
-    if [[ $return_status -eq 0 ]]; then
-        let columns=$(tput cols)-${#message}+${#GC}+${#EC}+11
-        printf "%${columns}b" "${GC}[SUCCESS]${EC}"
-    else
-        let columns=$(tput cols)-${#message}+${#GC}+${#EC}+11
-        printf "%${columns}b" "${RC}[FAILURE]${EC}"
-    fi
-
-    printf "\n"
-}
-
-#---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  bincheck
 #   DESCRIPTION:  Checks for the existence of specified binaries in the PATH
 #-------------------------------------------------------------------------------
-
 function bincheck() {
     for p in ${1}; do
         hash "$p" 2>&- || \
@@ -200,11 +133,73 @@ function bincheck() {
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  pause
-#   DESCRIPTION:  Pauses execution of the script
+#          NAME:  [start/stop]_spinner
+#   DESCRIPTION:  Displays a spinner while a long running job is processing
+#   NOTES:  Modified from https://github.com/tlatsas/bash-spinner
 #-------------------------------------------------------------------------------
 
-function pause() {
-    printf "${BC} * PAUSE${EC}: ";
-    read -p "$*"
+function _spinner() {
+    # $1 start/stop
+    # on start: $2 display message
+    # on stop : $2 process exit status
+    #           $3 spinner function pid (supplied from stop_spinner)
+
+    local on_success="SUCCESS"
+    local on_fail="FAIL"
+
+    case $1 in
+        start)
+            local message="${GC} ★  INFO${EC}: $2"
+            let column=$(tput cols)-${#message}+8 # calculate the column where spinner and status msg will be displayed
+
+            echo -ne "${message}" # display message and position the cursor in $column column
+            printf "%${column}s"
+
+            # start spinner
+            local i=1
+            local sp='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+            #local spinstr='← ↖ ↑ ↗ → ↘ ↓ ↙'
+            local delay=0.15
+
+            while :
+            do
+                printf "\b${sp:i++%${#sp}:1}"
+                sleep $delay
+            done
+            ;;
+        stop)
+            if [[ -z ${3} ]]; then
+                echo "Spinner is not running.."
+                exit 1
+            fi
+
+            kill "$3" > /dev/null 2>&1
+
+            # inform the user upon success or failure
+            echo -en "\b["
+            if [[ $2 -eq 0 ]]; then
+                echo -en "${GC}${on_success}${EC}"
+            else
+                echo -en "${RC}${on_fail}${EC}"
+            fi
+            echo -e "]"
+            ;;
+        *)
+            echo "Invalid argument, try {start/stop}"
+            exit 1
+            ;;
+    esac
+}
+
+function start_spinner {
+    tput civis                # Hide the cursor
+    _spinner "start" "${1}" & # $1 : msg to display
+    _sp_pid=$!                # set global spinner pid
+    disown
+}
+
+function stop_spinner {
+    _spinner "stop" "${1}" "$_sp_pid" # $1 : command exit status
+    unset _sp_pid
+    tput cnorm                        # Show the cursor
 }
