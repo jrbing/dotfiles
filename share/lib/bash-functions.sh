@@ -133,11 +133,20 @@ function bincheck() {
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  pause
+#   DESCRIPTION:  Pauses execution of the script
+#-------------------------------------------------------------------------------
+function pause() {
+    printf "${BC} ★  PAUSE${EC}: ";
+    read -p "$*"
+}
+
+
+#---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  [start/stop]_spinner
 #   DESCRIPTION:  Displays a spinner while a long running job is processing
 #   NOTES:  Modified from https://github.com/tlatsas/bash-spinner
 #-------------------------------------------------------------------------------
-
 function _spinner() {
     # $1 start/stop
     # on start: $2 display message
