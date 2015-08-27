@@ -77,9 +77,10 @@ class Template < Thor
     @project_base_directory = create_project_directory(@project_name)
 
     create_from_template("goenvrc.erb", ".envrc")
-    create_project_subdirectory('_vendor/bin')
-    create_project_subdirectory('_vendor/pkg')
-    create_project_subdirectory('_vendor/src')
+    create_project_subdirectory('vendor')
+    #create_project_subdirectory('_vendor/bin')
+    #create_project_subdirectory('_vendor/pkg')
+    #create_project_subdirectory('_vendor/src')
     inside(@project_base_directory) do
       run("direnv allow")
       run("glide init")

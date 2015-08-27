@@ -13,9 +13,10 @@ case $(uname) in
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
-    [[ -d "/usr/local/bin" ]] && export PATH="/usr/local/bin:$PATH" # Ensure /usr/local/bin is in path
+    export GO15VENDOREXPERIMENT=1                                                  # Enable golang 1.5 vendoring
+    [[ -d "/usr/local/bin" ]] && export PATH="/usr/local/bin:$PATH"                # Ensure /usr/local/bin is in path
+    [[ -d "/usr/texbin" ]] && export PATH="$PATH:/usr/texbin"                      # Tex
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
-    [[ -d "/usr/texbin" ]] && export PATH="$PATH:/usr/texbin" # Tex
 
     if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     #
@@ -27,7 +28,7 @@ case $(uname) in
     alias apb=ansible-playbook
     alias agx=ansible-galaxy
     alias anv=ansible-vault
-    alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -i -f ~/.sqlplus_history -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
+    alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
   ;;
   (Linux)
     if [[ $(python -c 'import sys; print("%i" % (sys.hexversion<0x02070000))') -eq 0 ]]; then
@@ -109,7 +110,7 @@ fi
 #
 # Additional Tools
 #
-export SQLPATH=$DOTFILES/sql/oracle       # SQL script path for sqlplus
+export SQLPATH=$DOTFILES/sql/oracle # SQL script path for sqlplus
 
 # direnv
 if hash direnv 2>/dev/null; then
