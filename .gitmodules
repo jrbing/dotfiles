@@ -22,10 +22,6 @@
   path = zsh/k
   url = git://github.com/rimraf/k.git
   ignore = dirty
-[submodule "tmux/tmux-sidebar"]
-  path = tmux/tmux-sidebar
-  url = git://github.com/tmux-plugins/tmux-sidebar.git
-  ignore = dirty
 [submodule "tmux/tmux-resurrect"]
   path = tmux/tmux-resurrect
   url = git://github.com/tmux-plugins/tmux-resurrect.git
