@@ -103,6 +103,7 @@
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'cosminadrianpopescu/vim-sql-workbench'
+    Plug 'Raimondi/delimitMate'
     if !VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
     endif
