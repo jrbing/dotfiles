@@ -43,6 +43,7 @@
   Plug 'majutsushi/tagbar'
   Plug 'mattn/webapi-vim'
   Plug 'mtth/scratch.vim'
+  Plug 'plasticboy/vim-markdown'
   Plug 'rizzatti/dash.vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-abolish'
@@ -53,7 +54,6 @@
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-jdaddy'
-  Plug 'tpope/vim-markdown'
   Plug 'tpope/vim-obsession'
   Plug 'tpope/vim-projectionist'
   Plug 'tpope/vim-rails'
@@ -87,7 +87,6 @@
   Plug 'cespare/vim-toml'
   Plug 'markcornick/vim-terraform'
   Plug 'funcodeio/lz4.vim'
-  "Plug 'juvenn/mustache.vim'
 
   if OSX()
     Plug 'Chiel92/vim-autoformat'
@@ -102,7 +101,6 @@
     Plug 'epeli/slimux'
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'cosminadrianpopescu/vim-sql-workbench'
     Plug 'Raimondi/delimitMate'
     if !VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
