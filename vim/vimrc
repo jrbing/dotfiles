@@ -90,7 +90,7 @@
 
   if OSX()
     Plug 'Chiel92/vim-autoformat'
-    Plug 'SQLUtilities'
+    Plug 'jphustman/SQLUtilities'
     Plug 'scrooloose/syntastic'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-scripts/VOoM'
@@ -623,13 +623,18 @@
 
   " SQLUtilities {{{2
     let g:sqlutil_align_comma = 1
+    let g:sqlutil_align_where = 1
+    let g:sqlutil_align_first_word = 1
     let g:sqlutil_keyword_case = '\L'
+    let g:sqlutil_align_keyword_right = 1
+    let g:sqlutil_indent_nested_blocks = 1
+    let g:sqlutil_wrap_long_lines = 1
     "let g:sqlutil_load_default_maps = 0
-    "vnoremap <leader>sf        <Plug>SQLU_Formatter<CR>
-    "nnoremap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
-    "nnoremap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
-    "nnoremap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
-    "nnoremap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
+    "vmap <leader>sf        <Plug>SQLU_Formatter<CR>
+    "nmap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
+    "nmap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
+    "nmap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
+    "nmap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
   "}}}
 
   " vim-go {{{2
