@@ -78,9 +78,6 @@ class Template < Thor
 
     create_from_template("goenvrc.erb", ".envrc")
     create_project_subdirectory('vendor')
-    #create_project_subdirectory('_vendor/bin')
-    #create_project_subdirectory('_vendor/pkg')
-    #create_project_subdirectory('_vendor/src')
     inside(@project_base_directory) do
       run("direnv allow")
       run("glide init")
@@ -100,6 +97,12 @@ class Template < Thor
   def casper (script_name=nil)
     @script_name = get_script_name(script_name)
     create_from_template("casper.erb", "#{@script_name}.js")
+  end
+
+  # makefile script
+  desc "make", "Creates a basic makefile"
+  def make
+    create_from_template("makefile.erb", "Makefile")
   end
 
 end

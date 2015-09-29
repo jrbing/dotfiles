@@ -1,0 +1,52 @@
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 noexpandtab fenc=utf-8 spelllang=en nolist
+#===============================================================================
+
+# Cheat Sheet - http://www.cheatography.com/bavo-van-achte/cheat-sheets/gnumake/
+# Refcard - http://www.schacherer.de/frank/technology/tools/make.html
+# Make for frontend development - http://www.sitepoint.com/using-gnu-make-front-end-development-build-tool/
+
+# Automatic Variables
+# -------------------
+# $@ – the target filename
+# $< – the filename of the first prerequisite
+# $? – space-delimited list of all prerequisites
+
+currentdir   := $(shell pwd)
+remoteuser   = jeffery
+remotehost   = lebowski.com
+remotedir    = /the/dude/abides
+syncswitches = --checksum -rlvzu --exclude ".*" --exclude "*.tgz*" --exclude "Makefile.*"
+syncmessage  = Synchronizing local files to remote host
+
+tdir		:=/
+all: update submodules
+
+setup:
+	mkdir vendor
+	mkdir lib
+
+submodules:
+	@git submodule foreach 'git fetch origin; \
+		git checkout master; \
+		git reset --hard origin/master; \
+		git submodule update --recursive; \
+		git clean -dfx'
+
+update:
+	git pull --rebase
+
+drysync:
+	@echo "DRY RUN: $(syncmessage)"
+	rsync --dry-run $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)$(sd)/
+	@echo
+
+sync:
+	@echo "$(syncmessage)"
+	rsync $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)$(sd)/
+	@echo
+
+test:
+	@echo "$(currentdir)"
+
+.PHONY: setup submodules update sync drysync
