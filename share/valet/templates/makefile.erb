@@ -16,10 +16,9 @@ currentdir   := $(shell pwd)
 remoteuser   = jeffery
 remotehost   = lebowski.com
 remotedir    = /the/dude/abides
-syncswitches = --checksum -rlvzu --exclude ".*" --exclude "*.tgz*" --exclude "Makefile.*"
-syncmessage  = Synchronizing local files to remote host
+syncswitches = --checksum --archive
+syncmessage  = 'Synchronizing local files to remote host'
 
-tdir		:=/
 all: update submodules
 
 setup:
@@ -38,12 +37,12 @@ update:
 
 drysync:
 	@echo "DRY RUN: $(syncmessage)"
-	rsync --dry-run $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)$(sd)/
+	rsync --dry-run $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)/
 	@echo
 
 sync:
 	@echo "$(syncmessage)"
-	rsync $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)$(sd)/
+	rsync $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)/
 	@echo
 
 test:
