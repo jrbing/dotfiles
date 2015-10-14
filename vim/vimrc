@@ -468,7 +468,14 @@
 
   " Ansible
   augroup ft_ansible
+    au!
     au FileType ansible setlocal textwidth=0 wrapmargin=0
+  augroup END
+
+  " Powershell
+  augroup ft_powershell
+    au!
+    au FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
   augroup END
 
 " }}}
