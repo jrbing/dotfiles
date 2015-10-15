@@ -587,6 +587,15 @@
       \ 'ctagsargs' : '-sort -silent'
     \ }
 
+    let g:tagbar_type_ps1 = {
+      \ 'ctagstype' : 'powershell',
+      \ 'kinds'     : [
+          \ 'f:function',
+          \ 'i:filter',
+          \ 'a:alias'
+      \ ]
+    \ }
+
   "}}}
 
   " Syntastic {{{2
