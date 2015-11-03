@@ -13,6 +13,7 @@ FORMULAS=(
     ansible
     aria2
     blink1
+		cheat
     hub
     imagemagick
     mosh
