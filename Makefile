@@ -21,6 +21,9 @@ link-vim:
 				ln -nfs $(dotfiles)/vim/vimrc .vimrc; \
 				ln -nfs $(dotfiles)/vim/gvimrc .gvimrc
 
+link-nvim:
+	@cd ~ && ln -nfs $(dotfiles)/vim/ .config/nvim
+
 link-prezto:
 	@cd ~ && ln -nfs $(dotfiles)/zsh/prezto .zprezto
 
@@ -55,3 +58,4 @@ submodules:
 update:
 	git pull --rebase
 
+.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd check-dead clean-dead submodules update
