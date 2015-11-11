@@ -138,8 +138,6 @@
   set laststatus=2
   set history=1000
   set cpoptions+=J
-  set list
-  set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
   set shell=/bin/bash
   set lazyredraw
   set matchtime=3
