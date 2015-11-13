@@ -92,13 +92,6 @@ class Template < Thor
     run "unix2dos #{@script_name}.ps1"
   end
 
-  # casperjs script
-  desc "casper [NAME]", "Creates a basic casperjs script file"
-  def casper (script_name=nil)
-    @script_name = get_script_name(script_name)
-    create_from_template("casper.erb", "#{@script_name}.js")
-  end
-
   # makefile script
   desc "make", "Creates a basic makefile"
   def make
