@@ -87,8 +87,9 @@
   Plug 'cespare/vim-toml'
   Plug 'markcornick/vim-terraform'
   Plug 'funcodeio/lz4.vim'
+  Plug 'dart-lang/dart-vim-plugin'
 
-  if OSX()
+  if g:OSX()
     Plug 'Chiel92/vim-autoformat'
     Plug 'jphustman/SQLUtilities'
     Plug 'scrooloose/syntastic'
@@ -102,13 +103,13 @@
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'Raimondi/delimitMate'
-    if !VIMR()
+    if !g:VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
     endif
   endif
 
   " Only load Nerdtree if we're not using VimR
-  if !VIMR()
+  if !g:VIMR()
     Plug 'scrooloose/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
     Plug 'EvanDotPro/nerdtree-chmod'
