@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #===============================================================================
-# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+# vim: softtabstop=4 shiftwidth=4 expandtab fenc=utf-8 spelllang=en ft=sh
 #===============================================================================
 #
 #          FILE: repo-update
@@ -16,21 +16,43 @@ IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 readonly PROGDIR=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
 readonly CURDIR=$(pwd)
+LISTONLY=false
 
-# Source bash functions
+# shellcheck source=/dev/null
 source "$PROGDIR/../share/lib/bash-functions.sh"
 
-echoinfo "Building list of repositories under $CURDIR"
-repositories=()
-for repo in $(find . -name ".git" | cut -c 3-); do
-    repo_base_path=$(dirname $repo)
-    repositories+=("$repo_base_path")
+while getopts ":l" opt; do
+    case $opt in
+        l)
+            LISTONLY=true
+        ;;
+        \?)
+            echoerror "Invalid option: -$OPTARG" >&2
+            exit 1
+        ;;
+    esac
 done
 
+function update_repositories() {
+    echoinfo "Building list of repositories under $CURDIR"
+    repositories=()
+    for repo in $(find . -name ".git" | cut -c 3-); do
+        repo_base_path="$(dirname $repo)"
+        repositories+=("$repo_base_path")
+    done
 
-for repo_path in "${repositories[@]}"; do
-    echoinfo "Updating repository at $repo_path"
-    cd "$CURDIR"/"$repo_path" && \
-        git pull --rebase && \
-        git submodule update --init
-done
+    if [[ $LISTONLY == true ]]; then
+        for repo_path in "${repositories[@]}"; do
+            echoinfo "Found repository at $repo_path"
+        done
+    else
+        for repo_path in "${repositories[@]}"; do
+            echoinfo "Updating repository at $repo_path"
+            cd "$CURDIR"/"$repo_path" && \
+                git pull --rebase && \
+                git submodule update --init
+        done
+    fi
+}
+
+update_repositories
