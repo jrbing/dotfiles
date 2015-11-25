@@ -13,49 +13,48 @@ FORMULAS=(
     ansible
     aria2
     blink1
-		cheat
+    caskroom/cask/brew-cask
+    cheat
+    coreutils
+    ctags
+    direnv
+    findutils
+    git
+    htop-osx
     hub
     imagemagick
+    keybase
+    macvim --override-system-vim --custom-icons --with-lua
     mosh
-    rlwrap
-    readline
-    reattach-to-user-namespace
-    tmux
     ngrok
-    git
-    tree
+    openssl
     optipng
-    ssh-copy-id
-    htop-osx
-    direnv
     rbenv
     rbenv-gem-rehash
+    readline
+    reattach-to-user-namespace
+    rlwrap
     ruby-build
-    openssl
-    coreutils
-    findutils
-    zsh
-    caskroom/cask/brew-cask
-    wget
-    the_silver_searcher
-    macvim --override-system-vim --custom-icons --with-lua
-    ctags
     shellcheck
+    ssh-copy-id
+    the_silver_searcher
+    tmux
+    tree
+    wget
+    zsh
 )
 
 # Homebrew casks
 CASKS=(
-    the-unarchiver
-    appcleaner
     growlnotify
     basictex
     pandoc
 )
 
-#font-inconsolata-dz-for-powerline
-#font-inconsolata
-#font-source-code-pro
-#font-droid-sans-mono
-#font-meslo-lg
-#virtualbox
-#vagrant
+FONTS=(
+    font-droid-sans-mono
+    font-inconsolata
+    font-inconsolata-dz-for-powerline
+    font-meslo-lg
+    font-source-code-pro
+)
