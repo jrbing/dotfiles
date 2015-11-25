@@ -443,7 +443,7 @@
   " C Style Indentation
   augroup ft_cstyle
     au!
-    au BufRead,BufNewFile *.{c,h,cpp} call s:cStyleIndent()
+    au BufRead,BufNewFile *.{c,h,cpp} call CStyleIndent()
   augroup END
 
   " Go
@@ -679,6 +679,12 @@
     " Set snippets search path
     let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
 
+    " Set custom snippet directory for use with UltiSnipsEdit
+    let g:UltiSnipsSnippetsDir='~/.dotfiles/vim/custom/snippets'
+
+    " Define how the edit window is opened when :UltiSnipsEdit is called
+    let g:UltiSnipsEditSplit='vertical'
+
     " Enable omni completion.
     augroup youcompleteme
       au!
@@ -724,12 +730,14 @@
     setlocal smarttab
   endfunction
 
-  function! s:cStyleIndent()
+  function! g:CStyleIndent()
     setlocal expandtab
     setlocal tabstop=4
     setlocal shiftwidth=4
     setlocal softtabstop=4
   endfunction
+
+  command! CStyleIndent :call CStyleIndent()
 
   function! s:setupWrapping()
     setlocal wrap

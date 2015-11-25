@@ -1,0 +1,58 @@
+priority 0
+
+snippet colorvars
+RC="\\033[1;31m"
+GC="\\033[1;32m"
+BC="\\033[1;34m"
+YC="\\033[1;33m"
+EC="\\033[0m"
+$0
+endsnippet
+
+snippet echoinfo
+function echoinfo() \{
+	local GC="\\033[1;32m"
+	local EC="\\033[0m"
+	printf "\$\{GC\} ★  INFO\$\{EC\}: %s\\n" "\$@";
+\}
+$0
+endsnippet
+
+snippet echoerror
+function echoerror() \{
+	local RC="\\033[1;31m"
+	local EC="\\033[0m"
+	printf "\$\{RC\} ★  ERROR\$\{EC\}: %s\\n" "\$@" 1>&2;
+\}
+$0
+endsnippet
+
+snippet echowarn
+function echowarn() \{
+	local YC="\\033[1;33m"
+	local EC="\\033[0m"
+	printf "\$\{YC\} ★  WARN\$\{EC\}: %s\\n" "\$@";
+\}
+$0
+endsnippet
+
+snippet echodebug
+function echodebug() \{
+	local BC="\\033[1;34m"
+	local EC="\\033[0m"
+	if [[ \$ECHO_DEBUG ]]; then
+		printf "\$\{BC\} ★ DEBUG\$\{EC\}: %s\\n" "\$@";
+	fi
+\}
+$0
+endsnippet
+
+snippet pause
+function pause() \{
+	local BC="\\033[1;34m"
+	local EC="\\033[0m"
+	printf "\$\{BC\} ★  PAUSE\$\{EC\}: ";
+	read -p "\$*"
+\}
+$0
+endsnippet
