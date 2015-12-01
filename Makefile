@@ -42,6 +42,9 @@ link-zsh:
 link-launchd:
 	@cd ~ && ln -nfs "$$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$$HOME/Library/LaunchAgents/yosemite.pathfix.plist"
 
+link-cheat:
+	@cd ~ && ln -nfs $(dotfiles)/cheat/ .cheat;
+
 check-dead:
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 
@@ -58,4 +61,4 @@ submodules:
 update:
 	git pull --rebase
 
-.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd check-dead clean-dead submodules update
+.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat check-dead clean-dead submodules update
