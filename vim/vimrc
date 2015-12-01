@@ -35,11 +35,12 @@
   " Utilities
   Plug 'artnez/vim-wipeout'
   Plug 'c0r73x/vimdir.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'ervandew/supertab'
   Plug 'gcmt/wildfire.vim'
   Plug 'godlygeek/tabular'
   Plug 'justinmk/vim-sneak'
   Plug 'kana/vim-metarw'
-  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'majutsushi/tagbar'
   Plug 'mattn/webapi-vim'
   Plug 'mtth/scratch.vim'
@@ -665,16 +666,15 @@
     endif
   "}}}
 
-  " YouCompleteMe / Ultisnips {{{2
-    let g:acp_enableAtStartup = 0
-
-    " Enable completion from tags
-    let g:ycm_collect_identifiers_from_tags_files = 1
-
+  " Ultisnips {{{2
     " Remap Ultisnips for compatibility for YCM
-    let g:UltiSnipsExpandTrigger = '<C-j>'
-    let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+    "let g:UltiSnipsExpandTrigger = '<C-j>'
+    "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+    "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+    " better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
     " Set snippets search path
     let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
@@ -685,6 +685,27 @@
     " Define how the edit window is opened when :UltiSnipsEdit is called
     let g:UltiSnipsEditSplit='vertical'
 
+  " }}}
+
+  " SuperTab{{{2
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+    "let g:acp_enableAtStartup = 0
+    "if has('conceal')
+      "set conceallevel=2 concealcursor=i
+    "endif
+  " }}}
+
+  " YouCompleteMe{{{2
+    "let g:acp_enableAtStartup = 0
+
+    " make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+    " Enable completion from tags
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_use_ultisnips_completer = 1
+
     " Enable omni completion.
     augroup youcompleteme
       au!
@@ -694,7 +715,6 @@
       autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
       autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
       autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-      autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     augroup END
 
     set completeopt-=preview
@@ -705,7 +725,7 @@
 
    " TODO: still can't get this to work
     if executable('yapf')
-      let g:formatdef_yapf = "/usr/local/bin/yapf"
+      let g:formatdef_yapf = '/usr/local/bin/yapf'
       let g:formatters_python = ['yapf']
     endif
   "}}}
@@ -715,7 +735,7 @@
 " Utility Functions {{{1
 
   " Remember last location in file
-  if has("autocmd")
+  if has('autocmd')
     au! BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
   endif
