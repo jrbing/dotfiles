@@ -4,7 +4,7 @@
 TAPS=(
     homebrew/binary
     homebrew/dupes
-    caskroom/cask
+    #caskroom/cask
 )
 
 # Homebrew Formulas
@@ -13,7 +13,7 @@ FORMULAS=(
     ansible
     aria2
     blink1
-    caskroom/cask/brew-cask
+    #caskroom/cask/brew-cask
     cheat
     coreutils
     ctags
@@ -24,7 +24,7 @@ FORMULAS=(
     hub
     imagemagick
     keybase
-    macvim --override-system-vim --custom-icons --with-lua
+    macvim --with-override-system-vim --with-custom-icons --with-lua
     mosh
     ngrok
     openssl
@@ -45,11 +45,11 @@ FORMULAS=(
 )
 
 # Homebrew casks
-CASKS=(
-    growlnotify
-    basictex
-    pandoc
-)
+#CASKS=(
+#    growlnotify
+#    basictex
+#    pandoc
+#)
 
 FONTS=(
     font-droid-sans-mono
