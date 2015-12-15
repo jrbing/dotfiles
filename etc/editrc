@@ -1,3 +1,32 @@
+## Vi editing mode
 bind -v
+
+# History
+## Size 10k
+history size 10000
+## Don't keep duplicates
+history unique 1
+
+# Keybinding
+## Up
+bind "\e[A" ed-prev-history
+## Down
+bind  "\e[B" ed-next-history
+## Home
+bind "\e[1~" ed-move-to-beg
+## End
+bind "\e[4~" ed-move-to-end
+## Page Up
+bind "\e[5~" ed-search-prev-history
+## Page Down
+bind "\e[6~" ed-search-next-history
+## Delete
+bind "\e[3~" ed-delete-next-char
+## Kill word forward
+bind "\e(" em-delete-next-word
+## ^K  to Copy prev shell word
+bind "^K" em-copy-prev-word
+## Inc search backwards
 bind "^R" em-inc-search-prev
+## Tab
 bind \\t rl_complete
