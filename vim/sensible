@@ -26,6 +26,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
+set number
 
 set nrformats-=octal
 
