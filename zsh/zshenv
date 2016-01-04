@@ -21,7 +21,8 @@ case $OSTYPE in
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
-    [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
+    [[ -d "$HOME/BTS/code/go" ]] && export GOPATH=$HOME/BTS/code/go && export PATH="$PATH:$HOME/BTS/code/go/bin" # GOPATH
+    #[[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
     export GO15VENDOREXPERIMENT=1                                                  # Enable golang 1.5 vendoring
     export CHEATCOLORS=true
 

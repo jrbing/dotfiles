@@ -590,7 +590,7 @@
           \ 'ctype' : 't',
           \ 'ntype' : 'n'
       \ },
-      \ 'ctagsbin'  : '/opt/go/bin/gotags',
+      \ 'ctagsbin'  : 'gotags',
       \ 'ctagsargs' : '-sort -silent'
     \ }
 
@@ -662,8 +662,8 @@
 
   " vim-go {{{2
     if OSX()
-      let g:go_bin_path = '/opt/go/bin'
-      let g:go_fmt_command = '/opt/go/bin/goimports'
+      let g:go_bin_path = '$HOME/BTS/code/go/bin'
+      let g:go_fmt_command = '$HOME/BTS/code/go/bin/goimports'
       "let g:go_play_open_browser = 0
       "let g:go_fmt_fail_silently = 1
       "let g:go_fmt_autosave = 0
