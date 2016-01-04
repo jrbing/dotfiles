@@ -24,7 +24,7 @@ FORMULAS=(
     hub
     imagemagick
     keybase
-    macvim --with-override-system-vim --with-custom-icons --with-lua
+    macvim --with-override-system-vim --with-custom-icons --with-lua --with-luajit
     mosh
     ngrok
     openssl
