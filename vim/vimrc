@@ -138,6 +138,7 @@
   set autoindent
   set showmode
   set showcmd
+  set showbreak=↳
   set hidden
   set visualbell
   set cursorline

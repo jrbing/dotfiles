@@ -7,7 +7,6 @@ if MACVIM()
 
   set list
   set listchars=trail:·,precedes:«,extends:»,tab:▸\ 
-  set showbreak=↪
   "set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
 
   " Map Command right/left to move tabs
