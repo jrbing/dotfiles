@@ -609,10 +609,12 @@
     let g:syntastic_enable_signs = 1
     let g:syntastic_disabled_filetypes = ['html']
     let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
-    let g:syntastic_ruby_exec = '~/.rbenv/shims/ruby'
+    let g:syntastic_ruby_exec = expand('~/.rbenv/shims/ruby')
     let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
     let g:syntastic_java_javac_config_file_enabled = 1
     let g:syntastic_vim_checkers = ['vint']
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
     "set statusline+=%#warningmsg#
     "set statusline+=%{SyntasticStatuslineFlag()}
@@ -662,14 +664,13 @@
 
   " vim-go {{{2
     if OSX()
-      let g:go_bin_path = '$HOME/BTS/code/go/bin'
-      let g:go_fmt_command = '$HOME/BTS/code/go/bin/goimports'
-      "let g:go_play_open_browser = 0
-      "let g:go_fmt_fail_silently = 1
-      "let g:go_fmt_autosave = 0
-      "let g:go_highlight_functions = 1
-      "let g:go_highlight_methods = 1
-      "let g:go_highlight_structs = 1
+      let g:go_bin_path = expand('~/BTS/code/go/bin')
+      let g:go_fmt_command = expand('~/BTS/code/go/bin/goimports')
+      let g:go_highlight_functions = 1
+      let g:go_highlight_methods = 1
+      let g:go_highlight_structs = 1
+      let g:go_highlight_operators = 1
+      let g:go_highlight_build_constraints = 1
     endif
   "}}}
 
