@@ -944,11 +944,14 @@ RUBY
   endfunction
 
   " Define the NERDTree-aware aliases
-  call s:DefineCommand("cd", "ChangeDirectory")
-  call s:DefineCommand("touch", "Touch")
-  call s:DefineCommand("rm", "Remove")
-  call s:DefineCommand("e", "Edit")
-  call s:DefineCommand("mkdir", "Mkdir")
+
+  if !g:VIMR()
+    call s:DefineCommand("cd", "ChangeDirectory")
+    call s:DefineCommand("touch", "Touch")
+    call s:DefineCommand("rm", "Remove")
+    call s:DefineCommand("e", "Edit")
+    call s:DefineCommand("mkdir", "Mkdir")
+  endif
 
   " Pulse
   function! PulseCursorLine()
@@ -1116,7 +1119,7 @@ RUBY
       set guifont=Inconsolata-dz\ for\ Powerline:h12
 
       " Set history file for YankRing
-      let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
+      "let g:yankring_history_dir = "$HOME/.vim/tmp/swap"
 
       " Insert date and time header at the top of the file
       nmap <D-D> gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
@@ -1183,7 +1186,7 @@ RUBY
       source $VIMRUNTIME/mswin.vim
 
       " Set history file for YankRing
-      let g:yankring_history_file = '$HOME/vimfiles/tmp/swap/yankring.history'
+      "let g:yankring_history_file = '$HOME/vimfiles/tmp/swap/yankring.history'
 
       " Map Alt-Shift-P to run markdown to pdf against the current document and
       " open the resulting document
