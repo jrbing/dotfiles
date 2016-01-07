@@ -72,8 +72,7 @@
   Plug 'altercation/vim-colors-solarized'
   Plug 'chriskempson/base16-vim'
   Plug 'morhetz/gruvbox'
-  Plug 'MarioRicalde/vim-lucius'
-  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'mhinz/vim-janah'
 
   " Filetypes
   Plug 'vim-ruby/vim-ruby'
