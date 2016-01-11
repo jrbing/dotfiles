@@ -88,6 +88,7 @@
   Plug 'markcornick/vim-terraform'
   Plug 'funcodeio/lz4.vim'
   Plug 'dart-lang/dart-vim-plugin'
+  Plug 'toyamarinyon/vim-swift'
 
   if g:OSX()
     Plug 'Chiel92/vim-autoformat'
