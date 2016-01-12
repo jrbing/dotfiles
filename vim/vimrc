@@ -665,8 +665,8 @@
 
   " vim-go {{{2
     if OSX()
-      let g:go_bin_path = expand('~/BTS/code/go/bin')
-      let g:go_fmt_command = expand('~/BTS/code/go/bin/goimports')
+      let g:go_bin_path = expand('/opt/go/bin')
+      let g:go_fmt_command = expand('/opt/go/bin/goimports')
       let g:go_highlight_functions = 1
       let g:go_highlight_methods = 1
       let g:go_highlight_structs = 1
