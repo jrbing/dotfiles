@@ -153,13 +153,15 @@ function _spinner() {
     # on stop : $2 process exit status
     #           $3 spinner function pid (supplied from stop_spinner)
 
-    local on_success="SUCCESS"
-    local on_fail="FAIL"
+    #local on_success="SUCCESS"
+    local on_success="✓"
+    #local on_fail="FAIL"
+    local on_fail="✗"
 
     case $1 in
         start)
             local message="${GC} ★  INFO${EC}: $2"
-            let column=$(tput cols)-${#message}+8 # calculate the column where spinner and status msg will be displayed
+            let column=$(tput cols)-${#message}+14 # calculate the column where spinner and status msg will be displayed
 
             echo -ne "${message}" # display message and position the cursor in $column column
             printf "%${column}s"
@@ -185,13 +187,13 @@ function _spinner() {
             kill "$3" > /dev/null 2>&1
 
             # inform the user upon success or failure
-            echo -en "\b["
+            echo -en "\b"
             if [[ $2 -eq 0 ]]; then
                 echo -en "${GC}${on_success}${EC}"
             else
                 echo -en "${RC}${on_fail}${EC}"
             fi
-            echo -e "]"
+            echo -e " "
             ;;
         *)
             echo "Invalid argument, try {start/stop}"
