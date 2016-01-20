@@ -739,6 +739,10 @@
     endif
   "}}}
 
+  " Ferret {{{2
+   let g:FerretDispatch=0
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
@@ -944,7 +948,6 @@ RUBY
   endfunction
 
   " Define the NERDTree-aware aliases
-
   if !g:VIMR()
     call s:DefineCommand("cd", "ChangeDirectory")
     call s:DefineCommand("touch", "Touch")
