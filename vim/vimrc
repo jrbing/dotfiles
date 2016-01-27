@@ -81,7 +81,7 @@
   Plug 'pangloss/vim-javascript'
   Plug 'plsql.vim'
   Plug 'stephpy/vim-yaml'
-  Plug 'chase/vim-ansible-yaml'
+  Plug 'pearofducks/ansible-vim'
   Plug 'rust-lang/rust.vim'
   Plug 'PProvost/vim-ps1'
   Plug 'cespare/vim-toml'
