@@ -26,3 +26,7 @@
   path = tmux/tmux-resurrect
   url = git://github.com/tmux-plugins/tmux-resurrect.git
   ignore = dirty
+[submodule "share/bash-concurrent"]
+  path = share/bash-concurrent
+  url = git://github.com/themattrix/bash-concurrent.git
+  ignore = dirty
