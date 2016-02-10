@@ -8,5 +8,5 @@
 -- set long 5000
 define _editor=vim
 set sqlprompt '&_user@&_connect_identifier > '
-set sqlformat ansiconsole
+-- set sqlformat ansiconsole
 --set editfile /tmp/afiedt.buf
