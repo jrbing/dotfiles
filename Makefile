@@ -60,9 +60,10 @@ submodules:
 
 iterm-integration:
 	@curl -L https://iterm2.com/misc/bash_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.bash; \
-		curl -L https://iterm2.com/misc/zsh_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.zsh
+		curl -L https://iterm2.com/misc/zsh_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.zsh; \
+		curl -L https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat > $(dotfiles)/iterm/imgcat
 
 update:
 	git pull --rebase
 
-.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat check-dead clean-dead submodules update
+.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat check-dead clean-dead submodules iterm-integration update
