@@ -119,9 +119,9 @@ fi
 #
 # iTerm integration
 #
-if [[ -f $DOTFILES/iterm/iterm2_shell_integration.bash ]]; then
-  source "${DOTFILES}/iterm/iterm2_shell_integration.bash"
-fi
+#if [[ -f $DOTFILES/iterm/iterm2_shell_integration.bash ]]; then
+  #source "${DOTFILES}/iterm/iterm2_shell_integration.bash"
+#fi
 
 #
 # Local system specific settings
