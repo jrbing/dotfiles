@@ -58,6 +58,10 @@ submodules:
 			git submodule update --recursive; \
 			git clean -dfx'
 
+iterm-integration:
+	@curl -L https://iterm2.com/misc/bash_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.bash; \
+		curl -L https://iterm2.com/misc/zsh_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.zsh
+
 update:
 	git pull --rebase
 
