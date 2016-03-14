@@ -490,13 +490,6 @@
     let g:sneak#streak = 1
   "}}}
 
-  " Wildfire {{{2
-  let g:wildfire_objects = {
-    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
-    \ "html,xml" : ["at"],
-    \ }
-  "}}}
-
   " Coffeescript {{{2
     let g:coffee_compile_vert = 1
     let g:coffee_watch_vert = 1
