@@ -27,7 +27,11 @@ case $(uname) in
     alias apb=ansible-playbook
     alias agx=ansible-galaxy
     alias anv=ansible-vault
-    alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
+    if [[ $TERM != "dumb" ]]; then
+        [[ -d "/opt/oracle/client" ]] && alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
+      else
+        [[ -d "/opt/oracle/client" ]] && export DYLD_LIBRARY_PATH=/opt/oracle/client/lib && export PATH=$PATH:/opt/oracle/client/bin
+    fi
   ;;
   (Linux)
     if [[ $(python -c 'import sys; print("%i" % (sys.hexversion<0x02070000))') -eq 0 ]]; then
@@ -62,11 +66,11 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 #
 # Aliases
 #
-alias ..='cd ..'
-alias ls="ls -F"
-alias l="ls -lAh"
-alias ll="ls -l"
-alias la='ls -A'
+#alias ..='cd ..'
+#alias ls="ls -F"
+#alias l="ls -lAh"
+#alias ll="ls -l"
+#alias la='ls -A'
 alias clip="nc localhost 8377"
 
 #
@@ -109,7 +113,7 @@ fi
 #
 # Additional Tools
 #
-export SQLPATH=$DOTFILES/sql/oracle # SQL script path for sqlplus
+export SQLPATH="$DOTFILES/sql/oracle" # SQL script path for sqlplus
 
 # direnv
 if hash direnv 2>/dev/null; then
