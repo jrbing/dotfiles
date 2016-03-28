@@ -104,6 +104,14 @@ class Template < Thor
     create_from_template("editorrc.erb", ".editorrc")
   end
 
+  # README.md file
+  desc "readme", "Creates a basic readme file"
+  def readme(project_name=nil)
+    @project_name = get_project_name(project_name)
+    #@date = Time.now.localtime.strftime("%m/%d/%Y")
+    create_from_template("readme.erb", "README.md")
+  end
+
 end
 
 Template.start(ARGV)
