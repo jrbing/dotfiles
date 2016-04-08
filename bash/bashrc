@@ -131,6 +131,6 @@ fi
 # Local system specific settings
 #
 if [[ -f $HOME/.localrc ]]; then
+  # shellcheck source=/dev/null
   source "${HOME}/.localrc"
 fi
-
