@@ -734,6 +734,11 @@
    let g:vim_markdown_toml_frontmatter = 1
   "}}}
 
+  " editorconfig-vim {{{2
+   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+   "let g:EditorConfig_verbose = 1
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
