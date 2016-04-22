@@ -484,9 +484,13 @@
 
 " Plugin configuration/mapping {{{1
 "
-  " vim-slime {{{2
-    let g:slime_target = 'tmux'
-    "let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+  " slimux {{{2
+    "map <Leader>s :SlimuxREPLSendLine<CR>
+    "vmap <Leader>s :SlimuxREPLSendSelection<CR>
+    "map <Leader>a :SlimuxShellLast<CR>
+    "map <Leader>k :SlimuxSendKeysLast<CR>
+    map <C-c><C-c> :SlimuxREPLSendLine<CR>
+    vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
   "}}}
 
   " vim-sneak {{{2
