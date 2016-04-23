@@ -167,10 +167,11 @@
   set iskeyword-=#                    " '#' is an end of word designator
   set iskeyword-=-                    " '-' is an end of word designator
 
-  " Set backup file location
-  set backupdir=$HOME/.vim/tmp/backup// " backups
-  set directory=$HOME/.vim/tmp/swap//   " swap files
+  " Backup settings
+  set backupdir=$HOME/.vim/tmp/backup// " backup directory location
+  set directory=$HOME/.vim/tmp/swap//   " swap file location
   set backup                            " enable backups
+  set noswapfile                        " disable swapfiles
 
   set wildmenu
   set wildmode=list:longest
@@ -187,11 +188,13 @@
   set modeline
   set modelines=10
 
-  " Emulate the save on losing focus functionality that TextMate has
+  " Save when focus is lost
   " au FocusLost * :wa
 
   " Set par as the paragraph formatting program to use
-  set formatprg=par
+  if executable('par')
+    set formatprg=par
+  endif
 
   " Set folding method, but disable by default
   set foldmethod=syntax
