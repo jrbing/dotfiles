@@ -7,11 +7,14 @@
 set -e
 
 # Source generic bash functions
+# shellcheck source=/dev/null
 source "$DOTFILES/share/lib/bash-functions.sh"
 
 function update_dotfiles() {
   start_spinner "Updating dotfiles"
-  cd "$DOTFILES" && git pull origin master > /dev/null 2>&1 && git submodule update --init --recursive > /dev/null 2>&1
+  cd "$DOTFILES" \
+    && git pull origin master > /dev/null 2>&1 \
+    && git submodule update --init --recursive > /dev/null 2>&1
   stop_spinner $?
 }
 
