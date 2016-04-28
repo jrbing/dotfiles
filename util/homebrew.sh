@@ -40,6 +40,7 @@ FORMULAS=(
     the_silver_searcher
     tmux
     tree
+    watchman
     wget
     zsh
 )
