@@ -743,6 +743,7 @@
    let g:vim_markdown_no_default_key_mappings = 1
    let g:vim_markdown_frontmatter = 1
    let g:vim_markdown_toml_frontmatter = 1
+   let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
   "}}}
 
   " editorconfig-vim {{{2
@@ -871,14 +872,14 @@
   " Trim trailing whitespace
   function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
+    let l:_s=@/
+    let l:l = line(".")
+    let l:c = col(".")
     " Do the business:
     %s/\s\+$//e
     " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
+    let @/=l:_s
+    call cursor(l:l, l:c)
   endfunction
 
   " Utility functions to create file commands
