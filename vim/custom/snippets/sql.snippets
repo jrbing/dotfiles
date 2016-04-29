@@ -1,0 +1,46 @@
+priority 0
+
+snippet tbl "create table"
+create table ${1:table} (
+	${2:columns}
+);${0}
+endsnippet
+
+snippet sel* "select * from.."
+select *
+	from ${1:table};$0
+endsnippet
+
+snippet inssel "insert using select"
+insert into ${1:table}
+select ${2:row}
+		from ${3:table}
+	where ${4:condition};$0
+endsnippet
+
+snippet insin "insert specifying columns"
+insert into ${1:table} (${2:columns})
+values (${3:values});$0
+endsnippet
+
+snippet ins "insert into table"
+insert into ${1:table}
+values ('${2:values}');$0
+endsnippet
+
+snippet trun "truncate table"
+truncate table ${1:table};$0
+endsnippet
+
+snippet del "delete from table"
+delete from ${1:table}
+	where ${2:condition};$0
+endsnippet
+
+snippet upd "update rows"
+update ${1:table}
+		set ${2:column} = ${3:value}
+	where ${4:condition};$0
+endsnippet
+
+# vim:ft=snippets:
