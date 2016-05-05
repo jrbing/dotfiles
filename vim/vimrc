@@ -34,6 +34,7 @@
 
   " Utilities
   Plug 'artnez/vim-wipeout'
+  Plug 'benjifisher/matchit.zip'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
@@ -743,7 +744,7 @@
    let g:vim_markdown_no_default_key_mappings = 1
    let g:vim_markdown_frontmatter = 1
    let g:vim_markdown_toml_frontmatter = 1
-   let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
+   "let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'go']
   "}}}
 
   " editorconfig-vim {{{2
