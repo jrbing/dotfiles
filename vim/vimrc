@@ -89,6 +89,7 @@
     Plug 'fatih/vim-go'
     Plug 'honza/vim-snippets'
     Plug 'jphustman/SQLUtilities'
+    Plug 'mustache/vim-mustache-handlebars'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
     Plug 'terryma/vim-multiple-cursors'
