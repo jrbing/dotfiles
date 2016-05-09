@@ -231,10 +231,10 @@
 " Visual mode {{{2
 
   function! s:VSetSearch()
-    let temp = @@
+    let l:temp = @@
     norm! gvy
     let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
+    let @@ = l:temp
   endfunction
 
   vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
@@ -301,11 +301,6 @@
   vmap <C-Up> [egv
   vmap <C-Down> ]egv
 
-  " Remap help to escape
-  inoremap <F1> <ESC>
-  nnoremap <F1> <ESC>
-  vnoremap <F1> <ESC>
-
   " Remap ; to :
   nnoremap ; :
   vnoremap ; :
@@ -322,11 +317,11 @@
 
   " Opens an edit command with the path of the currently edited file filled in
   " normal mode: <Leader>e
-  map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+  nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
   " Opens a tab edit command with the path of the currently edited file filled in
   " Normal mode: <Leader>t
-  map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+  "map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
   " Command mode: Ctrl+P
   cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -334,11 +329,8 @@
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
 
-  " Whitespace trim function
-  nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-
   " Bring up the CtrlP buffer window
-  nmap <leader>b :CtrlPBuffer<CR>
+  nnoremap <leader>b :CtrlPBuffer<CR>
 
   " Adjust viewports to the same size
   map <Leader>= <C-w>=
@@ -360,7 +352,7 @@
   nnoremap ,gf :vertical botright wincmd f<CR>
 
   " Autoformat the current buffer
-  nnoremap <leader>af :Autoformat<CR>
+  nnoremap <leader>af :Autoformat<CR><CR>
 
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
@@ -377,6 +369,24 @@
     nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
   endif
 
+
+  " Function Keys {{{2
+
+    " Remap help to escape
+    inoremap <F1> <ESC>
+    nnoremap <F1> <ESC>
+    vnoremap <F1> <ESC>
+
+    " Autoformat the current buffer
+    nnoremap <F4> :Autoformat<CR><CR>
+
+    " Trim trailing whitespace
+    nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+
+    " Toggle the tagbar
+    nnoremap <silent> <F8> :TagbarToggle<CR>
+
+  " }}}
 
 " }}}
 
@@ -562,8 +572,6 @@
   "}}}
 
   " Tagbar {{{2
-    nnoremap <silent> <F8> :TagbarToggle<CR>
-
     let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
       \ 'kinds'     : [
@@ -727,8 +735,6 @@
   " }}}
 
   " AutoFormat {{{2
-   nnoremap <F4> :Autoformat<CR><CR>
-
    " TODO: still can't get this to work
     if executable('yapf')
       let g:formatdef_yapf = '/usr/local/bin/yapf'
@@ -1020,7 +1026,6 @@ RUBY
   function! ToggleVerbose()
     if !&verbose
         set verbosefile=~/.log/vim/verbose.log
-        "set verbose=15
         set verbose=8
     else
         set verbose=0
