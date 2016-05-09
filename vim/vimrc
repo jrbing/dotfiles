@@ -613,7 +613,6 @@
 
   " Syntastic {{{2
     let g:syntastic_enable_signs = 1
-    let g:syntastic_disabled_filetypes = ['html']
     let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
     let g:syntastic_ruby_exec = expand('~/.rbenv/shims/ruby')
     let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
@@ -621,10 +620,7 @@
     let g:syntastic_vim_checkers = ['vint']
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-    "set statusline+=%#warningmsg#
-    "set statusline+=%{SyntasticStatuslineFlag()}
-    "set statusline+=%*
+    let g:syntastic_aggregate_errors = 1  "Aggregate the errors of all available syntax checkers
 
     "let g:syntastic_always_populate_loc_list = 1
     "let g:syntastic_auto_loc_list = 1
@@ -712,7 +708,7 @@
   " YouCompleteMe{{{2
     "let g:acp_enableAtStartup = 0
 
-    " make YCM compatible with UltiSnips (using supertab)
+    " Make YCM compatible with UltiSnips (using supertab)
     let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
