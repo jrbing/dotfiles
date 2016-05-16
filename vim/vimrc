@@ -80,6 +80,7 @@
   Plug 'rust-lang/rust.vim'
   Plug 'stephpy/vim-yaml'
   Plug 'vim-ruby/vim-ruby'
+  Plug 'HerringtonDarkholme/yats.vim'
 
   if g:OSX()
     Plug 'Chiel92/vim-autoformat'
@@ -728,6 +729,13 @@
     augroup END
 
     set completeopt-=preview
+
+    " Typescript support
+    if !exists("g:ycm_semantic_triggers")
+      let g:ycm_semantic_triggers = {}
+    endif
+    let g:ycm_semantic_triggers['typescript'] = ['.']
+
   " }}}
 
   " AutoFormat {{{2
