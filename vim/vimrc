@@ -91,6 +91,7 @@
     Plug 'fatih/vim-go'
     Plug 'honza/vim-snippets'
     Plug 'jphustman/SQLUtilities'
+    Plug 'moorereason/vim-markdownfmt'
     Plug 'mustache/vim-mustache-handlebars'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
@@ -776,6 +777,18 @@
   " editorconfig-vim {{{2
    let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
    "let g:EditorConfig_verbose = 1
+  "}}}
+
+  " markdownfmt {{{2
+  " for use with: https://github.com/moorereason/mdfmt
+   if executable('mdfmt')
+     let g:markdownfmt_command = 'mdfmt'
+     let g:markdownfmt_autosave=0
+     let g:markdownfmt_fail_silently=0
+     "let g:markdownfmt_options = ''
+     "au FileType markdown nmap <leader>s :<C-u>call markdownfmt#Format()<CR>
+     command! MDFormat :call markdownfmt#Format()<CR>
+   endif
   "}}}
 
 " }}}
