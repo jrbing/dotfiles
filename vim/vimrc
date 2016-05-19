@@ -83,6 +83,7 @@
   Plug 'HerringtonDarkholme/yats.vim'
 
   if g:OSX()
+    Plug 'dbext.vim'
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
