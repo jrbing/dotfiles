@@ -92,7 +92,7 @@ class Template < Thor
     run "unix2dos #{@script_name}.ps1"
   end
 
-  # makefile script
+  # makefile
   desc "make", "Creates a basic makefile"
   def make
     create_from_template("makefile.erb", "Makefile")
@@ -111,6 +111,13 @@ class Template < Thor
     #@date = Time.now.localtime.strftime("%m/%d/%Y")
     create_from_template("readme.erb", "README.md")
   end
+
+  # shipit configuration
+  desc "shipit", "Creates a shipit configuration file"
+  def shipit
+    create_from_template("shipit.erb", ".shipit")
+  end
+
 
 end
 
