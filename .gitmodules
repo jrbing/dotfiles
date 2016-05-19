@@ -30,3 +30,6 @@
   path = share/bash-concurrent
   url = git://github.com/themattrix/bash-concurrent.git
   ignore = dirty
+[submodule "share/shipit"]
+  path = share/shipit
+  url = git://github.com/sapegin/shipit.git
