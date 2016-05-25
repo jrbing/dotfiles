@@ -589,6 +589,7 @@
   "}}}
 
   " Tagbar {{{2
+
     let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
       \ 'kinds'     : [
@@ -625,6 +626,80 @@
           \ 'a:alias'
       \ ]
     \ }
+
+    let g:tagbar_type_make = {
+      \ 'kinds':[
+        \ 'm:macros',
+        \ 't:targets'
+      \ ]
+    \}
+
+    let g:tagbar_type_markdown = {
+      \ 'ctagstype' : 'markdown',
+      \ 'kinds' : [
+        \ 'h:heading1',
+        \ 'i:heading2',
+        \ 'k:heading3'
+      \ ]
+    \ }
+
+    let g:tagbar_type_rust = {
+      \ 'ctagstype' : 'rust',
+      \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+      \]
+    \}
+
+    let g:tagbar_type_typescript = {
+      \ 'ctagstype': 'typescript',
+      \ 'kinds': [
+        \ 'c:classes',
+        \ 'n:modules',
+        \ 'f:functions',
+        \ 'v:variables',
+        \ 'v:varlambdas',
+        \ 'm:members',
+        \ 'i:interfaces',
+        \ 'e:enums',
+      \ ]
+    \ }
+
+    let g:tagbar_type_xml = {
+      \ 'ctagstype' : 'WSDL',
+      \ 'kinds'     : [
+        \ 'n:namespaces',
+        \ 'm:messages',
+        \ 'p:portType',
+        \ 'o:operations',
+        \ 'b:bindings',
+        \ 's:service'
+      \ ]
+    \ }
+
+    let g:tagbar_type_ansible = {
+      \ 'ctagstype' : 'ansible',
+      \ 'kinds' : [
+        \ 't:tasks'
+      \ ],
+      \ 'sort' : 0
+    \ }
+
+    let g:tagbar_type_puppet = {
+      \ 'ctagstype': 'puppet',
+      \ 'kinds': [
+          \'c:class',
+          \'s:site',
+          \'n:node',
+          \'d:definition'
+        \]
+    \}
 
   "}}}
 
