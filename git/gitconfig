@@ -12,16 +12,22 @@
 
 [core]
   quotepath = false
-  pager = cat
+  pager = less
   editor = vim
   excludesfile = ~/.gitignore_global
+  whitespace = warn
 
 [alias]
   shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
   lg = log -10 --reverse
+  pruneremote = remote prune origin
+  tree = !"git log --graph --oneline --decorate --color --all | ${PAGER}"
+  reset-authors = commit --amend --reset-author -CHEAD
+  rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 
 [color]
-  ui = true
+  ui = auto
   branch = auto
   diff = auto
   interactive = auto
@@ -47,6 +53,7 @@
 
 [branch]
   autosetupmerge = true
+  autosetuprebase = always
 
 [web]
   browser = open
