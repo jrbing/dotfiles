@@ -14,3 +14,7 @@
 --type-set=sql=dms,sql
 --type-set=javascript=js,cljs,coffee
 --type-set=sqr=sqr,sqc
+
+# ignore unnecessary directories
+--ignore-dir=tags
+--ignore-dir=tmp
