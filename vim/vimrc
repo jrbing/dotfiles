@@ -267,7 +267,7 @@
   set guitablabel=%t
 
   " Change the menu name for the Align plugin
-  let g:DrChipTopLvlMenu="Plugin."
+  let g:DrChipTopLvlMenu='Plugin.'
 
 " }}}
 
@@ -877,6 +877,19 @@
    endif
   "}}}
 
+  " vim-javascript {{{2
+   let g:javascript_conceal_function       = 'ƒ'
+   let g:javascript_conceal_null           = 'ø'
+   let g:javascript_conceal_this           = '@'
+   let g:javascript_conceal_return         = '⇚'
+   let g:javascript_conceal_undefined      = '¿'
+   let g:javascript_conceal_NaN            = 'ℕ'
+   let g:javascript_conceal_prototype      = '¶'
+   let g:javascript_conceal_static         = '•'
+   let g:javascript_conceal_super          = 'Ω'
+   let g:javascript_conceal_arrow_function = '⇒'
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
@@ -1009,11 +1022,11 @@
 
   function! s:FileCommand(name, ...)
     if exists("a:1")
-      let funcname = a:1
+      let l:funcname = a:1
     else
-      let funcname = a:name
+      let l:funcname = a:name
     endif
-    execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . funcname . '(<f-args>)'
+    execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . l:funcname . '(<f-args>)'
   endfunction
 
   function! s:DefineCommand(name, destination)
@@ -1024,11 +1037,11 @@
   " Public NERDTree-aware versions of builtin functions
   function! ChangeDirectory(dir, ...)
     execute "cd " . a:dir
-    let stay = exists("a:1") ? a:1 : 1
+    let l:stay = exists("a:1") ? a:1 : 1
 
     NERDTree
 
-    if !stay
+    if !l:stay
       wincmd p
     endif
   endfunction
