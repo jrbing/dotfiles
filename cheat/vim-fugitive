@@ -1,0 +1,21 @@
+
+# Stage the current file to the index
+:Gwrite
+
+# Revert current file to last checked in version
+:Gread
+
+# Delete the current file and the corresponding Vim buffer
+:Gremove
+
+# Rename the current file and the corresponding Vim buffer
+:Gmove
+
+# Bring up the output of git status
+:Gstatus (Note: press - to add/reset a file's changes)
+
+# Opens up a commit window in a split window
+:Gcommit
+
+# Open the current file on GitHub
+:Gbrowse (Note: this also works with optional line range in visual mode)
