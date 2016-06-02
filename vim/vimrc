@@ -359,9 +359,6 @@
   " Use ,gf to go to file in a vertical split
   nnoremap ,gf :vertical botright wincmd f<CR>
 
-  " Autoformat the current buffer
-  nnoremap <leader>af :Autoformat<CR><CR>
-
   " Sudo to write
   cmap w!! w !sudo tee % >/dev/null
 
@@ -841,11 +838,9 @@
   " }}}
 
   " AutoFormat {{{2
-   " TODO: still can't get this to work
-    if executable('yapf')
-      let g:formatdef_yapf = '/usr/local/bin/yapf'
-      let g:formatters_python = ['yapf']
-    endif
+    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand("$HOME/.rbenv/shims") ]
+    "let g:formatters_python = ['yapf']
+    let g:formatter_yapf_style = 'pep8'
   "}}}
 
   " Ferret {{{2
