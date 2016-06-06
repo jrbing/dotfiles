@@ -11,10 +11,6 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-function defined {
-    [[ ${!1-X} == ${!1-Y} ]]
-}
-
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  __detect_color_support
 #   DESCRIPTION:  Try to detect color support.
@@ -66,7 +62,7 @@ function echowarn() {
 #   DESCRIPTION:  Echo debug information to stdout.
 #-------------------------------------------------------------------------------
 function echodebug() {
-    if [[ "$ECHO_DEBUG" -eq "$BS_TRUE" ]]; then
+    if [[ -n ${DEBUG+x} ]]; then
         printf "${BC} ★ DEBUG${EC}: %s\n" "$@";
     fi
 }
