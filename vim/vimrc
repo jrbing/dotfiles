@@ -724,7 +724,7 @@
     let g:syntastic_scss_checkers = ['sassc']
     let g:syntastic_sh_checkers = ['shellcheck']
     let g:syntastic_sql_checkers = ['sqlint']
-    let g:syntastic_sqlint_exec = expand('~/.rbenv/shims/sqlint')
+    let g:syntastic_sql_sqlint_exec = expand('~/.rbenv/shims/sqlint')
 
   "}}}
 
