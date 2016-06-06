@@ -40,7 +40,7 @@ snippet echodebug
 function echodebug() \{
 	local BC="\\033[1;34m"
 	local EC="\\033[0m"
-	if [[ \$ECHO_DEBUG ]]; then
+	if [[ -n \$\{DEBUG+x\} ]]; then
 		printf "\$\{BC\} ✪  DEBUG\$\{EC\}: %s\\n" "\$@";
 	fi
 \}
