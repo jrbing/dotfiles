@@ -23,6 +23,7 @@ case $OSTYPE in
     export LANG=en_US.UTF-8
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
     export CHEATCOLORS=true
+    export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
     #
     # Aliases
