@@ -254,11 +254,15 @@
 
   " Colorscheme
   set background=dark
-  "let g:solarized_visibility = "normal"
-  "let g:solarized_contrast = "normal"
-  "colorscheme solarized
-  "colorscheme base16-eighties
-  colorscheme gruvbox
+  if has('gui_running')
+    colorscheme solarized
+    let g:solarized_visibility = 'normal'
+    let g:solarized_contrast = 'normal'
+  else
+    "colorscheme base16-eighties
+    colorscheme gruvbox
+    let g:gruvbox_italic=0
+  endif
 
   " Highlight the current line
   set cursorline
@@ -332,7 +336,7 @@
   "map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
   " Command mode: Ctrl+P
-  cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+  "cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
   " Remap ,v to re-select text that was just pasted
   nnoremap <leader>v V`]
@@ -341,8 +345,8 @@
   nnoremap <leader>b :CtrlPBuffer<CR>
 
   " Adjust viewports to the same size
-  map <Leader>= <C-w>=
-  imap <Leader>= <Esc> <C-w>=
+  noremap <Leader>= <C-w>=
+  inoremap <Leader>= <Esc> <C-w>=
 
   " Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
   nnoremap <silent> <C-Tab> :call<sid>CycleTabpages(1)<cr>
@@ -701,9 +705,24 @@
   "}}}
 
   " Syntastic {{{2
+
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
+
+    let g:syntastic_error_symbol = '✘'
+    let g:syntastic_warning_symbol = '☢'
+
+    highlight link SyntasticError                      SpellBad
+    highlight link SyntasticErrorSign                  Error
+    highlight link SyntasticStyleErrorLine             SyntasticErrorLine
+    highlight link SyntasticStyleErrorSign             SyntasticErrorSign
+    highlight link SyntasticStyleWarningLine           SyntasticWarningLine
+    highlight link SyntasticStyleWarningSign           SyntasticWarningSign
+    highlight link SyntasticWarning                    SpellCap
+    highlight link SyntasticWarningSign                Todo
+    highlight clear SyntasticErrorLine
+    highlight clear SyntasticWarningLine
 
     "let g:syntastic_always_populate_loc_list = 1
     "let g:syntastic_auto_loc_list = 1
@@ -1094,18 +1113,18 @@ RUBY
 
   " Pulse
   function! PulseCursorLine()
-    let current_window = winnr()
+    let l:current_window = winnr()
 
     windo set nocursorline
-    execute current_window . 'wincmd w'
+    execute l:current_window . 'wincmd w'
 
     setlocal cursorline
 
-    redir => old_hi
+    redir => l:old_hi
         silent execute 'hi CursorLine'
     redir END
-    let old_hi = split(old_hi, '\n')[0]
-    let old_hi = substitute(old_hi, 'xxx', '', '')
+    let l:old_hi = split(l:old_hi, '\n')[0]
+    let l:old_hi = substitute(l:old_hi, 'xxx', '', '')
 
     hi CursorLine guibg=#2a2a2a ctermbg=233
     redraw
@@ -1135,10 +1154,10 @@ RUBY
     redraw
     sleep 20m
 
-    execute 'hi ' . old_hi
+    execute 'hi ' . l:old_hi
 
     windo set cursorline
-    execute current_window . 'wincmd w'
+    execute l:current_window . 'wincmd w'
 
   endfunction
 
@@ -1168,18 +1187,18 @@ RUBY
   endif
 
   "Gruvbox italic fix
-  if !has("gui_running")
+  if !has('gui_running')
     let g:gruvbox_italic=0
   endif
 
-  if has ('gui_running')
+  if has('gui_running')
 
     " Remove all the UI cruft
-    set go-=T
-    set go-=l
-    set go-=L
-    set go-=r
-    set go-=R
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
 
     " Highlighting for spelling
     highlight SpellBad term=underline gui=undercurl guisp=Orange
@@ -1191,12 +1210,11 @@ RUBY
     if OSX()
 
       " Set Colorscheme
-      let g:solarized_visibility = "normal"
-      let g:solarized_contrast = "normal"
+      let g:solarized_visibility = 'normal'
+      let g:solarized_contrast = 'normal'
       colorscheme solarized
       "colorscheme base16-eighties
       "set t_Co=256
-      "colorscheme PaperColor-Dark
 
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
@@ -1208,7 +1226,7 @@ RUBY
       "set transparency=4
 
       " Command-T for CtrlP
-      map <D-T> :CtrlP<CR>
+      noremap <D-T> :CtrlP<CR>
       imap <D-T> <Esc>:CtrlP<CR>
 
       " Command-Shift-F for quick file search
