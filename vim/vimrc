@@ -27,7 +27,7 @@
 
 " Plugins {{{1
 
-  set nocompatible
+  "set nocompatible
   filetype off
 
   call plug#begin('~/.vim/plugged')
@@ -1291,32 +1291,32 @@ RUBY
       set viminfo+=n$USERPROFILE\\_viminfo
 
       " Change the location of the bookmarks file
-      let NERDTreeBookmarksFile=expand('$USERPROFILE/NERDTreeBookmarks')
+      let g:NERDTreeBookmarksFile=expand('$USERPROFILE/NERDTreeBookmarks')
 
       " Map Alt-# to switch tabs
-      map  <A-0> 0gt
-      imap <A-0> <Esc>0gt
-      map  <A-1> 1gt
-      imap <A-1> <Esc>1gt
-      map  <A-2> 2gt
-      imap <A-2> <Esc>2gt
-      map  <A-3> 3gt
-      imap <A-3> <Esc>3gt
-      map  <A-4> 4gt
-      imap <A-4> <Esc>4gt
-      map  <A-5> 5gt
-      imap <A-5> <Esc>5gt
-      map  <A-6> 6gt
-      imap <A-6> <Esc>6gt
-      map  <A-7> 7gt
-      imap <A-7> <Esc>7gt
-      map  <A-8> 8gt
-      imap <A-8> <Esc>8gt
-      map  <A-9> 9gt
-      imap <A-9> <Esc>9gt
+      noremap  <A-0> 0gt
+      inoremap <A-0> <Esc>0gt
+      noremap  <A-1> 1gt
+      inoremap <A-1> <Esc>1gt
+      noremap  <A-2> 2gt
+      inoremap <A-2> <Esc>2gt
+      noremap  <A-3> 3gt
+      inoremap <A-3> <Esc>3gt
+      noremap  <A-4> 4gt
+      inoremap <A-4> <Esc>4gt
+      noremap  <A-5> 5gt
+      inoremap <A-5> <Esc>5gt
+      noremap  <A-6> 6gt
+      inoremap <A-6> <Esc>6gt
+      noremap  <A-7> 7gt
+      inoremap <A-7> <Esc>7gt
+      noremap  <A-8> 8gt
+      inoremap <A-8> <Esc>8gt
+      noremap  <A-9> 9gt
+      inoremap <A-9> <Esc>9gt
 
       " Show the tab line
-      set stal=1
+      set showtabline=1
 
       "Alt Shift-f to run Ack
       nmap <A-F> :Ack<space>
@@ -1377,9 +1377,9 @@ RUBY
   " Automatically reload the vimrc file when changed
   "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
-  if !exists('autocommands_loaded')
-    let autocommands_loaded = 1
-  endif
+  "if !exists('autocommands_loaded')
+    "let autocommands_loaded = 1
+  "endif
 
   " Include vim configuration specific to a machine
   if filereadable(expand('~/.vimrc.local'))
