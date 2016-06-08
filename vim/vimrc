@@ -520,7 +520,7 @@
 " }}}
 
 " Plugin configuration/mapping {{{1
-"
+
   " slimux {{{2
     "map <Leader>s :SlimuxREPLSendLine<CR>
     "vmap <Leader>s :SlimuxREPLSendSelection<CR>
@@ -593,7 +593,6 @@
   "}}}
 
   " Tagbar {{{2
-
     let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
       \ 'kinds'     : [
@@ -708,7 +707,6 @@
   "}}}
 
   " Syntastic {{{2
-
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
@@ -747,7 +745,6 @@
     let g:syntastic_sh_checkers = ['shellcheck']
     let g:syntastic_sql_checkers = ['sqlint']
     let g:syntastic_sql_sqlint_exec = expand('~/.rbenv/shims/sqlint')
-
   "}}}
 
   " Fugitive {{{2
@@ -817,7 +814,7 @@
     " Define how the edit window is opened when :UltiSnipsEdit is called
     let g:UltiSnipsEditSplit='vertical'
 
-  " }}}
+  "}}}
 
   " SuperTab{{{2
     let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -852,7 +849,7 @@
     set completeopt-=preview
 
     " Typescript support
-    if !exists("g:ycm_semantic_triggers")
+    if !exists('g:ycm_semantic_triggers')
       let g:ycm_semantic_triggers = {}
     endif
     let g:ycm_semantic_triggers['typescript'] = ['.']
@@ -860,51 +857,51 @@
   " }}}
 
   " AutoFormat {{{2
-    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand("$HOME/.rbenv/shims") ]
+    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.rbenv/shims') ]
     "let g:formatters_python = ['yapf']
     let g:formatter_yapf_style = 'pep8'
   "}}}
 
   " Ferret {{{2
-   let g:FerretDispatch=0
+    let g:FerretDispatch=0
   "}}}
 
   " vim-markdown {{{2
-   let g:vim_markdown_folding_disabled = 1
-   let g:vim_markdown_no_default_key_mappings = 1
-   let g:vim_markdown_frontmatter = 1
-   let g:vim_markdown_toml_frontmatter = 1
-   "let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'go']
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_no_default_key_mappings = 1
+    let g:vim_markdown_frontmatter = 1
+    let g:vim_markdown_toml_frontmatter = 1
+    "let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'go']
   "}}}
 
   " editorconfig-vim {{{2
-   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-   "let g:EditorConfig_verbose = 1
+    let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+    "let g:EditorConfig_verbose = 1
   "}}}
 
   " markdownfmt {{{2
   " for use with: https://github.com/moorereason/mdfmt
-   if executable('mdfmt')
-     let g:markdownfmt_command = 'mdfmt'
-     let g:markdownfmt_autosave=0
-     let g:markdownfmt_fail_silently=0
-     "let g:markdownfmt_options = ''
-     "au FileType markdown nmap <leader>s :<C-u>call markdownfmt#Format()<CR>
-     command! MDFormat :call markdownfmt#Format()<CR>
-   endif
+    if executable('mdfmt')
+      let g:markdownfmt_command = 'mdfmt'
+      let g:markdownfmt_autosave=0
+      let g:markdownfmt_fail_silently=0
+      "let g:markdownfmt_options = ''
+      "au FileType markdown nmap <leader>s :<C-u>call markdownfmt#Format()<CR>
+      command! MDFormat :call markdownfmt#Format()<CR>
+    endif
   "}}}
 
   " vim-javascript {{{2
-   let g:javascript_conceal_function       = 'ƒ'
-   let g:javascript_conceal_null           = 'ø'
-   let g:javascript_conceal_this           = '@'
-   let g:javascript_conceal_return         = '⇚'
-   let g:javascript_conceal_undefined      = '¿'
-   let g:javascript_conceal_NaN            = 'ℕ'
-   let g:javascript_conceal_prototype      = '¶'
-   let g:javascript_conceal_static         = '•'
-   let g:javascript_conceal_super          = 'Ω'
-   let g:javascript_conceal_arrow_function = '⇒'
+    let g:javascript_conceal_function       = 'ƒ'
+    let g:javascript_conceal_null           = 'ø'
+    let g:javascript_conceal_this           = '@'
+    let g:javascript_conceal_return         = '⇚'
+    let g:javascript_conceal_undefined      = '¿'
+    let g:javascript_conceal_NaN            = 'ℕ'
+    let g:javascript_conceal_prototype      = '¶'
+    let g:javascript_conceal_static         = '•'
+    let g:javascript_conceal_super          = 'Ω'
+    let g:javascript_conceal_arrow_function = '⇒'
   "}}}
 
 " }}}
@@ -972,9 +969,9 @@
       redraw
       echo 'Cycle Tab pages (Shift-Tab/Tab)'
       let l:c = s:Getchar()
-      if l:c == "\t"
+      if l:c ==# "\t"
         normal! gt
-      elseif l:c == "\<S-Tab>"
+      elseif l:c ==# "\<S-Tab>"
         normal! gT
       else
         exe "norm! :\<C-U>"
@@ -1023,8 +1020,8 @@
   function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let l:_s=@/
-    let l:l = line(".")
-    let l:c = col(".")
+    let l:l = line('.')
+    let l:c = col('.')
     " Do the business:
     %s/\s\+$//e
     " Clean up: restore previous search history, and cursor position
@@ -1038,7 +1035,7 @@
   endfunction
 
   function! s:FileCommand(name, ...)
-    if exists("a:1")
+    if exists('a:1')
       let l:funcname = a:1
     else
       let l:funcname = a:name
@@ -1053,8 +1050,8 @@
 
   " Public NERDTree-aware versions of builtin functions
   function! ChangeDirectory(dir, ...)
-    execute "cd " . a:dir
-    let l:stay = exists("a:1") ? a:1 : 1
+    execute 'cd ' . a:dir
+    let l:stay = exists('a:1') ? a:1 : 1
 
     NERDTree
 
@@ -1064,34 +1061,34 @@
   endfunction
 
   function! Touch(file)
-    execute "!touch " . a:file
-    call s:UpdateNERDTree()
+    execute '!touch ' . a:file
+    call g:UpdateNERDTree()
   endfunction
 
   function! Remove(file)
-    let current_path = expand("%")
-    let removed_path = fnamemodify(a:file, ":p")
+    let l:current_path = expand('%')
+    let l:removed_path = fnamemodify(a:file, ':p')
 
-    if (current_path == removed_path) && (getbufvar("%", "&modified"))
-      echo "You are trying to remove the file you are editing. Please close the buffer first."
+    if (l:current_path ==# l:removed_path) && (getbufvar('%', '&modified'))
+      echo 'You are trying to remove the file you are editing. Please close the buffer first.'
     else
-      execute "!rm " . a:file
+      execute '!rm ' . a:file
     endif
 
-    call s:UpdateNERDTree()
+    call g:UpdateNERDTree()
   endfunction
 
   function! Mkdir(file)
-    execute "!mkdir " . a:file
-    call s:UpdateNERDTree()
+    execute '!mkdir ' . a:file
+    call g:UpdateNERDTree()
   endfunction
 
   function! Edit(file)
-    if exists("b:NERDTreeRoot")
+    if exists('b:NERDTreeRoot')
       wincmd p
     endif
 
-    execute "e " . a:file
+    execute 'e ' . a:file
 
 ruby << RUBY
   destination = File.expand_path(VIM.evaluate(%{system("dirname " . a:file)}))
@@ -1107,11 +1104,11 @@ RUBY
 
   " Define the NERDTree-aware aliases
   if !g:VIMR()
-    call s:DefineCommand("cd", "ChangeDirectory")
-    call s:DefineCommand("touch", "Touch")
-    call s:DefineCommand("rm", "Remove")
-    call s:DefineCommand("e", "Edit")
-    call s:DefineCommand("mkdir", "Mkdir")
+    call s:DefineCommand('cd', 'ChangeDirectory')
+    call s:DefineCommand('touch', 'Touch')
+    call s:DefineCommand('rm', 'Remove')
+    call s:DefineCommand('e', 'Edit')
+    call s:DefineCommand('mkdir', 'Mkdir')
   endif
 
   " Pulse
@@ -1230,32 +1227,32 @@ RUBY
 
       " Command-T for CtrlP
       noremap <D-T> :CtrlP<CR>
-      imap <D-T> <Esc>:CtrlP<CR>
+      inoremap <D-T> <Esc>:CtrlP<CR>
 
       " Command-Shift-F for quick file search
-      map <D-F> :Ack<space>
+      noremap <D-F> :Ack<space>
 
       " Map Command-# to switch tabs
-      map  <D-0> 0gt
-      imap <D-0> <Esc>0gt
-      map  <D-1> 1gt
-      imap <D-1> <Esc>1gt
-      map  <D-2> 2gt
-      imap <D-2> <Esc>2gt
-      map  <D-3> 3gt
-      imap <D-3> <Esc>3gt
-      map  <D-4> 4gt
-      imap <D-4> <Esc>4gt
-      map  <D-5> 5gt
-      imap <D-5> <Esc>5gt
-      map  <D-6> 6gt
-      imap <D-6> <Esc>6gt
-      map  <D-7> 7gt
-      imap <D-7> <Esc>7gt
-      map  <D-8> 8gt
-      imap <D-8> <Esc>8gt
-      map  <D-9> 9gt
-      imap <D-9> <Esc>9gt
+      noremap  <D-0> 0gt
+      inoremap <D-0> <Esc>0gt
+      noremap  <D-1> 1gt
+      inoremap <D-1> <Esc>1gt
+      noremap  <D-2> 2gt
+      inoremap <D-2> <Esc>2gt
+      noremap  <D-3> 3gt
+      inoremap <D-3> <Esc>3gt
+      noremap  <D-4> 4gt
+      inoremap <D-4> <Esc>4gt
+      noremap  <D-5> 5gt
+      inoremap <D-5> <Esc>5gt
+      noremap  <D-6> 6gt
+      inoremap <D-6> <Esc>6gt
+      noremap  <D-7> 7gt
+      inoremap <D-7> <Esc>7gt
+      noremap  <D-8> 8gt
+      inoremap <D-8> <Esc>8gt
+      noremap  <D-9> 9gt
+      inoremap <D-9> <Esc>9gt
 
       " Map Command+Shift+P to preview the document in Marked
       nnoremap <D-P> :silent !open -a 'Marked 2.app' '%:p'<cr>
@@ -1278,8 +1275,8 @@ RUBY
       set guifont=Inconsolata-dz\ for\ Powerline:h12
 
       " Insert date and time header at the top of the file
-      nmap <D-D> gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
-      imap <D-D> <Esc>gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+      noremap <D-D> gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+      inoremap <D-D> <Esc>gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
 
     " Windows Specific Settings
     elseif WINDOWS()
@@ -1294,7 +1291,7 @@ RUBY
       set viminfo+=n$USERPROFILE\\_viminfo
 
       " Change the location of the bookmarks file
-      let NERDTreeBookmarksFile=expand("$USERPROFILE/NERDTreeBookmarks")
+      let NERDTreeBookmarksFile=expand('$USERPROFILE/NERDTreeBookmarks')
 
       " Map Alt-# to switch tabs
       map  <A-0> 0gt
@@ -1380,13 +1377,13 @@ RUBY
   " Automatically reload the vimrc file when changed
   "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
 
-  if !exists("autocommands_loaded")
+  if !exists('autocommands_loaded')
     let autocommands_loaded = 1
   endif
 
   " Include vim configuration specific to a machine
-  if filereadable(expand("~/.vimrc.local"))
-    source ~/.vimrc.local
+  if filereadable(expand('~/.vimrc.local'))
+    source expand('~/.vimrc.local')
   endif
 
 " }}}
