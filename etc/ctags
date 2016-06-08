@@ -2,7 +2,6 @@
 --langdef=js
 --langmap=js:.js
 --regex-javascript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\3/a,array/
---regex-javascript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\{/\3/o,object/
 --regex-javascript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[^{\[]*$/\3/r,var/
 --regex-javascript=/^var[ \t]+([A-Za-z0-9._$]+)[ \t]*=[ \t]*[A-Za-z0-9_$]+.extend/\1/f,function/
 --regex-javascript=/^[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*[:=][ \t]*function/\2/f,function/
