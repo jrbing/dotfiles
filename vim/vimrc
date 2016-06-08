@@ -81,6 +81,7 @@
   Plug 'stephpy/vim-yaml'
   Plug 'vim-ruby/vim-ruby'
   Plug 'HerringtonDarkholme/yats.vim' "Typescript
+  Plug 'posva/vim-vue'
 
   if g:OSX()
     Plug 'dbext.vim'
@@ -123,7 +124,7 @@
 " Editing Behavior {{{1
 
   if has('multi_byte')
-    if &termencoding == ""
+    if &termencoding ==# ''
       let &termencoding = &encoding
     endif
     set encoding=utf-8
@@ -193,12 +194,6 @@
   " Use modeline overrides
   set modeline
   set modelines=10
-
-  " Save when focus is lost
-  au FocusLost * :silent! wall
-
-  " Resize splits when the window is resized
-  au VimResized * :wincmd =
 
   " Set par as the paragraph formatting program to use
   if executable('par')
@@ -401,117 +396,125 @@
 
 " Autocommands {{{1
 
+  augroup miscellaneous
+    autocmd!
+    " Save when focus is lost
+    autocmd FocusLost * :silent! wall
+    " Resize splits when the window is resized
+    autocmd VimResized * :wincmd =
+  augroup END
+
   " Remember the last location in a file
   augroup line_return
-    au!
+    autocmd!
     au BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \     execute 'normal! g`"zvzz' |
       \ endif
   augroup END
 
-  augroup filetype_handling
-    au!
-    au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
+  augroup ft_handling
+    autocmd!
+    autocmd InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
+    autocmd InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
   augroup END
 
   " Make
   augroup ft_make
-    au!
-    au FileType make    setlocal noexpandtab
+    autocmd!
+    autocmd FileType make    setlocal noexpandtab
   augroup END
 
   " Python
   augroup ft_python
-    au!
-    au FileType python setlocal define=^\s*\\(def\\\\|class\\)
+    autocmd!
+    autocmd FileType python setlocal define=^\s*\\(def\\\\|class\\)
 
-    au FileType python  setlocal tabstop=8 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
-    au BufWritePre *.py normal m`:%s/\s\+$//e``
-    au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+    autocmd FileType python  setlocal tabstop=8 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+    autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
     au FileType python let b:dispatch = 'python %'
   augroup END
 
   " Ruby
   augroup ft_ruby
-    au!
-    au BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
-    au FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
+    autocmd!
+    autocmd BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
+    autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
   augroup END
 
   " Markdown
   augroup ft_markdown
-    au!
-    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+    autocmd!
+    autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
   augroup END
 
   " Textfiles
   augroup ft_txt
-    au!
-    au BufRead,BufNewFile *.{txt} call s:setupWrapping()
+    autocmd!
+    autocmd BufRead,BufNewFile *.{txt} call s:setupWrapping()
   augroup END
 
   " Datamover
   augroup ft_datamover
-    au!
-    au BufRead,BufNewFile *.{dms} setlocal ft=sql
+    autocmd!
+    autocmd BufRead,BufNewFile *.{dms} setlocal ft=sql
   augroup END
 
   " Gradle
   augroup ft_gradle
-    au!
-    au BufRead,BufNewFile *.{gradle} setlocal ft=groovy
+    autocmd!
+    autocmd BufRead,BufNewFile *.{gradle} setlocal ft=groovy
   augroup END
 
   " TaskPaper
   augroup ft_taskpaper
-    au!
-    au BufRead,BufNewFile *.{taskpaper} setlocal autoread nolist textwidth=0 wrapmargin=0
+    autocmd!
+    autocmd BufRead,BufNewFile *.{taskpaper} setlocal autoread nolist textwidth=0 wrapmargin=0
   augroup END
 
   " Coffeescript
   augroup ft_coffeescript
-    au!
-    au BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
+    autocmd!
+    autocmd BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
   augroup END
 
   " C Style Indentation
   augroup ft_cstyle
-    au!
-    au BufRead,BufNewFile *.{c,h,cpp} call CStyleIndent()
+    autocmd!
+    autocmd BufRead,BufNewFile *.{c,h,cpp} call CStyleIndent()
   augroup END
 
   " Go
   augroup ft_golang
-    au!
-    au BufRead,BufNewFile *.go call s:golangIndent()
-    "au FileType go nmap <leader>s <Plug>(go-implements)
-    "au FileType go nmap <leader>i <Plug>(go-info)
-    "au FileType go nmap <leader>gd <Plug>(go-doc)
-    "au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
-    "au FileType go nmap <leader>gb <Plug>(go-doc-browser)
-    "au FileType go nmap <leader>r <Plug>(go-run)
-    "au FileType go nmap <leader>b <Plug>(go-build)
-    "au FileType go nmap <leader>t <Plug>(go-test)
-    "au FileType go nmap <leader>c <Plug>(go-coverage)
-    "au FileType go nmap <leader>ds <Plug>(go-def-split)
-    "au FileType go nmap <leader>dv <Plug>(go-def-vertical)
-    "au FileType go nmap <leader>dt <Plug>(go-def-tab)
-    "au FileType go nmap <leader>e <Plug>(go-rename)
+    autocmd!
+    autocmd BufRead,BufNewFile *.go call s:golangIndent()
+    "autocmd FileType go nmap <leader>s <Plug>(go-implements)
+    "autocmd FileType go nmap <leader>i <Plug>(go-info)
+    "autocmd FileType go nmap <leader>gd <Plug>(go-doc)
+    "autocmd FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+    "autocmd FileType go nmap <leader>gb <Plug>(go-doc-browser)
+    "autocmd FileType go nmap <leader>r <Plug>(go-run)
+    "autocmd FileType go nmap <leader>b <Plug>(go-build)
+    "autocmd FileType go nmap <leader>t <Plug>(go-test)
+    "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+    "autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
+    "autocmd FileType go nmap <leader>dv <Plug>(go-def-vertical)
+    "autocmd FileType go nmap <leader>dt <Plug>(go-def-tab)
+    "autocmd FileType go nmap <leader>e <Plug>(go-rename)
   augroup END
 
   " Ansible
   augroup ft_ansible
-    au!
-    au FileType ansible setlocal textwidth=0 wrapmargin=0
+    autocmd!
+    autocmd FileType ansible setlocal textwidth=0 wrapmargin=0
   augroup END
 
   " Powershell
   augroup ft_powershell
-    au!
-    au FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    autocmd!
+    autocmd FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
   augroup END
 
 " }}}
