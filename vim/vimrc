@@ -396,138 +396,153 @@
 
 " Autocommands {{{1
 
-  augroup miscellaneous
-    autocmd!
-    " Save when focus is lost
-    autocmd FocusLost * :silent! wall
-    " Resize splits when the window is resized
-    autocmd VimResized * :wincmd =
-  augroup END
+  " Make {{{2
+    augroup ft_make
+      autocmd!
+      autocmd FileType make    setlocal noexpandtab
+    augroup END
+  "}}}
 
-  " Remember the last location in a file
-  augroup line_return
-    autocmd!
-    au BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \     execute 'normal! g`"zvzz' |
-      \ endif
-  augroup END
+  " Python {{{2
+    augroup ft_python
+      autocmd!
+      autocmd FileType python setlocal define=^\s*\\(def\\\\|class\\)
 
-  augroup ft_handling
-    autocmd!
-    autocmd InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    autocmd InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
-  augroup END
+      autocmd FileType python  setlocal tabstop=8 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+      autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+      autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-  " Make
-  augroup ft_make
-    autocmd!
-    autocmd FileType make    setlocal noexpandtab
-  augroup END
+      au FileType python let b:dispatch = 'python %'
+    augroup END
+  "}}}
 
-  " Python
-  augroup ft_python
-    autocmd!
-    autocmd FileType python setlocal define=^\s*\\(def\\\\|class\\)
+  " Ruby {{{2
+    augroup ft_ruby
+      autocmd!
+      autocmd BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
+      autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
+    augroup END
+  "}}}
 
-    autocmd FileType python  setlocal tabstop=8 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
-    autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
-    autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+  " Markdown {{{2
+    augroup ft_markdown
+      autocmd!
+      autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+    augroup END
+  "}}}
 
-    au FileType python let b:dispatch = 'python %'
-  augroup END
+  " Textfiles {{{2
+    augroup ft_txt
+      autocmd!
+      autocmd BufRead,BufNewFile *.{txt} call s:setupWrapping()
+    augroup END
+  "}}}
 
-  " Ruby
-  augroup ft_ruby
-    autocmd!
-    autocmd BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
-    autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
-  augroup END
+  " Datamover {{{2
+    augroup ft_datamover
+      autocmd!
+      autocmd BufRead,BufNewFile *.{dms} setlocal ft=sql
+    augroup END
+  "}}}
 
-  " Markdown
-  augroup ft_markdown
-    autocmd!
-    autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-  augroup END
+  " Gradle {{{2
+    augroup ft_gradle
+      autocmd!
+      autocmd BufRead,BufNewFile *.{gradle} setlocal ft=groovy
+    augroup END
+  "}}}
 
-  " Textfiles
-  augroup ft_txt
-    autocmd!
-    autocmd BufRead,BufNewFile *.{txt} call s:setupWrapping()
-  augroup END
+  " TaskPaper {{{2
+    augroup ft_taskpaper
+      autocmd!
+      autocmd BufRead,BufNewFile *.{taskpaper} setlocal autoread nolist textwidth=0 wrapmargin=0
+    augroup END
+  "}}}
 
-  " Datamover
-  augroup ft_datamover
-    autocmd!
-    autocmd BufRead,BufNewFile *.{dms} setlocal ft=sql
-  augroup END
+  " Coffeescript {{{2
+    augroup ft_coffeescript
+      autocmd!
+      autocmd BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
+    augroup END
+  "}}}
 
-  " Gradle
-  augroup ft_gradle
-    autocmd!
-    autocmd BufRead,BufNewFile *.{gradle} setlocal ft=groovy
-  augroup END
+  " C/C++ {{{2
+    augroup ft_cstyle
+      autocmd!
+      autocmd BufRead,BufNewFile *.{c,h,cpp} call CStyleIndent()
+    augroup END
+  "}}}
 
-  " TaskPaper
-  augroup ft_taskpaper
-    autocmd!
-    autocmd BufRead,BufNewFile *.{taskpaper} setlocal autoread nolist textwidth=0 wrapmargin=0
-  augroup END
+  " Go {{{2
+    augroup ft_golang
+      autocmd!
+      autocmd BufRead,BufNewFile *.go call s:golangIndent()
+      "autocmd FileType go nmap <leader>s <Plug>(go-implements)
+      "autocmd FileType go nmap <leader>i <Plug>(go-info)
+      "autocmd FileType go nmap <leader>gd <Plug>(go-doc)
+      "autocmd FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+      "autocmd FileType go nmap <leader>gb <Plug>(go-doc-browser)
+      "autocmd FileType go nmap <leader>r <Plug>(go-run)
+      "autocmd FileType go nmap <leader>b <Plug>(go-build)
+      "autocmd FileType go nmap <leader>t <Plug>(go-test)
+      "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+      "autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
+      "autocmd FileType go nmap <leader>dv <Plug>(go-def-vertical)
+      "autocmd FileType go nmap <leader>dt <Plug>(go-def-tab)
+      "autocmd FileType go nmap <leader>e <Plug>(go-rename)
+    augroup END
+  "}}}
 
-  " Coffeescript
-  augroup ft_coffeescript
-    autocmd!
-    autocmd BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
-  augroup END
+  " Ansible {{{2
+    augroup ft_ansible
+      autocmd!
+      autocmd FileType ansible setlocal textwidth=0 wrapmargin=0
+    augroup END
+  "}}}
 
-  " C Style Indentation
-  augroup ft_cstyle
-    autocmd!
-    autocmd BufRead,BufNewFile *.{c,h,cpp} call CStyleIndent()
-  augroup END
+  " Powershell {{{2
+    augroup ft_powershell
+      autocmd!
+      autocmd FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    augroup END
+  "}}}
 
-  " Go
-  augroup ft_golang
-    autocmd!
-    autocmd BufRead,BufNewFile *.go call s:golangIndent()
-    "autocmd FileType go nmap <leader>s <Plug>(go-implements)
-    "autocmd FileType go nmap <leader>i <Plug>(go-info)
-    "autocmd FileType go nmap <leader>gd <Plug>(go-doc)
-    "autocmd FileType go nmap <leader>gv <Plug>(go-doc-vertical)
-    "autocmd FileType go nmap <leader>gb <Plug>(go-doc-browser)
-    "autocmd FileType go nmap <leader>r <Plug>(go-run)
-    "autocmd FileType go nmap <leader>b <Plug>(go-build)
-    "autocmd FileType go nmap <leader>t <Plug>(go-test)
-    "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
-    "autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
-    "autocmd FileType go nmap <leader>dv <Plug>(go-def-vertical)
-    "autocmd FileType go nmap <leader>dt <Plug>(go-def-tab)
-    "autocmd FileType go nmap <leader>e <Plug>(go-rename)
-  augroup END
+  " VIMRC {{{2
+    " Automatically reload the vimrc file when changed
+    augroup myvimrc
+      autocmd!
+      autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+    augroup END
+  "}}}
 
-  " Ansible
-  augroup ft_ansible
-    autocmd!
-    autocmd FileType ansible setlocal textwidth=0 wrapmargin=0
-  augroup END
-
-  " Powershell
-  augroup ft_powershell
-    autocmd!
-    autocmd FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
-  augroup END
+  " Make {{{2
+    augroup miscellaneous
+      autocmd!
+      " Save when focus is lost
+      autocmd FocusLost * :silent! wall
+      " Resize splits when the window is resized
+      autocmd VimResized * :wincmd =
+      autocmd InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
+      autocmd InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
+      " Remember the last location in a file
+      autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+    augroup END
+  "}}}
 
 " }}}
 
 " Plugin configuration/mapping {{{1
 
   " slimux {{{2
+    map <C-c><C-c> :SlimuxREPLSendLine<CR>
+    vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
     "map <Leader>s :SlimuxREPLSendLine<CR>
     "vmap <Leader>s :SlimuxREPLSendSelection<CR>
     "map <Leader>a :SlimuxShellLast<CR>
     "map <Leader>k :SlimuxSendKeysLast<CR>
-    map <C-c><C-c> :SlimuxREPLSendLine<CR>
-    vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
   "}}}
 
   " vim-sneak {{{2
@@ -870,6 +885,7 @@
 
   " Ferret {{{2
     let g:FerretDispatch=0
+    let g:FerretMap=0
   "}}}
 
   " vim-markdown {{{2
@@ -1036,86 +1052,86 @@
   endfunction
 
   " Utility functions to create file commands
-  function! s:CommandCabbr(abbreviation, expansion)
-    execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
-  endfunction
+  "function! s:CommandCabbr(abbreviation, expansion)
+    "execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
+  "endfunction
 
-  function! s:FileCommand(name, ...)
-    if exists('a:1')
-      let l:funcname = a:1
-    else
-      let l:funcname = a:name
-    endif
-    execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . l:funcname . '(<f-args>)'
-  endfunction
+  "function! s:FileCommand(name, ...)
+    "if exists('a:1')
+      "let l:funcname = a:1
+    "else
+      "let l:funcname = a:name
+    "endif
+    "execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . l:funcname . '(<f-args>)'
+  "endfunction
 
-  function! s:DefineCommand(name, destination)
-    call s:FileCommand(a:destination)
-    call s:CommandCabbr(a:name, a:destination)
-  endfunction
+  "function! s:DefineCommand(name, destination)
+    "call s:FileCommand(a:destination)
+    "call s:CommandCabbr(a:name, a:destination)
+  "endfunction
 
   " Public NERDTree-aware versions of builtin functions
-  function! ChangeDirectory(dir, ...)
-    execute 'cd ' . a:dir
-    let l:stay = exists('a:1') ? a:1 : 1
+  "function! ChangeDirectory(dir, ...)
+    "execute 'cd ' . a:dir
+    "let l:stay = exists('a:1') ? a:1 : 1
 
-    NERDTree
+    "NERDTree
 
-    if !l:stay
-      wincmd p
-    endif
-  endfunction
+    "if !l:stay
+      "wincmd p
+    "endif
+  "endfunction
 
-  function! Touch(file)
-    execute '!touch ' . a:file
-    call g:UpdateNERDTree()
-  endfunction
+  "function! Touch(file)
+    "execute '!touch ' . a:file
+    "call g:UpdateNERDTree()
+  "endfunction
 
-  function! Remove(file)
-    let l:current_path = expand('%')
-    let l:removed_path = fnamemodify(a:file, ':p')
+  "function! Remove(file)
+    "let l:current_path = expand('%')
+    "let l:removed_path = fnamemodify(a:file, ':p')
 
-    if (l:current_path ==# l:removed_path) && (getbufvar('%', '&modified'))
-      echo 'You are trying to remove the file you are editing. Please close the buffer first.'
-    else
-      execute '!rm ' . a:file
-    endif
+    "if (l:current_path ==# l:removed_path) && (getbufvar('%', '&modified'))
+      "echo 'You are trying to remove the file you are editing. Please close the buffer first.'
+    "else
+      "execute '!rm ' . a:file
+    "endif
 
-    call g:UpdateNERDTree()
-  endfunction
+    "call g:UpdateNERDTree()
+  "endfunction
 
-  function! Mkdir(file)
-    execute '!mkdir ' . a:file
-    call g:UpdateNERDTree()
-  endfunction
+  "function! Mkdir(file)
+    "execute '!mkdir ' . a:file
+    "call g:UpdateNERDTree()
+  "endfunction
 
-  function! Edit(file)
-    if exists('b:NERDTreeRoot')
-      wincmd p
-    endif
+  "function! Edit(file)
+    "if exists('b:NERDTreeRoot')
+      "wincmd p
+    "endif
 
-    execute 'e ' . a:file
+    "execute 'e ' . a:file
 
-ruby << RUBY
-  destination = File.expand_path(VIM.evaluate(%{system("dirname " . a:file)}))
-  pwd         = File.expand_path(Dir.pwd)
-  home        = pwd == File.expand_path("~")
+"ruby << RUBY
+  "destination = File.expand_path(VIM.evaluate(%{system("dirname " . a:file)}))
+  "pwd         = File.expand_path(Dir.pwd)
+  "home        = pwd == File.expand_path("~")
 
-  if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
-    VIM.command(%{call ChangeDirectory(system("dirname " . a:file), 0)})
-  end
-RUBY
+  "if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
+    "VIM.command(%{call ChangeDirectory(system("dirname " . a:file), 0)})
+  "end
+"RUBY
 
-  endfunction
+  "endfunction
 
   " Define the NERDTree-aware aliases
-  if !g:VIMR()
-    call s:DefineCommand('cd', 'ChangeDirectory')
-    call s:DefineCommand('touch', 'Touch')
-    call s:DefineCommand('rm', 'Remove')
-    call s:DefineCommand('e', 'Edit')
-    call s:DefineCommand('mkdir', 'Mkdir')
-  endif
+  "if !g:VIMR()
+    "call s:DefineCommand('cd', 'ChangeDirectory')
+    "call s:DefineCommand('touch', 'Touch')
+    "call s:DefineCommand('rm', 'Remove')
+    "call s:DefineCommand('e', 'Edit')
+    "call s:DefineCommand('mkdir', 'Mkdir')
+  "endif
 
   " Pulse
   function! PulseCursorLine()
@@ -1380,16 +1396,9 @@ RUBY
 
 " Miscellaneous {{{1
 
-  " Automatically reload the vimrc file when changed
-  "autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
-
-  "if !exists('autocommands_loaded')
-    "let autocommands_loaded = 1
-  "endif
-
   " Include vim configuration specific to a machine
   if filereadable(expand('~/.vimrc.local'))
-    source expand('~/.vimrc.local')
+    source ~/.vimrc.local
   endif
 
 " }}}
