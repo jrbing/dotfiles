@@ -65,7 +65,8 @@ class Template < Thor
     # Create the datamover export files for all records
     records.each do |record|
       @record = record
-      create_from_template("datamover_backup.erb", "#{@record}.dms")
+      create_from_template("sqlcl_backup.erb", "#{@record}.sql")
+      #create_from_template("datamover_backup.erb", "#{@record}.dms")
     end
     run "unix2dos #{@datafix_base_directory}/*"
   end

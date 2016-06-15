@@ -53,6 +53,7 @@ module Valet
   end
 
   def initialize_git_repo(path)
+    say_status("info", "Initializing git repo")
     inside(path) do
       run 'git init'
     end
