@@ -41,19 +41,19 @@
   Plug 'justinmk/vim-sneak'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
-  Plug 'plasticboy/vim-markdown'
+  Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
   Plug 'rizzatti/dash.vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-bundler'
+  Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-git'
-  Plug 'tpope/vim-jdaddy'
+  Plug 'tpope/vim-jdaddy', { 'for': ['json'] }
   Plug 'tpope/vim-projectionist'
   Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-rbenv'
+  Plug 'tpope/vim-rbenv', { 'for': ['ruby'] }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-tbone'
   Plug 'tpope/vim-unimpaired'
@@ -67,40 +67,39 @@
   Plug 'mhinz/vim-janah'
 
   " Filetypes
-  Plug 'cespare/vim-toml'
-  Plug 'davidoc/taskpaper.vim'
+  Plug 'cespare/vim-toml', { 'for': ['toml'] }
+  Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'funcodeio/lz4.vim'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'keith/swift.vim'
+  Plug 'keith/swift.vim', { 'for': ['swift'] }
   Plug 'markcornick/vim-terraform'
-  Plug 'pangloss/vim-javascript'
-  Plug 'pearofducks/ansible-vim'
-  Plug 'plsql.vim'
-  Plug 'PProvost/vim-ps1'
-  Plug 'rust-lang/rust.vim'
-  Plug 'stephpy/vim-yaml'
-  Plug 'vim-ruby/vim-ruby'
-  Plug 'HerringtonDarkholme/yats.vim' "Typescript
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+  Plug 'pearofducks/ansible-vim', { 'for': ['ansible'] }
+  Plug 'plsql.vim', { 'for': ['plsql'] }
+  Plug 'PProvost/vim-ps1', { 'for': ['ps1'] }
+  Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
+  Plug 'stephpy/vim-yaml', { 'for': ['yaml'] }
+  Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
+  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
   Plug 'posva/vim-vue'
 
   if g:OSX()
-    Plug 'dbext.vim'
+    Plug 'dbext.vim', { 'for': ['sql', 'plsql'] }
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'epeli/slimux'
     Plug 'fatih/vim-go'
-    Plug 'honza/vim-snippets'
-    Plug 'jphustman/SQLUtilities'
-    Plug 'moorereason/vim-markdownfmt'
+    Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
+    Plug 'moorereason/vim-markdownfmt', { 'for': ['markdown'] }
     Plug 'mustache/vim-mustache-handlebars'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
+    Plug 'sourcegraph/sourcegraph-vim', { 'for': ['go'] }
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-scripts/VOoM'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'SirVer/ultisnips'
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     if !g:VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
     endif
@@ -193,7 +192,7 @@
 
   " Use modeline overrides
   set modeline
-  set modelines=10
+  set modelines=5
 
   " Set par as the paragraph formatting program to use
   if executable('par')
@@ -549,11 +548,6 @@
     let g:sneak#streak = 1
   "}}}
 
-  " Coffeescript {{{2
-    let g:coffee_compile_vert = 1
-    let g:coffee_watch_vert = 1
-  "}}}
-
   " Airline {{{2
     if has ('gui_running')
       let g:airline_powerline_fonts = 1
@@ -722,9 +716,9 @@
   "}}}
 
   " Syntastic {{{2
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
+    "set statusline+=%#warningmsg#
+    "set statusline+=%{SyntasticStatuslineFlag()}
+    "set statusline+=%*
 
     let g:syntastic_error_symbol = '✗✗'
     let g:syntastic_style_error_symbol = '✠✠'
