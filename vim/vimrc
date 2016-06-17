@@ -920,6 +920,11 @@
     let g:javascript_conceal_arrow_function = '⇒'
   "}}}
 
+  " Sourcegraph {{{2
+    let g:SOURCEGRAPH_AUTO = "false"
+    nnoremap <F2> :GRAPH<CR>
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
