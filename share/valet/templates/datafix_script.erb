@@ -1,5 +1,8 @@
 -- Datafix <%= @datafix_name %>
 -- Created on: <%= @date %>
+set echo on
+set feedback on
+set sqlformat ansiconsole
 
 spool <%= @datafix_name %>.log;
 
