@@ -5,6 +5,8 @@
 #
 #          FILE: <%= @script_name %>.sh
 #
+#         USAGE: ./<%= @script_name %>.sh
+#
 #   DESCRIPTION:
 #
 #===============================================================================
@@ -14,17 +16,180 @@ set -u          # Treat unset variables as an error
 set -o pipefail # Prevent errors in a pipeline from being masked
 IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
-readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
-readonly ARGS="$@"
+# Define variables for current file, directory, and script basename
+readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
+readonly __base="$(basename ${__file} .sh)"
 
-# Required program(s)
-readonly req_progs=(
-  "prog1"
-  "prog2"
-)
+###############
+#  Functions  #
+###############
 
-for p in "${req_progs[@]}"; do
-  hash "$p" 2>&- || \
-  { echo >&2 " Required program \"$p\" not installed."; exit 1; }
+function echoinfo() {
+  local GC="\033[1;32m"
+  local EC="\033[0m"
+  printf "${GC} ☆  INFO${EC}: %s\n" "$@";
+}
+
+function echowarn() {
+  local YC="\033[1;33m"
+  local EC="\033[0m"
+  printf "${YC} ⚠  WARN${EC}: %s\n" "$@";
+}
+
+function echodebug() {
+  local BC="\033[1;34m"
+  local EC="\033[0m"
+  if [[ -n ${DEBUG+x} ]]; then
+    printf "${BC} ★  DEBUG${EC}: %s\n" "$@";
+  fi
+}
+
+function echoerror() {
+  local RC="\033[1;31m"
+  local EC="\033[0m"
+  printf "${RC} ✖  ERROR${EC}: %s\n" "$@" 1>&2;
+}
+
+function echohelp () {
+  printf "\n" 1>&2;
+  printf " %s\n" "${*}" 1>&2;
+  printf "\n" 1>&2;
+  printf "  %s\n" "${__usage:-No usage available}" 1>&2;
+  printf "\n" 1>&2;
+  printf " %s\n" "${__helptext:-}" 1>&2;
+  printf "\n" 1>&2;
+  exit 1
+}
+
+function cleanup_before_exit () {
+  echodebug "Cleaning up"
+}
+trap cleanup_before_exit EXIT
+
+####################
+#  Option Parsing  #
+####################
+
+read -r -d '' __usage <<-'EOF' || true
+  -d --debug       Enables debug mode
+  -h --help        This page
+EOF
+read -r -d '' __helptext <<-'EOF' || true
+ This is the help text. Please add a description of the program and
+ elaborate on the available command-line arguments.
+EOF
+
+while read line; do
+  # fetch single character version of option string
+  opt="$(echo "${line}" |awk '{print $1}' |sed -e 's#^-##')"
+
+  # fetch long version if present
+  long_opt="$(echo "${line}" |awk '/\-\-/ {print $2}' |sed -e 's#^--##')"
+  long_opt_mangled="$(sed 's#-#_#g' <<< $long_opt)"
+
+  # map long name back to short name
+  varname="short_opt_${long_opt_mangled}"
+  eval "${varname}=\"${opt}\""
+
+  # check if option takes an argument
+  varname="has_arg_${opt}"
+  if ! echo "${line}" |egrep '\[.*\]' >/dev/null 2>&1; then
+    init="0" # it's a flag. init with 0
+    eval "${varname}=0"
+  else
+    opt="${opt}:" # add : if opt has arg
+    init=""  # it has an arg. init with ""
+    eval "${varname}=1"
+  fi
+  opts="${opts:-}${opt}"
+
+  varname="arg_${opt:0:1}"
+  if ! echo "${line}" |egrep '\. Default=' >/dev/null 2>&1; then
+    eval "${varname}=\"${init}\""
+  else
+    match="$(echo "${line}" |sed 's#^.*Default=\(\)#\1#g')"
+    eval "${varname}=\"${match}\""
+  fi
+done <<< "${__usage}"
+
+# Allow long options like --this
+opts="${opts}-:"
+
+# Reset in case getopts has been used previously in the shell.
+OPTIND=1
+
+# Unexpected arguments will cause unbound variables to be dereferenced
+set +o nounset
+
+# Overwrite $arg_<flag> defaults with the actual CLI options
+while getopts "${opts}" opt; do
+  [ "${opt}" = "?" ] && echohelp "Invalid use of script: ${*} "
+
+  if [ "${opt}" = "-" ]; then
+    # OPTARG is long-option-name or long-option=value
+    if [[ "${OPTARG}" =~ .*=.* ]]; then
+      # --key=value format
+      long=${OPTARG/=*/}
+      long_mangled="$(sed 's#-#_#g' <<< $long)"
+      # Set opt to the short option corresponding to the long option
+      eval "opt=\"\${short_opt_${long_mangled}}\""
+      OPTARG=${OPTARG#*=}
+    else
+      # --key value format
+      # Map long name to short version of option
+      long_mangled="$(sed 's#-#_#g' <<< $OPTARG)"
+      eval "opt=\"\${short_opt_${long_mangled}}\""
+      # Only assign OPTARG if option takes an argument
+      eval "OPTARG=\"\${@:OPTIND:\${has_arg_${opt}}}\""
+      # shift over the argument if argument is expected
+      ((OPTIND+=has_arg_${opt}))
+    fi
+    # we have set opt/OPTARG to the short value and the argument as OPTARG if it exists
+  fi
+  varname="arg_${opt:0:1}"
+  default="${!varname}"
+
+  value="${OPTARG}"
+  if [ -z "${OPTARG}" ] && [ "${default}" = "0" ]; then
+    value="1"
+  fi
+
+  eval "${varname}=\"${value}\""
+  echodebug "cli arg ${varname} = ($default) -> ${!varname}"
 done
+set -o nounset # no more unbound variable references expected
+
+shift $((OPTIND-1))
+
+[ "${1:-}" = "--" ] && shift
+
+##############
+#  Switches  #
+##############
+
+# Debug Mode
+if [[ "${arg_d}" = "1" ]]; then
+  set -o xtrace
+  DEBUG=true
+fi
+
+# Help Mode
+if [ "${arg_h}" = "1" ]; then
+  # Help exists with code 1
+  echohelp "Help using ${0}"
+fi
+
+#########################
+#  Argument Validation  #
+#########################
+
+#[ -z "${arg_f:-}" ]     && help      "Setting a filename with -f or --file is required"
+
+##########
+#  Main  #
+##########
+
+echoinfo "__file: ${__file}"
+echoinfo "__dir: ${__dir}"
+echoinfo "__base: ${__base}"
