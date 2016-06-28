@@ -61,6 +61,7 @@ alias ax="chmod a+x"                                # Make executable
 alias lt='ls -lAht && echo "------ OLDEST ------"'
 alias ltr='ls -lAhtr && echo "------ NEWEST ------"'
 alias clip="nc localhost 8377"
+alias purge-dsstore="find . -name '*.DS_Store' -type f -delete"
 
 #
 # Functions
