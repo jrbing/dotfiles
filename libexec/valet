@@ -13,6 +13,7 @@ import subprocess
 import cStringIO
 import re
 from textwrap import dedent as dd
+from subprocess import PIPE,Popen
 
 # }}}
 # Globals {{{
@@ -329,7 +330,8 @@ def get_container_summaries(container):
             if summary is not None:
                 summaries.append((command, summary))
     if summaries:
-        columns = int(subprocess.check_output(['stty', 'size']).split()[-1])
+        proc = Popen(['stty', 'size'], stdout=PIPE)
+        columns = int(proc.communicate()[0].split()[-1])
         max_length = max([ len(s[0]) for s in summaries ])
         summary_length = columns - max_length - 6
         summary_format = "   %-" + str(max_length) + "s  %s"
