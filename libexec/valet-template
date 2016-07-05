@@ -18,7 +18,7 @@ class Template < Thor
   self.source_root(TEMPLATE_DIRECTORY)
 
   # sqlplus script
-  desc "sqlplus [NAME]", "Creates a basic sqlplus script file from template"
+  desc "sqlplus [NAME]", "Creates a basic sqlplus script from template"
   def sqlplus(script_name=nil)
     @script_name = get_script_name(script_name)
     create_from_template("sqlplus_script.erb", "#{@script_name}.sql")
@@ -38,7 +38,7 @@ class Template < Thor
   end
 
   # thorfile
-  desc "thorfile [NAME]", "Creates a basic thor-based script file"
+  desc "thorfile", "Creates a basic Thorfile"
   def thorfile(script_name=nil)
     chmod(create_from_template("thor_script.erb", "Thorfile"), 0755)
   end
@@ -86,7 +86,7 @@ class Template < Thor
   end
 
   # windows powershell script
-  desc "powershell [NAME]", "Creates a basic powershell script file"
+  desc "powershell [NAME]", "Creates a basic powershell script"
   def powershell (script_name=nil)
     @script_name = get_script_name(script_name)
     create_from_template("powershell.erb", "#{@script_name}.ps1")
@@ -119,8 +119,13 @@ class Template < Thor
     create_from_template("shipit.erb", ".shipit")
   end
 
+  # python script
+  desc "python [NAME]", "Creates a python script"
+  def python(script_name=nil)
+    @script_name = get_script_name(script_name)
+    create_from_template("python_script.erb", "#{@script_name}.py")
+  end
 
 end
 
 Template.start(ARGV)
-
