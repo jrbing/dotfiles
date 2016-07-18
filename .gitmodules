@@ -38,3 +38,7 @@
   path = share/vipe
   url = git://github.com/juliangruber/vipe.git
   ignore = dirty
+[submodule "share/m-cli"]
+  path = share/m-cli
+  url = git://github.com/rgcr/m-cli.git
+  ignore = dirty
