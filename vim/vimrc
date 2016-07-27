@@ -80,7 +80,7 @@
   Plug 'stephpy/vim-yaml', { 'for': ['yaml'] }
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
-  Plug 'posva/vim-vue'
+  Plug 'robbles/logstash.vim'
 
   if g:OSX()
     Plug 'dbext.vim', { 'for': ['sql', 'plsql'] }
