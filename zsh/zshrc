@@ -29,9 +29,9 @@ setopt rmstarsilent
 alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"                                                                                              # List TODO/FIX lines from the current project
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
-alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
 alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
 
+alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
 function java_use() {
   export JAVA_HOME=$(/usr/libexec/java_home -v $1)
   export PATH=$JAVA_HOME/bin:$PATH
@@ -48,7 +48,7 @@ fi
 #
 
 #alias pmons="ps -ef | grep pmon | grep -v grep" # Currently running Oracle pmon processes
-export SQLPATH=$DOTFILES/sql/oracle             # SQL script path for sqlplus
+export SQLPATH=$DOTFILES/sql/oracle             # SQL script path for sqlplus and sqlcl
 export PSQL_EDITOR=vim
 export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 
@@ -66,7 +66,9 @@ alias purge-dsstore="find . -name '*.DS_Store' -type f -delete"
 #
 # Functions
 #
-any() {
+
+# Search for processes by keyword
+function any() {
   emulate -L zsh
   unsetopt KSH_ARRAYS
   if [[ -z "$1" ]] ; then
@@ -75,4 +77,49 @@ any() {
   else
     ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
   fi
+}
+
+# Make a temporary directory and enter it
+function tmpd() {
+  if [[ $# -eq 0 ]]; then
+    local dir=$(mktemp -d) && cd $dir
+  else
+    local dir=$(mktemp -d -t $1.XXXXXXXXXX) && cd $dir
+  fi
+}
+
+# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
+function targz() {
+  local tmpFile="${@%/}.tar"
+  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+
+  size=$(
+  stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
+  stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
+  )
+
+  local cmd=""
+  if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
+    # the .tar file is smaller than 50 MB and Zopfli is available; use it
+    cmd="zopfli"
+  else
+    if hash pigz 2> /dev/null; then
+      cmd="pigz"
+    else
+      cmd="gzip"
+    fi
+  fi
+
+  echo "Compressing .tar using \`${cmd}\`…"
+  "${cmd}" -v "${tmpFile}" || return 1
+  [[ -f "${tmpFile}" ]] && rm "${tmpFile}"
+  echo "${tmpFile}.gz created successfully."
+}
+
+# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
+# the `.git` directory, listing directories first. The output gets piped into
+# `less` with options to preserve color and line numbers, unless the output is
+# small enough for one screen.
+function tre() {
+  tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
 }
