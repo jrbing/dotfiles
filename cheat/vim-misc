@@ -1,0 +1,3 @@
+
+# Alphabetically sort the visually selected block
+:'<,'>sort
