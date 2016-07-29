@@ -4,7 +4,7 @@
 TAPS=(
     homebrew/binary
     homebrew/dupes
-    #caskroom/cask
+    caskroom/cask
 )
 
 # Homebrew Formulas
@@ -13,7 +13,6 @@ FORMULAS=(
     ansible
     aria2
     blink1
-    #caskroom/cask/brew-cask
     cheat
     coreutils
     ctags
@@ -29,6 +28,8 @@ FORMULAS=(
     ngrok
     openssl
     optipng
+    pandoc
+    pigz
     rbenv
     rbenv-gem-rehash
     readline
@@ -42,20 +43,15 @@ FORMULAS=(
     tree
     watchman
     wget
+    zopfli
     zsh
 )
 
 # Homebrew casks
-#CASKS=(
-#    growlnotify
-#    basictex
-#    pandoc
-#)
-
-FONTS=(
-    font-droid-sans-mono
-    font-inconsolata
-    font-inconsolata-dz-for-powerline
-    font-meslo-lg
-    font-source-code-pro
+CASKS=(
+    basictex
+    growlnotify
+    vagrant
+    virtualbox
+    xquartz
 )
