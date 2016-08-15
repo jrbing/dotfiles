@@ -81,6 +81,7 @@
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
   Plug 'robbles/logstash.vim'
+  Plug 'rodjek/vim-puppet'
 
   if g:OSX()
     Plug 'dbext.vim', { 'for': ['sql', 'plsql'] }
@@ -90,6 +91,7 @@
     Plug 'epeli/slimux'
     Plug 'fatih/vim-go'
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
+    Plug 'metakirby5/codi.vim'
     Plug 'mustache/vim-mustache-handlebars'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
@@ -910,6 +912,15 @@
   " Sourcegraph {{{2
     let g:SOURCEGRAPH_AUTO = "false"
     nnoremap <F2> :GRAPH<CR>
+  "}}}
+
+  " Codi {{{2
+    "let g:codi#interpreters = {
+      "\ 'ruby': {
+        "\ 'bin': '~/.rbenv/shims/ruby',
+        "\ 'prompt': '^\(>>>\|\.\.\.\) ',
+        "\ },
+      "\ }
   "}}}
 
 " }}}
