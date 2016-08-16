@@ -69,6 +69,7 @@
   " Filetypes
   Plug 'cespare/vim-toml', { 'for': ['toml'] }
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
+  Plug 'fatih/vim-hclfmt'
   Plug 'funcodeio/lz4.vim'
   Plug 'keith/swift.vim', { 'for': ['swift'] }
   Plug 'markcornick/vim-terraform'
@@ -459,13 +460,6 @@
     augroup END
   "}}}
 
-  " Coffeescript {{{2
-    augroup ft_coffeescript
-      autocmd!
-      autocmd BufNewFile,BufReadPost *.{coffee} setlocal shiftwidth=2 expandtab
-    augroup END
-  "}}}
-
   " C/C++ {{{2
     augroup ft_cstyle
       autocmd!
@@ -515,7 +509,7 @@
     augroup END
   "}}}
 
-  " Make {{{2
+  " Miscellaneous {{{2
     augroup miscellaneous
       autocmd!
       " Save when focus is lost
