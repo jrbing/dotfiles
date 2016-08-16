@@ -2,10 +2,10 @@
   name = JR Bing
   email = jr@jrbing.com
   editor = vim
-#  signingkey = EFDDCE56
+  signingkey = 1DB141D9
 
-#[commit]
-#  gpgsign = true
+[commit]
+  gpgsign = true
 
 [github]
   user = jrbing
