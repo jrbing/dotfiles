@@ -51,7 +51,7 @@ function echoinfo() {
 
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  echowarn
-#   DESCRIPTION:  Echo warning informations to stdout.
+#   DESCRIPTION:  Echo warning information to stdout.
 #-------------------------------------------------------------------------------
 function echowarn() {
     printf "${YC} ★  WARN${EC}: %s\n" "$@";
@@ -107,8 +107,9 @@ function trim {
 #   DESCRIPTION:  Checks if a variable is set to "y" or "yes"
 #-------------------------------------------------------------------------------
 function option_enabled () {
-    VAR="$1"
-    VAR_VALUE=$(eval echo \$$VAR)
+    local VAR="$1"
+    local VAR_VALUE
+    VAR_VALUE="$(eval echo \$$VAR)"
     if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
     then
         return 0
@@ -123,6 +124,7 @@ function option_enabled () {
 #-------------------------------------------------------------------------------
 function bincheck() {
     for p in ${1}; do
+        echodebug "Checking for $p"
         hash "$p" 2>&- || \
         { echoerror >&2 " Required program \"$p\" not installed."; exit 1; }
     done
