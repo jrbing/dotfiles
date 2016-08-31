@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#   FILE: getmospatch
+#
+#   DESCRIPTION: Download the specified MOS patches to the current directory
+#
+#===============================================================================
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+# Source bash functions
+# shellcheck disable=1090
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+# Check for required programs
+req_progs=(curl aria2c)
+bincheck "${req_progs[*]}"
+
+###############
+#  Variables  #
+###############
+
+readonly MOS_USERNAME=${MOS_USERNAME:=x}
+readonly MOS_PASSWORD=${MOS_PASSWORD:=x}
+
+if [[ $# -eq 0 ]]; then
+  echoerror "Patch ID must be specified"
+  exit 1
+fi
+readonly PATCH_ID="$1"
+
+readonly TMPDIR="$(mktemp -d)"
+readonly OUTPUTDIR="$(pwd)"
+readonly COOKIE_FILE="${TMPDIR}/$$.cookies"
+readonly AUTH_LOGFILE="${TMPDIR}/auth-wgetlog-$(date +%m-%d-%y-%H:%M).log"
+readonly SEARCH_LOGFILE="${TMPDIR}/search-wgetlog-$(date +%m-%d-%y-%H:%M).log"
+readonly DOWNLOAD_LOGFILE="${TMPDIR}/download-aria2log-$(date +%m-%d-%y-%H:%M).log"
+readonly AUTH_OUTPUT="${TMPDIR}/auth_output"
+readonly PATCH_SEARCH_OUTPUT="${TMPDIR}/patch_search_output"
+readonly PATCH_FILE_LIST="${TMPDIR}/patch_file_list"
+
+if [[ "${MOS_USERNAME}" == "x" ]] || [[ "${MOS_PASSWORD}" == "x" ]]; then
+  echoerror "Both MOS_USERNAME and MOS_PASSWORD environment variables need to be set"
+  exit 1
+fi
+
+###############
+#  Functions  #
+###############
+
+function create_authorization_cookie() {
+  echodebug "Authenticating and generating cookie file"
+  # shellcheck disable=2155
+  local MOS_TOKEN="$(curl --silent --head https://updates.oracle.com/Orion/Services/download | grep Location | cut -d '=' -f 2|cut -d ' ' -f 1)"
+  local AUTH_DATA="ssousername=$MOS_USERNAME&password=$MOS_PASSWORD&site2pstoretoken=$MOS_TOKEN"
+  wget --secure-protocol=TLSv1 \
+    --save-cookies="${COOKIE_FILE}" \
+    --keep-session-cookies \
+    --no-check-certificate \
+    --post-data="$AUTH_DATA" \
+    --user="$MOS_USERNAME" \
+    --password="$MOS_PASSWORD" \
+    "https://updates.oracle.com/Orion/SimpleSearch/switch_to_saved_searches" \
+    --output-document="${AUTH_OUTPUT}" \
+    --output-file="${AUTH_LOGFILE}"
+}
+
+function download_search_results() {
+  echodebug "Downloading search page results for ${PATCH_ID}"
+  # plat_lang 226P = Linux x86_64
+  # plat_lang 233P = Windows x86_64
+  wget --secure-protocol=TLSv1 \
+    --no-check-certificate \
+    --load-cookies="${COOKIE_FILE}" \
+    --output-document="${PATCH_SEARCH_OUTPUT}" \
+    --output-file="${SEARCH_LOGFILE}" \
+    "https://updates.oracle.com/Orion/SimpleSearch/process_form?search_type=patch&patch_number=${PATCH_ID}&plat_lang=226P"
+}
+
+function extract_download_links() {
+  echodebug "Extracting download links"
+  grep "btn_Download" "${PATCH_SEARCH_OUTPUT}" | \
+    egrep ".*" | \
+    sed 's/ //g' | \
+    sed "s/.*href=\"//g" | \
+    sed "s/\".*//g" \
+    > "${PATCH_FILE_LIST}"
+}
+
+function download_patch_files() {
+  create_authorization_cookie
+  download_search_results
+  extract_download_links
+  echoinfo "Downloading patch files"
+  aria2c \
+    --input-file="${PATCH_FILE_LIST}" \
+    --dir="${OUTPUTDIR}" \
+    --load-cookies="${COOKIE_FILE}" \
+    --user-agent="Mozilla/5.0" \
+    --max-connection-per-server=5 \
+    --max-concurrent-downloads=5 \
+    --log="${DOWNLOAD_LOGFILE}" \
+    --log-level="notice"
+    #--quiet=true \
+    #--file-allocation=none \
+}
+
+function cleanup_before_exit () {
+  if [[ -n ${DEBUG+x} ]]; then
+    echodebug "Temporary files and logs can be found in ${TMPDIR}"
+  else
+    echoinfo "Cleaning up temporary files"
+    rm -rf "${TMPDIR}"
+  fi
+}
+trap cleanup_before_exit EXIT
+
+##########
+#  Main  #
+##########
+
+download_patch_files
