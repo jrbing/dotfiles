@@ -96,7 +96,7 @@
     Plug 'mustache/vim-mustache-handlebars'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
-    Plug 'sourcegraph/sourcegraph-vim', { 'for': ['go'] }
+    "Plug 'sourcegraph/sourcegraph-vim', { 'for': ['go'] }
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-scripts/VOoM'
     Plug 'vim-airline/vim-airline'
