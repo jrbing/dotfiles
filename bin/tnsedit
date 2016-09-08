@@ -86,16 +86,10 @@ function get_tns_property() {
 function list_tns_entries() {
   check_tnsnames_file
   # Get a list of all databases
-  #awk -F"[ =]" '/DESCRIPTION/ { print X }{ X=$1 }' "$TNS_FILE"
-  #sed -n -e "/DESCRIPTION/{g;s/ .*=.*//p;}" -e "h" "$TNS_FILE"
-  #cat "$TNS_FILE" | get_tns_property dbname host
-
-  # Check to see if there are any entries in the file
-
-  # Print the header list
-  # Iterate through the entries and print the name, host, port, and sid/service
-
-  #get_tns_property FNDEV92 description < "$TNS_FILE"
+  awk -F"[ =]" '/DESCRIPTION/ { print X }{ X=$1 }' "${TNS_FILE}"
+  # TODO - Check to see if there are any entries in the file
+  # TODO - Print the header list
+  # TODO - Iterate through the entries and print the name, host, port, and sid/service
 }
 
 function edit_tnsnames_file() {
