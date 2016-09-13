@@ -1,8 +1,10 @@
 -- Datafix <%= @datafix_name %>
 -- Created on: <%= @date %>
 set echo on
+set term on
 set feedback on
 set sqlformat ansiconsole
+set sqlprompt ' _user@_connect_identifier > '
 
 spool <%= @datafix_name %>.log;
 
