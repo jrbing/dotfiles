@@ -23,7 +23,7 @@ FORMULAS=(
     hub
     imagemagick
     keybase
-    macvim --with-override-system-vim --with-custom-icons --with-lua --with-luajit
+    macvim --with-override-system-vim
     mosh
     ngrok
     openssl
