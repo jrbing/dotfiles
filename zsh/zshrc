@@ -35,6 +35,8 @@ alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d
 function java_use() {
   export JAVA_HOME=$(/usr/libexec/java_home -v $1)
   export PATH=$JAVA_HOME/bin:$PATH
+  path=("${JAVA_HOME}/bin" $path)
+  export PATH
   java -version
 }
 
@@ -47,10 +49,26 @@ fi
 # Database
 #
 
-#alias pmons="ps -ef | grep pmon | grep -v grep" # Currently running Oracle pmon processes
-export SQLPATH=$DOTFILES/sql/oracle             # SQL script path for sqlplus and sqlcl
+# Postgres
 export PSQL_EDITOR=vim
+
+# Oracle SQLcl
+export SQLPATH="${DOTFILES}/sql/oracle"
 export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
+if [[ -d "/opt/oracle/sqlcl" ]]; then
+  path+=('/opt/oracle/sqlcl/bin')
+  export PATH
+fi
+if [[ -d "/opt/oracle/tns" ]]; then
+  export TNS_ADMIN=/opt/oracle/tns
+fi
+
+# OEM CLI
+#export PATH=$PATH:/opt/oracle/emcli
+#if [[ -d "/opt/oracle/emcli" ]]; then
+  #path+=('/opt/oracle/emcli')
+  #export PATH
+#fi
 
 #
 # Miscellaneous aliases
