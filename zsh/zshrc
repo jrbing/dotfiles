@@ -18,9 +18,22 @@ if [[ -s "${DOTFILES}/zsh/k/k.sh" ]]; then
 fi
 
 #
-# Additional ZSH Options
+# Completion
 #
+_azure_complete() {
+  compadd -- $(azure --compzsh --compgen "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}")
+}
+compdef _azure_complete azure
+
+#
+# ZSH Options
+#
+
+# Don't ask before executing rm * or rm path/*
 setopt rmstarsilent
+
+# 10 second wait if you do something that will delete everything
+#setopt RM_STAR_WAIT
 
 #
 # Development
@@ -63,16 +76,10 @@ if [[ -d "/opt/oracle/tns" ]]; then
   export TNS_ADMIN=/opt/oracle/tns
 fi
 
-# OEM CLI
-#export PATH=$PATH:/opt/oracle/emcli
-#if [[ -d "/opt/oracle/emcli" ]]; then
-  #path+=('/opt/oracle/emcli')
-  #export PATH
-#fi
-
 #
 # Miscellaneous aliases
 #
+
 unalias rm
 unalias gb
 alias ax="chmod a+x"                                # Make executable
