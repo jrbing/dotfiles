@@ -99,10 +99,10 @@ class Template < Thor
     create_from_template("makefile.erb", "Makefile")
   end
 
-  # editorrc configuration file
-  desc "editorrc", "Creates a basic editorrc file"
-  def editorrc
-    create_from_template("editorrc.erb", ".editorrc")
+  # editorconfig configuration file
+  desc "editorconfig", "Creates a basic editorconfig file"
+  def editorconfig
+    create_from_template("editorconfig.erb", ".editorconfig")
   end
 
   # README.md file
