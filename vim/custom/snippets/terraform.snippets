@@ -1,0 +1,186 @@
+priority -50
+
+################################################################################
+#                                  Providers                                   #
+################################################################################
+
+snippet provider
+provider "${1:name}" {
+	${2:config}
+}
+$0
+endsnippet
+
+snippet provider_aws
+provider "aws" {
+	access_key = "${var.access_key}"
+	secret_key = "${var.secret_key}"
+	region = "${var.region}"
+}
+endsnippet
+
+snippet provider_consul "Consul provider" b
+provider "consul" {
+	address = "${1:demo.consul.io:80}"
+	datacenter = "${2:datacenter}"
+}
+$0
+endsnippet
+
+snippet provider_digitalocean
+provider "digitalocean" {
+	token = "${1:${var.digital_ocean_token}}"
+}
+$0
+endsnippet
+
+snippet provider_docker
+provider "docker" {
+	host = "${1:${var.docker_host}}"
+}
+$0
+endsnippet
+
+snippet provider_google
+provider "google" {
+	account_file = "${file("account.json")}"
+	project = "my-gce-project"
+	region = "us-central1"
+}
+$0
+endsnippet
+
+snippet provider_openstack
+provider "openstack" {
+	user_name  = "${var.user_name}"
+	tenant_name = "${var.tenant_name}"
+	password  = "${var.password}"
+	auth_url  = "${var.auth_url}"
+}
+$0
+endsnippet
+
+snippet provider_rundeck
+provider "rundeck" {
+	url = "http://rundeck.example.com/"
+	auth_token = "abcd1234"
+	#allow_unverified_ssl = "false"
+}
+$0
+endsnippet
+
+################################################################################
+#                                  Resources                                   #
+################################################################################
+
+snippet resource "Generic recource"
+resource "${1:type}" "${2:name}" {
+	${3:config}
+}
+$0
+endsnippet
+
+snippet resource_template_file "Template file resource"
+resource "template_file" "$1" {
+	filename = "$1"
+	vars {
+		$2
+	}
+}
+$0
+endsnippet
+
+snippet resource_rundeck_project "Rundeck project resource"
+resource "rundeck_project" "$1" {
+	name = "$2"
+	description = "$3"
+	#default_node_file_copier_plugin = "jsch-scp"
+	#default_node_executor_plugin = "jsch-ssh"
+	#ssh_authentication_type = "privateKey"
+	#ssh_key_storage_path = "anvils/id_rsa"
+	#ssh_key_file_path = "/var/lib/rundeck/id_rsa"
+
+	resource_model_source {
+		type = "file"
+		config = {
+			format = "resourceyaml"
+			# This path is interpreted on the Rundeck server
+			file = "/var/rundeck/projects/anvils/resources.yaml"
+		}
+	}
+}
+endsnippet
+
+snippet resource_rundeck_private_key "Rundeck private key resource"
+resource "rundeck_private_key" "$1" {
+	path = "anvils/id_rsa"
+	key_material = "${file("/id_rsa")}"
+}
+$0
+endsnippet
+
+snippet resource_rundeck_public_key "Rundeck public key resource"
+resource "rundeck_public_key" "$1" {
+	path = "anvils/id_rsa.pub"
+	key_material = "ssh-rsa yada-yada-yada"
+}
+$0
+endsnippet
+
+snippet resource_rundeck_job "Rundeck job resource"
+resource "rundeck_job" "$1" {
+	name = "$1"
+	project_name = "$2"
+	description = "$3"
+	#node_filter_query = "tags: web"
+
+	command {
+		shell_command = "sudo service httpd restart"
+	}
+}
+$0
+endsnippet
+
+################################################################################
+#                                  Variables                                   #
+################################################################################
+
+snippet var "variable"
+variable "${1:name}" {
+	${1}
+}
+$0
+endsnippet
+
+################################################################################
+#                                Miscellaneous                                 #
+################################################################################
+
+
+snippet tags
+tags {
+	Name = "${2:value}"
+}
+endsnippet
+
+snippet qvar "quoted variable"
+"\$\{var.$1\}"
+endsnippet
+
+snippet res "resouce as a variable" w
+\$\{$1.$2\}
+endsnippet
+
+snippet var "regular var" w
+\$\{var.$1\}
+endsnippet
+
+snippet arr "array"
+[ $1 ]
+endsnippet
+
+snippet =
+$1 = $2
+endsnippet
+
+# vim:ft=snippets:
