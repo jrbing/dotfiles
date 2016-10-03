@@ -147,7 +147,8 @@ endsnippet
 
 snippet var "variable"
 variable "${1:name}" {
-	${1}
+	description = "${2}"
+	default     = "${3}"
 }
 $0
 endsnippet
@@ -169,10 +170,6 @@ endsnippet
 
 snippet res "resouce as a variable" w
 \$\{$1.$2\}
-endsnippet
-
-snippet var "regular var" w
-\$\{var.$1\}
 endsnippet
 
 snippet arr "array"
