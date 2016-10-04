@@ -58,31 +58,6 @@ function check_tnsnames_file() {
   fi
 }
 
-function get_tns_property() {
-  sed -e 's/=/`=/g' -e 's/(/`(/g' -e 's/)/`)/g'|awk 'BEGIN{level=1} {
-    wrote=0
-    split($0,tokens,"`")
-    i=1; while(i in tokens) {
-      if(tokens[i]~"^[(]") level++
-      if(tokens[i]~"^[)]") level--
-      if(level==1&&i==1&&tokens[i]~"[A-Za-z]") TOP=tokens[i]
-      if(toupper(TOP)~toupper("^[ t]*'"$1"'[ t]*$")) {
-        if(propertylvl) {
-          if(level>=propertylvl) {
-            if(tokens[i]~"^="&&level==propertylvl) printf substr(tokens[i],2)
-              else printf tokens[i]
-            wrote=1
-          } else propertylvl=0
-          found=1
-        }
-        if(!found&&toupper(tokens[i])~toupper("^[(]?[ t]*'"$2"'[ t]*$")) propertylvl=level
-      }
-      i++
-    }
-    if(wrote) printf "n"
-  }'
-}
-
 function list_tns_entries() {
   check_tnsnames_file
   # Get a list of all databases
