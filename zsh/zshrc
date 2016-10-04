@@ -2,7 +2,7 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Source Prezto
+# Source prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
@@ -32,7 +32,7 @@ compdef _azure_complete azure
 # Don't ask before executing rm * or rm path/*
 setopt rmstarsilent
 
-# 10 second wait if you do something that will delete everything
+# 10 second wait before doing something that will delete everything
 #setopt RM_STAR_WAIT
 
 #
@@ -41,10 +41,9 @@ setopt rmstarsilent
 #alias server="open http://localhost:8000 && python -m SimpleHTTPServer"
 alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"                                                                                              # List TODO/FIX lines from the current project
-#ack -i -o --group --color --sort-files "(TODO|FIX(ME)?|OPTIMIZE|BUG)(\(\w+\))?: (.*)" $(ls -A) | perl -pe "s/:/\t/" | perl -pe "s/\t(\w+)(\(\w+\))?:(.*)/\t\$1:\$3 \$2/"
 alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
-
 alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
+
 function java_use() {
   export JAVA_HOME=$(/usr/libexec/java_home -v $1)
   export PATH=$JAVA_HOME/bin:$PATH
@@ -82,11 +81,22 @@ fi
 
 unalias rm
 unalias gb
-alias ax="chmod a+x"                                # Make executable
+
 alias lt='ls -lAht && echo "------ OLDEST ------"'
 alias ltr='ls -lAhtr && echo "------ NEWEST ------"'
-alias clip="nc localhost 8377"
+alias clip="nc localhost 8377"                                  # Used for piping output to clipper
 alias purge-dsstore="find . -name '*.DS_Store' -type f -delete"
+alias z='fasd_cd -d'
+alias flush-dns="sudo killall -HUP mDNSResponder"
+alias ans=ansible
+alias apb=ansible-playbook
+alias agx=ansible-galaxy
+alias anv=ansible-vault
+alias m="${DOTFILES}/share/m-cli/m"
+alias mvim="reattach-to-user-namespace mvim"                    # Fix for macOS Sierra
+alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
+#alias flush-dns="sudo discoveryutil udnsflushcaches"
+
 
 #
 # Functions
@@ -113,14 +123,15 @@ function tmpd() {
   fi
 }
 
-# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
+# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for
+# compression
 function targz() {
   local tmpFile="${@%/}.tar"
   tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
 
   size=$(
-  stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
-  stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
+    stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
+    stat -c"%s" "${tmpFile}" 2> /dev/null  # GNU `stat`
   )
 
   local cmd=""
@@ -141,10 +152,10 @@ function targz() {
   echo "${tmpFile}.gz created successfully."
 }
 
-# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
-# the `.git` directory, listing directories first. The output gets piped into
-# `less` with options to preserve color and line numbers, unless the output is
-# small enough for one screen.
+# `tre` is a shorthand for `tree` with hidden files and color enabled,
+# ignoring the `.git` directory, listing directories first. The output
+# gets piped into `less` with options to preserve color and line
+# numbers, unless the output is small enough for one screen.
 function tre() {
   tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
 }

@@ -7,7 +7,7 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-export DOTFILES=$HOME/.dotfiles
+export DOTFILES=${HOME}/.dotfiles
 
 #
 # OS Specific Settings
@@ -15,16 +15,19 @@ export DOTFILES=$HOME/.dotfiles
 
 case $OSTYPE in
   (darwin*)
-    eval "$("$HOME"/.dotfiles/bin/valet init -)"
-    export JAVA_HOME=$(/usr/libexec/java_home)
+    eval "$("${HOME}"/.dotfiles/bin/valet init -)"                                 # Setup completion for valet
+
+    export JAVA_HOME=$(/usr/libexec/java_home)                                     # Set JAVA_HOME
     export EDITOR='vim'
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
-    [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
     export CHEATCOLORS=true
     export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+    [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
+
+    # Setup GPG Agent
     if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
       source ~/.gnupg/.gpg-agent-info
       export GPG_AGENT_INFO
@@ -32,23 +35,10 @@ case $OSTYPE in
       eval $(/usr/local/bin/gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
     fi
 
-    #
-    # Aliases
-    #
-    alias z='fasd_cd -d'
-    #alias flush-dns="sudo discoveryutil udnsflushcaches"
-    alias flush-dns="sudo killall -HUP mDNSResponder"
-    alias ans=ansible
-    alias apb=ansible-playbook
-    alias agx=ansible-galaxy
-    alias anv=ansible-vault
-    alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
-    alias m="$DOTFILES/share/m-cli/m"
-
   ;;
   (linux*)
     eval "$("$HOME"/.dotfiles/bin/valet init -)"
-    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
+    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD         # Set colors for ls
     export PATH=$PATH:/sbin:/usr/sbin
   ;;
   (solaris*)
@@ -56,14 +46,10 @@ case $OSTYPE in
     export PATH=$PATH:/usr/cluster/bin
     export PATH=$PATH:/sbin
   ;;
-  (cygwin*)
-    alias vim="/c/Program\ Files/vim/vim74/gvim.exe &"
-    alias exp="explorer"
-  ;;
 esac
 
 #
-# Use .localrc for settings specific to the local system
+# Use .localrc for local system specific settings
 #
 
 if [[ -f ~/.localrc ]]; then
