@@ -1189,6 +1189,13 @@
       " Map Command+Shift+P to preview the document in Marked
       nnoremap <D-P> :silent !open -a 'Marked 2.app' '%:p'<cr>
 
+      " Open the document in TableFlip
+      function! TableFlip()
+        execute 'silent ! open -a TableFlip.app %:p'
+      endfunction
+
+      command! TableFlip :call TableFlip()
+
       " Create a pdf using pandoc and open it
       function! CreatePDF()
         "execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
