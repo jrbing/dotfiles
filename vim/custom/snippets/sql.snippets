@@ -43,4 +43,22 @@ update ${1:table}
 	where ${4:condition};$0
 endsnippet
 
+snippet header "script header"
+--- ############################################################################
+--- #
+--- # Script    : ${1:script_name}
+--- # Usage     : @${2:script_usage}
+--- #
+--- ############################################################################
+
+set echo off
+set timing off
+set verify off
+set serveroutput on
+-- {OFF|ENTRY|INTERMED[IATE]|FULL} Checks to make sure that SQL statements conform to the ANSI/ISO SQL92 standard
+--set flagger FULL
+whenever sqlerror exit failure
+$0
+endsnippet
+
 # vim:ft=snippets:
