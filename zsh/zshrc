@@ -66,6 +66,7 @@ export PSQL_EDITOR=vim
 
 # Oracle SQLcl
 export SQLPATH="${DOTFILES}/sql/oracle"
+export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
 export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 if [[ -d "/opt/oracle/sqlcl" ]]; then
   path+=('/opt/oracle/sqlcl/bin')
@@ -74,6 +75,9 @@ fi
 if [[ -d "/opt/oracle/tns" ]]; then
   export TNS_ADMIN=/opt/oracle/tns
 fi
+
+# SQLPlus
+alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
 
 #
 # Miscellaneous aliases
@@ -94,25 +98,12 @@ alias agx=ansible-galaxy
 alias anv=ansible-vault
 alias m="${DOTFILES}/share/m-cli/m"
 alias mvim="reattach-to-user-namespace mvim"                    # Fix for macOS Sierra
-alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
 #alias flush-dns="sudo discoveryutil udnsflushcaches"
 
 
 #
 # Functions
 #
-
-# Search for processes by keyword
-function any() {
-  emulate -L zsh
-  unsetopt KSH_ARRAYS
-  if [[ -z "$1" ]] ; then
-    echo "any - grep for process(es) by keyword" >&2
-    echo "Usage: any " >&2 ; return 1
-  else
-    ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
-  fi
-}
 
 # Make a temporary directory and enter it
 function tmpd() {
