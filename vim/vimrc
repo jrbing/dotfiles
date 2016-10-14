@@ -375,7 +375,6 @@
     nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
   endif
 
-
   " Function Keys {{{2
 
     " Remap help to escape
@@ -1105,6 +1104,13 @@
   endfunction
 
   command! ToggleVerbose :call ToggleVerbose()
+
+  "Format current sql script
+  "function! SQLFormat()
+    "echo "format file test.sql test2.sql" | sql /nolog
+  "endfunction
+
+  "command! SQLFormat :call SQLFormat()
 
 " }}}
 
