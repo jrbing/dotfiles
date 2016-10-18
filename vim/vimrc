@@ -904,8 +904,8 @@
   "}}}
 
   " Sourcegraph {{{2
-    let g:SOURCEGRAPH_AUTO = "false"
-    nnoremap <F2> :GRAPH<CR>
+    "let g:SOURCEGRAPH_AUTO = "false"
+    "nnoremap <F2> :GRAPH<CR>
   "}}}
 
   " Codi {{{2
@@ -915,6 +915,10 @@
         "\ 'prompt': '^\(>>>\|\.\.\.\) ',
         "\ },
       "\ }
+  "}}}
+
+  " vim-terraform {{{2
+    let g:terraform_fmt_on_save = 1
   "}}}
 
 " }}}
