@@ -105,6 +105,12 @@ alias mvim="reattach-to-user-namespace mvim"                    # Fix for macOS 
 # Functions
 #
 
+# Generate a random password
+function randpw() {
+  #openssl rand -base64 16
+  openssl rand -base64 16 |md5 |head -c16;echo
+}
+
 # Make a temporary directory and enter it
 function tmpd() {
   if [[ $# -eq 0 ]]; then
