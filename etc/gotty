@@ -1,0 +1,25 @@
+// IP to bind to
+// address = "127.0.0.1"
+
+// Port to listen on
+port = "8080"
+
+// Allow clients to write to the tty
+permit_write = false
+
+// Maximum connections
+max_connection = 1
+
+// Client terminal preferences
+preferences {
+
+  background_color = "rgb(45, 45, 45)"
+  foreground_color = "rgb(239, 225, 191)"
+  font_family = "'Source Code Pro', monospace"
+  user_css = "https://fonts.googleapis.com/css?family=Source+Code+Pro"
+  font_size = 15
+
+  // font_family = "'DejaVu Sans Mono', 'Everson Mono', FreeMono, 'Menlo', 'Terminal', monospace"
+  // font_smoothing = "antialiased"
+
+}
