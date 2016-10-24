@@ -370,8 +370,11 @@
   map zl zL
   map zh zH
 
+  " Close all buffers not open in a tab
+  nnoremap <leader>wo :Wipeout<CR>
+
+  " Forward clipboard contents to clipper
   if g:OSX()
-    " Forward clipboard contents to clipper
     nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
   endif
 
