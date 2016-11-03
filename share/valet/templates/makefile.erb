@@ -3,7 +3,6 @@
 #===============================================================================
 # Cheat Sheet - http://www.cheatography.com/bavo-van-achte/cheat-sheets/gnumake/
 # Refcard - http://www.schacherer.de/frank/technology/tools/make.html
-# Make for frontend development - http://www.sitepoint.com/using-gnu-make-front-end-development-build-tool/
 
 # Automatic Variables
 # -------------------
@@ -27,18 +26,18 @@ syncmessage  = 'Synchronizing local files to remote host'
 
 all: update submodules
 
-setup:
+setup: ## Setup necessary project prerequisites
 	mkdir vendor
 	mkdir lib
 
-submodules:
+submodules: ## Update git submodules
 	@git submodule foreach 'git fetch origin; \
 		git checkout master; \
 		git reset --hard origin/master; \
 		git submodule update --recursive; \
 		git clean -dfx'
 
-update:
+update: ## Pull the most recent project changes from origin
 	git pull --rebase
 
 drysync:
@@ -53,3 +52,6 @@ sync:
 
 test:
 	@echo "$(currentdir)"
+
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
