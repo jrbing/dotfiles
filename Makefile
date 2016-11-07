@@ -10,9 +10,9 @@ GPG_FILES := $(shell cd $(dotfiles)/gnupg; ls)
 GIT_FILES := $(shell cd $(dotfiles)/git; ls)
 ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
 
-all: update submodules link
+all: help
 
-link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-gpg
+link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-gpg  ## Link all dotfiles to their respective locations
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/tmux.conf .tmux.conf
@@ -49,13 +49,16 @@ link-launchd:
 link-cheat:
 	@cd ~ && ln -nfs $(dotfiles)/cheat/ .cheat;
 
-check-dead:
+check-dead:  ## Check for dead symlinks
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 
-clean-dead:
+clean-dead:  ## Cleanup dead symlinks
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
 
-submodules:
+clean:  ## Remove all temporary and backup files
+	@git clean -dfx
+
+submodules:  ## Update all submodule references
 	@git submodule foreach 'git fetch origin; \
 			git checkout master; \
 			git reset --hard origin/master; \
@@ -67,7 +70,10 @@ iterm-integration:
 		curl -L https://iterm2.com/misc/zsh_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.zsh; \
 		curl -L https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat > $(dotfiles)/iterm/imgcat
 
-update:
-	git pull --rebase
+update:  ## Update the dotfiles repo
+	@git pull --rebase
 
-.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg check-dead clean-dead submodules iterm-integration update
+help:  ## Show this help menu
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg check-dead clean-dead submodules iterm-integration update help
