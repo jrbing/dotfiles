@@ -29,14 +29,17 @@ bincheck "${req_progs[*]}"
 readonly MOS_USERNAME=${MOS_USERNAME:=x}
 readonly MOS_PASSWORD=${MOS_PASSWORD:=x}
 
+readonly ARGS=( "$@" )
+
 if [[ $# -eq 0 ]]; then
   echoerror "Patch ID must be specified"
   exit 1
 fi
 readonly PATCH_ID="$1"
+readonly PROGNAME="$(basename $0)"
+readonly OUTPUTDIR="$(pwd)"
 
 readonly TMPDIR="$(mktemp -d)"
-readonly OUTPUTDIR="$(pwd)"
 readonly COOKIE_FILE="${TMPDIR}/$$.cookies"
 readonly AUTH_LOGFILE="${TMPDIR}/auth-wgetlog-$(date +%m-%d-%y-%H:%M).log"
 readonly SEARCH_LOGFILE="${TMPDIR}/search-wgetlog-$(date +%m-%d-%y-%H:%M).log"
@@ -53,6 +56,36 @@ fi
 ###############
 #  Functions  #
 ###############
+
+function usage() {
+	cat <<- EOF
+	usage: $PROGNAME options patch_id
+
+	Program deletes files from filesystems to release space.
+	It gets config file that define fileystem paths to work on, and whitelist rules to
+	keep certain files.
+
+	OPTIONS:
+	   -t --test                run unit test to check the program
+	   -v --verbose             Verbose. You can specify more then one -v to have more verbose
+	   -x --debug               debug
+	   -h --help                show this help
+	      --help-config         configuration help
+
+	Examples:
+	   Run all tests:
+	   $PROGNAME --test all
+
+	   Run specific test:
+	   $PROGNAME --test test_string.sh
+
+	   Run:
+	   $PROGNAME --config /path/to/config/$PROGNAME.conf
+
+	   Just show what you are going to do:
+	   $PROGNAME -vn -c /path/to/config/$PROGNAME.conf
+	EOF
+}
 
 function create_authorization_cookie() {
   echodebug "Authenticating and generating cookie file"
@@ -111,6 +144,54 @@ function download_patch_files() {
     #--file-allocation=none \
 }
 
+function cmdline() {
+  local arg=
+  for arg
+  do
+    local delim=""
+    case "$arg" in
+      #translate --gnu-long-options to -g (short options)
+      --help)           args="${args}-h ";;
+      --verbose)        args="${args}-v ";;
+      --debug)          args="${args}-x ";;
+      #pass through anything else
+      *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+        args="${args}${delim}${arg}${delim} ";;
+    esac
+  done
+
+  #Reset the positional parameters to the short options
+  eval set -- "$args"
+
+  while getopts "hvxt:c:" OPTION
+  do
+    case $OPTION in
+    v)
+      readonly VERBOSE=1
+      ;;
+    h)
+      usage
+      exit 0
+      ;;
+    x)
+      readonly DEBUG='-x'
+      set -x
+      ;;
+    t)
+      #RUN_TESTS=$OPTARG
+      verbose VINFO "Running tests"
+      ;;
+    c)
+      readonly CONFIG_FILE=$OPTARG
+      ;;
+    n)
+      readonly PRETEND=1
+      ;;
+    esac
+  done
+}
+
+
 function cleanup_before_exit () {
   if [[ -n ${DEBUG+x} ]]; then
     echodebug "Temporary files and logs can be found in ${TMPDIR}"
@@ -125,4 +206,9 @@ trap cleanup_before_exit EXIT
 #  Main  #
 ##########
 
-download_patch_files
+main() {
+  cmdline "${ARGS[@]}"
+  #download_patch_files
+}
+
+main
