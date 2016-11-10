@@ -1,0 +1,6 @@
+
+# Replace all spaces in filenames with underscores
+zmv '* *' '$f:gs/ /_'
+
+# Preview changing a file extension (-n acts as a dry-run flag)
+zmv -n '(*).out' '$1.log'
