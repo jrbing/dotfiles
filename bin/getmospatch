@@ -5,7 +5,7 @@
 #
 #   FILE: getmospatch
 #
-#   DESCRIPTION: Download the specified MOS patches to the current directory
+#   DESCRIPTION: Download the specified MOS patch to the current directory
 #
 #===============================================================================
 
@@ -26,27 +26,14 @@ bincheck "${req_progs[*]}"
 #  Variables  #
 ###############
 
-readonly MOS_USERNAME=${MOS_USERNAME:=x}
-readonly MOS_PASSWORD=${MOS_PASSWORD:=x}
-
 readonly ARGS=( "$@" )
 
-if [[ $# -eq 0 ]]; then
-  echoerror "Patch ID must be specified"
-  exit 1
-fi
-readonly PATCH_ID="$1"
+#readonly PATCH_ID="$1"
 readonly PROGNAME="$(basename $0)"
 readonly OUTPUTDIR="$(pwd)"
 
-readonly TMPDIR="$(mktemp -d)"
-readonly COOKIE_FILE="${TMPDIR}/$$.cookies"
-readonly AUTH_LOGFILE="${TMPDIR}/auth-wgetlog-$(date +%m-%d-%y-%H:%M).log"
-readonly SEARCH_LOGFILE="${TMPDIR}/search-wgetlog-$(date +%m-%d-%y-%H:%M).log"
-readonly DOWNLOAD_LOGFILE="${TMPDIR}/download-aria2log-$(date +%m-%d-%y-%H:%M).log"
-readonly AUTH_OUTPUT="${TMPDIR}/auth_output"
-readonly PATCH_SEARCH_OUTPUT="${TMPDIR}/patch_search_output"
-readonly PATCH_FILE_LIST="${TMPDIR}/patch_file_list"
+readonly MOS_USERNAME=${MOS_USERNAME:=x}
+readonly MOS_PASSWORD=${MOS_PASSWORD:=x}
 
 if [[ "${MOS_USERNAME}" == "x" ]] || [[ "${MOS_PASSWORD}" == "x" ]]; then
   echoerror "Both MOS_USERNAME and MOS_PASSWORD environment variables need to be set"
@@ -59,31 +46,18 @@ fi
 
 function usage() {
 	cat <<- EOF
-	usage: $PROGNAME options patch_id
+	usage: $PROGNAME [options] patch_id
 
-	Program deletes files from filesystems to release space.
-	It gets config file that define fileystem paths to work on, and whitelist rules to
-	keep certain files.
+	Download the specified patch files from MOS
 
 	OPTIONS:
-	   -t --test                run unit test to check the program
-	   -v --verbose             Verbose. You can specify more then one -v to have more verbose
-	   -x --debug               debug
+	   -v --verbose             enable verbose output
+	   -x --debug               enable debug output
 	   -h --help                show this help
-	      --help-config         configuration help
 
 	Examples:
-	   Run all tests:
-	   $PROGNAME --test all
-
-	   Run specific test:
-	   $PROGNAME --test test_string.sh
-
 	   Run:
-	   $PROGNAME --config /path/to/config/$PROGNAME.conf
-
-	   Just show what you are going to do:
-	   $PROGNAME -vn -c /path/to/config/$PROGNAME.conf
+	   $PROGNAME -v 98765432
 	EOF
 }
 
@@ -127,6 +101,15 @@ function extract_download_links() {
 }
 
 function download_patch_files() {
+  readonly PATCHTMPDIR="$(mktemp -d)"
+  readonly COOKIE_FILE="${PATCHTMPDIR}/$$.cookies"
+  readonly AUTH_LOGFILE="${PATCHTMPDIR}/auth-wgetlog-$(date +%m-%d-%y-%H:%M).log"
+  readonly SEARCH_LOGFILE="${PATCHTMPDIR}/search-wgetlog-$(date +%m-%d-%y-%H:%M).log"
+  readonly DOWNLOAD_LOGFILE="${PATCHTMPDIR}/download-aria2log-$(date +%m-%d-%y-%H:%M).log"
+  readonly AUTH_OUTPUT="${PATCHTMPDIR}/auth_output"
+  readonly PATCH_SEARCH_OUTPUT="${PATCHTMPDIR}/patch_search_output"
+  readonly PATCH_FILE_LIST="${PATCHTMPDIR}/patch_file_list"
+
   create_authorization_cookie
   download_search_results
   extract_download_links
@@ -145,8 +128,7 @@ function download_patch_files() {
 }
 
 function cmdline() {
-  local arg=
-  for arg
+  for arg in
   do
     local delim=""
     case "$arg" in
@@ -163,50 +145,45 @@ function cmdline() {
   #Reset the positional parameters to the short options
   eval set -- "$args"
 
-  while getopts "hvxt:c:" OPTION
+  while getopts "vhx" OPTION
   do
     case $OPTION in
     v)
-      readonly VERBOSE=1
+      readonly VERBOSE=true
       ;;
     h)
       usage
       exit 0
       ;;
     x)
-      readonly DEBUG='-x'
-      set -x
-      ;;
-    t)
-      #RUN_TESTS=$OPTARG
-      verbose VINFO "Running tests"
-      ;;
-    c)
-      readonly CONFIG_FILE=$OPTARG
-      ;;
-    n)
-      readonly PRETEND=1
+      readonly DEBUG='true'
       ;;
     esac
   done
 }
 
 
-function cleanup_before_exit () {
-  if [[ -n ${DEBUG+x} ]]; then
-    echodebug "Temporary files and logs can be found in ${TMPDIR}"
-  else
-    echoinfo "Cleaning up temporary files"
-    rm -rf "${TMPDIR}"
-  fi
-}
-trap cleanup_before_exit EXIT
+#function cleanup_before_exit () {
+  #if [[ -n ${DEBUG+x} ]]; then
+    #echodebug "Temporary files and logs can be found in ${PATCHTMPDIR}"
+  #else
+    #echoinfo "Cleaning up temporary files"
+    #rm -rf "${PATCHTMPDIR}"
+  #fi
+#}
+#trap cleanup_before_exit EXIT
 
 ##########
 #  Main  #
 ##########
 
+if [[ $# -eq 0 ]]; then
+  echoerror "Patch ID must be specified"
+  exit 1
+fi
+
 main() {
+  echo "${ARGS[@]}"
   cmdline "${ARGS[@]}"
   #download_patch_files
 }
