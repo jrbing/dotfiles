@@ -28,7 +28,6 @@ bincheck "${req_progs[*]}"
 
 readonly ARGS=( "$@" )
 
-#readonly PATCH_ID="$1"
 readonly PROGNAME="$(basename $0)"
 readonly OUTPUTDIR="$(pwd)"
 
@@ -51,13 +50,14 @@ function usage() {
 	Download the specified patch files from MOS
 
 	OPTIONS:
-	   -v --verbose             enable verbose output
-	   -x --debug               enable debug output
-	   -h --help                show this help
+	   -v              enable verbose output
+	   -x              enable debug output
+	   -h              show this help
 
 	Examples:
 	   Run:
 	   $PROGNAME -v 98765432
+
 	EOF
 }
 
@@ -113,6 +113,7 @@ function download_patch_files() {
   create_authorization_cookie
   download_search_results
   extract_download_links
+
   echoinfo "Downloading patch files"
   aria2c \
     --input-file="${PATCH_FILE_LIST}" \
@@ -127,65 +128,52 @@ function download_patch_files() {
     #--file-allocation=none \
 }
 
-function cmdline() {
-  for arg in
-  do
-    local delim=""
-    case "$arg" in
-      #translate --gnu-long-options to -g (short options)
-      --help)           args="${args}-h ";;
-      --verbose)        args="${args}-v ";;
-      --debug)          args="${args}-x ";;
-      #pass through anything else
-      *) [[ "${arg:0:1}" == "-" ]] || delim="\""
-        args="${args}${delim}${arg}${delim} ";;
-    esac
-  done
-
-  #Reset the positional parameters to the short options
-  eval set -- "$args"
-
-  while getopts "vhx" OPTION
-  do
-    case $OPTION in
-    v)
-      readonly VERBOSE=true
-      ;;
-    h)
-      usage
+function cleanup_before_exit () {
+  if [[ -n ${DEBUG+x} ]]; then
+    echodebug "Temporary files and logs can be found in ${PATCHTMPDIR}"
+  else
+    if [[ -z "${PATCHTMPDIR+x}" ]]; then
       exit 0
-      ;;
-    x)
-      readonly DEBUG='true'
-      ;;
-    esac
-  done
+    else
+      echoinfo "Cleaning up temporary files"
+      rm -rf "${PATCHTMPDIR}"
+    fi
+  fi
 }
-
-
-#function cleanup_before_exit () {
-  #if [[ -n ${DEBUG+x} ]]; then
-    #echodebug "Temporary files and logs can be found in ${PATCHTMPDIR}"
-  #else
-    #echoinfo "Cleaning up temporary files"
-    #rm -rf "${PATCHTMPDIR}"
-  #fi
-#}
-#trap cleanup_before_exit EXIT
+trap cleanup_before_exit EXIT
 
 ##########
 #  Main  #
 ##########
 
-if [[ $# -eq 0 ]]; then
-  echoerror "Patch ID must be specified"
-  exit 1
-fi
-
 main() {
-  echo "${ARGS[@]}"
-  cmdline "${ARGS[@]}"
-  #download_patch_files
+
+  while getopts "hvx" opt; do
+    case $opt in
+      h)
+        usage
+        exit 0
+        ;;
+      v)
+        readonly VERBOSE=true
+        shift $(($OPTIND - 1))
+        ;;
+      x)
+        readonly DEBUG=true
+        shift $(($OPTIND - 1))
+        ;;
+    esac
+  done
+
+
+  if [[ $# -eq 0 ]]; then
+    echoerror "Patch ID must be specified"
+    exit 1
+  else
+    readonly PATCH_ID="$1"
+    download_patch_files
+  fi
+
 }
 
-main
+main "${ARGS[@]}"
