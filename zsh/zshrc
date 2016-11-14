@@ -25,6 +25,8 @@ _azure_complete() {
 }
 compdef _azure_complete azure
 
+[[ -f ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
+
 #
 # ZSH Options
 #
