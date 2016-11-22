@@ -512,6 +512,12 @@
     augroup END
   "}}}
 
+  " direnv {{{2
+    augroup direnv
+      autocmd BufRead,BufNewFile .envrc set filetype=sh
+    augroup END
+  "}}}
+
   " Miscellaneous {{{2
     augroup miscellaneous
       autocmd!
