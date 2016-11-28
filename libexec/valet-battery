@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Usage: valet battery
+# Summary: Show current battery statistics
+# Help: Use this command to show current stats on remaining battery
+
+# Set the script to exit immediately on error
+set -e
+
+# Source generic bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+case $(uname) in
+  (Darwin)
+    battery_power=$(pmset -g batt)
+    printf "${GC}%s \n\n${EC}" "$battery_power"
+  ;;
+  (Linux)
+    PERCENTAGE=$(upower -i "$(upower -e | grep battery)" |
+    awk -F: '/percentage/{gsub(/^\s+|[\s%]+$/, "", $2); print $2}')
+    TIME_REMAINING=$(upower -i "$(upower -e | grep battery)" |
+    awk -F: '/time to empty/{gsub(/^\s+|\s+$/, "", $2); print $2}')
+    if [[ "$PERCENTAGE" -gt "30" ]]; then
+      PERCENTAGE_COLOR=$GC
+    elif [[ "$PERCENTAGE" -gt "10" ]]; then
+      PERCENTAGE_COLOR=$YC
+    else
+      PERCENTAGE_COLOR=$RC
+    fi
+    printf "${PERCENTAGE_COLOR}${PERCENTAGE}%%${EC} (${TIME_REMAINING} left)\n"
+  ;;
+esac
