@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: valet weather
+# Summary: Show weather conditions
+# Help: Use this command to display current weather conditions
+
+# Set the script to exit immediately on error
+set -e
+
+# Set the zip code
+readonly zip_code="32174"
+
+# Source generic bash functions
+# shellcheck disable=1090
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+function display_weather_conditions() {
+  echoinfo "Getting current weather conditions for $zip_code"
+  #curl -s wttr.in/"$zip_code" | head -n 7 && printf "\n"
+  curl -s wttr.in/"$zip_code"
+}
+
+display_weather_conditions
