@@ -78,6 +78,12 @@ if [[ -d "/opt/oracle/tns" ]]; then
   export TNS_ADMIN=/opt/oracle/tns
 fi
 
+# Rundeck CLI
+if [[ -d "/opt/rundeck" ]]; then
+  #TODO: dynamically get the name of the jar file
+  alias rd='java -jar rundeck-cli-1.0.0-all.jar'
+fi
+
 # SQLPlus
 alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
 
