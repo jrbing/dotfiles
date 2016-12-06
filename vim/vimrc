@@ -267,9 +267,6 @@
   " Set the tab label to equal the file name
   set guitablabel=%t
 
-  " Change the menu name for the Align plugin
-  let g:DrChipTopLvlMenu='Plugin.'
-
 " }}}
 
 " Search {{{1
@@ -300,7 +297,7 @@
 
 " }}}
 
-" Mappings {{{1
+" Key Mappings {{{1
 
   " Bubble single lines
   nmap <C-Up> [e
@@ -930,6 +927,12 @@
     let g:terraform_fmt_on_save = 1
   "}}}
 
+  " Align {{{2
+    " Change the menu name
+    let g:DrChipTopLvlMenu='Plugin.'
+  "}}}
+
+
 " }}}
 
 " Utility Functions {{{1
@@ -1023,16 +1026,13 @@
     setlocal softtabstop=8
     setlocal textwidth=80
     setlocal noexpandtab
-
     " Indention
     setlocal cindent
     setlocal formatoptions=tcqlron
     setlocal cinoptions=:0,l1,t0,g0,(0
-
     " Keywords
     syn keyword cOperator likely unlikely
     syn keyword cType u8 u16 u32 u64 s8 s16 s32 s64
-
     " Highlighting
     highlight default link LinuxError ErrorMsg
     syn match LinuxError / \+\ze\t/     " spaces before tab
@@ -1065,7 +1065,7 @@
     setlocal cursorline
 
     redir => l:old_hi
-        silent execute 'hi CursorLine'
+      silent execute 'hi CursorLine'
     redir END
     let l:old_hi = split(l:old_hi, '\n')[0]
     let l:old_hi = substitute(l:old_hi, 'xxx', '', '')
