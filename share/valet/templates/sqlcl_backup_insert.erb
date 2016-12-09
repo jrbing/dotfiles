@@ -14,7 +14,7 @@ set serveroutput on
 set null ' '
 whenever sqlerror exit failure
 
-spool <%= @record %>_backup.csv;
+spool <%= @record %>_backup_data.sql;
 
 select * from <%= @record %>
 WHERE ... ;
