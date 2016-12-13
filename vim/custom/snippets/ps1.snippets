@@ -1,0 +1,56 @@
+priority 0
+
+snippet class
+class {
+	[string] ${0:FirstName}
+}
+endsnippet
+
+snippet fun
+function ${1:name} {
+	Param (
+		[Parameter(Mandatory = $true)][string] $Param1
+	)
+	Begin {
+		# Initialization
+	}
+	Process {
+		Try {
+		# Logic
+		}
+		Catch {
+			Log-Error -Message $_.Exception -ExitGracefully $True
+			Break
+		}
+	}
+	End {
+	}
+}$0
+endsnippet
+
+snippet splatting
+$Params = @{
+	${1:Param1} = 'Value1'
+	${2:Param2} = 'Value2'
+}
+${3:CommandName}$0
+endsnippet
+
+snippet enum
+enum ${1:name} {
+	${2:item1}
+	${3:item2}
+}$0
+endsnippet
+
+snippet if
+if (${0:condition}) {
+	${1:statement}
+}
+endsnippet
+
+snippet while
+while (${0:condition}) {
+	${1:statement}
+}
+endsnippet
