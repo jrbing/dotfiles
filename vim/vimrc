@@ -498,6 +498,7 @@
     augroup ft_powershell
       autocmd!
       autocmd FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+      autocmd FileType ps1  let delimitMate_quotes = "\" '"
     augroup END
   "}}}
 
