@@ -1,25 +1,28 @@
 priority 0
 
 snippet class
-class {
+Class {
 	[string] ${0:FirstName}
 }
 endsnippet
 
 snippet fun
-function ${1:name} {
+Function ${1:name} {
+	[CmdletBinding()]
 	Param (
 		[Parameter(Mandatory = $true)][string] $Param1
 	)
 	Begin {
 		# Initialization
+		Write-Debug -Message "$($MyInvocation.MyCommand.Name):: Function started"
 	}
 	Process {
 		Try {
 		# Logic
+		Write-Verbose -Message "$($MyInvocation.MyCommand.Name):: Running"
 		}
 		Catch {
-			Log-Error -Message $_.Exception -ExitGracefully $True
+			Write-Error -Message $_.Exception
 			Break
 		}
 	}

@@ -12,7 +12,7 @@ ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
 
 all: help
 
-link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-gpg  ## Link all dotfiles to their respective locations
+link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-gpg link-powershell  ## Link all dotfiles to their respective locations
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/tmux.conf .tmux.conf
@@ -49,6 +49,10 @@ link-launchd:
 link-cheat:
 	@cd ~ && ln -nfs $(dotfiles)/cheat/ .cheat;
 
+link-powershell:
+	@cd ~ && ln -nfs $(dotfiles)/powershell/profile.ps1 ~/.config/powershell/profile.ps1;
+	@cd ~ && ln -nfs $(dotfiles)/powershell/profile.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1;
+
 check-dead:  ## Check for dead symlinks
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 
@@ -70,10 +74,10 @@ iterm-integration:
 		curl -L https://iterm2.com/misc/zsh_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.zsh; \
 		curl -L https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat > $(dotfiles)/iterm/imgcat
 
-update:  ## Update the dotfiles repo
+update:  ## Pull updates from remote
 	@git pull --rebase
 
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg check-dead clean-dead submodules iterm-integration update help
+.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg link-powershell check-dead clean-dead submodules iterm-integration update help
