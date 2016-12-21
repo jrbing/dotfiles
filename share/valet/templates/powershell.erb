@@ -24,8 +24,10 @@
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
-$ErrorActionPreference = "SilentlyContinue"
+# Valid values: "Stop", "Inquire", "Continue", "Suspend", "SilentlyContinue"
+$ErrorActionPreference = "Inquire"
 $DebugPreference = "Continue"
+$VerbosePreference = "Continue"
 
 #----------------------------------------------------------[Declarations]----------------------------------------------------------
 
