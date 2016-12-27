@@ -1,4 +1,4 @@
-#requires -version 4
+#Requires -Version 4
 <#
 
     .SYNOPSIS
@@ -7,13 +7,13 @@
     .DESCRIPTION
         <Brief description of script>
 
-    .PARAMETER <Parameter_Name>
+    .PARAMETER OptionOne
         <Brief description of parameter input required. Repeat this attribute if required>
 
     .NOTES
         Version:        1.0
         Author:         JR Bing
-        Creation Date:  <%= @date %>
+        Creation Date:  
         Purpose/Change: Initial script development
 
     .EXAMPLE
@@ -21,22 +21,32 @@
 
 #>
 
+#-----------------------------------------------------------[Parameters]----------------------------------------------------------
 
-#---------------------------------------------------------[Initialisations]--------------------------------------------------------
+[CmdletBinding()]
+Param (
+    [Parameter(Mandatory = $true, HelpMessage="Example use of this attribute")][String]$OptionOne
+)
+
+#---------------------------------------------------------[Initialization]--------------------------------------------------------
 
 # Valid values: "Stop", "Inquire", "Continue", "Suspend", "SilentlyContinue"
-$ErrorActionPreference = "Inquire"
+$ErrorActionPreference = "Stop"
 $DebugPreference = "Continue"
 $VerbosePreference = "Continue"
 
-#----------------------------------------------------------[Declarations]----------------------------------------------------------
+#Import Modules
 
-#$sScriptVersion = "1.0"
+#----------------------------------------------------------[Declarations]---------------------------------------------------------
 
-#-----------------------------------------------------------[Functions]------------------------------------------------------------
-#
+#Global Declarations go here
+
+#-----------------------------------------------------------[Functions]-----------------------------------------------------------
+
 Function Log-Info {
-    Param ([Parameter(Mandatory=$true)][string]$Message)
+    Param (
+        [Parameter(Mandatory=$true)][string]$Message
+    )
     Process {
         Write-Host "INFO: $Message  " -Fore DarkYellow
     }
@@ -44,9 +54,9 @@ Function Log-Info {
 
 Function Log-Error {
     Param (
-            [Parameter(Mandatory=$true)][string]$Message,
-            [Parameter(Mandatory=$false)][boolean]$ExitGracefully
-          )
+        [Parameter(Mandatory=$true)][string]$Message,
+        [Parameter(Mandatory=$false)][boolean]$ExitGracefully
+    )
     Process {
         Write-Warning -Message "Error: An error has occurred [$ErrorDesc]."
         If ($ExitGracefully -eq $True){
@@ -76,7 +86,6 @@ Function Example-Function{
     }
 }
 
-#-----------------------------------------------------------[Execution]------------------------------------------------------------
+#-----------------------------------------------------------[Execution]-----------------------------------------------------------
 
-# Script execution goes here
 Example-Function

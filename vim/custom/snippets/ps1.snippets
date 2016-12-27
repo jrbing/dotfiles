@@ -18,8 +18,8 @@ Function ${1:name} {
 	}
 	Process {
 		Try {
-		# Logic
-		Write-Verbose -Message "$($MyInvocation.MyCommand.Name):: Running"
+			# Logic
+			Write-Verbose -Message "$($MyInvocation.MyCommand.Name):: Running"
 		}
 		Catch {
 			Write-Error -Message $_.Exception
