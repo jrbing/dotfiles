@@ -65,3 +65,15 @@ While (${1:condition}) {
 	${2:statement}
 }$0
 endsnippet
+
+snippet filtersort
+${1:command} | Where-Object -FilterScript { $PSItem.${2:property} -${3:operator} '${4:expression}' } | Sort-Object -Property ${5:sortproperty}$0
+endsnippet
+
+snippet loginfo
+Log-Info -Message "${1:message}"$0
+endsnippet
+
+snippet logerror
+Log-Error -Message "${1:message}"$0 -ExitGracefully False
+endsnippet
