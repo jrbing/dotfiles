@@ -62,7 +62,7 @@ function append_bom() {
       echoinfo "$file already has BOM, skipping"
     else
       echoinfo "Prepending BOM to $file"
-      ( mv "${file}" "${file}"~ && $UCONV -f utf-8 -t utf-8 --add-signature < "${file}~" > "${file}" ) || ( echoerror "Error processing $file"; exit 1 )
+      ( mv "${file}" "${file}~" && $UCONV -f utf-8 -t utf-8 --add-signature < "${file}~" > "${file}" && rm "${file}~" ) || ( echoerror "Error processing $file"; exit 1 )
     fi
   done
 }
