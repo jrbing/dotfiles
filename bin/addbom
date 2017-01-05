@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#          FILE: addbom.sh
+#
+#         USAGE: ./addbom.sh
+#
+#   DESCRIPTION:
+#
+#===============================================================================
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+# Note: this only works on macOS
+
+# Source bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+readonly PROGNAME="$(basename $0)"
+readonly UCONV=$(find /usr/local/Cellar/icu4c -type f -name "uconv")
+readonly ARGS=( "$@" )
+
+###############
+#  Functions  #
+###############
+
+function usage() {
+	cat <<- EOF
+	usage: $PROGNAME [options] file
+
+	Prepends a UTF-8 text file with a BOM if missing
+
+	OPTIONS:
+	   -v              enable verbose output
+	   -x              enable debug output
+	   -h              show this help
+
+	Examples:
+	   Run:
+	   $PROGNAME -v example.txt
+
+	EOF
+}
+
+function append_bom() {
+  for file in "$@"; do
+    echoinfo "Processing $file"
+
+    if [[ ! -f "$file" ]]; then
+      echoerror "$file is not a file"
+      exit 1
+    fi
+
+    TYPE=$(file - < "$file" | cut -d: -f2)
+
+    if echo "$TYPE" | grep -q '(with BOM)'; then
+      echoinfo "$file already has BOM, skipping"
+    else
+      echoinfo "Prepending BOM to $file"
+      ( mv "${file}" "${file}"~ && $UCONV -f utf-8 -t utf-8 --add-signature < "${file}~" > "${file}" ) || ( echoerror "Error processing $file"; exit 1 )
+    fi
+  done
+}
+
+
+##########
+#  Main  #
+##########
+
+main() {
+
+  while getopts "hvx" opt; do
+    case $opt in
+      h)
+        usage
+        exit 0
+        ;;
+      v)
+        readonly VERBOSE=true
+        shift $(($OPTIND - 1))
+        ;;
+      x)
+        readonly DEBUG=true
+        shift $(($OPTIND - 1))
+        ;;
+    esac
+  done
+
+
+  if [[ $# -eq 0 ]]; then
+    echoerror "Filename must be specified"
+    exit 1
+  else
+    append_bom "$@"
+  fi
+
+}
+
+main "${ARGS[@]}"
