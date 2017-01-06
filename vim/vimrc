@@ -39,6 +39,7 @@
   Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
   Plug 'justinmk/vim-sneak'
+  Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
   Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
