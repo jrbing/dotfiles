@@ -74,6 +74,7 @@
   Plug 'keith/swift.vim', { 'for': ['swift'] }
   Plug 'keith/tmux.vim'
   Plug 'hashivim/vim-terraform'
+  "Plug 'mustache/vim-mustache-handlebars'
   Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
   Plug 'pearofducks/ansible-vim', { 'for': ['ansible'] }
   Plug 'plsql.vim', { 'for': ['plsql'] }
@@ -94,7 +95,6 @@
     Plug 'fatih/vim-go'
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
     Plug 'metakirby5/codi.vim'
-    Plug 'mustache/vim-mustache-handlebars'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
     "Plug 'sourcegraph/sourcegraph-vim', { 'for': ['go'] }
@@ -755,7 +755,7 @@
     let g:syntastic_ruby_exec = expand('~/.rbenv/shims/ruby')
     let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
     let g:syntastic_java_javac_config_file_enabled = 1
-    let g:syntastic_vim_checkers = ['vint']
+    "let g:syntastic_vim_checkers = ['vint']
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_javascript_checkers = ['eslint']
     let g:syntastic_scss_checkers = ['sassc']
