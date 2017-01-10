@@ -1,31 +1,34 @@
 
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-If (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-}
-
-Import-Module PSCX
 Import-Module PSColor
-Import-Module posh-git
+Import-Module Pscx -arg @{
+    TextEditor = 'code.exe'
+    ModulesToImport = @{
+        CD                = $true
+        DirectoryServices = $false
+        FileSystem        = $true
+        GetHelp           = $false
+        Net               = $true
+        Prompt            = $false
+        TranscribeSession = $false
+        Utility           = $true
+        Vhd               = $false
+        Wmi               = $false
+    }
+}
 
 Function LoadProfile {
     . $Profile
 }
 
-# Add Custom modules directory to the autoload path.
-#$CustomModulePath = Join-Path -Path $ENV:HOME  -ChildPath ".dotfiles/powershell/modules"
-#if( -not $ENV:PSMODULEPATH.Contains($CustomModulePath) ){
-#$ENV:PSMODULEPATH = $ENV:PSMODULEPATH.Insert(0, "$CustomModulePath;")
-#}
 
 Function Global:Prompt {
-    $realCommandStatus = $?
-    $realLASTEXITCODE = $LASTEXITCODE
-    $lambda = [char]::ConvertFromUtf32(955)
-    $forwardArrow = [char]::ConvertFromUtf32(8594)
+    #PS $($executionContext.SessionState.Path.CurrentLocation)$('>' * ($nestedPromptLevel + 1))
+    $RealCommandStatus = $?
+    $RealLASTEXITCODE = $LASTEXITCODE
+    $Lambda = [char]::ConvertFromUtf32(955)
+    $ForwardArrow = [char]::ConvertFromUtf32(8594)
 
-    If ( $realCommandStatus -eq $True ) {
+    If ( $RealCommandStatus -eq $True ) {
         $EXIT="Green"
     } Else {
         $EXIT="Red"
@@ -34,17 +37,11 @@ Function Global:Prompt {
     $CurrentDirectory = Split-Path -Leaf -Path (Get-Location)
 
     Write-Host
-    Write-Host "$lambda " -ForegroundColor Gray -NoNewline
+    Write-Host "$Lambda " -ForegroundColor Gray -NoNewline
     Write-Host "$CurrentDirectory" -NoNewLine -ForegroundColor DarkGray
 
-    If(Get-GitStatus){
-        Write-Host " $forwardArrow $lambda " -ForegroundColor Yellow -NoNewline
-        Write-Host "git" -ForegroundColor Blue -NoNewline
-        checkGit(Get-Location)
-    }
-
-    Write-Host " $forwardArrow" -NoNewLine -ForegroundColor $EXIT
-    $Global:LASTEXITCODE = $realLASTEXITCODE
+    Write-Host " $ForwardArrow" -NoNewLine -ForegroundColor $EXIT
+    $Global:LASTEXITCODE = $RealLASTEXITCODE
     Return " "
 }
 
@@ -71,3 +68,10 @@ $Global:PSColor = @{
         Line       = @{ Color = 'White' }
     }
 }
+
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+If (Test-Path($ChocolateyProfile)) {
+    Import-Module "$ChocolateyProfile"
+}
+
