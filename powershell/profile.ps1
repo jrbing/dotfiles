@@ -25,19 +25,19 @@ Function Global:Prompt {
     $lambda = [char]::ConvertFromUtf32(955)
     $forwardArrow = [char]::ConvertFromUtf32(8594)
 
-    if ( $realCommandStatus -eq $True ) {
-      $EXIT="Yellow"
-    } else {
-      $EXIT="Red"
+    If ( $realCommandStatus -eq $True ) {
+        $EXIT="Green"
+    } Else {
+        $EXIT="Red"
     }
 
-    $CurrentDirectory = Split-Path -leaf -path (Get-Location)
+    $CurrentDirectory = Split-Path -Leaf -Path (Get-Location)
 
     Write-Host
-    Write-Host "$lambda $env:USERNAME " -ForegroundColor Yellow -NoNewline
-    Write-Host "$CurrentDirectory" -NoNewLine -ForegroundColor Green
+    Write-Host "$lambda " -ForegroundColor Gray -NoNewline
+    Write-Host "$CurrentDirectory" -NoNewLine -ForegroundColor DarkGray
 
-    if(Get-GitStatus){
+    If(Get-GitStatus){
         Write-Host " $forwardArrow $lambda " -ForegroundColor Yellow -NoNewline
         Write-Host "git" -ForegroundColor Blue -NoNewline
         checkGit(Get-Location)
@@ -45,7 +45,7 @@ Function Global:Prompt {
 
     Write-Host " $forwardArrow" -NoNewLine -ForegroundColor $EXIT
     $Global:LASTEXITCODE = $realLASTEXITCODE
-    return " "
+    Return " "
 }
 
 $Global:PSColor = @{
