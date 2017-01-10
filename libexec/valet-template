@@ -6,6 +6,7 @@
 require 'fileutils'
 require 'thor'
 require 'thor/actions'
+require 'securerandom'
 require_relative '../share/valet/util'
 
 TEMPLATE_DIRECTORY = File.expand_path('~/.dotfiles/share/valet/templates')
@@ -88,8 +89,9 @@ class Template < Thor
 
   # windows powershell script
   desc "powershell [NAME]", "Creates a basic powershell script"
-  def powershell (script_name=nil)
+  def powershell(script_name=nil)
     @script_name = get_script_name(script_name)
+    @guid = SecureRandom.uuid
     create_from_template("powershell.erb", "#{@script_name}.ps1")
     run "unix2dos #{@script_name}.ps1"
   end
