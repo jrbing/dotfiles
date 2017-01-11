@@ -1,12 +1,35 @@
 priority 0
 
-snippet class
-Class {
-	[string] ${0:FirstName}
-}
+snippet class "Class definition"
+Class ${1:TypeName} {
+	# Property with validate set
+	[ValidateSet("val1", "Val2")][string] $P1
+
+	# Static property
+	static [hashtable] $P2
+
+	# Hidden property does not show as result of Get-Member
+	hidden [int] $P3
+
+	# Constructor
+	TypeName ([string] $s) {
+		$this.P1 = $s
+	}
+
+	# Static method
+	static [void] MemberMethod1([hashtable] $h) {
+		[TypeName]::P2 = $h
+	}
+
+	# Instance method
+	[int] MemberMethod2([int] $i) {
+		$this.P3 = $i
+		return $this.P3
+	}
+}$0
 endsnippet
 
-snippet fun
+snippet fun "Advanced function"
 Function ${1:name} {
 	[CmdletBinding()]
 	Param (
@@ -70,10 +93,83 @@ snippet filtersort
 ${1:command} | Where-Object -FilterScript { $PSItem.${2:property} -${3:operator} '${4:expression}' } | Sort-Object -Property ${5:sortproperty}$0
 endsnippet
 
-snippet loginfo
-Log-Info -Message "${1:message}"$0
+snippet switch
+Switch (${1:variable}) {
+	'1' {"The value is 1"}
+	'2' {"The value is 2"}
+	{$_ -in 'A','B','C'} {"The value is either A, B, or C"}
+	Default {"The value could not be determined"}
+}$0
 endsnippet
 
-snippet logerror
-Log-Error -Message "${1:message}"$0 -ExitGracefully False
+snippet workflow "PowerShell Workflow"
+Workflow ${1:Verb-Noun} {
+<#
+.Synopsis
+	Short description
+.DESCRIPTION
+	Long description
+.EXAMPLE
+	Example of how to use this workflow
+.EXAMPLE
+	Another example of how to use this workflow
+.INPUTS
+	Inputs to this workflow (if any)
+.OUTPUTS
+	Output from this workflow (if any)
+.NOTES
+	General notes
+.FUNCTIONALITY
+	The functionality that best describes this workflow
+#>
+
+	[CmdletBinding(DefaultParameterSetName='Parameter Set 1', HelpUri = 'http://www.microsoft.com/', ConfirmImpact='Medium')]
+	[Alias()]
+	[OutputType([String])]
+	Param (
+		# Param1 help description
+		[Parameter(Mandatory=$true, Position=0, ParameterSetName='Parameter Set 1')]
+		[ValidateNotNull()]
+		[Alias("p1")]
+		$Param1,
+
+		# Param2 help description
+		[int]
+		$Param2
+	)
+
+	# Saves (persists) the current workflow state and output
+	# Checkpoint-Workflow
+
+	# Suspends the workflow
+	# Suspend-Workflow
+
+	# Workflow common parameters are available as variables such as:
+	$PSPersist
+	$PSComputerName
+	$PSCredential
+	$PSUseSsl
+	$PSAuthentication
+
+	# Workflow runtime information can be accessed by using the following variables:
+	$Input
+	$PSSenderInfo
+	$PSWorkflowRoot
+	$JobCommandName
+	$ParentCommandName
+	$JobId
+	$ParentJobId
+	$WorkflowInstanceId
+	$JobInstanceId
+	$ParentJobInstanceId
+	$JobName
+	$ParentJobName
+
+	# Set the progress message ParentActivityId
+	$PSParentActivityId
+
+	# Preference variables that control runtime behavior
+	$PSRunInProcessPreference
+	$PSPersistPreference
+}$0
 endsnippet
