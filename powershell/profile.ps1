@@ -1,5 +1,16 @@
+﻿
+$Dotfiles = Join-Path -Path $HOME -ChildPath ".dotfiles"
+$Documents = Split-Path(Split-Path $profile)
+
+#######################################################################
+#                               Modules                               #
+#######################################################################
+
+# Custom modules path
+$DotfilesModulePath = Join-Path -Path $Dotfiles -ChildPath "powershell\modules"
 
 Import-Module PSColor
+
 Import-Module Pscx -arg @{
     TextEditor = 'code.exe'
     ModulesToImport = @{
@@ -16,10 +27,9 @@ Import-Module Pscx -arg @{
     }
 }
 
-Function LoadProfile {
-    . $Profile
-}
-
+#######################################################################
+#                               Prompt                                #
+#######################################################################
 
 Function Global:Prompt {
     #PS $($executionContext.SessionState.Path.CurrentLocation)$('>' * ($nestedPromptLevel + 1))
@@ -45,6 +55,23 @@ Function Global:Prompt {
     Return " "
 }
 
+#######################################################################
+#                               Aliases                               #
+#######################################################################
+
+New-Alias sudo Invoke-Elevated
+New-Alias touch New-File
+
+#######################################################################
+#                                Misc                                 #
+#######################################################################
+
+# Reload the profile
+Function LoadProfile {
+    . $Profile
+}
+
+# Settings for PSColor
 $Global:PSColor = @{
     File = @{
         Default    = @{ Color = 'White' }
@@ -69,7 +96,7 @@ $Global:PSColor = @{
     }
 }
 
-# Chocolatey profile
+# Chocolatey module imports
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 If (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
