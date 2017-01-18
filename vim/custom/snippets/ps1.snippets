@@ -33,7 +33,7 @@ snippet fun "Advanced function"
 Function ${1:name} {
 	[CmdletBinding()]
 	Param (
-		[Parameter(Mandatory = $true)][string] $Param1
+		[Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][String] $Param1
 	)
 	Begin {
 		# Initialization
@@ -70,9 +70,9 @@ Enum ${1:name} {
 endsnippet
 
 snippet if
-If (${0:condition}) {
-	${1:statement}
-}
+If (${1:condition}) {
+	${2:statement}
+}$0
 endsnippet
 
 snippet ifelse
@@ -86,6 +86,12 @@ endsnippet
 snippet while
 While (${1:condition}) {
 	${2:statement}
+}$0
+endsnippet
+
+snippet for "For loop"
+For($i=0; $i -le 10; $i++){
+	Write-Information -MessageData "$i"
 }$0
 endsnippet
 
