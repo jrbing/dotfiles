@@ -1,19 +1,14 @@
 {
-  // Controls the font size in pixels.
   "editor.fontSize": 12,
-
-  // Controls auto save of dirty files. Accepted values:  "off", "afterDelay", "onFocusChange" (editor loses focus), "onWindowChange" (window loses focus). If set to "afterDelay", you can configure the delay in "files.autoSaveDelay".
-  "files.autoSave": "onFocusChange",
-
-  // Controls the font family.
-  "editor.fontFamily": "Menlo, Monaco, 'Consolas', monospace",
-
-  // The number of spaces a tab is equal to. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
+  "editor.fontFamily": "Menlo, Monaco, Consolas, monospace",
   "editor.tabSize": 2,
+  "editor.renderWhitespace": "boundary",
+  "editor.cursorStyle": "block",
+  "editor.insertSpaces": true,
+  "editor.wrappingColumn": 300,
 
-  // Controls how the editor should render whitespace characters, possibilities are 'none', 'boundary', and 'all'. The 'boundary' option does not render single spaces between words.
-  "editor.renderWhitespace": "none",
-
+  "files.associations": {}
+  "files.autoSave": "onFocusChange",
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -21,117 +16,30 @@
     "**/.DS_Store": true
   },
 
-  // Controls the cursor style, accepted values are 'block', 'line' and 'underline'
-  "editor.cursorStyle": "line",
-
-  // Insert spaces when pressing Tab. This setting is overriden based on the file contents when `editor.detectIndentation` is on.
-  "editor.insertSpaces": true,
-
-  // Controls after how many characters the editor will wrap to the next line. Setting this to 0 turns on viewport width wrapping (word wrapping). Setting this to -1 forces the editor to never wrap.
-  "editor.wrappingColumn": 300,
-
-  // Configure file associations to languages (e.g. "*.extension": "html"). These have precedence over the default associations of the languages installed.
-  "files.associations": {}
-
-  // Customizes which terminal to run on Windows.
   "terminal.external.windowsExec": "%COMSPEC%",
-
-  // Customizes which terminal application to run on OS X.
-  "terminal.external.osxExec": "Terminal.app",
-
-  // Customizes which terminal to run on Linux.
+  "terminal.external.osxExec": "iTerm.app",
   "terminal.external.linuxExec": "xterm",
 
-  // Remapped keys in normal mode. Allows mapping to vim commands or vscode actions. See README for more.
-  "vim.otherModesKeyBindings": [],
+  "extensions.autoUpdate": true,
 
-  // Non-recursive remapped keys in normal mode. Allows mapping to vim commands or vscode actions. See README for more.
-  "vim.otherModesKeyBindingsNonRecursive": [],
-
-  // Enable some vim ctrl key commands that override otherwise common operations, like ctrl+c
+  "vim.leader": ",",
   "vim.useCtrlKeys": true,
-
-  // What key should <leader> map to in remappings?
-  "vim.leader": "\\",
-
-  // Color of the search highlight.
   "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
-
-  // Use system clipboard for unnamed register.
   "vim.useSystemClipboard": false,
-
-  // Remapped keys in insert mode. Allows mapping to vim commands or vscode actions. See README for more.
-  "vim.insertModeKeyBindings": [],
-
-  // Non-recursive keybinding overrides to use for insert mode. Allows mapping to vim commands or vscode actions. See README for more.
-  "vim.insertModeKeyBindingsNonRecursive": [],
-
-  // Width to word-wrap to when using gq.
   "vim.textwidth": 80,
-
-  // Timeout in milliseconds for remapped commands
-  "vim.timeout": 1000,
-
-  // Use a non blinking block cursor.
   "vim.useSolidBlockCursor": false,
-
-  // Number of lines to scroll with CTRL-U and CTRL-D commands.
   "vim.scroll": 20,
-
-  // Show the text of any command you are in the middle of writing.
   "vim.showcmd": true,
-
-  // keywords contain alphanumeric characters and '_'
   "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-
-  // Ignore case in search patterns.
   "vim.ignorecase": true,
-
-  // Override the 'ignorecase' option if the search pattern contains upper case characters.
   "vim.smartcase": true,
-
-  // Enable the EasyMotion plugin for Vim.
   "vim.easymotion": false,
-
-  // Show all matches of the most recent search pattern
-  "vim.hlsearch": false,
-
-  // Don't worry about this one.
-  "vim.hl": true,
-
-  // Show where a / search matches as you type it.
   "vim.incsearch": true,
-
-  // How much search or command history should be remembered
   "vim.history": 50,
-
-  //Indent code automatically.
   "vim.autoindent": true,
-
-  // Start in Insert Mode.
   "vim.startInInsertMode": false,
 
-  //If true, causes the 32-bit language service to be used on 64-bit Windows.  On 32-bit Windows this setting has no effect.  This setting does not affect the debugger which has its own architecture configuration.
-  "powershell.useX86Host": false,
-
-  // If true, causes user and system wide profiles (profile.ps1 and Microsoft.VSCode_profile.ps1) to be loaded into the PowerShell session.  This affects IntelliSense and interactive script execution.  The debugger is not affected by this setting.
   "powershell.enableProfileLoading": true,
-
-  // Enables real-time script analysis using PowerShell Script Analyzer.
   "powershell.scriptAnalysis.enable": true,
-
-  // Specifies the path to a PowerShell Script Analyzer settings file. Use either an absolute path (to override the default settings for all projects) or use a path relative to your workspace.
-  "powershell.scriptAnalysis.settingsPath": "",
-
-  // Specifies the full path to a PowerShell executable.  Used to change the installation of PowerShell used for language and debugging services.
-  "powershell.developer.powerShellExePath": "",
-
-  // Specifies the path to the folder containing modules that are bundled with the PowerShell extension (i.e. PowerShell Editor Services, PowerShell Script Analyzer, Plaster)
-  "powershell.developer.bundledModulesPath": "../modules/",
-
-  // Sets the logging verbosity level for the PowerShell Editor Services host executable.  Possible values are 'Verbose', 'Normal', 'Warning', and 'Error'
-  "powershell.developer.editorServicesLogLevel": "Normal",
-
-  // Launches the language service with the /waitForDebugger flag to force it to wait for a .NET debugger to attach before proceeding.
-  "powershell.developer.editorServicesWaitForDebugger": false
+  "powershell.scriptAnalysis.settingsPath": ""
 }
