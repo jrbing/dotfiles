@@ -46,10 +46,8 @@ Function Global:Prompt {
 
     $CurrentDirectory = Split-Path -Leaf -Path (Get-Location)
 
-    Write-Host
     Write-Host "$Lambda " -ForegroundColor Gray -NoNewline
     Write-Host "$CurrentDirectory" -NoNewLine -ForegroundColor DarkGray
-
     Write-Host " $ForwardArrow" -NoNewLine -ForegroundColor $EXIT
     $Global:LASTEXITCODE = $RealLASTEXITCODE
     Return " "
