@@ -36,26 +36,20 @@ Begin {
     $Documents = Split-Path(Split-Path $profile)
     $DotfilesModulePath = Join-Path -Path $PSScriptRoot -ChildPath "powershell\modules"
 
-    #ForEach ($module In (Get-ChildItem -Path $DotfilesModulePath -Filter *.psm1)) {
-        #Import-Module 
-    #}
-    Get-ChildItem -Path $DotfilesModulePath -Filter *.psm1
+    ForEach ($module In (Get-ChildItem -Path $DotfilesModulePath -Filter *.psm1)) {
+        Import-Module $module.FullName
+    }
 
-    #Import-Module 
-    #Import-Module Admin
-    #Import-Module Environment
-    #Import-Module FileManagement
+    Write-Information "Dotfiles: $Dotfiles"
+    Write-Information "Documents: $Documents"
+    Write-Information "Home: $HOME"
 
-
-    Write-Verbose "Dotfiles: $Dotfiles"
-    Write-Verbose "Documents: $Documents"
-    Write-Verbose "Home: $HOME"
-
-    # An array of all modules in the form of @(Target, Path)
-    $symlinkMappings = @(
+    $SymlinkMappings = @(
             @("$Dotfiles\powershell\profile.ps1", "$Documents\WindowsPowershell\profile.ps1"),
             @("$Dotfiles\git\gitconfig", "$HOME\.gitconfig"),
-            @("$Dotfiles\vim", "$HOME\vimfiles")
+            @("$Dotfiles\vim\vimrc", "$HOME\_vimrc"),
+            @("$Dotfiles\vim", "$HOME\vimfiles"),
+            @("$Dotfiles\vscode\settings.json", "$env:APPDATA\Code\User\settings.json")
         )
 
     Function TestIsAdmin() {
@@ -105,41 +99,17 @@ Begin {
 
 Process {
     If ($Install) {
-
         TestIsAdmin
-        Set-EnvironmentVariable "Dotfiles" $Dotfiles -User
-        NewSymlinkWithBackup $Dotfiles "$HOME\.Dotfiles"
-
-        Get-ChildItem "$Dotfiles\*\PowershellModules" |
-            Where-Object { $_.PSIsContainer } |
-            ForEach-Object { Add-VariableToEnvironmentVariable PSModulePath "$_\" -User }
-
-        Add-VariableToEnvironmentVariable PSModulePath "$Dotfiles\external\powershell\modules" -User
-
-        $symlinkMappings | ForEach-Object { NewSymlinkWithBackup $_[0] $_[1] }
-
-        # Script run successfully
+        $SymlinkMappings | ForEach-Object { NewSymlinkWithBackup $_[0] $_[1] }
         Write-Output "Script Run Successfully. Please restart powershell for changes to take effect"
-
     } ElseIf ($Uninstall) {
-
-        # Test is admin and remove the Dotfiles env variable
         TestIsAdmin
-        Remove-EnvironmentVariable "Dotfiles" -User
-
-        Get-ChildItem "$Dotfiles\*\PowershellModules" |
-            Where-Object { $_.PSIsContainer } |
-            ForEach-Object { Remove-VariableFromEnvironmentVariable PSModulePath "$_\" -User }
-
-        Remove-VariableFromEnvironmentVariable PSModulePath "$Dotfiles\external\powershell\modules" -User
-
         $symlinkMappings | ForEach-Object { RemoveSymlinkWithBackup $_[1] }
-
-        # Script run successfully
         Write-Output "Script Run Successfully. Please restart powershell for changes to take effect"
+
     } ElseIf ($Chocolatey) {
         Write-Verbose "Installing Chocolatey"
-        Invoke-Expression ((new-object net.webclient).DownloadString("https://chocolatey.org/install.ps1"))
+        Invoke-Expression ((New-Object net.webclient).DownloadString("https://chocolatey.org/install.ps1"))
     } Else {
         Get-Help $MyInvocation.MyCommand.Path
     }

@@ -25,6 +25,7 @@ Function Set-EnvironmentVariable {
         [Parameter (Mandatory=$true, ParameterSetName="process")][Switch] $Process,
         [Parameter (Mandatory=$true, ParameterSetName="user")][Switch] $User,
         [Parameter (Mandatory=$true, ParameterSetName="machine")][Switch] $Machine
+    )
 
     Begin {}
 
@@ -155,6 +156,7 @@ Function Add-VariableToEnvironmentVariable {
         [Parameter (Mandatory=$true, ParameterSetName="user")][Switch] $User,
         [Parameter (Mandatory=$true, ParameterSetName="machine")][Switch] $Machine,
         [Parameter (Mandatory=$false, Position=2)][String] $Seperator
+    )
 
     Begin {}
 
@@ -219,6 +221,7 @@ Function Remove-VariableFromEnvironmentVariable {
         [Parameter (Mandatory=$true, ParameterSetName="user")][Switch] $User,
         [Parameter (Mandatory=$true, ParameterSetName="machine")][Switch] $Machine,
         [Parameter (Mandatory=$false, Position=2)][String] $Seperator
+    )
 
     Begin {}
 
