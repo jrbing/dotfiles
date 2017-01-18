@@ -59,8 +59,8 @@ Function Global:Prompt {
 #                               Aliases                               #
 #######################################################################
 
-New-Alias sudo Invoke-Elevated
-New-Alias touch New-File
+#New-Alias sudo Invoke-Elevated
+#New-Alias touch New-File
 
 #######################################################################
 #                                Misc                                 #
