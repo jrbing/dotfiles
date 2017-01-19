@@ -54,12 +54,41 @@ Function ${1:name} {
 }$0
 endsnippet
 
-snippet splatting
-$Params = @{
-	${1:Param1} = 'Value1'
-	${2:Param2} = 'Value2'
-}
-${3:CommandName}$0
+snippet sfun "Simple function"
+Function ${1:name}([string]$${2:parameter}, [string]$${3:parameter}) {
+	if ($null -eq $Value) {
+		return [string]::Empty
+	}
+	elseif ([string]::IsNullOrWhiteSpace($Value)) {
+		return $Value
+	}
+}$0
+endsnippet
+
+snippet fundoc "Function documentation"
+<#
+.SYNOPSIS
+	A brief description of the function
+
+.DESCRIPTION
+	A longer description
+
+.PARAMETER FirstParameter
+	Description of each of the parameters
+
+.INPUTS
+	Description of objects that can be piped to the script
+
+.OUTPUTS
+	Description of objects that are output by the script
+
+.EXAMPLE
+	Example of how to run the script
+
+.NOTES
+	Detail on what the script does, if this is needed
+
+#>$0
 endsnippet
 
 snippet enum
