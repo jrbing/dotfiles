@@ -124,6 +124,12 @@ For($i=0; $i -le 10; $i++){
 }$0
 endsnippet
 
+snippet foreach "ForEach loop"
+ForEach ($item in $items) {
+	"$item = " + $item.length
+}$0
+endsnippet
+
 snippet filtersort
 ${1:command} | Where-Object -FilterScript { $PSItem.${2:property} -${3:operator} '${4:expression}' } | Sort-Object -Property ${5:sortproperty}$0
 endsnippet
