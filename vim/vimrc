@@ -398,6 +398,9 @@
     " Toggle the tagbar
     nnoremap <silent> <F8> :TagbarToggle<CR>
 
+    " Reset NERDTree window size
+    nnoremap <silent> <F9> :vertical resize 30 :set winfixwidth<CR>
+
   " }}}
 
 " }}}
