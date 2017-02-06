@@ -30,7 +30,11 @@
   "set nocompatible
   filetype off
 
-  call plug#begin('~/.vim/plugged')
+  if g:WINDOWS()
+    call plug#begin('~/vimfiles/plugged')
+  else
+    call plug#begin('~/.vim/plugged')
+  endif
 
   " Utilities
   Plug 'artnez/vim-wipeout'
