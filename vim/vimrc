@@ -647,7 +647,8 @@
       \ 'kinds'     : [
           \ 'f:function',
           \ 'i:filter',
-          \ 'a:alias'
+          \ 'a:alias',
+          \ 'c:class'
       \ ]
     \ }
 
