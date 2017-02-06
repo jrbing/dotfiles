@@ -27,6 +27,7 @@ case $(uname) in
     alias apb=ansible-playbook
     alias agx=ansible-galaxy
     alias anv=ansible-vault
+    alias mux=tmuxinator
     if [[ $TERM != "dumb" ]]; then
         [[ -d "/opt/oracle/client" ]] && alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
       else
