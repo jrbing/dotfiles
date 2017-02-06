@@ -154,7 +154,9 @@
   set laststatus=2
   set history=1000
   set cpoptions+=J
-  set shell=/bin/bash
+  if !g:WINDOWS()
+    set shell=/bin/bash
+  endif
   set lazyredraw
   set matchtime=3
   set splitbelow
