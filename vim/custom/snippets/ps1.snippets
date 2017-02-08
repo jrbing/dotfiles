@@ -134,6 +134,14 @@ snippet filtersort
 ${1:command} | Where-Object -FilterScript { $PSItem.${2:property} -${3:operator} '${4:expression}' } | Sort-Object -Property ${5:sortproperty}$0
 endsnippet
 
+snippet splatting
+$Params = @{
+	${1:Param1} = 'Value1'
+	${2:Param2} = 'Value2'
+}
+${3:CommandName} @Params$0
+endsnippet
+
 snippet switch
 Switch (${1:variable}) {
 	'1' {"The value is 1"}
