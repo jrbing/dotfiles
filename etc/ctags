@@ -1,15 +1,11 @@
 
 --langdef=js
 --langmap=js:.js
---regex-javascript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\3/a,array/
---regex-javascript=/^(var)?[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[^{\[]*$/\3/r,var/
---regex-javascript=/^var[ \t]+([A-Za-z0-9._$]+)[ \t]*=[ \t]*[A-Za-z0-9_$]+.extend/\1/f,function/
---regex-javascript=/^[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*[:=][ \t]*function/\2/f,function/
---regex-javascript=/^[ \t]*function[ \t]*([A-Za-z0-9_$]+)[ \t]*\(/\1/f,function/
---regex-javascript=/^[ \t]*var[ \t]+([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*=[ \t]function/\2/f,function/
---regex-javascript=/(jQuery|\$)\([ \t]*([^ \t]*)[ \t]*\)\.bind\([ \t]*['"](.*)['"]/\2.\3/f,function/
---regex-javascript=/^[ \t]*describe[ \t]*\([ \t]*["'](.*)["']/\1/f,function/
---regex-javascript=/^([ \t]*)(describe|context|it)[ \t]*\([ \t]*["'](.*)["']/.\1\3/f,function/
+--regex-javascript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/o,object/
+--regex-javascript=/([A-Za-z0-9._$'"()]+)[ \t]*[:][ \t]*function[ \t]*\([^)]*\)/\1/f,function/
+--regex-javascript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\[/\1/a,array/
+--regex-javascript=/([^= ]+)[ \t]*=[ \t]*'[^']*'/\1/s,string/
+--regex-javascript=/([^= ]+)[ \t]*=[ \t]*"[^"]*"/\1/s,string/
 
 --regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/c,class,constant/
 --regex-ruby=/(^|;)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/f,function,association/
