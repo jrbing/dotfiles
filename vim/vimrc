@@ -79,7 +79,6 @@
   Plug 'keith/swift.vim', { 'for': ['swift'] }
   Plug 'keith/tmux.vim'
   Plug 'hashivim/vim-terraform'
-  "Plug 'mustache/vim-mustache-handlebars'
   Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
   Plug 'pearofducks/ansible-vim', { 'for': ['ansible'] }
   Plug 'plsql.vim', { 'for': ['plsql'] }
@@ -90,19 +89,17 @@
   Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
   Plug 'robbles/logstash.vim'
   Plug 'rodjek/vim-puppet'
+  "Plug 'mustache/vim-mustache-handlebars'
 
   if g:OSX()
     Plug 'dbext.vim', { 'for': ['sql', 'plsql'] }
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'epeli/slimux'
     Plug 'fatih/vim-go'
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
-    Plug 'metakirby5/codi.vim'
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
-    "Plug 'sourcegraph/sourcegraph-vim', { 'for': ['go'] }
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-scripts/VOoM'
     Plug 'vim-airline/vim-airline'
@@ -110,7 +107,10 @@
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     if !g:VIMR()
       Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
+      Plug 'ternjs/tern_for_vim', { 'do': 'yarn install' }
     endif
+    "Plug 'epeli/slimux'
+    "Plug 'metakirby5/codi.vim'
   endif
 
   " Only load Nerdtree if we're not using VimR
