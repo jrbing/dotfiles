@@ -229,6 +229,11 @@
 
 " Version specific {{{2
 
+  if v:version >= 800
+    " True color support
+    set termguicolors
+  endif
+
   if v:version >= 730
     set norelativenumber
     set undofile
