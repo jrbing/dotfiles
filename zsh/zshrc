@@ -106,6 +106,7 @@ alias apb=ansible-playbook
 alias agx=ansible-galaxy
 alias anv=ansible-vault
 alias mvim="reattach-to-user-namespace mvim"                    # Fix for macOS Sierra
+alias hellogopher="curl -O https://raw.githubusercontent.com/cloudflare/hellogopher/master/Makefile"
 #alias flush-dns="sudo discoveryutil udnsflushcaches"
 
 
