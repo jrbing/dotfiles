@@ -105,7 +105,6 @@ alias ans=ansible
 alias apb=ansible-playbook
 alias agx=ansible-galaxy
 alias anv=ansible-vault
-alias m="${DOTFILES}/share/m-cli/m"
 alias mvim="reattach-to-user-namespace mvim"                    # Fix for macOS Sierra
 #alias flush-dns="sudo discoveryutil udnsflushcaches"
 
