@@ -40,8 +40,8 @@ setopt rmstarsilent
 #
 # Development
 #
-#alias server="open http://localhost:8000 && python -m SimpleHTTPServer"
-alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
+#alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
+alias server="open http://localhost:8000 && python -m SimpleHTTPServer"
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"                                                                                              # List TODO/FIX lines from the current project
 alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
 alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
