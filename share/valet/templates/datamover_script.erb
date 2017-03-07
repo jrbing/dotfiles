@@ -1,0 +1,19 @@
+-- Name: <%= @script_name %>
+-- Created: <%= Time.now.localtime.strftime('%m/%d/%Y') %>
+
+SET LOG C:\temp\<%= @script_name %>.log;
+SET OUTPUT C:\temp\<%= @script_name %>.dat;
+SET INPUT C:\temp\<%= @script_name %>.dat;
+
+-- Export table to file
+EXPORT TABLE_NAME;
+
+-- Import table from file
+IMPORT TABLE_NAME;
+
+-- Change the access password
+CHANGE_ACCESS_PASSWORD SymbolicID newAccessPswd
+
+-- Encrypt all application user passwords
+ENCRYPT_PASSWORD *;
+
