@@ -780,9 +780,11 @@
     let g:syntastic_ruby_exec = expand('~/.rbenv/shims/ruby')
     let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
     let g:syntastic_java_javac_config_file_enabled = 1
+
     "let g:syntastic_vim_checkers = ['vint']
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_javascript_checkers = ['eslint']
+    let g:syntastic_python_checkers = ['python', 'prospector']
     let g:syntastic_scss_checkers = ['sassc']
     let g:syntastic_sh_checkers = ['shellcheck']
     let g:syntastic_sql_checkers = ['sqlint']
