@@ -34,3 +34,6 @@
   path = share/vipe
   url = git://github.com/juliangruber/vipe.git
   ignore = dirty
+[submodule "share/peat"]
+	path = share/peat
+	url = https://github.com/sjl/peat.git
