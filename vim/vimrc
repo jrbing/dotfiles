@@ -85,11 +85,11 @@
   Plug 'plsql.vim', { 'for': ['plsql'] }
   Plug 'PProvost/vim-ps1', { 'for': ['ps1'] }
   Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-  Plug 'stephpy/vim-yaml', { 'for': ['yaml'] }
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
   Plug 'robbles/logstash.vim'
   Plug 'rodjek/vim-puppet'
+  "Plug 'stephpy/vim-yaml', { 'for': ['yaml'] }
   "Plug 'mustache/vim-mustache-handlebars'
 
   if g:OSX()
