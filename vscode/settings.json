@@ -5,7 +5,7 @@
   "editor.renderWhitespace": "none",
   "editor.cursorStyle": "block",
   "editor.insertSpaces": true,
-  "editor.wrappingColumn": 300,
+  "editor.wordWrap": 300,
 
   "files.associations": {}
   "files.autoSave": "onFocusChange",
