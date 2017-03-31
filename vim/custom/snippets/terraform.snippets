@@ -1,6 +1,61 @@
 priority -50
 
 ################################################################################
+#                                    Global                                    #
+################################################################################
+
+snippet var "Variable"
+variable "${1:name}" {
+	description = "${2}"
+	default     = "${3}"
+}
+$0
+endsnippet
+
+snippet evar "Empty variable"
+	variable "${1:name}" {}$0
+endsnippet
+
+snippet qvar "Quoted variable"
+"\$\{var.$1\}"
+endsnippet
+
+snippet rvar "Resouce as a variable"
+\$\{$1.$2\}
+endsnippet
+
+snippet resource
+resource "${1:type}" "${2:name}" {
+	${3}
+
+	tags {
+		name = "${4}"
+	}
+}
+endsnippet
+
+snippet output
+output "${1}" {
+	value = "${2}"
+}
+${3}
+endsnippet
+
+snippet arr "array"
+[ $1 ]
+endsnippet
+
+snippet tags
+tags {
+	Name = "${2:value}"
+}
+endsnippet
+
+#snippet =
+#$1 = $2
+#endsnippet
+
+################################################################################
 #                                  Providers                                   #
 ################################################################################
 
@@ -19,7 +74,7 @@ provider "aws" {
 }
 endsnippet
 
-snippet provider_consul "Consul provider" b
+snippet provider_consul
 provider "consul" {
 	address = "${1:demo.consul.io:80}"
 	datacenter = "${2:datacenter}"
@@ -141,43 +196,5 @@ resource "rundeck_job" "$1" {
 $0
 endsnippet
 
-################################################################################
-#                                  Variables                                   #
-################################################################################
-
-snippet var "variable"
-variable "${1:name}" {
-	description = "${2}"
-	default     = "${3}"
-}
-$0
-endsnippet
-
-################################################################################
-#                                Miscellaneous                                 #
-################################################################################
-
-
-snippet tags
-tags {
-	Name = "${2:value}"
-}
-endsnippet
-
-snippet qvar "quoted variable"
-"\$\{var.$1\}"
-endsnippet
-
-snippet res "resouce as a variable" w
-\$\{$1.$2\}
-endsnippet
-
-snippet arr "array"
-[ $1 ]
-endsnippet
-
-snippet =
-$1 = $2
-endsnippet
 
 # vim:ft=snippets:
