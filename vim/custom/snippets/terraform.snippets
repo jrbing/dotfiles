@@ -4,7 +4,7 @@ priority -50
 #                                    Global                                    #
 ################################################################################
 
-snippet var "Variable"
+snippet var "Variable declaration"
 variable "${1:name}" {
 	description = "${2}"
 	default     = "${3}"
@@ -12,15 +12,19 @@ variable "${1:name}" {
 $0
 endsnippet
 
-snippet evar "Empty variable"
-	variable "${1:name}" {}$0
+snippet evar "Empty variable declaration"
+variable "${1:name}" {}$0
 endsnippet
 
 snippet qvar "Quoted variable"
 "\$\{var.$1\}"
 endsnippet
 
-snippet rvar "Resouce as a variable"
+snippet ivar "Variable insertion" i
+\$\{var.$1\}
+endsnippet
+
+snippet rvar "Resource as a variable"
 \$\{$1.$2\}
 endsnippet
 
