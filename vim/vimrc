@@ -569,6 +569,11 @@
     "map <Leader>k :SlimuxSendKeysLast<CR>
   "}}}
 
+  " scratch.vim {{{2
+    let g:scratch_insert_autohide = 0
+    let g:scratch_top = 0
+  "}}}
+
   " vim-sneak {{{2
     let g:sneak#streak = 1
   "}}}
