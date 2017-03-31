@@ -844,12 +844,17 @@
     endif
   "}}}
 
+  " SuperTab{{{2
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+  " }}}
+
   " Ultisnips {{{2
     " Remap Ultisnips for compatibility for YCM
     "let g:UltiSnipsExpandTrigger = '<C-j>'
     "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
     "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-    " better key bindings for UltiSnipsExpandTrigger
+
+    " Better key bindings for UltiSnipsExpandTrigger
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<tab>'
     let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
@@ -865,14 +870,6 @@
 
   "}}}
 
-  " SuperTab{{{2
-    let g:SuperTabDefaultCompletionType = '<C-n>'
-    "let g:acp_enableAtStartup = 0
-    "if has('conceal')
-      "set conceallevel=2 concealcursor=i
-    "endif
-  " }}}
-
   " YouCompleteMe{{{2
     "let g:acp_enableAtStartup = 0
 
@@ -882,6 +879,8 @@
 
     " Enable completion from tags
     let g:ycm_collect_identifiers_from_tags_files = 1
+
+    " Use the Ultisnips completion engine
     let g:ycm_use_ultisnips_completer = 1
 
     " Enable omni completion.
