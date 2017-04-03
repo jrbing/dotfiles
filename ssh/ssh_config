@@ -10,3 +10,10 @@ RemoteForward 8377 localhost:8377
 ControlMaster auto
 ControlPath ~/.ssh/ssh-%r@%h:%p.sock
 ControlPersist 240
+
+# macOS only
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  # Add a line for each identity file that should be added to ssh-agent
+  IdentityFile ~/.ssh/id_rsa
