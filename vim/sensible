@@ -1,15 +1,5 @@
 " sensible - light vimrc based on sensible.vim
 
-silent function! g:OSX()
-  return has('macunix')
-endfunction
-silent function! g:LINUX()
-  return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-silent function! g:WINDOWS()
-  return  (has('win16') || has('win32') || has('win64'))
-endfunction
-
 if exists('g:loaded_sensible') || &compatible
   finish
 else
@@ -101,67 +91,11 @@ if &t_Co == 8 && $TERM !~# '^linux'
   set t_Co=16
 endif
 
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
 inoremap <C-U> <C-G>u<C-U>
-
-if has ('gui_running')
-
-  " Remove all the UI cruft
-  set guioptions-=T
-  set guioptions-=l
-  set guioptions-=L
-  set guioptions-=r
-  set guioptions-=R
-
-  " Use a line-drawing char for nice-looking vertical splits.
-  set fillchars+=vert:│
-
-endif
-
-" Mac specific settings
-if OSX()
-
-  " Set Colorscheme
-  colorscheme desert
-
-  " Set the font
-  set guifont=Inconsolata-dz\ for\ Powerline:h12
-
-" Windows specific Settings
-elseif WINDOWS()
-
-  " Set Colorscheme
-  colorscheme desert
-
-  " Set the font
-  set guifont=Consolas:h10
-
-  " Change the location of the viminfo file
-  set viminfo+=n$USERPROFILE\\_viminfo
-
-  " Show the tab line
-  set showtabline=1
-
-  " Set size and position
-  set lines=50
-  set columns=135
-  winpos 0 0
-
-  " Prevent vim from writing backups, due to issues with the home directory
-  " being on a network share
-  set nobackup
-  set nowritebackup
-  set noswapfile
-
-  " Hides the menu
-  set winaltkeys=no
-
-  " Have vim use Windows Ctrl+ keys
-  source $VIMRUNTIME/mswin.vim
-
-  " Map Alt right/left to move tabs
-  nnoremap <silent> <A-Right> :tabnext<cr>
-  nnoremap <silent> <A-Left> :tabprevious<cr>
-
-endif
 
 " vim:set ft=vim et sw=2:
