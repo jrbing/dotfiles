@@ -467,6 +467,13 @@
       autocmd BufRead,BufNewFile *.{dms} setlocal ft=sql
     augroup END
   "}}}
+  "
+  " Java {{{2
+    augroup ft_java
+      autocmd!
+      autocmd FileType java  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    augroup END
+  "}}}
 
   " Gradle {{{2
     augroup ft_gradle
