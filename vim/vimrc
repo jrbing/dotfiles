@@ -478,7 +478,7 @@
   " Gradle {{{2
     augroup ft_gradle
       autocmd!
-      autocmd BufRead,BufNewFile *.{gradle} setlocal ft=groovy
+      autocmd BufRead,BufNewFile *.{gradle} setlocal ft=groovy tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
     augroup END
   "}}}
 
