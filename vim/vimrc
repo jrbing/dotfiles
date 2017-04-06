@@ -75,6 +75,7 @@
   " Filetypes
   Plug 'cespare/vim-toml', { 'for': ['toml'] }
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
+  Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
   Plug 'fatih/vim-hclfmt'
   Plug 'funcodeio/lz4.vim'
   Plug 'keith/swift.vim', { 'for': ['swift'] }
