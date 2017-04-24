@@ -40,6 +40,7 @@ case $(uname) in
     fi
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
     export PATH=$PATH:/sbin:/usr/sbin
+    alias mux=tmuxinator
   ;;
   (SunOS)
     export DISABLE_LS_COLORS=true
