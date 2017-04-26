@@ -143,6 +143,12 @@ class Template < Thor
     create_from_template("dockerfile.erb", "Dockerfile")
   end
 
+  # dockercompose
+  desc "dockercompose", "Creates a sample Docker Compose file"
+  def dockercompose
+    create_from_template("dockercompose.erb", "docker-compose.yml")
+  end
+
 end
 
 Template.start(ARGV)
