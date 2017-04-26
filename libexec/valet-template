@@ -137,6 +137,12 @@ class Template < Thor
     create_from_template("python_script.erb", "#{@script_name}.py")
   end
 
+  # dockerfile
+  desc "dockerfile", "Creates a sample Dockerfile"
+  def dockerfile
+    create_from_template("dockerfile.erb", "Dockerfile")
+  end
+
 end
 
 Template.start(ARGV)
