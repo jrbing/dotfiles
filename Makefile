@@ -15,7 +15,8 @@ all: help
 link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-gpg link-powershell  ## Link all dotfiles to their respective locations
 
 link-tmux:
-	@cd ~ && ln -nfs $(dotfiles)/tmux/tmux.conf .tmux.conf
+	@cd ~ && ln -nfs $(dotfiles)/tmux/oh-my-tmux/.tmux.conf .tmux.conf; \
+				ln -nfs $(dotfiles)/tmux/tmux.conf.local .tmux.conf.local; \
 
 link-vim:
 	@cd ~ && ln -nfs $(dotfiles)/vim/ .vim; \
