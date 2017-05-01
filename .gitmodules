@@ -22,10 +22,6 @@
   path = zsh/k
   url = git://github.com/rimraf/k.git
   ignore = dirty
-[submodule "tmux/tmux-resurrect"]
-  path = tmux/tmux-resurrect
-  url = git://github.com/tmux-plugins/tmux-resurrect.git
-  ignore = dirty
 [submodule "share/shipit"]
   path = share/shipit
   url = git://github.com/sapegin/shipit.git
