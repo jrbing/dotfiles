@@ -33,3 +33,6 @@
 [submodule "share/peat"]
   path = share/peat
   url = https://github.com/sjl/peat.git
+[submodule "tmux/oh-my-tmux"]
+	path = tmux/oh-my-tmux
+	url = git://github.com/gpakosz/.tmux

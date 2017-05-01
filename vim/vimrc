@@ -84,7 +84,7 @@
   Plug 'hashivim/vim-terraform'
   Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
   Plug 'pearofducks/ansible-vim', { 'for': ['ansible'] }
-  Plug 'plsql.vim', { 'for': ['plsql'] }
+  Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'PProvost/vim-ps1', { 'for': ['ps1'] }
   Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
@@ -95,7 +95,7 @@
   "Plug 'mustache/vim-mustache-handlebars'
 
   if g:OSX()
-    Plug 'dbext.vim', { 'for': ['sql', 'plsql'] }
+    Plug 'vim-scripts/dbext.vim', { 'for': ['sql', 'plsql'] }
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
