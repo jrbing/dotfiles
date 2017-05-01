@@ -198,6 +198,9 @@ set-option -g prefix C-f
 # Define the default terminal
 set-option -g default-terminal "xterm-256color"
 
+# Activity
+set-window-option -g monitor-activity off
+
 # Titles
 #set-window-option -g automatic-rename on
 
