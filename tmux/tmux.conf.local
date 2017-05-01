@@ -195,6 +195,9 @@ tmux_conf_theme_clock_style='12'
 # C-f for prefix
 set-option -g prefix C-f
 
+# Define the default terminal
+set-option -g default-terminal "xterm-256color"
+
 # Titles
 #set-window-option -g automatic-rename on
 
