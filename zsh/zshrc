@@ -82,7 +82,7 @@ fi
 # Rundeck CLI
 if [[ -d "/opt/rundeck" ]]; then
   #TODO: dynamically get the name of the jar file
-  alias rd='java -jar /opt/rundeck/rundeck-cli-1.0.0-all.jar'
+  alias rd='java -jar /opt/rundeck/rundeck-cli-*-all.jar'
 fi
 
 # SQLPlus
