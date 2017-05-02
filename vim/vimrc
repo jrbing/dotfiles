@@ -547,6 +547,12 @@
     augroup END
   "}}}
 
+  " nginx {{{2
+    augroup direnv
+      autocmd Filetype nginx  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    augroup END
+  "}}}
+
   " Miscellaneous {{{2
     augroup miscellaneous
       autocmd!
