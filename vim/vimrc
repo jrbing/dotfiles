@@ -82,6 +82,7 @@
   Plug 'keith/swift.vim', { 'for': ['swift'] }
   Plug 'keith/tmux.vim'
   Plug 'hashivim/vim-terraform'
+  Plug 'Matt-Deacalion/vim-systemd-syntax'
   Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
   Plug 'pearofducks/ansible-vim', { 'for': ['ansible'] }
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
