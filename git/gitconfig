@@ -1,91 +1,83 @@
 [user]
-  name = JR Bing
-  email = jr@jrbing.com
-  editor = vim
-  signingkey = 1DB141D9
+	name = JR Bing
+	email = jr@jrbing.com
+	editor = vim
+	signingkey = 1DB141D9
 
 [commit]
-  gpgsign = true
+	gpgsign = true
 
 [github]
-  user = jrbing
+	user = jrbing
 
 [core]
-  quotepath = false
-  pager = less
-  editor = vim
-  excludesfile = ~/.gitignore_global
-  whitespace = warn
+	quotepath = false
+	pager = less
+	editor = vim
+	excludesfile = ~/.gitignore_global
+	whitespace = warn
 
 [alias]
-  shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
-  lg = log -10 --reverse
-  pruneremote = remote prune origin
-  tree = !"git log --graph --oneline --decorate --color --all | ${PAGER}"
-  reset-authors = commit --amend --reset-author -CHEAD
-  rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
-  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
+	lg = log -10 --reverse
+	pruneremote = remote prune origin
+	tree = !"git log --graph --oneline --decorate --color --all | ${PAGER}"
+	reset-authors = commit --amend --reset-author -CHEAD
+	rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
+	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 
 [color]
-  ui = auto
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
+	ui = auto
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
 
 [format]
-  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+	pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 
 [mergetool]
-  prompt = false
+	prompt = false
 
 [mergetool "mvimdiff"]
-  cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
-  keepbackup=false
+	cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+	keepbackup=false
 
 [merge]
-  summary = true
-  verbosity = 1
-  tool = mvimdiff
+	summary = true
+	verbosity = 1
+	tool = mvimdiff
 
 [apply]
-  whitespace = nowarn
+	whitespace = nowarn
 
 [branch]
-  autosetupmerge = true
-  autosetuprebase = always
+	autosetupmerge = true
+	autosetuprebase = always
 
 [web]
-  browser = open
+	browser = open
 
 [push]
-  default = matching
+	default = matching
 
 [pull]
-  rebase = true
+	rebase = true
 
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 
 [filter "media"]
-  required = true
-  clean = git media clean %f
-  smudge = git media smudge %f
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
 
 [filter "hawser"]
-  clean = git hawser clean %f
-  smudge = git hawser smudge %f
-  required = true
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
 
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
-
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path =
-
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
