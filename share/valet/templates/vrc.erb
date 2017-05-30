@@ -1,0 +1,43 @@
+// vim: filetype=rest tabstop=4 expandtab shiftwidth=4 softtabstop=4
+
+# Global settings
+
+// Default host
+http://domain[:port]/...
+
+// Default CURL options
+#--include
+
+// Default headers
+#Accept: application/json
+#X-Header: Some Data
+--
+
+#
+# View Elasticsearch nodes status
+#
+--
+GET /_cat/nodes?v
+
+#
+# Add a new doc to index and type
+#
+--
+POST /testindex/testtype
+{
+    "name": "some name",
+    "value": "some value",
+    "date": "2015-01-01"
+}
+
+#
+# Search index
+#
+--
+GET /testindex/_search?pretty
+
+#
+# View mapping
+#
+--
+GET /testindex/testtype/_mapping?pretty

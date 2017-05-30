@@ -149,6 +149,13 @@ class Template < Thor
     create_from_template("dockercompose.erb", "docker-compose.yml")
   end
 
+  # Vim REST Console
+  desc "vrc [NAME]", "Creates a sample Vim REST Console file"
+  def vrc(script_name=nil)
+    @script_name = get_script_name(script_name)
+    create_from_template("vrc.erb", "#{@script_name}.rest")
+  end
+
 end
 
 Template.start(ARGV)
