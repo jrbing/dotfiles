@@ -1,0 +1,20 @@
+# Disconnecting a Session
+alter system disconnect session
+
+# Killing a Session
+alter system kill session
+
+# Enabling and Disabling Restricted Sessions
+alter system enable restricted session
+
+# Flushing the Shared Pool
+alter system flush shared_pool
+
+# Flushing the Buffer Cache
+alter system flush buffer_cache
+
+# Setting Force Logging
+alter database force logging
+
+# Switching Online Log Files
+alter system switch logfile
