@@ -70,7 +70,10 @@
   Plug 'chriskempson/base16-vim'
   Plug 'lifepillar/vim-solarized8'
   Plug 'morhetz/gruvbox'
-  Plug 'mhinz/vim-janah'
+  Plug 'ajmwagar/vim-dues'
+  Plug 'trevordmiller/nova-vim'
+  Plug 'w0ng/vim-hybrid'
+  Plug 'NLKNguyen/papercolor-theme'
 
   " Filetypes
   Plug 'cespare/vim-toml', { 'for': ['toml'] }
@@ -274,11 +277,15 @@
     let g:solarized_contrast = 'normal'
     let g:solarized_statusline = 'normal'
     let g:solarized_term_italics = 0
-    "colorscheme solarized
-    "colorscheme solarized8_dark
-    colorscheme solarized8_dark_flat
+    colorscheme solarized
+
+    "let g:hybrid_reduced_contrast = 1
+    "colorscheme hybrid
+
+    "colorscheme nova
+
+    "colorscheme PaperColor
   else
-    "colorscheme base16-eighties
     colorscheme gruvbox
     let g:gruvbox_italic=0
   endif
@@ -1253,8 +1260,6 @@
       " Set Colorscheme
       let g:solarized_visibility = 'normal'
       let g:solarized_contrast = 'normal'
-      colorscheme solarized
-      "colorscheme base16-eighties
       "set t_Co=256
 
       " Fullscreen takes up entire screen
@@ -1329,9 +1334,6 @@
 
     " Windows Specific Settings
     elseif WINDOWS()
-
-      " Set Colorscheme
-      colorscheme gruvbox
 
       " Set the font
       set guifont=Consolas:h10
