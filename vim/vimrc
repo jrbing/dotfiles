@@ -76,27 +76,12 @@
   Plug 'NLKNguyen/papercolor-theme'
 
   " Filetypes
-  Plug 'cespare/vim-toml', { 'for': ['toml'] }
+  Plug 'sheerun/vim-polyglot'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
-  Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
   Plug 'fatih/vim-hclfmt'
-  Plug 'fatih/vim-nginx'
   Plug 'funcodeio/lz4.vim'
-  Plug 'keith/swift.vim', { 'for': ['swift'] }
-  Plug 'keith/tmux.vim'
-  Plug 'hashivim/vim-terraform'
-  Plug 'Matt-Deacalion/vim-systemd-syntax'
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-  Plug 'pearofducks/ansible-vim', { 'for': ['ansible'] }
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
-  Plug 'PProvost/vim-ps1', { 'for': ['ps1'] }
-  Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-  Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
   Plug 'robbles/logstash.vim'
-  Plug 'rodjek/vim-puppet'
-  "Plug 'stephpy/vim-yaml', { 'for': ['yaml'] }
-  "Plug 'mustache/vim-mustache-handlebars'
 
   if g:OSX()
     Plug 'vim-scripts/dbext.vim', { 'for': ['sql', 'plsql'] }
