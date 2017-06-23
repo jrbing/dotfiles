@@ -1,3 +1,7 @@
 
 # Alphabetically sort the visually selected block
 :'<,'>sort
+
+# Project wide substitution using cfdo
+:vimgrep oldterm **                   # Populate the location list
+:cfdo %S/oldterm/newterm/ | update    # Execute substitution using vim-abolish
