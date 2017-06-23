@@ -85,7 +85,7 @@
   Plug 'robbles/logstash.vim'
 
   if g:OSX()
-    Plug 'vim-scripts/dbext.vim', { 'for': ['sql', 'plsql'] }
+    Plug '~/.dotfiles/vim/vendor/dbext', { 'for': ['sql', 'plsql'] }
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
     Plug 'editorconfig/editorconfig-vim'
