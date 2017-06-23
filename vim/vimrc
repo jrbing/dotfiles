@@ -94,7 +94,7 @@
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/syntastic'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'vim-scripts/VOoM'
+    Plug 'vim-voom/VOoM'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
