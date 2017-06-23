@@ -74,6 +74,7 @@
   Plug 'trevordmiller/nova-vim'
   Plug 'w0ng/vim-hybrid'
   Plug 'NLKNguyen/papercolor-theme'
+  Plug 'rakr/vim-one'
 
   " Filetypes
   Plug 'sheerun/vim-polyglot'
@@ -257,13 +258,13 @@
   " Colorscheme
   set background=dark
   if has('gui_running')
-    let g:solarized_visibility = 'normal'
-    let g:solarized_diffmode = 'normal'
-    let g:solarized_termtrans = 0
-    let g:solarized_contrast = 'normal'
-    let g:solarized_statusline = 'normal'
-    let g:solarized_term_italics = 0
-    colorscheme solarized
+    "let g:solarized_visibility = 'normal'
+    "let g:solarized_diffmode = 'normal'
+    "let g:solarized_termtrans = 0
+    "let g:solarized_contrast = 'normal'
+    "let g:solarized_statusline = 'normal'
+    "let g:solarized_term_italics = 0
+    "colorscheme solarized
 
     "let g:hybrid_reduced_contrast = 1
     "colorscheme hybrid
@@ -271,6 +272,9 @@
     "colorscheme nova
 
     "colorscheme PaperColor
+
+    let g:one_allow_italics = 1 " I love italic for comments
+    colorscheme one
   else
     colorscheme gruvbox
     let g:gruvbox_italic=0
