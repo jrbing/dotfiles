@@ -1009,6 +1009,16 @@
 
   "}}}
 
+  " dbext.vim {{{2
+    let g:dbext_default_buffer_lines = 5           " Default result buffer size
+    let g:dbext_default_use_sep_result_buffer = 1  " Use a separate result buffer per file
+    let g:dbext_default_type = 'ORA'               " Set the default database connection type
+    "let g:dbext_default_display_cmd_line = 1      " Display the SQL in the results
+    "let g:dbext_default_replace_title = 1         " Replace the file title with the connection information
+    ":DBSetOption delete_temp_file=0               " Prevent the temporary SQL file that's generated from being deleted
+  "}}}
+
+
 " }}}
 
 " Utility Functions {{{1
