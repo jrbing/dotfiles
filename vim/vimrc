@@ -135,9 +135,10 @@
     set fileencodings=ucs-bom,utf-8,latin1
   endif
   set autoindent
+  set breakindent
+  set showbreak=↳
   set showmode
   set showcmd
-  set showbreak=↳
   set hidden
   set visualbell
   set cursorline
