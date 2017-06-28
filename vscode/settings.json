@@ -7,7 +7,7 @@
   "editor.insertSpaces": true,
   "editor.wordWrap": 300,
 
-  "files.associations": {}
+  "files.associations": {},
   "files.autoSave": "onFocusChange",
   "files.exclude": {
     "**/.git": true,
@@ -22,22 +22,34 @@
 
   "extensions.autoUpdate": true,
 
-  "vim.leader": ",",
-  "vim.useCtrlKeys": true,
-  "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
-  "vim.useSystemClipboard": true,
-  "vim.textwidth": 80,
-  "vim.useSolidBlockCursor": false,
-  "vim.scroll": 20,
-  "vim.showcmd": true,
-  "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-  "vim.ignorecase": true,
-  "vim.smartcase": true,
-  "vim.easymotion": false,
-  "vim.incsearch": true,
-  "vim.history": 50,
   "vim.autoindent": true,
+  "vim.easymotion": false,
+  "vim.enableNeovim": true,
+  "vim.history": 50,
+  "vim.ignorecase": true,
+  "vim.incsearch": true,
+  "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "vim.leader": ",",
+  "vim.scroll": 20,
+  "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
+  "vim.showcmd": true,
+  "vim.smartcase": true,
   "vim.startInInsertMode": false,
+  "vim.textwidth": 80,
+  "vim.useCtrlKeys": true,
+  "vim.useSystemClipboard": true,
+  "vim.otherModesKeyBindingsNonRecursive": [
+    {
+        "before": [":"],
+        "after": [],
+        "commands": [
+            {
+                "command": "workbench.action.showCommands",
+                "args": []
+            }
+        ]
+    }
+],
 
   "powershell.enableProfileLoading": true,
   "powershell.scriptAnalysis.enable": true,
