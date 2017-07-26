@@ -83,6 +83,7 @@
   Plug 'funcodeio/lz4.vim'
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'robbles/logstash.vim'
+  Plug 'vim-pandoc/vim-pandoc-syntax'
 
   if g:OSX()
     Plug '~/.dotfiles/vim/vendor/dbext', { 'for': ['sql', 'plsql'] }
