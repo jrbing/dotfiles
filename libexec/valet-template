@@ -156,6 +156,12 @@ class Template < Thor
     create_from_template("vrc.erb", "#{@script_name}.rest")
   end
 
+  # lsyncd configuration
+  desc "lsyncd", "Creates a sample lsyncd configuration file"
+  def lsyncd
+    create_from_template("lsyncd_configuration.erb", "sync.lua")
+  end
+
 end
 
 Template.start(ARGV)

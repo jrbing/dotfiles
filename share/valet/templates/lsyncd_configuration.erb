@@ -1,0 +1,33 @@
+--Sample lsyncd configuration file
+--  call with `lsyncd sync.lua` (sudo access required on macOS)
+
+settings {
+  logfile    = "/tmp/lsyncd.log",
+  statusFile = "/tmp/lsyncd.status",
+  nodaemon   = true,
+}
+
+--  Remote directory sync
+--sync {
+  --default.rsync,
+  --source      = "./",
+  --target      = "host.example.com:/path/to/target/",
+  --excludeFrom = "/etc/lsyncd.exclude",
+  --rsync = {
+    --binary   = "/usr/local/bin/rsync",
+    --archive  = true,
+    --compress = true
+  --}
+--}
+
+--  Local directory sync
+--sync {
+  --default.direct,
+  --delete  = false,
+  --source  = "./",
+  --target  = "/path/to/target/directory/",
+  --exclude = {'.git', 'archive'},
+  --rsync     = {
+    --binary   = "/usr/local/bin/rsync",
+  --}
+--}
