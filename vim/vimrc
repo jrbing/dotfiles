@@ -260,13 +260,15 @@
   " Colorscheme
   set background=dark
   if has('gui_running')
-    "let g:solarized_visibility = 'normal'
-    "let g:solarized_diffmode = 'normal'
-    "let g:solarized_termtrans = 0
-    "let g:solarized_contrast = 'normal'
-    "let g:solarized_statusline = 'normal'
-    "let g:solarized_term_italics = 0
+    let g:solarized_visibility = 'normal'
+    let g:solarized_diffmode = 'normal'
+    let g:solarized_termtrans = 0
+    let g:solarized_contrast = 'normal'
+    let g:solarized_statusline = 'normal'
+    let g:solarized_term_italics = 0
+    let g:solarized_old_cursor_style = 0
     "colorscheme solarized
+    colorscheme solarized8_dark
 
     "let g:hybrid_reduced_contrast = 1
     "colorscheme hybrid
@@ -275,11 +277,11 @@
 
     "colorscheme PaperColor
 
-    let g:one_allow_italics = 1 " I love italic for comments
-    colorscheme one
+    "let g:one_allow_italics = 1
+    "colorscheme one
   else
+    let g:gruvbox_italic = 0
     colorscheme gruvbox
-    let g:gruvbox_italic=0
   endif
 
   " Highlight the current line
