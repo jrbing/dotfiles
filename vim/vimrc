@@ -84,6 +84,7 @@
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'robbles/logstash.vim'
   Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
 
   if g:OSX()
     Plug '~/.dotfiles/vim/vendor/dbext', { 'for': ['sql', 'plsql'] }
