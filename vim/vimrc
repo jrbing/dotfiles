@@ -1265,19 +1265,11 @@
     " Macvim specific settings
     if OSX()
 
-      " Set Colorscheme
-      let g:solarized_visibility = 'normal'
-      let g:solarized_contrast = 'normal'
-      "set t_Co=256
-
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
 
       " Set correct path for tagbar plugin
       let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-
-      " Make the window slightly transparent
-      "set transparency=4
 
       " Command-T for CtrlP
       noremap <D-T> :CtrlP<CR>
@@ -1396,9 +1388,6 @@
 
       " Have vim use Windows Ctrl+ keys
       source $VIMRUNTIME/mswin.vim
-
-      " Set history file for YankRing
-      "let g:yankring_history_file = '$HOME/vimfiles/tmp/swap/yankring.history'
 
       " Map Alt-Shift-P to run markdown to pdf against the current document and
       " open the resulting document
