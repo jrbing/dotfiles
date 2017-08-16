@@ -25,6 +25,7 @@
   "vim.autoindent": true,
   "vim.easymotion": false,
   "vim.enableNeovim": true,
+  "vim.neovimPath": "C:\\tools\\neovim\\Neovim\\bin\\nvim.exe",
   "vim.history": 50,
   "vim.ignorecase": true,
   "vim.incsearch": true,
