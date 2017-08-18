@@ -94,7 +94,7 @@
     Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
     Plug 'Raimondi/delimitMate'
-    Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-voom/VOoM'
     Plug 'vim-airline/vim-airline'
@@ -604,6 +604,7 @@
 
   " Airline {{{2
     let g:airline#extensions#tagbar#enabled = 0
+    let g:airline#extensions#ale#enabled = 1
     if has ('gui_running')
       let g:airline_powerline_fonts = 1
     else
@@ -793,41 +794,24 @@
 
   "}}}
 
-  " Syntastic {{{2
-    let g:syntastic_error_symbol = '✗✗'
-    let g:syntastic_style_error_symbol = '✠✠'
-    let g:syntastic_warning_symbol = '∆∆'
-    let g:syntastic_style_warning_symbol = '≈≈'
+  " ale {{{2
+    " Only run linter on file open and save
+    let g:ale_lint_on_text_changed = 'never'
 
-    highlight link SyntasticError                      SpellBad
-    highlight link SyntasticErrorSign                  Error
-    highlight link SyntasticStyleErrorLine             SyntasticErrorLine
-    highlight link SyntasticStyleErrorSign             SyntasticErrorSign
-    highlight link SyntasticStyleWarningLine           SyntasticWarningLine
-    highlight link SyntasticStyleWarningSign           SyntasticWarningSign
-    highlight link SyntasticWarning                    SpellCap
-    highlight link SyntasticWarningSign                Todo
-    highlight clear SyntasticErrorLine
-    highlight clear SyntasticWarningLine
+    " Change the default signs
+    let g:ale_sign_error = '✗✗'
+    let g:ale_sign_warning = '∆∆'
 
-    let g:syntastic_enable_signs = 1
-    let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
-    let g:syntastic_mode_map = {
-        \ 'mode': 'active',
-        \ 'passive_filetypes': ['go', 'sql'] }
-    let g:syntastic_aggregate_errors = 1  "Aggregate the errors of all available syntax checkers
+    " Change the error message format
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-    let g:syntastic_ruby_exec = expand('~/.rbenv/shims/ruby')
-    let g:syntastic_java_maven_executable = '/usr/local/bin/mvn'
-    let g:syntastic_java_javac_config_file_enabled = 1
-
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_javascript_checkers = ['eslint']
-    let g:syntastic_python_checkers = ['python', 'prospector']
-    let g:syntastic_scss_checkers = ['sassc']
-    let g:syntastic_sh_checkers = ['shellcheck']
-    let g:syntastic_sql_checkers = ['sqlint']
-    let g:syntastic_sql_sqlint_exec = expand('~/.rbenv/shims/sqlint')
+    "let g:ale_linters = {
+      "\ 'javascript': ['eslint'],
+      "\ 'go': ['golint','govet','errcheck'],
+      "\ 'python': ['python','prospector'],
+    "\}
   "}}}
 
   " Fugitive {{{2
@@ -1022,7 +1006,6 @@
 
     " Disable the default trigger key (<C-j> by default)
     "let g:vrc_set_default_mapping = 0
-
   "}}}
 
   " dbext.vim {{{2
