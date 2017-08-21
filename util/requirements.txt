@@ -1,0 +1,13 @@
+ansible-lint
+docker
+neovim
+pip
+platformio
+pylint
+pywatchman
+pywinrm
+PyYAML
+vim-vint
+virtualenv
+yamllint
+yapf
