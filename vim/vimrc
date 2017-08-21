@@ -668,11 +668,18 @@
       if &ft == 'ansible'
         let g:ft = 'ansible'
         let g:NERDSpaceDelims = 1
+      elseif &ft == 'yaml'
+        let g:ft = 'yaml'
+        let g:NERDSpaceDelims = 1
       endif
     endfu
     fu! NERDCommenter_after()
       if g:ft == 'ansible'
         setf ansible
+        let g:ft = ''
+        let g:NERDSpaceDelims = 0
+      elseif g:ft == 'yaml'
+        setf yaml
         let g:ft = ''
         let g:NERDSpaceDelims = 0
       endif
