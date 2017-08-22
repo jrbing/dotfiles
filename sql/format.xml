@@ -1,26 +1,35 @@
-<options><breakOnSubqueries>true</breakOnSubqueries>
-<singleLineComments>None</singleLineComments>
-<breakAnsiiJoin>true</breakAnsiiJoin>
-<maxCharLineSize>128</maxCharLineSize>
-<breaksComma>Before</breaksComma>
-<breaksAroundLogicalConjunctions>true</breaksAroundLogicalConjunctions>
-<breakAfterWhen>true</breakAfterWhen>
-<breakOnCompositeLogicalExpressions>true</breakOnCompositeLogicalExpressions>
-<formatThreshold>1</formatThreshold>
-<spaceAroundOperators>true</spaceAroundOperators>
-<useTab>false</useTab>
-<idCase>lower</idCase>
-<extraLinesAfterSignificantStatements>true</extraLinesAfterSignificantStatements>
-<breaksConcat>Before</breaksConcat>
-<breakAfterElse>true</breakAfterElse>
-<spaceAroundBrackets>NoSpace</spaceAroundBrackets>
-<commasPerLine>1</commasPerLine>
-<forceLinebreaksBeforeComment>false</forceLinebreaksBeforeComment>
-<alignTypeDecl>true</alignTypeDecl>
-<breaksAfterSelectFromWhere>true</breaksAfterSelectFromWhere>
-<identSpaces>4</identSpaces>
-<breakAfterCase>true</breakAfterCase>
-<breakAfterThen>true</breakAfterThen>
-<spaceAfterCommas>false</spaceAfterCommas>
-<kwCase>lower</kwCase>
+<options>
+  <breakOnSubqueries>true</breakOnSubqueries>
+  <alignEquality>true</alignEquality>
+  <breakAfterElsif>false</breakAfterElsif>
+  <singleLineComments>CommentsUnchanged</singleLineComments>
+  <breakAnsiiJoin>false</breakAnsiiJoin>
+  <maxCharLineSize>128</maxCharLineSize>
+  <alignAssignments>true</alignAssignments>
+  <breaksComma>After</breaksComma>
+  <breaksAroundLogicalConjunctions>BeforeAndAfter</breaksAroundLogicalConjunctions>
+  <breakAfterWhen>false</breakAfterWhen>
+  <alignNamedArgs>true</alignNamedArgs>
+  <formatThreshold>1</formatThreshold>
+  <spaceAroundOperators>true</spaceAroundOperators>
+  <useTab>false</useTab>
+  <idCase>lower</idCase>
+  <breaksAfterWhere>true</breaksAfterWhere>
+  <extraLinesAfterSignificantStatements>X2</extraLinesAfterSignificantStatements>
+  <breaksConcat>After</breaksConcat>
+  <breakAfterIf>false</breakAfterIf>
+  <breakAfterElse>false</breakAfterElse>
+  <spaceAroundBrackets>NoSpace</spaceAroundBrackets>
+  <commasPerLine>1</commasPerLine>
+  <forceLinebreaksBeforeComment>false</forceLinebreaksBeforeComment>
+  <breakAfterWhile>false</breakAfterWhile>
+  <alignTypeDecl>true</alignTypeDecl>
+  <breakParenCondition>false</breakParenCondition>
+  <identSpaces>2</identSpaces>
+  <breaksAfterFrom>true</breaksAfterFrom>
+  <breakAfterCase>false</breakAfterCase>
+  <breakAfterThen>false</breakAfterThen>
+  <breaksAfterSelect>true</breaksAfterSelect>
+  <spaceAfterCommas>false</spaceAfterCommas>
+  <kwCase>lower</kwCase>
 </options>
