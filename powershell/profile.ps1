@@ -61,13 +61,32 @@ Function Global:Prompt {
 #New-Alias touch New-File
 
 #######################################################################
-#                                Misc                                 #
+#                              Functions                              #
 #######################################################################
 
-# Reload the profile
+Function Which {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][String] $Name
+    )
+    Process {
+        Try {
+            Get-Command $Name | Select-Object -ExpandProperty Definition
+        }
+        Catch {
+            Write-Error -Message $_.Exception
+            Break
+        }
+    }
+}
+
 Function LoadProfile {
     . $Profile
 }
+
+#######################################################################
+#                                Misc                                 #
+#######################################################################
 
 # Settings for PSColor
 $Global:PSColor = @{
