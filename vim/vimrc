@@ -260,7 +260,7 @@
 
   " Colorscheme
   set background=dark
-  if has('gui_running')
+  if has('gui_macvim') || has('gui_vimr') || has('gui_running')
     let g:solarized_visibility = 'normal'
     let g:solarized_diffmode = 'normal'
     let g:solarized_termtrans = 0
@@ -1250,11 +1250,6 @@
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 
-  "Gruvbox italic fix
-  if !has('gui_running')
-    let g:gruvbox_italic=0
-  endif
-
   if has('gui_running')
 
     " Remove all the UI cruft
@@ -1271,7 +1266,7 @@
     set fillchars+=vert:│
 
     " Macvim specific settings
-    if OSX()
+    if MACVIM() || VIMR()
 
       " Fullscreen takes up entire screen
       set fuoptions=maxhorz,maxvert
