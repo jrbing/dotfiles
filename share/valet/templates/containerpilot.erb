@@ -1,0 +1,148 @@
+{
+  consul: "localhost:8500",
+  logging: {
+    level: "INFO",
+    format: "default",
+    output: "stdout"
+  },
+  jobs: [
+    {
+      name: "app",
+      exec: "/bin/app",
+      restarts: "unlimited",
+      port: 80,
+      when: {
+        // we want to start this job when the "setup" job has exited
+        // with success but give up after 60 sec
+        source: "setup",
+        once: "exitSuccess",
+        timeout: "60s"
+      },
+      health: {
+        exec: "/usr/bin/curl --fail -s -o /dev/null http://localhost/app",
+        interval: 5,
+        ttl: 10,
+        timeout: "5s",
+      },
+      tags: [
+        "app",
+        "prod"
+      ],
+      interfaces: [
+        "eth0",
+        "eth1[1]",
+        "192.168.0.0/16",
+        "2001:db8::/64",
+        "eth2:inet",
+        "eth2:inet6",
+        "inet",
+        "inet6",
+        "static:192.168.1.100", // a trailing comma isn't an error!
+        ]
+    },
+    {
+      // we can create a chain of "setup" events by having
+      // jobs wait for other jobs to become healthy
+      name: "setup",
+      when: {
+        source: "consul-agent",
+        once: "healthy"
+      },
+      exec: "/usr/local/bin/preStart-script.sh",
+      restarts: "never"
+    },
+    {
+      name: "preStop",
+      when: {
+        source: "app",
+        once: "stopping"
+      },
+      exec: "/usr/local/bin/preStop-script.sh",
+      restarts: "never",
+    },
+    {
+      name: "postStop",
+      when: {
+        source: "app",
+        once: "stopped"
+      },
+      exec: "/usr/local/bin/postStop-script.sh",
+    },
+    {
+      name: "consul-agent",
+      exec: [
+        "consul", "agent",
+        "-rejoin",
+        "-data-dir=/var/opt/consul",
+        "-retry-join", "{{ .CONSUL }}",
+        "-retry-max", "10",
+        "-retry-interval", "10s"
+        ],
+        restarts: "unlimited"
+    },
+    {
+      name: "consul-template",
+      exec: ["consul-template", "-consul", "consul",
+             "-template", "/tmp/template.ctmpl:/tmp/result"],
+      restarts: "unlimited",
+    },
+    {
+      name: "periodic-task1",
+      exec: "/usr/local/bin/task.sh arg1",
+      timeout: "100ms",
+      when: {
+        interval: "1500ms"
+      }
+    },
+    {
+      name: "reload-app",
+      when: {
+        source: "watch.app",
+        each: "changed"
+      },
+      exec: "/usr/local/bin/reload-app.sh",
+      timeout: "10s"
+    },
+    {
+      name: "reload-nginx",
+      when: {
+        source: "watch.nginx",
+        each: "changed"
+      },
+      exec: "/usr/local/bin/reload-nginx.sh",
+      timeout: "30s"
+    },
+    {
+      // this job will write metrics to our telemetry collector
+      name: "sensor",
+      exec: "/usr/local/bin/sensor.sh"
+      when: {
+        interval: "5s"
+      }
+    }
+  ],
+  watches: [
+    {
+      name: "app",
+      interval: 10
+    },
+    {
+      name: "nginx",
+      interval: 30
+    }
+  ],
+  control: {
+    socket: "/var/run/containerpilot.socket"
+  },
+  telemetry: {
+    port: 9090,
+    interfaces: "eth0"
+    metrics: [
+      {
+        name: "metric_id"
+        help: "help text"
+        type: "counter"
+      }
+    ]
+  }
+}
