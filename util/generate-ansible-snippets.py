@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import argparse
 import os
 import os.path
-import fnmatch
+# import fnmatch
 import logging
 import ansible.modules
-from ansible.utils.module_docs import get_docstring
+from ansible.utils.plugin_docs import get_docstring
 
 # NOTE:  Be sure to set the PYTHONPATH environment variable before running this
 #        ex: export PYTHONPATH=/usr/local/lib/python2.7/site-packages
@@ -26,14 +27,11 @@ logger.addHandler(ch)
 # TODO:
 # * free form modules (like command), should be formatted properly
 
+
 def get_documents():
     for root, dirnames, filenames in os.walk(os.path.dirname(ansible.modules.__file__)):  # noqa: E501
-        for filename in fnmatch.filter(filenames, '*.py'):
-            if filename == '__init__.py':
-                continue
-            if filename.endswith('.pyc'):
-                continue
-            if filename.endswith('.ps1'):
+        for filename in filenames:
+            if filename == '__init__.py' or not filename.endswith('py'):
                 continue
             documentation = get_docstring(os.path.join(root, filename))[0]
             if documentation is None:
@@ -55,35 +53,57 @@ def get_play_snippet():
 def to_snippet(document):
     snippet = []
     # Insert the snippet header, name label, and module name
-    snippet.insert(0, '\t%s:' % (document['module']))
-    snippet.insert(0, '- %s: $1' % ('name'))
-    snippet.insert(0, 'snippet %s "%s"' % (document['module'], document['short_description']))  # noqa: E501
+    snippet.insert(0, 'snippet %s "%s" b' % (document['module'], document['short_description']))  # noqa: E501
+    snippet.append('- %s: $1' % ('name'))
 
     if 'options' in document:
         if 'free_form' in document['options']:
-            logger.info('Found free-form module: ' + document['module'])
-
-        options = sorted(document['options'].items(), key=lambda x: x[1].get("required", False), reverse=True)  # noqa: E501
-        for index, (name, option) in enumerate(options, 1):
-            if 'choices' in option:
-                default = option.get('default')
-                if isinstance(default, list):
-                    prefix = lambda x: '#' if x in default else ''  # noqa: E731
-                    suffix = lambda x: "'%s'" % x if isinstance(x, str) else x  # noqa: E731
-                    value = '[' + ', '.join("%s%s" % (prefix(choice), suffix(choice)) for choice in option['choices'])  # noqa: E501
+            logger.info('Detected free-form module: ' + document['module'])
+            snippet.append('\t%s: $2' % (document['module']))
+            snippet.append('\targs:')
+            options = sorted(document['options'].items(), key=lambda x: x[1].get("required", False), reverse=True)  # noqa: E501
+            for index, (name, option) in enumerate(options, 1):
+                if 'choices' in option:
+                    default = option.get('default')
+                    if isinstance(default, list):
+                        prefix = lambda x: '#' if x in default else ''  # noqa: E731
+                        suffix = lambda x: "'%s'" % x if isinstance(x, str) else x  # noqa: E731, E501
+                        value = '[' + ', '.join("%s%s" % (prefix(choice), suffix(choice)) for choice in option['choices'])  # noqa: E501
+                    else:
+                        prefix = lambda x: '#' if x == default else ''  # noqa: E731
+                        value = '|'.join('%s%s' % (prefix(choice), choice) for choice in option['choices'])  # noqa: E501
+                elif option.get('default') is not None and option['default'] != 'None':  # noqa: E501
+                    value = option['default']
+                    if isinstance(value, bool):
+                        value = 'yes' if value else 'no'
                 else:
-                    prefix = lambda x: '#' if x == default else ''  # noqa: E731
-                    value = '|'.join('%s%s' % (prefix(choice), choice) for choice in option['choices'])  # noqa: E501
-            elif option.get('default') is not None and option['default'] != 'None':  # noqa: E501
-                value = option['default']
-                if isinstance(value, bool):
-                    value = 'yes' if value else 'no'
-            else:
-                value = "# " + option.get('description', [''])[0]
-            if name == 'free_form':  # special for command/shell
-                snippet.append('\t\t${%d:%s=%s}' % ((index+1), name, value))
-            else:
-                snippet.append('\t\t%s: ${%d:%s}' % (name, (index+1), value))
+                    value = "# " + option.get('description', [''])[0]
+                if option.get("required", False) is False:
+                    snippet.append('\t\t# %s: ${%d:%s}' % (name, (index+1), value))
+        else:
+            logger.info('Detected non-free-form module: ' + document['module'])
+            snippet.append('\t%s:' % (document['module']))
+            options = sorted(document['options'].items(), key=lambda x: x[1].get("required", False), reverse=True)  # noqa: E501
+            for index, (name, option) in enumerate(options, 1):
+                if 'choices' in option:
+                    default = option.get('default')
+                    if isinstance(default, list):
+                        prefix = lambda x: '#' if x in default else ''  # noqa: E731
+                        suffix = lambda x: "'%s'" % x if isinstance(x, str) else x  # noqa: E731, E501
+                        value = '[' + ', '.join("%s%s" % (prefix(choice), suffix(choice)) for choice in option['choices'])  # noqa: E501
+                    else:
+                        prefix = lambda x: '#' if x == default else ''  # noqa: E731
+                        value = '|'.join('%s%s' % (prefix(choice), choice) for choice in option['choices'])  # noqa: E501
+                elif option.get('default') is not None and option['default'] != 'None':  # noqa: E501
+                    value = option['default']
+                    if isinstance(value, bool):
+                        value = 'yes' if value else 'no'
+                else:
+                    value = "# " + option.get('description', [''])[0]
+                if option.get("required", False) is True:
+                    snippet.append('\t\t%s: ${%d:%s}' % (name, (index+1), value))
+                else:
+                    snippet.append('\t\t# %s: ${%d:%s}' % (name, (index+1), value))
 
     snippet.append('$0')
     snippet.append('endsnippet')
