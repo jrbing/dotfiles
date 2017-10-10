@@ -46,7 +46,6 @@
   Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
-  Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
   Plug 'rizzatti/dash.vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-abolish'
@@ -57,8 +56,9 @@
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-jdaddy', { 'for': ['json'] }
   Plug 'tpope/vim-projectionist'
-  Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rbenv', { 'for': ['ruby'] }
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-tbone'
   Plug 'tpope/vim-unimpaired'
@@ -87,6 +87,7 @@
   Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
   Plug 'gutenye/json5.vim'
   Plug 'glench/vim-jinja2-syntax'
+  Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
 
   if g:OSX()
     Plug '~/.dotfiles/vim/vendor/dbext', { 'for': ['sql', 'plsql'] }
@@ -836,15 +837,15 @@
       au!
       au BufNewFile,BufRead .git/index setlocal nolist
     augroup END
-    "nnoremap <leader>gd :Gdiff<cr>
-    "nnoremap <leader>gs :Gstatus<cr>
-    "nnoremap <leader>gw :Gwrite<cr>
+    nnoremap <leader>gd :Gdiff<cr>
+    nnoremap <leader>gs :Gstatus<cr>
+    nnoremap <leader>gw :Gwrite<cr>
+    nnoremap <leader>gco :Gcheckout<cr>
+    nnoremap <leader>gci :Gcommit<cr>
+    nnoremap <leader>gm :Gmove<cr>
+    nnoremap <leader>gr :Gremove<cr>
+    nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
     "nnoremap <leader>gb :Gblame<cr>
-    "nnoremap <leader>gco :Gcheckout<cr>
-    "nnoremap <leader>gci :Gcommit<cr>
-    "nnoremap <leader>gm :Gmove<cr>
-    "nnoremap <leader>gr :Gremove<cr>
-    "nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
   "}}}
 
   " TaskPaper {{{2
