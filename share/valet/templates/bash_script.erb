@@ -17,7 +17,7 @@ set -o pipefail # Prevent errors in a pipeline from being masked
 IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 readonly PROGNAME="$(basename $0)"
-readonly PROGDIR="$(readlink -m $(dirname $0))"
+readonly PROGDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 readonly ARGS=( "$@" )
 
 ###############
