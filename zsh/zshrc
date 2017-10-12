@@ -17,6 +17,12 @@ if [[ -s "${DOTFILES}/zsh/k/k.sh" ]]; then
   source "${DOTFILES}/zsh/k/k.sh"
 fi
 
+# Source asdf
+if [[ -s "${DOTFILES}/share/asdf/asdf.sh" ]]; then
+  source "${DOTFILES}/share/asdf/asdf.sh"
+fi
+
+
 #
 # Completion
 #
@@ -26,6 +32,10 @@ _azure_complete() {
 compdef _azure_complete azure
 
 [[ -f ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
+
+if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
+  source "${DOTFILES}/share/asdf/completions/asdf.bash"
+fi
 
 #
 # ZSH Options

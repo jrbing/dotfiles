@@ -34,5 +34,8 @@
   path = share/peat
   url = https://github.com/sjl/peat.git
 [submodule "tmux/oh-my-tmux"]
-	path = tmux/oh-my-tmux
-	url = git://github.com/gpakosz/.tmux
+  path = tmux/oh-my-tmux
+  url = git://github.com/gpakosz/.tmux
+[submodule "share/asdf"]
+  path = share/asdf
+  url = https://github.com/asdf-vm/asdf.git
