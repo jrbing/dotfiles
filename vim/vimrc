@@ -1039,6 +1039,12 @@
     let g:ansible_name_highlight = 'b'             " Brighten all instances of task names
   "}}}
 
+  " vim-hclfmt {{{2
+    let g:hcl_fmt_autosave = 1
+    let g:tf_fmt_autosave = 1
+    let g:nomad_fmt_autosave = 0
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
