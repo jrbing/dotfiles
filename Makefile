@@ -67,8 +67,7 @@ submodules:  ## Update all submodule references
 	@git submodule foreach 'git fetch origin; \
 			git checkout master; \
 			git reset --hard origin/master; \
-			git submodule update --recursive; \
-			git clean -dfx'
+			git submodule update --recursive;'
 
 iterm-integration:
 	@curl -L https://iterm2.com/misc/bash_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.bash; \
