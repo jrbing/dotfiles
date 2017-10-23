@@ -54,6 +54,9 @@ link-powershell:
 	@cd ~ && ln -nfs $(dotfiles)/powershell/profile.ps1 ~/.config/powershell/profile.ps1;
 	@cd ~ && ln -nfs $(dotfiles)/powershell/profile.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1;
 
+link-vscode:
+	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
+
 check-dead:  ## Check for dead symlinks
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 

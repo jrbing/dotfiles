@@ -50,7 +50,7 @@ Begin {
             @("$Dotfiles\vim\vimrc", "$HOME\_vimrc"),
             @("$Dotfiles\vim", "$HOME\vimfiles"),
             @("$Dotfiles\vim\plug\plug.vim", "$HOME\vimfiles\autoload\plug.vim"),
-            @("$Dotfiles\vscode\settings.json", "$env:APPDATA\Code\User\settings.json")
+            @("$Dotfiles\vscode\windows-settings.json", "$env:APPDATA\Code\User\settings.json")
         )
 
     Function TestIsAdmin() {
