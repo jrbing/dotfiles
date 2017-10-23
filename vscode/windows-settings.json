@@ -47,6 +47,7 @@
   "vim.textwidth": 80,
   "vim.useCtrlKeys": false,
   "vim.useSystemClipboard": true,
+  "vim.disableAnnoyingNeovimMessage": true,
   "vim.otherModesKeyBindingsNonRecursive": [{
     "before": [":"],
     "after": [],
