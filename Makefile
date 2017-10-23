@@ -57,6 +57,9 @@ link-powershell:
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
 
+link-pandoc:
+	@cd ~ && ln -nfs $(dotfiles)/pandoc/ .pandoc
+
 check-dead:  ## Check for dead symlinks
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 
