@@ -163,6 +163,12 @@ class Template < Thor
     create_from_template("lsyncd_configuration.erb", "sync.lua")
   end
 
+  # modd configuration
+  desc "modd", "Creates a sample modd configuration file"
+  def modd
+    create_from_template("modd_configuration.erb", "modd.conf")
+  end
+
 end
 
 Template.start(ARGV)
