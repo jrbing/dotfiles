@@ -21,6 +21,12 @@ function upgrade_homebrew_applications() {
   stop_spinner $?
 }
 
+function upgrade_homebrew_cask_applications() {
+  start_spinner "Updating homebrew cask applications"
+  brew cu --yes --quiet --no-brew-update > /dev/null 2>&1
+  stop_spinner $?
+}
+
 function clean_homebrew_cache() {
   start_spinner "Cleaning homebrew cache"
   brew cleanup > /dev/null 2>&1
@@ -34,6 +40,7 @@ case $(uname) in
       update_homebrew_repo
       echoinfo "Outdated packages" && brew outdated #TODO: clean this up
       upgrade_homebrew_applications
+      upgrade_homebrew_cask_applications
       clean_homebrew_cache
     fi
   ;;
