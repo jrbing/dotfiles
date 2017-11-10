@@ -273,16 +273,6 @@
     let g:solarized_old_cursor_style = 0
     "colorscheme solarized
     colorscheme solarized8_dark
-
-    "let g:hybrid_reduced_contrast = 1
-    "colorscheme hybrid
-
-    "colorscheme nova
-
-    "colorscheme PaperColor
-
-    "let g:one_allow_italics = 1
-    "colorscheme one
   else
     let g:gruvbox_italic = 0
     colorscheme gruvbox
