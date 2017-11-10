@@ -289,8 +289,8 @@
 " Search {{{1
 
   " Use sane regexes.
-  nnoremap / /\v
-  vnoremap / /\v
+  "nnoremap / /\v
+  "vnoremap / /\v
 
   set ignorecase
   set smartcase
