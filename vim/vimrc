@@ -146,7 +146,6 @@
   set showcmd
   set hidden
   set visualbell
-  set cursorline
   set ttyfast
   set ruler
   set backspace=indent,eol,start
@@ -552,6 +551,13 @@
   " gitconfig {{{2
     augroup gitconfig
       autocmd Filetype gitconfig  setlocal tabstop=2 softtabstop=2 shiftwidth=2 smarttab noexpandtab autoindent nolist
+    augroup END
+  "}}}
+
+  " html {{{2
+    augroup html
+      " Fixes an issue with cursorline highlighting causing a scroll lag
+      autocmd Filetype html  setlocal nocursorline
     augroup END
   "}}}
 
