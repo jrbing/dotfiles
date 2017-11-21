@@ -280,3 +280,7 @@ bind-key e copy-mode \; send-keys "?Error" C-m
 # Start GoTTY in a new window with C-t
 bind-key C-t new-window "gotty tmux attach -t $(tmux display -p '#S')"
 #bind-key C-t new-window "echo -n 'gotty tmux attach -t $(tmux display -p '#S')"\; split-window "ngrok http 8080"
+
+# Fix for .bashrc not being sourced when $SHELL is set to bash
+if-shell -b '[ $SHELL == /bin/bash ]' \
+  'set-option -g default-command "exec /bin/bash"'
