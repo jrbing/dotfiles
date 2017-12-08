@@ -5,6 +5,7 @@ set sqlformat ansiconsole
 set pagesize 25
 set editfile /tmp/sqlclbuf.sql
 --set nohistory SET, SHOW, HISTORY, CLEAR
+set encoding UTF8
 
 -- Aliases
 alias plan=select * from table(dbms_xplan.display_cursor);
