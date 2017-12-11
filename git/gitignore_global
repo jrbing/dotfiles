@@ -50,13 +50,13 @@ tags
 *.un~
 Session.vim
 .sass-cache
+modd.conf
 
 #####################
 # Environment files #
 #####################
 .envrc
 .direnv
-sync.lua
 
 ##########
 # Packer #
