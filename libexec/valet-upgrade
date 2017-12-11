@@ -27,6 +27,12 @@ function upgrade_homebrew_cask_applications() {
   stop_spinner $?
 }
 
+function upgrade_app_store_applications() {
+  start_spinner "Updating App Store applications"
+  mas upgrade > /dev/null 2>&1
+  stop_spinner $?
+}
+
 function clean_homebrew_cache() {
   start_spinner "Cleaning homebrew cache"
   brew cleanup > /dev/null 2>&1
@@ -41,6 +47,7 @@ case $(uname) in
       echoinfo "Outdated packages" && brew outdated #TODO: clean this up
       upgrade_homebrew_applications
       upgrade_homebrew_cask_applications
+      upgrade_app_store_applications
       clean_homebrew_cache
     fi
   ;;
