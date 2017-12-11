@@ -31,5 +31,5 @@ function update_vim_plugins() {
 }
 
 update_dotfiles
-cleanup_vim_plugins
+#cleanup_vim_plugins
 update_vim_plugins
