@@ -64,6 +64,10 @@
   Plug 'tpope/vim-unimpaired'
   Plug 'vim-scripts/Align'
   Plug 'wincent/ferret'
+  Plug 'scrooloose/nerdtree'
+  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'EvanDotPro/nerdtree-chmod'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
@@ -110,14 +114,6 @@
     endif
     "Plug 'epeli/slimux'
     "Plug 'metakirby5/codi.vim'
-  endif
-
-  " Only load Nerdtree if we're not using VimR
-  if !g:VIMR()
-    Plug 'scrooloose/nerdtree'
-    Plug 'jistr/vim-nerdtree-tabs'
-    Plug 'EvanDotPro/nerdtree-chmod'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
   endif
 
   call plug#end()
@@ -605,7 +601,7 @@
   " Airline {{{2
     let g:airline#extensions#tagbar#enabled = 0
     let g:airline#extensions#ale#enabled = 1
-    if has ('gui_running')
+    if (has('gui_running') || has('gui_vimr'))
       let g:airline_powerline_fonts = 1
     else
       let g:airline_powerline_fonts = 0
@@ -867,7 +863,7 @@
   " vim-go {{{2
     if OSX()
       let g:go_bin_path = expand('/opt/go/bin')
-      let g:go_fmt_command = expand('/opt/go/bin/goimports')
+      "let g:go_fmt_command = expand('/opt/go/bin/goimports')
       let g:go_highlight_functions = 1
       let g:go_highlight_methods = 1
       let g:go_highlight_structs = 1
@@ -1255,7 +1251,7 @@
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 
-  if has('gui_running')
+  if (has('gui_running') || has('gui_vimr'))
 
     " Remove all the UI cruft
     set guioptions-=T
@@ -1274,7 +1270,7 @@
     if MACVIM() || VIMR()
 
       " Fullscreen takes up entire screen
-      set fuoptions=maxhorz,maxvert
+      "set fuoptions=maxhorz,maxvert
 
       " Set correct path for tagbar plugin
       let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -1327,14 +1323,16 @@
 
       command! CreatePDF :call CreatePDF()
 
-      " Set the font
-      "set guifont=Meslo\ LG\ M\ DZ:h12.00
-      "set guifont=Inconsolata:h14.00
-      "set guifont=Inconsolata-dz:h12.00
-      "set guifont=Sauce\ Code\ Powerline\ Light:h13
-      "set guifont=Inconsolata\ XL:h12,Inconsolata:h12,Monaco:h12
-      "set guifont=InconsolataForPowerline\ Nerd\ Font:h16
-      set guifont=Inconsolata-dz\ for\ Powerline:h12
+      if !g:VIMR()
+        " Set the font
+        "set guifont=Meslo\ LG\ M\ DZ:h12.00
+        "set guifont=Inconsolata:h14.00
+        "set guifont=Inconsolata-dz:h12.00
+        "set guifont=Sauce\ Code\ Powerline\ Light:h13
+        "set guifont=Inconsolata\ XL:h12,Inconsolata:h12,Monaco:h12
+        "set guifont=InconsolataForPowerline\ Nerd\ Font:h16
+        set guifont=Inconsolata-dz\ for\ Powerline:h12
+      endif
 
       " Insert date and time header at the top of the file
       noremap <D-D> gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
