@@ -11,7 +11,8 @@ import ansible.modules
 from ansible.utils.plugin_docs import get_docstring
 
 # NOTE:  Be sure to set the PYTHONPATH environment variable before running this
-#        ex: export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+#        ex: export PYTHONPATH=/usr/local/lib/python2.7/site-packages or
+#            export PYTHONPATH=/usr/local/Cellar/ansible/2.4.2.0_1/libexec/lib/python2.7/site-packages
 
 snippets_file_path = os.path.expanduser('~') + '/.dotfiles/vim/custom/snippets/ansible.snippets'
 
@@ -42,10 +43,11 @@ def get_documents():
 def get_play_snippet():
     play_snippet = []
     play_snippet.insert(0, 'snippet play "Execute an ansible play"')
-    play_snippet.append('- hosts: ${1:host_group}')
-    play_snippet.append('\tremote_user: ${2:remote_user}')
+    play_snippet.append('- name: ${1:name}')
+    play_snippet.append('\thosts: ${2:host_group}')
+    play_snippet.append('\tbecome: ${3:true}')
     play_snippet.append('\ttasks:')
-    play_snippet.append('\t$0')
+    play_snippet.append('\t\t$0')
     play_snippet.append('endsnippet\n')
     return "\n".join(play_snippet)
 
