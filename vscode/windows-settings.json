@@ -48,16 +48,12 @@
   "vim.useCtrlKeys": false,
   "vim.useSystemClipboard": true,
   "vim.disableAnnoyingNeovimMessage": true,
-  "vim.otherModesKeyBindingsNonRecursive": [{
-    "before": [":"],
-    "after": [],
-    "commands": [
-      {
-        "command": "workbench.action.showCommands",
-        "args": []
-      }
-    ]
-  }],
+  "vim.otherModesKeyBindings": [
+    {
+      "before": [";"],
+      "after": [":"]
+    }
+  ],
 
   "powershell.enableProfileLoading": true,
   "powershell.scriptAnalysis.enable": true,
