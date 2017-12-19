@@ -1,0 +1,35 @@
+snippet play "Execute an Ansible play" b
+- name: ${1:name}
+	hosts: ${2:host_group}
+	become: ${3:true}
+	tasks:
+		$0
+endsnippet
+
+snippet when "Conditionally execute play" b
+when:
+	- ansible_os_family == "RedHat"
+	- foo is defined
+endsnippet
+
+snippet with_items "Loop over items" b
+with_items:
+	- $1
+	- $2
+	- $0
+endsnippet
+
+snippet block "Example block task" b
+- name: Install Apache
+	block:
+		- yum: name={{ item }} state=installed
+			with_items:
+				- httpd
+				- memcached
+		- template: src=templates/src.j2 dest=/etc/foo.conf
+		- service: name=bar state=started enabled=True
+	when: ansible_distribution == 'CentOS'
+	become: true
+	become_user: root
+$0
+endsnippet
