@@ -51,6 +51,7 @@ tags
 Session.vim
 .sass-cache
 modd.conf
+.mypy_cache
 
 #####################
 # Environment files #
