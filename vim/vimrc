@@ -430,7 +430,9 @@
       autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
       autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-      au FileType python let b:dispatch = 'python %'
+      autocmd FileType python let b:dispatch = 'python %'
+
+      autocmd FileType python let b:autoformat_autoindent = 0
     augroup END
   "}}}
 
