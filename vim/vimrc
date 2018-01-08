@@ -40,6 +40,7 @@
   Plug 'artnez/vim-wipeout'
   Plug 'benjifisher/matchit.zip'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'direnv/direnv.vim'
   Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
   Plug 'justinmk/vim-sneak'
@@ -533,14 +534,8 @@
     augroup END
   "}}}
 
-  " direnv {{{2
-    augroup direnv
-      autocmd BufRead,BufNewFile .envrc set filetype=sh
-    augroup END
-  "}}}
-
   " nginx {{{2
-    augroup direnv
+    augroup nginx
       autocmd Filetype nginx  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
     augroup END
   "}}}
