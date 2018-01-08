@@ -440,7 +440,7 @@
     augroup ft_ruby
       autocmd!
       autocmd BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
-      autocmd FileType ruby let b:dispatch = '~/.rbenv/shims/ruby %'
+      autocmd FileType ruby let b:dispatch = '~/.dotfiles/share/asdf/shims/ruby %'
     augroup END
   "}}}
 
