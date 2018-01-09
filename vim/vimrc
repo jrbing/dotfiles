@@ -808,11 +808,9 @@
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
     " Define linters
-    "let g:ale_linters = {
-      "\ 'javascript': ['eslint'],
-      "\ 'go': ['golint','govet','errcheck'],
-      "\ 'python': ['python','prospector'],
-    "\}
+    let g:ale_linters = {
+      \ 'python': ['flake8', 'pylint']
+    \}
 
     " Define fixers
     let g:ale_fix_on_save = 1
