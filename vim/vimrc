@@ -425,13 +425,21 @@
     augroup ft_python
       autocmd!
       autocmd FileType python setlocal define=^\s*\\(def\\\\|class\\)
+      autocmd FileType python setlocal
+            \ tabstop=8
+            \ softtabstop=4
+            \ shiftwidth=4
+            \ smarttab
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
 
-      autocmd FileType python  setlocal tabstop=8 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
       autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
-      autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+      autocmd BufRead *.py setlocal
+            \ smartindent
+            \ cinwords=if,elif,else,for,while,try,except,finally,def,class
 
       autocmd FileType python let b:dispatch = 'python %'
-
       autocmd FileType python let b:autoformat_autoindent = 0
     augroup END
   "}}}
