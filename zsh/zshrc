@@ -37,6 +37,11 @@ if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
   source "${DOTFILES}/share/asdf/completions/asdf.bash"
 fi
 
+if type "oc" > /dev/null; then
+  source <(oc completion zsh)
+fi
+
+
 #
 # ZSH Options
 #
