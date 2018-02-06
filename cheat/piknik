@@ -1,0 +1,25 @@
+## All of the below are for preconfigured piknik aliases
+
+# Copy content to the clipboard
+pko "Hello"
+
+# Copy the content of a file to the clipboard
+pkf test.txt
+
+# Read the content to copy to the clipboard from STDIN
+echo "Hello" | pkc
+
+# Paste the clipboard content
+pkp
+
+# Retrieve and delete the clipboard content
+pkm
+
+# Delete the clipboard content
+pkz
+
+# Copy a directory to the clipboard as a tar archive
+pkfr ./testdir
+
+# Extract tarfile sent using the pkfr command
+pkpr
