@@ -42,3 +42,7 @@
   path = share/asdf
   url = https://github.com/asdf-vm/asdf.git
   ignore = dirty
+[submodule "share/kube-ps1"]
+	path = share/kube-ps1
+	url = git://github.com/jonmosco/kube-ps1.git
+  ignore = dirty

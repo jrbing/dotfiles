@@ -2,46 +2,6 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Source prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Source bd
-if [[ -s "${DOTFILES}/zsh/bd/bd.zsh" ]]; then
-  source "${DOTFILES}/zsh/bd/bd.zsh"
-fi
-
-# Source k
-if [[ -s "${DOTFILES}/zsh/k/k.sh" ]]; then
-  source "${DOTFILES}/zsh/k/k.sh"
-fi
-
-# Source asdf
-if [[ -s "${DOTFILES}/share/asdf/asdf.sh" ]]; then
-  source "${DOTFILES}/share/asdf/asdf.sh"
-fi
-
-
-#
-# Completion
-#
-_azure_complete() {
-  compadd -- $(azure --compzsh --compgen "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}")
-}
-compdef _azure_complete azure
-
-[[ -f ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
-
-if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
-  source "${DOTFILES}/share/asdf/completions/asdf.bash"
-fi
-
-if type "oc" > /dev/null; then
-  source <(oc completion zsh)
-fi
-
-
 #
 # ZSH Options
 #
@@ -53,46 +13,74 @@ setopt rmstarsilent
 #setopt RM_STAR_WAIT
 
 #
-# Development
+# Source 3rd party modules
 #
-#alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
-#alias server="open http://localhost:8000 && python -m SimpleHTTPServer"
-alias server="devd -ol ."
-alias todos="ack --nogroup '(TODO|FIX(ME)?):'"                                                                                              # List TODO/FIX lines from the current project
-alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
-alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
-alias mux="tmuxinator"
 
-function java_use() {
-  export JAVA_HOME=$(/usr/libexec/java_home -v $1)
-  export PATH=$JAVA_HOME/bin:$PATH
-  path=("${JAVA_HOME}/bin" $path)
-  export PATH
-  java -version
-}
+# Prezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# bd
+if [[ -s "${DOTFILES}/zsh/bd/bd.zsh" ]]; then
+  source "${DOTFILES}/zsh/bd/bd.zsh"
+fi
+
+# k
+if [[ -s "${DOTFILES}/zsh/k/k.sh" ]]; then
+  source "${DOTFILES}/zsh/k/k.sh"
+fi
+
+# asdf
+if [[ -s "${DOTFILES}/share/asdf/asdf.sh" ]]; then
+  source "${DOTFILES}/share/asdf/asdf.sh"
+fi
+
+# kube-ps1
+if [[ -s "${DOTFILES}/share/kube-ps1/kube-ps1.sh" ]]; then
+  source "${DOTFILES}/share/kube-ps1/kube-ps1.sh"
+fi
 
 # direnv
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
+
 #
-# Database
+# Application and module settings
 #
+
+# kube-ps1
+if type "oc" > /dev/null; then
+  KUBE_PS1_BINARY=oc
+fi
+KUBE_PS1_NS_ENABLE=true
+KUBE_PS1_PREFIX=""
+KUBE_PS1_SEPARATOR=""
+KUBE_PS1_DIVIDER=":"
+KUBE_PS1_SUFFIX=" "
+KUBE_PS1_CTX_COLOR=yellow
+KUBE_PS1_NS_COLOR=cyan
+
+# Set the prompt to include kube_ps1, but disable by default
+PROMPT='$(kube_ps1)'$PROMPT
+KUBE_PS1_TOGGLE=off
 
 # Postgres
-export PSQL_EDITOR=vim
+PSQL_EDITOR=vim
 
 # Oracle SQLcl
-export SQLPATH="${DOTFILES}/sql/oracle"
-export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
-export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
+SQLPATH="${DOTFILES}/sql/oracle"
+SQLFORMATPATH="${DOTFILES}/sql/format.xml"
+NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
+
 if [[ -d "/opt/oracle/sqlcl" ]]; then
   path+=('/opt/oracle/sqlcl/bin')
-  export PATH
 fi
+
 if [[ -d "/opt/oracle/tns" ]]; then
-  export TNS_ADMIN=/opt/oracle/tns
+  TNS_ADMIN=/opt/oracle/tns
 fi
 
 # Rundeck CLI
@@ -101,19 +89,24 @@ if [[ -d "/opt/rundeck" ]]; then
   alias rd='java -jar /opt/rundeck/rundeck-cli-*-all.jar'
 fi
 
-# SQLPlus
-alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
 
 #
-# Miscellaneous aliases
+# Aliases
 #
 
 unalias rm
 unalias gb
 
+#alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
+#alias server="open http://localhost:8000 && python -m SimpleHTTPServer"
+alias server="devd -ol ."
+alias todos="ack --nogroup '(TODO|FIX(ME)?):'"
+alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
+alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
+alias mux="tmuxinator"
 alias lt='ls -lAht && echo "------ OLDEST ------"'
 alias ltr='ls -lAhtr && echo "------ NEWEST ------"'
-alias clip="nc localhost 8377"                                  # Used for piping output to clipper
+alias clip="nc localhost 8377"
 alias purge-dsstore="find . -name '*.DS_Store' -type f -delete"
 alias z='fasd_cd -d'
 alias flush-dns="sudo killall -HUP mDNSResponder"
@@ -121,14 +114,23 @@ alias ans=ansible
 alias apb=ansible-playbook
 alias agx=ansible-galaxy
 alias anv=ansible-vault
-alias mvim="reattach-to-user-namespace mvim"                    # Fix for macOS Sierra
+alias mvim="reattach-to-user-namespace mvim"
 alias hellogopher="curl -O https://raw.githubusercontent.com/cloudflare/hellogopher/master/Makefile"
 #alias flush-dns="sudo discoveryutil udnsflushcaches"
-
+alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
 
 #
 # Functions
 #
+
+# Switch the current java version
+function java_use() {
+  export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+  export PATH=$JAVA_HOME/bin:$PATH
+  path=("${JAVA_HOME}/bin" $path)
+  export PATH
+  java -version
+}
 
 # Generate a random password
 function randpw() {
@@ -163,3 +165,26 @@ function tre() {
     #hi NonText ctermfg=0 |\
     #Codi ${1:-python}"
 #}
+
+#
+# Completion
+#
+
+# Azure CLI
+_azure_complete() {
+  compadd -- $(azure --compzsh --compgen "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}")
+}
+compdef _azure_complete azure
+
+# TravisCI
+[[ -f ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
+
+# asdf
+if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
+  source "${DOTFILES}/share/asdf/completions/asdf.bash"
+fi
+
+# OpenShift
+if type "oc" > /dev/null; then
+  source <(oc completion zsh)
+fi
