@@ -2,6 +2,11 @@
 # Environment variables.
 #
 
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN || -z "${TMPDIR}" ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
 # Resolve an issue with MacOS prepending to the PATH.
 # https://superuser.com/questions/544989/does-tmux-sort-the-path-variable
 if [[ -n "$TMUX" ]]; then
@@ -11,11 +16,7 @@ if [[ -n "$TMUX" ]]; then
   fi
 fi
 
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN || -z "${TMPDIR}" ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
-
+# Set the dotfiles path environment variable
 export DOTFILES=${HOME}/.dotfiles
 
 #
@@ -24,9 +25,11 @@ export DOTFILES=${HOME}/.dotfiles
 
 case $OSTYPE in
   (darwin*)
-    eval "$("${HOME}"/.dotfiles/bin/valet init -)"                                 # Setup completion for valet
+    # Setup completion for valet
+    eval "$("${HOME}"/.dotfiles/bin/valet init -)"
 
-    export JAVA_HOME=$(/usr/libexec/java_home)                                     # Set JAVA_HOME
+    # Set JAVA_HOME
+    export JAVA_HOME=$(/usr/libexec/java_home)
     export EDITOR='vim'
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
@@ -34,16 +37,8 @@ case $OSTYPE in
     export CHEATCOLORS=true
     export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-    [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
-
-    # Setup GPG Agent
-    #if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
-      #source ~/.gnupg/.gpg-agent-info
-      #export GPG_AGENT_INFO
-    #else
-      #eval $(/usr/local/bin/gpg-agent --daemon ~/.gnupg/.gpg-agent-info)
-    #fi
-
+    # GOPATH
+    [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin"
   ;;
   (linux*)
     eval "$("$HOME"/.dotfiles/bin/valet init -)"
