@@ -36,11 +36,6 @@ if [[ -s "${DOTFILES}/share/asdf/asdf.sh" ]]; then
   source "${DOTFILES}/share/asdf/asdf.sh"
 fi
 
-# kube-ps1
-if [[ -s "${DOTFILES}/share/kube-ps1/kube-ps1.sh" ]]; then
-  source "${DOTFILES}/share/kube-ps1/kube-ps1.sh"
-fi
-
 # direnv
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook zsh)"
@@ -50,22 +45,6 @@ fi
 #
 # Application and module settings
 #
-
-# kube-ps1
-if type "oc" > /dev/null; then
-  KUBE_PS1_BINARY=oc
-fi
-KUBE_PS1_NS_ENABLE=true
-KUBE_PS1_PREFIX=""
-KUBE_PS1_SEPARATOR=""
-KUBE_PS1_DIVIDER=":"
-KUBE_PS1_SUFFIX=" "
-KUBE_PS1_CTX_COLOR=yellow
-KUBE_PS1_NS_COLOR=cyan
-
-# Set the prompt to include kube_ps1, but disable by default
-PROMPT='$(kube_ps1)'$PROMPT
-KUBE_PS1_TOGGLE=off
 
 # Postgres
 PSQL_EDITOR=vim
