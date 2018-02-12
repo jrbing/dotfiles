@@ -17,7 +17,6 @@ case $(uname) in
     [[ -d "/usr/texbin" ]] && export PATH="$PATH:/usr/texbin"                      # Tex
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
 
-    if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     #
     # Aliases
     #
@@ -69,12 +68,23 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 #
 # Aliases
 #
-#alias ..='cd ..'
-#alias ls="ls -F"
-#alias l="ls -lAh"
-#alias ll="ls -l"
-#alias la='ls -A'
 alias clip="nc localhost 8377"
+if type "piknik" > /dev/null; then
+  alias pkc='piknik -copy'
+  alias pkp='piknik -paste'
+  alias pkm='piknik -move'
+  alias pkz='piknik -copy < /dev/null'
+  alias pkpr='piknik -paste | tar xzhpvf -'
+  function pko() {
+      echo "$*" | piknik -copy
+  }
+  function pkf() {
+      piknik -copy < "$1"
+  }
+  function pkfr() {
+      tar czpvf - "${1:-.}" | piknik -copy
+  }
+fi
 
 #
 # Prompt
