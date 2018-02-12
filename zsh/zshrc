@@ -58,9 +58,9 @@ if [[ -d "/opt/oracle/sqlcl" ]]; then
   path+=('/opt/oracle/sqlcl/bin')
 fi
 
-#if [[ -d "/opt/oracle/tns" ]]; then
-  #TNS_ADMIN=/opt/oracle/tns
-#fi
+if [[ -d "/opt/oracle/tns" ]]; then
+  TNS_ADMIN=/opt/oracle/tns
+fi
 
 # Rundeck CLI
 if [[ -d "/opt/rundeck" ]]; then
