@@ -47,19 +47,19 @@ fi
 #
 
 # Postgres
-PSQL_EDITOR=vim
+export PSQL_EDITOR=vim
 
 # Oracle SQLcl
-SQLPATH="${DOTFILES}/sql/oracle"
-SQLFORMATPATH="${DOTFILES}/sql/format.xml"
-NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
+export SQLPATH="${DOTFILES}/sql/oracle"
+export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
+export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 
 if [[ -d "/opt/oracle/sqlcl" ]]; then
   path+=('/opt/oracle/sqlcl/bin')
 fi
 
 if [[ -d "/opt/oracle/tns" ]]; then
-  TNS_ADMIN=/opt/oracle/tns
+  export TNS_ADMIN=/opt/oracle/tns
 fi
 
 # Rundeck CLI
@@ -178,9 +178,4 @@ compdef _azure_complete azure
 # asdf
 if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
   source "${DOTFILES}/share/asdf/completions/asdf.bash"
-fi
-
-# OpenShift
-if type "oc" > /dev/null; then
-  source <(oc completion zsh)
 fi
