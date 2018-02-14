@@ -94,6 +94,7 @@
   Plug 'glench/vim-jinja2-syntax'
   Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
+  Plug 'towolf/vim-helm', { 'for': ['helm'] }
 
   if g:OSX()
     Plug '~/.dotfiles/vim/vendor/dbext', { 'for': ['sql', 'plsql'] }
@@ -560,6 +561,12 @@
     augroup html
       " Fixes an issue with cursorline highlighting causing a scroll lag
       autocmd Filetype html  setlocal nocursorline
+    augroup END
+  "}}}
+
+  " helm {{{2
+    augroup helm
+      autocmd BufRead,BufNewFile */templates/*.{yaml,yml} set ft=helm
     augroup END
   "}}}
 
