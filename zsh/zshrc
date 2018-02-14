@@ -97,7 +97,7 @@ alias mvim="reattach-to-user-namespace mvim"
 alias hellogopher="curl -O https://raw.githubusercontent.com/cloudflare/hellogopher/master/Makefile"
 #alias flush-dns="sudo discoveryutil udnsflushcaches"
 alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
-if type "piknik" > /dev/null; then
+if hash piknik 2>/dev/null; then
   alias pkc='piknik -copy'
   alias pkp='piknik -paste'
   alias pkm='piknik -move'

@@ -69,7 +69,7 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 # Aliases
 #
 alias clip="nc localhost 8377"
-if type "piknik" > /dev/null; then
+if hash piknik 2>/dev/null; then
   alias pkc='piknik -copy'
   alias pkp='piknik -paste'
   alias pkm='piknik -move'
