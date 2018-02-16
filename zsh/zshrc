@@ -74,7 +74,6 @@ fi
 #
 
 unalias rm
-unalias gb
 
 #alias server="open http://localhost:4567 && ruby -e '"'require "rack"; Rack::Handler::Thin.run(Rack::Directory.new("."), :Port => 4567)'"'" # Start a webserver in the local directory
 #alias server="open http://localhost:8000 && python -m SimpleHTTPServer"
