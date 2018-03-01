@@ -42,3 +42,6 @@
   path = share/asdf
   url = https://github.com/asdf-vm/asdf.git
   ignore = dirty
+[submodule "zsh/contrib"]
+	path = zsh/contrib
+	url = git://github.com/belak/prezto-contrib.git
