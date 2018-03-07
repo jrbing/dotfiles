@@ -74,13 +74,13 @@ fi
 
 SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
   char          # Prompt character
 )
 
 SPACESHIP_RPROMPT_ORDER=(
   exec_time     # Execution time
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
   #kubecontext   # Kubernetes context
   git           # Git branch and git status
 )
