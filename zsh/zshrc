@@ -74,21 +74,34 @@ fi
 
 SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory
-  git           # Git branch and git status
-  exec_time     # Execution time
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character
 )
 
+SPACESHIP_RPROMPT_ORDER=(
+  exec_time     # Execution time
+  #kubecontext   # Kubernetes context
+  git           # Git branch and git status
+)
+
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_PROMPT_SEPARATE_LINE=false
 SPACESHIP_DIR_COLOR="blue"
-SPACESHIP_EXEC_TIME_PREFIX="⌛ "
-SPACESHIP_EXEC_TIME_ELAPSED=5
 SPACESHIP_EXIT_CODE_SHOW=true
 SPACESHIP_CHAR_SUFFIX=" "
 SPACESHIP_CHAR_SYMBOL="❯❯❯"
+
+SPACESHIP_EXEC_TIME_PREFIX="⌛ "
+SPACESHIP_EXEC_TIME_ELAPSED=5
+SPACESHIP_KUBECONTEXT_COLOR="blue"
+SPACESHIP_GIT_PREFIX="| "
+SPACESHIP_GIT_STATUS_PREFIX=" "
+SPACESHIP_GIT_STATUS_SUFFIX=""
+SPACESHIP_GIT_STATUS_UNTRACKED="◼"
+SPACESHIP_GIT_STATUS_ADDED="✚"
+SPACESHIP_GIT_STATUS_MODIFIED="✱"
+SPACESHIP_GIT_STATUS_STASHED="✭"
 
 #
 # Aliases
