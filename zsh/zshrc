@@ -68,6 +68,27 @@ if [[ -d "/opt/rundeck" ]]; then
   alias rd='java -jar /opt/rundeck/rundeck-cli-*-all.jar'
 fi
 
+#
+# Prompt Settings
+#
+
+SPACESHIP_PROMPT_ORDER=(
+  dir           # Current directory
+  git           # Git branch and git status
+  exec_time     # Execution time
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_PROMPT_SEPARATE_LINE=false
+SPACESHIP_DIR_COLOR="blue"
+SPACESHIP_EXEC_TIME_PREFIX="⌛ "
+SPACESHIP_EXEC_TIME_ELAPSED=5
+SPACESHIP_EXIT_CODE_SHOW=true
+SPACESHIP_CHAR_SUFFIX=" "
+SPACESHIP_CHAR_SYMBOL="❯❯❯"
 
 #
 # Aliases
