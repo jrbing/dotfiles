@@ -97,7 +97,7 @@
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
 
   if g:OSX()
-    Plug '~/.dotfiles/vim/vendor/dbext', { 'for': ['sql', 'plsql'] }
+    Plug 'tpope/vim-db', { 'for': ['sql', 'plsql'] }
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
     Plug 'editorconfig/editorconfig-vim'
@@ -1032,15 +1032,6 @@
 
     " Disable the default trigger key (<C-j> by default)
     "let g:vrc_set_default_mapping = 0
-  "}}}
-
-  " dbext.vim {{{2
-    let g:dbext_default_buffer_lines = 5           " Default result buffer size
-    let g:dbext_default_use_sep_result_buffer = 1  " Use a separate result buffer per file
-    let g:dbext_default_type = 'ORA'               " Set the default database connection type
-    "let g:dbext_default_display_cmd_line = 1      " Display the SQL in the results
-    "let g:dbext_default_replace_title = 1         " Replace the file title with the connection information
-    ":DBSetOption delete_temp_file=0               " Prevent the temporary SQL file that's generated from being deleted
   "}}}
 
   " ansible-vim {{{2
