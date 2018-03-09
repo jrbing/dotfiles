@@ -9898,7 +9898,7 @@ snippet ios_config "Manage Cisco IOS configuration sections" b
 		# running_config: # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for comparing against the contents of source.  There are times when it is not desirable to have the task get the current running-config for every task in a playbook.  The I(running_config) argument allows the implementer to pass in the configuration to use as the base config for comparison.
 		# diff_ignore_lines: # Use this argument to specify one or more lines that should be ignored during the diff.  This is used for lines in the configuration that are automatically updated by the system.  This argument takes a list of regular expressions or exact line matches.
 		# src: # Specifies the source path to the file that contains the configuration or configuration template to load.  The path to the source file can either be the full path on the Ansible control host or a relative path from the playbook or role root directory.  This argument is mutually exclusive with I(lines).
-		# save_when: always|#never|modified
+		# save_when: always|#never|modified|changed
 		# auth_pass: none
 		# lines: # The ordered set of commands that should be configured in the section.  The commands must be the exact same commands as found in the device running-config.  Be sure to note the configuration command syntax as some commands are automatically modified by the device config parser.
 		# intended_config: # The C(intended_config) provides the master configuration that the node should conform to and is used to check the final running-config against.   This argument will not modify any settings on the remote device and is strictly used to check the compliance of the current device's configuration against.  When specifying this argument, the task should also modify the C(diff_against) value and set it to I(intended).
@@ -12367,7 +12367,7 @@ snippet include_role "Load and execute a role" b
 		# tasks_from: main
 		# vars_from: main
 		# defaults_from: main
-		# private: # If True the variables from defaults/ and vars/ in a role will not be made available to the rest of the play.
+		# private: # If C(True) the variables from C(defaults/) and C(vars/) in a role will not be made available to the rest of the play.
 $0
 endsnippet
 
@@ -12399,17 +12399,17 @@ snippet wait_for_connection "Waits until remote system is reachable/usable" b
 $0
 endsnippet
 
-snippet include_tasks "dynamically include a task list." b
+snippet include_tasks "Dynamically include a task list" b
 - name: $1
 	include_tasks:
-		# free-form: # This action allows you to specify the name of the file directly w/o any other options.
+		# free-form: # The name of the imported file is specified directly without any other option.
 $0
 endsnippet
 
-snippet import_tasks "import a task list." b
+snippet import_tasks "Import a task list" b
 - name: $1
 	import_tasks:
-		# free-form: # This action allows you to specify the name of the file directly w/o any other options.
+		# free-form: # The name of the imported file is specified directly without any other option.
 $0
 endsnippet
 
@@ -12421,17 +12421,17 @@ snippet assert "Asserts given expressions are true" b
 $0
 endsnippet
 
-snippet include_vars "Load variables from files, dynamically within a task." b
+snippet include_vars "Load variables from files, dynamically within a task" b
 - name: $1
 	include_vars:
 		# ignore_files: # List of file names to ignore.
-		# free-form: # This module allows you to specify the 'file' option directly w/o any other options. There is no 'free-form' option, this is just an indicator, see example below.
+		# free-form: # This module allows you to specify the 'file' option directly without any other options. There is no 'free-form' option, this is just an indicator, see example below.
 		# files_matching: # Limit the files that are loaded within any directory to this regular expression.
 		# depth: 0
 		# extensions: [u'yaml', u'yml', u'json']
 		# file: # The file name from which variables should be loaded.
 		# dir: # The directory name from which the variables should be loaded.
-		# name: # The name of a variable into which assign the included vars, if omitted (null) they will be made top level vars.
+		# name: # The name of a variable into which assign the included vars. If omitted (null) they will be made top level vars.
 $0
 endsnippet
 
@@ -12459,10 +12459,10 @@ snippet pause "Pause playbook execution" b
 $0
 endsnippet
 
-snippet import_playbook "import a playbook." b
+snippet import_playbook "Import a playbook" b
 - name: $1
 	import_playbook:
-		# free-form: # This action allows you to specify the name of the file directly w/o any other options.
+		# free-form: # The name of the imported playbook is specified directly without any other option.
 $0
 endsnippet
 
@@ -12483,7 +12483,7 @@ snippet import_role "Import a role into a play" b
 		# tasks_from: main
 		# vars_from: main
 		# defaults_from: main
-		# private: # If True the variables from defaults/ and vars/ in a role will not be made available to the rest of the play.
+		# private: # If C(True) the variables from C(defaults/) and C(vars/) in a role will not be made available to the rest of the play.
 $0
 endsnippet
 
