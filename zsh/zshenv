@@ -39,6 +39,9 @@ case $OSTYPE in
 
     # GOPATH
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin"
+
+    # Cargo
+    [[ -d "${HOME}/.cargo/bin" ]] && path+=("${HOME}/.cargo/bin") && export PATH
   ;;
   (linux*)
     eval "$("$HOME"/.dotfiles/bin/valet init -)"
