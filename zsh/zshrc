@@ -81,7 +81,6 @@ SPACESHIP_RPROMPT_ORDER=(
   exec_time     # Execution time
   jobs          # Background jobs indicator
   exit_code     # Exit code section
-  #kubecontext   # Kubernetes context
   git           # Git branch and git status
 )
 
@@ -124,7 +123,6 @@ alias agx=ansible-galaxy
 alias anv=ansible-vault
 alias mvim="reattach-to-user-namespace mvim"
 alias hellogopher="curl -O https://raw.githubusercontent.com/cloudflare/hellogopher/master/Makefile"
-#alias flush-dns="sudo discoveryutil udnsflushcaches"
 alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
 if hash piknik 2>/dev/null; then
   alias pkc='piknik -copy'
@@ -207,4 +205,9 @@ compdef _azure_complete azure
 # asdf
 if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
   source "${DOTFILES}/share/asdf/completions/asdf.bash"
+fi
+
+# Kubernetes CLI
+if [[ $commands[kubectl] ]]; then
+  source <(kubectl completion zsh)
 fi
