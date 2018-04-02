@@ -1271,7 +1271,7 @@
     highlight SpellBad term=underline gui=undercurl guisp=Orange
 
     " Use a line-drawing char for pretty vertical splits.
-    set fillchars+=vert:│
+    "set fillchars+=vert:│
 
     " Macvim specific settings
     if MACVIM() || VIMR()
