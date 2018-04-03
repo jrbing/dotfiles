@@ -223,18 +223,18 @@ set-option -g mouse on
 #  Keybindings  #
 #################
 
-unbind C-b
-unbind C-a
-unbind %
-unbind ,
-unbind .
-unbind n
-unbind p
-unbind [
-unbind '"'
-unbind l
-unbind &
-unbind "'"
+unbind-key C-b
+unbind-key C-a
+unbind-key %
+unbind-key ,
+unbind-key .
+unbind-key n
+unbind-key p
+unbind-key [
+unbind-key '"'
+unbind-key l
+unbind-key &
+unbind-key "'"
 
 bind-key C-f    last-window
 bind-key |      split-window -h
@@ -264,20 +264,20 @@ bind-key Space  next-layout
 # Vim keybindings
 set-option -g status-keys vi
 set-window-option -g mode-keys vi
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
-bind ` copy-mode
-bind p paste-buffer
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+bind-key ` copy-mode
+bind-key p paste-buffer
 
 # Mouse scrolling
-bind -n WheelUpPane   select-pane -t= \; copy-mode -e \; send-keys -M
-bind -n WheelDownPane select-pane -t= \;                 send-keys -M
-bind -T copy-mode C-WheelUpPane send -X halfpage-up
-bind -T copy-mode C-WheelDownPane send -X halfpage-down
-bind -T copy-mode-vi C-WheelUpPane send -X halfpage-up
-bind -T copy-mode-vi C-WheelDownPane send -X halfpage-down
+bind-key -n WheelUpPane   select-pane -t= \; copy-mode -e \; send-keys -M
+bind-key -n WheelDownPane select-pane -t= \;                 send-keys -M
+bind-key -T copy-mode C-WheelUpPane send -X halfpage-up
+bind-key -T copy-mode C-WheelDownPane send -X halfpage-down
+bind-key -T copy-mode-vi C-WheelUpPane send -X halfpage-up
+bind-key -T copy-mode-vi C-WheelDownPane send -X halfpage-down
 
 # Send current buffer to Clipper - https://github.com/wincent/clipper
 bind-key y run-shell "tmux save-buffer - | nc localhost 8377"
