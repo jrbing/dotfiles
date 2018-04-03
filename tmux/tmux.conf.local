@@ -144,13 +144,13 @@ tmux_conf_theme_status_right_bg='#282828,#d65d0e,#458588'  # bg, orange, blue
 tmux_conf_theme_status_right_attr='none,none,bold'
 
 # pairing indicator
-tmux_conf_theme_pairing='👓'          # U+1F453
+tmux_conf_theme_pairing='👓 '          # U+1F453
 tmux_conf_theme_pairing_fg='none'
 tmux_conf_theme_pairing_bg='none'
 tmux_conf_theme_pairing_attr='none'
 
 # prefix indicator
-tmux_conf_theme_prefix='⌨'            # U+2328
+tmux_conf_theme_prefix='⌨ '            # U+2328
 tmux_conf_theme_prefix_fg='none'
 tmux_conf_theme_prefix_bg='none'
 tmux_conf_theme_prefix_attr='none'
@@ -184,6 +184,14 @@ tmux_conf_battery_status_discharging='↓'    # U+2193
 # clock style
 tmux_conf_theme_clock_colour='#00afff'  # light blue
 tmux_conf_theme_clock_style='12'
+
+
+################################################################################
+#                                  Clipboard                                   #
+################################################################################
+
+# in copy mode, copying selection also copies to the OS clipboard
+tmux_conf_copy_to_os_clipboard=false
 
 ################################################################################
 #                               Custom Overrides                               #
