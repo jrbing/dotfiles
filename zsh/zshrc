@@ -193,11 +193,18 @@ function tre() {
 # Completion
 #
 
+# Set custom completion directory
+#fpath=("${DOTFILES}/completions/zsh" $fpath)
+
+# Activate completions
+compinit
+# Enable bash completion
+bashcompinit
+
 # Azure CLI
-_azure_complete() {
-  compadd -- $(azure --compzsh --compgen "${CURRENT}" "${words[CURRENT-1]}" "${BUFFER}")
-}
-compdef _azure_complete azure
+if [[ -s "${DOTFILES}/completions/az.zsh" ]]; then
+  source "${DOTFILES}/completions/az.zsh"
+fi
 
 # TravisCI
 [[ -f ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
