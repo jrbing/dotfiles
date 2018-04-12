@@ -218,3 +218,8 @@ fi
 if [[ $commands[kubectl] ]]; then
   source <(kubectl completion zsh)
 fi
+
+# Helm CLI
+if [[ $commands[helm] ]]; then
+  source <(helm completion zsh)
+fi
