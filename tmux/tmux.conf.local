@@ -213,6 +213,13 @@ set-window-option -g monitor-activity off
 # Titles
 #set-window-option -g automatic-rename on
 
+# Direnv
+set-option -g update-environment "DIRENV_DIFF DIRENV_DIR DIRENV_WATCHES"
+set-environment -gu DIRENV_DIFF
+set-environment -gu DIRENV_DIR
+set-environment -gu DIRENV_WATCHES
+set-environment -gu DIRENV_LAYOUT
+
 # Misc
 #set -sg escape-time 0
 #set-window-option -g window-status-attr bold
