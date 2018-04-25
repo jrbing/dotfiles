@@ -80,6 +80,7 @@
   Plug 'w0ng/vim-hybrid'
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'rakr/vim-one'
+  Plug 'michalbachowski/vim-wombat256mod'
 
   " Filetypes
   Plug 'sheerun/vim-polyglot'
