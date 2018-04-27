@@ -52,7 +52,7 @@ export PSQL_EDITOR=vim
 # Oracle SQLcl
 export SQLPATH="${DOTFILES}/sql/oracle"
 export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
-export NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
+export NLS_LANG=American_America.UTF8
 
 if [[ -d "/opt/oracle/sqlcl" ]]; then
   path+=('/opt/oracle/sqlcl/bin')
