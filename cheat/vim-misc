@@ -5,3 +5,7 @@
 # Project wide substitution using cfdo
 :vimgrep oldterm **                   # Populate the location list
 :cfdo %S/oldterm/newterm/ | update    # Execute substitution using vim-abolish
+
+# Fix for slow vim scrolling
+:set cursorline!    # Turn of cursorline highlighting
+:set lazyredraw     # Use lazy screen updating
