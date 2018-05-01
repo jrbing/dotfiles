@@ -156,7 +156,7 @@
   if !g:WINDOWS()
     set shell=/bin/bash
   endif
-  set lazyredraw
+  "set lazyredraw
   set matchtime=3
   set splitbelow
   set splitright
