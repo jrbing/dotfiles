@@ -44,6 +44,7 @@
   Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
   Plug 'justinmk/vim-sneak'
+  Plug 'kristijanhusak/vim-carbon-now-sh'
   Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
@@ -1044,6 +1045,10 @@
     let g:hcl_fmt_autosave = 1
     let g:tf_fmt_autosave = 1
     let g:nomad_fmt_autosave = 0
+  "}}}
+
+  " vim-carbon-now {{{2
+    let g:carbon_now_sh_options = 't=solarized\%20dark&wt=none&wa=false&ln=true&fm=Inconsolata&fs=18px'
   "}}}
 
 " }}}
