@@ -525,9 +525,9 @@
   "}}}
 
   " Ansible {{{2
-    augroup ft_ansible
+    augroup ft_yaml.ansible
       autocmd!
-      autocmd FileType ansible setlocal textwidth=0 wrapmargin=0
+      autocmd FileType yaml.ansible setlocal textwidth=0 wrapmargin=0
     augroup END
   "}}}
 
@@ -675,8 +675,8 @@
     " no space between the parameter definition and the comment delimiter
     let g:ft = ''
     fu! NERDCommenter_before()
-      if &ft == 'ansible'
-        let g:ft = 'ansible'
+      if &ft == 'yaml.ansible'
+        let g:ft = 'yaml.ansible'
         let g:NERDSpaceDelims = 1
       elseif &ft == 'yaml'
         let g:ft = 'yaml'
@@ -684,8 +684,8 @@
       endif
     endfu
     fu! NERDCommenter_after()
-      if g:ft == 'ansible'
-        setf ansible
+      if g:ft == 'yaml.ansible'
+        setf yaml.ansible
         let g:ft = ''
         let g:NERDSpaceDelims = 0
       elseif g:ft == 'yaml'
@@ -791,8 +791,8 @@
       \ ]
     \ }
 
-    let g:tagbar_type_ansible = {
-      \ 'ctagstype' : 'ansible',
+    let g:tagbar_type_yaml = {
+      \ 'ctagstype' : 'yaml.ansible',
       \ 'kinds' : [
         \ 't:tasks'
       \ ],
