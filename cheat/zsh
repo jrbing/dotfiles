@@ -4,3 +4,6 @@ zmv '* *' '$f:gs/ /_'
 
 # Preview changing a file extension (-n acts as a dry-run flag)
 zmv -n '(*).out' '$1.log'
+
+# Convert filenames to lower case
+for file in IMG*.PNG ; do  mv $file ${file:l}  ; done
