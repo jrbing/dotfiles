@@ -51,8 +51,9 @@ link-cheat:
 	@cd ~ && ln -nfs $(dotfiles)/cheat/ .cheat;
 
 link-powershell:
-	@cd ~ && ln -nfs $(dotfiles)/powershell/profile.ps1 ~/.config/powershell/profile.ps1;
-	@cd ~ && ln -nfs $(dotfiles)/powershell/profile.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1;
+	@cd ~ && mkdir -p ~/.config/powershell;
+	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/profile.ps1;
+	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1;
 
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
