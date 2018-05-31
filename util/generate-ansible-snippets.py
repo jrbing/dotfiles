@@ -8,6 +8,7 @@ import os.path
 # import fnmatch
 import logging
 import ansible.modules
+from ansible.plugins.loader import fragment_loader
 from ansible.utils import plugin_docs
 
 # NOTE:  Be sure to set the PYTHONPATH environment variable before running this
@@ -32,7 +33,7 @@ def get_documents():
         for filename in filenames:
             if filename == '__init__.py' or not filename.endswith('py'):
                 continue
-            documentation = plugin_docs.get_docstring(os.path.join(root, filename))[0]
+            documentation = plugin_docs.get_docstring(os.path.join(root, filename), fragment_loader)[0]
             if documentation is None:
                 continue
             yield documentation
