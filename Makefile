@@ -73,15 +73,10 @@ submodules:  ## Update all submodule references
 			git reset --hard origin/master; \
 			git submodule update --recursive;'
 
-iterm-integration:
-	@curl -L https://iterm2.com/misc/bash_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.bash; \
-		curl -L https://iterm2.com/misc/zsh_startup.in > $(dotfiles)/iterm/iterm2_shell_integration.zsh; \
-		curl -L https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat > $(dotfiles)/iterm/imgcat
-
 update:  ## Pull updates from remote
 	@git pull --rebase
 
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: link-tmux link-vim link-nvim link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg link-powershell check-dead clean-dead submodules iterm-integration update help
+.PHONY: link-tmux link-vim link-nvim link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg link-powershell check-dead clean-dead submodules update help
