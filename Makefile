@@ -12,7 +12,7 @@ ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
 
 all: help
 
-link: link-tmux link-vim link-prezto link-etc link-git link-bash link-zsh link-gpg link-powershell  ## Link all dotfiles to their respective locations
+link: link-tmux link-vim link-etc link-git link-bash link-zsh link-gpg link-powershell  ## Link all dotfiles to their respective locations
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/oh-my-tmux/.tmux.conf .tmux.conf; \
@@ -25,9 +25,6 @@ link-vim:
 
 link-nvim:
 	@cd ~ && ln -nfs $(dotfiles)/vim/ .config/nvim
-
-link-prezto:
-	@cd ~ && ln -nfs $(dotfiles)/zsh/prezto .zprezto
 
 link-etc:
 	@cd ~ && for file in $(ETC_FILES); do ln -nfs .dotfiles/etc/$$file .$$file; done
@@ -87,4 +84,4 @@ update:  ## Pull updates from remote
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: link-tmux link-vim link-nvim link-prezto link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg link-powershell check-dead clean-dead submodules iterm-integration update help
+.PHONY: link-tmux link-vim link-nvim link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg link-powershell check-dead clean-dead submodules iterm-integration update help
