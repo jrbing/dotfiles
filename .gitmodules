@@ -13,3 +13,4 @@
 [submodule "zsh/zplug"]
 	path = zsh/zplug
 	url = git://github.com/zplug/zplug.git
+  ignore = dirty

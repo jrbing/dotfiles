@@ -24,6 +24,11 @@ zplug "sorin-ionescu/prezto", \
 zplug "belak/prezto-contrib", \
   hook-build:"cd $ZPLUG_ROOT/repos/belak/prezto-contrib && git submodule update --init"
 
+zplug "b4b4r07/httpstat", \
+  as:command, \
+  use:'(*).sh', \
+  rename-to:'$1'
+
 zplug "Tarrasch/zsh-bd"
 zplug "rimraf/k"
 zplug "asdf-vm/asdf", use:asdf.sh
@@ -149,7 +154,6 @@ if hash piknik 2>/dev/null; then
       tar czpvf - ${1:-.} | piknik -copy
   }
 fi
-
 
 #
 # Functions
