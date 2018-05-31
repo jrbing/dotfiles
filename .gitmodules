@@ -6,10 +6,6 @@
   path = vim/plug
   url = git://github.com/junegunn/vim-plug.git
   ignore = dirty
-[submodule "share/shipit"]
-  path = share/shipit
-  url = git://github.com/sapegin/shipit.git
-  ignore = dirty
 [submodule "share/vipe"]
   path = share/vipe
   url = git://github.com/juliangruber/vipe.git
