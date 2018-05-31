@@ -13,8 +13,8 @@ zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 
 # Add additional directories to load prezto modules from
-# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
-zstyle ':prezto:load' pmodule-dirs $HOME/.dotfiles/zsh/contrib
+#zstyle ':prezto:load' pmodule-dirs $HOME/.dotfiles/zsh/contrib
+zstyle ':prezto:load' pmodule-dirs $ZPLUG_ROOT/repos/belak/prezto-contrib
 
 # Set the Zsh modules to load (man zshmodules).
 zstyle ':prezto:load' zmodule 'attr' 'stat'

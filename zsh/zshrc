@@ -9,38 +9,46 @@
 # Don't ask before executing rm * or rm path/*
 setopt rmstarsilent
 
-# 10 second wait before doing something that will delete everything
-#setopt RM_STAR_WAIT
+#
+# zplug
+#
+
+export ZPLUG_HOME="${DOTFILES}/zsh/zplug"
+source $ZPLUG_HOME/init.zsh
+
+zplug "sorin-ionescu/prezto", \
+  as:plugin, \
+  use:init.zsh, \
+  hook-build:"ln -s $ZPLUG_ROOT/repos/sorin-ionescu/prezto ${ZDOTDIR:-$HOME}/.zprezto"
+
+zplug "belak/prezto-contrib", \
+  hook-build:"cd $ZPLUG_ROOT/repos/belak/prezto-contrib && git submodule update --init"
+
+zplug "Tarrasch/zsh-bd"
+zplug "rimraf/k"
+zplug "asdf-vm/asdf", use:asdf.sh
+# sapegin/shipit
+# juliangruber/vipe
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
+
+# Source plugins and add commands to $PATH
+zplug load
 
 #
 # Source 3rd party modules
 #
 
-# Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# bd
-if [[ -s "${DOTFILES}/zsh/bd/bd.zsh" ]]; then
-  source "${DOTFILES}/zsh/bd/bd.zsh"
-fi
-
-# k
-if [[ -s "${DOTFILES}/zsh/k/k.sh" ]]; then
-  source "${DOTFILES}/zsh/k/k.sh"
-fi
-
-# asdf
-if [[ -s "${DOTFILES}/share/asdf/asdf.sh" ]]; then
-  source "${DOTFILES}/share/asdf/asdf.sh"
-fi
-
 # direnv
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
-
 
 #
 # Application and module settings
@@ -124,6 +132,7 @@ alias anv=ansible-vault
 alias mvim="reattach-to-user-namespace mvim"
 alias hellogopher="curl -O https://raw.githubusercontent.com/cloudflare/hellogopher/master/Makefile"
 alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
+
 if hash piknik 2>/dev/null; then
   alias pkc='piknik -copy'
   alias pkp='piknik -paste'
@@ -193,13 +202,15 @@ function tre() {
 # Completion
 #
 
+autoload -U +X bashcompinit && bashcompinit
+
 # Set custom completion directory
 #fpath=("${DOTFILES}/completions/zsh" $fpath)
 
 # Activate completions
-compinit
+#compinit
 # Enable bash completion
-bashcompinit
+#bashcompinit
 
 # Azure CLI
 if [[ -s "${DOTFILES}/completions/az.zsh" ]]; then
@@ -210,8 +221,8 @@ fi
 [[ -f ~/.travis/travis.sh ]] && source ~/.travis/travis.sh
 
 # asdf
-if [[ -s "${DOTFILES}/share/asdf/completions/asdf.bash" ]]; then
-  source "${DOTFILES}/share/asdf/completions/asdf.bash"
+if [[ -s "$ZPLUG_ROOT/repos/asdf-vm/asdf/completions/asdf.bash" ]]; then
+  source "$ZPLUG_ROOT/repos/asdf-vm/asdf/completions/asdf.bash"
 fi
 
 # Kubernetes CLI
