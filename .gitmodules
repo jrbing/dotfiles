@@ -10,13 +10,6 @@
   path = tmux/oh-my-tmux
   url = git://github.com/gpakosz/.tmux
   ignore = dirty
-[submodule "share/asdf"]
-  path = share/asdf
-  url = https://github.com/asdf-vm/asdf.git
-  ignore = dirty
-[submodule "zsh/contrib"]
-	path = zsh/contrib
-	url = git://github.com/belak/prezto-contrib.git
 [submodule "zsh/zplug"]
 	path = zsh/zplug
 	url = git://github.com/zplug/zplug.git
