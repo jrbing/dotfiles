@@ -30,10 +30,6 @@
   path = share/vipe
   url = git://github.com/juliangruber/vipe.git
   ignore = dirty
-[submodule "share/peat"]
-  path = share/peat
-  url = https://github.com/sjl/peat.git
-  ignore = dirty
 [submodule "tmux/oh-my-tmux"]
   path = tmux/oh-my-tmux
   url = git://github.com/gpakosz/.tmux
@@ -45,3 +41,6 @@
 [submodule "zsh/contrib"]
 	path = zsh/contrib
 	url = git://github.com/belak/prezto-contrib.git
+[submodule "zsh/zplug"]
+	path = zsh/zplug
+	url = git://github.com/zplug/zplug.git
