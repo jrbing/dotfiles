@@ -36,6 +36,8 @@ case $OSTYPE in
     export LANG=en_US.UTF-8
     export CHEATCOLORS=true
     export NVIM_TUI_ENABLE_TRUE_COLOR=1
+    export HTTPSTAT_SHOW_BODY=true
+    export HTTPSTAT_SHOW_SPEED=true
 
     # GOPATH
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin"
