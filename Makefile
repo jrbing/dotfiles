@@ -8,7 +8,7 @@ BASH_FILES := $(shell cd $(dotfiles)/bash; ls)
 ETC_FILES := $(shell cd $(dotfiles)/etc; ls)
 GPG_FILES := $(shell cd $(dotfiles)/gnupg; ls)
 GIT_FILES := $(shell cd $(dotfiles)/git; ls)
-ZSH_FILES := $(shell cd $(dotfiles)/zsh; ls z*)
+ZSH_FILES := zlogin zlogout zpreztorc zprofile zshenv zshrc
 
 all: help
 
@@ -50,7 +50,6 @@ link-cheat:
 link-powershell:
 	@cd ~ && mkdir -p ~/.config/powershell;
 	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/profile.ps1;
-	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1;
 
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
