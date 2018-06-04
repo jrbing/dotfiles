@@ -30,6 +30,13 @@ function update_vim_plugins() {
   stop_spinner $?
 }
 
+function update_asdf_plugins() {
+  start_spinner "Updating asdf plugins"
+  asdf plugin-update --all > /dev/null 2>&1
+  stop_spinner $?
+}
+
 update_dotfiles
 #cleanup_vim_plugins
-update_vim_plugins
+#update_vim_plugins
+update_asdf_plugins
