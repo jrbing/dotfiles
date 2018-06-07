@@ -41,5 +41,12 @@ zplug "genuinetools/pepper", \
   from:gh-r, \
   as:command
 
-#akme/lsofgraph-python
+# Be sure to install the pyyaml dependency for this
+#   `pip3 install pyyaml`
+zplug "lbolla/kube-secret-editor", \
+  as:command, \
+  use:'(*).py', \
+  rename-to:'$1'
+
+# akme/lsofgraph-python
 # sapegin/shipit
