@@ -41,6 +41,11 @@ zplug "genuinetools/pepper", \
   from:gh-r, \
   as:command
 
+zplug "drwetter/testssl.sh", \
+  as:command, \
+  use:'testssl.sh', \
+  rename-to:'testssl'
+
 # Be sure to install the pyyaml dependency for this
 #   `pip3 install pyyaml`
 zplug "lbolla/kube-secret-editor", \
