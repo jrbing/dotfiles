@@ -76,12 +76,8 @@
   Plug 'chriskempson/base16-vim'
   Plug 'lifepillar/vim-solarized8'
   Plug 'morhetz/gruvbox'
-  Plug 'ajmwagar/vim-dues'
-  Plug 'trevordmiller/nova-vim'
-  Plug 'w0ng/vim-hybrid'
-  Plug 'NLKNguyen/papercolor-theme'
   Plug 'rakr/vim-one'
-  Plug 'michalbachowski/vim-wombat256mod'
+  Plug 'joshdick/onedark.vim'
 
   " Filetypes
   Plug 'sheerun/vim-polyglot'
@@ -264,15 +260,15 @@
   " Colorscheme
   set background=dark
   if has('gui_macvim') || has('gui_vimr') || has('gui_running')
-    let g:solarized_visibility = 'normal'
-    let g:solarized_diffmode = 'normal'
-    let g:solarized_termtrans = 0
-    let g:solarized_contrast = 'normal'
-    let g:solarized_statusline = 'normal'
-    let g:solarized_term_italics = 0
-    let g:solarized_old_cursor_style = 0
-    "colorscheme solarized
-    colorscheme solarized8_dark
+    "let g:solarized_visibility = 'normal'
+    "let g:solarized_diffmode = 'normal'
+    "let g:solarized_termtrans = 0
+    "let g:solarized_contrast = 'normal'
+    "let g:solarized_statusline = 'normal'
+    "let g:solarized_term_italics = 0
+    "let g:solarized_old_cursor_style = 0
+    "colorscheme solarized8_dark
+    colorscheme onedark
   else
     let g:gruvbox_italic = 0
     colorscheme gruvbox
