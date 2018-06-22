@@ -589,16 +589,6 @@
 
 " Plugin configuration/mapping {{{1
 
-  " slimux {{{2
-    "map <C-c><C-c> :SlimuxREPLSendLine<CR>
-    "vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
-
-    "map <Leader>s :SlimuxREPLSendLine<CR>
-    "vmap <Leader>s :SlimuxREPLSendSelection<CR>
-    "map <Leader>a :SlimuxShellLast<CR>
-    "map <Leader>k :SlimuxSendKeysLast<CR>
-  "}}}
-
   " scratch.vim {{{2
     let g:scratch_insert_autohide = 0
     let g:scratch_top = 0
