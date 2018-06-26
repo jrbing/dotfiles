@@ -1,0 +1,103 @@
+priority 0
+
+extends java
+
+snippet gradle "Skeleton Gradle build file" !b
+apply plugin: 'java'
+apply plugin: 'application'
+
+apply plugin: 'eclipse'$1
+// apply plugin: 'eclipse-wtp'
+// apply plugin: 'war'
+// apply plugin: 'jetty'
+
+project.version = '${2:0.0.1}'
+
+// mainClassName = ''
+
+/* Extra Properties */
+ext {
+	springVersion = '4.0.3.RELEASE'
+	guavaVersion = '16.0.1'
+	slf4jVersion = '1.7.6'
+	log4jVersion = '1.2.17'${3}
+}
+
+jar {
+	baseName = "${project.name}"
+	version = "${project.version}"
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'http://clojars.org/repo' }
+}
+
+dependencies {
+	compile "com.google.guava:guava:${guavaVersion}"
+	compile "org.springframework:spring-context:${springVersion}"
+	compile "org.springframework:spring-webmvc:${springVersion}"
+	compile "javax.servlet:servlet-api:2.5"
+	compile "org.slf4j:slf4j-api:${slf4jVersion}"
+	compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+	compile "log4j:log4j:${log4jVersion}"
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.12'
+}
+endsnippet
+
+snippet springboot "Springboot" !b
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url "http://repo.spring.io/snapshot" }
+		maven { url "http://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'application'
+
+// apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+// apply plugin: 'war'
+// apply plugin: 'jetty'
+
+project.version = '${1:0.0.1}'
+
+/* Extra Properties */
+ext {
+	springVersion = '4.0.3.RELEASE'
+	guavaVersion = '16.0.1'
+	slf4jVersion = '1.7.6'
+	log4jVersion = '1.2.17'
+}
+
+jar {
+	baseName = "${project.name}"
+	version = "${project.version}"
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'http://clojars.org/repo' }
+	maven { url "http://repo.spring.io/snapshot" }
+	maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-web"
+	compile "com.google.guava:guava:${guavaVersion}"
+	compile "com.fasterxml.jackson.core:jackson-databind"
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.12'
+}
+endsnippet
