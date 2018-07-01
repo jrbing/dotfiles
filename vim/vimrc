@@ -1037,6 +1037,12 @@
     let g:carbon_now_sh_options = 't=solarized\%20dark&wt=none&wa=false&ln=true&fm=Inconsolata&fs=18px'
   "}}}
 
+  " vim-kubernetes {{{2
+    nnoremap <leader>ka :KubeApply<CR>
+    nnoremap <leader>kd :KubeDelete<CR>
+
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
