@@ -130,8 +130,8 @@ tmux_conf_theme_right_separator_sub=''
 #tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
 #tmux_conf_theme_status_right='#{prefix}#{pairing} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
 tmux_conf_theme_status_left=' ❐ #S |  | '
-#tmux_conf_theme_status_right='#{prefix}#{pairing} | #{fuzzyclock} | #{hostname} '
-tmux_conf_theme_status_right='#{prefix}#{pairing} |  | #{hostname} '
+#tmux_conf_theme_status_right='#{prefix}#{pairing} |  | #{hostname} '
+tmux_conf_theme_status_right='#{prefix}#{pairing} |  | #(/bin/bash ~/.dotfiles/tmux/kube.tmux) | #{hostname} '
 
 # status left style
 tmux_conf_theme_status_left_fg='#d5c4a1,#d79921,#282828'  # fg2, yellow, bg0
@@ -139,9 +139,12 @@ tmux_conf_theme_status_left_bg='#665c54,#d79921,#282828'  # bg2, yellow, bg0
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
-tmux_conf_theme_status_right_fg='#ebdbb2,#ebdbb2,#ebdbb2'  # fg, fg, fg
-tmux_conf_theme_status_right_bg='#282828,#d65d0e,#458588'  # bg, orange, blue
-tmux_conf_theme_status_right_attr='none,none,bold'
+#tmux_conf_theme_status_right_fg='#ebdbb2,#ebdbb2,#ebdbb2'  # fg, fg, fg
+#tmux_conf_theme_status_right_bg='#282828,#d65d0e,#458588'  # bg, orange, blue
+#tmux_conf_theme_status_right_attr='none,none,bold'
+tmux_conf_theme_status_right_fg='#ebdbb2,#ebdbb2,#ebdbb2,#ebdbb2'  # fg, fg, fg
+tmux_conf_theme_status_right_bg='#282828,#d65d0e,#cc241d,#458588'  # bg, orange, red,blue
+tmux_conf_theme_status_right_attr='none,none,none,bold'
 
 # pairing indicator
 tmux_conf_theme_pairing='👓 '          # U+1F453
