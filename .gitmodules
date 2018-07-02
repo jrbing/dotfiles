@@ -11,6 +11,6 @@
   url = git://github.com/gpakosz/.tmux
   ignore = dirty
 [submodule "zsh/zplug"]
-	path = zsh/zplug
-	url = git://github.com/zplug/zplug.git
+  path = zsh/zplug
+  url = git://github.com/zplug/zplug.git
   ignore = dirty
