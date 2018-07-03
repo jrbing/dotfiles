@@ -49,12 +49,12 @@ zplug 'genuinetools/pepper', \
 
 zplug 'drwetter/testssl.sh', \
   as:command, \
-  use:'testssl.sh', \
-  rename-to:'testssl'
+  use:'(*).sh', \
+  rename-to:'$1'
 
 # Be sure to install the pyyaml dependency for this
 #   `pip3 install pyyaml`
-zplug "lbolla/kube-secret-editor", \
+zplug 'lbolla/kube-secret-editor', \
   as:command, \
   use:'(*).py', \
   rename-to:'$1'
