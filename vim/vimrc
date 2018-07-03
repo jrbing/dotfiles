@@ -90,7 +90,6 @@
   Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
   Plug 'gutenye/json5.vim'
   Plug 'glench/vim-jinja2-syntax'
-  Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
 
