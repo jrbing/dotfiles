@@ -1,7 +1,7 @@
 {
   "editor.snippetSuggestions": "top",
-  "editor.fontSize": 14,
-  "editor.fontFamily": "Menlo, Monaco, Consolas, monospace",
+  "editor.fontSize": 16,
+  "editor.fontFamily": "Inconsolata-dz for Powerline, Menlo, Monaco, Consolas, monospace",
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "editor.renderWhitespace": "none",
@@ -46,8 +46,7 @@
   "vim.textwidth": 80,
   "vim.useCtrlKeys": false,
   "vim.useSystemClipboard": true,
-  "vim.disableAnnoyingNeovimMessage": true,
-  "vim.otherModesKeyBindings": [
+  "vim.normalModeKeyBindings": [
     {
       "before": [";"],
       "after": [":"]
