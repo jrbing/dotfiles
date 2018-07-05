@@ -1,27 +1,17 @@
 // vim: filetype=rest tabstop=4 expandtab shiftwidth=4 softtabstop=4
+// Trigger key is <C-j>
 
 # Global settings
-
-// Default host
 http://domain[:port]/...
-
-// Default CURL options
-#--include
-
-// Default headers
 #Accept: application/json
 #X-Header: Some Data
 --
 
-#
 # View Elasticsearch nodes status
-#
 --
 GET /_cat/nodes?v
 
-#
 # Add a new doc to index and type
-#
 --
 POST /testindex/testtype
 {
@@ -30,14 +20,23 @@ POST /testindex/testtype
     "date": "2015-01-01"
 }
 
-#
 # Search index
-#
 --
 GET /testindex/_search?pretty
 
-#
 # View mapping
-#
 --
 GET /testindex/testtype/_mapping?pretty
+
+# Bulk load data
+--
+POST /testindex/_bulk
+{ "index": { "_index": "test", "_type": "product" } }
+{ "sku": "SKU1", "name": "Product name 1" }
+{ "index": { "_index": "test", "_type": "product" } }
+{ "sku": "SKU2", "name": "Product name 2" }
+
+# Bulk load data from file
+--
+POST /testindex/_bulk
+@data.sample.json
