@@ -52,6 +52,11 @@ zplug 'drwetter/testssl.sh', \
   use:'(*).sh', \
   rename-to:'$1'
 
+zplug 'chubin/cheat.sh', \
+  as:command, \
+  use:'share/cht.sh.txt', \
+  rename-to:'cht.sh'
+
 # Be sure to install the pyyaml dependency for this
 #   `pip3 install pyyaml`
 zplug 'lbolla/kube-secret-editor', \
