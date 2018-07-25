@@ -395,6 +395,9 @@
     nnoremap <F1> <ESC>
     vnoremap <F1> <ESC>
 
+    " Toggle paste mode
+    set pastetoggle=<F3>
+
     " Autoformat the current buffer
     nnoremap <F4> :Autoformat<CR><CR>
 
