@@ -937,12 +937,9 @@
     let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.dotfiles/share/asdf/shims') ]
     "let g:formatters_python = ['yapf']
     let g:formatter_yapf_style = 'pep8'
-    let b:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
-    let b:formatters_java = ['custom_java']
-    "astyle --mode=java --style=java -pcH
-    "--pad-oper / -p
-    "--convert-tabs / -c
-    "--pad-header / -H
+    let g:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
+    let g:formatters_java = ['custom_java']
+    let g:formatters_yaml = ['prettier']
   "}}}
 
   " Ferret {{{2
