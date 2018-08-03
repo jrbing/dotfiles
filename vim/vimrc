@@ -93,6 +93,7 @@
   Plug 'glench/vim-jinja2-syntax'
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
+  Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
 
   if g:OSX()
     Plug 'tpope/vim-db', { 'for': ['sql', 'plsql'] }
