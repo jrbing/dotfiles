@@ -81,7 +81,6 @@
   Plug 'joshdick/onedark.vim'
 
   " Filetypes
-  Plug 'sheerun/vim-polyglot'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'fatih/vim-hclfmt'
   Plug 'funcodeio/lz4.vim'
@@ -94,6 +93,10 @@
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
   Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
+  Plug 'sheerun/vim-polyglot'
+
+  let g:polyglot_disabled = ['markdown']
+  Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 
   if g:OSX()
     Plug 'tpope/vim-db', { 'for': ['sql', 'plsql'] }
