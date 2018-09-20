@@ -56,5 +56,6 @@
   "powershell.enableProfileLoading": true,
   "powershell.scriptAnalysis.enable": true,
   "powershell.scriptAnalysis.settingsPath": "",
-  "extensions.ignoreRecommendations": false
+  "extensions.ignoreRecommendations": false,
+  "vsicons.dontShowNewVersionMessage": true
 }
