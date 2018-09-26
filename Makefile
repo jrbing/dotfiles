@@ -69,7 +69,6 @@ clean:  ## Remove all temporary and backup files
 submodules:  ## Update all submodule references
 	@git submodule foreach 'git fetch origin; \
 			git checkout master; \
-			git reset --hard origin/master; \
 			git submodule update --recursive;'
 
 update:  ## Pull updates from remote
