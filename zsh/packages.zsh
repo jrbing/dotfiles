@@ -52,6 +52,10 @@ zplug 'drwetter/testssl.sh', \
   use:'(*).sh', \
   rename-to:'$1'
 
+zplug 'trailofbits/twa', \
+  as:command, \
+  use:'twa'
+
 zplug 'chubin/cheat.sh', \
   as:command, \
   use:'share/cht.sh.txt', \
