@@ -81,6 +81,7 @@
   Plug 'joshdick/onedark.vim'
 
   " Filetypes
+  Plug 'ap/vim-css-color'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'fatih/vim-hclfmt'
   Plug 'funcodeio/lz4.vim'
