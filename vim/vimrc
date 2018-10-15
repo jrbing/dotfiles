@@ -942,9 +942,13 @@
     let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.dotfiles/share/asdf/shims') ]
     "let g:formatters_python = ['yapf']
     let g:formatter_yapf_style = 'pep8'
+    let g:formatters_yaml = ['prettier']
     let g:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
     let g:formatters_java = ['custom_java']
-    let g:formatters_yaml = ['prettier']
+    "let g:formatdef_pg_format='"pg_format --comma-start --comma-break --function-case 1 --spaces 2 --keyword-case 1 -"'
+    "let g:formatters_sql = ['pg_format']
+    let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width 2 --keywords lower --identifiers lower --comma_first True -"'
+
   "}}}
 
   " Ferret {{{2

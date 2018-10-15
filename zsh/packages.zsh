@@ -11,7 +11,7 @@ zplug 'sorin-ionescu/prezto', \
   depth:10, \
   as:plugin, \
   use:init.zsh, \
-  hook-build:"ln -s ${ZPLUG_ROOT}/repos/sorin-ionescu/prezto ${ZDOTDIR:-$HOME}/.zprezto"
+  hook-build:"ln -nfs ${ZPLUG_ROOT}/repos/sorin-ionescu/prezto ${ZDOTDIR:-$HOME}/.zprezto"
 
 zplug 'belak/prezto-contrib', \
   depth:10, \
@@ -47,11 +47,6 @@ zplug 'genuinetools/pepper', \
   as:command, \
   from:gh-r
 
-zplug 'drwetter/testssl.sh', \
-  as:command, \
-  use:'(*).sh', \
-  rename-to:'$1'
-
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
@@ -68,5 +63,13 @@ zplug 'lbolla/kube-secret-editor', \
   use:'(*).py', \
   rename-to:'$1'
 
+# TODO: figure out why this fails to update
+#zplug 'drwetter/testssl.sh', \
+  #as:command, \
+  #use:'(*).sh', \
+  #rename-to:'$1'
+#zplug 'darold/pgFormatter', \
+  #as:command, \
+  #use:'pg_format'
 # akme/lsofgraph-python
 # sapegin/shipit
