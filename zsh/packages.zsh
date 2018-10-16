@@ -47,6 +47,10 @@ zplug 'genuinetools/pepper', \
   as:command, \
   from:gh-r
 
+zplug 'pulumi/kubespy', \
+  as:command, \
+  from:gh-r
+
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
