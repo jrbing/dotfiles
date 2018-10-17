@@ -51,6 +51,10 @@ zplug 'pulumi/kubespy', \
   as:command, \
   from:gh-r
 
+zplug 'davrodpin/mole', \
+  as:command, \
+  from:gh-r
+
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
