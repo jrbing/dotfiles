@@ -46,6 +46,7 @@ Begin {
 
     $SymlinkMappings = @(
             @("$Dotfiles\powershell\profile.ps1", "$Documents\WindowsPowershell\profile.ps1"),
+            @("$Dotfiles\powershell\profile.ps1", "$Documents\Powershell\Microsoft.PowerShell_profile.ps1"),
             @("$Dotfiles\git\gitconfig", "$HOME\.gitconfig"),
             @("$Dotfiles\vim\vimrc", "$HOME\_vimrc"),
             @("$Dotfiles\vim", "$HOME\vimfiles"),
