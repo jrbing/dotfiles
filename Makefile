@@ -53,6 +53,7 @@ link-powershell:
 
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
+	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 
 link-pandoc:
 	@cd ~ && ln -nfs $(dotfiles)/pandoc/ .pandoc
