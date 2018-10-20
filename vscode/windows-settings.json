@@ -1,18 +1,23 @@
 {
   "editor.snippetSuggestions": "top",
   "editor.fontSize": 18,
-  "editor.fontFamily": "Menlo, Monaco, Consolas, monospace",
+  "editor.fontFamily": "Consolas, monospace",
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "editor.renderWhitespace": "none",
   "editor.cursorStyle": "block",
   "editor.insertSpaces": true,
   "editor.wordWrap": 300,
+  "editor.renderLineHighlight": "line",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.scrollBeyondLastLine": false,
+  "editor.minimap.enabled": false,
 
   "window.zoomLevel": -1,
+  "window.nativeTabs": true,
+
   "workbench.welcome.enabled": false,
-  "workbench.colorTheme": "Solarized Dark",
-  "workbench.iconTheme": "vs-seti",
+  "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.enablePreview": false,
 
   "files.associations": {},
@@ -29,6 +34,7 @@
   "terminal.external.linuxExec": "xterm",
 
   "extensions.autoUpdate": true,
+  "extensions.ignoreRecommendations": false,
 
   "vim.autoindent": true,
   "vim.easymotion": false,
@@ -47,7 +53,6 @@
   "vim.textwidth": 80,
   "vim.useCtrlKeys": false,
   "vim.useSystemClipboard": true,
-  "vim.disableAnnoyingNeovimMessage": true,
   "vim.otherModesKeyBindings": [
     {
       "before": [";"],
@@ -57,5 +62,7 @@
 
   "powershell.enableProfileLoading": true,
   "powershell.scriptAnalysis.enable": true,
-  "powershell.scriptAnalysis.settingsPath": ""
+  "powershell.scriptAnalysis.settingsPath": "",
+
+  "vsicons.dontShowNewVersionMessage": true
 }

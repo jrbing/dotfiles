@@ -1,6 +1,6 @@
 {
   "editor.snippetSuggestions": "top",
-  "editor.fontSize": 16,
+  "editor.fontSize": 15,
   "editor.fontFamily": "Inconsolata-dz for Powerline, Menlo, Monaco, Consolas, monospace",
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
@@ -8,8 +8,14 @@
   "editor.cursorStyle": "block",
   "editor.insertSpaces": true,
   "editor.wordWrap": 300,
+  "editor.renderLineHighlight": "line",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.scrollBeyondLastLine": false,
+  "editor.minimap.enabled": false,
 
   "window.zoomLevel": -1,
+  "window.nativeTabs": true,
+
   "workbench.welcome.enabled": false,
   "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.enablePreview": false,
@@ -28,6 +34,7 @@
   "terminal.external.linuxExec": "xterm",
 
   "extensions.autoUpdate": true,
+  "extensions.ignoreRecommendations": false,
 
   "vim.autoindent": true,
   "vim.easymotion": false,
@@ -56,6 +63,6 @@
   "powershell.enableProfileLoading": true,
   "powershell.scriptAnalysis.enable": true,
   "powershell.scriptAnalysis.settingsPath": "",
-  "extensions.ignoreRecommendations": false,
+
   "vsicons.dontShowNewVersionMessage": true
 }
