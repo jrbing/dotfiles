@@ -14,7 +14,7 @@
   "editor.minimap.enabled": false,
 
   "window.zoomLevel": -1,
-  "window.nativeTabs": true,
+  "window.nativeTabs": false,
 
   "workbench.welcome.enabled": false,
   "workbench.colorTheme": "One Dark Pro",
