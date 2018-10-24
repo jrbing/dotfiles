@@ -100,7 +100,7 @@
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 
   if g:OSX()
-    Plug 'tpope/vim-db', { 'for': ['sql', 'plsql'] }
+    Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
     Plug 'editorconfig/editorconfig-vim'
