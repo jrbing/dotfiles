@@ -104,7 +104,7 @@
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
     Plug 'Raimondi/delimitMate'
     Plug 'w0rp/ale'
