@@ -1053,7 +1053,10 @@
   " vim-kubernetes {{{2
     nnoremap <leader>ka :KubeApply<CR>
     nnoremap <leader>kd :KubeDelete<CR>
+  "}}}
 
+  " vim-dadbod {{{2
+    let g:dbext_default_ORA_bin = 'sql'
   "}}}
 
 " }}}
