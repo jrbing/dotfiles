@@ -55,6 +55,10 @@ zplug 'davrodpin/mole', \
   as:command, \
   from:gh-r
 
+zplug 'asciimoo/wuzz', \
+  as:command, \
+  from:gh-r
+
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
