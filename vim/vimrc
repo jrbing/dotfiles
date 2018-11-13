@@ -95,6 +95,7 @@
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
   Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
   Plug 'sheerun/vim-polyglot'
+  Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
   let g:polyglot_disabled = ['markdown']
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
