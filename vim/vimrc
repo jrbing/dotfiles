@@ -94,10 +94,11 @@
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
   Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'sheerun/vim-polyglot'
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
-  let g:polyglot_disabled = ['markdown']
+  let g:polyglot_disabled = ['markdown', 'go']
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 
   if g:OSX()
@@ -105,7 +106,6 @@
     Plug 'Chiel92/vim-autoformat'
     Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
     Plug 'Raimondi/delimitMate'
     Plug 'w0rp/ale'
