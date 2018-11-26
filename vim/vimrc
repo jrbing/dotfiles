@@ -1353,7 +1353,11 @@
         "set guifont=Sauce\ Code\ Powerline\ Light:h13
         "set guifont=Inconsolata\ XL:h12,Inconsolata:h12,Monaco:h12
         "set guifont=InconsolataForPowerline\ Nerd\ Font:h16
-        set guifont=Inconsolata-dz\ for\ Powerline:h12
+        "set guifont=Inconsolata-dz\ for\ Powerline:h12
+        "set guifont=Inconsolata\ Nerd\ Font:h14
+        "set guifont=InconsolataGo\ Nerd\ Font\ Mono:h14
+        "set guifont=InconsolataLGC\ Nerd\ Font:h12
+        set guifont=Inconsolata\ for\ Powerline:h14
       endif
 
       " Insert date and time header at the top of the file
