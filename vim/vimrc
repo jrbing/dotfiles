@@ -98,6 +98,7 @@
   Plug 'sheerun/vim-polyglot'
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
   Plug 'kergoth/vim-bitbake'
+  Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
 
   let g:polyglot_disabled = ['markdown', 'go']
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
