@@ -59,6 +59,11 @@ zplug 'asciimoo/wuzz', \
   as:command, \
   from:gh-r
 
+zplug 'kubedb/cli', \
+  as:command, \
+  from:gh-r, \
+  rename-to:'kubedb'
+
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
