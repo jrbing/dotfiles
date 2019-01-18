@@ -64,6 +64,10 @@ zplug 'kubedb/cli', \
   from:gh-r, \
   rename-to:'kubedb'
 
+zplug 'VirtusLab/render', \
+  as:command, \
+  from:gh-r
+
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
