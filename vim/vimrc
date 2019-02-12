@@ -49,7 +49,6 @@
   Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
-  Plug 'rizzatti/dash.vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
@@ -110,6 +109,7 @@
     Plug 'editorconfig/editorconfig-vim'
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
     Plug 'Raimondi/delimitMate'
+    Plug 'rizzatti/dash.vim'
     Plug 'w0rp/ale'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-voom/VOoM'
