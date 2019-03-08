@@ -1283,6 +1283,12 @@
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 
+  " Use 256 colors in terminal
+  if !has("gui_running")
+    set t_Co=256
+    set term=xterm-256color
+  endif
+
   if (has('gui_running') || has('gui_vimr'))
 
     " Remove all the UI cruft

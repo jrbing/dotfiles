@@ -208,8 +208,9 @@ tmux_conf_copy_to_os_clipboard=false
 set-option -g prefix C-f
 
 # Define the default terminal
-#set-option -g default-terminal "xterm-256color"
-set-option -g default-terminal "screen-256color"
+set-option -g default-terminal "xterm-256color"
+#set-option -g default-terminal "screen-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
 
 # Activity
 set-window-option -g monitor-activity off
