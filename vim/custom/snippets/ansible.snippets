@@ -200,7 +200,7 @@ snippet pip "Manages Python library dependencies" b
 		# editable: no
 		# chdir: # cd into this directory before running the command
 		# executable: # The explicit executable or a pathname to the executable to be used to run pip for a specific version of Python installed in the system. For example C(pip-3.3), if there are both Python 2.7 and 3.3 installations in the system and you want to run pip for the Python 3.3 installation. It cannot be specified together with the 'virtualenv' parameter (added in 2.1). By default, it will take the appropriate version for the python interpreter use by ansible, e.g. pip3 on python 3, and pip2 or pip on python 2.
-		# umask: # The system umask to apply before installing the pip package. This is useful, for example, when installing on systems that have a very restrictive umask by default (e.g., 0077) and you want to pip install packages which are to be used by all users. Note that this requires you to specify desired umask mode in octal, with a leading 0 (e.g., 0077).
+		# umask: # The system umask to apply before installing the pip package. This is useful, for example, when installing on systems that have a very restrictive umask by default (e.g., "0077") and you want to pip install packages which are to be used by all users. Note that this requires you to specify desired umask mode as an octal string, (e.g., "0022").
 $0
 endsnippet
 
@@ -609,7 +609,7 @@ snippet yum "Manages packages with the I(yum) package manager" b
 		# name: # A package name or package specifier with version, like C(name-1.0).
 		# exclude: # Package name(s) to exclude when state=present, or latest
 		# list: # Package name to run the equivalent of yum list <package> against. In addition to listing packages, use can also list the following: C(installed), C(updates), C(available) and C(repos).
-		# state: absent|installed|latest|#present|removed
+		# state: absent|installed|latest|present|removed
 		# enablerepo: # I(Repoid) of repositories to enable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a C(",").
 		# disablerepo: # I(Repoid) of repositories to disable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a C(",").
 		# conf_file: # The remote yum configuration file to use for the transaction.
@@ -626,7 +626,7 @@ snippet yum "Manages packages with the I(yum) package manager" b
 		# disable_plugin: # I(Plugin) name to disable for the install/update operation. The disabled plugins will not persist beyond the transaction.
 		# releasever: # Specifies an alternative release from which all packages will be installed.
 		# autoremove: no
-		# disable_excludes: all|main|repoid
+		# disable_excludes: # Disable the excludes defined in YUM config files.
 		# download_only: no
 $0
 endsnippet
@@ -634,9 +634,9 @@ endsnippet
 snippet dnf "Manages packages with the I(dnf) package manager" b
 - name: $1
 	dnf:
-		name: ${2:# A list of package names, or package specifier with version, like C(name-1.0) When using state=latest, this can be '*' which means run: dnf -y update. You can also pass a url or a local path to a rpm file.}
+		name: ${2:# A package name or package specifier with version, like C(name-1.0). When using state=latest, this can be '*' which means run: dnf -y update. You can also pass a url or a local path to a rpm file. To operate on several packages this can accept a comma separated string of packages or a list of packages.}
 		# list: # Various (non-idempotent) commands for usage with C(/usr/bin/ansible) and I(not) playbooks. See examples.
-		# state: absent|#present|installed|removed|latest
+		# state: absent|present|installed|removed|latest
 		# enablerepo: # I(Repoid) of repositories to enable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a ",".
 		# disablerepo: # I(Repoid) of repositories to disable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a ",".
 		# conf_file: # The remote dnf configuration file to use for the transaction.
@@ -652,7 +652,7 @@ snippet dnf "Manages packages with the I(dnf) package manager" b
 		# bugfix: no
 		# enable_plugin: # I(Plugin) name to enable for the install/update operation. The enabled plugin will not persist beyond the transaction.
 		# disable_plugin: # I(Plugin) name to disable for the install/update operation. The disabled plugins will not persist beyond the transaction.
-		# disable_excludes: all|main|repoid
+		# disable_excludes: # Disable the excludes defined in DNF config files.
 		# validate_certs: yes
 		# allow_downgrade: no
 		# install_repoquery: yes
@@ -4114,7 +4114,7 @@ snippet ftd_file_upload "Uploads files to Cisco FTD devices over HTTP(S)" b
 - name: $1
 	ftd_file_upload:
 		operation: ${2:# The name of the operation to execute.}
-		fileToUpload: ${3:# Absolute path to the file that should be uploaded.}
+		file_to_upload: ${3:# Absolute path to the file that should be uploaded.}
 		# register_as: # Specifies Ansible fact name that is used to register received response from the FTD device.
 $0
 endsnippet
@@ -4122,7 +4122,7 @@ endsnippet
 snippet ftd_configuration "Manages configuration on Cisco FTD devices over REST API" b
 - name: $1
 	ftd_configuration:
-		operation: ${2:# The name of the operation to execute. Commonly, the operation starts with 'add', 'edit', 'get' or 'delete' verbs, but can have an arbitrary name too.}
+		operation: ${2:# The name of the operation to execute. Commonly, the operation starts with 'add', 'edit', 'get', 'upsert' or 'delete' verbs, but can have an arbitrary name too.}
 		# data: # Key-value pairs that should be sent as body parameters in a REST API call
 		# query_params: # Key-value pairs that should be sent as query parameters in a REST API call.
 		# path_params: # Key-value pairs that should be sent as path parameters in a REST API call.
@@ -5140,8 +5140,8 @@ snippet ce_vlan "Manages VLAN resources and attributes on Huawei CloudEngine swi
 	ce_vlan:
 		# vlan_id: # Single VLAN ID, in the range from 1 to 4094.
 		# vlan_range: # Range of VLANs such as C(2-10) or C(2,5,10-15), etc.
-		# name: # Name of VLAN, in the range from 1 to 31.
-		# description: # Specify VLAN description, in the range from 1 to 80.
+		# name: # Name of VLAN, minimum of 1 character, maximum of 31 characters.
+		# description: # Specify VLAN description, minimum of 1 character, maximum of 80 characters.
 		# state: #present|absent
 $0
 endsnippet
@@ -5486,7 +5486,7 @@ snippet netconf_config "netconf device configuration" b
 		# source_datastore: # Name of the configuration datastore to use as the source to copy the configuration to the datastore mentioned by C(target) option. The values can be either I(running), I(candidate), I(startup) or a remote URL
 		# format: #xml|text
 		# lock: never|#always|if-supported
-		# default_operation: #merge|replace|none
+		# default_operation: merge|replace|none
 		# confirm: 0
 		# confirm_commit: no
 		# error_option: #stop-on-error|continue-on-error|rollback-on-error
@@ -16903,7 +16903,7 @@ snippet k8s "Manage Kubernetes (K8s) objects" b
 		# password: # Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable.
 		# cert_file: # Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.
 		# key_file: # Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_HOST environment variable.
-		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
+		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
 		# verify_ssl: # Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.
 $0
 endsnippet
@@ -16923,7 +16923,7 @@ snippet k8s_scale "Set a new size for a Deployment, ReplicaSet, Replication Cont
 		# password: # Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable.
 		# cert_file: # Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.
 		# key_file: # Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_HOST environment variable.
-		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
+		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
 		# verify_ssl: # Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.
 		# resource_definition: # Provide a valid YAML definition (either as a string, list, or dict) for an object when creating or updating. NOTE: I(kind), I(api_version), I(name), and I(namespace) will be overwritten by corresponding values found in the provided I(resource_definition).
 		# src: # Provide a path to a file containing a valid YAML definition of an object or objects to be created or updated. Mutually exclusive with I(resource_definition). NOTE: I(kind), I(api_version), I(name), and I(namespace) will be overwritten by corresponding values found in the configuration read in from the I(src) file.
@@ -16952,7 +16952,7 @@ snippet k8s_facts "Describe Kubernetes (K8s) objects" b
 		# password: # Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable.
 		# cert_file: # Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.
 		# key_file: # Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_HOST environment variable.
-		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
+		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
 		# verify_ssl: # Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.
 $0
 endsnippet
@@ -16977,7 +16977,7 @@ snippet k8s "Manage Kubernetes (K8s) objects" b
 		# password: # Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable.
 		# cert_file: # Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.
 		# key_file: # Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_HOST environment variable.
-		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
+		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
 		# verify_ssl: # Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.
 $0
 endsnippet
@@ -16997,7 +16997,7 @@ snippet k8s_scale "Set a new size for a Deployment, ReplicaSet, Replication Cont
 		# password: # Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable.
 		# cert_file: # Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.
 		# key_file: # Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_HOST environment variable.
-		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
+		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
 		# verify_ssl: # Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.
 		# resource_definition: # Provide a valid YAML definition (either as a string, list, or dict) for an object when creating or updating. NOTE: I(kind), I(api_version), I(name), and I(namespace) will be overwritten by corresponding values found in the provided I(resource_definition).
 		# src: # Provide a path to a file containing a valid YAML definition of an object or objects to be created or updated. Mutually exclusive with I(resource_definition). NOTE: I(kind), I(api_version), I(name), and I(namespace) will be overwritten by corresponding values found in the configuration read in from the I(src) file.
@@ -17029,7 +17029,7 @@ snippet k8s "Manage Kubernetes (K8s) objects" b
 		# password: # Provide a password for authenticating with the API. Can also be specified via K8S_AUTH_PASSWORD environment variable.
 		# cert_file: # Path to a certificate used to authenticate with the API. Can also be specified via K8S_AUTH_CERT_FILE environment variable.
 		# key_file: # Path to a key file used to authenticate with the API. Can also be specified via K8S_AUTH_HOST environment variable.
-		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
+		# ssl_ca_cert: # Path to a CA certificate used to authenticate with the API. The full certificate chain must be provided to avoid certificate validation errors. Can also be specified via K8S_AUTH_SSL_CA_CERT environment variable.
 		# verify_ssl: # Whether or not to verify the API server's SSL certificates. Can also be specified via K8S_AUTH_VERIFY_SSL environment variable.
 $0
 endsnippet
@@ -17442,6 +17442,9 @@ snippet na_ontap_snapmirror "NetApp ONTAP Manage SnapMirror" b
 		# source_hostname: # Source hostname or IP address.
 		# source_username: # Source username.
 		# source_password: # Source password.
+		# https: no
+		# validate_certs: yes
+		# http_port: # Override the default port (80 or 443) with this port
 $0
 endsnippet
 
@@ -17641,6 +17644,9 @@ snippet na_ontap_net_vlan "NetApp ONTAP network VLAN" b
 		username: ${6:# This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required. For more information, please read the documentation U(https://mysupport.netapp.com/NOW/download/software/nmsdk/9.4/).}
 		password: ${7:# Password for the specified user.}
 		# state: #present|absent
+		# https: no
+		# validate_certs: yes
+		# http_port: # Override the default port (80 or 443) with this port
 $0
 endsnippet
 
@@ -17799,6 +17805,9 @@ snippet na_ontap_cluster_peer "NetApp ONTAP Manage Cluster peering" b
 		# dest_cluster_name: # The name of the destination cluster name in the peer relation to be deleted.
 		# dest_username: # Destination username.
 		# dest_password: # Destination password.
+		# https: no
+		# validate_certs: yes
+		# http_port: # Override the default port (80 or 443) with this port
 $0
 endsnippet
 
@@ -18445,6 +18454,9 @@ snippet na_ontap_software_update "NetApp ONTAP Update Software" b
 		# state: #present|absent
 		# node: # List of nodes to be updated, the nodes have to be a part of a HA Pair.
 		# ignore_validation_warning: no
+		# https: no
+		# validate_certs: yes
+		# http_port: # Override the default port (80 or 443) with this port
 $0
 endsnippet
 
@@ -18462,6 +18474,9 @@ snippet na_ontap_vserver_peer "NetApp ONTAP Vserver peering" b
 		# dest_hostname: # Destination hostname or IP address.
 		# dest_username: # Destination username.
 		# dest_password: # Destination password.
+		# https: no
+		# validate_certs: yes
+		# http_port: # Override the default port (80 or 443) with this port
 $0
 endsnippet
 
@@ -19250,7 +19265,7 @@ snippet user "Manage user accounts" b
 		# ssh_key_passphrase: # Set a passphrase for the SSH key.  If no passphrase is provided, the SSH key will default to having no passphrase.
 		# update_password: #always|on_create
 		# expires: # An expiry time for the user in epoch, it will be ignored on platforms that do not support this. Currently supported on GNU/Linux, FreeBSD, and DragonFlyBSD.
-		# password_lock: # Lock the password (usermod -L, pw lock, usermod -C). BUT implementation differs on different platforms, this option does not always mean the user cannot login via other methods. This option does not disable the user, only lock the password. Do not change the password in the same task. Currently supported on Linux, FreeBSD, DragonFlyBSD, NetBSD.
+		# password_lock: # Lock the password (usermod -L, pw lock, usermod -C). BUT implementation differs on different platforms, this option does not always mean the user cannot login via other methods. This option does not disable the user, only lock the password. Do not change the password in the same task. Currently supported on Linux, FreeBSD, DragonFlyBSD, NetBSD, OpenBSD.
 		# local: no
 $0
 endsnippet
@@ -21892,7 +21907,7 @@ snippet docker_volume "Manage Docker volumes" b
 		name: ${2:# Name of the volume to operate on.}
 		# driver: local
 		# driver_options: # Dictionary of volume settings. Consult docker docs for valid options and values: U(https://docs.docker.com/engine/reference/commandline/volume_create/#driver-specific-options)
-		# labels: # List of labels to set for the volume
+		# labels: # Dictionary of label key/values to set for the volume
 		# force: no
 		# state: absent|#present
 		# docker_host: unix://var/run/docker.sock
@@ -21923,9 +21938,9 @@ snippet docker_swarm_service "docker swarm service" b
 		# dns_search: []
 		# dns_options: []
 		# force_update: no
-		# labels: # List of the service labels.
-		# container_labels: []
-		# endpoint_mode: #vip|dnsrr
+		# labels: # Dictionary of key value pairs.
+		# container_labels: # Dictionary of key value pairs.
+		# endpoint_mode: vip|dnsrr
 		# env: []
 		# log_driver: json-file
 		# log_driver_options: []
@@ -22041,8 +22056,8 @@ snippet docker_container "manage docker containers" b
 		# cap_drop: # List of capabilities to drop from the container.
 		# cleanup: no
 		# command: # Command to execute when the container starts. A command may be either a string or a list. Prior to version 2.4, strings were split on commas.
-		# cpu_period: 0
-		# cpu_quota: 0
+		# cpu_period: # Limit CPU CFS (Completely Fair Scheduler) period
+		# cpu_quota: # Limit CPU CFS (Completely Fair Scheduler) quota
 		# cpuset_cpus: # CPUs in which to allow execution C(1,3) or C(1-3).
 		# cpuset_mems: # Memory nodes (MEMs) in which to allow execution C(0-3) or C(0,1)
 		# cpu_shares: # CPU shares (relative weight).
@@ -22067,24 +22082,24 @@ snippet docker_container "manage docker containers" b
 		# ipc_mode: # Set the IPC mode for the container. Can be one of 'container:<name|id>' to reuse another container's IPC namespace or 'host' to use the host's IPC namespace within the container.
 		# keep_volumes: yes
 		# kill_signal: # Override default signal used to kill a running container.
-		# kernel_memory: 0
+		# kernel_memory: # Kernel memory limit (format: C(<number>[<unit>])). Number is a positive integer. Unit can be C(B) (byte), C(K) (kibibyte, 1024B), C(M) (mebibyte), C(G) (gibibyte), C(T) (tebibyte), or C(P) (pebibyte). Minimum is C(4M).
 		# labels: # Dictionary of key value pairs.
 		# links: # List of name aliases for linked containers in the format C(container_name:alias).
 		# log_driver: # Specify the logging driver. Docker uses I(json-file) by default.
 		# log_options: # Dictionary of options specific to the chosen log_driver. See https://docs.docker.com/engine/admin/logging/overview/ for details.
 		# mac_address: # Container MAC address (e.g. 92:d0:c6:0a:29:33)
 		# memory: 0
-		# memory_reservation: 0
-		# memory_swap: 0
-		# memory_swappiness: 0
+		# memory_reservation: # Memory soft limit (format: C(<number>[<unit>])). Number is a positive integer. Unit can be C(B) (byte), C(K) (kibibyte, 1024B), C(M) (mebibyte), C(G) (gibibyte), C(T) (tebibyte), or C(P) (pebibyte).
+		# memory_swap: # Total memory limit (memory + swap, format: C(<number>[<unit>])). Number is a positive integer. Unit can be C(B) (byte), C(K) (kibibyte, 1024B), C(M) (mebibyte), C(G) (gibibyte), C(T) (tebibyte), or C(P) (pebibyte).
+		# memory_swappiness: # Tune a container's memory swappiness behavior. Accepts an integer between 0 and 100.
 		# network_mode: # Connect the container to a network. Choices are "bridge", "host", "none" or "container:<name|id>"
-		# userns_mode: # User namespace to use
+		# userns_mode: # Set the user namespace mode for the container. Currently, the only valid value is C(host).
 		# networks: # List of networks the container belongs to.
-		# oom_killer: no
-		# oom_score_adj: 0
+		# oom_killer: # Whether or not to disable OOM Killer for the container.
+		# oom_score_adj: # An integer value containing the score given to the container in order to tune OOM killer preferences.
 		# output_logs: no
 		# paused: no
-		# pid_mode: # Set the PID namespace mode for the container. Currently only supports 'host'.
+		# pid_mode: # Set the PID namespace mode for the container.
 		# privileged: no
 		# published_ports: # List of ports to publish from the container to the host.
 		# pull: no
@@ -22093,7 +22108,7 @@ snippet docker_container "manage docker containers" b
 		# recreate: no
 		# restart: no
 		# restart_policy: no|on-failure|always|unless-stopped
-		# restart_retries: 0
+		# restart_retries: # Use with restart policy to control maximum number of restart attempts.
 		# shm_size: # Size of C(/dev/shm) (format: C(<number>[<unit>])). Number is positive integer. Unit can be C(B) (byte), C(K) (kibibyte, 1024B), C(M) (mebibyte), C(G) (gibibyte), C(T) (tebibyte), or C(P) (pebibyte).
 		# security_opts: # List of security options in the form of C("label:user:User")
 		# state: absent|present|stopped|#started
@@ -31341,8 +31356,8 @@ snippet cs_instance "Manages instances and virtual machines on Apache CloudStack
 		# template: # Name, display text or id of the template to be used for creating the new instance.
 		# iso: # Name or id of the ISO to be used for creating the new instance.
 		# template_filter: all|featured|self|selfexecutable|sharedexecutable|#executable|community
-		# hypervisor: KVM|VMware|BareMetal|XenServer|LXC|HyperV|UCS|OVM|Simulator
-		# keyboard: de|de-ch|es|fi|fr|fr-be|fr-ch|is|it|jp|nl-be|False|pt|uk|us
+		# hypervisor: KVM|kvm|VMware|vmware|BareMetal|baremetal|XenServer|xenserver|LXC|lxc|HyperV|hyperv|UCS|ucs|OVM|ovm|Simulator|simulator
+		# keyboard: de|de-ch|es|fi|fr|fr-be|fr-ch|is|it|jp|nl-be|no|pt|uk|us
 		# networks: # List of networks to use for the new instance.
 		# ip_address: # IPv4 address for default instance's network during creation.
 		# ip6_address: # IPv6 address for default instance's network.
@@ -36223,6 +36238,7 @@ snippet acl "Sets and retrieves file ACL information." b
 		# permissions: # Permissions to apply/remove can be any combination of r, w and  x (read, write and execute respectively)
 		# entry: # DEPRECATED. The acl to set or remove.  This must always be quoted in the form of '<etype>:<qualifier>:<perms>'.  The qualifier may be empty for some types, but the type and perms are always required. '-' can be used as placeholder when you do not care about permissions. This is now superseded by entity, type and permissions fields.
 		# recursive: no
+		# use_nfsv4_acls: no
 		# recalculate_mask: #default|mask|no_mask
 $0
 endsnippet
@@ -36231,7 +36247,7 @@ snippet lineinfile "Manage lines in text files" b
 - name: $1
 	lineinfile:
 		path: ${2:# The file to modify.}
-		# regexp: # The regular expression to look for in every line of the file. For C(state=present), the pattern to replace if found. Only the last line found will be replaced. For C(state=absent), the pattern of the line(s) to remove. Uses Python regular expressions. See U(http://docs.python.org/2/library/re.html).
+		# regexp: # The regular expression to look for in every line of the file.
 		# state: absent|#present
 		# line: # Required for C(state=present). The line to insert/replace into the file. If C(backrefs) is set, may contain backreferences that will get expanded with the C(regexp) capture groups if the regexp matches.
 		# backrefs: no
@@ -36815,7 +36831,7 @@ snippet win_firewall_rule "Windows firewall automation" b
 	win_firewall_rule:
 		name: ${2:# The rules name}
 		direction: ${3:in|out}
-		action: ${4:allow|block|bypass}
+		action: ${4:allow|block}
 		# enabled: yes
 		# state: absent|#present
 		# description: # Description for the firewall rule.
@@ -36884,7 +36900,7 @@ snippet win_nssm "NSSM - the Non-Sucking Service Manager" b
 		# application: # The application binary to run as a service
 		# stdout_file: # Path to receive output.
 		# stderr_file: # Path to receive error output.
-		# app_parameters: # Parameters to be passed to the application when it starts.
+		# app_parameters: # A string representing a dictionary of parameters to be passed to the application when it starts.
 		# app_parameters_free_form: # Single string of parameters to be passed to the service.
 		# dependencies: # Service dependencies that has to be started to trigger startup, separated by comma.
 		# user: # User to be used for service startup.
@@ -37332,7 +37348,7 @@ endsnippet
 snippet win_power_plan "Changes the power plan of a Windows system" b
 - name: $1
 	win_power_plan:
-		name: ${2:# String value that indicates the desired power plan. The power plan must already be present on the system. Commonly there will be options for C(balanced) and C(high performance).}
+		name: ${2:# String value that indicates the desired power plan.}
 $0
 endsnippet
 
