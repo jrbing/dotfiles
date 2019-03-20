@@ -25,41 +25,32 @@ VOLUME ["/some_directory"]
 
 EXPOSE 80
 
-RUN apk add --no-cache --update \
-    curl \
-    unzip \
+# Base Packages
+RUN apk -U update && \
+    apk -U upgrade && \
+    apk -U add --no-cache \
+        bash \
+        coreutils \
+        ca-certificates \
+        shadow \
+        curl \
+        unzip
 
-####################
-#  ContainerPilot  #
-####################
+################
+#  S6 Overlay  #
+################
+# https://github.com/just-containers/s6-overlay
 
-ENV CONTAINERPILOT_VERSION 3.4.2
+ENV S6_OVERLAY_VERSION v1.22.0.0
 
-RUN export checksum=5c99ae9ede01e8fcb9b027b5b3cb0cfd8c0b8b88 \
-    && curl -Lso /tmp/containerpilot.tar.gz \
-         "https://github.com/joyent/containerpilot/releases/download/${CONTAINERPILOT_VERSION}/containerpilot-${CONTAINERPILOT_VERSION}.tar.gz" \
-    && echo "${checksum}  /tmp/containerpilot.tar.gz" | sha1sum -c \
-    && tar zxf /tmp/containerpilot.tar.gz -C /usr/local/bin \
-    && rm /tmp/containerpilot.tar.gz
+RUN curl -L https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
+    | tar -xzC /
 
-COPY containerpilot.json5 /etc/containerpilot.json5
-
-##################
-#  Consul Agent  #
-##################
-
-ENV CONSUL_VERSION 0.9.3
-
-RUN export checksum=1884e8af16c07378aafe243554cf6d09478be074 \
-    && curl -Lso /tmp/consul.zip \
-         "https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip" \
-    && echo "${checksum}  /tmp/consul.zip" | sha1sum -c \
-    && unzip /tmp/consul.zip -d /usr/local/bin \
-    && mkdir /var/opt/consul \
-    && rm /tmp/consul.zip
-
-# NOTE: Consul agent configuration is performed via command line parameters
-#       in the containerpilot.json5 file
+RUN groupadd -g 1000 appuser && \
+    useradd -u 1000 -g appuser -d /app -s /bin/false appuser && \
+    mkdir -p \
+      /app \
+      /config
 
 #############################################
 #  Application specific build instructions  #
@@ -67,4 +58,4 @@ RUN export checksum=1884e8af16c07378aafe243554cf6d09478be074 \
 
 COPY example.sh /example/
 
-CMD /usr/local/bin/containerpilot -config /etc/containerpilot.json5
+ENTRYPOINT [ "/init" ]

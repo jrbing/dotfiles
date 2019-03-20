@@ -141,7 +141,6 @@ class Template < Thor
   desc "dockerfile", "Creates a sample Dockerfile"
   def dockerfile
     create_from_template("dockerfile.erb", "Dockerfile")
-    create_from_template("containerpilot.erb", "containerpilot.json5")
   end
 
   # dockercompose
