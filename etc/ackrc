@@ -18,3 +18,5 @@
 # ignore unnecessary directories
 --ignore-dir=tags
 --ignore-dir=tmp
+--ignore-dir=node_modules
+--ignore-dir=.direnv
