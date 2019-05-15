@@ -1568,16 +1568,16 @@ snippet openssl_certificate "Generate and/or check OpenSSL certificates" b
 		# acme_challenge_path: # Path to the ACME challenge directory that is served on U(http://<HOST>:80/.well-known/acme-challenge/)
 		# acme_chain: yes
 		# signature_algorithms: # list of algorithms that you would accept the certificate to be signed with (e.g. ['sha256WithRSAEncryption', 'sha512WithRSAEncryption']).
-		# issuer: # Key/value pairs that must be present in the issuer name field of the certificate. If you need to specify more than one value with the same key, use a list as value.
+		# issuer: # Key/value pairs that must be present in the issuer name field of the certificate.
 		# issuer_strict: no
 		# subject: # Key/value pairs that must be present in the subject name field of the certificate. If you need to specify more than one value with the same key, use a list as value.
 		# subject_strict: no
 		# has_expired: no
-		# version: # Version of the certificate. Nowadays it should almost always be 3.
-		# valid_at: # The certificate must be valid at this point in time. The timestamp is formatted as an ASN.1 TIME.
-		# invalid_at: # The certificate must be invalid at this point in time. The timestamp is formatted as an ASN.1 TIME.
-		# not_before: # The certificate must start to become valid at this point in time. The timestamp is formatted as an ASN.1 TIME.
-		# not_after: # The certificate must expire at this point in time. The timestamp is formatted as an ASN.1 TIME.
+		# version: # The version of the certificate.
+		# valid_at: # The certificate must be valid at this point in time.
+		# invalid_at: # The certificate must be invalid at this point in time.
+		# not_before: # The certificate must start to become valid at this point in time.
+		# not_after: # The certificate must expire at this point in time.
 		# valid_in: # The certificate must still be valid in I(valid_in) seconds from now.
 		# key_usage: # The I(key_usage) extension field must contain all these values.
 		# key_usage_strict: no
@@ -1605,7 +1605,7 @@ snippet openssl_publickey "Generate an OpenSSL public key from its private key."
 		# state: #present|absent
 		# force: no
 		# format: #PEM|OpenSSH
-		# privatekey_passphrase: # The passphrase for the privatekey.
+		# privatekey_passphrase: # The passphrase for the private key.
 		# mode: # Mode the file or directory should be. For those used to I(/usr/bin/chmod) remember that modes are actually octal numbers. You must either add a leading zero so that Ansible's YAML parser knows it is an octal number (like C(0644) or C(01777)) or quote it (like C('644') or C('1777')) so Ansible receives a string and can do its own conversion from string into number.  Giving Ansible a number without following one of these rules will end up with a decimal number which will have unexpected results. As of version 1.8, the mode may be specified as a symbolic mode (for example, C(u+rwx) or C(u=rw,g=r,o=r)).
 		# owner: # Name of the user that should own the file/directory, as would be fed to I(chown).
 		# group: # Name of the group that should own the file/directory, as would be fed to I(chown).
@@ -1662,11 +1662,11 @@ endsnippet
 snippet openssl_csr "Generate OpenSSL Certificate Signing Request (CSR)" b
 - name: $1
 	openssl_csr:
-		privatekey_path: ${2:# Path to the privatekey to use when signing the certificate signing request}
+		privatekey_path: ${2:# The path to the private key to use when signing the certificate signing request.}
 		path: ${3:# Name of the file into which the generated OpenSSL certificate signing request will be written}
 		# state: #present|absent
 		# digest: sha256
-		# privatekey_passphrase: # The passphrase for the privatekey.
+		# privatekey_passphrase: # The passphrase for the private key.
 		# version: 1
 		# force: no
 		# subject: # Key/value pairs that will be present in the subject name field of the certificate signing request.
@@ -2909,7 +2909,7 @@ snippet katello "Manage Katello Resources" b
 		server_url: ${2:# URL of Foreman server.}
 		username: ${3:# Username on Foreman server.}
 		password: ${4:# Password for user accessing Foreman server.}
-		entity: ${5:repository|manifest|repository_set|sync_plan|content_view|lifecycle_environment|activation_key}
+		entity: ${5:repository|manifest|repository_set|sync_plan|content_view|lifecycle_environment|activation_key|product}
 		params: ${6:# Parameters associated to the entity resource and action, to set or edit in dictionary format.}
 		# action: sync|publish|promote
 		# task_timeout: 1000
@@ -3576,7 +3576,7 @@ snippet jenkins_plugin "Add or remove Jenkins plugin" b
 		# state: absent|#present|pinned|unpinned|enabled|disabled|latest
 		# timeout: 30
 		# updates_expiration: 86400
-		# updates_url: https://updates.jenkins-ci.org
+		# updates_url: https://updates.jenkins.io
 		# url: http://localhost:8080
 		# version: # Plugin version number.
 		# with_dependencies: yes
@@ -3700,12 +3700,12 @@ snippet tower_credential "create, update, or destroy Ansible Tower credential." 
 - name: $1
 	tower_credential:
 		name: ${2:# The name to use for the credential.}
-		kind: ${3:ssh|vault|net|scm|aws|vmware|satellite6|cloudforms|gce|azure_rm|openstack|rhv|insights|tower}
+		organization: ${3:# Organization that should own the credential.}
+		kind: ${4:ssh|vault|net|scm|aws|vmware|satellite6|cloudforms|gce|azure_rm|openstack|rhv|insights|tower}
 		# description: # The description to use for the credential.
 		# user: # User that should own this credential.
 		# team: # Team that should own this credential.
 		# project: # Project that should for this credential.
-		# organization: # Organization that should own the credential.
 		# host: # Host for this credential.
 		# username: # Username for this credential. access_key for AWS.
 		# password: # Password for this credential. Use ASK for prompting. secret_key for AWS. api_key for RAX.
@@ -4007,8 +4007,8 @@ endsnippet
 snippet tower_settings "Modify Ansible Tower settings." b
 - name: $1
 	tower_settings:
-		# name: # Name of setting to get/modify
-		# value: # Value to be modified for given setting.
+		name: ${2:# Name of setting to modify}
+		value: ${3:# Value to be modified for given setting.}
 		# tower_host: # URL to your Tower instance.
 		# tower_username: # Username for your Tower instance.
 		# tower_password: # Password for your Tower instance.
@@ -22015,7 +22015,7 @@ snippet docker_swarm "Manage Swarm cluster" b
 		# force: no
 		# node_id: # Swarm id of the node to remove.
 		# join_token: # Swarm token used to join a swarm cluster.
-		# remote_addrs: # Remote address of a manager to connect to.
+		# remote_addrs: # Remote address of one or more manager nodes of an existing Swarm to connect to.
 		# task_history_retention_limit: # Maximum number of tasks history stored.
 		# snapshot_interval: # Number of logs entries between snapshot.
 		# keep_old_snapshots: # Number of snapshots to keep beyond the current snapshot.
@@ -36490,8 +36490,8 @@ snippet replace "Replace all instances of a particular string in a file using a 
 		path: ${2:# The file to modify.}
 		regexp: ${3:# The regular expression to look for in the contents of the file. Uses Python regular expressions; see U(http://docs.python.org/2/library/re.html). Uses MULTILINE mode, which means C(^) and C($) match the beginning and end of the file, as well as the beginning and end respectively of I(each line) of the file.}
 		# replace: # The string to replace regexp matches. May contain backreferences that will get expanded with the regexp capture groups if the regexp matches. If not set, matches are removed entirely.
-		# after: # If specified, the line after the replace/remove will start. Can be used in combination with C(before). Uses Python regular expressions; see U(http://docs.python.org/2/library/re.html).
-		# before: # If specified, the line before the replace/remove will occur. Can be used in combination with C(after). Uses Python regular expressions; see U(http://docs.python.org/2/library/re.html).
+		# after: # If specified, only content after this match will be replaced/removed.
+		# before: # If specified, only content before this match will be replaced/removed.
 		# backup: no
 		# others: # All arguments accepted by the M(file) module also work here.
 		# encoding: utf-8
