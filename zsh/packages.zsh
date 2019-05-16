@@ -84,6 +84,10 @@ zplug 'lbolla/kube-secret-editor', \
   use:'(*).py', \
   rename-to:'$1'
 
+zplug 'cloud66-oss/habitus', \
+  as:command, \
+  from:gh-r
+
 # TODO: figure out why this fails to update
 #zplug 'drwetter/testssl.sh', \
   #as:command, \
