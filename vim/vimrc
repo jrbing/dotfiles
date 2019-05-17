@@ -80,7 +80,7 @@
   Plug 'joshdick/onedark.vim'
 
   " Filetypes
-  Plug 'ap/vim-css-color'
+  "Plug 'ap/vim-css-color'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'fatih/vim-hclfmt'
   Plug 'funcodeio/lz4.vim'
@@ -90,7 +90,7 @@
   Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
   Plug 'gutenye/json5.vim'
   Plug 'glench/vim-jinja2-syntax'
-  Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
+  "Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
   Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
