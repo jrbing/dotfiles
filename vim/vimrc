@@ -80,7 +80,6 @@
   Plug 'joshdick/onedark.vim'
 
   " Filetypes
-  "Plug 'ap/vim-css-color'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'fatih/vim-hclfmt'
   Plug 'funcodeio/lz4.vim'
@@ -88,19 +87,18 @@
   Plug 'robbles/logstash.vim'
   Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
-  Plug 'gutenye/json5.vim'
-  Plug 'glench/vim-jinja2-syntax'
-  "Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
   Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'sheerun/vim-polyglot'
   Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
   Plug 'kergoth/vim-bitbake'
   Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
+  Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
+  Plug 'sheerun/vim-polyglot'
+  "Plug 'ap/vim-css-color'
+  "Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 
-  let g:polyglot_disabled = ['markdown', 'go']
-  Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
+  let g:polyglot_disabled = ['go']
 
   if g:OSX()
     Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
