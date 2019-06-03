@@ -1282,7 +1282,7 @@
   endif
 
   " Use 256 colors in terminal
-  if !has("gui_running")
+  if !has("gui_running") && !has("gui_vimr")
     set t_Co=256
     set term=xterm-256color
   endif
