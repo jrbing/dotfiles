@@ -2,7 +2,8 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Uncomment to get startup times
+# Uncomment this and the 'zprof' call at the bottom of the
+# file to get startup times
 #zmodload zsh/zprof
 
 ###########
@@ -202,3 +203,9 @@ fi
 if [[ $commands[helm] ]]; then
   source <(helm completion zsh)
 fi
+
+###############
+#  Profiling  #
+###############
+
+#zprof
