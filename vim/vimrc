@@ -78,6 +78,7 @@
   Plug 'morhetz/gruvbox'
   Plug 'rakr/vim-one'
   Plug 'joshdick/onedark.vim'
+  Plug 'arcticicestudio/nord-vim'
 
   " Filetypes
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
@@ -275,7 +276,8 @@
     "let g:solarized_term_italics = 0
     "let g:solarized_old_cursor_style = 0
     "colorscheme solarized8_dark
-    colorscheme onedark
+    "colorscheme onedark
+    colorscheme nord
   else
     let g:gruvbox_italic = 0
     colorscheme gruvbox
