@@ -64,6 +64,5 @@
   "powershell.scriptAnalysis.enable": true,
   "powershell.scriptAnalysis.settingsPath": "",
 
-  "vsicons.dontShowNewVersionMessage": true,
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-"
 }
