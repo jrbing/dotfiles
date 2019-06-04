@@ -82,6 +82,7 @@
   " Filetypes
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'fatih/vim-hclfmt'
+  Plug 'b4b4r07/vim-hcl'
   Plug 'funcodeio/lz4.vim'
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'robbles/logstash.vim'
