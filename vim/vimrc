@@ -276,8 +276,8 @@
     "let g:solarized_term_italics = 0
     "let g:solarized_old_cursor_style = 0
     "colorscheme solarized8_dark
-    "colorscheme onedark
-    colorscheme nord
+    colorscheme onedark
+    "colorscheme nord
   else
     let g:gruvbox_italic = 0
     colorscheme gruvbox
