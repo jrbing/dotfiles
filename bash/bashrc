@@ -35,7 +35,8 @@ case $(uname) in
   ;;
   (Linux)
     [[ $TERM == xterm ]] && export TERM="xterm-256color"
-    if [[ $(python -c 'import sys; print("%i" % (sys.hexversion<0x02070000))') -eq 0 ]]; then
+    # Test if the system python version is >= 3.7 or if python3 is in the path
+    if [[ $(python -c 'import sys; print("%i" % (sys.hexversion<0x03070000))') -eq 0 || $(hash python3 2>/dev/null) ]]; then
       eval "$("$HOME"/.dotfiles/bin/valet init -)"
     fi
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
