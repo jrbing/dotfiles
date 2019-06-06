@@ -1,0 +1,20 @@
+#compdef argo
+
+_arguments \
+  '1: :->level1' \
+  '2: :_files'
+case $state in
+  level1)
+    case $words[1] in
+      argo)
+        _arguments '1: :(completion delete get lint list logs resubmit resume retry submit suspend terminate version wait watch)'
+      ;;
+      *)
+        _arguments '*: :_files'
+      ;;
+    esac
+  ;;
+  *)
+    _arguments '*: :_files'
+  ;;
+esac
