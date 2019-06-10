@@ -97,10 +97,10 @@
   Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
   Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'sheerun/vim-polyglot'
+  Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
   "Plug 'ap/vim-css-color'
-  "Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 
-  let g:polyglot_disabled = ['go']
+  let g:polyglot_disabled = ['go', 'markdown']
 
   if g:OSX()
     Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
