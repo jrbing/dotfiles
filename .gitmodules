@@ -1,7 +1,3 @@
-[submodule "pandoc"]
-  path = pandoc
-  url = git://github.com/jrbing/pandoc-templates.git
-  ignore = dirty
 [submodule "vim/plug"]
   path = vim/plug
   url = git://github.com/junegunn/vim-plug.git
