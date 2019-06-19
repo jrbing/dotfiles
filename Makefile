@@ -72,6 +72,9 @@ submodules:  ## Update all submodule references
 			git checkout master; \
 			git submodule update --recursive;'
 
+pandoc-document-template:	## Update source pandoc document template
+	@curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex > $(dotfiles)/pandoc/templates/eisvogel.latex
+
 update:  ## Pull updates from remote
 	@git pull --rebase
 

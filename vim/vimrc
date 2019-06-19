@@ -64,6 +64,7 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-tbone'
   Plug 'tpope/vim-unimpaired'
+  Plug 'vim-pandoc/vim-pandoc', { 'for': ['pandoc', 'markdown'] }
   Plug 'vim-scripts/Align'
   Plug 'wincent/ferret'
   Plug 'scrooloose/nerdtree'
@@ -87,7 +88,7 @@
   Plug 'funcodeio/lz4.vim'
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'robbles/logstash.vim'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['pandoc', 'markdown'] }
   Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
   Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
@@ -466,7 +467,7 @@
   " Markdown {{{2
     augroup ft_markdown
       autocmd!
-      autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+      autocmd BufRead,BufNewFile,BufFilePre *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
     augroup END
   "}}}
 
@@ -942,11 +943,13 @@
 
     set completeopt-=preview
 
-    " Typescript support
+    " Typescript and Pandoc support
     if !exists('g:ycm_semantic_triggers')
       let g:ycm_semantic_triggers = {}
     endif
     let g:ycm_semantic_triggers['typescript'] = ['.']
+    let g:ycm_semantic_triggers.tex = ['@']
+    let g:ycm_filetype_blacklist = {}
   " }}}
 
   " AutoFormat {{{2
@@ -1068,6 +1071,10 @@
     let g:dbext_default_ORA_bin = 'sql'
   "}}}
 
+  " vim-pandoc {{{2
+    "let g:pandoc#spell#enabled = 0
+  "}}}
+
 " }}}
 
 " Utility Functions {{{1
@@ -1121,6 +1128,8 @@
     setlocal formatoptions+=n
     set spelllang=en
     set spellsuggest=9 "show only 9 suggestions for misspelled words
+    set filetype=markdown.pandoc
+    set nospell
   endfunction
 
   func! <sid>CycleTabpages(forw)
@@ -1353,7 +1362,8 @@
       " Create a pdf using pandoc and open it
       function! CreatePDF()
         "execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
-        execute '! pandoc -o /tmp/%:t:r.pdf --pdf-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        "execute '! pandoc -o /tmp/%:t:r.pdf --pdf-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        execute '! pandoc "%" --output /tmp/%:t:r.pdf --template eisvogel --from markdown --listings'
         execute 'silent ! open /tmp/%:t:r.pdf'
       endfunction
 
