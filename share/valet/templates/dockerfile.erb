@@ -52,4 +52,6 @@ RUN groupadd -g 1000 appuser && \
       /app \
       /config
 
+COPY rootfs /
+
 ENTRYPOINT [ "/init" ]
