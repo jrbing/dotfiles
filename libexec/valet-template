@@ -82,20 +82,6 @@ class Template < Thor
     run "unix2dos #{@datafix_base_directory}/*"
   end
 
-  # golang project
-  desc "golang [NAME]", "Creates golang project files and directories"
-  def golang(project_name=nil)
-    @project_name = get_project_name(project_name)
-    @project_base_directory = create_project_directory(@project_name)
-
-    create_from_template("goenvrc.erb", ".envrc")
-    create_project_subdirectory('vendor')
-    inside(@project_base_directory) do
-      run("direnv allow")
-      run("glide init")
-    end
-  end
-
   # windows powershell script
   desc "powershell [NAME]", "Creates a basic powershell script"
   def powershell(script_name=nil)
