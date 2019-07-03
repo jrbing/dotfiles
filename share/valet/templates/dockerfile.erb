@@ -1,5 +1,7 @@
 # https://example.com
 #
+# vim:set et ft=Dockerfile sw=2 ts=2 tw=80:
+#
 # To build:
 #   docker build --build-arg BUILD_ARG_ONE=${BUILD_ARG_ONE} BUILD_ARG_TWO=${BUILD_ARG_TWO} -t image-name .
 #
@@ -36,14 +38,12 @@ RUN apk -U update && \
         curl \
         unzip
 
-################
-#  S6 Overlay  #
-################
-# https://github.com/just-containers/s6-overlay
+# S6 Overlay
+#    https://github.com/just-containers/s6-overlay
+ENV S6_OVERLAY_VERSION v1.22.1.0
 
-ENV S6_OVERLAY_VERSION v1.22.0.0
-
-RUN curl -L https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
+RUN curl -L \
+    https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
     | tar -xzC /
 
 RUN groupadd -g 1000 appuser && \
@@ -51,11 +51,5 @@ RUN groupadd -g 1000 appuser && \
     mkdir -p \
       /app \
       /config
-
-#############################################
-#  Application specific build instructions  #
-#############################################
-
-COPY example.sh /example/
 
 ENTRYPOINT [ "/init" ]
