@@ -68,9 +68,7 @@ clean:  ## Remove all temporary and backup files
 	@git clean -dfx
 
 submodules:  ## Update all submodule references
-	@git submodule foreach 'git fetch origin; \
-			git checkout master; \
-			git submodule update --recursive;'
+	@git submodule update --rebase --remote --recursive
 
 pandoc-document-template:	## Update source pandoc document template
 	@curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex > $(dotfiles)/pandoc/templates/eisvogel.latex
