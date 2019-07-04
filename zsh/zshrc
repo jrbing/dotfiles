@@ -112,7 +112,7 @@ SPACESHIP_GIT_STATUS_SUFFIX=""
 
 unalias rm
 
-alias server="devd -ol ."
+alias server="devd --open --livewatch ."
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"
 alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
 alias java_ls='/usr/libexec/java_home -V'
