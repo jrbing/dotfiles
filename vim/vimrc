@@ -83,8 +83,7 @@
 
   " Filetypes
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
-  Plug 'fatih/vim-hclfmt'
-  Plug 'b4b4r07/vim-hcl'
+  Plug 'hashivim/vim-terraform'
   Plug 'funcodeio/lz4.vim'
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'robbles/logstash.vim'
@@ -1005,6 +1004,7 @@
 
   " vim-terraform {{{2
     let g:terraform_fmt_on_save = 1
+    let g:terraform_align=1
   "}}}
 
   " Align {{{2
