@@ -1,7 +1,7 @@
 priority -50
 
 ################################################################################
-#                                    Global                                    #
+#                                     Base                                     #
 ################################################################################
 
 snippet var "Variable declaration"
@@ -17,18 +17,36 @@ variable "${1:name}" {}$0
 endsnippet
 
 snippet qvar "Quoted variable"
-"\$\{var.$1\}"
+"\$\{var.$1\}"$0
 endsnippet
 
 snippet ivar "Variable insertion" i
-\$\{var.$1\}
+\$\{var.$1\}$0
 endsnippet
 
 snippet rvar "Resource as a variable" i
-\$\{$1.$2\}
+\$\{$1.$2\}$0
 endsnippet
 
-snippet resource
+snippet output "Output"
+output "${1}" {
+	value = "${2}"
+}
+$0
+endsnippet
+
+snippet arr "Array"
+[ $1 ]$0
+endsnippet
+
+snippet tags "Tags"
+tags {
+	Name = "${2:value}"
+}
+$0
+endsnippet
+
+snippet resource "Resource"
 resource "${1:type}" "${2:name}" {
 	${3}
 
@@ -36,169 +54,2909 @@ resource "${1:type}" "${2:name}" {
 		name = "${4}"
 	}
 }
+$0
 endsnippet
 
-snippet output
-output "${1}" {
-	value = "${2}"
-}
-${3}
-endsnippet
-
-snippet arr "array"
-[ $1 ]
-endsnippet
-
-snippet tags
-tags {
-	Name = "${2:value}"
-}
-endsnippet
-
-#snippet =
-#$1 = $2
-#endsnippet
-
-################################################################################
-#                                  Providers                                   #
-################################################################################
-
-snippet provider
-provider "${1:name}" {
-	${2:config}
+snippet provider "Provider"
+provider "${1}" {
+	${2}
 }
 $0
 endsnippet
 
-snippet provider_aws
-provider "aws" {
-	access_key = "${var.access_key}"
-	secret_key = "${var.secret_key}"
-	region = "${var.region}"
-}
-endsnippet
-
-snippet provider_consul
-provider "consul" {
-	address = "${1:demo.consul.io:80}"
-	datacenter = "${2:datacenter}"
+snippet data "Data source"
+data "${1}" "${2}" {
+	${3}
 }
 $0
 endsnippet
 
-snippet provider_digitalocean
-provider "digitalocean" {
-	token = "${1:${var.digital_ocean_token}}"
-}
-$0
-endsnippet
-
-snippet provider_docker
-provider "docker" {
-	host = "${1:${var.docker_host}}"
-}
-$0
-endsnippet
-
-snippet provider_google
-provider "google" {
-	account_file = "${file("account.json")}"
-	project = "my-gce-project"
-	region = "us-central1"
-}
-$0
-endsnippet
-
-snippet provider_openstack
-provider "openstack" {
-	user_name  = "${var.user_name}"
-	tenant_name = "${var.tenant_name}"
-	password  = "${var.password}"
-	auth_url  = "${var.auth_url}"
-}
-$0
-endsnippet
-
-snippet provider_rundeck
-provider "rundeck" {
-	url = "http://rundeck.example.com/"
-	auth_token = "abcd1234"
-	#allow_unverified_ssl = "false"
+snippet module "Module"
+module "${1}" {
+	${2}
 }
 $0
 endsnippet
 
 ################################################################################
-#                                  Resources                                   #
+#                                 Provisioners                                 #
 ################################################################################
 
-snippet resource "Generic recource"
-resource "${1:type}" "${2:name}" {
-	${3:config}
+snippet ssh "SSH Provisioner"
+connection {
+	type     = "ssh"
+	user     = "root"
+	password = "${var.root_password}"
 }
 $0
 endsnippet
 
-snippet resource_template_file "Template file resource"
-resource "template_file" "$1" {
-	filename = "$1"
-	vars {
-		$2
+snippet winrm "WinRM Provisioner"
+connection {
+	type     = "winrm"
+	user     = "Administrator"
+	password = "${var.admin_password}"
+}
+$0
+endsnippet
+
+snippet local_exec "Local Exec Provisioner"
+provisioner "local-exec" {
+	command = "${1}"
+}
+$0
+endsnippet
+
+snippet remote_exec "Remote Exec Provisioner"
+provisioner "remote-exec" {
+	inline = [
+		"${1}"
+	]
+}
+$0
+endsnippet
+
+snippet file "File Provisioner"
+provisioner "file" {
+	source = "${1}"
+	destination = "${2}"
+}
+$0
+endsnippet
+
+################################################################################
+#                                    Random                                    #
+################################################################################
+
+snippet random "Random Provider"
+provider "random" {
+	
+}
+$0
+endsnippet
+
+snippet r_random_id "Random ID"
+resource "random_id" "${1}" {
+	byte_length = ${2}
+}
+$0
+endsnippet
+
+snippet r_random_integer "Random Integer"
+resource "random_integer" "${1}" {
+	max = ${2}
+	min = ${3}
+}
+$0
+endsnippet
+
+snippet r_random_pet "Random Pet"
+resource "random_pet" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet r_random_shuffle "Random Shuffle"
+resource "random_shuffle" "${1}" {
+	input = ["${2}"]
+}
+$0
+endsnippet
+
+snippet r_random_string "Random String"
+resource "random_string" "${1}" {
+	length = ${2}
+}
+$0
+endsnippet
+
+snippet r_random_uuid "Random UUID"
+resource "random_uuid" "${1}" {
+	
+}
+$0
+endsnippet
+
+################################################################################
+#                                    Local                                     #
+################################################################################
+
+snippet local
+provider "local" {
+	
+}
+endsnippet
+
+snippet r_local_file
+resource "local_file" "${1}" {
+	content = "${2}"
+	filename = "${3}"
+}
+endsnippet
+
+snippet d_local_file
+data "local_file" "${1}" {
+	filename = "${2}"
+}
+endsnippet
+
+################################################################################
+#                                   Nutanix                                    #
+################################################################################
+
+snippet nutanix
+provider "nutanix" {
+	endpoint = "${1}"
+	password = "${2}"
+	username = "${3}"
+}
+$0
+endsnippet
+
+snippet r_nutanix_category_key
+resource "nutanix_category_key" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet r_nutanix_category_value
+resource "nutanix_category_value" "${1}" {
+	name = "${2}"
+	value = "${3}"
+}
+$0
+endsnippet
+
+snippet r_nutanix_image
+resource "nutanix_image" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet r_nutanix_subnet
+resource "nutanix_subnet" "${1}" {
+	name = "${2}"
+	subnet_type = "${3}"
+}
+$0
+endsnippet
+
+snippet r_nutanix_virtual_machine
+resource "nutanix_virtual_machine" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_nutanix_cluster
+data "nutanix_cluster" "${1}" {
+	cluster_id = "${2}"
+}
+$0
+endsnippet
+
+snippet d_nutanix_clusters
+data "nutanix_clusters" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_nutanix_image
+data "nutanix_image" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_nutanix_subnet
+data "nutanix_subnet" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_nutanix_virtual_machine
+data "nutanix_virtual_machine" "${1}" {
+	vm_id = "${2}"
+}
+$0
+endsnippet
+
+
+################################################################################
+#                                   AzureRM                                    #
+################################################################################
+
+snippet azurerm
+provider "azurerm" {
+	environment = "${1}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_api_management
+resource "azurerm_api_management" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	publisher_email = "${4}"
+	publisher_name = "${5}"
+	resource_group_name = "${6}"
+	sku {
+		capacity = 1
+		name = ""
 	}
 }
 $0
 endsnippet
 
-snippet resource_rundeck_project "Rundeck project resource"
-resource "rundeck_project" "$1" {
-	name = "$2"
-	description = "$3"
-	#default_node_file_copier_plugin = "jsch-scp"
-	#default_node_executor_plugin = "jsch-ssh"
-	#ssh_authentication_type = "privateKey"
-	#ssh_key_storage_path = "anvils/id_rsa"
-	#ssh_key_file_path = "/var/lib/rundeck/id_rsa"
+snippet r_azurerm_app_service
+resource "azurerm_app_service" "${1}" {
+	app_service_plan_id = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
 
-	resource_model_source {
-		type = "file"
-		config = {
-			format = "resourceyaml"
-			# This path is interpreted on the Rundeck server
-			file = "/var/rundeck/projects/anvils/resources.yaml"
+snippet r_azurerm_app_service_active_slot
+resource "azurerm_app_service_active_slot" "${1}" {
+	app_service_name = "${2}"
+	app_service_slot_name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_app_service_custom_hostname_binding
+resource "azurerm_app_service_custom_hostname_binding" "${1}" {
+	app_service_name = "${2}"
+	hostname = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_app_service_plan
+resource "azurerm_app_service_plan" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku {
+		size = ""
+		tier = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_app_service_slot
+resource "azurerm_app_service_slot" "${1}" {
+	app_service_name = "${2}"
+	app_service_plan_id = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_application_gateway
+resource "azurerm_application_gateway" "${1}" {
+	backend_address_pool {
+		name = ""
+	}
+	backend_http_settings {
+		cookie_based_affinity = ""
+		name = ""
+		port = 1
+		protocol = ""
+	}
+	frontend_ip_configuration {
+		name = ""
+	}
+	frontend_port {
+		name = ""
+		port = 1
+	}
+	gateway_ip_configuration {
+		name = ""
+		subnet_id = ""
+	}
+	http_listener {
+		frontend_ip_configuration_name = ""
+		frontend_port_name = ""
+		name = ""
+		protocol = ""
+	}
+	location = "${8}"
+	name = "${9}"
+	request_routing_rule {
+		http_listener_name = ""
+		name = ""
+		rule_type = ""
+	}
+	resource_group_name = "${11}"
+	sku {
+		capacity = 1
+		name = ""
+		tier = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_application_insights
+resource "azurerm_application_insights" "${1}" {
+	application_type = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_application_insights_api_key
+resource "azurerm_application_insights_api_key" "${1}" {
+	application_insights_id = "${2}"
+	name = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_application_security_group
+resource "azurerm_application_security_group" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_account
+resource "azurerm_automation_account" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku {
+	
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_credential
+resource "azurerm_automation_credential" "${1}" {
+	account_name = "${2}"
+	name = "${3}"
+	password = "${4}"
+	resource_group_name = "${5}"
+	username = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_dsc_configuration
+resource "azurerm_automation_dsc_configuration" "${1}" {
+	automation_account_name = "${2}"
+	content_embedded = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_dsc_nodeconfiguration
+resource "azurerm_automation_dsc_nodeconfiguration" "${1}" {
+	automation_account_name = "${2}"
+	content_embedded = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_module
+resource "azurerm_automation_module" "${1}" {
+	automation_account_name = "${2}"
+	module_link {
+		uri = ""
+	}
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_runbook
+resource "azurerm_automation_runbook" "${1}" {
+	account_name = "${2}"
+	location = "${3}"
+	log_progress = ${4:false}
+	log_verbose = ${5:false}
+	name = "${6}"
+	publish_content_link {
+		uri = ""
+	}
+	resource_group_name = "${8}"
+	runbook_type = "${9}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_automation_schedule
+resource "azurerm_automation_schedule" "${1}" {
+	frequency = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_autoscale_setting
+resource "azurerm_autoscale_setting" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	profile {
+		capacity {
+			default = 1
+			maximum = 1
+			minimum = 1
+		}
+		name = ""
+	}
+	resource_group_name = "${5}"
+	target_resource_id = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_availability_set
+resource "azurerm_availability_set" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_azuread_application
+resource "azurerm_azuread_application" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_azuread_service_principal
+resource "azurerm_azuread_service_principal" "${1}" {
+	application_id = "${2}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_azuread_service_principal_password
+resource "azurerm_azuread_service_principal_password" "${1}" {
+	end_date = "${2}"
+	service_principal_id = "${3}"
+	value = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_batch_account
+resource "azurerm_batch_account" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_batch_pool
+resource "azurerm_batch_pool" "${1}" {
+	account_name = "${2}"
+	name = "${3}"
+	node_agent_sku_id = "${4}"
+	resource_group_name = "${5}"
+	storage_image_reference {
+		offer = ""
+		publisher = ""
+		sku = ""
+		version = ""
+	}
+	vm_size = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_cdn_endpoint
+resource "azurerm_cdn_endpoint" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	origin {
+		host_name = ""
+		name = ""
+	}
+	profile_name = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_cdn_profile
+resource "azurerm_cdn_profile" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_cognitive_account
+resource "azurerm_cognitive_account" "${1}" {
+	kind = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	sku {
+		name = ""
+		tier = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_container_group
+resource "azurerm_container_group" "${1}" {
+	container {
+		cpu = 1.0
+		image = ""
+		memory = 1.0
+		name = ""
+	}
+	location = "${3}"
+	name = "${4}"
+	os_type = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_container_registry
+resource "azurerm_container_registry" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_container_service
+resource "azurerm_container_service" "${1}" {
+	agent_pool_profile {
+		dns_prefix = ""
+		name = ""
+		vm_size = ""
+	}
+	diagnostics_profile {
+		enabled = false
+	}
+	linux_profile {
+		admin_username = ""
+		ssh_key {
+			key_data = ""
 		}
 	}
-}
-endsnippet
-
-snippet resource_rundeck_private_key "Rundeck private key resource"
-resource "rundeck_private_key" "$1" {
-	path = "anvils/id_rsa"
-	key_material = "${file("/id_rsa")}"
-}
-$0
-endsnippet
-
-snippet resource_rundeck_public_key "Rundeck public key resource"
-resource "rundeck_public_key" "$1" {
-	path = "anvils/id_rsa.pub"
-	key_material = "ssh-rsa yada-yada-yada"
+	location = "${5}"
+	master_profile {
+		dns_prefix = ""
+	}
+	name = "${7}"
+	orchestration_platform = "${8}"
+	resource_group_name = "${9}"
 }
 $0
 endsnippet
 
-snippet resource_rundeck_job "Rundeck job resource"
-resource "rundeck_job" "$1" {
-	name = "$1"
-	project_name = "$2"
-	description = "$3"
-	#node_filter_query = "tags: web"
+snippet r_azurerm_cosmosdb_account
+resource "azurerm_cosmosdb_account" "${1}" {
+	consistency_policy {
+		consistency_level = ""
+	}
+	location = "${3}"
+	name = "${4}"
+	offer_type = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
 
-	command {
-		shell_command = "sudo service httpd restart"
+snippet r_azurerm_data_lake_analytics_account
+resource "azurerm_data_lake_analytics_account" "${1}" {
+	default_store_account_name = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_data_lake_analytics_firewall_rule
+resource "azurerm_data_lake_analytics_firewall_rule" "${1}" {
+	account_name = "${2}"
+	end_ip_address = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	start_ip_address = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_data_lake_store
+resource "azurerm_data_lake_store" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_data_lake_store_file
+resource "azurerm_data_lake_store_file" "${1}" {
+	account_name = "${2}"
+	local_file_path = "${3}"
+	remote_file_path = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_data_lake_store_firewall_rule
+resource "azurerm_data_lake_store_firewall_rule" "${1}" {
+	account_name = "${2}"
+	end_ip_address = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	start_ip_address = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_databricks_workspace
+resource "azurerm_databricks_workspace" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dev_test_lab
+resource "azurerm_dev_test_lab" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dev_test_linux_virtual_machine
+resource "azurerm_dev_test_linux_virtual_machine" "${1}" {
+	gallery_image_reference {
+		offer = ""
+		publisher = ""
+		sku = ""
+		version = ""
+	}
+	lab_name = "${3}"
+	lab_subnet_name = "${4}"
+	lab_virtual_network_id = "${5}"
+	location = "${6}"
+	name = "${7}"
+	resource_group_name = "${8}"
+	size = "${9}"
+	storage_type = "${10}"
+	username = "${11}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dev_test_policy
+resource "azurerm_dev_test_policy" "${1}" {
+	evaluator_type = "${2}"
+	lab_name = "${3}"
+	name = "${4}"
+	policy_set_name = "${5}"
+	resource_group_name = "${6}"
+	threshold = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dev_test_virtual_network
+resource "azurerm_dev_test_virtual_network" "${1}" {
+	lab_name = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dev_test_windows_virtual_machine
+resource "azurerm_dev_test_windows_virtual_machine" "${1}" {
+	gallery_image_reference {
+		offer = ""
+		publisher = ""
+		sku = ""
+		version = ""
+	}
+	lab_name = "${3}"
+	lab_subnet_name = "${4}"
+	lab_virtual_network_id = "${5}"
+	location = "${6}"
+	name = "${7}"
+	password = "${8}"
+	resource_group_name = "${9}"
+	size = "${10}"
+	storage_type = "${11}"
+	username = "${12}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_devspace_controller
+resource "azurerm_devspace_controller" "${1}" {
+	host_suffix = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	sku {
+		name = ""
+		tier = ""
+	}
+	target_container_host_credentials_base64 = "${7}"
+	target_container_host_resource_id = "${8}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_a_record
+resource "azurerm_dns_a_record" "${1}" {
+	name = "${2}"
+	records = ["${3}"]
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_aaaa_record
+resource "azurerm_dns_aaaa_record" "${1}" {
+	name = "${2}"
+	records = ["${3}"]
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_caa_record
+resource "azurerm_dns_caa_record" "${1}" {
+	name = "${2}"
+	record {
+		flags = 1
+		tag = ""
+		value = ""
+	}
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_cname_record
+resource "azurerm_dns_cname_record" "${1}" {
+	name = "${2}"
+	record = "${3}"
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_mx_record
+resource "azurerm_dns_mx_record" "${1}" {
+	name = "${2}"
+	record {
+		exchange = ""
+		preference = ""
+	}
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_ns_record
+resource "azurerm_dns_ns_record" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	ttl = ${4}
+	zone_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_ptr_record
+resource "azurerm_dns_ptr_record" "${1}" {
+	name = "${2}"
+	records = ["${3}"]
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_srv_record
+resource "azurerm_dns_srv_record" "${1}" {
+	name = "${2}"
+	record {
+		port = 1
+		priority = 1
+		target = ""
+		weight = 1
+	}
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_txt_record
+resource "azurerm_dns_txt_record" "${1}" {
+	name = "${2}"
+	record {
+		value = ""
+	}
+	resource_group_name = "${4}"
+	ttl = ${5}
+	zone_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_dns_zone
+resource "azurerm_dns_zone" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_eventgrid_topic
+resource "azurerm_eventgrid_topic" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_eventhub
+resource "azurerm_eventhub" "${1}" {
+	message_retention = ${2}
+	name = "${3}"
+	namespace_name = "${4}"
+	partition_count = ${5}
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_eventhub_authorization_rule
+resource "azurerm_eventhub_authorization_rule" "${1}" {
+	eventhub_name = "${2}"
+	name = "${3}"
+	namespace_name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_eventhub_consumer_group
+resource "azurerm_eventhub_consumer_group" "${1}" {
+	eventhub_name = "${2}"
+	name = "${3}"
+	namespace_name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_eventhub_namespace
+resource "azurerm_eventhub_namespace" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_eventhub_namespace_authorization_rule
+resource "azurerm_eventhub_namespace_authorization_rule" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_express_route_circuit
+resource "azurerm_express_route_circuit" "${1}" {
+	bandwidth_in_mbps = ${2}
+	location = "${3}"
+	name = "${4}"
+	peering_location = "${5}"
+	resource_group_name = "${6}"
+	service_provider_name = "${7}"
+	sku {
+		family = ""
+		tier = ""
 	}
 }
 $0
 endsnippet
 
+snippet r_azurerm_express_route_circuit_authorization
+resource "azurerm_express_route_circuit_authorization" "${1}" {
+	express_route_circuit_name = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_express_route_circuit_peering
+resource "azurerm_express_route_circuit_peering" "${1}" {
+	express_route_circuit_name = "${2}"
+	peering_type = "${3}"
+	primary_peer_address_prefix = "${4}"
+	resource_group_name = "${5}"
+	secondary_peer_address_prefix = "${6}"
+	vlan_id = ${7}
+}
+$0
+endsnippet
+
+snippet r_azurerm_firewall
+resource "azurerm_firewall" "${1}" {
+	ip_configuration {
+		name = ""
+		subnet_id = ""
+	}
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_firewall_application_rule_collection
+resource "azurerm_firewall_application_rule_collection" "${1}" {
+	action = "${2}"
+	azure_firewall_name = "${3}"
+	name = "${4}"
+	priority = ${5}
+	resource_group_name = "${6}"
+	rule {
+		name = ""
+		source_addresses = [""]
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_firewall_network_rule_collection
+resource "azurerm_firewall_network_rule_collection" "${1}" {
+	action = "${2}"
+	azure_firewall_name = "${3}"
+	name = "${4}"
+	priority = ${5}
+	resource_group_name = "${6}"
+	rule {
+		destination_addresses = [""]
+		destination_ports = [""]
+		name = ""
+		protocols = [""]
+		source_addresses = [""]
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_function_app
+resource "azurerm_function_app" "${1}" {
+	app_service_plan_id = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	storage_connection_string = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_image
+resource "azurerm_image" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_iothub
+resource "azurerm_iothub" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku {
+		capacity = 1
+		name = ""
+		tier = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_iothub_consumer_group
+resource "azurerm_iothub_consumer_group" "${1}" {
+	eventhub_endpoint_name = "${2}"
+	iothub_name = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_key_vault
+resource "azurerm_key_vault" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku {
+		name = ""
+	}
+	tenant_id = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_key_vault_access_policy
+resource "azurerm_key_vault_access_policy" "${1}" {
+	object_id = "${2}"
+	resource_group_name = "${3}"
+	tenant_id = "${4}"
+	vault_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_key_vault_certificate
+resource "azurerm_key_vault_certificate" "${1}" {
+	certificate_policy {
+		issuer_parameters {
+			name = ""
+		}
+		key_properties {
+			exportable = false
+			key_size = 1
+			key_type = ""
+			reuse_key = false
+		}
+		secret_properties {
+			content_type = ""
+		}
+	}
+	name = "${3}"
+	vault_uri = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_key_vault_key
+resource "azurerm_key_vault_key" "${1}" {
+	key_opts = ["${2}"]
+	key_size = ${3}
+	key_type = "${4}"
+	name = "${5}"
+	vault_uri = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_key_vault_secret
+resource "azurerm_key_vault_secret" "${1}" {
+	name = "${2}"
+	value = "${3}"
+	vault_uri = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_kubernetes_cluster
+resource "azurerm_kubernetes_cluster" "${1}" {
+	agent_pool_profile {
+		name = ""
+		vm_size = ""
+	}
+	dns_prefix = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+	service_principal {
+		client_id = ""
+		client_secret = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_lb
+resource "azurerm_lb" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_lb_backend_address_pool
+resource "azurerm_lb_backend_address_pool" "${1}" {
+	loadbalancer_id = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_lb_nat_pool
+resource "azurerm_lb_nat_pool" "${1}" {
+	backend_port = ${2}
+	frontend_ip_configuration_name = "${3}"
+	frontend_port_end = ${4}
+	frontend_port_start = ${5}
+	loadbalancer_id = "${6}"
+	name = "${7}"
+	protocol = "${8}"
+	resource_group_name = "${9}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_lb_nat_rule
+resource "azurerm_lb_nat_rule" "${1}" {
+	backend_port = ${2}
+	frontend_ip_configuration_name = "${3}"
+	frontend_port = ${4}
+	loadbalancer_id = "${5}"
+	name = "${6}"
+	protocol = "${7}"
+	resource_group_name = "${8}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_lb_probe
+resource "azurerm_lb_probe" "${1}" {
+	loadbalancer_id = "${2}"
+	name = "${3}"
+	port = ${4}
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_lb_rule
+resource "azurerm_lb_rule" "${1}" {
+	backend_port = ${2}
+	frontend_ip_configuration_name = "${3}"
+	frontend_port = ${4}
+	loadbalancer_id = "${5}"
+	name = "${6}"
+	protocol = "${7}"
+	resource_group_name = "${8}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_local_network_gateway
+resource "azurerm_local_network_gateway" "${1}" {
+	address_space = ["${2}"]
+	gateway_address = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_log_analytics_solution
+resource "azurerm_log_analytics_solution" "${1}" {
+	location = "${2}"
+	plan {
+		product = ""
+		publisher = ""
+	}
+	resource_group_name = "${4}"
+	solution_name = "${5}"
+	workspace_name = "${6}"
+	workspace_resource_id = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_log_analytics_workspace
+resource "azurerm_log_analytics_workspace" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_log_analytics_workspace_linked_service
+resource "azurerm_log_analytics_workspace_linked_service" "${1}" {
+	linked_service_properties {
+		resource_id = ""
+	}
+	resource_group_name = "${3}"
+	workspace_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_logic_app_action_custom
+resource "azurerm_logic_app_action_custom" "${1}" {
+	body = "${2}"
+	logic_app_id = "${3}"
+	name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_logic_app_action_http
+resource "azurerm_logic_app_action_http" "${1}" {
+	logic_app_id = "${2}"
+	method = "${3}"
+	name = "${4}"
+	uri = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_logic_app_trigger_custom
+resource "azurerm_logic_app_trigger_custom" "${1}" {
+	body = "${2}"
+	logic_app_id = "${3}"
+	name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_logic_app_trigger_http_request
+resource "azurerm_logic_app_trigger_http_request" "${1}" {
+	logic_app_id = "${2}"
+	name = "${3}"
+	schema = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_logic_app_trigger_recurrence
+resource "azurerm_logic_app_trigger_recurrence" "${1}" {
+	frequency = "${2}"
+	interval = ${3}
+	logic_app_id = "${4}"
+	name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_logic_app_workflow
+resource "azurerm_logic_app_workflow" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_managed_disk
+resource "azurerm_managed_disk" "${1}" {
+	create_option = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	storage_account_type = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_management_group
+resource "azurerm_management_group" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet r_azurerm_management_lock
+resource "azurerm_management_lock" "${1}" {
+	lock_level = "${2}"
+	name = "${3}"
+	scope = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_mariadb_database
+resource "azurerm_mariadb_database" "${1}" {
+	charset = "${2}"
+	collation = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	server_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_mariadb_server
+resource "azurerm_mariadb_server" "${1}" {
+	administrator_login = "${2}"
+	administrator_login_password = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+	sku {
+		capacity = 1
+		family = ""
+		name = ""
+		tier = ""
+	}
+	ssl_enforcement = "${8}"
+	storage_profile {
+		storage_mb = 1
+	}
+	version = "${10}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_metric_alertrule
+resource "azurerm_metric_alertrule" "${1}" {
+	aggregation = "${2}"
+	location = "${3}"
+	metric_name = "${4}"
+	name = "${5}"
+	operator = "${6}"
+	period = "${7}"
+	resource_group_name = "${8}"
+	resource_id = "${9}"
+	threshold = ${10}
+}
+$0
+endsnippet
+
+snippet r_azurerm_monitor_action_group
+resource "azurerm_monitor_action_group" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	short_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_monitor_activity_log_alert
+resource "azurerm_monitor_activity_log_alert" "${1}" {
+	criteria {
+		category = ""
+	}
+	name = "${3}"
+	resource_group_name = "${4}"
+	scopes = ["${5}"]
+}
+$0
+endsnippet
+
+snippet r_azurerm_monitor_diagnostic_setting
+resource "azurerm_monitor_diagnostic_setting" "${1}" {
+	name = "${2}"
+	target_resource_id = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_monitor_log_profile
+resource "azurerm_monitor_log_profile" "${1}" {
+	categories = ["${2}"]
+	locations = ["${3}"]
+	name = "${4}"
+	retention_policy {
+		enabled = false
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_monitor_metric_alert
+resource "azurerm_monitor_metric_alert" "${1}" {
+	criteria {
+		aggregation = ""
+		metric_name = ""
+		metric_namespace = ""
+		operator = ""
+		threshold = 1.0
+	}
+	name = "${3}"
+	resource_group_name = "${4}"
+	scopes = ["${5}"]
+}
+$0
+endsnippet
+
+snippet r_azurerm_mssql_elasticpool
+resource "azurerm_mssql_elasticpool" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	per_database_settings {
+		max_capacity = 1.0
+		min_capacity = 1.0
+	}
+	resource_group_name = "${5}"
+	server_name = "${6}"
+	sku {
+		capacity = 1
+		name = ""
+		tier = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_mysql_configuration
+resource "azurerm_mysql_configuration" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	server_name = "${4}"
+	value = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_mysql_database
+resource "azurerm_mysql_database" "${1}" {
+	charset = "${2}"
+	collation = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	server_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_mysql_firewall_rule
+resource "azurerm_mysql_firewall_rule" "${1}" {
+	end_ip_address = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	server_name = "${5}"
+	start_ip_address = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_mysql_server
+resource "azurerm_mysql_server" "${1}" {
+	administrator_login = "${2}"
+	administrator_login_password = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+	sku {
+		capacity = 1
+		family = ""
+		name = ""
+		tier = ""
+	}
+	ssl_enforcement = "${8}"
+	storage_profile {
+		storage_mb = 1
+	}
+	version = "${10}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_mysql_virtual_network_rule
+resource "azurerm_mysql_virtual_network_rule" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	server_name = "${4}"
+	subnet_id = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_interface
+resource "azurerm_network_interface" "${1}" {
+	ip_configuration {
+		name = ""
+		private_ip_address_allocation = ""
+	}
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_interface_application_gateway_backend_address_pool_association
+resource "azurerm_network_interface_application_gateway_backend_address_pool_association" "${1}" {
+	backend_address_pool_id = "${2}"
+	ip_configuration_name = "${3}"
+	network_interface_id = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_interface_backend_address_pool_association
+resource "azurerm_network_interface_backend_address_pool_association" "${1}" {
+	backend_address_pool_id = "${2}"
+	ip_configuration_name = "${3}"
+	network_interface_id = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_interface_nat_rule_association
+resource "azurerm_network_interface_nat_rule_association" "${1}" {
+	ip_configuration_name = "${2}"
+	nat_rule_id = "${3}"
+	network_interface_id = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_security_group
+resource "azurerm_network_security_group" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_security_rule
+resource "azurerm_network_security_rule" "${1}" {
+	access = "${2}"
+	direction = "${3}"
+	name = "${4}"
+	network_security_group_name = "${5}"
+	priority = ${6}
+	protocol = "${7}"
+	resource_group_name = "${8}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_network_watcher
+resource "azurerm_network_watcher" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_notification_hub
+resource "azurerm_notification_hub" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	namespace_name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_notification_hub_authorization_rule
+resource "azurerm_notification_hub_authorization_rule" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	notification_hub_name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_notification_hub_namespace
+resource "azurerm_notification_hub_namespace" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	namespace_type = "${4}"
+	resource_group_name = "${5}"
+	sku {
+		name = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_packet_capture
+resource "azurerm_packet_capture" "${1}" {
+	name = "${2}"
+	network_watcher_name = "${3}"
+	resource_group_name = "${4}"
+	storage_location {
+	
+	}
+	target_resource_id = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_policy_assignment
+resource "azurerm_policy_assignment" "${1}" {
+	name = "${2}"
+	policy_definition_id = "${3}"
+	scope = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_policy_definition
+resource "azurerm_policy_definition" "${1}" {
+	display_name = "${2}"
+	mode = "${3}"
+	name = "${4}"
+	policy_type = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_policy_set_definition
+resource "azurerm_policy_set_definition" "${1}" {
+	display_name = "${2}"
+	name = "${3}"
+	policy_type = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_postgresql_configuration
+resource "azurerm_postgresql_configuration" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	server_name = "${4}"
+	value = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_postgresql_database
+resource "azurerm_postgresql_database" "${1}" {
+	charset = "${2}"
+	collation = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	server_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_postgresql_firewall_rule
+resource "azurerm_postgresql_firewall_rule" "${1}" {
+	end_ip_address = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	server_name = "${5}"
+	start_ip_address = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_postgresql_server
+resource "azurerm_postgresql_server" "${1}" {
+	administrator_login = "${2}"
+	administrator_login_password = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+	sku {
+		capacity = 1
+		family = ""
+		name = ""
+		tier = ""
+	}
+	ssl_enforcement = "${8}"
+	storage_profile {
+		storage_mb = 1
+	}
+	version = "${10}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_postgresql_virtual_network_rule
+resource "azurerm_postgresql_virtual_network_rule" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	server_name = "${4}"
+	subnet_id = "${5}"
+}
+snippet r_azurerm_public_ip
+resource "azurerm_public_ip" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_recovery_services_protected_vm
+resource "azurerm_recovery_services_protected_vm" "${1}" {
+	backup_policy_id = "${2}"
+	recovery_vault_name = "${3}"
+	resource_group_name = "${4}"
+	source_vm_id = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_recovery_services_protection_policy_vm
+resource "azurerm_recovery_services_protection_policy_vm" "${1}" {
+	backup {
+		frequency = ""
+		time = ""
+	}
+	name = "${3}"
+	recovery_vault_name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_recovery_services_vault
+resource "azurerm_recovery_services_vault" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_redis_cache
+resource "azurerm_redis_cache" "${1}" {
+	capacity = ${2}
+	family = "${3}"
+	location = "${4}"
+	name = "${5}"
+	redis_configuration {
+	
+	}
+	resource_group_name = "${7}"
+	sku_name = "${8}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_redis_firewall_rule
+resource "azurerm_redis_firewall_rule" "${1}" {
+	end_ip = "${2}"
+	name = "${3}"
+	redis_cache_name = "${4}"
+	resource_group_name = "${5}"
+	start_ip = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_relay_namespace
+resource "azurerm_relay_namespace" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku {
+		name = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_resource_group
+resource "azurerm_resource_group" "${1}" {
+	location = "${2}"
+	name = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_role_assignment
+resource "azurerm_role_assignment" "${1}" {
+	principal_id = "${2}"
+	scope = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_role_definition
+resource "azurerm_role_definition" "${1}" {
+	assignable_scopes = ["${2}"]
+	name = "${3}"
+	permissions {
+	
+	}
+	scope = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_route
+resource "azurerm_route" "${1}" {
+	address_prefix = "${2}"
+	name = "${3}"
+	next_hop_type = "${4}"
+	resource_group_name = "${5}"
+	route_table_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_route_table
+resource "azurerm_route_table" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_scheduler_job
+resource "azurerm_scheduler_job" "${1}" {
+	job_collection_name = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_scheduler_job_collection
+resource "azurerm_scheduler_job_collection" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_search_service
+resource "azurerm_search_service" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_security_center_contact
+resource "azurerm_security_center_contact" "${1}" {
+	alert_notifications = ${2:false}
+	alerts_to_admins = ${3:false}
+	email = "${4}"
+	phone = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_security_center_subscription_pricing
+resource "azurerm_security_center_subscription_pricing" "${1}" {
+	tier = "${2}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_security_center_workspace
+resource "azurerm_security_center_workspace" "${1}" {
+	scope = "${2}"
+	workspace_id = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_service_fabric_cluster
+resource "azurerm_service_fabric_cluster" "${1}" {
+	location = "${2}"
+	management_endpoint = "${3}"
+	name = "${4}"
+	node_type {
+		client_endpoint_port = 1
+		http_endpoint_port = 1
+		instance_count = 1
+		is_primary = false
+		name = ""
+	}
+	reliability_level = "${6}"
+	resource_group_name = "${7}"
+	upgrade_mode = "${8}"
+	vm_image = "${9}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_namespace
+resource "azurerm_servicebus_namespace" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_namespace_authorization_rule
+resource "azurerm_servicebus_namespace_authorization_rule" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_queue
+resource "azurerm_servicebus_queue" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_queue_authorization_rule
+resource "azurerm_servicebus_queue_authorization_rule" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	queue_name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_subscription
+resource "azurerm_servicebus_subscription" "${1}" {
+	max_delivery_count = ${2}
+	name = "${3}"
+	namespace_name = "${4}"
+	resource_group_name = "${5}"
+	topic_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_subscription_rule
+resource "azurerm_servicebus_subscription_rule" "${1}" {
+	filter_type = "${2}"
+	name = "${3}"
+	namespace_name = "${4}"
+	resource_group_name = "${5}"
+	subscription_name = "${6}"
+	topic_name = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_topic
+resource "azurerm_servicebus_topic" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_servicebus_topic_authorization_rule
+resource "azurerm_servicebus_topic_authorization_rule" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	resource_group_name = "${4}"
+	topic_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_shared_image
+resource "azurerm_shared_image" "${1}" {
+	gallery_name = "${2}"
+	identifier {
+		offer = ""
+		publisher = ""
+		sku = ""
+	}
+	location = "${4}"
+	name = "${5}"
+	os_type = "${6}"
+	resource_group_name = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_shared_image_gallery
+resource "azurerm_shared_image_gallery" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_shared_image_version
+resource "azurerm_shared_image_version" "${1}" {
+	gallery_name = "${2}"
+	image_name = "${3}"
+	location = "${4}"
+	managed_image_id = "${5}"
+	name = "${6}"
+	resource_group_name = "${7}"
+	target_region {
+		name = ""
+		regional_replica_count = 1
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_signalr_service
+resource "azurerm_signalr_service" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	sku {
+		capacity = 1
+		name = ""
+	}
+}
+$0
+endsnippet
+
+snippet r_azurerm_snapshot
+resource "azurerm_snapshot" "${1}" {
+	create_option = "${2}"
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_sql_active_directory_administrator
+resource "azurerm_sql_active_directory_administrator" "${1}" {
+	login = "${2}"
+	object_id = "${3}"
+	resource_group_name = "${4}"
+	server_name = "${5}"
+	tenant_id = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_sql_database
+resource "azurerm_sql_database" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	server_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_sql_elasticpool
+resource "azurerm_sql_elasticpool" "${1}" {
+	dtu = ${2}
+	edition = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+	server_name = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_sql_firewall_rule
+resource "azurerm_sql_firewall_rule" "${1}" {
+	end_ip_address = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	server_name = "${5}"
+	start_ip_address = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_sql_server
+resource "azurerm_sql_server" "${1}" {
+	administrator_login = "${2}"
+	administrator_login_password = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+	version = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_sql_virtual_network_rule
+resource "azurerm_sql_virtual_network_rule" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	server_name = "${4}"
+	subnet_id = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_storage_account
+resource "azurerm_storage_account" "${1}" {
+	account_replication_type = "${2}"
+	account_tier = "${3}"
+	location = "${4}"
+	name = "${5}"
+	resource_group_name = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_storage_blob
+resource "azurerm_storage_blob" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	storage_account_name = "${4}"
+	storage_container_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_storage_container
+resource "azurerm_storage_container" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	storage_account_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_storage_queue
+resource "azurerm_storage_queue" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	storage_account_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_storage_share
+resource "azurerm_storage_share" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	storage_account_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_storage_table
+resource "azurerm_storage_table" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	storage_account_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_subnet
+resource "azurerm_subnet" "${1}" {
+	address_prefix = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	virtual_network_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_subnet_network_security_group_association
+resource "azurerm_subnet_network_security_group_association" "${1}" {
+	network_security_group_id = "${2}"
+	subnet_id = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_subnet_route_table_association
+resource "azurerm_subnet_route_table_association" "${1}" {
+	route_table_id = "${2}"
+	subnet_id = "${3}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_template_deployment
+resource "azurerm_template_deployment" "${1}" {
+	deployment_mode = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_traffic_manager_endpoint
+resource "azurerm_traffic_manager_endpoint" "${1}" {
+	name = "${2}"
+	profile_name = "${3}"
+	resource_group_name = "${4}"
+	type = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_traffic_manager_profile
+resource "azurerm_traffic_manager_profile" "${1}" {
+	dns_config {
+		relative_name = ""
+		ttl = 1
+	}
+	monitor_config {
+		port = 1
+		protocol = ""
+	}
+	name = "${4}"
+	resource_group_name = "${5}"
+	traffic_routing_method = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_user_assigned_identity
+resource "azurerm_user_assigned_identity" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_machine
+resource "azurerm_virtual_machine" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	network_interface_ids = ["${4}"]
+	resource_group_name = "${5}"
+	storage_os_disk {
+		create_option = ""
+		name = ""
+	}
+	vm_size = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_machine_data_disk_attachment
+resource "azurerm_virtual_machine_data_disk_attachment" "${1}" {
+	caching = "${2}"
+	lun = ${3}
+	managed_disk_id = "${4}"
+	virtual_machine_id = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_machine_extension
+resource "azurerm_virtual_machine_extension" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	publisher = "${4}"
+	resource_group_name = "${5}"
+	type = "${6}"
+	type_handler_version = "${7}"
+	virtual_machine_name = "${8}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_machine_scale_set
+resource "azurerm_virtual_machine_scale_set" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	network_profile {
+		ip_configuration {
+			name = ""
+			primary = false
+			subnet_id = ""
+		}
+		name = ""
+		primary = false
+	}
+	os_profile {
+		admin_username = ""
+		computer_name_prefix = ""
+	}
+	resource_group_name = "${6}"
+	sku {
+		capacity = 1
+		name = ""
+	}
+	storage_profile_os_disk {
+		create_option = ""
+	}
+	upgrade_policy_mode = "${9}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_network
+resource "azurerm_virtual_network" "${1}" {
+	address_space = ["${2}"]
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_network_gateway
+resource "azurerm_virtual_network_gateway" "${1}" {
+	ip_configuration {
+		subnet_id = ""
+	}
+	location = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+	sku = "${6}"
+	type = "${7}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_network_gateway_connection
+resource "azurerm_virtual_network_gateway_connection" "${1}" {
+	location = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+	type = "${5}"
+	virtual_network_gateway_id = "${6}"
+}
+$0
+endsnippet
+
+snippet r_azurerm_virtual_network_peering
+resource "azurerm_virtual_network_peering" "${1}" {
+	name = "${2}"
+	remote_virtual_network_id = "${3}"
+	resource_group_name = "${4}"
+	virtual_network_name = "${5}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_api_management
+data "azurerm_api_management" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_app_service
+data "azurerm_app_service" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_app_service_plan
+data "azurerm_app_service_plan" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_application_insights
+data "azurerm_application_insights" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_application_security_group
+data "azurerm_application_security_group" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_azuread_application
+data "azurerm_azuread_application" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_azurerm_azuread_service_principal
+data "azurerm_azuread_service_principal" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_azurerm_batch_account
+data "azurerm_batch_account" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_batch_pool
+data "azurerm_batch_pool" "${1}" {
+	account_name = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_builtin_role_definition
+data "azurerm_builtin_role_definition" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_cdn_profile
+data "azurerm_cdn_profile" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_client_config
+data "azurerm_client_config" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_azurerm_container_registry
+data "azurerm_container_registry" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_cosmosdb_account
+data "azurerm_cosmosdb_account" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_data_lake_store
+data "azurerm_data_lake_store" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_dev_test_lab
+data "azurerm_dev_test_lab" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_dns_zone
+data "azurerm_dns_zone" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_eventhub_namespace
+data "azurerm_eventhub_namespace" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_image
+data "azurerm_image" "${1}" {
+	resource_group_name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_key_vault
+data "azurerm_key_vault" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_key_vault_access_policy
+data "azurerm_key_vault_access_policy" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_key_vault_key
+data "azurerm_key_vault_key" "${1}" {
+	name = "${2}"
+	vault_uri = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_key_vault_secret
+data "azurerm_key_vault_secret" "${1}" {
+	name = "${2}"
+	vault_uri = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_kubernetes_cluster
+data "azurerm_kubernetes_cluster" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_lb
+data "azurerm_lb" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_lb_backend_address_pool
+data "azurerm_lb_backend_address_pool" "${1}" {
+	loadbalancer_id = "${2}"
+	name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_log_analytics_workspace
+data "azurerm_log_analytics_workspace" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_logic_app_workflow
+data "azurerm_logic_app_workflow" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_managed_disk
+data "azurerm_managed_disk" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_management_group
+data "azurerm_management_group" "${1}" {
+	group_id = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_monitor_action_group
+data "azurerm_monitor_action_group" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_monitor_diagnostic_categories
+data "azurerm_monitor_diagnostic_categories" "${1}" {
+	resource_id = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_monitor_log_profile
+data "azurerm_monitor_log_profile" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_network_interface
+data "azurerm_network_interface" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_network_security_group
+data "azurerm_network_security_group" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_notification_hub
+data "azurerm_notification_hub" "${1}" {
+	name = "${2}"
+	namespace_name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_notification_hub_namespace
+data "azurerm_notification_hub_namespace" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_platform_image
+data "azurerm_platform_image" "${1}" {
+	location = "${2}"
+	offer = "${3}"
+	publisher = "${4}"
+	sku = "${5}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_public_ip
+data "azurerm_public_ip" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_public_ips
+data "azurerm_public_ips" "${1}" {
+	resource_group_name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_recovery_services_vault
+data "azurerm_recovery_services_vault" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_resource_group
+data "azurerm_resource_group" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_role_definition
+data "azurerm_role_definition" "${1}" {
+	role_definition_id = "${2}"
+	scope = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_route_table
+data "azurerm_route_table" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_scheduler_job_collection
+data "azurerm_scheduler_job_collection" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_shared_image
+data "azurerm_shared_image" "${1}" {
+	gallery_name = "${2}"
+	name = "${3}"
+	resource_group_name = "${4}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_shared_image_gallery
+data "azurerm_shared_image_gallery" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_shared_image_version
+data "azurerm_shared_image_version" "${1}" {
+	gallery_name = "${2}"
+	image_name = "${3}"
+	name = "${4}"
+	resource_group_name = "${5}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_snapshot
+data "azurerm_snapshot" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_storage_account
+data "azurerm_storage_account" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_storage_account_sas
+data "azurerm_storage_account_sas" "${1}" {
+	connection_string = "${2}"
+	expiry = "${3}"
+	permissions {
+			add = false
+			create = false
+			delete = false
+			list = false
+			process = false
+			read = false
+			update = false
+			write = false
+		}
+	resource_types {
+			container = false
+			object = false
+			service = false
+		}
+	services {
+			blob = false
+			file = false
+			queue = false
+			table = false
+		}
+	start = "${7}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_subnet
+data "azurerm_subnet" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+	virtual_network_name = "${4}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_subscription
+data "azurerm_subscription" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_azurerm_subscriptions
+data "azurerm_subscriptions" "${1}" {
+	
+}
+$0
+endsnippet
+
+snippet d_azurerm_traffic_manager_geographical_location
+data "azurerm_traffic_manager_geographical_location" "${1}" {
+	name = "${2}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_virtual_machine
+data "azurerm_virtual_machine" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_virtual_network
+data "azurerm_virtual_network" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
+
+snippet d_azurerm_virtual_network_gateway
+data "azurerm_virtual_network_gateway" "${1}" {
+	name = "${2}"
+	resource_group_name = "${3}"
+}
+$0
+endsnippet
 
 # vim:ft=snippets:
