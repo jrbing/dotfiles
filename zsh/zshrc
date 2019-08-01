@@ -206,6 +206,11 @@ if [[ $commands[helm] ]]; then
   source <(helm completion zsh)
 fi
 
+# Terraform
+if [[ $commands[terraform] ]]; then
+  complete -o nospace -C /usr/local/bin/terraform terraform
+fi
+
 ###############
 #  Profiling  #
 ###############
