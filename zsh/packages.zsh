@@ -35,36 +35,11 @@ zplug 'b4b4r07/httpstat', \
   use:'(*).sh', \
   rename-to:'$1'
 
-zplug 'genuinetools/reg', \
-  as:command, \
-  from:gh-r
-
-zplug 'genuinetools/audit', \
-  as:command, \
-  from:gh-r
-
-zplug 'genuinetools/pepper', \
-  as:command, \
-  from:gh-r
-
-zplug 'pulumi/kubespy', \
-  as:command, \
-  from:gh-r
-
 zplug 'davrodpin/mole', \
   as:command, \
   from:gh-r
 
 zplug 'asciimoo/wuzz', \
-  as:command, \
-  from:gh-r
-
-zplug 'kubedb/cli', \
-  as:command, \
-  from:gh-r, \
-  rename-to:'kubedb'
-
-zplug 'VirtusLab/render', \
   as:command, \
   from:gh-r
 
@@ -84,17 +59,19 @@ zplug 'lbolla/kube-secret-editor', \
   use:'(*).py', \
   rename-to:'$1'
 
-zplug 'cloud66-oss/habitus', \
-  as:command, \
-  from:gh-r
+#zplug 'genuinetools/reg', \
+  #as:command, \
+  #from:gh-r
 
-# TODO: figure out why this fails to update
-#zplug 'drwetter/testssl.sh', \
+#zplug 'genuinetools/audit', \
   #as:command, \
-  #use:'(*).sh', \
-  #rename-to:'$1'
-#zplug 'darold/pgFormatter', \
+  #from:gh-r
+
+#zplug 'genuinetools/pepper', \
   #as:command, \
-  #use:'pg_format'
-# akme/lsofgraph-python
-# sapegin/shipit
+  #from:gh-r
+
+#zplug 'vmware/octant', \
+  #as:command, \
+  #from:gh-r
+
