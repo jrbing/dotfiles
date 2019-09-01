@@ -117,7 +117,7 @@
     Plug 'vim-airline/vim-airline-themes'
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     if !g:VIMR()
-      Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
+      Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
       "Plug 'ternjs/tern_for_vim', { 'do': 'yarn install' }
     endif
     "Plug 'epeli/slimux'
