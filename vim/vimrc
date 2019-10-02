@@ -110,7 +110,7 @@
     Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
     Plug 'Raimondi/delimitMate'
     Plug 'rizzatti/dash.vim'
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-voom/VOoM'
     Plug 'vim-airline/vim-airline'
