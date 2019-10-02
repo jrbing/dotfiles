@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -124,6 +124,6 @@ if __name__ == "__main__":
             logger.info('Generating snippet for module: ' + document['module'])
             if 'deprecated' in document:
                 continue
-            # snippetfile.write(to_snippet(document).encode('utf-8'))
-            snippetfile.write(to_snippet(document))
+            snippetfile.write(to_snippet(document).encode('utf-8'))
+            # snippetfile.write(to_snippet(document))
             snippetfile.write("\n\n")
