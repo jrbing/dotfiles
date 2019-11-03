@@ -59,17 +59,17 @@ zplug 'lbolla/kube-secret-editor', \
   use:'(*).py', \
   rename-to:'$1'
 
-#zplug 'genuinetools/reg', \
-  #as:command, \
-  #from:gh-r
+zplug 'genuinetools/reg', \
+  as:command, \
+  from:gh-r, \
+  rename-to:reg, \
+  use:"*darwin*amd64"
 
-#zplug 'genuinetools/audit', \
-  #as:command, \
-  #from:gh-r
-
-#zplug 'genuinetools/pepper', \
-  #as:command, \
-  #from:gh-r
+zplug 'genuinetools/pepper', \
+  as:command, \
+  from:gh-r, \
+  rename-to:pepper, \
+  use:"*darwin*amd64"
 
 #zplug 'vmware/octant', \
   #as:command, \
