@@ -16,6 +16,11 @@ services:
           memory: 50M
     ports:
       - "80:80"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3s
     networks:
       - webnet
 
