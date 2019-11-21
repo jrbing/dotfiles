@@ -25,6 +25,8 @@ ENV BUILD_ARG_ONE=${BUILD_ARG_ONE} \
 
 VOLUME ["/some_directory"]
 
+HEALTHCHECK --interval=5m --timeout=3s CMD curl --fail http://localhost || exit 1
+
 EXPOSE 80
 
 # Base Packages
