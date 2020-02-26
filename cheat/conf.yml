@@ -1,0 +1,21 @@
+---
+
+editor: vim
+
+colorize: true
+
+style: api
+
+formatter: terminal16m
+
+cheatpaths:
+
+  - name: community
+    path: ~/.dotfiles/cheat/cheatsheets/community
+    tags: [ community ]
+    readonly: true
+
+  - name: personal
+    path: ~/.dotfiles/cheat/cheatsheets/personal
+    tags: [ personal ]
+    readonly: false

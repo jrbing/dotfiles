@@ -10,3 +10,6 @@
   path = zsh/zplug
   url = git://github.com/zplug/zplug.git
   ignore = dirty
+[submodule "cheat/cheatsheets/community"]
+	path = cheat/cheatsheets/community
+	url = git@github.com:cheat/cheatsheets.git

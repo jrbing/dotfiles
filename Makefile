@@ -45,7 +45,8 @@ link-launchd:
 	@cd ~ && ln -nfs "$$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$$HOME/Library/LaunchAgents/yosemite.pathfix.plist"
 
 link-cheat:
-	@cd ~ && ln -nfs $(dotfiles)/cheat/ .cheat;
+	@cd ~ && mkdir -p ~/.config/cheat;
+	@cd ~ && ln -nfs $(dotfiles)/cheat/conf.yml ~/.config/cheat/conf.yml;
 
 link-powershell:
 	@cd ~ && mkdir -p ~/.config/powershell;
