@@ -12,5 +12,5 @@
   ignore = dirty
 [submodule "cheat/cheatsheets/community"]
 	path = cheat/cheatsheets/community
-	url = git@github.com:cheat/cheatsheets.git
+	url = git://github.com:cheat/cheatsheets.git
   ignore = dirty
