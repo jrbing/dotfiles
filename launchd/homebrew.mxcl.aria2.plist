@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NOTE: This file should be copied to the $HOME/Library/LaunchAgents directory
+  and the download directory path should be adjusted appropriately
+-->
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
@@ -8,7 +12,7 @@
     <array>
       <string>/usr/local/opt/aria2/bin/aria2c</string>
       <string>--enable-rpc</string>
-      <string>--dir=/Users/jrbing/Downloads</string>
+      <string>--dir=/Users/!USERNAME/Downloads</string>
     </array>
     <key>StandardOutPath</key>
     <string>/usr/local/var/log/aria2.log</string>

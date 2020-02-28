@@ -50,9 +50,6 @@ link-zsh:
 link-gpg:
 	@cd ~ && for file in $(GPG_FILES); do ln -nfs "$$HOME/.dotfiles/gnupg/$$file" "$$HOME/.gnupg/$$file"; done
 
-link-launchd:
-	@cd ~ && ln -nfs "$$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$$HOME/Library/LaunchAgents/yosemite.pathfix.plist"
-
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
@@ -81,4 +78,4 @@ update:  ## Pull updates from remote
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: link-tmux link-vim link-nvim link-etc link-xdg link-git link-bash link-zsh link-launchd link-gpg check-dead clean-dead submodules update help
+.PHONY: link-tmux link-vim link-nvim link-etc link-xdg link-git link-bash link-zsh link-gpg check-dead clean-dead submodules update help
