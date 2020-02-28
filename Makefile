@@ -5,14 +5,14 @@
 dotfiles=~/.dotfiles
 
 BASH_FILES := $(shell cd $(dotfiles)/bash; ls)
-ETC_FILES := $(shell cd $(dotfiles)/etc; ls)
 GPG_FILES := $(shell cd $(dotfiles)/gnupg; ls)
 GIT_FILES := $(shell cd $(dotfiles)/git; ls)
+ETC_FILES := $(shell cd $(dotfiles)/etc; ls)
 ZSH_FILES := zlogin zlogout zpreztorc zprofile zshenv zshrc
 
 all: help
 
-link: link-tmux link-vim link-etc link-git link-bash link-zsh link-gpg link-powershell link-vscode  ## Link all dotfiles to their respective locations
+link: link-tmux link-vim link-etc link-xdg link-git link-bash link-zsh link-gpg link-vscode  ## Link all dotfiles to their respective locations
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/oh-my-tmux/.tmux.conf .tmux.conf; \
@@ -29,6 +29,15 @@ link-nvim:
 link-etc:
 	@cd ~ && for file in $(ETC_FILES); do ln -nfs .dotfiles/etc/$$file .$$file; done
 
+link-xdg:
+	@cd ~ && mkdir -p ~/.config/aria2;
+	@cd ~ && mkdir -p ~/.config/cheat;
+	@cd ~ && mkdir -p ~/.config/powershell;
+	@cd ~ && ln -nfs $(dotfiles)/xdg/aria2.conf ~/.config/aria2/aria2.conf;
+	@cd ~ && ln -nfs $(dotfiles)/xdg/topgrade.toml ~/.config/topgrade.toml;
+	@cd ~ && ln -nfs $(dotfiles)/cheat/conf.yml ~/.config/cheat/conf.yml;
+	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/profile.ps1;
+
 link-git:
 	@cd ~ && for file in $(GIT_FILES); do ln -nfs .dotfiles/git/$$file .$$file; done
 
@@ -43,14 +52,6 @@ link-gpg:
 
 link-launchd:
 	@cd ~ && ln -nfs "$$HOME/.dotfiles/launchd/yosemite.pathfix.plist" "$$HOME/Library/LaunchAgents/yosemite.pathfix.plist"
-
-link-cheat:
-	@cd ~ && mkdir -p ~/.config/cheat;
-	@cd ~ && ln -nfs $(dotfiles)/cheat/conf.yml ~/.config/cheat/conf.yml;
-
-link-powershell:
-	@cd ~ && mkdir -p ~/.config/powershell;
-	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/profile.ps1;
 
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
@@ -80,4 +81,4 @@ update:  ## Pull updates from remote
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: link-tmux link-vim link-nvim link-etc link-git link-bash link-zsh link-launchd link-cheat link-gpg link-powershell check-dead clean-dead submodules update help
+.PHONY: link-tmux link-vim link-nvim link-etc link-xdg link-git link-bash link-zsh link-launchd link-gpg check-dead clean-dead submodules update help
