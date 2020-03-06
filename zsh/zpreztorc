@@ -13,8 +13,11 @@ zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 
 # Add additional directories to load prezto modules from
-#zstyle ':prezto:load' pmodule-dirs $HOME/.dotfiles/zsh/contrib
+# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 zstyle ':prezto:load' pmodule-dirs $ZPLUG_ROOT/repos/belak/prezto-contrib
+
+# Allow module overrides when pmodule-dirs causes module name collisions
+# zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
 zstyle ':prezto:load' zmodule 'attr' 'stat'
@@ -40,7 +43,6 @@ zstyle ':prezto:load' pmodule \
   'fasd' \
   'rsync' \
   'tmux' \
-  'ruby' \
   'git' \
   'gpg' \
   'osx' \
@@ -67,7 +69,6 @@ zstyle ':prezto:load' pmodule \
 
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'emacs'
-#zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Auto convert .... to ../..
 # zstyle ':prezto:module:editor' dot-expansion 'yes'
