@@ -49,7 +49,7 @@
   Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
-  Plug 'scrooloose/nerdcommenter'
+  Plug 'preservim/nerdcommenter'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
   Plug 'tpope/vim-dispatch'
@@ -67,7 +67,7 @@
   Plug 'vim-pandoc/vim-pandoc', { 'for': ['pandoc', 'markdown'] }
   Plug 'vim-scripts/Align'
   Plug 'wincent/ferret'
-  Plug 'scrooloose/nerdtree'
+  Plug 'preservim/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'EvanDotPro/nerdtree-chmod'
   Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -666,7 +666,10 @@
   "}}}
 
   " NERDCommenter {{{2
-    let g:NERDCustomDelimiters = { 'openscad': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' } }
+    let g:NERDCustomDelimiters = {
+      \ 'openscad': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+      \ 'helm': { 'left': '#' }
+      \}
     let g:NERDTrimTrailingWhitespace = 1                                  " Enable trimming of trailing whitespace when uncommenting
 
     " let g:NERDSpaceDelims = 1                                             " Add spaces after comment delimiters by default
