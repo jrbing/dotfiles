@@ -98,6 +98,7 @@
   Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
+  Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
   "Plug 'ap/vim-css-color'
 
   let g:polyglot_disabled = ['go', 'markdown']
