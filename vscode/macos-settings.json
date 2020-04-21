@@ -13,7 +13,7 @@
   "editor.scrollBeyondLastLine": false,
   "editor.minimap.enabled": false,
 
-  "window.zoomLevel": -1,
+  "window.zoomLevel": 0,
   "window.nativeTabs": true,
 
   "workbench.welcome.enabled": false,
