@@ -67,5 +67,7 @@
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
   "workbench.startupEditor": "none",
   "terminal.integrated.fontSize": 14,
-  "debug.console.fontSize": 14
+  "debug.console.fontSize": 14,
+  "sqltools.telemetry": false,
+  "sqltools.useNodeRuntime": true
 }
