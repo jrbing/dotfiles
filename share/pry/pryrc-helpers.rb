@@ -188,7 +188,7 @@ class Object
 end
 
 # ==============================
-#   Helpers!
+#   Helpers
 # ==============================
 
 ## Pry.active_sessions
@@ -198,7 +198,9 @@ class Pry
   end
 end
 
-## YAML#to_yaml abstraction.
+### YAML
+
+## to_yaml abstraction.
 # y("language: ruby\nrvm:\n  - 2.0.0\n  - 1.9.3\nscript: rake test\n")
 # =>
 # --- |
