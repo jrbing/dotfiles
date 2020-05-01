@@ -58,6 +58,7 @@
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-jdaddy', { 'for': ['json'] }
   Plug 'tpope/vim-projectionist'
+  Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-rbenv', { 'for': ['ruby'] }
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rhubarb'
