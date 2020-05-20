@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #===============================================================================
-# vim: softtabstop=4 shiftwidth=4 expandtab fenc=utf-8 spell spelllang=en
+# vim: softtabstop=4 shiftwidth=4 expandtab fenc=utf-8
 #===============================================================================
 #
 #          FILE: bash-functions.sh
@@ -9,7 +9,7 @@
 #
 #===============================================================================
 
-set -o nounset                              # Treat unset variables as an error
+set -o nounset  # Treat unset variables as an error
 
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:  __detect_color_support
@@ -38,7 +38,7 @@ __detect_color_support
 #   DESCRIPTION:  Echo errors to stderr.
 #-------------------------------------------------------------------------------
 function echoerror() {
-    printf "${RC} ★  ERROR${EC}: %s\n" "$@" 1>&2;
+    printf "${RC} ✖  ERROR${EC}: %s\n" "$@" 1>&2;
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -46,7 +46,7 @@ function echoerror() {
 #   DESCRIPTION:  Echo information to stdout.
 #-------------------------------------------------------------------------------
 function echoinfo() {
-    printf "${GC} ★  INFO${EC}: %s\n" "$@";
+    printf "${GC} ☆  INFO${EC}: %s\n" "$@";
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -63,7 +63,7 @@ function echowarn() {
 #-------------------------------------------------------------------------------
 function echodebug() {
     if [[ -n ${DEBUG+x} ]]; then
-        printf "${BC} ★ DEBUG${EC}: %s\n" "$@";
+        printf "${BC} ★  DEBUG${EC}: %s\n" "$@";
     fi
 }
 
