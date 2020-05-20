@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#          FILE: git-hard-delete
+#
+#         USAGE: git hard-delete
+#
+#   DESCRIPTION: git alias for deleting local and remote branch 
+#                based on - https://gist.github.com/srebalaji/4b23fb62f6ce26c17b73ca07ae7cfc67
+#
+#===============================================================================
+
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+# Source bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+readonly ARGS=( "$@" )
+
+if [[ $# -eq 0 ]]; then
+  echoerror "Branch name not provided"
+  exit 1
+else
+  echoinfo "Deleting branch ${ARGS[*]} from local and remote"
+  git branch -D "${ARGS[@]}"
+  git push -d origin "${ARGS[@]}"
+fi

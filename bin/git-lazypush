@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#          FILE: git-lazypush
+#
+#         USAGE: git lazypush
+#
+#   DESCRIPTION: git alias for quickly creating a commit and pushing to origin
+#                based on - https://gist.github.com/srebalaji/4b23fb62f6ce26c17b73ca07ae7cfc67
+#
+#===============================================================================
+
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+# Source bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+readonly ARGS=( "$@" )
+readonly CURRENTBRANCH="$(git symbolic-ref --short -q HEAD)"
+
+if [[ $# -eq 0 ]]; then
+  echoerror "Commit message not provided"
+  exit 1
+else
+  git add .
+  git commit -m "${ARGS[@]}"
+  git push origin "${CURRENTBRANCH}"
+fi
