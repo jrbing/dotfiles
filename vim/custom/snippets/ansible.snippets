@@ -2389,7 +2389,7 @@ snippet acme_certificate_revoke "Revoke certificates with the ACME protocol" b
 		# account_key_content: # Content of the ACME account RSA or Elliptic Curve key.
 		# private_key_src: # Path to the certificate's private key.
 		# private_key_content: # Content of the certificate's private key.
-		# revoke_reason: # One of the revocation reasonCodes defined in L(https://tools.ietf.org/html/rfc5280#section-5.3.1, Section 5.3.1 of RFC5280).
+		# revoke_reason: # One of the revocation reasonCodes defined in L(Section 5.3.1 of RFC5280,https://tools.ietf.org/html/rfc5280#section-5.3.1).
 		# account_uri: # If specified, assumes that the account URI is as given. If the account key does not match this account, or an account with this URI does not exist, the module fails.
 		# acme_version: #1|2
 		# acme_directory: https://acme-staging.api.letsencrypt.org/directory
@@ -33064,13 +33064,13 @@ snippet purefa_snmp "Configure FlashArray SNMP Managers" b
 - name: $1
 	purefa_snmp:
 		name: ${2:# Name of SNMP Manager}
-		host: ${3:# IPv4 or IPv6 address or FQDN to send trap messages to.}
-		fa_url: ${4:# FlashArray management IPv4 address or Hostname.}
-		api_token: ${5:# FlashArray API token for admin privileged user.}
+		fa_url: ${3:# FlashArray management IPv4 address or Hostname.}
+		api_token: ${4:# FlashArray API token for admin privileged user.}
 		# state: absent|#present
 		# auth_passphrase: # SNMPv3 only. Passphrase of 8 - 32 characters.
 		# auth_protocol: MD5|SHA
 		# community: # SNMP v2c only. Manager community ID. Between 1 and 32 characters long.
+		# host: # IPv4 or IPv6 address or FQDN to send trap messages to.
 		# user: # SNMP v3 only. User ID recognized by the specified SNMP manager. Must be between 1 and 32 characters.
 		# version: #v2c|v3
 		# notification: inform|#trap
@@ -36324,8 +36324,8 @@ snippet os_network "Creates/removes networks from OpenStack" b
 		# provider_segmentation_id: # An isolated segment on the physical network. The I(network_type) attribute defines the segmentation model. For example, if the I(network_type) value is vlan, this ID is a vlan identifier. If the I(network_type) value is gre, this ID is a gre key.
 		# project: # Project name or ID containing the network (name admin-only)
 		# availability_zone: # Ignored. Present for backwards compatibility
-		# port_security_enabled: # Whether port security is enabled on the network or not. Network will use OpenStack defaults if this option is not utilised.
-		# mtu: # The maximum transmission unit (MTU) value to address fragmentation. Network will use OpenStack defaults if this option is not provided.
+		# port_security_enabled: # Whether port security is enabled on the network or not. Network will use OpenStack defaults if this option is not utilised. Requires openstacksdk>=0.18.
+		# mtu: # The maximum transmission unit (MTU) value to address fragmentation. Network will use OpenStack defaults if this option is not provided. Requires openstacksdk>=0.18.
 		# dns_domain: # The DNS domain value to set. Network will use Openstack defaults if this option is not provided.
 		# cloud: # Named cloud or cloud config to operate against. If I(cloud) is a string, it references a named cloud config as defined in an OpenStack clouds.yaml file. Provides default values for I(auth) and I(auth_type). This parameter is not needed if I(auth) is provided or if OpenStack OS_* environment variables are present. If I(cloud) is a dict, it contains a complete cloud configuration like would be in a section of clouds.yaml.
 		# auth: # Dictionary containing auth information as needed by the cloud's auth plugin strategy. For the default I(password) plugin, this would contain I(auth_url), I(username), I(password), I(project_name) and any information about domains (for example, I(os_user_domain_name) or I(os_project_domain_name)) if the cloud supports them. For other plugins, this param will need to contain whatever parameters that auth plugin requires. This parameter is not needed if a named cloud is provided or OpenStack OS_* environment variables are present.
@@ -57066,11 +57066,11 @@ snippet ovirt_disk "Module to manage Virtual Machine and floating disks in oVirt
 		# download_image_path: # Path on a file system where disk should be downloaded.
 		# upload_image_path: # Path to disk image, which should be uploaded.
 		# size: # Size of the disk. Size should be specified using IEC standard units. For example 10GiB, 1024MiB, etc.
-		# interface: #virtio|ide|virtio_scsi
+		# interface: virtio|ide|virtio_scsi
 		# format: raw|cow
 		# content_type: #data|iso|hosted_engine|hosted_engine_sanlock|hosted_engine_metadata|hosted_engine_configuration
 		# sparse: # I(True) if the disk should be sparse (also known as I(thin provision)). If the parameter is omitted, cow disks will be created as sparse and raw disks as I(preallocated)
-		# storage_domain: # Storage domain name where disk should be created. By default storage is chosen by oVirt/RHV engine.
+		# storage_domain: # Storage domain name where disk should be created.
 		# storage_domains: # Storage domain names where disk should be copied.
 		# force: # Please take a look at C(image_path) documentation to see the correct usage of this parameter.
 		# profile: # Disk profile name to be attached to disk. By default profile is chosen by oVirt/RHV engine.
@@ -64087,7 +64087,6 @@ snippet ldap_attr "Add or remove LDAP attribute values" b
 		values: ${3:# The value(s) to add or remove. This can be a string or a list of strings. The complex argument format is required in order to pass a list of strings (see examples).}
 		dn: ${4:# The DN of the entry to add or remove.}
 		# state: absent|exact|#present
-		# params: # Additional module parameters.
 		# bind_dn: # A DN to bind with. If this is omitted, we'll try a SASL bind with the EXTERNAL mechanism.
 		# bind_pw: # The password to use with I(bind_dn).
 		# server_uri: ldapi:///
@@ -64102,7 +64101,6 @@ snippet ldap_entry "Add or remove LDAP entries." b
 		dn: ${2:# The DN of the entry to add or remove.}
 		# attributes: # If I(state=present), attributes necessary to create an entry. Existing entries are never modified. To assert specific attribute values on an existing entry, use M(ldap_attr) module instead.
 		# objectClass: # If I(state=present), value or list of values to use when creating the entry. It can either be a string or an actual list of strings.
-		# params: # List of options which allows to overwrite any of the task or the I(attributes) options. To remove an option, set the value of the option to C(null).
 		# state: #present|absent
 		# bind_dn: # A DN to bind with. If this is omitted, we'll try a SASL bind with the EXTERNAL mechanism.
 		# bind_pw: # The password to use with I(bind_dn).
@@ -64576,7 +64574,7 @@ snippet subversion "Deploys a subversion repository" b
 		# force: no
 		# in_place: no
 		# username: # C(--username) parameter passed to svn.
-		# password: # C(--password) parameter passed to svn.
+		# password: # C(--password) parameter passed to svn when svn is less than version 1.10.0. This is not secure and the password will be leaked to argv.
 		# executable: # Path to svn executable to use. If not supplied, the normal mechanism for resolving binary paths will be used.
 		# checkout: yes
 		# update: yes
