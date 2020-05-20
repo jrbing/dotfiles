@@ -3,11 +3,11 @@
 # vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
 #===============================================================================
 #
-#          FILE: addbom.sh
+#          FILE: addbom
 #
-#         USAGE: ./addbom.sh
+#         USAGE: ./addbom
 #
-#   DESCRIPTION:
+#   DESCRIPTION: Prepends a UTF-8 text file with a BOM if missing
 #
 #===============================================================================
 
