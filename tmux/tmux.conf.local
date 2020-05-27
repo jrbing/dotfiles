@@ -326,10 +326,14 @@ bind-key -T copy-mode-vi C-WheelDownPane send -X halfpage-down
 # Send current buffer to Clipper - https://github.com/wincent/clipper
 bind-key y run-shell "tmux save-buffer - | nc localhost 8377"
 
+# Send current buffer to piknik - https://github.com/jedisct1/piknik
+bind-key Y run-shell "tmux save-buffer - | piknik -copy"
+
 # Search for previous error
 bind-key e copy-mode \; send-keys "?Error" C-m
 
-# Start GoTTY in a new window with C-t
+# Start ttyd in a new window with C-t
+# https://github.com/tsl0922/ttyd
 bind-key C-t new-window "ttyd --readonly tmux attach -t $(tmux display -p '#S')"
 #bind-key C-t new-window "gotty tmux attach -t $(tmux display -p '#S')"
 #bind-key C-t new-window "echo -n 'gotty tmux attach -t $(tmux display -p '#S')"\; split-window "ngrok http 8080"
