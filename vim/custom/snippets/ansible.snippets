@@ -1521,8 +1521,8 @@ snippet influxdb_user "Manage InfluxDB users" b
 		user_name: ${2:# Name of the user.}
 		# user_password: # Password to be set for the user.
 		# admin: no
-		# state: #present|absent
-		# grants: # Privileges to grant to this user. Takes a list of dicts containing the "database" and "privilege" keys.
+		# state: absent|#present
+		# grants: # Privileges to grant to this user.
 		# hostname: localhost
 		# username: root
 		# password: root
@@ -1537,7 +1537,7 @@ snippet influxdb_user "Manage InfluxDB users" b
 $0
 endsnippet
 
-snippet influxdb_write "Write data points into InfluxDB." b
+snippet influxdb_write "Write data points into InfluxDB" b
 - name: $1
 	influxdb_write:
 		data_points: ${2:# Data points as dict to write into the database.}
@@ -1556,7 +1556,7 @@ snippet influxdb_write "Write data points into InfluxDB." b
 $0
 endsnippet
 
-snippet influxdb_query "Query data points from InfluxDB." b
+snippet influxdb_query "Query data points from InfluxDB" b
 - name: $1
 	influxdb_query:
 		query: ${2:# Query to be executed.}
@@ -1579,7 +1579,7 @@ snippet influxdb_database "Manage InfluxDB databases" b
 - name: $1
 	influxdb_database:
 		database_name: ${2:# Name of the database.}
-		# state: #present|absent
+		# state: absent|#present
 		# hostname: localhost
 		# username: root
 		# password: root
@@ -1598,10 +1598,10 @@ snippet influxdb_retention_policy "Manage InfluxDB retention policies" b
 - name: $1
 	influxdb_retention_policy:
 		database_name: ${2:# Name of the database.}
-		policy_name: ${3:# Name of the retention policy}
-		duration: ${4:# Determines how long InfluxDB should keep the data}
-		replication: ${5:# Determines how many independent copies of each point are stored in the cluster}
-		default: ${6:# Sets the retention policy as default retention policy}
+		policy_name: ${3:# Name of the retention policy.}
+		duration: ${4:# Determines how long InfluxDB should keep the data.}
+		replication: ${5:# Determines how many independent copies of each point are stored in the cluster.}
+		# default: # Sets the retention policy as default retention policy.
 		# hostname: localhost
 		# username: root
 		# password: root
@@ -57067,7 +57067,7 @@ snippet ovirt_disk "Module to manage Virtual Machine and floating disks in oVirt
 		# upload_image_path: # Path to disk image, which should be uploaded.
 		# size: # Size of the disk. Size should be specified using IEC standard units. For example 10GiB, 1024MiB, etc.
 		# interface: virtio|ide|virtio_scsi
-		# format: raw|cow
+		# format: raw|#cow
 		# content_type: #data|iso|hosted_engine|hosted_engine_sanlock|hosted_engine_metadata|hosted_engine_configuration
 		# sparse: # I(True) if the disk should be sparse (also known as I(thin provision)). If the parameter is omitted, cow disks will be created as sparse and raw disks as I(preallocated)
 		# storage_domain: # Storage domain name where disk should be created.
