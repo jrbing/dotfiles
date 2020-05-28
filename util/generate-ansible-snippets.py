@@ -27,15 +27,24 @@ formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
-
 def get_documents():
     for root, dirnames, filenames in os.walk(os.path.dirname(ansible.modules.__file__)):  # noqa: E501
         for filename in filenames:
             if filename == '__init__.py' or not filename.endswith('py'):
                 continue
             documentation = plugin_docs.get_docstring(os.path.join(root, filename), fragment_loader)[0]
+            metadata = plugin_docs.get_docstring(os.path.join(root, filename), fragment_loader)[3]
             if documentation is None:
                 continue
+            if metadata is None:
+                continue
+            if metadata.get('supported_by') == 'network' or metadata['supported_by'] == 'network':
+                logger.info('Skipping network module: ' + documentation['module'])
+                continue
+            if metadata.get('supported_by') == 'certified' or metadata['supported_by'] == 'certified':
+                logger.info('Skipping certified module: ' + documentation['module'])
+                continue
+            logger.info('Metadata for module: ' + documentation['module'] + str(metadata))
             yield documentation
 
 
@@ -51,10 +60,11 @@ def get_play_snippet():
     return "\n".join(play_snippet)
 
 
+# TODO: strip double quotes from description
 def to_snippet(document):
     snippet = []
     # Insert the snippet header, name label, and module name
-    snippet.insert(0, 'snippet %s "%s" b' % (document['module'], document['short_description']))  # noqa: E501
+    snippet.insert(0, 'snippet %s "%s" b' % (document['module'], document['short_description'].replace('"', '')))  # noqa: E501
     snippet.append('- %s: $1' % ('name'))
 
     if 'options' in document:
