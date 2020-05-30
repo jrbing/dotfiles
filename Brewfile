@@ -1,11 +1,11 @@
 
-tap "argoproj/tap"
 tap "buo/cask-upgrade"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "minio/stable"
+#tap "argoproj/tap"
 #tap "cjbassi/gotop"
 #tap "denisidoro/tools"
 #tap "derailed/k9s"
