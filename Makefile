@@ -48,7 +48,7 @@ link-zsh:
 	@cd ~ && for file in $(ZSH_FILES); do ln -nfs .dotfiles/zsh/$$file .$$file; done
 
 link-gpg:
-	@cd ~ && for file in $(GPG_FILES); do ln -nfs .dotfiles/gnupg/$$file .gnupg/$$file; done
+	@cd ~ && for file in $(GPG_FILES); do ln -nfs "$$HOME/.dotfiles/gnupg/$$file" "$$HOME/.gnupg/$$file"; done
 
 link-vscode:
 	@cd ~ && ln -nfs $(dotfiles)/vscode/macos-settings.json ~/Library/Application\ Support/Code/User/settings.json
