@@ -52,7 +52,6 @@ brew "github-release"                                  # Create and edit release
 brew "gnu-indent"                                      # C code prettifier
 brew "gnupg", link: false                              # GNU Pretty Good Privacy (PGP) package
 brew "go"                                              # Open source programming language to build simple/reliable/efficient software
-brew "gpg-agent"                                       # GPG key agent
 brew "gradle"                                          # Open-source build automation tool based on the Groovy and Kotlin DSL
 brew "graphviz"                                        # Graph visualization software from AT&T and Bell Labs
 brew "grep"                                            # GNU grep, egrep and fgrep
@@ -142,6 +141,7 @@ brew "zsh"                                             # UNIX shell (command int
 #brew "glide"                                           # Simplified Go project management, dependency management, and vendoring
 #brew "go-task/tap/go-task"                             # Task runner / simpler Make alternative written in Go
 #brew "gost"                                            # Simple command-line utility for easily creating Gists for Github.
+#brew "gpg-agent"                                       # GPG key agent
 #brew "groovy"                                          # Java-based scripting language
 #brew "gst-libav"                                       # GStreamer plugins for Libav (a fork of FFmpeg)
 #brew "gst-plugins-bad"                                 # GStreamer plugins less supported, not fully tested
