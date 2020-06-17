@@ -75,6 +75,11 @@ if [[ -d '/opt/rundeck/rd' ]]; then
   path+=('/opt/rundeck/rd/bin')
 fi
 
+# Krew plugins
+if [[ -d "${HOME}/.krew/bin" ]]; then
+  path+=("${HOME}/.krew/bin")
+fi
+
 ############
 #  Prompt  #
 ############
