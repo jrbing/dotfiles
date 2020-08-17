@@ -1,6 +1,7 @@
 {
+  "diagnostic.displayByAle": true,
   "template.email": "jr@jrbing.com",
   "template.username": "jrbing",
   "template.license": "MIT",
-  "template.templatesDirectory":"~/.dotfiles/vim/templates"
+  "template.templatesDirectory":"~/.dotfiles/vim/templates",
 }
