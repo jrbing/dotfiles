@@ -41,17 +41,23 @@
   Plug 'benjifisher/matchit.zip'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'dbeniamine/cheat.sh-vim'
+  Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
   Plug 'direnv/direnv.vim'
-  Plug 'ervandew/supertab'
+  Plug 'editorconfig/editorconfig-vim'
   Plug 'godlygeek/tabular'
+  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
   Plug 'justinmk/vim-sneak'
   Plug 'kristijanhusak/vim-carbon-now-sh'
   Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
   Plug 'mtth/scratch.vim'
   Plug 'preservim/nerdcommenter'
+  Plug 'preservim/nerdtree'
+  Plug 'terryma/vim-multiple-cursors'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
+  Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
@@ -65,65 +71,80 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-tbone'
   Plug 'tpope/vim-unimpaired'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-pandoc/vim-pandoc', { 'for': ['pandoc', 'markdown'] }
   Plug 'vim-scripts/Align'
   Plug 'wincent/ferret'
-  Plug 'preservim/nerdtree'
-  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'Chiel92/vim-autoformat'
   Plug 'EvanDotPro/nerdtree-chmod'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'Raimondi/delimitMate'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  "Plug 'mattn/emmet-vim'
+  "Plug 'ervandew/supertab'
+  "Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
+  Plug 'arcticicestudio/nord-vim'
   Plug 'chriskempson/base16-vim'
+  Plug 'joshdick/onedark.vim'
   Plug 'lifepillar/vim-solarized8'
   Plug 'morhetz/gruvbox'
   Plug 'rakr/vim-one'
-  Plug 'joshdick/onedark.vim'
-  Plug 'arcticicestudio/nord-vim'
 
   " Filetypes
+  Plug 'sheerun/vim-polyglot'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
-  Plug 'hashivim/vim-terraform'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'funcodeio/lz4.vim'
-  Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
+  Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
+  Plug 'hashivim/vim-terraform'
+  Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
+  Plug 'kergoth/vim-bitbake'
+  Plug 'kevinoid/vim-jsonc'
+  Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
   Plug 'robbles/logstash.vim'
-  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['pandoc', 'markdown'] }
+  Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
   Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
   Plug 'towolf/vim-helm', { 'for': ['helm'] }
-  Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-  Plug 'kergoth/vim-bitbake'
-  Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
-  Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
-  Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
-  Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
+  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['pandoc', 'markdown'] }
+  Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
+  Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
   "Plug 'ap/vim-css-color'
 
   let g:polyglot_disabled = ['go', 'markdown']
 
   if g:OSX()
-    Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
-    Plug 'Chiel92/vim-autoformat'
-    Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
-    Plug 'editorconfig/editorconfig-vim'
-    Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
-    Plug 'Raimondi/delimitMate'
     Plug 'rizzatti/dash.vim'
     Plug 'dense-analysis/ale'
-    Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-voom/VOoM'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-    if !g:VIMR()
-      Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Coc extensions
+    let g:coc_global_extensions=[
+          \ 'coc-css',
+          \ 'coc-html',
+          \ 'coc-java',
+          \ 'coc-json',
+          \ 'coc-pyls',
+          \ 'coc-rls',
+          \ 'coc-sh',
+          \ 'coc-snippets',
+          \ 'coc-solargraph',
+          \ 'coc-sql',
+          \ 'coc-template',
+          \ 'coc-tsserver',
+          \ 'coc-ultisnips',
+          \ 'coc-xml',
+          \ 'coc-yaml',
+          \ 'coc-yank'
+          \ ]
+    "if !g:VIMR()
+      "Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
       "Plug 'ternjs/tern_for_vim', { 'do': 'yarn install' }
-    endif
-    "Plug 'epeli/slimux'
-    "Plug 'metakirby5/codi.vim'
+    "endif
   endif
 
   call plug#end()
@@ -603,15 +624,6 @@
 
 " Plugin configuration/mapping {{{1
 
-  " scratch.vim {{{2
-    let g:scratch_insert_autohide = 0
-    let g:scratch_top = 0
-  "}}}
-
-  " vim-sneak {{{2
-    let g:sneak#streak = 1
-  "}}}
-
   " Airline {{{2
     let g:airline#extensions#tagbar#enabled = 0
     let g:airline#extensions#ale#enabled = 1
@@ -638,15 +650,158 @@
     endif
   "}}}
 
-  " Ruby-vim {{{2
-    let g:rubycomplete_buffer_loading = 1
-    let g:rubycomplete_classes_in_global = 1
-    let g:ruby_operators = 1
-    let g:ruby_space_errors = 1
+  " ALE {{{2
+    " Only run linter on file open and save
+    let g:ale_lint_on_text_changed = 'never'
+
+    " Change the default signs
+    let g:ale_sign_error = '✗✗'
+    let g:ale_sign_warning = '∆∆'
+
+    " Change the error message format
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+    " Define linters
+    let g:ale_linters = {
+      \ 'python': ['flake8', 'pylint']
+    \}
+
+    " Define fixers
+    let g:ale_fix_on_save = 1
+    let g:ale_fixers = {
+      \ 'javascript': ['prettier'],
+    \}
+    "let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+  "}}}
+
+  " Align {{{2
+    " Change the menu name
+    let g:DrChipTopLvlMenu='Plugin.'
+  "}}}
+
+  " AutoFormat {{{2
+    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.dotfiles/share/asdf/shims') ]
+    let g:formatters_python = ['black']
+    "let g:formatters_python = ['yapf']
+    "let g:formatter_yapf_style = 'pep8'
+    let g:formatters_yaml = ['prettier']
+    let g:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
+    let g:formatters_java = ['custom_java']
+    let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width 2 --keywords lower --identifiers lower --comma_first True -"'
+  "}}}
+
+  " Coc {{{2
+    " Give more space for displaying messages.
+    set cmdheight=2
+
+    " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+    " delays and poor user experience.
+    set updatetime=300
+
+    " Don't pass messages to |ins-completion-menu|.
+    set shortmess+=c
+
+    " Always show the signcolumn, otherwise it would shift the text each time
+    " diagnostics appear/become resolved.
+    if has("patch-8.1.1564")
+      " Recently vim can merge signcolumn and number column into one
+      set signcolumn=number
+    else
+      set signcolumn=yes
+    endif
+
+    " Snippet navigation
+    let g:coc_snippet_next = '<TAB>'
+    let g:coc_snippet_prev = '<S-TAB>'
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+    " other plugin before putting this into your config.
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+    " position. Coc only does snippet and additional edit on confirm.
+    " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+    if exists('*complete_info')
+      inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    else
+      inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    endif
+
+    " GoTo code navigation.
+    "nmap <silent> gd <Plug>(coc-definition)
+    "nmap <silent> gy <Plug>(coc-type-definition)
+    "nmap <silent> gi <Plug>(coc-implementation)
+    "nmap <silent> gr <Plug>(coc-references)
+
+    " Use K to show documentation in preview window.
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
+    " Symbol renaming.
+    "nmap <leader>rn <Plug>(coc-rename)
+
+    " Formatting selected code.
+    "xmap <leader>f  <Plug>(coc-format-selected)
+    "nmap <leader>f  <Plug>(coc-format-selected)
+
+    "augroup mygroup
+      "autocmd!
+      "" Setup formatexpr specified filetype(s).
+      "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+      "" Update signature help on jump placeholder.
+      "autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    "augroup end
+
+    " Add (Neo)Vim's native statusline support.
+    " NOTE: Please see `:h coc-status` for integrations with external plugins that
+    " provide custom statusline: lightline.vim, vim-airline.
+    "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+    " coc-yank mapping
+    nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
   "}}}
 
   " CtrlP {{{2
     noremap <silent> <A-t> :CtrlP<CR>
+  "}}}
+
+  " Ferret {{{2
+    let g:FerretDispatch=0
+    let g:FerretMap=0
+  "}}}
+
+  " Fugitive {{{2
+    augroup ft_fugitive
+      au!
+      au BufNewFile,BufRead .git/index setlocal nolist
+    augroup END
+    nnoremap <leader>gd :Gdiff<cr>
+    nnoremap <leader>gs :Gstatus<cr>
+    nnoremap <leader>gw :Gwrite<cr>
+    nnoremap <leader>gco :Gcheckout<cr>
+    nnoremap <leader>gci :Gcommit<cr>
+    nnoremap <leader>gm :Gmove<cr>
+    nnoremap <leader>gr :Gremove<cr>
+    nnoremap <leader>gl :Glog -18 --reverse<cr>
   "}}}
 
   " NERDTree {{{2
@@ -705,6 +860,22 @@
         let g:NERDSpaceDelims = 0
       endif
     endfu
+  "}}}
+
+  " SQLUtilities {{{2
+    let g:sqlutil_align_comma = 1
+    let g:sqlutil_align_where = 1
+    let g:sqlutil_align_first_word = 1
+    let g:sqlutil_keyword_case = '\L'
+    let g:sqlutil_align_keyword_right = 1
+    let g:sqlutil_indent_nested_blocks = 1
+    let g:sqlutil_wrap_long_lines = 1
+    "let g:sqlutil_load_default_maps = 0
+    "vmap <leader>sf        <Plug>SQLU_Formatter<CR>
+    "nmap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
+    "nmap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
+    "nmap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
+    "nmap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
   "}}}
 
   " Tagbar {{{2
@@ -822,65 +993,48 @@
 
   "}}}
 
-  " ALE {{{2
-    " Only run linter on file open and save
-    let g:ale_lint_on_text_changed = 'never'
-
-    " Change the default signs
-    let g:ale_sign_error = '✗✗'
-    let g:ale_sign_warning = '∆∆'
-
-    " Change the error message format
-    let g:ale_echo_msg_error_str = 'E'
-    let g:ale_echo_msg_warning_str = 'W'
-    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-    " Define linters
-    let g:ale_linters = {
-      \ 'python': ['flake8', 'pylint']
-    \}
-
-    " Define fixers
-    let g:ale_fix_on_save = 1
-    let g:ale_fixers = {
-      \ 'javascript': ['prettier'],
-    \}
-    "let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
-  "}}}
-
-  " Fugitive {{{2
-    augroup ft_fugitive
-      au!
-      au BufNewFile,BufRead .git/index setlocal nolist
-    augroup END
-    nnoremap <leader>gd :Gdiff<cr>
-    nnoremap <leader>gs :Gstatus<cr>
-    nnoremap <leader>gw :Gwrite<cr>
-    nnoremap <leader>gco :Gcheckout<cr>
-    nnoremap <leader>gci :Gcommit<cr>
-    nnoremap <leader>gm :Gmove<cr>
-    nnoremap <leader>gr :Gremove<cr>
-    nnoremap <leader>gl :Glog -18 --reverse<cr>
-  "}}}
-
   " TaskPaper {{{2
     let g:task_paper_date_format = '%Y-%m-%dT%H:%M:%S%z'
   "}}}
 
-  " SQLUtilities {{{2
-    let g:sqlutil_align_comma = 1
-    let g:sqlutil_align_where = 1
-    let g:sqlutil_align_first_word = 1
-    let g:sqlutil_keyword_case = '\L'
-    let g:sqlutil_align_keyword_right = 1
-    let g:sqlutil_indent_nested_blocks = 1
-    let g:sqlutil_wrap_long_lines = 1
-    "let g:sqlutil_load_default_maps = 0
-    "vmap <leader>sf        <Plug>SQLU_Formatter<CR>
-    "nmap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
-    "nmap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
-    "nmap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
-    "nmap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
+  " Ultisnips {{{2
+    " Remap Ultisnips for compatibility with Coc
+    let g:UltiSnipsExpandTrigger='<Nop>'
+    let g:UltiSnipsJumpForwardTrigger = '<TAB>'
+    let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+
+    " Set snippets search path
+    let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
+
+    " Set custom snippet directory for use with UltiSnipsEdit
+    let g:UltiSnipsSnippetsDir='~/.dotfiles/vim/custom/snippets'
+
+    " Define how the edit window is opened when :UltiSnipsEdit is called
+    let g:UltiSnipsEditSplit='vertical'
+
+  "}}}
+
+  " ansible-vim {{{2
+    let g:ansible_attribute_highlight = 'n'        " Disable attribute highlighting
+    let g:ansible_name_highlight = 'b'             " Brighten all instances of task names
+  "}}}
+
+  " editorconfig-vim {{{2
+    let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+    "let g:EditorConfig_verbose = 1
+  "}}}
+
+  " scratch.vim {{{2
+    let g:scratch_insert_autohide = 0
+    let g:scratch_top = 0
+  "}}}
+
+  " vim-carbon-now {{{2
+    let g:carbon_now_sh_options = 't=solarized\%20dark&wt=none&wa=false&ln=true&fm=Inconsolata&fs=18px'
+  "}}}
+
+  " vim-dadbod {{{2
+    let g:dbext_default_ORA_bin = 'sql'
   "}}}
 
   " vim-go {{{2
@@ -895,94 +1049,10 @@
     endif
   "}}}
 
-  " SuperTab{{{2
-    let g:SuperTabDefaultCompletionType = '<C-n>'
-  " }}}
-
-  " Ultisnips {{{2
-    " Remap Ultisnips for compatibility for YCM
-    "let g:UltiSnipsExpandTrigger = '<C-j>'
-    "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-    "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-    " Better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<tab>'
-    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-    " Set snippets search path
-    let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
-
-    " Set custom snippet directory for use with UltiSnipsEdit
-    let g:UltiSnipsSnippetsDir='~/.dotfiles/vim/custom/snippets'
-
-    " Define how the edit window is opened when :UltiSnipsEdit is called
-    let g:UltiSnipsEditSplit='vertical'
-
-  "}}}
-
-  " YouCompleteMe{{{2
-    "let g:acp_enableAtStartup = 0
-
-    " Make YCM compatible with UltiSnips (using supertab)
-    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-
-    " Enable completion from tags
-    let g:ycm_collect_identifiers_from_tags_files = 1
-
-    " Use the Ultisnips completion engine
-    let g:ycm_use_ultisnips_completer = 1
-
-    " Enable omni completion.
-    augroup youcompleteme
-      au!
-      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-      autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    augroup END
-
-    set completeopt-=preview
-
-    " Typescript and Pandoc support
-    if !exists('g:ycm_semantic_triggers')
-      let g:ycm_semantic_triggers = {}
-    endif
-    let g:ycm_semantic_triggers['typescript'] = ['.']
-    let g:ycm_semantic_triggers.tex = ['@']
-    let g:ycm_filetype_blacklist = {}
-  " }}}
-
-  " AutoFormat {{{2
-    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.dotfiles/share/asdf/shims') ]
-    let g:formatters_python = ['black']
-    "let g:formatters_python = ['yapf']
-    "let g:formatter_yapf_style = 'pep8'
-    let g:formatters_yaml = ['prettier']
-    let g:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
-    let g:formatters_java = ['custom_java']
-    let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width 2 --keywords lower --identifiers lower --comma_first True -"'
-  "}}}
-
-  " Ferret {{{2
-    let g:FerretDispatch=0
-    let g:FerretMap=0
-  "}}}
-
-  " vim-markdown {{{2
-    let g:vim_markdown_folding_disabled = 1
-    let g:vim_markdown_no_default_key_mappings = 1
-    let g:vim_markdown_frontmatter = 1
-    let g:vim_markdown_toml_frontmatter = 1
-    "let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'go']
-  "}}}
-
-  " editorconfig-vim {{{2
-    let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-    "let g:EditorConfig_verbose = 1
+  " vim-hclfmt {{{2
+    let g:hcl_fmt_autosave = 1
+    let g:tf_fmt_autosave = 1
+    let g:nomad_fmt_autosave = 0
   "}}}
 
   " vim-javascript {{{2
@@ -998,26 +1068,26 @@
     let g:javascript_conceal_arrow_function = '⇒'
   "}}}
 
-  " Codi {{{2
-    "let g:codi#interpreters = {
-      "\ 'ruby': {
-        "\ 'bin': '~/.rbenv/shims/ruby',
-        "\ 'prompt': '^\(>>>\|\.\.\.\) ',
-        "\ },
-      "\ }
+  " vim-kubernetes {{{2
+    nnoremap <leader>ka :KubeApply<CR>
+    nnoremap <leader>kd :KubeDelete<CR>
   "}}}
 
-  " vim-terraform {{{2
-    let g:terraform_fmt_on_save = 1
-    let g:terraform_align=1
+  " vim-markdown {{{2
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_no_default_key_mappings = 1
+    let g:vim_markdown_frontmatter = 1
+    let g:vim_markdown_toml_frontmatter = 1
+    "let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'go']
   "}}}
 
-  " Align {{{2
-    " Change the menu name
-    let g:DrChipTopLvlMenu='Plugin.'
+  " vim-pandoc {{{2
+    "let g:pandoc#spell#enabled = 0
   "}}}
 
-  " Vim REST Console {{{2
+" }}}
+
+  " vim-rest-console {{{2
     " Set additional CURL options
     let g:vrc_curl_opts = {
       \ '--connect-timeout' : 10,
@@ -1055,35 +1125,14 @@
 
   "}}}
 
-  " ansible-vim {{{2
-    let g:ansible_attribute_highlight = 'n'        " Disable attribute highlighting
-    let g:ansible_name_highlight = 'b'             " Brighten all instances of task names
+  " vim-sneak {{{2
+    let g:sneak#streak = 1
   "}}}
 
-  " vim-hclfmt {{{2
-    let g:hcl_fmt_autosave = 1
-    let g:tf_fmt_autosave = 1
-    let g:nomad_fmt_autosave = 0
+  " vim-terraform {{{2
+    let g:terraform_fmt_on_save = 1
+    let g:terraform_align=1
   "}}}
-
-  " vim-carbon-now {{{2
-    let g:carbon_now_sh_options = 't=solarized\%20dark&wt=none&wa=false&ln=true&fm=Inconsolata&fs=18px'
-  "}}}
-
-  " vim-kubernetes {{{2
-    nnoremap <leader>ka :KubeApply<CR>
-    nnoremap <leader>kd :KubeDelete<CR>
-  "}}}
-
-  " vim-dadbod {{{2
-    let g:dbext_default_ORA_bin = 'sql'
-  "}}}
-
-  " vim-pandoc {{{2
-    "let g:pandoc#spell#enabled = 0
-  "}}}
-
-" }}}
 
 " Utility Functions {{{1
 
@@ -1279,13 +1328,6 @@
   nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
   nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
 
-  "Format current sql script
-  "function! SQLFormat()
-    "echo "format file test.sql test2.sql" | sql /nolog
-  "endfunction
-
-  "command! SQLFormat :call SQLFormat()
-
 " }}}
 
 " Platform Specific Settings {{{1
@@ -1299,9 +1341,10 @@
   endif
 
   " Use 256 colors in terminal
-  if !has("gui_running") && !has("gui_vimr")
+  if !has("gui_running") && !has("gui_vimr") && !has("nvim")
     set t_Co=256
     set term=xterm-256color
+    "set term=tmux-256color
   endif
 
   if (has('gui_running') || has('gui_vimr'))
