@@ -94,9 +94,9 @@
   Plug 'rakr/vim-one'
 
   " Filetypes
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'sheerun/vim-polyglot'
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'funcodeio/lz4.vim'
   Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
   Plug 'hashivim/vim-terraform'
