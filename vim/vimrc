@@ -54,6 +54,7 @@
   Plug 'mtth/scratch.vim'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree'
+  Plug 'psliwka/vim-smoothie'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
