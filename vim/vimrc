@@ -81,8 +81,8 @@
   Plug 'EvanDotPro/nerdtree-chmod'
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'ervandew/supertab'
   "Plug 'mattn/emmet-vim'
-  "Plug 'ervandew/supertab'
   "Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " Colorschemes
@@ -121,32 +121,10 @@
     Plug 'rizzatti/dash.vim'
     Plug 'dense-analysis/ale'
     Plug 'vim-voom/VOoM'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    " Coc extensions
-    let g:coc_global_extensions=[
-          \ 'coc-css',
-          \ 'coc-homeassistant',
-          \ 'coc-html',
-          \ 'coc-java',
-          \ 'coc-json',
-          \ 'coc-pyls',
-          \ 'coc-rls',
-          \ 'coc-sh',
-          \ 'coc-snippets',
-          \ 'coc-solargraph',
-          \ 'coc-sql',
-          \ 'coc-template',
-          \ 'coc-tsserver',
-          \ 'coc-ultisnips',
-          \ 'coc-xml',
-          \ 'coc-yaml',
-          \ 'coc-yank'
-          \ ]
-    "if !g:VIMR()
-      "Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
-      "Plug 'ternjs/tern_for_vim', { 'do': 'yarn install' }
-    "endif
+    Plug 'metakirby5/codi.vim'
+    if !g:VIMR()
+      Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
+    endif
   endif
 
   call plug#end()
@@ -694,94 +672,6 @@
     let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width 2 --keywords lower --identifiers lower --comma_first True -"'
   "}}}
 
-  " Coc {{{2
-    " Give more space for displaying messages.
-    set cmdheight=2
-
-    " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-    " delays and poor user experience.
-    set updatetime=300
-
-    " Don't pass messages to |ins-completion-menu|.
-    set shortmess+=c
-
-    " Always show the signcolumn, otherwise it would shift the text each time
-    " diagnostics appear/become resolved.
-    if has("patch-8.1.1564")
-      " Recently vim can merge signcolumn and number column into one
-      set signcolumn=number
-    else
-      set signcolumn=yes
-    endif
-
-    " Snippet navigation
-    let g:coc_snippet_next = '<TAB>'
-    let g:coc_snippet_prev = '<S-TAB>'
-
-    " Use tab for trigger completion with characters ahead and navigate.
-    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-    " other plugin before putting this into your config.
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
-
-    " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-    " position. Coc only does snippet and additional edit on confirm.
-    " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-    if exists('*complete_info')
-      inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-    else
-      inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    endif
-
-    " GoTo code navigation.
-    "nmap <silent> gd <Plug>(coc-definition)
-    "nmap <silent> gy <Plug>(coc-type-definition)
-    "nmap <silent> gi <Plug>(coc-implementation)
-    "nmap <silent> gr <Plug>(coc-references)
-
-    " Use K to show documentation in preview window.
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
-    endfunction
-
-    " Symbol renaming.
-    "nmap <leader>rn <Plug>(coc-rename)
-
-    " Formatting selected code.
-    "xmap <leader>f  <Plug>(coc-format-selected)
-    "nmap <leader>f  <Plug>(coc-format-selected)
-
-    "augroup mygroup
-      "autocmd!
-      "" Setup formatexpr specified filetype(s).
-      "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-      "" Update signature help on jump placeholder.
-      "autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    "augroup end
-
-    " Add (Neo)Vim's native statusline support.
-    " NOTE: Please see `:h coc-status` for integrations with external plugins that
-    " provide custom statusline: lightline.vim, vim-airline.
-    "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-    " coc-yank mapping
-    nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-  "}}}
-
   " CtrlP {{{2
     noremap <silent> <A-t> :CtrlP<CR>
   "}}}
@@ -863,6 +753,10 @@
       endif
     endfu
   "}}}
+
+  " SuperTab{{{2
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+  " }}}
 
   " SQLUtilities {{{2
     let g:sqlutil_align_comma = 1
@@ -1000,10 +894,20 @@
   "}}}
 
   " Ultisnips {{{2
+    " Remap Ultisnips for compatibility for YCM
+    "let g:UltiSnipsExpandTrigger = '<C-j>'
+    "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+    "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+    " Better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
     " Remap Ultisnips for compatibility with Coc
-    let g:UltiSnipsExpandTrigger='<Nop>'
-    let g:UltiSnipsJumpForwardTrigger = '<TAB>'
-    let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+    "let g:UltiSnipsExpandTrigger='<Nop>'
+    "let g:UltiSnipsJumpForwardTrigger = '<TAB>'
+    "let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 
     " Set snippets search path
     let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
@@ -1134,6 +1038,31 @@
   " vim-terraform {{{2
     let g:terraform_fmt_on_save = 1
     let g:terraform_align=1
+  "}}}
+
+ " YouCompleteMe{{{2
+    "let g:acp_enableAtStartup = 0
+
+    " Make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+    " Enable completion from tags
+    let g:ycm_collect_identifiers_from_tags_files = 1
+
+    " Use the Ultisnips completion engine
+    let g:ycm_use_ultisnips_completer = 1
+
+    " Enable omni completion.
+    augroup youcompleteme
+      au!
+      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+      autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    augroup END
   "}}}
 
 " Utility Functions {{{1
