@@ -144,6 +144,13 @@ class Template < Thor
     create_from_template("modd_configuration.erb", "modd.conf")
   end
 
+  # markdown file
+  desc "markdown [NAME]", "Creates a basic markdown file from template"
+  def markdown(file_name=nil)
+    @file_name = get_file_name(file_name)
+    create_from_template("markdown.erb", "#{@file_name}.md")
+  end
+
 end
 
 Template.start(ARGV)

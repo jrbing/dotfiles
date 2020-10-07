@@ -25,6 +25,13 @@ module Valet
     return datafix
   end
 
+  def get_file_name(filename=nil)
+    if !filename
+      filename = ask("Name for file: ")
+    end
+    return filename
+  end
+
   def create_project_directory(project)
     project_directory = File.join(Dir.pwd, project)
     empty_directory(project_directory) unless File.exists?(project_directory)
