@@ -96,7 +96,7 @@
 
   " Filetypes
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot', { 'tag': 'v4.13.5' }
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'funcodeio/lz4.vim'
   Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
