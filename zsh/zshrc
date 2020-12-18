@@ -224,6 +224,11 @@ if [[ $commands[hass-cli] ]]; then
   source <(hass-cli completion zsh)
 fi
 
+# Flux
+if [[ $commands[flux] ]]; then
+  source <(flux completion zsh)
+fi
+
 ###############
 #  Profiling  #
 ###############
