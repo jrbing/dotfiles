@@ -53,6 +53,10 @@ Function Global:Prompt {
     Return " "
 }
 
+if (Get-Command "starship.exe" -ErrorAction SilentlyContinue) { 
+   Invoke-Expression (&starship init powershell)
+}
+
 #######################################################################
 #                               Aliases                               #
 #######################################################################
