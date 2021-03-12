@@ -38,12 +38,13 @@
 
   " Utilities
   Plug 'artnez/vim-wipeout'
-  Plug 'benjifisher/matchit.zip'
+  Plug 'chrisbra/matchit'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'dbeniamine/cheat.sh-vim'
   Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
   Plug 'direnv/direnv.vim'
   Plug 'editorconfig/editorconfig-vim'
+  Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
@@ -81,9 +82,6 @@
   Plug 'EvanDotPro/nerdtree-chmod'
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-  Plug 'ervandew/supertab'
-  "Plug 'mattn/emmet-vim'
-  "Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
@@ -97,7 +95,6 @@
   " Filetypes
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'sheerun/vim-polyglot'
-  "Plug 'sheerun/vim-polyglot', { 'tag': 'v4.13.5' }
   Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
   Plug 'funcodeio/lz4.vim'
   Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
