@@ -43,6 +43,10 @@ zplug 'asciimoo/wuzz', \
   as:command, \
   from:gh-r
 
+zplug 'kastenhq/kubestr', \
+  as:command, \
+  from:gh-r
+
 zplug 'trailofbits/twa', \
   as:command, \
   use:'twa'
