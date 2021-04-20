@@ -52,11 +52,11 @@
   Plug 'kristijanhusak/vim-carbon-now-sh'
   Plug 'lambdalisue/vim-gista'
   Plug 'majutsushi/tagbar'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
   Plug 'mtth/scratch.vim'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree'
   Plug 'psliwka/vim-smoothie'
-  Plug 'terryma/vim-multiple-cursors'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
   Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
