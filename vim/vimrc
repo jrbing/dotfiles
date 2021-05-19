@@ -643,7 +643,8 @@
 
     " Define linters
     let g:ale_linters = {
-      \ 'python': ['flake8', 'pylint']
+      \ 'python': ['flake8', 'pylint'],
+      \ 'cpp': ['cppcheck']
     \}
 
     " Define fixers
@@ -652,6 +653,9 @@
       \ 'javascript': ['prettier'],
     \}
     "let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+
+    " Parse the compile_commands.json file
+    let g:ale_c_parse_compile_commands = 1 
   "}}}
 
   " Align {{{2
