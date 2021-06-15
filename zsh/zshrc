@@ -140,6 +140,9 @@ alias dcb="docker-compose down && docker-compose up -d && docker-compose logs -f
 alias kedit-secret="KUBE_EDITOR=kube-secret-editor kubectl edit secret"
 alias kshell='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
 alias kdnstools='kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest -- sh'
+if [[ $commands[kubecolor] ]]; then
+  alias kubectl=kubecolor
+fi
 
 if hash piknik 2>/dev/null; then
   alias pkc='piknik -copy'
@@ -207,6 +210,7 @@ fi
 # Kubernetes CLI
 if [[ $commands[kubectl] ]]; then
   source <(kubectl completion zsh)
+  compdef kubecolor=kubectl
 fi
 
 # Helm CLI

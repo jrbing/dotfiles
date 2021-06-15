@@ -1,5 +1,6 @@
 
 tap "buo/cask-upgrade"
+tap "dty1er/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
@@ -66,9 +67,10 @@ brew "imagemagick"                                     # Tools and libraries to 
 brew "iperf3"                                          # Update of iperf: measures TCP, UDP, and SCTP bandwidth
 brew "jq"                                              # Lightweight and flexible command-line JSON processor
 brew "jsonlint"                                        # JSON parser and validator with a CLI
+brew "kubecolor"                                       # Colorize your kubectl output
 brew "kubectx"                                         # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubernetes-cli"                                  # Kubernetes command-line interface
-brew "macvim" #, args: ["HEAD"]                          # GUI for vim, made for macOS
+brew "macvim" #, args: ["HEAD"]                        # GUI for vim, made for macOS
 brew "mas"                                             # Mac App Store command-line interface
 brew "modd"                                            # Flexible tool for responding to filesystem changes
 brew "ncdu"                                            # NCurses Disk Usage
