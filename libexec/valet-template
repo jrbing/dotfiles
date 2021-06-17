@@ -97,6 +97,12 @@ class Template < Thor
     create_from_template("makefile.erb", "Makefile")
   end
 
+  # Taskfile
+  desc "task", "Creates a basic taskfile"
+  def task
+    create_from_template("taskfile.erb", "Taskfile.yml")
+  end
+
   # editorconfig configuration file
   desc "editorconfig", "Creates a basic editorconfig file"
   def editorconfig
