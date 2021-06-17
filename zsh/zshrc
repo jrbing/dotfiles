@@ -135,7 +135,7 @@ alias mvim="reattach-to-user-namespace mvim"
 alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
 alias uuid="uuidgen | tr -d '\n' | tr '[:upper:]' '[:lower:]' | pbcopy && pbpaste && echo"
 alias ytd="youtube-dl"
-alias dcb="docker-compose down && docker-compose up -d && docker-compose logs -f"
+alias dcb="docker compose down && docker compose up -d && docker compose logs -f"
 
 alias kedit-secret="KUBE_EDITOR=kube-secret-editor kubectl edit secret"
 alias kshell='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
