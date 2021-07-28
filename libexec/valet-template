@@ -120,7 +120,7 @@ class Template < Thor
   desc "python [NAME]", "Creates a python script"
   def python(script_name=nil)
     @script_name = get_script_name(script_name)
-    create_from_template("python_script.erb", "#{@script_name}.py")
+    chmod(create_from_template("python_script.erb", "#{@script_name}.py"), 0755)
   end
 
   # dockerfile
