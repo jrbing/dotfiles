@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 # vim: filetype=python tabstop=8 expandtab shiftwidth=4 softtabstop=4
 # -*- coding: utf-8 -*-
-"""A boilerplate script to be customized for data projects.
+""" A boilerplate script
+
+Author: JR Bing
+Version: 1.0
+Last Modified By: JR Bing
+Date: <%= @date %>
 
 This script-level docstring will double as the description when the script is
 called with the --help or -h option.
 
+TODO: Things that still need to be done.
 """
 
 # Standard Library imports go here
 import argparse
-import contextlib
-import io
 import logging
-import sys
+# import sys
+# import io
 
 # External library imports go here
 #
@@ -22,10 +27,6 @@ from pathlib import Path
 
 # External library from-style imports go here
 #
-# Ideally we all live in a unicode world, but if you have to use something
-# else, you can set it here
-ENCODE_IN = 'utf-8'
-ENCODE_OUT = 'utf-8'
 
 # Set up a global logger. Logging is a decent exception to the no-globals rule.
 # We want to use the logger because it sends to standard error, and we might
@@ -34,36 +35,9 @@ ENCODE_OUT = 'utf-8'
 log = logging.getLogger(Path(__file__).stem)
 
 
-def manipulate_data(data):
-    """This function is where the real work happens (or at least starts).
-
-    Probably you should write some real documentation for it.
-
-    Arguments:
-
-    * data_in: the data to be manipulated
-
-    """
-    log.info("Doing some fun stuff here!")
-    return data
-
-
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description=__doc__)
-    # If user doesn't specify an input file, read from standard input. Since
-    # encodings are the worst thing, we're explicitly expecting std
-    parser.add_argument('-i', '--infile',
-                        type=lambda x: open(x, encoding=ENCODE_IN),
-                        default=io.TextIOWrapper(
-                            sys.stdin.buffer, encoding=ENCODE_IN)
-                        )
-    # Same thing goes with the output file.
-    parser.add_argument('-o', '--outfile',
-                        type=lambda x: open(x, 'w', encoding=ENCODE_OUT),
-                        default=io.TextIOWrapper(
-                            sys.stdout.buffer, encoding=ENCODE_OUT)
-                        )
     # Set the verbosity level for the logger. The `-v` option will set it to
     # the debug level, while the `-q` will set it to the warning level.
     # Otherwise use the info level.
@@ -75,25 +49,10 @@ def parse_args():
     return parser.parse_args()
 
 
-def read_instream(instream):
-    """Convert raw input for to a manipulatable format.
-
-    Arguments:
-
-    *Instream: a file-like object
-
-    """
-    # If you need to read a csv, create a DataFrame, or whatever it might be,
-    # do it here.
-    return instream.read()
-
-
 def main():
     args = parse_args()
     logging.basicConfig(level=args.verbose)
-    data = read_instream(args.infile)
-    results = manipulate_data(data)
-    args.outfile.write(results)
+    log.info("Running")
 
 
 if __name__ == "__main__":
