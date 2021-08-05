@@ -643,9 +643,10 @@
 
     " Define linters
     let g:ale_linters = {
-      \ 'python': ['yapf'],
+      \ 'python': ['pylint'],
       \ 'cpp': ['cppcheck']
     \}
+    let g:ale_python_pylint_use_global = 1
 
     " Define fixers
     let g:ale_fix_on_save = 1
@@ -666,8 +667,7 @@
   " AutoFormat {{{2
     let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.dotfiles/share/asdf/shims') ]
     let g:formatters_python = ['yapf']
-    "let g:formatters_python = ['black']
-    "let g:formatter_yapf_style = 'pep8'
+    let g:formatter_yapf_style = 'google'
     let g:formatters_yaml = ['prettier']
     let g:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
     let g:formatters_java = ['custom_java']
