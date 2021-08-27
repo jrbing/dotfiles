@@ -48,8 +48,8 @@ function archive_and_compress() {
   local tmpFile="${@%/}.tar"
   echodebug "tmpFile: ${tmpFile}"
 
-  #tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
-  tar -cf --exclude=".DS_Store" "${@}" | pipebench > "${tmpFile}" || return 1
+  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+  #tar -cf "${@}" | pipebench > "${tmpFile}" || return 1
 
   local size=$(
     stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
