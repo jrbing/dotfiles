@@ -26,7 +26,8 @@ function install_homebrew() {
   echoinfo "Installing homebrew"
   if ! command -v brew &>/dev/null; then
     echoinfo "Installing Homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   else
     echoinfo "Homebrew already installed"
   fi
