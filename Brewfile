@@ -65,6 +65,7 @@ brew "hugo"                                            # Configurable static sit
 brew "icdiff"                                          # Improved colored diff
 brew "imagemagick"                                     # Tools and libraries to manipulate images in many formats
 brew "iperf3"                                          # Update of iperf: measures TCP, UDP, and SCTP bandwidth
+brew "java"                                            # Development kit for the Java programming language
 brew "jq"                                              # Lightweight and flexible command-line JSON processor
 brew "jsonlint"                                        # JSON parser and validator with a CLI
 brew "kubecolor"                                       # Colorize your kubectl output
@@ -207,14 +208,12 @@ brew "zsh"                                             # UNIX shell (command int
 #brew "ykpers"                                          # YubiKey personalization library and tool
 #brew "youtube-dl"                                      # Download YouTube videos from the command-line
 
-cask "adoptopenjdk8"
 cask "appcleaner"
 cask "arq"
 cask "balenaetcher"
 cask "docker"
 cask "gpg-suite"
 cask "iterm2"
-cask "java"
 cask "mactex-no-gui"
 cask "seafile-client"
 cask "tableflip"
