@@ -18,10 +18,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "0x6a7262696e67"
-sudo scutil --set HostName "0x6a7262696e67"
-sudo scutil --set LocalHostName "0x6a7262696e67"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6a7262696e67"
+#sudo scutil --set ComputerName "0x6a7262696e67"
+#sudo scutil --set HostName "0x6a7262696e67"
+#sudo scutil --set LocalHostName "0x6a7262696e67"
+#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6a7262696e67"
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
@@ -41,6 +41,9 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
 # Disable the over-the-top focus ring animation
 defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
+
+# Adjust toolbar title rollover delay
+defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
