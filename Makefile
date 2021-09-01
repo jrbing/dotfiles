@@ -12,7 +12,7 @@ ZSH_FILES := zlogin zlogout zpreztorc zprofile zshenv zshrc
 
 all: help
 
-link: link-tmux link-vim link-etc link-xdg link-git link-bash link-zsh link-gpg link-vscode  ## Link all dotfiles to their respective locations
+link: link-tmux link-vim link-etc link-xdg link-git link-bash link-zsh link-gpg  ## Link all dotfiles to their respective locations
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/oh-my-tmux/.tmux.conf .tmux.conf; \
