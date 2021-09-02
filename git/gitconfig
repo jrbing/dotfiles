@@ -17,6 +17,9 @@
 	excludesfile = ~/.gitignore_global
 	whitespace = warn
 
+[init]
+	defaultBranch = main
+
 [alias]
 	shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
 	lg = log -10 --reverse
