@@ -29,7 +29,7 @@ case $OSTYPE in
     eval "$("${HOME}"/.dotfiles/bin/valet init -)"
 
     # Set JAVA_HOME
-    export JAVA_HOME=$(/usr/libexec/java_home)
+    #export JAVA_HOME=$(/usr/libexec/java_home)
     export EDITOR='vim'
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
