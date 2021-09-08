@@ -120,6 +120,7 @@ brew "yarn"                                            # JavaScript package mana
 brew "yq"                                              # Process YAML documents from the CLI
 brew "zopfli"                                          # New zlib (gzip, deflate) compatible compressor
 brew "zsh"                                             # UNIX shell (command interpreter)
+
 #brew "ant"                                             # Java build tool
 #brew "argoproj/tap/argo"                               # Get stuff done with container-native workflows for Kubernetes.
 #brew "argoproj/tap/argocd"                             # GitOps Continuous Delivery for Kubernetes
@@ -207,6 +208,24 @@ brew "zsh"                                             # UNIX shell (command int
 #brew "yank"                                            # Copy terminal output to clipboard
 #brew "ykpers"                                          # YubiKey personalization library and tool
 #brew "youtube-dl"                                      # Download YouTube videos from the command-line
+#fzf
+#git-delta
+#gpg-agent
+#hub
+#inlets
+#jsoncpp
+#k9s
+#kops
+#krb5
+#krew
+#minio-mc
+#navi
+#neofetch
+#netcdf
+#netlify-cli
+#pandoc-citeproc
+#pylint
+#yapf
 
 cask "appcleaner"
 cask "arq"
@@ -255,6 +274,8 @@ cask "vlc"
 #cask "vagrant"
 #cask "virtualbox"
 #cask "xquartz"
+#muzzle
+#soapui
 
 mas "Affinity Designer", id: 824171161
 mas "Amphetamine", id: 937984704
