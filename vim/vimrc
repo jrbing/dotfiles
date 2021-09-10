@@ -48,6 +48,7 @@
   Plug 'godlygeek/tabular'
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
+  Plug 'junegunn/fzf'
   Plug 'justinmk/vim-sneak'
   Plug 'kristijanhusak/vim-carbon-now-sh'
   Plug 'lambdalisue/vim-gista'
@@ -1283,6 +1284,9 @@
     set term=xterm-256color
     "set term=tmux-256color
   endif
+
+  " Put fuzzy finder in the runtimepath
+  set rtp+=/usr/local/opt/fzf
 
   if (has('gui_running') || has('gui_vimr'))
 

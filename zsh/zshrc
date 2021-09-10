@@ -233,6 +233,11 @@ if [[ $commands[flux] ]]; then
   source <(flux completion zsh)
 fi
 
+# fzf
+if [[ -f ~/.fzf.zsh ]]; then
+  source ~/.fzf.zsh
+fi
+
 ###############
 #  Profiling  #
 ###############
