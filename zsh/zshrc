@@ -243,6 +243,11 @@ if [[ -f ~/.fzf.zsh ]]; then
   source ~/.fzf.zsh
 fi
 
+# aws-sso-util
+if [[ -e ~/.local/bin/aws-sso-util ]]; then
+  eval "$(_AWS_SSO_UTIL_COMPLETE=source_zsh aws-sso-util)"
+fi
+
 ###############
 #  Profiling  #
 ###############
