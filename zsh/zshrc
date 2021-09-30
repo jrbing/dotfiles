@@ -80,6 +80,11 @@ if [[ -d "${HOME}/.krew/bin" ]]; then
   path+=("${HOME}/.krew/bin")
 fi
 
+# Pipx
+if [[ -d "${HOME}/.local/bin" ]]; then
+  path+=("${HOME}/.local/bin")
+fi
+
 ############
 #  Prompt  #
 ############
