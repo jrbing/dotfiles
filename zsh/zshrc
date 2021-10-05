@@ -85,6 +85,11 @@ if [[ -d "${HOME}/.local/bin" ]]; then
   path+=("${HOME}/.local/bin")
 fi
 
+# TeX
+if [[ -d "/Library/TeX/texbin" ]]; then
+  path+=("/Library/TeX/texbin")
+fi
+
 ############
 #  Prompt  #
 ############
