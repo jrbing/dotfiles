@@ -1355,7 +1355,7 @@
       function! CreatePDF()
         "execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
         "execute '! pandoc -o /tmp/%:t:r.pdf --pdf-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
-        execute '! pandoc "%" --output /tmp/%:t:r.pdf --template eisvogel --from markdown --listings --variable fontsize=9pt'
+        execute '! pandoc "%" --output /tmp/%:t:r.pdf --pdf-engine xelatex --template eisvogel --from markdown --listings --variable fontsize=9pt'
         execute 'silent ! open /tmp/%:t:r.pdf'
       endfunction
 
