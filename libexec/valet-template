@@ -128,8 +128,8 @@ class Template < Thor
   desc "dockerfile", "Creates a sample Dockerfile"
   def dockerfile
     create_from_template("dockerfile.erb", "Dockerfile")
-    @source = File.expand_path('~/.dotfiles/share/valet/templates/s6/rootfs')
-    directory(@source, "rootfs")
+    #@source = File.expand_path('~/.dotfiles/share/valet/templates/s6/rootfs')
+    #directory(@source, "rootfs")
   end
 
   # dockercompose
