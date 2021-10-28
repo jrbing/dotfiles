@@ -33,9 +33,9 @@ zplug load
 # Prepend custom function directory to fpath
 fpath=("${DOTFILES}/zsh/functions" $fpath)
 # Append asdf completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+#fpath=(${ASDF_DIR}/completions $fpath)
 # Initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+#autoload -Uz compinit && compinit
 
 ##########
 #  Misc  #

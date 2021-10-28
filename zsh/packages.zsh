@@ -17,10 +17,10 @@ zplug 'belak/prezto-contrib', \
   depth:10, \
   as:plugin
 
-zplug 'asdf-vm/asdf', \
-  depth:10, \
-  as:plugin, \
-  use:'asdf.sh'
+#zplug 'asdf-vm/asdf', \
+  #depth:10, \
+  #as:plugin, \
+  #use:'asdf.sh'
 
 zplug 'Tarrasch/zsh-bd', \
   depth:10, \
