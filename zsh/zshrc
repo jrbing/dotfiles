@@ -32,6 +32,10 @@ zplug load
 
 # Prepend custom function directory to fpath
 fpath=("${DOTFILES}/zsh/functions" $fpath)
+# Append asdf completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# Initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
 ##########
 #  Misc  #
@@ -210,11 +214,6 @@ autoload -U +X bashcompinit && bashcompinit
 # Azure CLI
 if [[ $commands[az] ]]; then
   source "${DOTFILES}/completions/az.zsh"
-fi
-
-# asdf
-if [[ -s "${ZPLUG_ROOT}/repos/asdf-vm/asdf/completions/asdf.bash" ]]; then
-  source "${ZPLUG_ROOT}/repos/asdf-vm/asdf/completions/asdf.bash"
 fi
 
 # Kubernetes CLI
