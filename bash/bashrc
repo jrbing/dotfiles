@@ -8,7 +8,7 @@ export DOTFILES=$HOME/.dotfiles
 case $(uname) in
   (Darwin)
     eval "$("$HOME"/.dotfiles/bin/valet init -)"
-    JAVA_HOME="$(/usr/libexec/java_home)"; export JAVA_HOME
+    #JAVA_HOME="$(/usr/libexec/java_home)"; export JAVA_HOME
     export EDITOR='vim'
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
