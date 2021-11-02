@@ -17,11 +17,6 @@ zplug 'belak/prezto-contrib', \
   depth:10, \
   as:plugin
 
-#zplug 'asdf-vm/asdf', \
-  #depth:10, \
-  #as:plugin, \
-  #use:'asdf.sh'
-
 zplug 'Tarrasch/zsh-bd', \
   depth:10, \
   as:plugin
@@ -78,4 +73,9 @@ zplug 'genuinetools/pepper', \
 #zplug 'vmware/octant', \
   #as:command, \
   #from:gh-r
+
+#zplug 'asdf-vm/asdf', \
+  #depth:10, \
+  #as:plugin, \
+  #use:'asdf.sh'
 
