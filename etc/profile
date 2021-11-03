@@ -1,3 +1,6 @@
 #!/usr/bin/env sh
 
 # Nothing to see here
+[[ -s ~/.fig/shell/pre.sh ]] && source ~/.fig/shell/pre.sh
+
+[[ -s ~/.fig/fig.sh ]] && source ~/.fig/fig.sh

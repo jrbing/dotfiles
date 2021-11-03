@@ -1,73 +1,72 @@
 {
-  "editor.snippetSuggestions": "top",
-  "editor.fontSize": 15,
-  "editor.fontFamily": "Inconsolata-dz for Powerline, Menlo, Monaco, Consolas, monospace",
-  "editor.fontLigatures": true,
-  "editor.tabSize": 2,
-  "editor.renderWhitespace": "none",
-  "editor.cursorStyle": "block",
-  "editor.insertSpaces": true,
-  "editor.wordWrap": 300,
-  "editor.renderLineHighlight": "line",
-  "editor.hideCursorInOverviewRuler": true,
-  "editor.scrollBeyondLastLine": false,
-  "editor.minimap.enabled": false,
-
-  "window.zoomLevel": 0,
-  "window.nativeTabs": true,
-
-  "workbench.welcome.enabled": false,
-  "workbench.colorTheme": "One Dark Pro",
-  "workbench.editor.enablePreview": false,
-
-  "files.associations": {},
-  "files.autoSave": "onFocusChange",
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/.DS_Store": true
+  "editor.insertSpaces" : true,
+  "debug.console.fontSize" : 14,
+  "editor.tabSize" : 2,
+  "workbench.startupEditor" : "none",
+  "editor.fontFamily" : "Inconsolata-dz for Powerline, Menlo, Monaco, Consolas, monospace",
+  "vim.incsearch" : true,
+  "extensions.ignoreRecommendations" : false,
+  "vim.autoindent" : true,
+  "editor.minimap.enabled" : false,
+  "vim.history" : 50,
+  "vim.scroll" : 20,
+  "vim.startInInsertMode" : false,
+  "window.zoomLevel" : 0,
+  "sqltools.telemetry" : false,
+  "files.exclude" : {
+    "**\/.DS_Store" : true,
+    "**\/.hg" : true,
+    "**\/.svn" : true,
+    "**\/.git" : true
   },
-
-  "terminal.external.windowsExec": "%COMSPEC%",
-  "terminal.external.osxExec": "iTerm.app",
-  "terminal.external.linuxExec": "xterm",
-
-  "extensions.autoUpdate": true,
-  "extensions.ignoreRecommendations": false,
-
-  "vim.autoindent": true,
-  "vim.easymotion": false,
-  "vim.enableNeovim": true,
-  "vim.neovimPath": "/usr/local/bin/nvim",
-  "vim.history": 50,
-  "vim.ignorecase": true,
-  "vim.incsearch": true,
-  "vim.iskeyword": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-  "vim.leader": ",",
-  "vim.scroll": 20,
-  "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
-  "vim.showcmd": true,
-  "vim.smartcase": true,
-  "vim.startInInsertMode": false,
-  "vim.textwidth": 80,
-  "vim.useCtrlKeys": false,
-  "vim.useSystemClipboard": true,
-  "vim.normalModeKeyBindings": [
+  "vim.smartcase" : true,
+  "sqltools.useNodeRuntime" : true,
+  "editor.wordSeparators" : "\/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "extensions.autoUpdate" : true,
+  "workbench.colorTheme" : "One Dark Pro",
+  "editor.scrollBeyondLastLine" : false,
+  "editor.fontLigatures" : true,
+  "editor.snippetSuggestions" : "top",
+  "vim.neovimPath" : "\/usr\/local\/bin\/nvim",
+  "terminal.external.osxExec" : "iTerm.app",
+  "vim.enableNeovim" : true,
+  "editor.fontSize" : 15,
+  "powershell.scriptAnalysis.settingsPath" : "",
+  "editor.renderLineHighlight" : "line",
+  "powershell.enableProfileLoading" : true,
+  "terminal.external.linuxExec" : "xterm",
+  "vim.normalModeKeyBindings" : [
     {
-      "before": [";"],
-      "after": [":"]
+      "after" : [
+        ":"
+      ],
+      "before" : [
+        ";"
+      ]
     }
   ],
+  "window.nativeTabs" : true,
+  "workbench.welcome.enabled" : false,
+  "vim.useSystemClipboard" : true,
+  "terminal.integrated.fontSize" : 14,
+  "workbench.editor.enablePreview" : false,
+  "terminal.external.windowsExec" : "%COMSPEC%",
+  "vim.useCtrlKeys" : false,
+  "vim.showcmd" : true,
+  "vim.leader" : ",",
+  "vim.searchHighlightColor" : "rgba(150, 150, 255, 0.3)",
+  "vim.easymotion" : false,
+  "editor.accessibilitySupport" : "off",
+  "powershell.scriptAnalysis.enable" : true,
+  "vim.ignorecase" : true,
+  "files.autoSave" : "onFocusChange",
+  "editor.renderWhitespace" : "none",
+  "editor.cursorStyle" : "block",
+  "editor.hideCursorInOverviewRuler" : true,
+  "editor.wordWrap" : 300,
+  "vim.textwidth" : 80,
+  "files.associations" : {
 
-  "powershell.enableProfileLoading": true,
-  "powershell.scriptAnalysis.enable": true,
-  "powershell.scriptAnalysis.settingsPath": "",
-
-  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-  "workbench.startupEditor": "none",
-  "terminal.integrated.fontSize": 14,
-  "debug.console.fontSize": 14,
-  "sqltools.telemetry": false,
-  "sqltools.useNodeRuntime": true
+  },
+  "vim.iskeyword" : "\/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-"
 }

@@ -6,6 +6,14 @@
 # file to get startup times
 #zmodload zsh/zprof
 
+#########
+#  Fig  #
+#########
+
+if [[ -s ~/.fig/shell/pre.sh ]]; then
+  source ~/.fig/shell/pre.sh
+fi
+
 ###########
 #  ZPLUG  #
 ###########
@@ -252,8 +260,14 @@ if [[ -e ~/.local/bin/aws-sso-util ]]; then
   eval "$(_AWS_SSO_UTIL_COMPLETE=source_zsh aws-sso-util)"
 fi
 
+# fig
+if [[ -s ~/.fig/fig.sh ]]; then
+  source ~/.fig/fig.sh
+fi
+
 ###############
 #  Profiling  #
 ###############
 
 #zprof
+

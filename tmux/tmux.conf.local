@@ -339,3 +339,6 @@ bind-key C-t new-window "ttyd --readonly tmux attach -t $(tmux display -p '#S')"
 # Fix for .bashrc not being sourced when $SHELL is set to bash
 if-shell -b '[ $SHELL == /bin/bash ]' \
   'set-option -g default-command "exec /bin/bash"'
+
+# Fig Tmux Integration: Enabled
+source-file ~/.fig/tmux
