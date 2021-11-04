@@ -84,6 +84,13 @@
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
+  "Plug 'lambdalisue/fern.vim'
+  "Plug 'lambdalisue/nerdfont.vim'
+  "Plug 'lambdalisue/fern-ssh'
+  "Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+  "Plug 'lambdalisue/fern-bookmark.vim'
+  "Plug 'LumaKernel/fern-mapping-reload-all.vim'
+
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
   Plug 'arcticicestudio/nord-vim'
@@ -697,6 +704,66 @@
     nnoremap <leader>gm :Gmove<cr>
     nnoremap <leader>gr :Gremove<cr>
     nnoremap <leader>gl :Glog -18 --reverse<cr>
+  "}}}
+
+  " Fern {{{2
+    "let g:fern#disable_default_mappings = 1
+
+    "noremap <silent> <Leader>f :Fern . -drawer -reveal=% -toggle -width=35<CR><C-w>=
+
+    "function! s:init_fern() abort
+
+      "" Use 'select' instead of 'edit' for default 'open' action
+      "nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
+
+      "Define NERDTree like mappings
+      "nmap <buffer><expr>
+        "\ <Plug>(fern-my-open-expand-collapse)
+        "\ fern#smart#leaf(
+        "\   "\<Plug>(fern-action-open:select)",
+        "\   "\<Plug>(fern-action-expand)",
+        "\   "\<Plug>(fern-action-collapse)",
+        "\ )
+      "nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+      "nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+      "nmap <buffer> o <Plug>(fern-action-open:edit)
+      "nmap <buffer> go <Plug>(fern-action-open:edit)<C-w>p
+      "nmap <buffer> t <Plug>(fern-action-open:tabedit)
+      "nmap <buffer> T <Plug>(fern-action-open:tabedit)gT
+      "nmap <buffer> i <Plug>(fern-action-open:split)
+      "nmap <buffer> gi <Plug>(fern-action-open:split)<C-w>p
+      "nmap <buffer> s <Plug>(fern-action-open:vsplit)
+      "nmap <buffer> gs <Plug>(fern-action-open:vsplit)<C-w>p
+      "nmap <buffer> ma <Plug>(fern-action-new-path)
+      "nmap <buffer> P gg
+      "nmap <buffer> C <Plug>(fern-action-enter)
+      "nmap <buffer> u <Plug>(fern-action-leave)
+      "nmap <buffer> r <Plug>(fern-action-reload)
+      "nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
+      "nmap <buffer> cd <Plug>(fern-action-cd)
+      "nmap <buffer> CD gg<Plug>(fern-action-cd)<C-o>
+      "nmap <buffer> I <Plug>(fern-action-hide-toggle)
+      "nmap <buffer> q :<C-u>quit<CR>
+      "nmap <buffer> n <Plug>(fern-action-new-path)
+
+      "nmap <buffer> d <Plug>(fern-action-remove)
+      "nmap <buffer> m <Plug>(fern-action-move)
+      "nmap <buffer> M <Plug>(fern-action-rename)
+      "nmap <buffer> h <Plug>(fern-action-hidden-toggle)j
+      "nmap <buffer> r <Plug>(fern-action-reload)
+      "nmap <buffer> k <Plug>(fern-action-mark-toggle)j
+      "nmap <buffer> s <Plug>(fern-action-open:split)
+      "nmap <buffer> v <Plug>(fern-action-open:vsplit)
+      "nmap <buffer><nowait> < <Plug>(fern-action-leave)
+      "nmap <buffer><nowait> > <Plug>(fern-action-enter)
+    "endfunction
+
+    "augroup fern-custom
+      "autocmd! *
+      "autocmd FileType fern call s:init_fern()
+      "autocmd VimEnter * ++nested Fern -drawer -stay .
+    "augroup END
+
   "}}}
 
   " NERDTree {{{2
