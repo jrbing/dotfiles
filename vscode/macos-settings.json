@@ -21,7 +21,7 @@
   },
   "vim.smartcase" : true,
   "sqltools.useNodeRuntime" : true,
-  "editor.wordSeparators" : "\/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordSeparators" : "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
   "extensions.autoUpdate" : true,
   "workbench.colorTheme" : "One Dark Pro",
   "editor.scrollBeyondLastLine" : false,
@@ -68,5 +68,8 @@
   "files.associations" : {
 
   },
-  "vim.iskeyword" : "\/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-"
+  "vim.iskeyword": "\/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  }
 }
