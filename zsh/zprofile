@@ -5,9 +5,9 @@
 #
 # Fig setup
 #
-if [[ -s ~/.fig/shell/pre.sh ]]; then
-  source ~/.fig/shell/pre.sh
-fi
+#if [[ -s ~/.fig/shell/pre.sh ]]; then
+  #source ~/.fig/shell/pre.sh
+#fi
 
 
 #
@@ -68,6 +68,6 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
 fi
 
 # fig
-if [[ -s ~/.fig/fig.sh ]]; then
-  source ~/.fig/fig.sh
-fi
+#if [[ -s ~/.fig/fig.sh ]]; then
+  #source ~/.fig/fig.sh
+#fi

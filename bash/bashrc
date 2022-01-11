@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [[ -s ~/.fig/shell/pre.sh ]]; then
-  source ~/.fig/shell/pre.sh
-fi
+#if [[ -s ~/.fig/shell/pre.sh ]]; then
+  #source ~/.fig/shell/pre.sh
+#fi
 
 export DOTFILES=$HOME/.dotfiles
 
@@ -153,6 +153,6 @@ if [[ -f $HOME/.localrc ]]; then
   source "${HOME}/.localrc"
 fi
 
-if [[ -s ~/.fig/fig.sh ]]; then
-  source ~/.fig/fig.sh
-fi
+#if [[ -s ~/.fig/fig.sh ]]; then
+  #source ~/.fig/fig.sh
+#fi

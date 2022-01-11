@@ -10,9 +10,9 @@
 #  Fig  #
 #########
 
-if [[ -s ~/.fig/shell/pre.sh ]]; then
-  source ~/.fig/shell/pre.sh
-fi
+#if [[ -s ~/.fig/shell/pre.sh ]]; then
+  #source ~/.fig/shell/pre.sh
+#fi
 
 ###########
 #  ZPLUG  #
@@ -261,9 +261,9 @@ if [[ -e ~/.local/bin/aws-sso-util ]]; then
 fi
 
 # fig
-if [[ -s ~/.fig/fig.sh ]]; then
-  source ~/.fig/fig.sh
-fi
+#if [[ -s ~/.fig/fig.sh ]]; then
+  #source ~/.fig/fig.sh
+#fi
 
 ###############
 #  Profiling  #
