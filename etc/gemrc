@@ -6,4 +6,4 @@
 :bulk_threshold: 1000
 :backtrace: false
 :verbose: false
-gem: --user-install --no-ri --no-rdoc
+gem: --no-document
