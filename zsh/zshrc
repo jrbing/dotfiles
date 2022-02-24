@@ -54,6 +54,12 @@ if [[ $commands[direnv] ]]; then
   eval "$(direnv hook zsh)"
 fi
 
+# frum
+if [[ $commands[frum] ]]; then
+  eval "$(frum init)"
+fi
+
+
 #################
 #  ZSH Options  #
 #################
