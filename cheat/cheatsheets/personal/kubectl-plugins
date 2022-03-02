@@ -1,0 +1,53 @@
+# kubectl-explore: Find the field explanation from supported API resources.
+kubectl explore
+
+# kubectl-explore: Find the field explanation from "pod"
+kubectl explore pod
+
+# kubectl-explore: Find the field explanation from "node.spec"
+kubectl explore pod.spec.containers
+
+# kubectl-explore: Find the field explanation from supported API resources in the selected cluster.
+kubectl explore --context=onecontext
+
+# kubectl-example: Generate an example YAML manifest for the specified resource
+kubectl-example deployment
+
+# kubectl-doctor: Scan your currently targeted k8s cluster to see if there are anomalies or useful action points
+kubectl doctor
+
+# kubectl-df-pv: Show df information for persistent volumes
+kubectl df-pv
+
+# kubectl-cilium: Run commands on cilium agent for either pod or node
+kubectl cilium exec <namespace>/<pod-name> cilium monitor
+
+# kubectl-cert-manager: Interact with installed cert-manager
+kubectl cert-manager help
+
+# kubectl-view-secret: Print secret keys
+kubectl view-secret <secret>
+
+# kubectl-view-secret: Decode specific entry
+kubectl view-secret <secret> <key>
+
+# kubectl-tmux-exec: Start tmux session with multiple kubectl exec panes
+ kubectl tmux-exec -l app=nginx /bin/bash
+
+# kubectl-ksniff: Start a remote capture on any pod in your Kubernetes cluster
+kubectl sniff <POD_NAME> [-n <NAMESPACE_NAME>] [-c <CONTAINER_NAME>] [-i <INTERFACE_NAME>] [-f <CAPTURE_FILTER>] [-o OUTPUT_FILE] [-l LOCAL_TCPDUMP_FILE] [-r REMOTE_TCPDUMP_FILE]
+
+# kubectl-reap: Cleanup kubernetes resources
+kubectl reap <object_type>
+
+# kubectl-pv-migrate: Migrate data between PVC's
+kubectl pv-migrate migrate old-pvc new-pvc
+
+# kubectl-node-shell: Get a terminal shell for a Kubernetes node
+kubectl node-shell <node>
+
+# kubectl-neat: Clean unnecessary system information from resources
+kubectl get pod mypod -o yaml | kubectl neat
+
+# kubectl-ktop: Top-like interface for Kubernetes resources
+kubectl ktop
