@@ -59,7 +59,6 @@
   Plug 'preservim/nerdtree'
   Plug 'psliwka/vim-smoothie'
   Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
   Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-eunuch'
@@ -90,6 +89,7 @@
   "Plug 'lambdalisue/fern-renderer-nerdfont.vim'
   "Plug 'lambdalisue/fern-bookmark.vim'
   "Plug 'LumaKernel/fern-mapping-reload-all.vim'
+  "Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
 
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
