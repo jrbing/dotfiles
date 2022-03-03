@@ -468,7 +468,6 @@
     augroup ft_ruby
       autocmd!
       autocmd BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
-      autocmd FileType ruby let b:dispatch = '~/.dotfiles/share/asdf/shims/ruby %'
     augroup END
   "}}}
 
@@ -673,7 +672,7 @@
   "}}}
 
   " AutoFormat {{{2
-    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin', expand('$HOME/.dotfiles/share/asdf/shims') ]
+    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin' ]
     let g:formatters_python = ['yapf']
     let g:formatter_yapf_style = 'google'
     let g:formatters_yaml = ['prettier']
