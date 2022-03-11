@@ -1,0 +1,5 @@
+# List configured AWS profiles
+aws configure list-profiles
+
+# Set the profile for the current session
+export AWS_PROFILE=<profile_name>
