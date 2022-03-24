@@ -1,6 +1,6 @@
 
 # Disable specific steps - same options as the command line flag
-disable = ["tlmgr", "node", "gem"]
+disable = ["tlmgr", "node", "gem", "pnpm", "containers"]
 
 # Do not ask to retry failed steps (default: false)
 no_retry = true
