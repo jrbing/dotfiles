@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Usage: valet automerge
+# Summary: Automerge pull requests in current repo
+# Help: Automatically merges all Github pull requests for the current repository
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n'     # Set the internal field separator to a tab and newline
+
+# Source generic bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+bincheck "gh"
+
+readarray -t PR_LIST < <(gh pr list | awk '{print $1}' | sort)
+
+for pr in "${PR_LIST[@]}"; do
+  echoinfo "Merging pull request ${pr}"
+  gh pr merge "${pr}" --auto --delete-branch --merge
+  sleep 10
+  echoinfo "Rebasing local"
+  git pull --rebase
+done
+
