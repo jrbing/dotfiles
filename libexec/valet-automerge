@@ -17,9 +17,10 @@ readarray -t PR_LIST < <(gh pr list | awk '{print $1}' | sort)
 
 for pr in "${PR_LIST[@]}"; do
   echoinfo "Merging pull request ${pr}"
-  gh pr merge "${pr}" --auto --delete-branch --merge
-  sleep 10
+  gh pr merge "${pr}" --delete-branch --merge
+  #gh pr merge "${pr}" --auto --delete-branch --merge
   echoinfo "Rebasing local"
   git pull --rebase
+  sleep 10
 done
 
