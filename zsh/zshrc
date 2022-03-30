@@ -218,6 +218,17 @@ function tre() {
   tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
 }
 
+# Assume AWS credentials
+function assume-aws-role(){
+  # $1 is the role to assume from current role
+  echo "Assuming role: $1"
+  aws sts assume-role --role-arn $1 --role-session-name AWSCLI-Session  > /tmp/assume-role.yaml
+  export AWS_ACCESS_KEY_ID=$(yq .Credentials.AccessKeyId /tmp/assume-role.yaml)
+  export AWS_SECRET_ACCESS_KEY=$(yq .Credentials.SecretAccessKey /tmp/assume-role.yaml)
+  export AWS_SESSION_TOKEN=$(yq .Credentials.SessionToken /tmp/assume-role.yaml)
+  rm -f /tmp/assume-role.yaml
+}
+
 ################
 #  Completion  #
 ################
