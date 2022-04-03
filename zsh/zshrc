@@ -229,6 +229,12 @@ function assume-aws-role(){
   rm -f /tmp/assume-role.yaml
 }
 
+# Switch AWS profile
+function awsctx() {
+  profile=$(aws configure list-profiles | fzf)
+  [[ -n "$profile" ]] && export AWS_PROFILE=${profile}
+}
+
 ################
 #  Completion  #
 ################
