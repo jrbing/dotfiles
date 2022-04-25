@@ -118,7 +118,8 @@
   Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
   Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['pandoc', 'markdown'] }
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
-  Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
+  Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
+  "Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
   "Plug 'ap/vim-css-color'
 
   let g:polyglot_disabled = ['go', 'markdown']
