@@ -24,7 +24,7 @@ link-vim:
 				ln -nfs $(dotfiles)/vim/gvimrc .gvimrc
 
 link-nvim:
-	@cd ~ && ln -nfs $(dotfiles)/vim/ .config/nvim
+	@cd ~ && ln -nfs $(dotfiles)/nvim/ .config/nvim
 
 link-etc:
 	@cd ~ && for file in $(ETC_FILES); do ln -nfs .dotfiles/etc/$$file .$$file; done
