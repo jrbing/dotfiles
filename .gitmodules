@@ -1,16 +1,16 @@
 [submodule "vim/plug"]
   path = vim/plug
-  url = http://github.com/junegunn/vim-plug.git/
+  url = https://github.com/junegunn/vim-plug.git/
   ignore = dirty
 [submodule "tmux/oh-my-tmux"]
   path = tmux/oh-my-tmux
-  url = http://github.com/gpakosz/.tmux.git/
+  url = https://github.com/gpakosz/.tmux.git/
   ignore = dirty
 [submodule "zsh/zplug"]
   path = zsh/zplug
-  url = http://github.com/zplug/zplug.git/
+  url = https://github.com/zplug/zplug.git/
   ignore = dirty
 [submodule "cheat/cheatsheets/community"]
   path = cheat/cheatsheets/community
-  url = http://github.com/cheat/cheatsheets.git/
+  url = https://github.com/cheat/cheatsheets.git/
   ignore = dirty
