@@ -72,6 +72,9 @@ submodules:  ## Update all submodule references
 pandoc-document-template:	## Update source pandoc document template
 	@curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex > $(dotfiles)/pandoc/templates/eisvogel.latex
 
+install-pandoc-template-dependencies:	## Install pandoc document template dependencies
+	@tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
+
 update:  ## Pull updates from remote
 	@git pull --rebase
 
