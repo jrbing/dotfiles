@@ -108,6 +108,12 @@ if [[ -d "/Library/TeX/texbin" ]]; then
   path+=("/Library/TeX/texbin")
 fi
 
+# Rancher Desktop
+if [[ -d "${HOME}/.rd/bin" ]]; then
+  path+=("${HOME}/.rd/bin")
+fi
+
+
 ############
 #  Prompt  #
 ############
