@@ -341,4 +341,4 @@ if-shell -b '[ $SHELL == /bin/bash ]' \
   'set-option -g default-command "exec /bin/bash"'
 
 # Fig Tmux Integration: Enabled
-source-file ~/.fig/tmux
+#source-file ~/.fig/tmux
