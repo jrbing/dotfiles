@@ -14,3 +14,7 @@
   path = cheat/cheatsheets/community
   url = https://github.com/cheat/cheatsheets.git/
   ignore = dirty
+[submodule "tmux/tpm"]
+  path = tmux/tpm
+  url = https://github.com/tmux-plugins/tpm
+  ignore = dirty

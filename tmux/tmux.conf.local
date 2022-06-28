@@ -340,5 +340,8 @@ bind-key C-t new-window "ttyd --readonly tmux attach -t $(tmux display -p '#S')"
 if-shell -b '[ $SHELL == /bin/bash ]' \
   'set-option -g default-command "exec /bin/bash"'
 
+# Install tmux-resurrect plugin
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
 # Fig Tmux Integration: Enabled
 #source-file ~/.fig/tmux
