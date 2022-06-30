@@ -1,0 +1,195 @@
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+############
+#  Prompt  #
+############
+
+# Left prompt
+format = """
+$directory\
+$character"""
+
+# Right prompt
+right_format = """
+$c\
+$golang\
+$helm\
+$java\
+$lua\
+$nodejs\
+$package\
+$python\
+$ruby\
+$rust\
+$terraform\
+$vagrant\
+$aws\
+$azure\
+$git_branch\
+$git_state\
+$git_metrics\
+$git_status\
+$cmd_duration\
+$battery\
+$status\
+"""
+
+#https://starship.rs/config/#line-break
+[line_break]
+disabled = true
+
+#https://starship.rs/config/#character
+[character]
+success_symbol = "[❯❯❯](bold green)"
+error_symbol = "[❯❯❯](bold red)"
+
+############
+#  System  #
+############
+
+#https://starship.rs/config/#command-duration
+#[cmd_duration]
+#min_time = 500
+#format = "underwent [$duration](bold yellow)"
+
+#https://starship.rs/config/#directory
+#[directory]
+#truncation_length = 8
+#truncation_symbol = "…/"
+
+#https://starship.rs/config/#status
+#[status]
+#style = "bg:blue"
+#symbol = "🔴 "
+#success_symbol = "🟢 SUCCESS"
+#format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+#map_symbol = true
+#disabled = false
+
+#https://starship.rs/config/#battery
+#[battery]
+#full_symbol = "🔋 "
+#charging_symbol = "⚡️ "
+#discharging_symbol = "💀 "
+
+#[[battery.display]]
+#threshold = 10
+#style = "bold red"
+
+#####################
+#  Cloud Providers  #
+#####################
+
+#https://starship.rs/config/#aws
+#[aws]
+#format = 'on [$symbol($profile )(\($region\) )]($style)'
+#style = "bold blue"
+#symbol = "🅰 "
+#[aws.region_aliases]
+#ap-southeast-2 = "au"
+#us-east-1 = "va"
+#[aws.profile_aliases]
+#CompanyGroupFrobozzOnCallAccess = 'Frobozz'
+
+#https://starship.rs/config/#azure
+#[azure]
+#disabled = false
+#format = "on [$symbol($subscription)]($style) "
+#symbol = "ﴃ "
+#style = "blue bold"
+
+
+#########
+#  Git  #
+#########
+
+#https://starship.rs/config/#git-branch
+#[git_branch]
+#symbol = "🌱 "
+#truncation_length = 4
+#truncation_symbol = ""
+#ignore_branches = ["master", "main"]
+
+#https://starship.rs/config/#git-commit
+#[git_commit]
+#commit_hash_length = 4
+#tag_symbol = "🔖 "
+
+#https://starship.rs/config/#git-state
+#[git_state]
+#format = '[\($state( $progress_current of $progress_total)\)]($style) '
+#cherry_pick = "[🍒 PICKING](bold red)"
+
+#https://starship.rs/config/#git-metrics
+#[git_metrics]
+#added_style = "bold blue"
+#format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+#https://starship.rs/config/#git-status
+#[git_status]
+#conflicted = "🏳"
+#ahead = "🏎💨"
+#behind = "😰"
+#diverged = "😵"
+#up_to_date = "✓"
+#untracked = "🤷"
+#stashed = "📦"
+#modified = "📝"
+#staged = '[++\($count\)](green)'
+#renamed = "👅"
+#deleted = "🗑"
+
+###############
+#  Languages  #
+###############
+
+#https://starship.rs/config/#c
+#[c]
+#format = "via [$name $version]($style)"
+
+#https://starship.rs/config/#go
+#[golang]
+#format = "via [🏎💨 $version](bold cyan) "
+
+#https://starship.rs/config/#helm
+#[helm]
+#format = "via [⎈ $version](bold white) "
+
+#https://starship.rs/config/#java
+#[java]
+#symbol = "🌟 "
+
+#https://starship.rs/config/#lua
+#[lua]
+#format = "via [🌕 $version](bold blue) "
+
+#https://starship.rs/config/#package-version
+#[package]
+#format = "via [🎁 $version](208 bold) "
+
+#https://starship.rs/config/#python
+#[python]
+#symbol = "👾 "
+#pyenv_version_name = true
+
+#https://starship.rs/config/#ruby
+[ruby]
+detect_files = ["Gemfile"]
+
+#https://starship.rs/config/#rust
+#[rust]
+
+#https://starship.rs/config/#terraform
+#[terraform]
+
+#https://starship.rs/config/#vagrant
+#[vagrant]
+
+#https://starship.rs/config/#node-js
+#[nodejs]
+#format = "via [🤖 $version](bold green) "

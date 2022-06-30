@@ -113,36 +113,40 @@ if [[ -d "${HOME}/.rd/bin" ]]; then
   path+=("${HOME}/.rd/bin")
 fi
 
-
 ############
 #  Prompt  #
 ############
 
-SPACESHIP_PROMPT_ORDER=(
-  dir           # Current directory
-  char          # Prompt character
-)
+# Starship
+if [[ $commands[starship] ]]; then
+  eval "$(starship init zsh)"
+else
+  SPACESHIP_PROMPT_ORDER=(
+    dir           # Current directory
+    char          # Prompt character
+  )
 
-SPACESHIP_RPROMPT_ORDER=(
-  exec_time     # Execution time
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  git           # Git branch and git status
-)
+  SPACESHIP_RPROMPT_ORDER=(
+    exec_time     # Execution time
+    jobs          # Background jobs indicator
+    exit_code     # Exit code section
+    git           # Git branch and git status
+  )
 
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_PROMPT_SEPARATE_LINE=false
-SPACESHIP_DIR_COLOR="blue"
-SPACESHIP_EXIT_CODE_SHOW=true
-SPACESHIP_CHAR_SUFFIX=" "
-SPACESHIP_CHAR_SYMBOL="❯❯❯"
+  SPACESHIP_PROMPT_ADD_NEWLINE=false
+  SPACESHIP_PROMPT_SEPARATE_LINE=false
+  SPACESHIP_DIR_COLOR="blue"
+  SPACESHIP_EXIT_CODE_SHOW=true
+  SPACESHIP_CHAR_SUFFIX=" "
+  SPACESHIP_CHAR_SYMBOL="❯❯❯"
 
-SPACESHIP_EXEC_TIME_PREFIX="⌛ "
-SPACESHIP_EXEC_TIME_ELAPSED=5
-SPACESHIP_KUBECONTEXT_COLOR="blue"
-SPACESHIP_GIT_PREFIX="| "
-SPACESHIP_GIT_STATUS_PREFIX=" "
-SPACESHIP_GIT_STATUS_SUFFIX=""
+  SPACESHIP_EXEC_TIME_PREFIX="⌛ "
+  SPACESHIP_EXEC_TIME_ELAPSED=5
+  SPACESHIP_KUBECONTEXT_COLOR="blue"
+  SPACESHIP_GIT_PREFIX="| "
+  SPACESHIP_GIT_STATUS_PREFIX=" "
+  SPACESHIP_GIT_STATUS_SUFFIX=""
+fi
 
 #############
 #  Aliases  #
