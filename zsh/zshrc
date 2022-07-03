@@ -113,6 +113,11 @@ if [[ -d "${HOME}/.rd/bin" ]]; then
   path+=("${HOME}/.rd/bin")
 fi
 
+# Cargo
+if [[ -d "${HOME}/.cargo/bin" ]]; then
+  path+=("${HOME}/.cargo/bin")
+fi
+
 ############
 #  Prompt  #
 ############
