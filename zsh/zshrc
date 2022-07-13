@@ -118,6 +118,23 @@ if [[ -d "${HOME}/.cargo/bin" ]]; then
   path+=("${HOME}/.cargo/bin")
 fi
 
+# kubeswitch
+if [[ -f /usr/local/opt/switch/switch.sh ]]; then
+  INSTALLATION_PATH=$(brew --prefix switch) && source $INSTALLATION_PATH/switch.sh
+  trap kubeswitchCleanupHandler EXIT
+fi
+
+function kubeswitchCleanupHandler {
+ if [ ! -z "$KUBECONFIG" ]
+ then
+    switchTmpDirectory="$HOME/.kube/.switch_tmp/config"
+    if [[ $KUBECONFIG == *"$switchTmpDirectory"* ]]; then
+      rm $KUBECONFIG
+    fi
+ fi
+}
+
+
 ############
 #  Prompt  #
 ############
@@ -298,21 +315,10 @@ if [[ -e ~/.local/bin/aws-sso-util ]]; then
   eval "$(_AWS_SSO_UTIL_COMPLETE=source_zsh aws-sso-util)"
 fi
 
-# kubeswitch
-if [[ -f /usr/local/opt/switch/switch.sh ]]; then
-  INSTALLATION_PATH=$(brew --prefix switch) && source $INSTALLATION_PATH/switch.sh
-  trap kubeswitchCleanupHandler EXIT
+# sake
+if [[ $commands[sake] ]]; then
+  source <(sake completion zsh)
 fi
-
-function kubeswitchCleanupHandler {
- if [ ! -z "$KUBECONFIG" ]
- then
-    switchTmpDirectory="$HOME/.kube/.switch_tmp/config"
-    if [[ $KUBECONFIG == *"$switchTmpDirectory"* ]]; then
-      rm $KUBECONFIG
-    fi
- fi
-}
 
 # fig
 #if [[ -s ~/.fig/fig.sh ]]; then
