@@ -267,8 +267,13 @@ function awsctx() {
   [[ -n "$profile" ]] && export AWS_PROFILE=${profile}
 }
 
+# Kubernetes debug pods
 function kcdebug() {
   kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
+}
+
+function kadebug() {
+  kubectl run -i --rm --tty debug --image=alpine --restart=Never -- sh
 }
 
 ################
