@@ -174,7 +174,7 @@ fi
 #  Aliases  #
 #############
 
-unalias rm
+#unalias rm
 
 alias server="devd --open --livewatch ."
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"
