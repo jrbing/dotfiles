@@ -37,16 +37,17 @@ zstyle ':prezto:load' pmodule \
   'gnu-utility' \
   'utility' \
   'completion' \
+  'history-substring-search' \
   'contrib-prompt' \
-  'prompt' \
   'archive' \
   'fasd' \
   'rsync' \
   'tmux' \
   'git' \
   'gpg' \
-  'osx' \
-  'history-substring-search'
+  'osx'
+
+  #'prompt' \
 
 #
 # Autosuggestions
