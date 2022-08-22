@@ -1,6 +1,7 @@
 ﻿
 $Dotfiles = Join-Path -Path $HOME -ChildPath ".dotfiles"
 $Documents = Split-Path(Split-Path $profile)
+[console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
 #######################################################################
 #                               Modules                               #
@@ -8,6 +9,17 @@ $Documents = Split-Path(Split-Path $profile)
 
 # Custom modules path
 $DotfilesModulePath = Join-Path -Path $Dotfiles -ChildPath "powershell\modules"
+Import-Module -Name Terminal-Icons
+
+# PSReadLine
+Set-PSReadLineOption -EditMode Emacs
+Set-PSReadLineOption -BellStyle None
+Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
+Set-PSReadLineOption -PredictionSource History
+
+# Fzf
+Import-Module PSFzf
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 #######################################################################
 #                              Functions                              #
