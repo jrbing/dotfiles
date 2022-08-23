@@ -11,7 +11,7 @@ kubectl explore pod.spec.containers
 kubectl explore --context=onecontext
 
 # kubectl-example: Generate an example YAML manifest for the specified resource
-kubectl-example deployment
+kubectl example deployment
 
 # kubectl-doctor: Scan your currently targeted k8s cluster to see if there are anomalies or useful action points
 kubectl doctor
@@ -32,7 +32,7 @@ kubectl view-secret <secret>
 kubectl view-secret <secret> <key>
 
 # kubectl-tmux-exec: Start tmux session with multiple kubectl exec panes
- kubectl tmux-exec -l app=nginx /bin/bash
+kubectl tmux-exec -l app=nginx /bin/bash
 
 # kubectl-ksniff: Start a remote capture on any pod in your Kubernetes cluster
 kubectl sniff <POD_NAME> [-n <NAMESPACE_NAME>] [-c <CONTAINER_NAME>] [-i <INTERFACE_NAME>] [-f <CAPTURE_FILTER>] [-o OUTPUT_FILE] [-l LOCAL_TCPDUMP_FILE] [-r REMOTE_TCPDUMP_FILE]
