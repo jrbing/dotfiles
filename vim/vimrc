@@ -593,6 +593,12 @@
     augroup END
   "}}}
 
+  " flux {{{2
+    augroup flux
+      autocmd BufRead,BufNewFile *.flux		set filetype=flux
+    augroup END
+  "}}}
+
   " Miscellaneous {{{2
     augroup miscellaneous
       autocmd!
