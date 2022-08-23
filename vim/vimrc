@@ -82,6 +82,7 @@
   Plug 'EvanDotPro/nerdtree-chmod'
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'mattn/webapi-vim'
 
   "Plug 'lambdalisue/fern.vim'
   "Plug 'lambdalisue/nerdfont.vim'
@@ -797,7 +798,8 @@
   " NERDCommenter {{{2
     let g:NERDCustomDelimiters = {
       \ 'openscad': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
-      \ 'helm': { 'left': '#' }
+      \ 'helm': { 'left': '#' },
+      \ 'flux': { 'left': '//' }
       \}
     let g:NERDTrimTrailingWhitespace = 1                                  " Enable trimming of trailing whitespace when uncommenting
 
