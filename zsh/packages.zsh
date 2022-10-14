@@ -25,12 +25,6 @@ zplug 'rimraf/k', \
   depth:10, \
   as:plugin
 
-zplug 'kubeopsskills/awsp', \
-  from:gh-r, \
-  as:command, \
-  rename-to:awsp, \
-  use:"*MacOs*"
-
 # Be sure to install the pyyaml dependency for this
 #   `pip3 install pyyaml`
 zplug 'lbolla/kube-secret-editor', \
