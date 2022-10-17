@@ -1,0 +1,76 @@
+---
+# Example taken and modified from https://github.com/mutagen-io/mutagen-examples/blob/main/projects/docker/web-go/mutagen.yml
+
+# Set up the Mutagen service and code volume before creating sessions.
+beforeCreate:
+  - docker-compose up --build --detach mutagen
+
+# Set up the main services after creating sessions.
+afterCreate:
+  - docker-compose up --build --detach
+
+# Pause services after pausing sessions
+afterPause:
+  - docker-compose stop
+
+# Resume services before resume sessions
+beforeResume:
+  - docker-compose start
+
+# Tear down all services and remove the code volume after terminating sessions
+afterTerminate:
+  - docker-compose down --rmi=local --volumes
+
+# Define common utility commands
+# Use "mutagen project run <command>"
+commands:
+  database: docker-compose exec database psql -U messagessvc -d messagesdb
+  logs: docker-compose logs --follow
+
+# Forward local traffic to the remote endpoints
+forward:
+  docker_example:
+    source: "tcp:localhost:8081"
+    destination: "docker://web-go-mutagen:tcp:api:8081"
+  ssh_example:
+    source: "tcp:localhost:8080"
+    destination: "user@example.org:tcp::8080"
+
+# Synchronize code to the shared Docker volume via the Mutagen service
+sync:
+  defaults:
+    flushOnCreate: true
+    ignore:
+      vcs: true
+  docker_example:
+    alpha: "."
+    beta: "docker://mutagen/code"
+    mode: "two-way-resolved"  # Also supports "one-way-replica"
+    ignore:  # https://mutagen.io/documentation/synchronization/ignores
+      paths:
+        - "/*"
+        - "!/api/"
+        - "/api/*"
+        - "!/api/{entrypoint.sh,go.mod,go.sum,server.go}"
+        - "!/frontend/"
+        - "/frontend/*"
+        - "!/frontend/{entrypoint.sh,gulpfile.js,index.html,package.json,yarn.lock}"
+        - "!/web/"
+        - "/web/*"
+        - "!/web/{entrypoint.sh,go.mod,go.sum,server.go}"
+  ssh_example:
+    alpha: "."
+    beta: "user@example.org/code"
+    mode: "two-way-resolved"  # Also supports "one-way-replica"
+    ignore:  # https://mutagen.io/documentation/synchronization/ignores
+      paths:
+        - "/*"
+        - "!/api/"
+        - "/api/*"
+        - "!/api/{entrypoint.sh,go.mod,go.sum,server.go}"
+        - "!/frontend/"
+        - "/frontend/*"
+        - "!/frontend/{entrypoint.sh,gulpfile.js,index.html,package.json,yarn.lock}"
+        - "!/web/"
+        - "/web/*"
+        - "!/web/{entrypoint.sh,go.mod,go.sum,server.go}"

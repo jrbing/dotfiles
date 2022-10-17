@@ -158,6 +158,13 @@ class Template < Thor
     create_from_template("markdown.erb", "#{@file_name}.md")
   end
 
+  # mutagen configuration
+  desc "mutagen", "Creates a sample mutagen project file"
+  def modd
+    create_from_template("mutagen.erb", "mutagen.yml")
+  end
+
+
 end
 
 Template.start(ARGV)
