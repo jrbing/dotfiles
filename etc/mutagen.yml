@@ -1,0 +1,33 @@
+---
+
+sync:
+  defaults:
+    ignore:
+      vcs: true
+      paths:
+        - "node_modules"
+        - "*.ckpt"
+        - ".DS_Store"
+        - "__pycache__"
+        - ".idea"
+        - ".ipynb_checkpoints"
+        - ".DS_Store?"
+        - ".AppleDouble"
+        - ".LSOverride"
+        - "*.7z"
+        - "*.dmg"
+        - "*.ear"
+        - "*.gz"
+        - "*.iso"
+        - "*.jar"
+        - "*.rar"
+        - "*.tar"
+        - "*.tar.gz"
+        - "*.tgz"
+        - "*.war"
+        - "*.zip"
+        - "*.log"
+        - "*.logs"
+        - "*.sqlite"
+        - ".envrc"
+        - ".direnv"
