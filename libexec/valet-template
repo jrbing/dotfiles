@@ -160,7 +160,7 @@ class Template < Thor
 
   # mutagen configuration
   desc "mutagen", "Creates a sample mutagen project file"
-  def modd
+  def mutagen
     create_from_template("mutagen.erb", "mutagen.yml")
   end
 
