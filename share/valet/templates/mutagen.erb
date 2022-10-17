@@ -45,7 +45,7 @@ sync:
   docker_example:
     alpha: "."
     beta: "docker://mutagen/code"
-    mode: "two-way-resolved"  # Also supports "one-way-replica"
+    mode: "two-way-resolved"  # Also supports "one-way-replica, one-way-safe, and two-way-safe(default)"
     ignore:  # https://mutagen.io/documentation/synchronization/ignores
       paths:
         - "/*"
@@ -61,7 +61,7 @@ sync:
   ssh_example:
     alpha: "."
     beta: "user@example.org/code"
-    mode: "two-way-resolved"  # Also supports "one-way-replica"
+    mode: "two-way-resolved"  # Also supports "one-way-replica, one-way-safe, and two-way-safe(default)"
     ignore:  # https://mutagen.io/documentation/synchronization/ignores
       paths:
         - "/*"
