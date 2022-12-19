@@ -45,3 +45,5 @@ Thumbs.db
 # Develepment temp files #
 ##########################
 tags
+
+nvim/plugin
