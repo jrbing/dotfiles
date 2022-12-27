@@ -304,10 +304,10 @@ if [[ $commands[terraform] ]]; then
   complete -o nospace -C /usr/local/bin/terraform terraform
 fi
 
-# Helm CLI
-if [[ $commands[hass-cli] ]]; then
-  source <(hass-cli completion zsh)
-fi
+# Hass CLI
+#if [[ $commands[hass-cli] ]]; then
+  #source <(hass-cli completion zsh)
+#fi
 
 # Flux
 if [[ $commands[flux] ]]; then
