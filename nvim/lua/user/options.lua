@@ -7,6 +7,7 @@ vim.opt.fileencoding = "utf-8"                  -- the encoding written to a fil
 vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true                       -- ignore case in search patterns
 vim.opt.mouse = "a"                             -- allow the mouse to be used in neovim
+vim.opt.mousehide = true                        -- hide the mouse
 vim.opt.pumheight = 10                          -- pop up menu height
 vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showtabline = 0                         -- always show tabs
@@ -25,118 +26,103 @@ vim.opt.shiftwidth = 2                          -- the number of spaces inserted
 vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.number = true                           -- set numbered lines
-vim.opt.laststatus = 3
-vim.opt.showcmd = false
-vim.opt.ruler = false
-vim.opt.numberwidth = 4                         -- set number column width to 2 {default 4}
+vim.opt.laststatus = 3                          -- only the last window will always have a status line
+vim.opt.showcmd = false                         -- hide (partial) command in the last line of the screen (for performance)
+vim.opt.ruler = false                           -- hide the line and column number of the cursor position
+vim.opt.numberwidth = 4                         -- minimal number of columns to use for the line number {default 4}
 vim.opt.signcolumn = "yes"                      -- always show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = false                            -- display lines as one long line
-vim.opt.scrolloff = 8                           -- is one of my fav
-vim.opt.sidescrolloff = 8
+vim.opt.scrolloff = 8                           -- minimal number of screen lines to keep above and below the cursor
+vim.opt.sidescrolloff = 8                       -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
 vim.opt.guifont = "monospace:h17"               -- the font used in graphical neovim applications
-vim.opt.fillchars.eob=" "
-vim.opt.shortmess:append "c"
-vim.opt.whichwrap:append("<,>,[,],h,l")
-vim.opt.iskeyword:append("-")
+vim.opt.fillchars.eob=" "                       -- show empty lines at the end of a buffer as ` ` {default `~`}
+vim.opt.shortmess:append "c"                    -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
+vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
+vim.opt.iskeyword:append("-")                   -- treats words with `-` as single words
+vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
+vim.opt.linebreak = true
 
---if has('multi_byte')
-  --if &termencoding ==# ''
-    --let &termencoding = &encoding
-  --endif
-  --set encoding=utf-8
-  --scriptencoding utf-8
-  --setglobal fileencoding=utf-8
-  --"setglobal bomb
-  --set fileencodings=ucs-bom,utf-8,latin1
---endif
+vim.opt.termguicolors = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.incsearch = true
+vim.opt.showmatch = true
+vim.opt.hlsearch = true
+vim.opt.gdefault = true
 
---set autoindent
---set breakindent
---set showbreak=↳
---set showmode
---set showcmd
---set hidden
---set visualbell
---set ttyfast
---set ruler
---set backspace=indent,eol,start
---set number
+vim.opt.scrolloff = 3
+vim.opt.sidescroll = 1
+vim.opt.sidescrolloff = 10
+
+vim.opt.encoding = "utf-8"
+
+vim.opt.backspace = { "indent", "eol", "start" }
+vim.opt.showbreak = "↳"
+
+vim.opt.autoindent = true
+vim.opt.breakindent = true
+vim.opt.showmode = true
+vim.opt.showcmd = true
+vim.opt.hidden = true
+vim.opt.visualbell = true
+vim.opt.ttyfast = true
+vim.opt.ruler = true
+vim.opt.number = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.ttimeout = true
+vim.opt.autowrite = true
+vim.opt.shiftround = true
+vim.opt.autoread = true
+vim.opt.title = true
+
+--" Use modeline overrides
+vim.opt.modeline = true
+vim.opt.modelines = 5
+
+vim.opt.formatprg = "par"
+
+--" Set folding method, but disable by default
+vim.opt.foldmethod = "syntax"
+vim.opt.foldenable = false
+vim.opt.wrap = false
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.textwidth = 80
+--vim.opt.formatoptions = qrn1j
+
+--set norelativenumber
+--set undofile
+--set undoreload=10000
+--set undodir=$HOME/.vim/tmp/undo//     " undo files
+--set colorcolumn=+1
+--set virtualedit+=block
+--set list
+--set listchars=trail:·,precedes:«,extends:»,tab:▸\
+
 --set laststatus=2
 --set history=1000
 --set cpoptions+=J
 --set matchtime=3
---set splitbelow
---set splitright
 --set fillchars=diff:⣿
---set ttimeout
---set notimeout
---set nottimeout
---set autowrite
---set shiftround
---set autoread
---set title
 --set mouse=a
---set mousehide
 --set synmaxcol=200                               " Don't try to highlight lines longer than 200 characters.
 --set shortmess+=filmnrxoOtT                      " Abbrev. of messages (avoids 'hit enter')
 --set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 --set iskeyword-=.                    " '.' is an end of word designator
 --set iskeyword-=#                    " '#' is an end of word designator
 --set iskeyword-=-                    " '-' is an end of word designator
---set backupdir=$HOME/.vim/tmp/backup// " backup directory location
---set directory=$HOME/.vim/tmp/swap//   " swap file location
---set backup                            " enable backups
---set noswapfile                        " disable swapfiles
 
 --" Wildmenu completion
---set wildmenu
---set wildmode=list:longest
---set wildignore+=.hg,.git,.svn                    " version control
---set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
---set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
---set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
---set wildignore+=*.spl                            " compiled spelling word lists
---set wildignore+=*.sw?                            " Vim swap files
---set wildignore+=*.DS_Store                       " OSX temp files
---" Use modeline overrides
---set modeline
---set modelines=5
---" Set par as the paragraph formatting program to use
---if executable('par')
-  --set formatprg=par
---endif
---" Set folding method, but disable by default
---set foldmethod=syntax
---set nofoldenable
---set nowrap
---set expandtab
---set tabstop=2
---set shiftwidth=2
---set softtabstop=2
---set textwidth=80
---set formatoptions=qrn1j
---if v:version >= 800
-  --" True color support
-  --set termguicolors
---endif
---if v:version >= 730
-  --set norelativenumber
-  --set undofile
-  --set undoreload=10000
-  --set undodir=$HOME/.vim/tmp/undo//     " undo files
-  --set colorcolumn=+1
---endif
---set ignorecase
---set smartcase
---set incsearch
---set showmatch
---set hlsearch
---set gdefault
+--vim.opt.wildmenu
+--vim.opt.wildmode = list:longest
+--vim.opt.wildignore+=.hg,.git,.svn                    " version control
+--vim.opt.wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+--vim.opt.wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+--vim.opt.wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+--vim.opt.wildignore+=*.spl                            " compiled spelling word lists
+--vim.opt.wildignore+=*.sw?                            " Vim swap files
+--vim.opt.wildignore+=*.DS_Store                       " OSX temp files
 
---set scrolloff=3
---set sidescroll=1
---set sidescrolloff=10
-
---set virtualedit+=block
---set list
---set listchars=trail:·,precedes:«,extends:»,tab:▸\
