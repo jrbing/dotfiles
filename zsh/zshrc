@@ -174,7 +174,7 @@ fi
 #  Aliases  #
 #############
 
-#unalias rm
+unalias rm
 
 alias server="devd --open --livewatch ."
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"
@@ -219,6 +219,16 @@ if hash piknik 2>/dev/null; then
   function pkfr() {
       tar czpvf - ${1:-.} | piknik -copy
   }
+fi
+
+# Ripgrep
+if [[ $commands[rg] ]]; then
+  alias grep='rg'
+fi
+
+# XCP
+if [[ $commands[xcp] ]]; then
+  alias cp='xcp'
 fi
 
 ###############
@@ -304,11 +314,6 @@ if [[ $commands[terraform] ]]; then
   complete -o nospace -C /usr/local/bin/terraform terraform
 fi
 
-# Hass CLI
-#if [[ $commands[hass-cli] ]]; then
-  #source <(hass-cli completion zsh)
-#fi
-
 # Flux
 if [[ $commands[flux] ]]; then
   source <(flux completion zsh)
@@ -325,9 +330,9 @@ if [[ -e ~/.local/bin/aws-sso-util ]]; then
 fi
 
 # sake
-if [[ $commands[sake] ]]; then
-  source <(sake completion zsh)
-fi
+#if [[ $commands[sake] ]]; then
+  #source <(sake completion zsh)
+#fi
 
 # fig
 #if [[ -s ~/.fig/fig.sh ]]; then
