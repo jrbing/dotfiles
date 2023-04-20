@@ -78,7 +78,7 @@
   Plug 'vim-pandoc/vim-pandoc', { 'for': ['pandoc', 'markdown'] }
   Plug 'vim-scripts/Align'
   Plug 'wincent/ferret'
-  Plug 'Chiel92/vim-autoformat'
+  Plug 'vim-autoformat/vim-autoformat'
   Plug 'EvanDotPro/nerdtree-chmod'
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -662,10 +662,11 @@
 
     " Define linters
     let g:ale_linters = {
-      \ 'python': ['pylint'],
+      \ 'python': ['ruff'],
       \ 'cpp': ['cppcheck']
     \}
-    let g:ale_python_pylint_use_global = 1
+      "\ 'python': ['pylint'],
+    "let g:ale_python_pylint_use_global = 1
 
     " Define fixers
     let g:ale_fix_on_save = 1
@@ -685,8 +686,9 @@
 
   " AutoFormat {{{2
     let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin' ]
-    let g:formatters_python = ['yapf']
-    let g:formatter_yapf_style = 'google'
+    let g:formatters_python = ['black']
+    "let g:formatters_python = ['yapf']
+    "let g:formatter_yapf_style = 'google'
     let g:formatters_yaml = ['prettier']
     let g:formatdef_custom_java='"astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
     let g:formatters_java = ['custom_java']
