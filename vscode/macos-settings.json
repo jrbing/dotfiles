@@ -101,5 +101,8 @@
     "!Split",
     "!Split sequence"
   ],
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "[python]": {
+    "editor.formatOnType": true
+  }
 }
