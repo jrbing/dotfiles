@@ -6,6 +6,7 @@ end
 
 local b = null_ls.builtins
 
+--TODO: add formatters and linters to null-ls
 local sources = {
 
   -- webdev stuff
