@@ -343,6 +343,8 @@ if-shell -b '[ $SHELL == /bin/bash ]' \
 # Install tmux-resurrect plugin
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'jaclu/tmux-menus'
+set -g @plugin 'yardnsm/tmux-1password'
+set -g @1password-copy-to-clipboard 'on'
 #set -g @plugin 'nordtheme/tmux'
 #set -g @plugin 'egel/tmux-gruvbox'
 #set -g @tmux-gruvbox 'dark' # or 'light'
