@@ -46,7 +46,8 @@
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
-  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'mattmartini/vim-nerdtree-tabs'
+  "Plug 'jistr/vim-nerdtree-tabs'
   Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
   Plug 'junegunn/fzf'
   Plug 'justinmk/vim-sneak'

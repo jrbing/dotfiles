@@ -16,4 +16,8 @@ M.add = {
   NvimTreeOpenedFolderName = { fg = "green", bold = true },
 }
 
+M.options = {
+  mapleader = ",",
+}
+
 return M

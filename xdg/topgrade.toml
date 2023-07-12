@@ -1,3 +1,4 @@
+[misc]
 
 # Disable specific steps - same options as the command line flag
 disable = ["tlmgr", "node", "gem", "containers", "github_cli_extensions"]
