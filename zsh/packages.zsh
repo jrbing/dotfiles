@@ -32,6 +32,12 @@ zplug 'lbolla/kube-secret-editor', \
   use:'(*).py', \
   rename-to:'$1'
 
+#zplug 'lima-vm/sshocker', \
+  #as:command, \
+  #from:gh-r, \
+  #rename-to:sshocker, \
+  #use:"*-Darwin-x86_64"
+
 #zplug 'b4b4r07/httpstat', \
   #as:command, \
   #use:'(*).sh', \
