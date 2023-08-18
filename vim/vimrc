@@ -101,6 +101,7 @@
   Plug 'lifepillar/vim-solarized8'
   Plug 'morhetz/gruvbox'
   Plug 'rakr/vim-one'
+  Plug 'ghifarit53/tokyonight-vim'
 
   " Filetypes
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -292,8 +293,12 @@
     "let g:solarized_term_italics = 0
     "let g:solarized_old_cursor_style = 0
     "colorscheme solarized8_dark
-    colorscheme onedark
     "colorscheme nord
+    colorscheme onedark
+    "let g:tokyonight_style = 'night' " available: night, storm
+    "let g:tokyonight_enable_italic = 1
+    "colorscheme tokyonight
+    "let g:airline_theme = "tokyonight"
   else
     let g:gruvbox_italic = 0
     colorscheme gruvbox
