@@ -108,15 +108,16 @@ if [[ -d "/Library/TeX/texbin" ]]; then
   path+=("/Library/TeX/texbin")
 fi
 
-# Rancher Desktop
-if [[ -d "${HOME}/.rd/bin" ]]; then
-  path+=("${HOME}/.rd/bin")
-fi
-
 # Cargo
 if [[ -d "${HOME}/.cargo/bin" ]]; then
   path+=("${HOME}/.cargo/bin")
 fi
+
+# Codon
+if [[ -d "${HOME}/.codon/bin" ]]; then
+  path+=("${HOME}/.codon/bin")
+fi
+
 
 # kubeswitch
 if [[ -f /usr/local/opt/switch/switch.sh ]]; then
