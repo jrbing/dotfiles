@@ -54,7 +54,7 @@ if [[ $commands[direnv] ]]; then
   eval "$(direnv hook zsh)"
 fi
 
-# frum
+# frum (Ruby version manager)
 if [[ $commands[frum] ]]; then
   eval "$(frum init)"
 fi
@@ -117,23 +117,6 @@ fi
 if [[ -d "${HOME}/.codon/bin" ]]; then
   path+=("${HOME}/.codon/bin")
 fi
-
-
-# kubeswitch
-if [[ -f /usr/local/opt/switch/switch.sh ]]; then
-  INSTALLATION_PATH=$(brew --prefix switch) && source $INSTALLATION_PATH/switch.sh
-  trap kubeswitchCleanupHandler EXIT
-fi
-
-function kubeswitchCleanupHandler {
- if [ ! -z "$KUBECONFIG" ]
- then
-    switchTmpDirectory="$HOME/.kube/.switch_tmp/config"
-    if [[ $KUBECONFIG == *"$switchTmpDirectory"* ]]; then
-      rm $KUBECONFIG
-    fi
- fi
-}
 
 
 ############
