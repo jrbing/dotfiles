@@ -123,6 +123,7 @@
   Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'gianarb/vim-flux', { 'for': ['flux'] }
+  Plug 'omer/vim-sparql', { 'for': ['sparql'] }
   "Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
   "Plug 'ap/vim-css-color'
 
