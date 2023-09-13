@@ -808,7 +808,8 @@
     let g:NERDCustomDelimiters = {
       \ 'openscad': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
       \ 'helm': { 'left': '#' },
-      \ 'flux': { 'left': '//' }
+      \ 'flux': { 'left': '//' },
+      \ 'sparql': { 'left': '#' }
       \}
     let g:NERDTrimTrailingWhitespace = 1                                  " Enable trimming of trailing whitespace when uncommenting
 
