@@ -104,5 +104,7 @@
   "redhat.telemetry.enabled": false,
   "[python]": {
     "editor.formatOnType": true
-  }
+  },
+  "ansible.lightspeed.enabled": true,
+  "ansible.lightspeed.suggestions.enabled": true
 }
