@@ -22,5 +22,7 @@
     <true/>
     <key>KeepAlive</key>
     <true/>
+    <key>LimitLoadToSessionType</key>
+    <string>Background</string>
   </dict>
 </plist>
