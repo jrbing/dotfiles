@@ -300,8 +300,13 @@ if [[ $commands[terraform] ]]; then
 fi
 
 # Flux
-if [[ $commands[flux] ]]; then
-  source <(flux completion zsh)
+#if [[ $commands[flux] ]]; then
+  #source <(flux completion zsh)
+#fi
+
+# NATS nsc CLI
+if [[ $commands[nsc] ]]; then
+  source <(nsc completion zsh)
 fi
 
 # fzf
