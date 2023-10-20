@@ -216,6 +216,12 @@ if [[ $commands[xcp] ]]; then
   alias cp='xcp'
 fi
 
+# Travelgrunt
+if [[ $commands[travelgrunt] ]]; then
+  alias tg='_tg(){ travelgrunt -out-file ~/.tg-path ${@} && cd "$(cat ~/.tg-path)" }; _tg'
+  alias tt='_tt(){ travelgrunt -top -out-file ~/.tg-path && cd "$(cat ~/.tg-path)" }; _tt'
+fi
+
 ###############
 #  Functions  #
 ###############
