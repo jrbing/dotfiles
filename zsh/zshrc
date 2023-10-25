@@ -212,9 +212,9 @@ if [[ $commands[rg] ]]; then
 fi
 
 # XCP
-if [[ $commands[xcp] ]]; then
-  alias cp='xcp'
-fi
+#if [[ $commands[xcp] ]]; then
+  #alias cp='xcp'
+#fi
 
 # Travelgrunt
 if [[ $commands[travelgrunt] ]]; then
