@@ -81,3 +81,6 @@ fi
 #if [[ -s ~/.fig/fig.sh ]]; then
   #source ~/.fig/fig.sh
 #fi
+
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
