@@ -330,6 +330,11 @@ if [[ $commands[broot] ]]; then
   source ~/.config/broot/launcher/bash/br
 fi
 
+# Atuin
+if [[ $commands[atuin] ]]; then
+  eval "$(atuin init zsh)"
+fi
+
 # sake
 #if [[ $commands[sake] ]]; then
   #source <(sake completion zsh)
