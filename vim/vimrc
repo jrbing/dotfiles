@@ -124,6 +124,7 @@
   Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
   Plug 'gianarb/vim-flux', { 'for': ['flux'] }
   Plug 'omer/vim-sparql', { 'for': ['sparql'] }
+  Plug 'terrastruct/d2-vim'
   "Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
   "Plug 'ap/vim-css-color'
 
