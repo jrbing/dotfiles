@@ -305,11 +305,6 @@ if [[ $commands[terraform] ]]; then
   complete -o nospace -C /usr/local/bin/terraform terraform
 fi
 
-# Flux
-#if [[ $commands[flux] ]]; then
-  #source <(flux completion zsh)
-#fi
-
 # NATS nsc CLI
 if [[ $commands[nsc] ]]; then
   source <(nsc completion zsh)
@@ -330,21 +325,15 @@ if [[ $commands[broot] ]]; then
   source ~/.config/broot/launcher/bash/br
 fi
 
-# Atuin
-if [[ $commands[atuin] ]]; then
-  eval "$(atuin init zsh)"
+# talosctl
+if [[ $commands[talosctl] ]]; then
+  source <(talosctl completion zsh)
 fi
 
-# sake
-#if [[ $commands[sake] ]]; then
-  #source <(sake completion zsh)
+# Atuin
+#if [[ $commands[atuin] ]]; then
+  #eval "$(atuin init zsh)"
 #fi
-
-# fig
-#if [[ -s ~/.fig/fig.sh ]]; then
-  #source ~/.fig/fig.sh
-#fi
-
 
 
 ###############
