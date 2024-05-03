@@ -608,6 +608,13 @@
     augroup END
   "}}}
 
+  " hcl {{{2
+    augroup hcl.fmt
+      autocmd!
+      autocmd BufWritePre *.hcl call hcl#align()
+    augroup END
+  "}}}
+
   " Miscellaneous {{{2
     augroup miscellaneous
       autocmd!
@@ -1049,12 +1056,6 @@
     endif
   "}}}
 
-  " vim-hclfmt {{{2
-    let g:hcl_fmt_autosave = 1
-    let g:tf_fmt_autosave = 1
-    let g:nomad_fmt_autosave = 0
-  "}}}
-
   " vim-javascript {{{2
     let g:javascript_conceal_function       = 'ƒ'
     let g:javascript_conceal_null           = 'ø'
@@ -1132,6 +1133,7 @@
   " vim-terraform {{{2
     let g:terraform_fmt_on_save = 1
     let g:terraform_align=1
+    let g:hcl_align=1
   "}}}
 
   " vim-visual-multi {{{2
