@@ -58,6 +58,9 @@ link-vscode:
 link-pandoc:
 	@cd ~ && ln -nfs $(dotfiles)/pandoc/ .pandoc
 
+link-taskfile:
+	@cd ~ && ln -nfs $(dotfiles)/Taskfile.yaml Taskfile.yaml
+
 check-dead:  ## Check for dead symlinks
 	@find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
 

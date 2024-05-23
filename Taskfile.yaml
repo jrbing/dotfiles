@@ -1,0 +1,12 @@
+---
+version: "3"
+
+includes:
+  kube: ~/.dotfiles/taskfiles/KubernetesTasks.yaml
+  forward: ~/.dotfiles/taskfiles/ForwardingTasks.yaml
+
+tasks:
+
+  default:
+    silent: true
+    cmd: task -l

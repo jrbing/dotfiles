@@ -1,0 +1,29 @@
+---
+version: "3"
+
+tasks:
+
+  hubble:
+    desc: Forward Cilium Hubble UI
+    cmds:
+      - kubectl port-forward -n kube-system svc/hubble-ui 12000:80
+
+  traefik:
+    desc: Forward Traefik UI
+    cmds:
+      - kubectl port-forward --namespace kube-system $(kubectl get pods --namespace kube-system --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+
+  longhorn:
+    desc: Forward Longhorn UI
+    cmds:
+      - kubectl port-forward service/longhorn-frontend --namespace longhorn-system 8080:80
+
+  grafana:
+    desc: Forward Grafana UI
+    cmds:
+      - kubectl port-forward --namespace default $(kubectl get pods --namespace default --selector "app.kubernetes.io/name=grafana" --output=name) 3000:3000
+
+  argocd:
+    desc: Forward ArgoCD UI
+    cmds:
+      - kubectl port-forward -n argocd svc/argocd-server 8080:80
