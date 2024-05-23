@@ -320,11 +320,6 @@ if [[ -e ~/.local/bin/aws-sso-util ]]; then
   eval "$(_AWS_SSO_UTIL_COMPLETE=source_zsh aws-sso-util)"
 fi
 
-# Broot
-if [[ $commands[broot] ]]; then
-  source ~/.config/broot/launcher/bash/br
-fi
-
 # talosctl
 if [[ $commands[talosctl] ]]; then
   source <(talosctl completion zsh)
