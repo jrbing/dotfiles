@@ -106,5 +106,6 @@
     "editor.formatOnType": true
   },
   "ansible.lightspeed.enabled": true,
-  "ansible.lightspeed.suggestions.enabled": true
+  "ansible.lightspeed.suggestions.enabled": true,
+  "D2.previewTheme": "Flagship Terrastruct"
 }
