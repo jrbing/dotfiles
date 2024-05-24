@@ -7,6 +7,9 @@
 [commit]
 	gpgsign = true
 
+[fetch]
+	prune = true
+
 [github]
 	user = jrbing
 
