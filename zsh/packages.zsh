@@ -32,6 +32,14 @@ zplug 'lbolla/kube-secret-editor', \
   use:'(*).py', \
   rename-to:'$1'
 
+#zplug 'skupperproject/skupper', \
+  #as:command, \
+  #from:gh-r, \
+  #frozen:1, \
+  #at:1.7.1, \
+  #use:"skupper-cli-1.7.1-mac-amd64.tgz", \
+  #hook-build:"tar -xzf skupper-cli-1.7.1-mac-amd64.tgz"
+
 #zplug 'lima-vm/sshocker', \
   #as:command, \
   #from:gh-r, \
