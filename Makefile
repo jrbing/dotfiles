@@ -24,7 +24,7 @@ link-vim:
 				ln -nfs $(dotfiles)/vim/gvimrc .gvimrc
 
 link-nvim:
-	@cd ~ && ln -nfs $(dotfiles)/nvim/ .config/nvim/lua/custom
+	@cd ~ && ln -nfs $(dotfiles)/nvim/ .config/nvim
 
 link-etc:
 	@cd ~ && for file in $(ETC_FILES); do ln -nfs .dotfiles/etc/$$file .$$file; done
@@ -78,9 +78,6 @@ pandoc-document-template:	## Update source pandoc document template
 
 install-pandoc-template-dependencies:	## Install pandoc document template dependencies
 	@tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
-
-install-nvchad:  ## Install nvchad
-	@git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 update:  ## Pull updates from remote
 	@git pull --rebase
