@@ -183,8 +183,7 @@ alias ytd="yt-dlp --force-overwrites"
 alias dcb="docker compose down && docker compose up -d && docker compose logs -f"
 
 alias kedit-secret="KUBE_EDITOR=kube-secret-editor kubectl edit secret"
-alias kshell='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
-alias kdnstools='kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest -- sh'
+alias kshell='kubectl run -it --rm debug --image=alpine --restart=Never -- sh'
 if [[ $commands[kubecolor] ]]; then
   alias kubectl=kubecolor
 fi
