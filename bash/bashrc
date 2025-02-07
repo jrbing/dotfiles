@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#if [[ -s ~/.fig/shell/pre.sh ]]; then
-  #source ~/.fig/shell/pre.sh
-#fi
-
 export DOTFILES=$HOME/.dotfiles
 
 #
@@ -132,10 +128,17 @@ fi
 # Additional Tools
 #
 export SQLPATH="$DOTFILES/sql/oracle" # SQL script path for sqlplus
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # direnv
 if hash direnv 2>/dev/null; then
   eval "$(direnv hook bash)"
+fi
+
+# asdf
+if hash asdf 2>/dev/null; then
+  #source <(asdf completion bash)
+  eval "$(asdf completion bash)"
 fi
 
 #
@@ -152,7 +155,3 @@ if [[ -f $HOME/.localrc ]]; then
   # shellcheck source=/dev/null
   source "${HOME}/.localrc"
 fi
-
-#if [[ -s ~/.fig/fig.sh ]]; then
-  #source ~/.fig/fig.sh
-#fi

@@ -3,14 +3,6 @@
 #
 
 #
-# Fig setup
-#
-#if [[ -s ~/.fig/shell/pre.sh ]]; then
-  #source ~/.fig/shell/pre.sh
-#fi
-
-
-#
 # Browser
 #
 
@@ -77,10 +69,7 @@ if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-# fig
-#if [[ -s ~/.fig/fig.sh ]]; then
-  #source ~/.fig/fig.sh
-#fi
-
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+# OrbStack: command-line tools and integration
+if [[ -s ~/.orbstack/shell/init.zsh ]]; then
+  source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+fi

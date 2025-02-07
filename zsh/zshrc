@@ -6,14 +6,6 @@
 # file to get startup times
 #zmodload zsh/zprof
 
-#########
-#  Fig  #
-#########
-
-#if [[ -s ~/.fig/shell/pre.sh ]]; then
-  #source ~/.fig/shell/pre.sh
-#fi
-
 ###########
 #  ZPLUG  #
 ###########
@@ -40,10 +32,6 @@ zplug load
 
 # Prepend custom function directory to fpath
 fpath=("${DOTFILES}/zsh/functions" $fpath)
-# Append asdf completions to fpath
-#fpath=(${ASDF_DIR}/completions $fpath)
-# Initialise completions with ZSH's compinit
-#autoload -Uz compinit && compinit
 
 ##########
 #  Misc  #
@@ -55,8 +43,18 @@ if [[ $commands[direnv] ]]; then
 fi
 
 # frum (Ruby version manager)
-if [[ $commands[frum] ]]; then
-  eval "$(frum init)"
+#if [[ $commands[frum] ]]; then
+  #eval "$(frum init)"
+#fi
+
+# asdf version manager
+if [[ $commands[asdf] ]]; then
+  # prepend shims to path
+  path=("${HOME}/.asdf/shims" $path)
+  # prepend completions to fpath
+  fpath=("${HOME}/.asdf/completions" $fpath)
+  # initialise completions with ZSH's compinit
+  autoload -Uz compinit && compinit
 fi
 
 
@@ -113,7 +111,7 @@ if [[ -d "${HOME}/.cargo/bin" ]]; then
   path+=("${HOME}/.cargo/bin")
 fi
 
-# Codon
+# Codon: python compiler - https://github.com/exaloop/codon
 if [[ -d "${HOME}/.codon/bin" ]]; then
   path+=("${HOME}/.codon/bin")
 fi
@@ -324,7 +322,7 @@ if [[ $commands[talosctl] ]]; then
   source <(talosctl completion zsh)
 fi
 
-# Atuin
+# Atuin: shell history - https://github.com/atuinsh/atuin
 #if [[ $commands[atuin] ]]; then
   #eval "$(atuin init zsh)"
 #fi
