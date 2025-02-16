@@ -182,26 +182,27 @@ alias dcb="docker compose down && docker compose up -d && docker compose logs -f
 
 alias kedit-secret="KUBE_EDITOR=kube-secret-editor kubectl edit secret"
 alias kshell='kubectl run -it --rm debug --image=alpine --restart=Never -- sh'
+alias keti='kubectl exec -t -i' # Drop into an interactive terminal on a container
 if [[ $commands[kubecolor] ]]; then
   alias kubectl=kubecolor
 fi
 
-if hash piknik 2>/dev/null; then
-  alias pkc='piknik -copy'
-  alias pkp='piknik -paste'
-  alias pkm='piknik -move'
-  alias pkz='piknik -copy < /dev/null'
-  alias pkpr='piknik -paste | tar xzhpvf -'
-  function pko() {
-      echo "$*" | piknik -copy
-  }
-  function pkf() {
-      piknik -copy < $1
-  }
-  function pkfr() {
-      tar czpvf - ${1:-.} | piknik -copy
-  }
-fi
+#if hash piknik 2>/dev/null; then
+  #alias pkc='piknik -copy'
+  #alias pkp='piknik -paste'
+  #alias pkm='piknik -move'
+  #alias pkz='piknik -copy < /dev/null'
+  #alias pkpr='piknik -paste | tar xzhpvf -'
+  #function pko() {
+      #echo "$*" | piknik -copy
+  #}
+  #function pkf() {
+      #piknik -copy < $1
+  #}
+  #function pkfr() {
+      #tar czpvf - ${1:-.} | piknik -copy
+  #}
+#fi
 
 # Ripgrep
 if [[ $commands[rg] ]]; then
