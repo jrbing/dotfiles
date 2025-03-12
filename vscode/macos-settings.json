@@ -107,5 +107,6 @@
   },
   "ansible.lightspeed.enabled": true,
   "ansible.lightspeed.suggestions.enabled": true,
-  "D2.previewTheme": "Flagship Terrastruct"
+  "D2.previewTheme": "Flagship Terrastruct",
+  "mssql.enableRichExperiences": true
 }
