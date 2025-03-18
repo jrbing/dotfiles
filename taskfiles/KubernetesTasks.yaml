@@ -4,33 +4,47 @@ version: "3"
 
 tasks:
 
-  delete-failed-pods:
-    desc: Deletes pods with Failed phase
-    summary: |
-      Args:
-        cluster: Cluster to run command against (required)
+  browse-pvc:
+    desc: Mount a PVC to an temp container [NS=default] [CLAIM=required]
+    interactive: true
+    cmd: kubectl browse-pvc --namespace {{.NS}} --image docker.io/library/alpine:latest {{.CLAIM}}
     vars:
-      cluster: '{{ or .cluster (fail "Argument (cluster) is required") }}'
-    cmds:
-      - kubectl --context {{.cluster}} delete pods --field-selector status.phase=Failed -A --ignore-not-found=true
+      NS: '{{.NS | default "default"}}'
+    requires:
+      vars: [CLAIM]
+    preconditions:
+      - kubectl --namespace {{.NS}} get persistentvolumeclaims {{.CLAIM}}
+      - kubectl browse-pvc --version
+      - which kubectl
 
-  delete-succeeded-pods:
-    desc: Deletes pods with Succeeded phase
-    summary: |
-      Args:
-        cluster: Cluster to run command against (required)
+  node-shell:
+    desc: Open a shell to a node [NODE=required]
+    interactive: true
+    cmd: kubectl node-shell -n kube-system -x {{.NODE}}
+    requires:
+      vars: [NODE]
+    preconditions:
+      - kubectl get nodes {{.NODE}}
+      - kubectl node-shell --version
+      - which kubectl
+
+  sync-secrets:
+    desc: Sync all ExternalSecrets
+    cmds:
+      - for: { var: SECRETS, split: "\n" }
+        cmd: kubectl --namespace {{splitList "," .ITEM | first}} annotate externalsecret {{splitList "," .ITEM | last}} force-sync="{{now | unixEpoch}}" --overwrite
     vars:
-      cluster: '{{ or .cluster (fail "Argument (cluster) is required") }}'
-    cmds:
-      - kubectl --context {{.cluster}} delete pods --field-selector status.phase=Succeeded -A --ignore-not-found=true
+      SECRETS:
+        sh: kubectl get externalsecret --all-namespaces --no-headers --output=jsonpath='{range .items[*]}{.metadata.namespace},{.metadata.name}{"\n"}{end}'
+    preconditions:
+      - which kubectl
 
-  delete-pending-pods:
-    desc: Deletes pods with Pending phase
-    summary: |
-      Args:
-        cluster: Cluster to run command against (required)
-    vars:
-      cluster: '{{ or .cluster (fail "Argument (cluster) is required") }}'
+  cleanse-pods:
+    desc: Cleanse pods with a Failed/Pending/Succeeded phase
     cmds:
-      - kubectl --context {{.cluster}} delete pods --field-selector status.phase=Pending -A --ignore-not-found=true
-
+      - for:
+          matrix:
+            PHASE: [Failed, Pending, Succeeded]
+        cmd: kubectl delete pods --all-namespaces --field-selector status.phase={{.ITEM.PHASE}} --ignore-not-found=true
+    preconditions:
+      - which kubectl
