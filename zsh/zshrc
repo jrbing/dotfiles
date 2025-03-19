@@ -42,20 +42,20 @@ if [[ $commands[direnv] ]]; then
   eval "$(direnv hook zsh)"
 fi
 
-# frum (Ruby version manager)
-#if [[ $commands[frum] ]]; then
-  #eval "$(frum init)"
-#fi
+# mise
+if [[ $commands[mise] ]]; then
+  eval "$(mise activate zsh)"
+fi
 
 # asdf version manager
-if [[ $commands[asdf] ]]; then
-  # prepend shims to path
-  path=("${HOME}/.asdf/shims" $path)
-  # prepend completions to fpath
-  fpath=("${HOME}/.asdf/completions" $fpath)
-  # initialise completions with ZSH's compinit
-  autoload -Uz compinit && compinit
-fi
+#if [[ $commands[asdf] ]]; then
+  ## prepend shims to path
+  #path=("${HOME}/.asdf/shims" $path)
+  ## prepend completions to fpath
+  #fpath=("${HOME}/.asdf/completions" $fpath)
+  ## initialise completions with ZSH's compinit
+  #autoload -Uz compinit && compinit
+#fi
 
 
 #################
