@@ -25,7 +25,7 @@ return {
   },
 
   ----------------------
-  --  Custom Plugins  --
+  --  Legacy Plugins  --
   ----------------------
   --" Utilities
   --Plug 'artnez/vim-wipeout'
