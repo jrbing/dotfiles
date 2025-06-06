@@ -139,9 +139,6 @@
     if !g:VIMR()
       Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
     endif
-    if g:VIMR()
-      Plug 'github/copilot.vim'
-    endif
   endif
 
   call plug#end()
