@@ -84,6 +84,7 @@
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'mattn/webapi-vim'
+  Plug 'github/copilot.vim'
 
   "Plug 'lambdalisue/fern.vim'
   "Plug 'lambdalisue/nerdfont.vim'
