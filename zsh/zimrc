@@ -13,7 +13,8 @@ zmodule magic-enter
 zmodule ssh
 zmodule utility
 zmodule homebrew
-zmodule fasd  # TODO: replace fasd with zoxide
+#zmodule fasd  # TODO: replace fasd with zoxide
+zmodule kiesman99/zim-zoxide
 
 # Third-party ZSH modules
 # TODO: figure out how to get this to work when starship is not installed
