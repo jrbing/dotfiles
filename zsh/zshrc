@@ -6,25 +6,6 @@
 # file to get startup times
 #zmodload zsh/zprof
 
-###########
-#  ZPLUG  #
-###########
-
-#export ZPLUG_HOME="${DOTFILES}/zsh/zplug"
-#export ZPLUG_LOADFILE="${DOTFILES}/zsh/packages.zsh"
-#source $ZPLUG_HOME/init.zsh
-
-# Install plugins if there are plugins that have not been installed
-#if ! zplug check --verbose; then
-  #printf "Install? [y/N]: "
-  #if read -q; then
-    #echo; zplug install
-  #fi
-#fi
-
-# Source plugins and add commands to $PATH
-#zplug load
-
 #########
 #  ZIM  #
 #########
@@ -47,7 +28,6 @@ autoload -U +X compinit && compinit
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
-
 ###########
 #  fpath  #
 ###########
@@ -59,26 +39,10 @@ fpath=("${DOTFILES}/zsh/functions" $fpath)
 #  Misc  #
 ##########
 
-# direnv
-#if [[ $commands[direnv] ]]; then
-  #eval "$(direnv hook zsh)"
-#fi
-
 # mise
 if [[ $commands[mise] ]]; then
   eval "$(mise activate zsh)"
 fi
-
-# asdf version manager
-#if [[ $commands[asdf] ]]; then
-  ## prepend shims to path
-  #path=("${HOME}/.asdf/shims" $path)
-  ## prepend completions to fpath
-  #fpath=("${HOME}/.asdf/completions" $fpath)
-  ## initialise completions with ZSH's compinit
-  #autoload -Uz compinit && compinit
-#fi
-
 
 #################
 #  ZSH Options  #
@@ -133,12 +97,6 @@ if [[ -d "${HOME}/.cargo/bin" ]]; then
   path+=("${HOME}/.cargo/bin")
 fi
 
-# Codon: python compiler - https://github.com/exaloop/codon
-#if [[ -d "${HOME}/.codon/bin" ]]; then
-  #path+=("${HOME}/.codon/bin")
-#fi
-
-
 ############
 #  Prompt  #
 ############
@@ -179,18 +137,13 @@ fi
 #  Aliases  #
 #############
 
-#unalias rm
-
-alias server="devd --open --livewatch ."
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"
 alias rpi_ip="arp -a | grep b8:27:eb | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
 alias java_ls='/usr/libexec/java_home -V'
-alias mux="tmuxinator"
 alias lt='ls -lAht && echo "------ OLDEST ------"'
 alias ltr='ls -lAhtr && echo "------ NEWEST ------"'
 alias clip="nc localhost 8377"
 alias purge-dsstore="find . -name '*.DS_Store' -type f -delete"
-#alias z='fasd_cd -d'
 alias flush-dns="sudo killall -HUP mDNSResponder"
 alias ans=ansible
 alias apb=ansible-playbook
@@ -203,39 +156,17 @@ alias uuid="uuidgen | tr -d '\n' | tr '[:upper:]' '[:lower:]' | pbcopy && pbpast
 alias ytd="yt-dlp --force-overwrites"
 alias dcb="docker compose down && docker compose up -d && docker compose logs -f"
 
-alias kedit-secret="KUBE_EDITOR=kube-secret-editor kubectl edit secret"
+# Kubernetes
 alias kshell='kubectl run -it --rm debug --image=alpine --restart=Never -- sh'
 alias keti='kubectl exec -t -i' # Drop into an interactive terminal on a container
 if [[ $commands[kubecolor] ]]; then
   alias kubectl=kubecolor
 fi
 
-#if hash piknik 2>/dev/null; then
-  #alias pkc='piknik -copy'
-  #alias pkp='piknik -paste'
-  #alias pkm='piknik -move'
-  #alias pkz='piknik -copy < /dev/null'
-  #alias pkpr='piknik -paste | tar xzhpvf -'
-  #function pko() {
-      #echo "$*" | piknik -copy
-  #}
-  #function pkf() {
-      #piknik -copy < $1
-  #}
-  #function pkfr() {
-      #tar czpvf - ${1:-.} | piknik -copy
-  #}
-#fi
-
 # Ripgrep
 if [[ $commands[rg] ]]; then
   alias grep='rg'
 fi
-
-# XCP
-#if [[ $commands[xcp] ]]; then
-  #alias cp='xcp'
-#fi
 
 ###############
 #  Functions  #
@@ -283,12 +214,8 @@ function awsctx() {
   [[ -n "$profile" ]] && export AWS_PROFILE=${profile}
 }
 
-# Kubernetes debug pods
-function kcdebug() {
-  kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
-}
-
-function kadebug() {
+# Kubernetes debug pod
+function kdebug() {
   kubectl run -i --rm --tty debug --image=alpine --restart=Never -- sh
 }
 
@@ -324,11 +251,6 @@ fi
 if [[ $commands[nsc] ]]; then
   source <(nsc completion zsh)
 fi
-
-# fzf
-#if [[ -f ~/.fzf.zsh ]]; then
-  #source ~/.fzf.zsh
-#fi
 
 # aws-sso-util
 if [[ -e ~/.local/bin/aws-sso-util ]]; then

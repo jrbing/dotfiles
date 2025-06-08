@@ -13,43 +13,26 @@ zmodule magic-enter
 zmodule ssh
 zmodule utility
 zmodule homebrew
-#zmodule fasd  # TODO: replace fasd with zoxide
-zmodule kiesman99/zim-zoxide
 
 # Third-party ZSH modules
+zmodule zsh-users/zsh-completions --fpath src
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
+#zmodule zsh-users/zsh-autosuggestions
+zmodule kiesman99/zim-zoxide
+zmodule Tarrasch/zsh-bd --source bd.zsh
+
 # TODO: figure out how to get this to work when starship is not installed
 #zmodule spaceship-prompt/spaceship-prompt --name spaceship --no-submodules
-zmodule Tarrasch/zsh-bd --source bd.zsh
-zmodule supercrabtree/k --source k.sh
 
-# TODO: get this working
+#zmodule sorin-ionescu/prezto --root modules/completion
+#zmodule sorin-ionescu/prezto --root modules/contrib-prompt
+#zmodule sorin-ionescu/prezto --root modules/gpg
+#zmodule sorin-ionescu/prezto --root modules/history
 #zmodule sorin-ionescu/prezto --root modules/history-substring-search
-
+#zmodule sorin-ionescu/prezto --root modules/rsync
+#zmodule sorin-ionescu/prezto --root modules/terminal
+#zmodule sorin-ionescu/prezto --root modules/utility
 #zmodule joke/zim-github-cli
 #zmodule joke/zim-helm
 #zmodule joke/zim-mise
-
-#zmodule zsh-users/zsh-completions --fpath src
-#zmodule zsh-users/zsh-syntax-highlighting
-#zmodule zsh-users/zsh-autosuggestions
-
-#zmodule sorin-ionescu/prezto --root modules/command-not-found
-#zmodule sorin-ionescu/prezto --root modules/environment
-#zmodule sorin-ionescu/prezto --root modules/terminal
-#zmodule sorin-ionescu/prezto --root modules/editor
-#zmodule sorin-ionescu/prezto --root modules/history
-#zmodule sorin-ionescu/prezto --root modules/directory
-#zmodule sorin-ionescu/prezto --root modules/spectrum
-#zmodule sorin-ionescu/prezto --root modules/gnu-utility
-#zmodule sorin-ionescu/prezto --root modules/utility
-#zmodule sorin-ionescu/prezto --root modules/completion
-#zmodule sorin-ionescu/prezto --root modules/history-substring-search
-#zmodule sorin-ionescu/prezto --root modules/contrib-prompt
-#zmodule sorin-ionescu/prezto --root modules/archive
-#zmodule sorin-ionescu/prezto --root modules/fasd
-#zmodule sorin-ionescu/prezto --root modules/rsync
-#zmodule sorin-ionescu/prezto --root modules/tmux
-#zmodule sorin-ionescu/prezto --root modules/git
-#zmodule sorin-ionescu/prezto --root modules/gpg
-#zmodule sorin-ionescu/prezto --root modules/osx
-
