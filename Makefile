@@ -87,8 +87,6 @@ pandoc-document-template:	## Update source pandoc document template
 			&& rm -rf $(dotfiles)/pandoc/templates/Eisvogel* \
 			&& rm Eisvogel.zip
 
-#\ > $(dotfiles)/pandoc/templates/eisvogel.latex
-
 install-pandoc-template-dependencies:	## Install pandoc document template dependencies
 	@tlmgr install soul adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat unicode-math upquote xecjk xurl zref draftwatermark
 
