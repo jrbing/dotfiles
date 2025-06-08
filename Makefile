@@ -76,7 +76,18 @@ submodules:  ## Update all submodule references
 	@git submodule update --rebase --remote --recursive
 
 pandoc-document-template:	## Update source pandoc document template
-	@curl -L https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex > $(dotfiles)/pandoc/templates/eisvogel.latex
+	@curl -s https://api.github.com/repos/Wandmalfarbe/pandoc-latex-template/releases/latest \
+			| grep "browser_download_url.*Eisvogel.zip" \
+			| cut -d : -f 2,3 \
+			| tr -d \" \
+			| wget -qi - \
+			&& unzip -qq Eisvogel.zip -d $(dotfiles)/pandoc/templates \
+			&& mv $(dotfiles)/pandoc/templates/Eisvogel*/eisvogel.beamer $(dotfiles)/pandoc/templates/ \
+			&& mv $(dotfiles)/pandoc/templates/Eisvogel*/eisvogel.latex $(dotfiles)/pandoc/templates/ \
+			&& rm -rf $(dotfiles)/pandoc/templates/Eisvogel* \
+			&& rm Eisvogel.zip
+
+#\ > $(dotfiles)/pandoc/templates/eisvogel.latex
 
 install-pandoc-template-dependencies:	## Install pandoc document template dependencies
 	@tlmgr install soul adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat unicode-math upquote xecjk xurl zref draftwatermark
@@ -88,3 +99,4 @@ help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: link-tmux link-vim link-nvim link-etc link-xdg link-git link-bash link-zsh link-gpg check-dead clean-dead submodules update help
+
