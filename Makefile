@@ -8,7 +8,7 @@ BASH_FILES := $(shell cd $(dotfiles)/bash; ls)
 GPG_FILES := $(shell cd $(dotfiles)/gnupg; ls)
 GIT_FILES := $(shell cd $(dotfiles)/git; ls)
 ETC_FILES := $(shell cd $(dotfiles)/etc; ls)
-ZSH_FILES := zlogin zlogout zpreztorc zprofile zshenv zshrc
+ZSH_FILES := zlogin zlogout zpreztorc zprofile zshenv zshrc zimrc
 
 all: help
 

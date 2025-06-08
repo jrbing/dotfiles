@@ -10,9 +10,9 @@
 #  ZPLUG  #
 ###########
 
-export ZPLUG_HOME="${DOTFILES}/zsh/zplug"
-export ZPLUG_LOADFILE="${DOTFILES}/zsh/packages.zsh"
-source $ZPLUG_HOME/init.zsh
+#export ZPLUG_HOME="${DOTFILES}/zsh/zplug"
+#export ZPLUG_LOADFILE="${DOTFILES}/zsh/packages.zsh"
+#source $ZPLUG_HOME/init.zsh
 
 # Install plugins if there are plugins that have not been installed
 #if ! zplug check --verbose; then
@@ -23,7 +23,29 @@ source $ZPLUG_HOME/init.zsh
 #fi
 
 # Source plugins and add commands to $PATH
-zplug load
+#zplug load
+
+#########
+#  ZIM  #
+#########
+export ZIM_HOME="${HOME}/.zim"
+
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# Initialize zsh's completion system
+autoload -U +X compinit && compinit
+
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
 
 
 ###########
@@ -38,9 +60,9 @@ fpath=("${DOTFILES}/zsh/functions" $fpath)
 ##########
 
 # direnv
-if [[ $commands[direnv] ]]; then
-  eval "$(direnv hook zsh)"
-fi
+#if [[ $commands[direnv] ]]; then
+  #eval "$(direnv hook zsh)"
+#fi
 
 # mise
 if [[ $commands[mise] ]]; then
@@ -112,16 +134,17 @@ if [[ -d "${HOME}/.cargo/bin" ]]; then
 fi
 
 # Codon: python compiler - https://github.com/exaloop/codon
-if [[ -d "${HOME}/.codon/bin" ]]; then
-  path+=("${HOME}/.codon/bin")
-fi
+#if [[ -d "${HOME}/.codon/bin" ]]; then
+  #path+=("${HOME}/.codon/bin")
+#fi
 
 
 ############
 #  Prompt  #
 ############
 
-# Starship
+# Starship prompt
+# NOTE: Sets options for spaceship prompt if starship is not installed
 if [[ $commands[starship] ]]; then
   eval "$(starship init zsh)"
 else
@@ -156,7 +179,7 @@ fi
 #  Aliases  #
 #############
 
-unalias rm
+#unalias rm
 
 alias server="devd --open --livewatch ."
 alias todos="ack --nogroup '(TODO|FIX(ME)?):'"
@@ -303,9 +326,9 @@ if [[ $commands[nsc] ]]; then
 fi
 
 # fzf
-if [[ -f ~/.fzf.zsh ]]; then
-  source ~/.fzf.zsh
-fi
+#if [[ -f ~/.fzf.zsh ]]; then
+  #source ~/.fzf.zsh
+#fi
 
 # aws-sso-util
 if [[ -e ~/.local/bin/aws-sso-util ]]; then
