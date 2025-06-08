@@ -47,6 +47,12 @@ class Template < Thor
     create_from_template("envrc.erb", ".envrc")
   end
 
+  # mise
+  desc "mise", "Creates a basic mise.toml file in the current directory"
+  def mise
+    create_from_template("mise.erb", ".mise.toml")
+  end
+
   # thorfile
   desc "thorfile", "Creates a basic Thorfile"
   def thorfile(script_name=nil)

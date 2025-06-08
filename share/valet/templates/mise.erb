@@ -1,0 +1,9 @@
+# Example mise.toml configuration file
+
+[tools]
+node = 'lts'
+python = "3.13" # [optional] will be used for the venv
+
+[env]
+# Install seed packages (pip, setuptools, and wheel) into the virtual environment.
+_.python.venv = { path = ".venv", create = true, uv_create_args = ['--seed'] }
