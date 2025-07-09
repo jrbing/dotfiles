@@ -108,5 +108,6 @@
   "ansible.lightspeed.enabled": true,
   "ansible.lightspeed.suggestions.enabled": true,
   "D2.previewTheme": "Flagship Terrastruct",
-  "mssql.enableRichExperiences": true
+  "mssql.enableRichExperiences": true,
+  "github.copilot.nextEditSuggestions.enabled": true
 }
