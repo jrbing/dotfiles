@@ -8,6 +8,7 @@
 #   kcfg remove <name>                  # Remove context, cluster, and user by name
 #   kcfg list                           # List all available contexts
 #   kcfg export <name>                  # Export single context to ~/.kube/kubeconfig-<name>.yaml
+# Example: kcfg scp root@<hostname>:/etc/rancher/k3s/k3s.yaml <cluster-name>
 
 set -euo pipefail
 
@@ -66,7 +67,9 @@ function patch_server_and_names() {
   tmp="$(mktemp)"
   if ! cat "$file" | yq ".clusters[].name = \"$name\" |
                          .contexts[].context.cluster = \"$name\" |
+                         .contexts[].context.user = \"$name\" |
                          .contexts[].name = \"$name\" |
+                         .users[].name = \"$name\" |
                          .current-context = \"$name\"" > "$tmp"; then
     error "❌ Failed to patch with yq"
     cat "$file"
