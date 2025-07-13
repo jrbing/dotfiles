@@ -21,6 +21,7 @@ zmodule zsh-users/zsh-history-substring-search
 #zmodule zsh-users/zsh-autosuggestions
 zmodule kiesman99/zim-zoxide
 zmodule Tarrasch/zsh-bd --source bd.zsh
+zmodule atuinsh/atuin
 
 # TODO: figure out how to get this to work when starship is not installed
 #zmodule spaceship-prompt/spaceship-prompt --name spaceship --no-submodules
