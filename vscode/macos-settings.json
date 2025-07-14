@@ -66,7 +66,7 @@
   "editor.renderWhitespace" : "none",
   "vim.useCtrlKeys" : false,
   "editor.fontSize" : 15,
-  "workbench.colorTheme" : "One Dark Pro",
+  "workbench.colorTheme" : "One Dark Pro Mix",
   "powershell.enableProfileLoading" : true,
   "vim.easymotion" : false,
   "debug.console.fontSize" : 14,
