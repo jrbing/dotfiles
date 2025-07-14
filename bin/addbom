@@ -22,7 +22,7 @@ IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 source "$DOTFILES/share/lib/bash-functions.sh"
 
 readonly PROGNAME="$(basename $0)"
-readonly UCONV=$(find /usr/local/Cellar/icu4c -type f -name "uconv")
+readonly UCONV=$(find /opt/homebrew/Cellar -type f -name "uconv")
 readonly ARGS=( "$@" )
 
 ###############

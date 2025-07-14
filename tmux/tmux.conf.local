@@ -340,6 +340,9 @@ bind-key C-t new-window "ttyd --readonly tmux attach -t $(tmux display -p '#S')"
 if-shell -b '[ $SHELL == /bin/bash ]' \
   'set-option -g default-command "exec /bin/bash"'
 
+if-shell -b '[ $SHELL == /bin/zsh ]' \
+  'set-option -g default-shell "${SHELL}" \ set-option -g default-command "reattach-to-user-namespace -l zsh"'
+
 # Install tmux-resurrect plugin
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'jaclu/tmux-menus'
@@ -350,6 +353,3 @@ set -g @1password-copy-to-clipboard 'on'
 #set -g @tmux-gruvbox 'dark' # or 'light'
 #set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
 #set -g @tmux-nerd-font-window-name-show-name true
-
-# Fig Tmux Integration: Enabled
-#source-file ~/.fig/tmux

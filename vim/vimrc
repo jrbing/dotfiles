@@ -698,7 +698,7 @@
   "}}}
 
   " AutoFormat {{{2
-    let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin' ]
+    let g:formatterpath = [ '/opt/homebrew/bin', '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin' ]
     let g:formatters_python = ['black']
     "let g:formatters_python = ['yapf']
     "let g:formatter_yapf_style = 'google'
@@ -1379,6 +1379,7 @@
 
   " Put fuzzy finder in the runtimepath
   set rtp+=/usr/local/opt/fzf
+  set rtp+=/opt/homebrew/bin/fzf
 
   if (has('gui_running') || has('gui_vimr'))
 
@@ -1402,7 +1403,7 @@
       "set fuoptions=maxhorz,maxvert
 
       " Set correct path for tagbar plugin
-      let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+      let g:tagbar_ctags_bin = '/opt/homebrew/bin/ctags'
 
       " Command-T for CtrlP
       noremap <D-T> :CtrlP<CR>

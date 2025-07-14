@@ -59,23 +59,22 @@ setopt rmstarsilent
 export PSQL_EDITOR=vim
 
 # Oracle SQLcl
-export SQLPATH="${DOTFILES}/sql/oracle"
-export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
-export NLS_LANG=American_America.UTF8
-
-if [[ -d "/opt/oracle/sqlcl" ]]; then
-  path+=('/opt/oracle/sqlcl/bin')
-fi
+# export SQLPATH="${DOTFILES}/sql/oracle"
+# export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
+# export NLS_LANG=American_America.UTF8
+# if [[ -d "/opt/oracle/sqlcl" ]]; then
+  # path+=('/opt/oracle/sqlcl/bin')
+# fi
 
 # TNS
-if [[ -d "/opt/oracle/tns" ]]; then
-  export TNS_ADMIN=/opt/oracle/tns
-fi
+# if [[ -d "/opt/oracle/tns" ]]; then
+  # export TNS_ADMIN=/opt/oracle/tns
+# fi
 
 # Rundeck CLI
-if [[ -d '/opt/rundeck/rd' ]]; then
-  path+=('/opt/rundeck/rd/bin')
-fi
+# if [[ -d '/opt/rundeck/rd' ]]; then
+  # path+=('/opt/rundeck/rd/bin')
+# fi
 
 # Krew plugins
 if [[ -d "${HOME}/.krew/bin" ]]; then
@@ -151,7 +150,7 @@ alias agx=ansible-galaxy
 alias anv=ansible-vault
 alias anav=ansible-navigator
 alias mvim="reattach-to-user-namespace mvim"
-alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
+# alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/sqlplus"
 alias uuid="uuidgen | tr -d '\n' | tr '[:upper:]' '[:lower:]' | pbcopy && pbpaste && echo"
 alias ytd="yt-dlp --force-overwrites"
 alias dcb="docker compose down && docker compose up -d && docker compose logs -f"
@@ -244,7 +243,7 @@ fi
 
 # Terraform
 if [[ $commands[terraform] ]]; then
-  complete -o nospace -C /usr/local/bin/terraform terraform
+  complete -o nospace -C terraform terraform
 fi
 
 # NATS nsc CLI
