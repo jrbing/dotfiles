@@ -35,6 +35,13 @@ source ${ZIM_HOME}/init.zsh
 # Prepend custom function directory to fpath
 fpath=("${DOTFILES}/zsh/functions" $fpath)
 
+##################
+#  Key Bindings  #
+##################
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+export HISTORY_SUBSTRING_SEARCH_FUZZY=1
+
 ##########
 #  Misc  #
 ##########
@@ -242,9 +249,9 @@ if [[ $commands[helm] ]]; then
 fi
 
 # Terraform
-if [[ $commands[terraform] ]]; then
-  complete -o nospace -C terraform terraform
-fi
+# if [[ $commands[terraform] ]]; then
+  # complete -o nospace -C terraform terraform
+# fi
 
 # NATS nsc CLI
 if [[ $commands[nsc] ]]; then
@@ -262,9 +269,9 @@ if [[ $commands[talosctl] ]]; then
 fi
 
 # Atuin: shell history - https://github.com/atuinsh/atuin
-#if [[ $commands[atuin] ]]; then
-  #eval "$(atuin init zsh)"
-#fi
+if [[ $commands[atuin] ]]; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
 
 
 ###############

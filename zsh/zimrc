@@ -4,36 +4,30 @@
 
 # Official Zim modules
 zmodule environment
+zmodule git
 zmodule input
+zmodule termtitle
+zmodule utility
 zmodule run-help
 zmodule archive
 zmodule direnv
 zmodule fzf
 zmodule magic-enter
 zmodule ssh
-zmodule utility
 zmodule homebrew
 
 # Third-party ZSH modules
 zmodule zsh-users/zsh-completions --fpath src
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
-#zmodule zsh-users/zsh-autosuggestions
-zmodule kiesman99/zim-zoxide
+zmodule kiesman99/zim-zoxide  # zoxide integration for Zim (provides the `z` command)
 zmodule Tarrasch/zsh-bd --source bd.zsh
-zmodule atuinsh/atuin
+# zmodule joke/zim-mise
+# zmodule joke/zim-github-cli
+# zmodule joke/zim-helm
+# zmodule joke/zim-k9s
+# zmodule joke/zim-yq
 
 # TODO: figure out how to get this to work when starship is not installed
 #zmodule spaceship-prompt/spaceship-prompt --name spaceship --no-submodules
 
-#zmodule sorin-ionescu/prezto --root modules/completion
-#zmodule sorin-ionescu/prezto --root modules/contrib-prompt
-#zmodule sorin-ionescu/prezto --root modules/gpg
-#zmodule sorin-ionescu/prezto --root modules/history
-#zmodule sorin-ionescu/prezto --root modules/history-substring-search
-#zmodule sorin-ionescu/prezto --root modules/rsync
-#zmodule sorin-ionescu/prezto --root modules/terminal
-#zmodule sorin-ionescu/prezto --root modules/utility
-#zmodule joke/zim-github-cli
-#zmodule joke/zim-helm
-#zmodule joke/zim-mise
