@@ -109,5 +109,6 @@
   "ansible.lightspeed.suggestions.enabled": true,
   "D2.previewTheme": "Flagship Terrastruct",
   "mssql.enableRichExperiences": true,
-  "github.copilot.nextEditSuggestions.enabled": true
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.editing.confirmEditRequestRetry": false
 }
