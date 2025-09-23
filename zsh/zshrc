@@ -23,7 +23,13 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 # Initialize zsh's completion system
-autoload -U +X compinit && compinit
+if type brew &>/dev/null; then
+  # Fix for homebrew installed zsh on Apple Silicon Macs
+  fpath=("$(brew --prefix)/zsh/functions" $fpath)
+  autoload -Uz compinit && compinit -u
+else
+  autoload -Uz +X compinit && compinit -u
+fi
 
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
