@@ -92,10 +92,10 @@ function add_config() {
   # Keep only the 5 most recent backups
   find "$CONFIG_DIR" -maxdepth 1 -name "config.backup.*" -type f | sort -r | tail -n +6 | xargs -r rm --
 
-  if kubectl config --kubeconfig="$MERGED_CONFIG" get-contexts "$name" &>/dev/null; then
-    warn "⚠️ Context '$name' already exists in config. Skipping merge."
-    return
-  fi
+  # if kubectl config --kubeconfig="$MERGED_CONFIG" get-contexts "$name" &>/dev/null; then
+    # warn "⚠️ Context '$name' already exists in config. Skipping merge."
+    # return
+  # fi
 
   success "✅ Merging $file into $MERGED_CONFIG"
   KUBECONFIG="$MERGED_CONFIG:$file" kubectl config view --flatten > "/tmp/kubeconfig-merged.yaml"
