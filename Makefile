@@ -35,11 +35,13 @@ link-xdg:
 	@cd ~ && mkdir -p ~/.config/powershell;
 	@cd ~ && mkdir -p ~/.config/mise;
 	@cd ~ && mkdir -p ~/.config/atuin;
+	@cd ~ && mkdir -p ~/.config/ghostty;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/topgrade.toml ~/.config/topgrade.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/starship.toml ~/.config/starship.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/aria2.conf ~/.config/aria2/aria2.conf;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/mise.toml ~/.config/mise/config.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/atuin.toml ~/.config/atuin/config.toml;
+	@cd ~ && ln -nfs $(dotfiles)/xdg/ghostty ~/.config/ghostty/config;
 	@cd ~ && ln -nfs $(dotfiles)/cheat/conf.yml ~/.config/cheat/conf.yml;
 	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/profile.ps1;
 
