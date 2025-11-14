@@ -1,2 +1,14 @@
-# vim: ft=ghostty
+# vim: ft=conf
 
+shell-integration = zsh
+
+theme = "Gruvbox Dark"
+cursor-style = block
+
+font-family = "Inconsola-dz for Powerline"
+font-style = "dz"
+font-size = 12
+
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
