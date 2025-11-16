@@ -5,6 +5,7 @@ NODE_ENV = 'production'
 [tools]
 ruby = "3.4.4"
 python = "3.13"
+uv = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
