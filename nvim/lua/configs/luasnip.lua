@@ -1,13 +1,15 @@
 -- Snippets
---https://github.com/L3MON4D3/LuaSnip
- 
--- stdpath("config") returns the path of our nvimc config folder
+-- https://github.com/L3MON4D3/LuaSnip
 
--- vscode format i.e json files
---vim.g.vscode_snippets_path = "your snippets path"
+local luasnip = require "luasnip"
 
--- snipmate format 
---vim.g.snipmate_snippets_path = "your snippets path"
+-- Load community snippets and our legacy UltiSnips collection (snipmate format)
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_snipmate").lazy_load {
+  paths = { vim.fn.expand "~/.dotfiles/vim/custom/snippets" },
+}
 
--- lua format 
---vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/lua_snippets"
+luasnip.config.set_config {
+  history = true,
+  updateevents = "TextChanged,TextChangedI",
+}

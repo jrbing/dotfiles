@@ -4,25 +4,41 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
+    python = { "ruff_format", "black" },
+    css = { "prettier" },
+    html = { "prettier" },
+    javascript = { "prettierd", "prettier" },
+    javascriptreact = { "prettierd", "prettier" },
+    typescript = { "prettierd", "prettier" },
+    typescriptreact = { "prettierd", "prettier" },
+    json = { "prettier" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+    go = { "goimports", "gofmt" },
+    terraform = { "terraform_fmt" },
+    hcl = { "terraform_fmt" },
+    sh = { "shfmt" },
+    sql = { "sqlformat" },
+    java = { "astyle" },
   },
 
-  -- format_on_save = {
-  --   -- These options will be passed to conform.format()
-  --   timeout_ms = 500,
-  --   lsp_fallback = true,
-  -- },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+
+  formatters = {
+    sqlformat = {
+      command = "sqlformat",
+      args = { "--reindent", "--indent_width", "2", "--keywords", "lower", "--identifiers", "lower", "--comma_first", "True", "-" },
+      stdin = true,
+    },
+    astyle = {
+      command = "astyle",
+      args = { "--mode=java", "--style=google", "--pad-oper", "--convert-tabs", "--pad-header" },
+      stdin = true,
+    },
+  },
 }
 
 require("conform").setup(options)
-
---------------
---  Legacy  --
---------------
---let g:formatterpath = [ '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin' ]
---let g:formatters_python = ['black']
---let g:formatters_yaml = ['prettier']
---let g:formatdef_custom_java='astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
---let g:formatters_java = ['custom_java']
---let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width 2 --keywords lower --identifiers lower --comma_first True -"'

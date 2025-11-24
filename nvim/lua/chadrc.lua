@@ -6,12 +6,12 @@
 local M = {}
 
 M.ui = {
-  theme = "solarized_dark",
-
-  -- hl_override = {
-  --  Comment = { italic = true },
-  --  ["@comment"] = { italic = true },
-  -- },
+  theme = "gruvbox",
+  theme_toggle = { "gruvbox", "onedark" },
+  statusline = {
+    theme = "default",
+    separator_style = "default",
+  },
 }
 
 return M

@@ -18,99 +18,73 @@ return {
   -- File formatter: https://github.com/stevearc/conform.nvim
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre',
     config = function()
       require "configs.conform"
     end,
   },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "bash-language-server",
+        "clangd",
+        "css-lsp",
+        "dockerfile-language-server",
+        "gopls",
+        "helm-ls",
+        "html-lsp",
+        "json-lsp",
+        "lua-language-server",
+        "marksman",
+        "powershell-editor-services",
+        "prettier",
+        "prettierd",
+        "pyright",
+        "rust-analyzer",
+        "stylua",
+        "terraform-ls",
+        "typescript-language-server",
+        "yaml-language-server",
+      },
+    },
+  },
 
-  ----------------------
-  --  Legacy Plugins  --
-  ----------------------
-  --" Utilities
-  --Plug 'artnez/vim-wipeout'
-  --Plug 'chrisbra/matchit'
-  --Plug 'ctrlpvim/ctrlp.vim'
-  --Plug 'dbeniamine/cheat.sh-vim'
-  --Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
-  --Plug 'direnv/direnv.vim'
-  --Plug 'editorconfig/editorconfig-vim'
-  --Plug 'ervandew/supertab'
-  --Plug 'godlygeek/tabular'
-  --Plug 'mattmartini/vim-nerdtree-tabs'
-  --Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
-  --Plug 'junegunn/fzf'
-  --Plug 'justinmk/vim-sneak'
-  --Plug 'kristijanhusak/vim-carbon-now-sh'
-  --Plug 'lambdalisue/vim-gista'
-  --Plug 'majutsushi/tagbar'
-  --Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-  --Plug 'mtth/scratch.vim'
-  --Plug 'preservim/nerdcommenter'
-  --Plug 'preservim/nerdtree'
-  --Plug 'psliwka/vim-smoothie'
-  --Plug 'tpope/vim-abolish'
-  --Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
-  --Plug 'tpope/vim-dispatch'
-  --Plug 'tpope/vim-eunuch'
-  --Plug 'tpope/vim-fugitive'
-  --Plug 'tpope/vim-git'
-  --Plug 'tpope/vim-jdaddy', { 'for': ['json'] }
-  --Plug 'tpope/vim-projectionist'
-  --Plug 'tpope/vim-ragtag'
-  --Plug 'tpope/vim-rbenv', { 'for': ['ruby'] }
-  --Plug 'tpope/vim-repeat'
-  --Plug 'tpope/vim-rhubarb'
-  --Plug 'tpope/vim-surround'
-  --Plug 'tpope/vim-tbone'
-  --Plug 'tpope/vim-unimpaired'
-  --Plug 'vim-airline/vim-airline'
-  --Plug 'vim-airline/vim-airline-themes'
-  --Plug 'vim-pandoc/vim-pandoc', { 'for': ['pandoc', 'markdown'] }
-  --Plug 'vim-scripts/Align'
-  --Plug 'wincent/ferret'
-  --Plug 'vim-autoformat/vim-autoformat'
-  --Plug 'EvanDotPro/nerdtree-chmod'
-  --Plug 'Raimondi/delimitMate'
-  --Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-  --Plug 'mattn/webapi-vim'
-  --Plug 'rizzatti/dash.vim'
-  --Plug 'dense-analysis/ale'
-  --Plug 'vim-voom/VOoM'
-  --Plug 'metakirby5/codi.vim'
-  --if !g:VIMR()
-    --Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
-  --endif
-  --if g:VIMR()
-    --Plug 'github/copilot.vim'
-  --endif
-
-  -- Examples:
+  --------------------
+  --  Vim Parity   --
+  --------------------
+  { "justinmk/vim-sneak", event = "VeryLazy" },
+  -- { "mg979/vim-visual-multi", branch = "master", event = "VeryLazy" },
+  { "psliwka/vim-smoothie", event = "VeryLazy" },
+  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
+  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-unimpaired", event = "VeryLazy" },
+  { "tpope/vim-abolish", event = "VeryLazy" },
+  { "tpope/vim-fugitive", event = "VeryLazy" },
+  { "tpope/vim-rhubarb", event = "VeryLazy" },
+  { "tpope/vim-eunuch", event = "VeryLazy" },
+  { "tpope/vim-projectionist", event = "VeryLazy" },
+  { "tpope/vim-dadbod", event = "VeryLazy" },
   -- {
-  --   "neovim/nvim-lspconfig",
-  --   config = function()
-  --     require("nvchad.configs.lspconfig").defaults()
-  --     require "configs.lspconfig"
-  --   end,
+    -- "majutsushi/tagbar",
+    -- cmd = "TagbarToggle",
+    -- init = function()
+      -- local ctags = vim.fn.exepath "ctags"
+      -- if ctags ~= "" then
+        -- vim.g.tagbar_ctags_bin = ctags
+      -- end
+    -- end,
   -- },
-  --
-  -- {
-  --  "williamboman/mason.nvim",
-  --  opts = {
-  --    ensure_installed = {
-  --      "lua-language-server", "stylua",
-  --      "html-lsp", "css-lsp" , "prettier"
-  --    },
-  --  },
-  -- },
-  --
-  -- {
-  --  "nvim-treesitter/nvim-treesitter",
-  --  opts = {
-  --    ensure_installed = {
-  --      "vim", "lua", "vimdoc",
-  --      "html", "css"
-  --    },
-  --  },
-  -- },
+  { "direnv/direnv.vim", event = "BufReadPost" },
+  { "godlygeek/tabular", cmd = { "Tabularize" } },
+  { "kristijanhusak/vim-carbon-now-sh", cmd = "CarbonNowSh" },
+  { "numToStr/Comment.nvim", opts = {} },
+  { "artnez/vim-wipeout", cmd = "Wipeout" },
+  { "Raimondi/delimitMate", event = "InsertEnter" },
+  { "andrewstuart/vim-kubernetes", ft = { "yaml" } },
+  { "towolf/vim-helm", ft = { "helm" } },
+  { "hashivim/vim-terraform", ft = { "terraform", "hcl" } },
+  { "gianarb/vim-flux", ft = { "flux" } },
+  { "omer/vim-sparql", ft = { "sparql" } },
+  { "terrastruct/d2-vim", ft = { "d2" } },
 }
