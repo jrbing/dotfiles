@@ -23,6 +23,7 @@ return {
       require "configs.conform"
     end,
   },
+  { "github/copilot.vim", event = "InsertEnter" },
   {
     "williamboman/mason.nvim",
     opts = {
