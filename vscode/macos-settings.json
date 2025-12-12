@@ -23,8 +23,8 @@
   "sqltools.telemetry" : false,
   "terminal.external.windowsExec" : "%COMSPEC%",
   "window.nativeTabs" : true,
-  "workbench.welcome.enabled" : false,
-  "vim.neovimPath" : "\/usr\/local\/bin\/nvim",
+  "workbench.welcome.enabled": false,
+  "vim.neovimPath": "/usr/local/bin/nvim",
   "files.autoSave" : "onFocusChange",
   "vim.searchHighlightColor" : "rgba(150, 150, 255, 0.3)",
   "editor.wordWrap" : 300,
@@ -54,8 +54,8 @@
   "extensions.ignoreRecommendations" : false,
   "sqltools.useNodeRuntime" : true,
   "vim.enableNeovim" : true,
-  "editor.wordSeparators" : "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-  "window.zoomLevel" : 0,
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "window.zoomLevel": 0,
   "editor.renderLineHighlight" : "line",
   "editor.fontFamily" : "Inconsolata-dz for Powerline, Menlo, Monaco, Consolas, monospace",
   "editor.tabSize" : 2,
@@ -65,7 +65,7 @@
   "editor.fontLigatures" : true,
   "editor.renderWhitespace" : "none",
   "vim.useCtrlKeys" : false,
-  "editor.fontSize" : 15,
+  "editor.fontSize" : 13,
   "workbench.colorTheme" : "One Dark Pro Mix",
   "powershell.enableProfileLoading" : true,
   "vim.easymotion" : false,
@@ -110,5 +110,6 @@
   "D2.previewTheme": "Flagship Terrastruct",
   "mssql.enableRichExperiences": true,
   "github.copilot.nextEditSuggestions.enabled": true,
-  "chat.editing.confirmEditRequestRetry": false
+  "chat.editing.confirmEditRequestRetry": false,
+  "chat.mcp.gallery.enabled": true
 }
