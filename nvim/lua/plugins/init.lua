@@ -1,15 +1,14 @@
 return {
-  -------------------------
-  --  Delivered Plugins  --
-  -------------------------
-  
+  --------------------------------
+  --  NVChad Delivered Plugins  --
+  --------------------------------
   -- Plugin manager: https://github.com/folke/lazy.nvim
   -- Syntax highlighting and auto-indexing: https://github.com/nvim-treesitter/nvim-treesitter
   -- Colorizer: https://github.com/norcalli/nvim-colorizer.lua
   -- Fuzzy file finder: https://github.com/nvim-telescope/telescope.nvim
   -- Auto pairing: https://github.com/windwp/nvim-autopairs
   -- Snippets: https://github.com/L3MON4D3/LuaSnip
-  -- Portable package manager: https://github.com/williamboman/mason.nvim
+  -- LSP package manager: https://github.com/williamboman/mason.nvim
   -- Git integration: https://github.com/lewis6991/gitsigns.nvim
   -- Displays keybindings of the command you start typing: https://github.com/folke/which-key.nvim
   -- Indention guides: https://github.com/lukas-reineke/indent-blankline.nvim
@@ -19,11 +18,14 @@ return {
   {
     "stevearc/conform.nvim",
     event = 'BufWritePre',
+    opts = require "configs.conform",
+  },
+  {
+    "neovim/nvim-lspconfig",
     config = function()
-      require "configs.conform"
+      require "configs.lspconfig"
     end,
   },
-  { "github/copilot.vim", event = "InsertEnter" },
   {
     "williamboman/mason.nvim",
     opts = {
@@ -50,42 +52,26 @@ return {
       },
     },
   },
+  {import = "nvchad.blink.lazyspec"},
 
-  --------------------
-  --  Vim Parity   --
-  --------------------
-  { "justinmk/vim-sneak", event = "VeryLazy" },
-  -- { "mg979/vim-visual-multi", branch = "master", event = "VeryLazy" },
-  { "psliwka/vim-smoothie", event = "VeryLazy" },
-  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
-  { "tpope/vim-repeat", event = "VeryLazy" },
-  { "tpope/vim-unimpaired", event = "VeryLazy" },
-  { "tpope/vim-abolish", event = "VeryLazy" },
-  { "tpope/vim-fugitive", event = "VeryLazy" },
-  { "tpope/vim-rhubarb", event = "VeryLazy" },
-  { "tpope/vim-eunuch", event = "VeryLazy" },
-  { "tpope/vim-projectionist", event = "VeryLazy" },
-  { "tpope/vim-dadbod", event = "VeryLazy" },
   -- {
-    -- "majutsushi/tagbar",
-    -- cmd = "TagbarToggle",
-    -- init = function()
-      -- local ctags = vim.fn.exepath "ctags"
-      -- if ctags ~= "" then
-        -- vim.g.tagbar_ctags_bin = ctags
-      -- end
-    -- end,
+  --  "nvim-treesitter/nvim-treesitter",
+  --  opts = {
+  --    ensure_installed = {
+  --      "vim", "lua", "vimdoc",
+  --      "html", "css"
+  --    },
+  --  },
   -- },
-  { "direnv/direnv.vim", event = "BufReadPost" },
-  { "godlygeek/tabular", cmd = { "Tabularize" } },
-  { "kristijanhusak/vim-carbon-now-sh", cmd = "CarbonNowSh" },
+
+  --------------------------
+  --  Additional Plugins  --
+  --------------------------
+  { "NickvanDyke/opencode.nvim", lazy = false },
   { "numToStr/Comment.nvim", opts = {} },
   { "artnez/vim-wipeout", cmd = "Wipeout" },
-  { "Raimondi/delimitMate", event = "InsertEnter" },
   { "andrewstuart/vim-kubernetes", ft = { "yaml" } },
-  { "towolf/vim-helm", ft = { "helm" } },
-  { "hashivim/vim-terraform", ft = { "terraform", "hcl" } },
-  { "gianarb/vim-flux", ft = { "flux" } },
-  { "omer/vim-sparql", ft = { "sparql" } },
-  { "terrastruct/d2-vim", ft = { "d2" } },
+  { "kylechui/nvim-surround", event = "VeryLazy", config = true },
+  -- { "github/copilot.vim", event = "InsertEnter" },
+  -- { "kristijanhusak/vim-carbon-now-sh", cmd = "CarbonNowSh" },
 }

@@ -6,12 +6,7 @@
 local M = {}
 
 M.ui = {
-  theme = "gruvbox",
-  theme_toggle = { "gruvbox", "onedark" },
-  statusline = {
-    theme = "default",
-    separator_style = "default",
-  },
+  theme = "solarized_dark",
 }
 
 return M

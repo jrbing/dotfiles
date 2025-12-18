@@ -19,12 +19,12 @@ link-tmux:
 				ln -nfs $(dotfiles)/tmux/tmux.conf.local .tmux.conf.local; \
 
 link-vim:
-	@cd ~ && ln -nfs $(dotfiles)/vim/ .vim; \
-				ln -nfs $(dotfiles)/vim/vimrc .vimrc; \
-				ln -nfs $(dotfiles)/vim/gvimrc .gvimrc
+	@cd ~ && ln -nfs $(dotfiles)/vim/ ~/.vim; \
+				ln -nfs $(dotfiles)/vim/vimrc ~/.vimrc; \
+				ln -nfs $(dotfiles)/vim/gvimrc ~/.gvimrc
 
 link-nvim:
-	@cd ~ && ln -nfs $(dotfiles)/nvim/ .config/nvim
+	@cd ~ && ln -nfs $(dotfiles)/nvim/ ~/.config/nvim
 
 link-etc:
 	@cd ~ && for file in $(ETC_FILES); do ln -nfs .dotfiles/etc/$$file .$$file; done
@@ -36,12 +36,15 @@ link-xdg:
 	@cd ~ && mkdir -p ~/.config/mise;
 	@cd ~ && mkdir -p ~/.config/atuin;
 	@cd ~ && mkdir -p ~/.config/ghostty;
+	@cd ~ && mkdir -p ~/.config/opencode;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/topgrade.toml ~/.config/topgrade.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/starship.toml ~/.config/starship.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/aria2.conf ~/.config/aria2/aria2.conf;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/mise.toml ~/.config/mise/config.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/atuin.toml ~/.config/atuin/config.toml;
 	@cd ~ && ln -nfs $(dotfiles)/xdg/ghostty ~/.config/ghostty/config;
+	@cd ~ && ln -nfs $(dotfiles)/xdg/opencode.json ~/.config/opencode/opencode.json;
+	@cd ~ && ln -nfs $(dotfiles)/xdg/oh-my-opencode.json ~/.config/opencode/oh-my-opencode.json;
 	@cd ~ && ln -nfs $(dotfiles)/cheat/conf.yml ~/.config/cheat/conf.yml;
 	@cd ~ && ln -nfs $(dotfiles)/powershell/profile_macos.ps1 ~/.config/powershell/profile.ps1;
 

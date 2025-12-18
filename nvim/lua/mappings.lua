@@ -1,6 +1,7 @@
 require "nvchad.mappings"
 
 local map = vim.keymap.set
+
 local utils = require "utils"
 local telescope = require "telescope.builtin"
 
@@ -28,16 +29,16 @@ map("n", "<leader>b", telescope.buffers, { desc = "Buffers (CtrlPBuffer)" })
 map("n", "<A-t>", telescope.find_files, { desc = "Find files" })
 
 -- Window sizing
-map("n", "<leader>=", "<C-w>=", { desc = "Equalize splits" })
-map("i", "<leader>=", "<Esc><C-w>=", { desc = "Equalize splits" })
+-- map("n", "<leader>=", "<C-w>=", { desc = "Equalize splits" })
+-- map("i", "<leader>=", "<Esc><C-w>=", { desc = "Equalize splits" })
 
 -- Alignment helpers
-map("n", "<leader>Al", ":left<cr>", { desc = "Align left" })
-map("n", "<leader>Ac", ":center<cr>", { desc = "Align center" })
-map("n", "<leader>Ar", ":right<cr>", { desc = "Align right" })
-map("v", "<leader>Al", ":left<cr>", { desc = "Align left" })
-map("v", "<leader>Ac", ":center<cr>", { desc = "Align center" })
-map("v", "<leader>Ar", ":right<cr>", { desc = "Align right" })
+--map("n", "<leader>Al", ":left<cr>", { desc = "Align left" })
+--map("n", "<leader>Ac", ":center<cr>", { desc = "Align center" })
+--map("n", "<leader>Ar", ":right<cr>", { desc = "Align right" })
+--map("v", "<leader>Al", ":left<cr>", { desc = "Align left" })
+--map("v", "<leader>Ac", ":center<cr>", { desc = "Align center" })
+--map("v", "<leader>Ar", ":right<cr>", { desc = "Align right" })
 
 map("n", ",gf", ":vertical botright wincmd f<CR>", { desc = "Open file in vsplit" })
 
@@ -67,11 +68,14 @@ map("n", "<F4>", function()
   require("conform").format { async = false, lsp_fallback = true }
 end, { desc = "Format buffer" })
 map("n", "<F5>", utils.strip_trailing_whitespace, { desc = "Trim trailing whitespace" })
-map("n", "<F8>", "<cmd>TagbarToggle<cr>", { desc = "Toggle Tagbar" })
-map("n", "<F9>", "<cmd>vertical resize 30 | set winfixwidth<cr>", { desc = "Resize side window" })
+-- map("n", "<F8>", "<cmd>TagbarToggle<cr>", { desc = "Toggle Tagbar" })
+-- map("n", "<F9>", "<cmd>vertical resize 30 | set winfixwidth<cr>", { desc = "Resize side window" })
 
 -- Wipeout unused buffers
 map("n", "<leader>wo", "<cmd>Wipeout<CR>", { desc = "Close non-tab buffers" })
 
 -- Toggle verbose logging
 map("n", "<leader>tv", utils.toggle_verbose, { desc = "Toggle verbose logging" })
+
+-- nvim-tree
+-- TODO: toggle nvim tree

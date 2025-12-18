@@ -70,10 +70,6 @@ opt.wildignore:append {
 opt.modeline = true
 opt.modelines = 5
 
-if vim.fn.executable "par" == 1 then
-  opt.formatprg = "par"
-end
-
 opt.foldmethod = "syntax"
 opt.foldenable = false
 
@@ -108,6 +104,17 @@ opt.cursorline = true
 
 if vim.fn.has "unix" == 1 and vim.fn.has "win32" == 0 then
   opt.shell = "/bin/bash"
+end
+
+if vim.g.neovide then
+  vim.o.guifont = "Inconsolata-dz for Powerline:h12"
+  -- vim.g.neovide_scale_factor = 1.0
+  -- vim.g.neovide_text_gamma = 0.0
+  -- vim.g.neovide_text_contrast = 0.5
+  -- vim.g.neovide_padding_top = 0
+  -- vim.g.neovide_padding_bottom = 0
+  -- vim.g.neovide_padding_right = 0
+  -- vim.g.neovide_padding_left = 0
 end
 
 -- Open nvim-tree on startup to mimic NERDTree tabs workflow

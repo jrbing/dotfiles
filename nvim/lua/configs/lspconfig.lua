@@ -1,5 +1,4 @@
-local defaults = require "nvchad.configs.lspconfig"
-local lspconfig = require "lspconfig"
+require("nvchad.configs.lspconfig").defaults()
 
 local servers = {
   "bashls",
@@ -19,14 +18,4 @@ local servers = {
   "yamlls",
 }
 
-local opts = {
-  on_attach = defaults.on_attach,
-  on_init = defaults.on_init,
-  capabilities = defaults.capabilities,
-}
-
-for _, server in ipairs(servers) do
-  if lspconfig[server] then
-    lspconfig[server].setup(opts)
-  end
-end
+vim.lsp.enable(servers)
