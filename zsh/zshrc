@@ -57,6 +57,12 @@ if [[ $commands[mise] ]]; then
   eval "$(mise activate zsh)"
 fi
 
+case $(uname -a) in
+*Microsoft*|*Darwin*)
+    unsetopt BG_NICE
+    ;;
+esac
+
 #################
 #  ZSH Options  #
 #################
