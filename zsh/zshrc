@@ -115,6 +115,13 @@ if [[ -d "${HOME}/.cargo/bin" ]]; then
   path+=("${HOME}/.cargo/bin")
 fi
 
+# Bun
+if [[ -d "${HOME}/.bun" ]]; then
+  # bun
+  export BUN_INSTALL="${HOME}/.bun"
+  path+=("${BUN_INSTALL}/bin")
+fi
+
 ############
 #  Prompt  #
 ############
@@ -291,6 +298,10 @@ if [[ $commands[aws_completer] ]]; then
   complete -C 'aws_completer' aws
 fi
 
+# bun
+if [[ $commands[bun] ]]; then
+  source "${HOME}/.bun/_bun"
+fi
 
 ###############
 #  Profiling  #
