@@ -193,6 +193,11 @@ if [[ $commands[rg] ]]; then
   alias grep='rg'
 fi
 
+# OpenCode
+if [[ $commands[opencode] ]]; then
+  alias opencode='reattach-to-user-namespace opencode'
+fi
+
 ###############
 #  Functions  #
 ###############
