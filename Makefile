@@ -12,7 +12,7 @@ ZSH_FILES := zlogin zlogout zpreztorc zprofile zshenv zshrc zimrc
 
 all: help
 
-link: link-tmux link-vim link-etc link-xdg link-git link-bash link-zsh link-gpg  ## Link all dotfiles to their respective locations
+link: link-tmux link-vim link-etc link-xdg link-git link-bash link-zsh link-gpg link-pandoc  ## Link all dotfiles to their respective locations
 
 link-tmux:
 	@cd ~ && ln -nfs $(dotfiles)/tmux/oh-my-tmux/.tmux.conf .tmux.conf; \
@@ -103,5 +103,5 @@ update:  ## Pull updates from remote
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: link-tmux link-vim link-nvim link-etc link-xdg link-git link-bash link-zsh link-gpg check-dead clean-dead submodules update help
+.PHONY: link-tmux link-vim link-nvim link-etc link-xdg link-git link-bash link-zsh link-gpg link-pandoc check-dead clean-dead submodules update help
 

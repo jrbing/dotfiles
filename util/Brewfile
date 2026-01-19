@@ -4,10 +4,10 @@ tap "common-fate/granted"
 tap "go-task/tap"
 tap "gofireflyio/aiac"
 tap "hashicorp/tap"
-tap "kubeshark/kubeshark"
 tap "nats-io/nats-tools"
-tap "siderolabs/tap"
 tap "utkuozdemir/pv-migrate"
+# tap "kubeshark/kubeshark"
+# tap "siderolabs/tap"
 #tap "alajmo/sake"
 #tap "dagger/tap"
 #tap "esnet/gdg"
@@ -25,9 +25,9 @@ brew "ack"                                  # Search tool like grep, but optimiz
 brew "act"                                  # Run your GitHub Actions locally
 brew "age"                                  # Simple, modern, secure file encryption
 brew "aiac"                                 # Artificial Intelligence Infrastructure-as-Code Generator
-brew "ansible"                              # Automate deployment, configuration, and upgrading
-brew "ansible-cmdb"                         # Generates static HTML overview page from Ansible facts
-brew "ansible-lint"                         # Checks ansible playbooks for practices and behaviour
+# brew "ansible"                              # Automate deployment, configuration, and upgrading
+# brew "ansible-cmdb"                         # Generates static HTML overview page from Ansible facts
+# brew "ansible-lint"                         # Checks ansible playbooks for practices and behaviour
 brew "argocd"                               # GitOps Continuous Delivery for Kubernetes
 brew "argocd-autopilot"                     # Opinionated way of installing Argo CD and managing GitOps repositories
 brew "aria2"                                # Download with resuming and segmented downloading
@@ -37,7 +37,7 @@ brew "awscli"                               # Official Amazon AWS command-line i
 brew "azure-cli"                            # Microsoft Azure CLI 2.0
 brew "bash"                                 # Bourne-Again SHell, a UNIX command interpreter
 brew "bat"                                  # Clone of cat(1) with syntax highlighting and Git integration
-brew "bitwarden-cli"                        # Secure and free password manager for all of your devices
+# brew "bitwarden-cli"                        # Secure and free password manager for all of your devices
 brew "black"                                # Python code formatter
 brew "blink1"                               # Control blink(1) indicator light
 brew "broot"                                # New way to see and navigate directory trees
@@ -154,8 +154,8 @@ brew "ssh-copy-id"                          # Add a public key to a remote machi
 brew "sshpass"                              # Non-interactive SSH password auth
 brew "starship"                             # Cross-shell prompt for astronauts
 brew "stern"                                # Tail multiple Kubernetes pods & their containers
-brew "talhelper"                            # Configuration helper for talos clusters
-brew "talosctl"                             # CLI for out-of-band management of Kubernetes nodes created by Talos
+# brew "talhelper"                            # Configuration helper for talos clusters
+# brew "talosctl"                             # CLI for out-of-band management of Kubernetes nodes created by Talos
 brew "telnet"                               # User interface to the TELNET protocol
 brew "terraform"                            # Tool to build, change, and version infrastructure
 brew "terraform-docs"                       # Tool to generate documentation from Terraform modules
