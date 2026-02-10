@@ -313,3 +313,6 @@ fi
 ###############
 
 #zprof
+
+# bun completions
+[ -s "/Users/jrbing/.bun/_bun" ] && source "/Users/jrbing/.bun/_bun"
