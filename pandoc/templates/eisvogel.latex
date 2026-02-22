@@ -1,6 +1,6 @@
 %%
-% Copyright (c) 2017 - 2025, Pascal Wagler;
-% Copyright (c) 2014 - 2025, John MacFarlane
+% Copyright (c) 2017 - 2026, Pascal Wagler;
+% Copyright (c) 2014 - 2026, John MacFarlane
 %
 % All rights reserved.
 %
@@ -39,6 +39,26 @@
 % For usage information and examples visit the official GitHub page:
 % https://github.com/Wandmalfarbe/pandoc-latex-template
 %%
+$--
+$-- PDF standard support (PDF/A, PDF/UA, PDF/X)
+$-- Requires LuaLaTeX and recent LaTeX (2023+)
+$--
+$if(pdfstandard)$
+\DocumentMetadata{
+$if(pdfstandard.version)$
+  pdfversion=$pdfstandard.version$,
+$endif$
+$if(pdfstandard.standards)$
+  pdfstandard={$for(pdfstandard.standards)$$it$$sep$,$endfor$},
+$endif$
+$if(pdfstandard.tagging)$
+  tagging=on,
+$endif$
+$if(lang)$
+  lang=$lang$,
+$endif$
+  xmp=true}
+$endif$
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
@@ -84,7 +104,9 @@ $else$
 \usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
 \usepackage{amsmath,amssymb}
-
+$if(cancel)$
+\usepackage{cancel}
+$endif$
 $if(titlepage-logo)$
 \usepackage[export]{adjustbox}
 \usepackage{graphicx}
@@ -321,6 +343,7 @@ $-- tables
 $--
 $if(tables)$
 \usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
 $if(multirow)$
 \usepackage{multirow}
 $endif$
@@ -438,9 +461,9 @@ $-- Babel language support
 $--
 $if(lang)$
 \ifLuaTeX
-\usepackage[bidi=basic,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
+\usepackage[bidi=basic$if(shorthands)$$else$,shorthands=off$endif$$for(babeloptions)$,$babeloptions$$endfor$]{babel}
 \else
-\usepackage[bidi=default,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
+\usepackage[bidi=default$if(shorthands)$$else$,shorthands=off$endif$$for(babeloptions)$,$babeloptions$$endfor$]{babel}
 \fi
 $if(babel-lang)$
 $if(mainfont)$
@@ -488,6 +511,12 @@ $if(dir)$
   \newcommand{\LR}[1]{\beginL #1\endL}
   \newenvironment{RTL}{\beginR}{\endR}
   \newenvironment{LTR}{\beginL}{\endL}
+\fi
+\ifluatex
+  \newcommand{\RL}[1]{\bgroup\textdir TRT#1\egroup}
+  \newcommand{\LR}[1]{\bgroup\textdir TLT#1\egroup}
+  \newenvironment{RTL}{\textdir TRT\pardir TRT\bodydir TRT}{}
+  \newenvironment{LTR}{\textdir TLT\pardir TLT\bodydir TLT}{}
 \fi
 $endif$
 $--
@@ -557,6 +586,19 @@ $endif$
 $endif$
   breaklinks=true,
   pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+$if(pdf-trailer-id)$
+
+\ifXeTeX
+\special{pdf:trailerid [ $pdf-trailer-id$ ]}
+\fi
+\ifPDFTeX
+\pdftrailerid{}
+\pdftrailer{/ID [ $pdf-trailer-id$ ]}
+\fi
+\ifLuaTeX
+\pdfvariable trailerid {[ $pdf-trailer-id$ ]}
+\fi
+$endif$
 
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
@@ -627,6 +669,11 @@ $endif$
 % 'default' option sets the default
 % font family to Source Sans Pro, not \sfdefault.
 %
+% Note that the font has been officially renamed to `Source Sans 3`, and
+% the version provided by the `sourcesanspro` package is slightly outdated.
+% You can install the newer version locally and use it, for example, with
+% `mainfont: "Source Sans 3"` in the YAML metadata (requires XeTeX or LuaTeX).
+%
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   $if(fontfamily)$
   $else$
@@ -664,10 +711,9 @@ $endif$
 % heading color
 %
 \definecolor{heading-color}{RGB}{40,40,40}
-\addtokomafont{section}{\color{heading-color}}
-% When using the classes report, scrreprt, book,
-% scrbook or memoir, uncomment the following line.
-%\addtokomafont{chapter}{\color{heading-color}}
+% By default, the KOMA-Script classes will typeset sectioning headings in
+% sans-serif. Use the normal body font for headings.
+\addtokomafont{disposition}{\normalfont\color{heading-color}\bfseries}
 
 %
 % variables for title, author and date
@@ -984,7 +1030,9 @@ $if(toc-title)$
 $endif$
 {
 $if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
+$if(toccolor)$
+\hypersetup{linkcolor=$toccolor$}
+$endif$
 $endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
