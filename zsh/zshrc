@@ -316,3 +316,6 @@ fi
 
 # bun completions
 [ -s "/Users/jrbing/.bun/_bun" ] && source "/Users/jrbing/.bun/_bun"
+
+# opencode
+export PATH=/Users/jrbing/.opencode/bin:$PATH
