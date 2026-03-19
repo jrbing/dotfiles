@@ -1,0 +1,15 @@
+
+# Change double quotes to single quotes
+cs"'
+
+# Remove surrounding double quotes
+ds"
+
+# Surround the current word under the cursor with brackets
+ysiw]
+
+# Wrap the entire line with parenthesis
+yssb
+
+# Add matching paragraph tags to visual selection
+S<p class="important">

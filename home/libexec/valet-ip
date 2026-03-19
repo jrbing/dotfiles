@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Usage: valet [<if>]
+# Summary: Show current IP address
+# Help: Show IPv4 address for interface <if> or all interfaces with
+# no <if> given.
+
+# Set the script to exit immediately on error
+set -e
+
+# Source generic bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+echoinfo "Getting internal ip address..."
+internal_ip=$(ifconfig -a | grep 'inet ' | grep broadcast | awk '{ print $2 }')
+
+echoinfo "Getting external ip address..."
+external_ip=$(curl -s ifconfig.me)
+
+echoinfo "Internal IP Address: ${internal_ip}"
+echoinfo "External IP Address: ${external_ip}"

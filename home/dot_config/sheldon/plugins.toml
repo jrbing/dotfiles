@@ -1,0 +1,273 @@
+# `sheldon` configuration file
+# ----------------------------
+#
+# You can modify this file directly or you can use one of the following
+# `sheldon` commands which are provided to assist in editing the config file:
+#
+# - `sheldon add` to add a new plugin to the config file
+# - `sheldon edit` to open up the config file in the default editor
+# - `sheldon remove` to remove a plugin from the config file
+#
+# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+
+shell = "zsh"
+
+#
+# Sheldon Templates
+#
+
+[templates]
+defer = """
+{{ hooks?.pre | nl }}
+{% for file in files %}
+zsh-defer source "{{ file }}"
+{% endfor %}
+{{ hooks?.post | nl }}
+"""
+
+fzf-install = """
+{{ hooks?.pre | nl }}
+{{ dir }}/install --bin > /dev/null
+path=($path {{ dir }}/bin(N-/))
+{{ hooks?.post | nl }}
+"""
+
+fzf-source = "source <(fzf --zsh)"
+
+#
+# Deferred Loading of Plugins in Zsh
+#
+
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
+apply = ['source']
+
+#
+# Autoloading of Functions in Zsh
+#
+
+[plugins.compinit]
+inline = 'autoload -Uz compinit && zsh-defer compinit'
+
+[plugins.custom-commands]
+inline = 'autoload -Uz dev cdgwq cdw'
+
+[plugins.fzf]
+github = 'junegunn/fzf'
+apply = ['fzf-install']
+hooks.post = '''
+export FZF_DEFAULT_OPTS="--reverse"
+'''
+
+#
+# Zsh-related Plugins
+#
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+apply = ['defer']
+
+[plugins.zsh-completions]
+github = 'zsh-users/zsh-completions'
+apply = ['defer']
+
+[plugins.zsh-syntax-highlighting]
+github = 'zsh-users/zsh-syntax-highlighting'
+apply = ['defer']
+
+[plugins.zsh-autopair]
+github = 'hlissner/zsh-autopair'
+apply = ['defer']
+
+[plugins.zsh-history-on-success]
+github = 'nyoungstudios/zsh-history-on-success'
+
+[plugins.oh-my-zsh]
+github = "ohmyzsh/ohmyzsh"
+use = [
+    #
+    # Load necessary functions first
+    #
+    'lib/functions.zsh',
+    #
+    # Load other useful libraries
+    #
+    'lib/completion.zsh',
+    'lib/history.zsh',
+    'lib/termsupport.zsh',
+    #
+    # Load some plugins
+    #
+    'plugins/fzf/fzf.plugin.zsh',
+]
+
+[plugins.zsh-history-shell-options]
+inline = '''
+setopt INC_APPEND_HISTORY_TIME
+setopt INC_APPEND_HISTORY
+'''
+
+#
+# Mise for managing multiple versions of tools
+#
+
+[plugins.mise]
+inline = 'eval "$(~/.local/bin/mise activate zsh)"'
+
+#
+# Language-related plugins
+#
+
+[plugins.lang]
+inline = '''
+function _lang() {
+    export LANG='en_US.UTF-8'
+}
+zsh-defer _lang
+'''
+
+[plugins.go]
+inline = '''
+function _go() {
+    export GOPATH="${HOME}/ghq"
+    export GOROOT=$(go env GOROOT)
+
+    typeset -gU path
+    path=(
+        $path
+        ${GOPATH}/bin(N-/)
+        ${HOME}/.go/bin(N-/)
+    )
+}
+zsh-defer _go
+'''
+
+[plugins.rust]
+inline = '''
+function _rust() {
+    typeset -gU path
+    path=(
+        $path
+        ${HOME}/.cargo/bin(N-/)
+    )
+}
+zsh-defer _rust
+'''
+
+[plugins.bun]
+inline = '''
+export BUN_INSTALL="$HOME/.bun"
+
+typeset -gU path
+path+=(
+    $BUN_INSTALL/bin(N-/)
+)
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
+'''
+
+#
+# Aliases
+#
+
+[plugins.common-alias]
+local = '~/.config/alias'
+use = ['common.sh']
+apply = ['source']
+
+#
+# GPG
+#
+
+[plugins.gpg]
+inline = '''
+function _gpg() {
+    export GPG_TTY=$(tty)
+}
+zsh-defer _gpg
+'''
+
+#
+# Prompt
+#
+
+[plugins.powerlevel10k]
+github = "romkatv/powerlevel10k"
+
+[plugins.p10k]
+local = "~/.config/powerlevel10k"
+use = ["p10k.zsh"]
+apply = ["source"]
+
+#
+# Git related plugins
+#
+
+[plugins.git-open]
+github = "paulirish/git-open"
+apply = ["defer"]
+
+[plugins.homebrew]
+inline = '''
+function _homebrew() {
+    # Disable installing certain formulae
+    export HOMEBREW_FORBIDDEN_FORMULAE="node python python3 pip npm pnpm yarn claude"
+}
+zsh-defer _homebrew
+'''
+
+[plugins.macos-path]
+inline = '''
+function _macos_path() {
+    typeset -gU path
+    path=(
+        $path
+        /opt/{homebrew,local}/{,s}bin(N-/)
+    )    
+}
+zsh-defer _macos_path
+'''
+
+[plugins.macos-browser]
+inline = '''
+function _macos_browser() {
+    if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
+        export BROWSER='open'
+    fi
+}
+zsh-defer _macos_browser
+'''
+
+[plugins.macos-command]
+inline = '''
+function _macos_command() {
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+}
+zsh-defer _macos_command
+'''
+
+#################
+#  ZIM Modules  #
+#################
+
+# Official Zim modules
+#zmodule environment
+#zmodule git
+#zmodule input
+#zmodule termtitle
+#zmodule utility
+#zmodule run-help
+#zmodule archive
+#zmodule direnv
+#zmodule fzf
+#zmodule magic-enter
+#zmodule ssh
+#zmodule homebrew
+
+# Third-party ZSH modules
+#zmodule zsh-users/zsh-completions --fpath src
+#zmodule zsh-users/zsh-syntax-highlighting
+#zmodule zsh-users/zsh-history-substring-search
+#zmodule kiesman99/zim-zoxide  # zoxide integration for Zim (provides the `z` command)
+#zmodule Tarrasch/zsh-bd --source bd.zsh

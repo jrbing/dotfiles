@@ -1,0 +1,262 @@
+#!/usr/bin/env zsh
+
+###################
+#  Path Settings  #
+###################
+
+typeset -gU path fpath
+path=(
+    $path
+    /usr/local/{,s}bin(N-/)
+    ${HOME}/.local/bin(N-/)
+    ${HOME}/.local/bin/common(N-/)
+)
+fpath=(
+    $fpath
+    ${HOME}/.local/bin/common(N-/)
+)
+
+############################
+#  Sheldon Initialization  #
+############################
+
+eval "$(sheldon source)"
+
+################################################################################
+#                                    Legacy                                    #
+################################################################################
+
+###########
+#  fpath  #
+###########
+
+# Prepend custom function directory to fpath
+#fpath=("${DOTFILES}/zsh/functions" $fpath)
+
+##################
+#  Key Bindings  #
+##################
+#bindkey '^[OA' history-substring-search-up
+#bindkey '^[OB' history-substring-search-down
+#export HISTORY_SUBSTRING_SEARCH_FUZZY=1
+
+##########
+#  Misc  #
+##########
+
+# mise
+#if [[ $commands[mise] ]]; then
+  #eval "$(mise activate zsh)"
+#fi
+
+#case $(uname -a) in
+#*Microsoft*|*Darwin*)
+    #unsetopt BG_NICE
+    #;;
+#esac
+
+#################
+#  ZSH Options  #
+#################
+
+# Don't ask before executing rm * or rm path/*
+#setopt rmstarsilent
+
+##########################
+#  Application Settings  #
+##########################
+
+# Postgres
+#export PSQL_EDITOR=vim
+
+# Oracle SQLcl
+# export SQLPATH="${DOTFILES}/sql/oracle"
+# export SQLFORMATPATH="${DOTFILES}/sql/format.xml"
+# export NLS_LANG=American_America.UTF8
+# if [[ -d "/opt/oracle/sqlcl" ]]; then
+  # path+=('/opt/oracle/sqlcl/bin')
+# fi
+
+# TNS
+# if [[ -d "/opt/oracle/tns" ]]; then
+  # export TNS_ADMIN=/opt/oracle/tns
+# fi
+
+# Rundeck CLI
+# if [[ -d '/opt/rundeck/rd' ]]; then
+  # path+=('/opt/rundeck/rd/bin')
+# fi
+
+# Krew plugins
+#if [[ -d "${HOME}/.krew/bin" ]]; then
+  #path+=("${HOME}/.krew/bin")
+#fi
+
+# Pipx
+#if [[ -d "${HOME}/.local/bin" ]]; then
+  #path+=("${HOME}/.local/bin")
+#fi
+
+# TeX
+#if [[ -d "/Library/TeX/texbin" ]]; then
+  #path+=("/Library/TeX/texbin")
+#fi
+
+# Cargo
+#if [[ -d "${HOME}/.cargo/bin" ]]; then
+  #path+=("${HOME}/.cargo/bin")
+#fi
+
+# Bun
+#if [[ -d "${HOME}/.bun" ]]; then
+  ## bun
+  #export BUN_INSTALL="${HOME}/.bun"
+  #path+=("${BUN_INSTALL}/bin")
+#fi
+
+############
+#  Prompt  #
+############
+
+# Starship prompt
+# NOTE: Sets options for spaceship prompt if starship is not installed
+#if [[ $commands[starship] ]]; then
+  #eval "$(starship init zsh)"
+#else
+  #SPACESHIP_PROMPT_ORDER=(
+    #dir           # Current directory
+    #char          # Prompt character
+  #)
+
+  #SPACESHIP_RPROMPT_ORDER=(
+    #exec_time     # Execution time
+    #jobs          # Background jobs indicator
+    #exit_code     # Exit code section
+    #git           # Git branch and git status
+  #)
+
+  #SPACESHIP_PROMPT_ADD_NEWLINE=false
+  #SPACESHIP_PROMPT_SEPARATE_LINE=false
+  #SPACESHIP_DIR_COLOR="blue"
+  #SPACESHIP_EXIT_CODE_SHOW=true
+  #SPACESHIP_CHAR_SUFFIX=" "
+  #SPACESHIP_CHAR_SYMBOL="❯❯❯"
+
+  #SPACESHIP_EXEC_TIME_PREFIX="⌛ "
+  #SPACESHIP_EXEC_TIME_ELAPSED=5
+  #SPACESHIP_KUBECONTEXT_COLOR="blue"
+  #SPACESHIP_GIT_PREFIX="| "
+  #SPACESHIP_GIT_STATUS_PREFIX=" "
+  #SPACESHIP_GIT_STATUS_SUFFIX=""
+#fi
+
+###############
+#  Functions  #
+###############
+
+# Switch the current java version
+#function java_use() {
+  #export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+  #java -version
+#}
+
+## Generate a random password
+#function randpw() {
+  #openssl rand -base64 16 | md5 | head -c16; echo
+#}
+
+## Make a temporary directory and enter it
+#function tmpd() {
+  #if [[ $# -eq 0 ]]; then
+    #local dir=$(mktemp -d) && cd $dir
+  #else
+    #local dir=$(mktemp -d -t $1.XXXXXXXXXX) && cd $dir
+  #fi
+#}
+
+## Improved tree
+#function tre() {
+  #tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
+#}
+
+## Assume AWS credentials
+#function assume-aws-role(){
+  ## $1 is the role to assume from current role
+  #echo "Assuming role: $1"
+  #aws sts assume-role --role-arn $1 --role-session-name AWSCLI-Session  > /tmp/assume-role.yaml
+  #export AWS_ACCESS_KEY_ID=$(yq .Credentials.AccessKeyId /tmp/assume-role.yaml)
+  #export AWS_SECRET_ACCESS_KEY=$(yq .Credentials.SecretAccessKey /tmp/assume-role.yaml)
+  #export AWS_SESSION_TOKEN=$(yq .Credentials.SessionToken /tmp/assume-role.yaml)
+  #rm -f /tmp/assume-role.yaml
+#}
+
+## Switch AWS profile
+#function awsctx() {
+  #profile=$(aws configure list-profiles | fzf)
+  #[[ -n "$profile" ]] && export AWS_PROFILE=${profile}
+#}
+
+## Kubernetes debug pod
+#function kdebug() {
+  #kubectl run -i --rm --tty debug --image=alpine --restart=Never -- sh
+#}
+
+################
+#  Completion  #
+################
+
+# Enable bash completion support
+#autoload -U +X bashcompinit && bashcompinit
+
+## Azure CLI
+#if [[ $commands[az] ]]; then
+  #source "${DOTFILES}/completions/az.zsh"
+#fi
+
+## Kubernetes CLI
+#if [[ $commands[kubectl] ]]; then
+  #source <(kubectl completion zsh)
+  #compdef kubecolor=kubectl
+#fi
+
+## Helm CLI
+#if [[ $commands[helm] ]]; then
+  #source <(helm completion zsh)
+#fi
+
+# NATS nsc CLI
+#if [[ $commands[nsc] ]]; then
+  #source <(nsc completion zsh)
+#fi
+
+## aws-sso-util
+#if [[ -e ~/.local/bin/aws-sso-util ]]; then
+  #eval "$(_AWS_SSO_UTIL_COMPLETE=source_zsh aws-sso-util)"
+#fi
+
+## talosctl
+#if [[ $commands[talosctl] ]]; then
+  #source <(talosctl completion zsh)
+#fi
+
+## Atuin: shell history - https://github.com/atuinsh/atuin
+#if [[ $commands[atuin] ]]; then
+  #eval "$(atuin init zsh --disable-up-arrow)"
+#fi
+
+## awscli v2
+#if [[ $commands[aws_completer] ]]; then
+  #source <(talosctl completion zsh)
+  #complete -C 'aws_completer' aws
+#fi
+
+## bun
+#if [[ $commands[bun] ]]; then
+  #source "${HOME}/.bun/_bun"
+#fi
+
+###############
+#  Profiling  #
+###############
+
+#zprof

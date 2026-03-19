@@ -1,0 +1,104 @@
+name: MacOS
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/macos.yaml"
+      - "setup.sh"
+      - "install/macos/**"
+      - "home/.chezmoiscripts/macos/**"
+      - "home/dot_tmux.conf.d/os/macos.conf"
+      - "tests/install/macos/**"
+
+  pull_request:
+    branches: [master]
+    paths:
+      - ".github/workflows/macos.yaml"
+      - "setup.sh"
+      - "install/macos/**"
+      - "home/.chezmoiscripts/macos/**"
+      - "home/dot_tmux.conf.d/os/macos.conf"
+      - "tests/install/macos/**"
+
+jobs:
+  build:
+    runs-on: macos-14 # M1 Mac
+    env:
+      # DOTFILES_DEBUG: 1
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Set up SSH agent and add the private deploy key for the private dotfiles repo
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_DOTFILES_PRIVATE_DEPLOY_KEY }}
+
+      - name: Setup dotfiles
+        env:
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EVENT_NAME: ${{ github.event_name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # for avoiding rate limit of GitHub API
+        run: |
+          if [ "${EVENT_NAME}" == "push" ]; then
+            BRANCH_NAME="${{ github.ref_name }}"
+          elif [ "${EVENT_NAME}" == "pull_request" ]; then
+            BRANCH_NAME="${{ github.head_ref }}"
+          fi
+          export BRANCH_NAME
+
+          URL="https://raw.githubusercontent.com/shunk031/dotfiles/${BRANCH_NAME}/setup.sh"
+          echo "Download setup.sh from ${URL}"
+
+          printf "${EMAIL_ADDRESS}\n" | bash -c "$(curl -fsLS $URL)"
+          #              │
+          #              └─ Simulate inputting an email address into the chezmoi's config.
+
+      - name: Unset gpg
+        run: |
+          git config --global commit.gpgsign false
+
+      - name: Run benchmark
+        run: |
+          brew install gnu-time chezmoi
+          $(chezmoi source-path)/../scripts/run_benchmark.sh > result.json
+
+      - name: Dump result.json
+        run: cat result.json
+
+      - name: Set flag for auto-push in the benchmark action
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/master" ]; then
+            echo "auto_push=true" >> $GITHUB_ENV
+          else
+            echo "auto_push=false" >> $GITHUB_ENV
+          fi
+
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: MacOS benchmark
+          tool: customSmallerIsBetter
+          output-file-path: result.json
+          github-token: ${{ secrets.MY_DOTFILES_BENCHMARK }}
+          gh-repository: "github.com/shunk031/my-dotfiles-benchmarks"
+          auto-push: ${{ env.auto_push }}
+          comment-on-alert: true
+          fail-on-alert: false
+          alert-threshold: "150%"
+          alert-comment-cc-users: "@shunk031"
+          benchmark-data-dir-path: "."
+
+      - uses: jdx/mise-action@v3
+        with:
+          install: true
+          cache: true
+
+      - name: Test file existence
+        run: |
+          brew install bats-core
+
+          cd $(chezmoi source-path)/../
+          bats --print-output-on-failure \
+            tests/files/common.bats \
+            tests/files/macos.bats

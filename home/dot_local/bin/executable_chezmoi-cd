@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+chezmoi-cd() {
+    cd "$(chezmoi source-path)" || return
+}
+
+if [ -n "$($SHELL -c "echo ${ZSH_VERSION}")" ]; then
+    chezmoi-cd
+fi

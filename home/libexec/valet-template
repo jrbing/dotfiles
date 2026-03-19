@@ -1,0 +1,176 @@
+#!/usr/bin/env ruby
+# Usage: valet template <type>
+# Summary: Create script from template
+# Help: Creates script files based on predefined templates
+
+require 'fileutils'
+require 'thor'
+require 'thor/actions'
+require 'securerandom'
+require_relative '../share/valet/util'
+
+TEMPLATE_DIRECTORY = File.expand_path('~/.dotfiles/share/valet/templates')
+
+class Template < Thor
+
+  include Thor::Actions
+  include Valet
+
+  self.source_root(TEMPLATE_DIRECTORY)
+
+  # sqlplus script
+  desc "sqlplus [NAME]", "Creates a basic sqlplus script from template"
+  def sqlplus(script_name=nil)
+    @script_name = get_script_name(script_name)
+    @date = Time.now.localtime.strftime("%m/%d/%Y")
+    create_from_template("sqlplus_script.erb", "#{@script_name}.sql")
+  end
+
+  # datamover script
+  desc "datamover [NAME]", "Creates a basic datamover script from template"
+  def datamover(script_name=nil)
+    @script_name = get_script_name(script_name)
+    create_from_template("datamover_script.erb", "#{@script_name}.dms")
+    run "unix2dos #{@script_name}.dms"
+  end
+
+  # bash script
+  desc "bash [NAME]", "Creates a basic bash script from template"
+  def bash(script_name=nil)
+    @script_name = get_script_name(script_name)
+    chmod(create_from_template("bash_script.erb", "#{@script_name}.sh"), 0755)
+  end
+
+  # envrc
+  desc "envrc", "Creates a basic .envrc file in the current directory"
+  def envrc
+    create_from_template("envrc.erb", ".envrc")
+  end
+
+  # mise
+  desc "mise", "Creates a basic mise.toml file in the current directory"
+  def mise
+    create_from_template("mise.erb", ".mise.toml")
+  end
+
+  # thorfile
+  desc "thorfile", "Creates a basic Thorfile"
+  def thorfile(script_name=nil)
+    chmod(create_from_template("thor_script.erb", "Thorfile"), 0755)
+  end
+
+  # windows batch script
+  desc "batch [NAME]", "Creates a basic dos batch script file"
+  def batch(script_name=nil)
+    @script_name = get_script_name(script_name)
+    create_from_template("batch_script.erb", "#{@script_name}.bat")
+    run "unix2dos #{@script_name}.bat"
+  end
+
+  # datafix
+  desc "datafix [NAME]", "Creates datafix files and directories"
+  def datafix(datafix_name=nil)
+    @datafix_name = get_datafix_name(datafix_name)
+    records = ask("Records to be affected: ").upcase.split(' ').uniq
+    @date = Time.now.localtime.strftime("%m/%d/%Y")
+
+    # Create the datafix directory
+    @datafix_base_directory = create_datafix_directory(@datafix_name)
+    create_from_template("datafix_script.erb", "#{@datafix_name}.sql")
+
+    # Create the datamover export files for all records
+    records.each do |record|
+      @record = record
+      create_from_template("sqlcl_backup_insert.erb", "#{@record}_backup_script.sql")
+      #create_from_template("sqlcl_backup.erb", "#{@record}_backup_script.sql")
+      #create_from_template("datamover_backup.erb", "#{@record}.dms")
+    end
+    run "unix2dos #{@datafix_base_directory}/*"
+  end
+
+  # windows powershell script
+  desc "powershell [NAME]", "Creates a basic powershell script"
+  def powershell(script_name=nil)
+    @script_name = get_script_name(script_name)
+    @guid = SecureRandom.uuid
+    create_from_template("powershell.erb", "#{@script_name}.ps1")
+    run "unix2dos #{@script_name}.ps1"
+  end
+
+  # makefile
+  desc "make", "Creates a basic makefile"
+  def make
+    create_from_template("makefile.erb", "Makefile")
+  end
+
+  # Taskfile
+  desc "task", "Creates a basic taskfile"
+  def task
+    create_from_template("taskfile.erb", "Taskfile.yml")
+  end
+
+  # editorconfig configuration file
+  desc "editorconfig", "Creates a basic editorconfig file"
+  def editorconfig
+    create_from_template("editorconfig.erb", ".editorconfig")
+  end
+
+  # README.md file
+  desc "readme", "Creates a basic readme file"
+  def readme(project_name=nil)
+    @project_name = get_project_name(project_name)
+    create_from_template("readme.erb", "README.md")
+  end
+
+  # python script
+  desc "python [NAME]", "Creates a python script"
+  def python(script_name=nil)
+    @script_name = get_script_name(script_name)
+    @date = Time.now.localtime.strftime("%m/%d/%Y")
+    chmod(create_from_template("python_script.erb", "#{@script_name}.py"), 0755)
+  end
+
+  # dockerfile
+  desc "dockerfile", "Creates a sample Dockerfile"
+  def dockerfile
+    create_from_template("dockerfile.erb", "Dockerfile")
+    #@source = File.expand_path('~/.dotfiles/share/valet/templates/s6/rootfs')
+    #directory(@source, "rootfs")
+  end
+
+  # dockercompose
+  desc "dockercompose", "Creates a sample Docker Compose file"
+  def dockercompose
+    create_from_template("dockercompose.erb", "docker-compose.yml")
+  end
+
+  # vim rest console
+  desc "vrc [NAME]", "Creates a sample Vim REST Console file"
+  def vrc(script_name=nil)
+    @script_name = get_script_name(script_name)
+    create_from_template("vrc.erb", "#{@script_name}.rest")
+  end
+
+  # modd configuration
+  desc "modd", "Creates a sample modd configuration file"
+  def modd
+    create_from_template("modd_configuration.erb", "modd.conf")
+  end
+
+  # markdown file
+  desc "markdown [NAME]", "Creates a basic markdown file from template"
+  def markdown(file_name=nil)
+    @file_name = get_file_name(file_name)
+    create_from_template("markdown.erb", "#{@file_name}.md")
+  end
+
+  # mutagen configuration
+  desc "mutagen", "Creates a sample mutagen project file"
+  def mutagen
+    create_from_template("mutagen.erb", "mutagen.yml")
+  end
+
+
+end
+
+Template.start(ARGV)

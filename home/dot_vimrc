@@ -1,0 +1,1572 @@
+" vim: set sw=2 ts=2 sts=2 et
+" Personal .vimrc file
+" JR Bing <jr@jrbing.com>
+" -------------------------------------------------------------------------
+"   Much of this is borrowed heavily from Vincent Driessen, Steve Losh, Tim
+"   Pope, Janus, and the rest of the internet
+" -------------------------------------------------------------------------
+" Environment functions {{{1
+
+  silent function! g:OSX()
+    return has('macunix')
+  endfunction
+  silent function! g:LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+  endfunction
+  silent function! g:WINDOWS()
+    return  (has('win16') || has('win32') || has('win64'))
+  endfunction
+  silent function! g:MACVIM()
+    return has('gui_macvim')
+  endfunction
+  silent function! g:VIMR()
+    return has('gui_vimr')
+  endfunction
+
+" }}}
+
+" Plugins {{{1
+
+  "set nocompatible
+  filetype off
+
+  if g:WINDOWS()
+    call plug#begin('~/vimfiles/plugged')
+  else
+    call plug#begin('~/.vim/plugged')
+  endif
+
+  " Utilities
+  Plug 'artnez/vim-wipeout'
+  Plug 'chrisbra/matchit'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'dbeniamine/cheat.sh-vim'
+  Plug 'diepm/vim-rest-console', { 'for': ['rest'] }
+  Plug 'direnv/direnv.vim'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'ervandew/supertab'
+  Plug 'godlygeek/tabular'
+  Plug 'mattmartini/vim-nerdtree-tabs'
+  "Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
+  Plug 'junegunn/fzf'
+  Plug 'justinmk/vim-sneak'
+  Plug 'kristijanhusak/vim-carbon-now-sh'
+  Plug 'lambdalisue/vim-gista'
+  Plug 'majutsushi/tagbar'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'mtth/scratch.vim'
+  Plug 'preservim/nerdcommenter'
+  Plug 'preservim/nerdtree'
+  Plug 'psliwka/vim-smoothie'
+  Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-dadbod', { 'for': ['sql', 'plsql'] }
+  Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-jdaddy', { 'for': ['json'] }
+  Plug 'tpope/vim-projectionist'
+  Plug 'tpope/vim-ragtag'
+  Plug 'tpope/vim-rbenv', { 'for': ['ruby'] }
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-rhubarb'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-tbone'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'vim-pandoc/vim-pandoc', { 'for': ['pandoc', 'markdown'] }
+  Plug 'vim-scripts/Align'
+  Plug 'wincent/ferret'
+  Plug 'vim-autoformat/vim-autoformat'
+  Plug 'EvanDotPro/nerdtree-chmod'
+  Plug 'Raimondi/delimitMate'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'mattn/webapi-vim'
+  Plug 'github/copilot.vim'
+
+  "Plug 'lambdalisue/fern.vim'
+  "Plug 'lambdalisue/nerdfont.vim'
+  "Plug 'lambdalisue/fern-ssh'
+  "Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+  "Plug 'lambdalisue/fern-bookmark.vim'
+  "Plug 'LumaKernel/fern-mapping-reload-all.vim'
+  "Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
+
+  " Colorschemes
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'chriskempson/base16-vim'
+  Plug 'joshdick/onedark.vim'
+  Plug 'lifepillar/vim-solarized8'
+  Plug 'morhetz/gruvbox'
+  Plug 'rakr/vim-one'
+  Plug 'ghifarit53/tokyonight-vim'
+
+  " Filetypes
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'sheerun/vim-polyglot'
+  Plug 'davidoc/taskpaper.vim', { 'for': ['taskpaper'] }
+  Plug 'funcodeio/lz4.vim'
+  Plug 'google/vim-jsonnet', { 'for': ['jsonnet'] }
+  Plug 'hashivim/vim-terraform'
+  Plug 'hjson/vim-hjson', { 'for': ['hjson'] }
+  Plug 'kergoth/vim-bitbake'
+  Plug 'kevinoid/vim-jsonc'
+  Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+  Plug 'robbles/logstash.vim'
+  Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
+  Plug 'tangledhelix/vim-kickstart', { 'for': ['kickstart'] }
+  Plug 'towolf/vim-helm', { 'for': ['helm'] }
+  Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
+  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['pandoc', 'markdown'] }
+  Plug 'vim-scripts/plsql.vim', { 'for': ['plsql'] }
+  Plug 'andrewstuart/vim-kubernetes', { 'for': ['yaml'] }
+  Plug 'gianarb/vim-flux', { 'for': ['flux'] }
+  Plug 'omer/vim-sparql', { 'for': ['sparql'] }
+  Plug 'terrastruct/d2-vim'
+  "Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
+  "Plug 'ap/vim-css-color'
+
+  let g:polyglot_disabled = ['go', 'markdown']
+
+  if g:OSX()
+    Plug 'rizzatti/dash.vim'
+    Plug 'dense-analysis/ale'
+    Plug 'vim-voom/VOoM'
+    Plug 'metakirby5/codi.vim'
+    if !g:VIMR()
+      Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
+    endif
+  endif
+
+  call plug#end()
+
+  filetype plugin indent on
+  let g:mapleader = ','
+  let g:maplocalleader = '_'
+
+" }}}
+
+" Editing Behavior {{{1
+
+  if has('multi_byte')
+    if &termencoding ==# ''
+      let &termencoding = &encoding
+    endif
+    set encoding=utf-8
+    scriptencoding utf-8
+    setglobal fileencoding=utf-8
+    "setglobal bomb
+    set fileencodings=ucs-bom,utf-8,latin1
+  endif
+  set autoindent
+  set breakindent
+  set showbreak=↳
+  set showmode
+  set showcmd
+  set hidden
+  set visualbell
+  set ttyfast
+  set ruler
+  set backspace=indent,eol,start
+  set number
+  set laststatus=2
+  set history=1000
+  set cpoptions+=J
+  if !g:WINDOWS()
+    set shell=/bin/bash
+  endif
+  "set lazyredraw
+  set matchtime=3
+  set splitbelow
+  set splitright
+  set fillchars=diff:⣿
+  set ttimeout
+  set notimeout
+  set nottimeout
+  set autowrite
+  set shiftround
+  set autoread
+  set title
+  set mouse=a
+  set mousehide
+
+  syntax on
+
+  set synmaxcol=200                               " Don't try to highlight lines longer than 200 characters.
+  set shortmess+=filmnrxoOtT                      " Abbrev. of messages (avoids 'hit enter')
+  set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+
+  set iskeyword-=.                    " '.' is an end of word designator
+  set iskeyword-=#                    " '#' is an end of word designator
+  set iskeyword-=-                    " '-' is an end of word designator
+
+  " Backup settings
+  set backupdir=$HOME/.vim/tmp/backup// " backup directory location
+  set directory=$HOME/.vim/tmp/swap//   " swap file location
+  set backup                            " enable backups
+  set noswapfile                        " disable swapfiles
+
+  " Wildmenu completion
+  set wildmenu
+  set wildmode=list:longest
+
+  set wildignore+=.hg,.git,.svn                    " version control
+  set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+  set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+  set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+  set wildignore+=*.spl                            " compiled spelling word lists
+  set wildignore+=*.sw?                            " Vim swap files
+  set wildignore+=*.DS_Store                       " OSX temp files
+
+  " Use modeline overrides
+  set modeline
+  set modelines=5
+
+  " Set par as the paragraph formatting program to use
+  if executable('par')
+    set formatprg=par
+  endif
+
+  " Set folding method, but disable by default
+  set foldmethod=syntax
+  set nofoldenable
+
+" }}}
+
+" Whitespace {{{2
+
+  set nowrap
+  set expandtab
+  set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
+  set textwidth=80
+  set formatoptions=qrn1j
+
+" }}}
+
+" Version specific {{{2
+
+  if v:version >= 800
+    " True color support
+    set termguicolors
+  endif
+
+  if v:version >= 730
+    set norelativenumber
+    set undofile
+    set undoreload=10000
+    set undodir=$HOME/.vim/tmp/undo//     " undo files
+    set colorcolumn=+1
+  endif
+
+" }}}
+
+
+" Visual mode {{{2
+
+  function! s:VSetSearch()
+    let l:temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = l:temp
+  endfunction
+
+  vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+  vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+
+" }}}
+
+" Display {{{1
+
+  " Colorscheme
+  set background=dark
+  if has('gui_macvim') || has('gui_vimr') || has('gui_running')
+    "let g:solarized_visibility = 'normal'
+    "let g:solarized_diffmode = 'normal'
+    "let g:solarized_termtrans = 0
+    "let g:solarized_contrast = 'normal'
+    "let g:solarized_statusline = 'normal'
+    "let g:solarized_term_italics = 0
+    "let g:solarized_old_cursor_style = 0
+    "colorscheme solarized8_dark
+    "colorscheme nord
+    colorscheme onedark
+    "let g:tokyonight_style = 'night' " available: night, storm
+    "let g:tokyonight_enable_italic = 1
+    "colorscheme tokyonight
+    "let g:airline_theme = "tokyonight"
+  else
+    let g:gruvbox_italic = 0
+    colorscheme gruvbox
+  endif
+
+  " Highlight the current line
+  set cursorline
+
+  " Set the tab label to equal the file name
+  set guitablabel=%t
+
+" }}}
+
+" Search {{{1
+
+  " Use sane regexes.
+  "nnoremap / /\v
+  "vnoremap / /\v
+
+  set ignorecase
+  set smartcase
+  set incsearch
+  set showmatch
+  set hlsearch
+  set gdefault
+
+  set scrolloff=3
+  set sidescroll=1
+  set sidescrolloff=10
+
+  set virtualedit+=block
+
+  nnoremap <leader><space> :noh<cr>:call clearmatches()<cr>
+
+  " Keep search matches in the middle of the window and pulse the line when moving
+  " to them.
+  nnoremap n nzzzv:call PulseCursorLine()<cr>
+  nnoremap N Nzzzv:call PulseCursorLine()<cr>
+
+" }}}
+
+" Key Mappings {{{1
+
+  " Bubble single lines
+  nmap <C-Up> [e
+  nmap <C-Down> ]e
+
+  " Bubble multiple lines
+  vmap <C-Up> [egv
+  vmap <C-Down> ]egv
+
+  " Remap ; to :
+  nnoremap ; :
+  vnoremap ; :
+
+  " Visual shifting (does not exit Visual mode)
+  vnoremap < <gv
+  vnoremap > >gv
+
+  " Map Ctrl+h,j,k,l to easily move around splits
+  nnoremap <C-J> <C-W>j<C-W>_
+  nnoremap <C-K> <C-W>k<C-W>_
+  nnoremap <C-L> <C-W>l<C-W>_
+  nnoremap <C-H> <C-W>h<C-W>_
+
+  " Opens an edit command with the path of the currently edited file filled in
+  " normal mode: <Leader>e
+  nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+  " Opens a tab edit command with the path of the currently edited file filled in
+  " Normal mode: <Leader>t
+  "map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
+  " Command mode: Ctrl+P
+  "cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+  " Remap ,v to re-select text that was just pasted
+  nnoremap <leader>v V`]
+
+  " Bring up the CtrlP buffer window
+  nnoremap <leader>b :CtrlPBuffer<CR>
+
+  " Adjust viewports to the same size
+  noremap <Leader>= <C-w>=
+  inoremap <Leader>= <Esc> <C-w>=
+
+  " Map Ctrl+Tab and Ctrl+Shift+Tab to switch tabs
+  nnoremap <silent> <C-Tab> :call<sid>CycleTabpages(1)<cr>
+  nnoremap <silent> <C-S-Tab> :call<sid>CycleTabpages(0)<cr>
+
+  " Align text
+  nnoremap <leader>Al :left<cr>
+  nnoremap <leader>Ac :center<cr>
+  nnoremap <leader>Ar :right<cr>
+  vnoremap <leader>Al :left<cr>
+  vnoremap <leader>Ac :center<cr>
+  vnoremap <leader>Ar :right<cr>
+
+  " Use ,gf to go to file in a vertical split
+  nnoremap ,gf :vertical botright wincmd f<CR>
+
+  " Sudo to write
+  cmap w!! w !sudo tee % >/dev/null
+
+  " Yank from the cursor to the end of the line, to be consistent with C and D
+  nnoremap Y y$
+
+  " Easier horizontal scrolling
+  map zl zL
+  map zh zH
+
+  " Close all buffers not open in a tab
+  nnoremap <leader>wo :Wipeout<CR>
+
+  " Forward clipboard contents to clipper
+  if g:OSX()
+    nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+  endif
+
+  " Function Keys {{{2
+
+    " Remap help to escape
+    inoremap <F1> <ESC>
+    nnoremap <F1> <ESC>
+    vnoremap <F1> <ESC>
+
+    " Toggle paste mode
+    set pastetoggle=<F3>
+
+    " Autoformat the current buffer
+    nnoremap <F4> :Autoformat<CR><CR>
+
+    " Trim trailing whitespace
+    nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+
+    " Toggle the tagbar
+    nnoremap <silent> <F8> :TagbarToggle<CR>
+
+    " Reset NERDTree window size
+    nnoremap <silent> <F9> :vertical resize 30 :set winfixwidth<CR>
+
+  " }}}
+
+" }}}
+
+" Autocommands {{{1
+
+  " Make {{{2
+    augroup ft_make
+      autocmd!
+      autocmd FileType make    setlocal noexpandtab
+    augroup END
+  "}}}
+
+  " Python {{{2
+    augroup ft_python
+      autocmd!
+      autocmd FileType python setlocal define=^\s*\\(def\\\\|class\\)
+      autocmd FileType python setlocal
+            \ tabstop=8
+            \ softtabstop=4
+            \ shiftwidth=4
+            \ smarttab
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
+
+      autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+      autocmd BufRead *.py setlocal
+            \ smartindent
+            \ cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+      autocmd FileType python let b:dispatch = 'python %'
+      autocmd FileType python let b:autoformat_autoindent = 0
+    augroup END
+  "}}}
+
+  " Ruby {{{2
+    augroup ft_ruby
+      autocmd!
+      autocmd BufRead,BufNewFile {Gemfile,Vagrantfile,Rakefile,Thorfile,Procfile,config.ru,*.rake,*.cap} setlocal ft=ruby
+    augroup END
+  "}}}
+
+  " Markdown {{{2
+    augroup ft_markdown
+      autocmd!
+      autocmd BufRead,BufNewFile,BufFilePre *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+    augroup END
+  "}}}
+
+  " Textfiles {{{2
+    augroup ft_txt
+      autocmd!
+      autocmd BufRead,BufNewFile *.{txt} call s:setupWrapping()
+    augroup END
+  "}}}
+
+  " Datamover {{{2
+    augroup ft_datamover
+      autocmd!
+      autocmd BufRead,BufNewFile *.{dms} setlocal ft=sql
+    augroup END
+  "}}}
+  "
+  " Java {{{2
+    augroup ft_java
+      autocmd!
+      autocmd FileType java  setlocal tabstop=2 softtabstop=2 shiftwidth=2 smarttab expandtab autoindent
+    augroup END
+  "}}}
+
+  " Gradle {{{2
+    augroup ft_gradle
+      autocmd!
+      autocmd BufRead,BufNewFile *.{gradle} setlocal ft=groovy tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    augroup END
+  "}}}
+
+  " TaskPaper {{{2
+    augroup ft_taskpaper
+      autocmd!
+      autocmd BufRead,BufNewFile *.{taskpaper} setlocal autoread nolist textwidth=0 wrapmargin=0
+    augroup END
+  "}}}
+
+  " C/C++ {{{2
+    augroup ft_cstyle
+      autocmd!
+      autocmd BufRead,BufNewFile *.{c,h,cpp} call CStyleIndent()
+    augroup END
+  "}}}
+
+  " Go {{{2
+    augroup ft_golang
+      autocmd!
+      autocmd BufRead,BufNewFile *.go call s:golangIndent()
+      "autocmd FileType go nmap <leader>s <Plug>(go-implements)
+      "autocmd FileType go nmap <leader>i <Plug>(go-info)
+      "autocmd FileType go nmap <leader>gd <Plug>(go-doc)
+      "autocmd FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+      "autocmd FileType go nmap <leader>gb <Plug>(go-doc-browser)
+      "autocmd FileType go nmap <leader>r <Plug>(go-run)
+      "autocmd FileType go nmap <leader>b <Plug>(go-build)
+      "autocmd FileType go nmap <leader>t <Plug>(go-test)
+      "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+      "autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
+      "autocmd FileType go nmap <leader>dv <Plug>(go-def-vertical)
+      "autocmd FileType go nmap <leader>dt <Plug>(go-def-tab)
+      "autocmd FileType go nmap <leader>e <Plug>(go-rename)
+    augroup END
+  "}}}
+
+  " Ansible {{{2
+    augroup ft_yaml.ansible
+      autocmd!
+      autocmd FileType yaml.ansible setlocal textwidth=0 wrapmargin=0
+    augroup END
+  "}}}
+
+  " Powershell {{{2
+    augroup ft_powershell
+      autocmd!
+      autocmd FileType ps1  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+      autocmd FileType ps1  let delimitMate_quotes = "\" '"
+    augroup END
+  "}}}
+
+  " VIMRC {{{2
+    " Automatically reload the vimrc file when changed
+    augroup myvimrc
+      autocmd!
+      autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+    augroup END
+  "}}}
+
+  " nginx {{{2
+    augroup nginx
+      autocmd Filetype nginx  setlocal tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab autoindent
+    augroup END
+  "}}}
+
+  " gitconfig {{{2
+    augroup gitconfig
+      autocmd Filetype gitconfig  setlocal tabstop=2 softtabstop=2 shiftwidth=2 smarttab noexpandtab autoindent nolist
+    augroup END
+  "}}}
+
+  " html {{{2
+    augroup html
+      " Fixes an issue with cursorline highlighting causing a scroll lag
+      autocmd Filetype html  setlocal nocursorline
+    augroup END
+  "}}}
+
+  " helm {{{2
+    augroup helm
+      autocmd BufRead,BufNewFile */templates/*.{yaml,yml} set ft=helm
+    augroup END
+  "}}}
+
+  " flux {{{2
+    augroup flux
+      autocmd BufRead,BufNewFile *.flux		set filetype=flux
+    augroup END
+  "}}}
+
+  " hcl {{{2
+    augroup hcl.fmt
+      autocmd!
+      autocmd BufWritePre *.hcl call hcl#align()
+    augroup END
+  "}}}
+
+  " Miscellaneous {{{2
+    augroup miscellaneous
+      autocmd!
+      " Save when focus is lost
+      autocmd FocusLost * :silent! wall
+      " Resize splits when the window is resized
+      autocmd VimResized * :wincmd =
+      autocmd InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
+      autocmd InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
+      " Remember the last location in a file
+      autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+    augroup END
+  "}}}
+
+" }}}
+
+" Plugin configuration/mapping {{{1
+
+  " Airline {{{2
+    let g:airline#extensions#tagbar#enabled = 0
+    let g:airline#extensions#ale#enabled = 1
+    if (has('gui_running') || has('gui_vimr'))
+      let g:airline_powerline_fonts = 1
+    else
+      let g:airline_powerline_fonts = 0
+      if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+      endif
+      let g:airline_left_sep = '»'
+      let g:airline_left_sep = '▶'
+      let g:airline_right_sep = '«'
+      let g:airline_right_sep = '◀'
+      let g:airline_symbols.crypt = '🔒'
+      let g:airline_symbols.linenr = '␊'
+      let g:airline_symbols.linenr = '␤'
+      let g:airline_symbols.linenr = '¶'
+      let g:airline_symbols.branch = '⎇'
+      let g:airline_symbols.paste = 'ρ'
+      let g:airline_symbols.paste = 'Þ'
+      let g:airline_symbols.paste = '∥'
+      let g:airline_symbols.whitespace = 'Ξ'
+    endif
+  "}}}
+
+  " ALE {{{2
+    " Only run linter on file open and save
+    let g:ale_lint_on_text_changed = 'never'
+
+    " Change the default signs
+    let g:ale_sign_error = '✗✗'
+    let g:ale_sign_warning = '∆∆'
+
+    " Change the error message format
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+    " Define linters
+    let g:ale_linters = {
+      \ 'python': ['ruff'],
+      \ 'cpp': ['cppcheck']
+    \}
+      "\ 'python': ['pylint'],
+    "let g:ale_python_pylint_use_global = 1
+
+    " Define fixers
+    let g:ale_fix_on_save = 1
+    let g:ale_fixers = {
+      \ 'javascript': ['prettier'],
+    \}
+    "let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+
+    " Parse the compile_commands.json file
+    let g:ale_c_parse_compile_commands = 1 
+  "}}}
+
+  " Align {{{2
+    " Change the menu name
+    let g:DrChipTopLvlMenu='Plugin.'
+  "}}}
+
+  " AutoFormat {{{2
+    let g:formatterpath = [ '/opt/homebrew/bin', '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin', '/usr/sbin', '/sbin', '/opt/go/bin', '/opt/oracle/sqlcl/bin' ]
+    let g:formatters_python = ['black']
+    "let g:formatters_python = ['yapf']
+    "let g:formatter_yapf_style = 'google'
+    let g:formatters_yaml = ['prettier']
+    "let g:formatdef_custom_yaml='yamlfmt -in'
+    let g:formatdef_custom_java='astyle --mode=java --style=google --pad-oper --convert-tabs --pad-header'
+    let g:formatters_java = ['custom_java']
+    let g:formatdef_sqlformat = '"sqlformat --reindent --indent_width 2 --keywords lower --identifiers lower --comma_first True -"'
+  "}}}
+
+  " CtrlP {{{2
+    noremap <silent> <A-t> :CtrlP<CR>
+  "}}}
+
+  " Ferret {{{2
+    let g:FerretDispatch=0
+    let g:FerretMap=0
+  "}}}
+
+  " Fugitive {{{2
+    augroup ft_fugitive
+      au!
+      au BufNewFile,BufRead .git/index setlocal nolist
+    augroup END
+    nnoremap <leader>gd :Gdiff<cr>
+    nnoremap <leader>gs :Gstatus<cr>
+    nnoremap <leader>gw :Gwrite<cr>
+    nnoremap <leader>gco :Gcheckout<cr>
+    nnoremap <leader>gci :Gcommit<cr>
+    nnoremap <leader>gm :Gmove<cr>
+    nnoremap <leader>gr :Gremove<cr>
+    nnoremap <leader>gl :Glog -18 --reverse<cr>
+  "}}}
+
+  " Fern {{{2
+    "let g:fern#disable_default_mappings = 1
+
+    "noremap <silent> <Leader>f :Fern . -drawer -reveal=% -toggle -width=35<CR><C-w>=
+
+    "function! s:init_fern() abort
+
+      "" Use 'select' instead of 'edit' for default 'open' action
+      "nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
+
+      "Define NERDTree like mappings
+      "nmap <buffer><expr>
+        "\ <Plug>(fern-my-open-expand-collapse)
+        "\ fern#smart#leaf(
+        "\   "\<Plug>(fern-action-open:select)",
+        "\   "\<Plug>(fern-action-expand)",
+        "\   "\<Plug>(fern-action-collapse)",
+        "\ )
+      "nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+      "nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+      "nmap <buffer> o <Plug>(fern-action-open:edit)
+      "nmap <buffer> go <Plug>(fern-action-open:edit)<C-w>p
+      "nmap <buffer> t <Plug>(fern-action-open:tabedit)
+      "nmap <buffer> T <Plug>(fern-action-open:tabedit)gT
+      "nmap <buffer> i <Plug>(fern-action-open:split)
+      "nmap <buffer> gi <Plug>(fern-action-open:split)<C-w>p
+      "nmap <buffer> s <Plug>(fern-action-open:vsplit)
+      "nmap <buffer> gs <Plug>(fern-action-open:vsplit)<C-w>p
+      "nmap <buffer> ma <Plug>(fern-action-new-path)
+      "nmap <buffer> P gg
+      "nmap <buffer> C <Plug>(fern-action-enter)
+      "nmap <buffer> u <Plug>(fern-action-leave)
+      "nmap <buffer> r <Plug>(fern-action-reload)
+      "nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
+      "nmap <buffer> cd <Plug>(fern-action-cd)
+      "nmap <buffer> CD gg<Plug>(fern-action-cd)<C-o>
+      "nmap <buffer> I <Plug>(fern-action-hide-toggle)
+      "nmap <buffer> q :<C-u>quit<CR>
+      "nmap <buffer> n <Plug>(fern-action-new-path)
+
+      "nmap <buffer> d <Plug>(fern-action-remove)
+      "nmap <buffer> m <Plug>(fern-action-move)
+      "nmap <buffer> M <Plug>(fern-action-rename)
+      "nmap <buffer> h <Plug>(fern-action-hidden-toggle)j
+      "nmap <buffer> r <Plug>(fern-action-reload)
+      "nmap <buffer> k <Plug>(fern-action-mark-toggle)j
+      "nmap <buffer> s <Plug>(fern-action-open:split)
+      "nmap <buffer> v <Plug>(fern-action-open:vsplit)
+      "nmap <buffer><nowait> < <Plug>(fern-action-leave)
+      "nmap <buffer><nowait> > <Plug>(fern-action-enter)
+    "endfunction
+
+    "augroup fern-custom
+      "autocmd! *
+      "autocmd FileType fern call s:init_fern()
+      "autocmd VimEnter * ++nested Fern -drawer -stay .
+    "augroup END
+
+  "}}}
+
+  " NERDTree {{{2
+    map <Leader>n <plug>NERDTreeTabsToggle<CR>
+    let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+    let g:NERDChristmasTree=1           " Makes NERDTree use colors
+    let g:NERDTreeChDirMode=1           " Changes the current working directory to the one set as the root in NERDTree
+    let g:NERDTreeShowBookmarks=1       " Display the bookmarks on startup
+    let g:NERDTreeMinimalUI=1           " Minimal UI elements
+    let g:NERDTreeDirArrows=1           " Use arrows for directory folding
+  "}}}
+
+  " NERDTree Tabs {{{2
+    let g:nerdtree_tabs_smart_startup_focus = 1
+    let g:nerdtree_tabs_open_on_gui_startup = 1
+    let g:nerdtree_tabs_open_on_console_startup = 1
+    let g:nerdtree_tabs_meaningful_tab_names = 1
+    let g:nerdtree_tabs_synchronize_view = 0
+  "}}}
+
+  " NERDCommenter {{{2
+    let g:NERDCustomDelimiters = {
+      \ 'openscad': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+      \ 'helm': { 'left': '#' },
+      \ 'flux': { 'left': '//' },
+      \ 'brewfile': { 'left': '#' },
+      \ 'sparql': { 'left': '#' }
+      \}
+    let g:NERDTrimTrailingWhitespace = 1                                  " Enable trimming of trailing whitespace when uncommenting
+
+    let g:NERDSpaceDelims = 1                                             " Add spaces after comment delimiters by default
+    " let g:NERDCompactSexyComs = 1                                         " Use compact syntax for prettified multi-line comments
+    " let g:NERDDefaultAlign = 'left'                                       " Align line-wise comment delimiters flush left instead of following code indentation
+    " let g:NERDAltDelims_java = 1                                          " Set a language to use its alternate delimiters by default
+    " let g:NERDCommentEmptyLines = 1                                       " Allow commenting and inverting empty lines (useful when commenting a region)
+    "let g:NERDToggleCheckAllLines = 1                                      " Enable NERDCommenterToggle to check all selected lines is commented or not
+
+    " Workaround for an issue with ansible-vim not properly highlighting
+    " commented module parameters when the line is indented and there is
+    " no space between the parameter definition and the comment delimiter
+    let g:ft = ''
+    fu! NERDCommenter_before()
+      if &ft == 'yaml.ansible'
+        let g:ft = 'yaml.ansible'
+        let g:NERDSpaceDelims = 1
+      elseif &ft == 'yaml'
+        let g:ft = 'yaml'
+        let g:NERDSpaceDelims = 1
+      endif
+    endfu
+    fu! NERDCommenter_after()
+      if g:ft == 'yaml.ansible'
+        setf yaml.ansible
+        let g:ft = ''
+        let g:NERDSpaceDelims = 0
+      elseif g:ft == 'yaml'
+        setf yaml
+        let g:ft = ''
+        let g:NERDSpaceDelims = 0
+      endif
+    endfu
+  "}}}
+
+  " SuperTab{{{2
+    let g:SuperTabDefaultCompletionType = '<C-n>'
+  " }}}
+
+  " SQLUtilities {{{2
+    let g:sqlutil_align_comma = 1
+    let g:sqlutil_align_where = 1
+    let g:sqlutil_align_first_word = 1
+    let g:sqlutil_keyword_case = '\L'
+    let g:sqlutil_align_keyword_right = 1
+    let g:sqlutil_indent_nested_blocks = 1
+    let g:sqlutil_wrap_long_lines = 1
+    "let g:sqlutil_load_default_maps = 0
+    "vmap <leader>sf        <Plug>SQLU_Formatter<CR>
+    "nmap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
+    "nmap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
+    "nmap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
+    "nmap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
+  "}}}
+
+  " Tagbar {{{2
+    let g:tagbar_type_go = {
+      \ 'ctagstype' : 'go',
+      \ 'kinds'     : [
+          \ 'p:package',
+          \ 'i:imports:1',
+          \ 'c:constants',
+          \ 'v:variables',
+          \ 't:types',
+          \ 'n:interfaces',
+          \ 'w:fields',
+          \ 'e:embedded',
+          \ 'm:methods',
+          \ 'r:constructor',
+          \ 'f:functions'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+          \ 't' : 'ctype',
+          \ 'n' : 'ntype'
+      \ },
+      \ 'scope2kind' : {
+          \ 'ctype' : 't',
+          \ 'ntype' : 'n'
+      \ },
+      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+    let g:tagbar_type_ps1 = {
+      \ 'ctagstype' : 'powershell',
+      \ 'kinds'     : [
+          \ 'f:function',
+          \ 'i:filter',
+          \ 'a:alias',
+          \ 'c:class'
+      \ ]
+    \ }
+
+    let g:tagbar_type_make = {
+      \ 'kinds':[
+        \ 'm:macros',
+        \ 't:targets'
+      \ ]
+    \}
+
+    let g:tagbar_type_markdown = {
+      \ 'ctagstype' : 'markdown',
+      \ 'kinds' : [
+        \ 'h:heading1',
+        \ 'i:heading2',
+        \ 'k:heading3'
+      \ ]
+    \ }
+
+    let g:tagbar_type_rust = {
+      \ 'ctagstype' : 'rust',
+      \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+      \]
+    \}
+
+    let g:tagbar_type_typescript = {
+      \ 'ctagstype': 'typescript',
+      \ 'kinds': [
+        \ 'c:classes',
+        \ 'n:modules',
+        \ 'f:functions',
+        \ 'v:variables',
+        \ 'v:varlambdas',
+        \ 'm:members',
+        \ 'i:interfaces',
+        \ 'e:enums',
+      \ ]
+    \ }
+
+    let g:tagbar_type_xml = {
+      \ 'ctagstype' : 'WSDL',
+      \ 'kinds'     : [
+        \ 'n:namespaces',
+        \ 'm:messages',
+        \ 'p:portType',
+        \ 'o:operations',
+        \ 'b:bindings',
+        \ 's:service'
+      \ ]
+    \ }
+
+    let g:tagbar_type_yaml = {
+      \ 'ctagstype' : 'yaml.ansible',
+      \ 'kinds' : [
+        \ 't:tasks'
+      \ ],
+      \ 'sort' : 0
+    \ }
+
+    let g:tagbar_type_puppet = {
+      \ 'ctagstype': 'puppet',
+      \ 'kinds': [
+          \'c:class',
+          \'s:site',
+          \'n:node',
+          \'d:definition'
+        \]
+    \}
+
+  "}}}
+
+  " TaskPaper {{{2
+    let g:task_paper_date_format = '%Y-%m-%dT%H:%M:%S%z'
+  "}}}
+
+  " Ultisnips {{{2
+    " Remap Ultisnips for compatibility for YCM
+    "let g:UltiSnipsExpandTrigger = '<C-j>'
+    "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+    "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+    " Better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+    " Remap Ultisnips for compatibility with Coc
+    "let g:UltiSnipsExpandTrigger='<Nop>'
+    "let g:UltiSnipsJumpForwardTrigger = '<TAB>'
+    "let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+
+    " Set snippets search path
+    let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
+
+    " Set custom snippet directory for use with UltiSnipsEdit
+    let g:UltiSnipsSnippetsDir='~/.dotfiles/vim/custom/snippets'
+
+    " Define how the edit window is opened when :UltiSnipsEdit is called
+    let g:UltiSnipsEditSplit='vertical'
+
+  "}}}
+
+  " ansible-vim {{{2
+    let g:ansible_attribute_highlight = 'n'        " Disable attribute highlighting
+    let g:ansible_name_highlight = 'b'             " Brighten all instances of task names
+  "}}}
+
+  " editorconfig-vim {{{2
+    let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+    "let g:EditorConfig_verbose = 1
+  "}}}
+
+  " scratch.vim {{{2
+    let g:scratch_insert_autohide = 0
+    let g:scratch_top = 0
+  "}}}
+
+  " vim-carbon-now {{{2
+    let g:carbon_now_sh_options = 't=solarized\%20dark&wt=none&wa=false&ln=true&fm=Inconsolata&fs=18px'
+  "}}}
+
+  " vim-dadbod {{{2
+    let g:dbext_default_ORA_bin = 'sql'
+  "}}}
+
+  " vim-go {{{2
+    if OSX()
+      let g:go_bin_path = expand('/opt/go/bin')
+      "let g:go_fmt_command = expand('/opt/go/bin/goimports')
+      let g:go_highlight_functions = 1
+      let g:go_highlight_methods = 1
+      let g:go_highlight_structs = 1
+      let g:go_highlight_operators = 1
+      let g:go_highlight_build_constraints = 1
+    endif
+  "}}}
+
+  " vim-javascript {{{2
+    let g:javascript_conceal_function       = 'ƒ'
+    let g:javascript_conceal_null           = 'ø'
+    let g:javascript_conceal_this           = '@'
+    let g:javascript_conceal_return         = '⇚'
+    let g:javascript_conceal_undefined      = '¿'
+    let g:javascript_conceal_NaN            = 'ℕ'
+    let g:javascript_conceal_prototype      = '¶'
+    let g:javascript_conceal_static         = '•'
+    let g:javascript_conceal_super          = 'Ω'
+    let g:javascript_conceal_arrow_function = '⇒'
+  "}}}
+
+  " vim-kubernetes {{{2
+    nnoremap <leader>ka :KubeApply<CR>
+    nnoremap <leader>kd :KubeDelete<CR>
+  "}}}
+
+  " vim-markdown {{{2
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_no_default_key_mappings = 1
+    let g:vim_markdown_frontmatter = 1
+    let g:vim_markdown_toml_frontmatter = 1
+    "let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'go']
+  "}}}
+
+  " vim-pandoc {{{2
+    "let g:pandoc#spell#enabled = 0
+  "}}}
+
+" }}}
+
+  " vim-rest-console {{{2
+    " Set additional CURL options
+    let g:vrc_curl_opts = {
+      \ '--connect-timeout' : 10,
+      \ '--location': '',
+      \ '--max-time': 60,
+      \ '--ipv4': '',
+      \ '--insecure': '',
+      \ '--silent': '',
+      \ '--show-error': '',
+    \}
+
+    " Enable auto-formatting responses
+    let g:vrc_auto_format_response_enabled = 1
+
+    " Define the external tools to autoformat the responses
+    let g:vrc_auto_format_response_patterns = {
+      \ 'json': 'python -m json.tool',
+      \ 'xml': 'xmllint --format -',
+    \}
+
+    " Set the default header content type
+    let g:vrc_header_content_type = 'application/json; charset=utf-8'
+
+    " Set the default response content type
+    let g:vrc_response_default_content_type = 'application/json'
+
+    " Enable elasticsearch bulk data loading
+    let g:vrc_elasticsearch_support = 1
+
+    " Send the request body line by line
+    let g:vrc_split_request_body = 1
+
+    " Disable the default trigger key (<C-j> by default)
+    "let g:vrc_set_default_mapping = 0
+
+  "}}}
+
+  " vim-sneak {{{2
+    let g:sneak#streak = 1
+  "}}}
+
+  " vim-terraform {{{2
+    let g:terraform_fmt_on_save = 1
+    let g:terraform_align=1
+    let g:hcl_align=1
+  "}}}
+
+  " vim-visual-multi {{{2
+    let g:VM_default_mappings = 0
+  "}}}
+
+ " YouCompleteMe{{{2
+    "let g:acp_enableAtStartup = 0
+
+    " Make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+    " Enable completion from tags
+    let g:ycm_collect_identifiers_from_tags_files = 1
+
+    " Use the Ultisnips completion engine
+    let g:ycm_use_ultisnips_completer = 1
+
+    " Enable omni completion.
+    augroup youcompleteme
+      au!
+      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+      autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    augroup END
+  "}}}
+
+" Utility Functions {{{1
+
+  function! s:golangIndent()
+    setlocal tabstop=4
+    setlocal shiftwidth=4
+    setlocal softtabstop=4
+    setlocal expandtab
+    setlocal autoindent
+    setlocal nolist
+    setlocal smarttab
+  endfunction
+
+  function! g:CStyleIndent()
+    setlocal expandtab
+    setlocal tabstop=4
+    setlocal shiftwidth=4
+    setlocal softtabstop=4
+  endfunction
+
+  command! CStyleIndent :call CStyleIndent()
+
+  function! s:setupWrapping()
+    setlocal wrap
+    setlocal wrapmargin=2
+    setlocal textwidth=80
+    setlocal linebreak
+    setlocal nolist
+    nnoremap j gj
+    nnoremap k gk
+    vnoremap j gj
+    vnoremap k gk
+    nnoremap <Down> gj
+    nnoremap <Up> gk
+    vnoremap <Down> gj
+    vnoremap <Up> gk
+    inoremap <Down> <C-o>gj
+    inoremap <Up> <C-o>gk
+  endfunction
+
+  function! s:setupMarkup()
+    call s:setupWrapping()
+    setlocal expandtab
+    setlocal tabstop=4
+    setlocal shiftwidth=4
+    setlocal softtabstop=4
+    setlocal textwidth=0
+    setlocal wrapmargin=0
+    setlocal formatoptions+=1
+    setlocal formatoptions+=n
+    set spelllang=en
+    set spellsuggest=9 "show only 9 suggestions for misspelled words
+    set filetype=markdown.pandoc
+    set nospell
+  endfunction
+
+  func! <sid>CycleTabpages(forw)
+    if a:forw
+      normal! gt
+    else
+      normal! gT
+    endif
+    while 1
+      redraw
+      echo 'Cycle Tab pages (Shift-Tab/Tab)'
+      let l:c = s:Getchar()
+      if l:c ==# "\t"
+        normal! gt
+      elseif l:c ==# "\<S-Tab>"
+        normal! gT
+      else
+        exe "norm! :\<C-U>"
+        call feedkeys(l:c)
+        break
+      endif
+    endwhile
+  endfunc
+
+  func! s:Getchar()
+    let l:c = getchar()
+    if l:c != 0
+      let l:c = nr2char(l:c)
+    endif
+    return l:c
+  endfunc
+
+  " Kernel formatting function modified from https://github.com/vivien/vim-addon-linux-coding-style
+  function! SetKernelFormatting()
+    " Whitespace
+    setlocal tabstop=8
+    setlocal shiftwidth=8
+    setlocal softtabstop=8
+    setlocal textwidth=80
+    setlocal noexpandtab
+    " Indention
+    setlocal cindent
+    setlocal formatoptions=tcqlron
+    setlocal cinoptions=:0,l1,t0,g0,(0
+    " Keywords
+    syn keyword cOperator likely unlikely
+    syn keyword cType u8 u16 u32 u64 s8 s16 s32 s64
+    " Highlighting
+    highlight default link LinuxError ErrorMsg
+    syn match LinuxError / \+\ze\t/     " spaces before tab
+    syn match LinuxError /\s\+$/        " trailing whitespaces
+    syn match LinuxError /\%81v.\+/     " virtual column 81 and more
+  endfunction
+
+  command! SetKernelFormatting :call SetKernelFormatting()
+
+  " Trim trailing whitespace
+  function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let l:_s=@/
+    let l:l = line('.')
+    let l:c = col('.')
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=l:_s
+    call cursor(l:l, l:c)
+  endfunction
+
+  " Pulse
+  function! PulseCursorLine()
+    let l:current_window = winnr()
+
+    windo set nocursorline
+    execute l:current_window . 'wincmd w'
+
+    setlocal cursorline
+
+    redir => l:old_hi
+      silent execute 'hi CursorLine'
+    redir END
+    let l:old_hi = split(l:old_hi, '\n')[0]
+    let l:old_hi = substitute(l:old_hi, 'xxx', '', '')
+
+    hi CursorLine guibg=#2a2a2a ctermbg=233
+    redraw
+    sleep 20m
+
+    hi CursorLine guibg=#333333 ctermbg=235
+    redraw
+    sleep 20m
+
+    hi CursorLine guibg=#3a3a3a ctermbg=237
+    redraw
+    sleep 20m
+
+    hi CursorLine guibg=#444444 ctermbg=239
+    redraw
+    sleep 20m
+
+    hi CursorLine guibg=#3a3a3a ctermbg=237
+    redraw
+    sleep 20m
+
+    hi CursorLine guibg=#333333 ctermbg=235
+    redraw
+    sleep 20m
+
+    hi CursorLine guibg=#2a2a2a ctermbg=233
+    redraw
+    sleep 20m
+
+    execute 'hi ' . l:old_hi
+
+    windo set cursorline
+    execute l:current_window . 'wincmd w'
+
+  endfunction
+
+  "Toggle Verbose Mode
+  function! ToggleVerbose()
+    if !&verbose
+      set verbosefile=~/.log/vim/verbose.log
+      set verbose=8
+    else
+      set verbose=0
+      set verbosefile=
+    endif
+  endfunction
+
+  command! ToggleVerbose :call ToggleVerbose()
+
+  "Toggle Solarized8 contrast
+  fun! Solarized8Contrast(delta)
+    let l:schemes = map(["_low", "_flat", "", "_high"], '"solarized8_".(&background).v:val')
+    exe "colors" l:schemes[((a:delta+index(l:schemes, g:colors_name)) % 4 + 4) % 4]
+  endf
+
+  nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
+  nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
+
+" }}}
+
+" Platform Specific Settings {{{1
+
+  if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
+
+  " Use 256 colors in terminal
+  if !has("gui_running") && !has("gui_vimr") && !has("nvim")
+    set t_Co=256
+    set term=xterm-256color
+    "set term=tmux-256color
+  endif
+
+  " Put fuzzy finder in the runtimepath
+  set rtp+=/usr/local/opt/fzf
+  set rtp+=/opt/homebrew/bin/fzf
+
+  if (has('gui_running') || has('gui_vimr'))
+
+    " Remove all the UI cruft
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+
+    " Highlighting for spelling
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
+
+    " Use a line-drawing char for pretty vertical splits.
+    "set fillchars+=vert:│
+
+    " Macvim specific settings
+    if MACVIM() || VIMR()
+
+      " Fullscreen takes up entire screen
+      "set fuoptions=maxhorz,maxvert
+
+      " Set correct path for tagbar plugin
+      let g:tagbar_ctags_bin = '/opt/homebrew/bin/ctags'
+
+      " Command-T for CtrlP
+      noremap <D-T> :CtrlP<CR>
+      inoremap <D-T> <Esc>:CtrlP<CR>
+
+      " Command-Shift-F for quick file search
+      noremap <D-F> :Ack<space>
+
+      " Map Command-# to switch tabs
+      noremap  <D-0> 0gt
+      inoremap <D-0> <Esc>0gt
+      noremap  <D-1> 1gt
+      inoremap <D-1> <Esc>1gt
+      noremap  <D-2> 2gt
+      inoremap <D-2> <Esc>2gt
+      noremap  <D-3> 3gt
+      inoremap <D-3> <Esc>3gt
+      noremap  <D-4> 4gt
+      inoremap <D-4> <Esc>4gt
+      noremap  <D-5> 5gt
+      inoremap <D-5> <Esc>5gt
+      noremap  <D-6> 6gt
+      inoremap <D-6> <Esc>6gt
+      noremap  <D-7> 7gt
+      inoremap <D-7> <Esc>7gt
+      noremap  <D-8> 8gt
+      inoremap <D-8> <Esc>8gt
+      noremap  <D-9> 9gt
+      inoremap <D-9> <Esc>9gt
+
+      " Map Command+Shift+P to preview the document in Marked
+      nnoremap <D-P> :silent !open -a 'Marked 2.app' '%:p'<cr>
+
+      " Open the document in TableFlip
+      function! TableFlip()
+        execute 'silent ! open -a TableFlip.app %:p'
+      endfunction
+
+      command! TableFlip :call TableFlip()
+
+      " Create a pdf using pandoc and open it
+      function! CreatePDF()
+        "execute 'silent ! pandoc -o /tmp/%:t:r.pdf --latex-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        "execute '! pandoc -o /tmp/%:t:r.pdf --pdf-engine=xelatex --template=$HOME/.pandoc/custom/document.latex "%"'
+        execute '! pandoc "%" --output /tmp/%:t:r.pdf --pdf-engine xelatex --template eisvogel --from markdown --listings --variable fontsize=9pt'
+        execute 'silent ! open /tmp/%:t:r.pdf'
+      endfunction
+
+      command! CreatePDF :call CreatePDF()
+
+      if !g:VIMR()
+        " Set the font
+        "set guifont=Meslo\ LG\ M\ DZ:h12.00
+        "set guifont=Inconsolata:h14.00
+        "set guifont=Inconsolata-dz:h12.00
+        "set guifont=Sauce\ Code\ Powerline\ Light:h13
+        "set guifont=Inconsolata\ XL:h12,Inconsolata:h12,Monaco:h12
+        "set guifont=InconsolataForPowerline\ Nerd\ Font:h16
+        "set guifont=Inconsolata\ Nerd\ Font:h14
+        "set guifont=InconsolataLGC\ Nerd\ Font:h12
+        "set guifont=Inconsolata\ for\ Powerline:h14
+        "set guifont=InconsolataGo\ Nerd\ Font\ Mono:h14
+        set guifont=Inconsolata-dz\ for\ Powerline:h12
+      endif
+
+      " Insert date and time header at the top of the file
+      noremap <D-D> gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+      inoremap <D-D> <Esc>gg}o## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+
+    " Windows Specific Settings
+    elseif WINDOWS()
+
+      " Set the font
+      set guifont=Consolas:h10
+
+      " Change the location of the viminfo file
+      set viminfo+=n$USERPROFILE\\_viminfo
+
+      " Change the location of the bookmarks file
+      let g:NERDTreeBookmarksFile=expand('$USERPROFILE/NERDTreeBookmarks')
+
+      " Map Alt-# to switch tabs
+      noremap  <A-0> 0gt
+      inoremap <A-0> <Esc>0gt
+      noremap  <A-1> 1gt
+      inoremap <A-1> <Esc>1gt
+      noremap  <A-2> 2gt
+      inoremap <A-2> <Esc>2gt
+      noremap  <A-3> 3gt
+      inoremap <A-3> <Esc>3gt
+      noremap  <A-4> 4gt
+      inoremap <A-4> <Esc>4gt
+      noremap  <A-5> 5gt
+      inoremap <A-5> <Esc>5gt
+      noremap  <A-6> 6gt
+      inoremap <A-6> <Esc>6gt
+      noremap  <A-7> 7gt
+      inoremap <A-7> <Esc>7gt
+      noremap  <A-8> 8gt
+      inoremap <A-8> <Esc>8gt
+      noremap  <A-9> 9gt
+      inoremap <A-9> <Esc>9gt
+
+      " Show the tab line
+      set showtabline=1
+
+      "Alt Shift-f to run Ack
+      nmap <A-F> :Ack<space>
+
+      " Set size and position
+      set lines=50
+      set columns=135
+      winpos 0 0
+
+      " Prevent vim from writing backups, due to issues with the home directory
+      " being on a network share
+      set nobackup
+      set nowritebackup
+      set noswapfile
+
+      " Hides the menu
+      set winaltkeys=no
+
+      " Have vim use Windows Ctrl+ keys
+      source $VIMRUNTIME/mswin.vim
+
+      " Map Alt-Shift-P to run markdown to pdf against the current document and
+      " open the resulting document
+      function! CreatePDF()
+        execute 'silent ! markdown2pdf "%" -o \%TMP\%\/%:t:r:s,$,.pdf,'
+        execute 'silent ! \%TMP\%\/%:t:r:s,$,.pdf,'
+      endfunction
+
+      command! CreatePDF :call CreatePDF()
+
+      nmap <silent> <A-P> :call CreatePDF()<CR>
+
+      " Generate rtf and open in default viewer
+      function! CreateRTF()
+        execute 'silent ! pandoc  -f markdown -t rtf -s -o \%TEMP\%\/%:t:r:s,$,.rtf, "%"'
+        execute 'silent ! \%TEMP\%\/%:t:r:s,$,.rtf,'
+      endfunction
+
+      command! CreateRTF :call CreateRTF()
+
+      nmap <silent> <A-R> :call CreateRTF()<CR>
+
+      " Insert date and time header at the top of the file
+      nmap <A-D> 1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+      imap <A-D> <Esc>1Go<CR>## <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR> ##<CR>
+
+    endif
+
+  endif
+
+" }}}
+
+" Miscellaneous {{{1
+
+  " Include vim configuration specific to a machine
+  if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+  endif
+
+" }}}
+

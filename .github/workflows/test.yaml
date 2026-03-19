@@ -1,0 +1,94 @@
+name: Unit test
+
+on:
+  push:
+    branches: [master]
+    paths:
+        - ".github/workflows"
+        - "home/**"
+        - "install/**"
+        - "tests/**"
+  pull_request:
+    branches: [master]
+    paths:
+        - ".github/workflows"
+        - "home/**"
+        - "install/**"
+        - "tests/**"
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-14]
+        system: [client, server]
+        exclude:
+          - os: macos-14
+            system: server
+
+    runs-on: ${{ matrix.os }}
+    env:
+      OS: ${{ matrix.os }}
+      SYSTEM: ${{ matrix.system }}
+      DOTFILES_DEBUG: 1
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install tools
+        run: |
+          if [ "${OS}" == "macos-14" ]; then
+            brew install bats-core kcov parallel
+
+          elif [ "${OS}" == "ubuntu-latest" ]; then
+            sudo apt-get update && sudo apt-get install -y bats parallel
+            bash ./install/ubuntu/common/kcov.sh
+
+          else
+            echo "${OS} and ${SYSTEM} are not supported" >&2
+            exit 1
+          fi
+
+      - name: Run unit test
+        run: |
+          ./scripts/run_unit_test.sh
+
+      - name: Setup for codecov
+        run: |
+          if [ "${OS}" == "macos-14" ]; then
+            echo "flags=${OS}" >> $GITHUB_ENV
+            brew install gpg jq curl
+
+          elif [ "${OS}" == "ubuntu-latest" ]; then
+            echo "flags=${OS}-${SYSTEM}" >> $GITHUB_ENV
+            sudo apt-get install -y gpg jq curl
+
+          else
+            echo "${OS} and ${SYSTEM} are not supported" >&2
+            exit 1
+          fi
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          # directory: ./coverage/kcov-merged
+          files: ./coverage/kcov-merged/cobertura.xml
+          env_vars: OS,SYSTEM
+          fail_ci_if_error: true
+          flags: ${{ env.flags }}
+          name: codecov-dotfiles
+          verbose: true
+        # run: |
+        #   bash <(curl -s https://codecov.io/bash) \
+        #     -n "codecov-dotfiles"             `# Custom defined name of the upload. Visible in Codecov UI.` \
+        #     -s ./coverage/kcov-merged         `# Directory to search for coverage reports.` \
+        #     -t ${{ secrets.CODECOV_TOKEN }}   `# Set the private repository token.` \
+        #     -e OS,SYSTEM                      `# Specify environment variables to be included with this build.` \
+        #     -C ${{ github.sha }}              `# Specify the commit sha.` \
+        #     -F ${{ env.flags }}               `# Flag the upload to group coverage metrics.` \
+        #     -Z                                `# Exit with 1 if not successful. Default will Exit with 0.` \
+        #     -v                                `# Verbose mode.`

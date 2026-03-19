@@ -1,0 +1,14 @@
+# Connect to local dataguard configuration
+dgmgrl /
+
+# Show configuration summary
+DGMGRL> show configuration
+
+# Show verbose configuration summary
+DGMGRL> show configuration verbose
+
+# Show individual configuration value
+DGMGRL> show configuration 'CommunicationTimeout';
+
+# Edit global configuration property
+edit configuration set property CommunicationTimeout=600

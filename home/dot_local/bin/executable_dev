@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+function ghq-path() {
+    ghq list --full-path | fzf
+}
+
+function dev() {
+    local moveto
+    moveto=$(ghq-path)
+    cd "${moveto}" || exit 1
+
+    # rename session if in tmux
+    if [[ -n ${TMUX} ]]; then
+        local repo_name
+        repo_name="${moveto##*/}"
+
+        tmux rename-session "${repo_name//./-}"
+    fi
+}
+
+if [ -n "$($SHELL -c "echo ${ZSH_VERSION}")" ]; then
+    dev
+fi

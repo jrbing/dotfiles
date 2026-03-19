@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# Usage: valet upgrade
+# Summary: Upgrade installed software
+# Help: Use this command to upgrade the installed software using the
+# environments default package manager(s)
+
+set -e
+
+# Source generic bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+function update_homebrew_repo() {
+  start_spinner "Updating homebrew repo"
+  brew update > /dev/null 2>&1
+  stop_spinner $?
+}
+
+function upgrade_homebrew_applications() {
+  start_spinner "Updating homebrew applications"
+  brew upgrade > /dev/null 2>&1
+  stop_spinner $?
+}
+
+function upgrade_homebrew_cask_applications() {
+  start_spinner "Updating homebrew cask applications"
+  brew cu --yes --quiet --no-brew-update > /dev/null 2>&1
+  stop_spinner $?
+}
+
+function upgrade_app_store_applications() {
+  start_spinner "Updating App Store applications"
+  mas upgrade > /dev/null 2>&1
+  stop_spinner $?
+}
+
+function clean_homebrew_cache() {
+  start_spinner "Cleaning homebrew cache"
+  brew cleanup > /dev/null 2>&1
+  stop_spinner $?
+}
+
+case $(uname) in
+  (Darwin)
+    # Update homebrew (if installed) and upgrade packages
+    if hash brew 2>/dev/null; then
+      update_homebrew_repo
+      echoinfo "Outdated packages" && brew outdated #TODO: clean this up
+      upgrade_homebrew_applications
+      upgrade_homebrew_cask_applications
+      upgrade_app_store_applications
+      clean_homebrew_cache
+    fi
+  ;;
+  (Linux)
+    if hash yum 2>/dev/null; then
+      echoinfo 'Updating packages'
+      sudo yum upgrade -y
+    fi
+    if hash aptitude 2>/dev/null; then
+      echoinfo 'Updating packages'
+      sudo aptitude upgrade -y
+    fi
+  ;;
+  (SunOS)
+    echoinfo 'Updating packages'
+    sudo pkgin update && sudo pkgin upgrade -y
+  ;;
+esac
+
+exit 0

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#          FILE: git-remote-diff
+#
+#         USAGE: git remote-diff
+#
+#   DESCRIPTION: git alias for showing diff between local branch and remote
+#                based on - https://gist.github.com/srebalaji/4b23fb62f6ce26c17b73ca07ae7cfc67
+#
+#===============================================================================
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+# Source bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+readonly REMOTEBRANCH="$(git symbolic-ref --short -q HEAD)"
+
+git fetch
+echoinfo "Showing diff between ${REMOTEBRANCH} origin/${REMOTEBRANCH}"
+git icdiff "${REMOTEBRANCH}" "origin/${REMOTEBRANCH}"

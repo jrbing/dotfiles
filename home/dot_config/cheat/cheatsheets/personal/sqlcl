@@ -1,0 +1,24 @@
+
+# List SQL history
+history
+
+# Recall specific SQL statement from history
+history <history_id>
+
+# Create a table pointer to an external database
+bridge new_table as "jdbc:oracle:thin:[USER/PASSWORD]@[HOST][:PORT]/SERVICE"(select * from scott.dept);
+
+# Generate the DDL for a table
+ddl <table_name>
+
+# Show summary information for a table
+info <table_name>
+
+# Show extended summary information for a table
+info+ <table_name>
+
+# Show all variables for current session
+show all
+
+# Set the output format for the current session
+set sqlformat [csv,html,xml,json,ansiconsole,insert,loader,fixed,default]

@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#          FILE: emcli
+#
+#         USAGE: ./emcli
+#
+#   DESCRIPTION: Wrapper for the Oracle emcli tool in order to use it on macOS
+#
+#===============================================================================
+
+# To Install:
+  #export JAVA_TOOL_OPTIONS=-Dos.name=Linux
+  #java -jar emcliadvancedkit.jar -install_dir=/opt/oracle/emcli
+
+# To Authenticate:
+  #emcli setup -url="https://...:7802/em" -username=USER -trustall
+
+# To Sync:
+  #emcli sync
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+###############
+#  Functions  #
+###############
+
+function echoinfo() {
+  local GC="\033[1;32m"
+  local EC="\033[0m"
+  printf "${GC} ☆  INFO${EC}: %s\n" "$@";
+}
+
+function echodebug() {
+  local BC="\033[1;34m"
+  local EC="\033[0m"
+  if [[ -n ${DEBUG+x} ]]; then
+    printf "${BC} ★  DEBUG${EC}: %s\n" "$@";
+  fi
+}
+
+function echoerror() {
+  local RC="\033[1;31m"
+  local EC="\033[0m"
+  printf "${RC} ✖  ERROR${EC}: %s\n" "$@" 1>&2;
+  exit 1
+}
+
+##########
+#  Main  #
+##########
+
+# Set variable and check to see if /opt/oracle/emcli exists
+export EMCLI_DIR="/opt/oracle/emcli"
+if [[ ! -d "${EMCLI_DIR}" ]]; then
+  echoerror "EMCLI_DIR ${EMCLI_DIR} does not exist"
+fi
+
+# Set EMCLI_JAVA_BINDIR
+export EMCLI_JAVA_BINDIR="${JAVA_HOME}/bin"
+
+# Set the main emcli jar
+EMCLI_JAR="${EMCLI_DIR}/emCLI.jar"
+
+# Set the CLASSPATH
+EMCLI_CLASSPATH="${EMCLI_DIR}/http_client.jar"
+
+# Set EMCLI_OPTS to an additional set of java options for emcli
+# Set the EMCLI_STATE_DIR to assign the emcli setup directory
+
+#-DoracleHome="$OracleHome" \
+#-Demcli.state.dir="$EMCLI_STATE_DIR" \
+#"$EMCLI_OPTS" \
+
+exec java \
+  -Dhttps.protocols="TLSv1,TLSv1.1,TLSv1.2" \
+  -Demcli.dir="$EMCLI_DIR" \
+  -Dos.name=Linux \
+  -Djava.class.path="$EMCLI_CLASSPATH" \
+  -Xmx512m \
+  -jar "$EMCLI_JAR" \
+  "$@"

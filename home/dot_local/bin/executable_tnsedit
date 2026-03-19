@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sh
+#===============================================================================
+#
+#   FILE: tnsedit
+#
+#   DESCRIPTION: Tool for working with local tnsnames.ora files
+#
+#
+#===============================================================================
+
+set -e          # Exit immediately on error
+set -u          # Treat unset variables as an error
+set -o pipefail # Prevent errors in a pipeline from being masked
+IFS=$'\n\t'     # Set the internal field separator to a tab and newline
+
+readonly PROGDIR=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
+readonly CURDIR=$(pwd)
+
+function echoinfo() {
+  local GC="\033[1;32m"
+  local EC="\033[0m"
+  printf "${GC} ☆  INFO${EC}: %s\n" "$@";
+}
+
+function echoerror() {
+  local RC="\033[1;31m"
+  local EC="\033[0m"
+  printf "${RC} ✖  ERROR${EC}: %s\n" "$@" 1>&2;
+}
+
+function echodebug() {
+  local BC="\033[1;34m"
+  local EC="\033[0m"
+  if [[ -n ${DEBUG+x} ]]; then
+    printf "${BC} ★  DEBUG${EC}: %s\n" "$@";
+  fi
+}
+
+function check_tnsadmin_variable() {
+  echodebug "Testing for TNS_ADMIN"
+  if [[ -n ${TNS_ADMIN+x} ]]; then
+    echodebug "TNS_ADMIN is set...assigning tns_file"
+    TNS_FILE=${TNS_ADMIN}/tnsnames.ora
+  else
+    echoerror "TNS_ADMIN needs to be set"
+    exit 1
+  fi
+}
+
+function check_tnsnames_file() {
+  if [[ -e "${TNS_FILE}" ]]; then
+    echodebug "Found ${TNS_FILE}"
+  else
+    echoerror "TNSNAMES.ORA missing"
+    exit 1
+  fi
+}
+
+function list_tns_entries() {
+  check_tnsnames_file
+  # Get a list of all databases
+  awk -F"[ =]" '/DESCRIPTION/ { print X }{ X=$1 }' "${TNS_FILE}"
+  # TODO - Check to see if there are any entries in the file
+  # TODO - Print the header list
+  # TODO - Iterate through the entries and print the name, host, port, and sid/service
+}
+
+function edit_tnsnames_file() {
+  check_tnsnames_file
+  echodebug "Editing ${TNS_FILE}"
+  # TODO: check for existence of $EDITOR
+  "$EDITOR" "$TNS_FILE"
+}
+
+function main() {
+  echodebug "Entering main function"
+
+  check_tnsadmin_variable
+
+  while getopts ":l" opt; do
+    case $opt in
+      l)
+        echodebug "The -l option was specified"
+        local LISTONLY=true
+      ;;
+      \?)
+        echoerror "Invalid option: -$OPTARG" >&2
+        exit 1
+      ;;
+    esac
+  done
+
+  if [[ -n ${LISTONLY+x} ]]; then
+    list_tns_entries
+  else
+    edit_tnsnames_file
+  fi
+}
+
+main "$@"

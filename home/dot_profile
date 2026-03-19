@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+export PATH="$PATH:$HOME/.local/bin"
+eval "$(mise activate bash --shims)"

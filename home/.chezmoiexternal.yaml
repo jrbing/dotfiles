@@ -1,0 +1,35 @@
+---
+
+".vim/plug":
+  type: "git-repo"
+  url: "https://github.com/junegunn/vim-plug.git"
+  refreshPeriod: "720h"
+".tmux/oh-my-tmux":
+  type: "git-repo"
+  url: "https://github.com/gpakosz/.tmux.git"
+  refreshPeriod: "720h"
+".tmux/tpm":
+  type: "git-repo"
+  url: "https://github.com/tmux-plugins/.tpm.git"
+  refreshPeriod: "720h"
+
+# [submodule "cheat/cheatsheets/community"]
+  # path = cheat/cheatsheets/community
+  # url = https://github.com/cheat/cheatsheets.git/
+  # ignore = dirty
+
+# pandoc-document-template: ## Update source pandoc document template
+  # @curl -s https://api.github.com/repos/Wandmalfarbe/pandoc-latex-template/releases/latest \
+      # | grep "browser_download_url.*Eisvogel.zip" \
+      # | cut -d : -f 2,3 \
+      # | tr -d \" \
+      # | wget -qi - \
+      # && unzip -qq Eisvogel.zip -d $(dotfiles)/pandoc/templates \
+      # && mv $(dotfiles)/pandoc/templates/Eisvogel*/eisvogel.beamer $(dotfiles)/pandoc/templates/ \
+      # && mv $(dotfiles)/pandoc/templates/Eisvogel*/eisvogel.latex $(dotfiles)/pandoc/templates/ \
+      # && rm -rf $(dotfiles)/pandoc/templates/Eisvogel* \
+      # && rm Eisvogel.zip
+
+# install-pandoc-template-dependencies: ## Install pandoc document template dependencies
+  # @tlmgr install soul adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat unicode-math upquote xecjk xurl zref draftwatermark
+

@@ -1,0 +1,35 @@
+" vim: set sw=2 ts=2 sts=2 et
+" Personal .gvimrc file
+" JR Bing <jr@jrbing.com>
+" -------------------------------------------------------------------------
+
+if MACVIM()
+
+  set list
+  set listchars=trail:·,precedes:«,extends:»,tab:▸\ 
+  "set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
+
+  " Map Command right/left to move tabs
+  nnoremap <silent> <D-Right> :tabnext<cr>
+  nnoremap <silent> <D-Left> :tabprevious<cr>
+
+  " Command-][ to increase/decrease indentation
+  vmap <D-]> >gv
+  vmap <D-[> <gv
+
+  " Command-T for CtrlP
+  macmenu &File.New\ Tab key=<nop>
+  map <D-t> :CtrlP<CR>
+  imap <D-t> <Esc>:CtrlP<CR>
+  macmenu &File.New\ Tab key=<D-T>
+
+  " Command-Return for fullscreen
+  macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
+
+elseif WINDOWS()
+
+  " Map Alt right/left to move tabs
+  nnoremap <silent> <A-Right> :tabnext<cr>
+  nnoremap <silent> <A-Left> :tabprevious<cr>
+
+endif

@@ -1,0 +1,20 @@
+# Online help
+https://nats-io.github.io/nsc/
+
+# List keys
+nsc list keys
+
+# Describe operator
+nsc describe operator
+
+# Describe account (lists subscriptions)
+nsc describe account <account>
+
+# Describe user
+nsc describe user <user> --account <account>
+
+# Push all account changes to NATS
+nsc push -A
+
+# Delete an import
+nsc delete import --account <account> --subject <subject>

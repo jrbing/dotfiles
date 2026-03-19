@@ -1,0 +1,4 @@
+
+rules:
+  comments:
+    require-starting-space: false

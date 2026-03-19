@@ -1,0 +1,69 @@
+#!/usr/bin/env zsh
+
+#
+#
+# Environment variables.
+#
+
+# Ensure that a non-login, non-interactive shell has a defined environment.
+#if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  #source "${ZDOTDIR:-$HOME}/.zprofile"
+#fi
+
+# Resolve an issue with MacOS prepending to the PATH.
+# https://superuser.com/questions/544989/does-tmux-sort-the-path-variable
+#if [[ -n "$TMUX" ]]; then
+  #if [[ -f /etc/profile ]]; then
+    #PATH=""
+    #source /etc/profile
+  #fi
+#fi
+
+# Set the dotfiles path environment variable
+#export DOTFILES=${HOME}/.dotfiles
+
+#
+# OS Specific Settings
+#
+
+#case $OSTYPE in
+  #(darwin*)
+    ## Setup completion for valet
+    #eval "$("${HOME}"/.dotfiles/bin/valet init -)"
+
+    ## Set JAVA_HOME
+    ##export JAVA_HOME=$(/usr/libexec/java_home)
+    #export EDITOR='vim'
+    #export VISUAL='mvim -f'
+    #export LC_ALL=en_US.UTF-8
+    #export LANG=en_US.UTF-8
+    #export CHEATCOLORS=true
+    #export NVIM_TUI_ENABLE_TRUE_COLOR=1
+    #export HTTPSTAT_SHOW_BODY=true
+    #export HTTPSTAT_SHOW_SPEED=true
+
+    ## GOPATH
+    #[[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin"
+
+    ## Cargo
+    #[[ -d "${HOME}/.cargo/bin" ]] && path+=("${HOME}/.cargo/bin") && export PATH
+  #;;
+  #(linux*)
+    #eval "$("$HOME"/.dotfiles/bin/valet init -)"
+    #export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD         # Set colors for ls
+    #export PATH=$PATH:/sbin:/usr/sbin
+  #;;
+  #(solaris*)
+    #export DISABLE_LS_COLORS=true
+    #export PATH=$PATH:/usr/cluster/bin
+    #export PATH=$PATH:/sbin
+  #;;
+#esac
+
+#
+# Use .localrc for local system specific settings
+#
+
+if [[ -f ~/.localrc ]]; then
+  source ~/.localrc
+fi

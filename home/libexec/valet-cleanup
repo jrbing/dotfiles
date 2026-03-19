@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Usage: valet cleanup
+# Summary: Cleanup temporary files
+# Help: Use this command to cleanup temporary files
+
+# Set the script to exit immediately on error
+set -e
+
+# Source generic bash functions
+source "$DOTFILES/share/lib/bash-functions.sh"
+
+case $(uname) in
+  (Darwin)
+    echoinfo 'Removing trash and temporary files'
+    sudo rm -rfv /Volumes/*/.Trashes
+    sudo rm -rfv ~/.Trash
+    sudo rm -rfv /private/var/log/asl/*.asl
+  ;;
+  (Linux)
+    # TODO
+  ;;
+  (SunOS)
+    # TODO
+  ;;
+esac
+
+exit 0

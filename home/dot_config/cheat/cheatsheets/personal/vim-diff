@@ -1,0 +1,27 @@
+
+# Select a file for diff
+:diffthis
+
+# Turn off vim-diff
+:diffoff
+
+# Re-scan the files for differences
+:diffupdate
+
+# Jump to next difference
+]c :
+
+# Jump to previous difference
+[c :
+
+# Pull the diff to the current buffer
+do
+
+# Push the diff
+dp
+
+# Open folded text
+zo
+
+# Close folded text
+zc
