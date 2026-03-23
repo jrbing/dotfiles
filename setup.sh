@@ -24,7 +24,8 @@ declare -r DOTFILES_LOGO='
                      https://github.com/jrbing/dotfiles
 '
 
-declare -r DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
+declare -r DOTFILES_REPO_URL="git@github.com:jrbing/dotfiles.git"
+# declare -r DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
 declare -r BRANCH_NAME="${BRANCH_NAME:-main}"
 
 function is_ci() {
