@@ -39,6 +39,11 @@ case $OSTYPE in
     export HTTPSTAT_SHOW_BODY=true
     export HTTPSTAT_SHOW_SPEED=true
 
+    path=(
+      /opt/{homebrew,local}/{,s}bin(N)
+      $path
+    )
+
     # GOPATH
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin"
 
