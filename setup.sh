@@ -24,8 +24,8 @@ declare -r DOTFILES_LOGO='
                      https://github.com/jrbing/dotfiles
 '
 
-declare -r DOTFILES_REPO_URL="git@github.com:jrbing/dotfiles.git"
-# declare -r DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
+# declare -r DOTFILES_REPO_URL="git@github.com:jrbing/dotfiles.git"
+declare -r DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
 declare -r BRANCH_NAME="${BRANCH_NAME:-main}"
 
 function is_ci() {
@@ -58,7 +58,8 @@ function get_os_type() {
 function keepalive_sudo_linux() {
     # Might as well ask for password up-front, right?
     echo "Checking for \`sudo\` access which may request your password."
-    sudo -v
+    # sudo
+    sudo pwd
 
     # Keep-alive: update existing sudo time stamp if set, otherwise do nothing.
     while true; do

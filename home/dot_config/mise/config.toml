@@ -2,7 +2,7 @@
 go = "latest"
 node = "lts"
 rust = "latest"
-python = "3.13"
+python = "latest"
 ruby = "latest"
 
 age = "latest"
@@ -13,16 +13,11 @@ chezmoi = "latest"
 dotenvx = "latest"
 eza = "latest"
 jq = "latest"
-hugo-extended = "0.136.5"
 uv = "latest"
 yazi = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 
-"npm:@openai/codex" = "latest"
-"npm:bash-language-server" = "latest"
-
-"github:x-motemen/ghq" = "latest"
 "github:d-kuro/gwq" = "latest"
 "github:cli/cli" = "latest"
 

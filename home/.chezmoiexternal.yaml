@@ -8,10 +8,12 @@
   type: "git-repo"
   url: "https://github.com/gpakosz/.tmux.git"
   refreshPeriod: "720h"
-".tmux/tpm":
-  type: "git-repo"
-  url: "https://github.com/tmux-plugins/.tpm.git"
-  refreshPeriod: "720h"
+# ".tmux/tpm":
+  # type: "git-repo"
+  # url: "https://github.com/tmux-plugins/tpm.git"
+  # refreshPeriod: "720h"
+
+# https://github.com/thewtex/tmux-mem-cpu-load.git
 
 # [submodule "cheat/cheatsheets/community"]
   # path = cheat/cheatsheets/community
