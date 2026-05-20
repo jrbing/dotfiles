@@ -49,8 +49,8 @@ apply = ['source']
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
 
-[plugins.custom-commands]
-inline = 'autoload -Uz dev cdgwq cdw'
+#[plugins.custom-commands]
+#inline = 'autoload -Uz dev cdgwq cdw'
 
 [plugins.fzf]
 github = 'junegunn/fzf'
@@ -63,9 +63,9 @@ export FZF_DEFAULT_OPTS="--reverse"
 # Zsh-related Plugins
 #
 
-[plugins.zsh-autosuggestions]
-github = 'zsh-users/zsh-autosuggestions'
-apply = ['defer']
+#[plugins.zsh-autosuggestions]
+#github = 'zsh-users/zsh-autosuggestions'
+#apply = ['defer']
 
 [plugins.zsh-completions]
 github = 'zsh-users/zsh-completions'
@@ -126,21 +126,21 @@ function _lang() {
 zsh-defer _lang
 '''
 
-[plugins.go]
-inline = '''
-function _go() {
-    export GOPATH="${HOME}/ghq"
-    export GOROOT=$(go env GOROOT)
+#[plugins.go]
+#inline = '''
+#function _go() {
+    #export GOPATH="${HOME}/ghq"
+    #export GOROOT=$(go env GOROOT)
 
-    typeset -gU path
-    path=(
-        $path
-        ${GOPATH}/bin(N-/)
-        ${HOME}/.go/bin(N-/)
-    )
-}
-zsh-defer _go
-'''
+    #typeset -gU path
+    #path=(
+        #$path
+        #${GOPATH}/bin(N-/)
+        #${HOME}/.go/bin(N-/)
+    #)
+#}
+#zsh-defer _go
+#'''
 
 [plugins.rust]
 inline = '''
@@ -192,13 +192,13 @@ zsh-defer _gpg
 # Prompt
 #
 
-[plugins.powerlevel10k]
-github = "romkatv/powerlevel10k"
+#[plugins.powerlevel10k]
+#github = "romkatv/powerlevel10k"
 
-[plugins.p10k]
-local = "~/.config/powerlevel10k"
-use = ["p10k.zsh"]
-apply = ["source"]
+#[plugins.p10k]
+#local = "~/.config/powerlevel10k"
+#use = ["p10k.zsh"]
+#apply = ["source"]
 
 #
 # Git related plugins
@@ -224,7 +224,7 @@ function _macos_path() {
     path=(
         $path
         /opt/{homebrew,local}/{,s}bin(N-/)
-    )    
+    )
 }
 zsh-defer _macos_path
 '''
@@ -239,13 +239,13 @@ function _macos_browser() {
 zsh-defer _macos_browser
 '''
 
-[plugins.macos-command]
-inline = '''
-function _macos_command() {
-    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-}
-zsh-defer _macos_command
-'''
+#[plugins.macos-command]
+#inline = '''
+#function _macos_command() {
+    #alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+#}
+#zsh-defer _macos_command
+#'''
 
 #################
 #  ZIM Modules  #
