@@ -13,41 +13,68 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
 fi
 
 readonly BREW_PACKAGES=(
-    imagemagick
+    aria2
+    atuin
+    clipper
+    cmake
+    colima
+    direnv
+    docker
+    docker-buildx
+    ffmpeg
+    gh
+    git-delta
+    git-filter-repo
+    gnupg
+    go
+    go-task
+    helm
     htop
+    icdiff
+    imagemagick
+    just
+    krew
+    kubectx
+    kubernetes-cli
+    mise
+    mole
+    nmap
+    node
+    nzbget
+    opencode
+    pinentry-mac
+    reattach-to-user-namespace
+    ripgrep
+    starship
+    stern
     terminal-notifier
+    tmux
+    topgrade
     watchexec
+    wget
+    yt-dlp
+    zoxide
 )
 
 readonly BREW_TAPS=(
-    manaflow-ai/cmux
+    #manaflow-ai/cmux
 )
 
 readonly CASK_PACKAGES=(
-    adobe-acrobat-reader
-    cmux
-    cyberduck
-    google-chrome
-    google-drive
-    google-japanese-ime
-    ngrok
-    slack
-    rectangle
-    spotify
-    vlc
-    visual-studio-code
-    zotero
     1password
-)
-
-# Additional brew packages installed only for user shunk031.
-readonly ADDITIONAL_BREW_PACKAGES=(
-    tailscale
-)
-
-# Add applications controlled by the administrator on the work computer here
-readonly ADDITIONAL_CASK_PACKAGES=(
-    zoom
+    1password-cli
+    alfred
+    font-inconsolata-dz-for-powerline
+    font-inconsolata-go-nerd-font
+    font-inconsolata-nerd-font
+    google-chrome
+    iina
+    iterm2
+    lens
+    macvim-app
+    serial
+    syncthing-app
+    vlc
 )
 
 #
@@ -137,74 +164,12 @@ function install_brew_cask_packages() {
 }
 
 #
-# @description Install additional brew packages for the primary user only.
-#
-function install_additional_brew_packages() {
-    # Restrict personal packages to the primary user account.
-    if [[ "$(whoami)" != "shunk031" ]]; then
-        return 0
-    fi
-
-    local missing_packages=()
-
-    for package in "${ADDITIONAL_BREW_PACKAGES[@]}"; do
-        if ! is_brew_package_installed "${package}"; then
-            missing_packages+=("${package}")
-        fi
-    done
-
-    if [[ ${#missing_packages[@]} -gt 0 ]]; then
-        if "${CI:-false}"; then
-            brew info "${missing_packages[@]}"
-        else
-            brew install --force "${missing_packages[@]}"
-        fi
-    fi
-}
-
-#
-# @description Install additional casks that may fail independently.
-#
-function install_additional_cask_packages() {
-    local missing_packages=()
-
-    for package in "${ADDITIONAL_CASK_PACKAGES[@]}"; do
-        if ! is_brew_package_installed "${package}"; then
-            missing_packages+=("${package}")
-        fi
-    done
-
-    if [[ ${#missing_packages[@]} -gt 0 ]]; then
-        if "${CI:-false}"; then
-            brew info --cask "${missing_packages[@]}"
-        else
-            # Temporarily disable error exit to continue even if some packages fail
-            set +e
-            brew install --cask --force "${missing_packages[@]}"
-            # Re-enable error exit
-            set -e
-        fi
-    fi
-}
-
-#
-# @description Open Google Chrome and prompt it to become the default browser.
-#
-function setup_google_chrome() {
-    open "/Applications/Google Chrome.app" --args --make-default-browser
-}
-
-#
 # @description Install the configured optional macOS packages and casks.
 #
 function main() {
     install_brew_taps
     install_brew_packages
     install_brew_cask_packages
-    install_additional_brew_packages
-    # install_additional_cask_packages
-
-    # setup_google_chrome
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

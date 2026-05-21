@@ -29,5 +29,7 @@ function main() {
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    main
+    # Disabled for now since I don't have a need for Rosetta
+    #main
+    :
 fi

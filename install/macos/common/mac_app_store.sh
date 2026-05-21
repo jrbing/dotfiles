@@ -38,30 +38,6 @@ function run_mas_install() {
 }
 
 #
-# @description Install Bandwidth+ from the Mac App Store.
-#
-function install_bandwidth_plus() {
-    local app_id="490461369"
-    run_mas_install "${app_id}"
-}
-
-#
-# @description Install LINE from the Mac App Store.
-#
-function install_line() {
-    local app_id="539883307"
-    run_mas_install "${app_id}"
-}
-
-#
-# @description Install 1Password 7 from the Mac App Store.
-#
-function install_1password7() {
-    local app_id="1333542190"
-    run_mas_install "${app_id}"
-}
-
-#
 # @description Install Xcode from the Mac App Store.
 #
 function install_xcode() {
@@ -76,9 +52,7 @@ function main() {
     install_mas
 
     if ! "${CI:-false}"; then
-        install_bandwidth_plus
-        install_line
-        # install_1password7
+        :
         # install_xcode
     fi
 }

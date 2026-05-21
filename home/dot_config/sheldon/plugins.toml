@@ -75,12 +75,12 @@ apply = ['defer']
 github = 'zsh-users/zsh-syntax-highlighting'
 apply = ['defer']
 
-[plugins.zsh-autopair]
-github = 'hlissner/zsh-autopair'
-apply = ['defer']
+#[plugins.zsh-autopair]
+#github = 'hlissner/zsh-autopair'
+#apply = ['defer']
 
-[plugins.zsh-history-on-success]
-github = 'nyoungstudios/zsh-history-on-success'
+#[plugins.zsh-history-on-success]
+#github = 'nyoungstudios/zsh-history-on-success'
 
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
@@ -101,11 +101,11 @@ use = [
     'plugins/fzf/fzf.plugin.zsh',
 ]
 
-[plugins.zsh-history-shell-options]
-inline = '''
-setopt INC_APPEND_HISTORY_TIME
-setopt INC_APPEND_HISTORY
-'''
+#[plugins.zsh-history-shell-options]
+#inline = '''
+#setopt INC_APPEND_HISTORY_TIME
+#setopt INC_APPEND_HISTORY
+#'''
 
 #
 # Mise for managing multiple versions of tools
@@ -192,13 +192,8 @@ zsh-defer _gpg
 # Prompt
 #
 
-#[plugins.powerlevel10k]
-#github = "romkatv/powerlevel10k"
-
-#[plugins.p10k]
-#local = "~/.config/powerlevel10k"
-#use = ["p10k.zsh"]
-#apply = ["source"]
+[plugins.starship]
+inline = 'eval "$(starship init zsh)"'
 
 #
 # Git related plugins
@@ -238,14 +233,6 @@ function _macos_browser() {
 }
 zsh-defer _macos_browser
 '''
-
-#[plugins.macos-command]
-#inline = '''
-#function _macos_command() {
-    #alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-#}
-#zsh-defer _macos_command
-#'''
 
 #################
 #  ZIM Modules  #

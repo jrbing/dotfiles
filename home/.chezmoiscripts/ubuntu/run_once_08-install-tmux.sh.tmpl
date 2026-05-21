@@ -2,7 +2,4 @@
 {{   if eq .chezmoi.osRelease.idLike "debian" -}}
 {{     include "../install/ubuntu/common/tmux.sh" }}
 {{   end -}}
-{{   if eq .system "client" -}}
-{{     include "../install/common/tpm.sh" }}
-{{   end -}}
 {{ end -}}

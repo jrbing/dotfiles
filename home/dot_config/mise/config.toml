@@ -2,8 +2,8 @@
 go = "latest"
 node = "lts"
 rust = "latest"
-python = "latest"
-ruby = "latest"
+python = "3.11"
+#ruby = "latest"
 
 age = "latest"
 aws-cli = "latest"
