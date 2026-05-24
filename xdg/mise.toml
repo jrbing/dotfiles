@@ -5,6 +5,7 @@ NODE_ENV = 'production'
 [tools]
 ruby = "4.0.5"
 python = "3.13"
+node = "latest"
 uv = "latest"
 
 [settings]
