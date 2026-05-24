@@ -7,7 +7,7 @@
   "mcp": {
     "terraform-registry": {
       "type": "local",
-      "enabled": true,
+      "enabled": false,
       "command": [
         "docker",
         "run",
