@@ -39,7 +39,7 @@
     "**\/.svn" : true,
     "**\/.git" : true
   },
-  "extensions.autoUpdate" : true,
+  "extensions.autoUpdate" : "on",
   "workbench.startupEditor" : "none",
   "editor.cursorStyle" : "block",
   "vim.textwidth" : 80,
