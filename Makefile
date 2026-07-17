@@ -41,11 +41,9 @@ reset-config:  ## Reset chezmoi configuration (removes all stored configuration 
 #############
 
 VM_NAME ?= dotfiles-test
-VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-base:latest
+VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-xcode:latest
 
-.PHONY: vm-init vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
-
-vm-init: vm-clone  ## (deprecated) Alias for vm-clone
+.PHONY: vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
 
 vm-clone:  ## Clone a macOS Tahoe VM image for testing (one-time, ~25GB download)
 	tart clone $(VM_IMAGE) $(VM_NAME)
