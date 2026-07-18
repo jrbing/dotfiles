@@ -41,7 +41,7 @@ reset-config:  ## Reset chezmoi configuration (removes all stored configuration 
 #############
 
 VM_NAME ?= dotfiles-test
-VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-xcode:latest
+VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-base:latest
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 .PHONY: vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
@@ -68,6 +68,9 @@ vm-delete:  ## Delete the VM
 
 vm-list:  ## List all Tart VMs
 	tart list
+
+vm-prune:  ## Prune all base images
+	tart prune --space-budget=0
 
 vm-test:  ## Automated test: boot VM, run dotfiles setup, then clean up
 	@bash scripts/vm-test.sh
