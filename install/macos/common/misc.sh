@@ -21,6 +21,7 @@ readonly BREW_PACKAGES=(
     direnv
     docker
     docker-buildx
+    eza
     ffmpeg
     gh
     git-delta
