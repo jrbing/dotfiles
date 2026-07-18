@@ -57,9 +57,9 @@ readonly BREW_PACKAGES=(
     zoxide
 )
 
-readonly BREW_TAPS=(
-    #manaflow-ai/cmux
-)
+# readonly BREW_TAPS=(
+    # #manaflow-ai/cmux
+# )
 
 readonly CASK_PACKAGES=(
     1password
@@ -168,7 +168,7 @@ function install_brew_cask_packages() {
 # @description Install the configured optional macOS packages and casks.
 #
 function main() {
-    install_brew_taps
+    # install_brew_taps
     install_brew_packages
     install_brew_cask_packages
 }
