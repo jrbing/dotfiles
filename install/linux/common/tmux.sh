@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# @file install/ubuntu/common/tmux.sh
-# @brief Install tmux on Ubuntu.
+# @file install/linux/common/tmux.sh
+# @brief Install tmux on Linux.
 # @description
-#   Installs or removes the Ubuntu `tmux` package while preserving proxy
+#   Installs or removes the Linux `tmux` package while preserving proxy
 #   environment variables.
 
 set -Eeuo pipefail
@@ -17,21 +17,21 @@ readonly PACKAGES=(
 )
 
 #
-# @description Install the Ubuntu `tmux` package.
+# @description Install the Linux `tmux` package.
 #
 function install_tmux() {
     sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y "${PACKAGES[@]}"
 }
 
 #
-# @description Remove the Ubuntu `tmux` package.
+# @description Remove the Linux `tmux` package.
 #
 function uninstall_tmux() {
     sudo apt-get remove -y "${PACKAGES[@]}"
 }
 
 #
-# @description Run the Ubuntu tmux installation flow.
+# @description Run the Linux tmux installation flow.
 #
 function main() {
     install_tmux

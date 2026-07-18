@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# @file install/ubuntu/server/starship.sh
-# @brief Install the Starship prompt on Ubuntu servers.
+# @file install/linux/server/starship.sh
+# @brief Install the Starship prompt on Linux servers.
 # @description
 #   Downloads the upstream Starship installer and places the binary in the
 #   user's local bin directory.

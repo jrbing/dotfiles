@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# @file install/ubuntu/common/dependencies.sh
-# @brief Install essential Ubuntu packages for the dotfiles.
+# @file install/linux/common/dependencies.sh
+# @brief Install essential Linux packages for the dotfiles.
 # @description
 #   Ensures the base command-line toolchain required by the repository is
 #   present, including `sudo` when starting from a minimal container.
@@ -81,7 +81,7 @@ function uninstall_apt_packages() {
 }
 
 #
-# @description Install the required Ubuntu dependencies.
+# @description Install the required Linux dependencies.
 #
 function main() {
     install_apt_packages

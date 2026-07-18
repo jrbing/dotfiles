@@ -1,5 +1,5 @@
 {{ if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.osRelease.idLike "debian" -}}
-{{     include "../install/ubuntu/common/starship.sh" }}
+{{       include "../install/linux/common/misc.sh" }}
 {{   end -}}
 {{ end -}}

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# @file install/ubuntu/client/docker.sh
-# @brief Install Docker Engine on Ubuntu client machines.
+# @file install/linux/client/docker.sh
+# @brief Install Docker Engine on Linux client machines.
 # @description
 #   Removes legacy Docker packages, configures Docker's apt repository, and
 #   installs the current Docker Engine packages.
@@ -80,7 +80,7 @@ function uninstall_docker_engine() {
 }
 
 #
-# @description Install Docker Engine from Docker's official Ubuntu repository.
+# @description Install Docker Engine from Docker's official Linux repository.
 #
 function main() {
     uninstall_old_docker

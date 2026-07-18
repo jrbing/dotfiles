@@ -9,7 +9,7 @@ Dotfiles repo managed by [chezmoi](https://chezmoi.io). Bootstrapped via `setup.
   - `executable_*` marks scripts that get `+x` (see `home/dot_local/bin/`)
   - directories like `dot_config/` map to `~/.config/`
 - Do **not** edit files at the repo root expecting them to land in `$HOME` — they won't.
-- `install/{common,macos,ubuntu}/` hold chezmoi `run_onchange_` / `run_` scripts executed during `chezmoi apply` (Homebrew, tmux, mise, sheldon, etc.).
+- `install/{common,macos,linux}/` hold chezmoi `run_onchange_` / `run_` scripts executed during `chezmoi apply` (Homebrew, tmux, mise, sheldon, etc.).
 - Tool chain on a fresh machine: `setup.sh` → chezmoi applies dotfiles → `mise` (runs at shell startup, installs sheldon) → `sheldon` (installs zsh plugins). Don't replicate this wiring manually.
 
 ## Common commands

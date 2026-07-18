@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# @file install/ubuntu/common/ssh.sh
-# @brief Install the OpenSSH client on Ubuntu.
+# @file install/linux/common/ssh.sh
+# @brief Install the OpenSSH client on Linux.
 # @description
-#   Installs or removes the Ubuntu OpenSSH client package while preserving
+#   Installs or removes the Linux OpenSSH client package while preserving
 #   proxy-related environment variables.
 
 set -Eeuo pipefail
