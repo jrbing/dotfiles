@@ -42,6 +42,7 @@ reset-config:  ## Reset chezmoi configuration (removes all stored configuration 
 
 VM_NAME ?= dotfiles-test
 VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-xcode:latest
+ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 .PHONY: vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
 
@@ -49,7 +50,7 @@ vm-clone:  ## Clone a macOS Tahoe VM image for testing (one-time, ~25GB download
 	tart clone $(VM_IMAGE) $(VM_NAME)
 
 vm-run:  ## Run the VM with a graphical console window
-	tart run $(VM_NAME)
+	tart run --dir=dotfiles:$(ROOT_DIR) $(VM_NAME)
 
 vm-run-headless:  ## Run the VM in headless mode (no GUI)
 	tart run --no-graphics $(VM_NAME)
