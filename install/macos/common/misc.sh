@@ -41,7 +41,6 @@ readonly BREW_PACKAGES=(
     mole
     nmap
     node
-    nzbget
     opencode
     pinentry-mac
     reattach-to-user-namespace
@@ -75,6 +74,7 @@ readonly CASK_PACKAGES=(
     macvim-app
     serial
     syncthing-app
+    vimr
     vlc
 )
 
