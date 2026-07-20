@@ -15,7 +15,7 @@ set -o pipefail # Prevent errors in a pipeline from being masked
 IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 # Source bash functions
-source "$DOTFILES/share/lib/bash-functions.sh"
+source "~/.local/lib/bash/bash-functions.sh"
 
 PUSHOVER_APP_TOKEN=${PUSHOVER_APP_TOKEN:=x}
 PUSHOVER_USER_KEY=${PUSHOVER_USER_KEY:=x}

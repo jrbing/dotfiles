@@ -15,7 +15,7 @@ set -u          # Treat unset variables as an error
 set -o pipefail # Prevent errors in a pipeline from being masked
 
 # Source bash functions
-source "$DOTFILES/share/lib/bash-functions.sh"
+source "~/.local/lib/bash/bash-functions.sh"
 
 # Check for the blink1-tool
 req_progs=(blink1-tool)

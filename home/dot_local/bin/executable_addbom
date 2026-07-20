@@ -19,7 +19,7 @@ IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 # Note: this only works on macOS
 
 # Source bash functions
-source "$DOTFILES/share/lib/bash-functions.sh"
+source "~/.local/lib/bash/bash-functions.sh"
 
 readonly PROGNAME="$(basename $0)"
 readonly UCONV=$(find /opt/homebrew/Cellar -type f -name "uconv")

@@ -16,7 +16,7 @@ set -o pipefail # Prevent errors in a pipeline from being masked
 IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 # Source bash functions
-source "$DOTFILES/share/lib/bash-functions.sh"
+source "~/.local/lib/bash/bash-functions.sh"
 
 readonly ARGS=( "$@" )
 readonly CURRENTBRANCH="$(git symbolic-ref --short -q HEAD)"

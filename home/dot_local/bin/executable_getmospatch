@@ -16,7 +16,7 @@ IFS=$'\n\t'     # Set the internal field separator to a tab and newline
 
 # Source bash functions
 # shellcheck disable=1090
-source "$DOTFILES/share/lib/bash-functions.sh"
+source "~/.local/lib/bash/bash-functions.sh"
 
 # Check for required programs
 req_progs=(curl aria2c)
