@@ -25,6 +25,13 @@ zsh-defer source "{{ file }}"
 {{ hooks?.post | nl }}
 """
 
+defer-more = """
+{{ hooks?.pre | nl }}
+{% for file in files %}
+zsh-defer -t 0.5 source "{{ file }}"\n
+{% endfor %}{{ hooks?.post | nl }}
+"""
+
 fzf-install = """
 {{ hooks?.pre | nl }}
 {{ dir }}/install --bin > /dev/null
@@ -35,23 +42,21 @@ path=($path {{ dir }}/bin(N-/))
 fzf-source = "source <(fzf --zsh)"
 
 #
-# Deferred Loading of Plugins in Zsh
+# Plugins
 #
 
+[plugins]
+
+# Deferred Loading of Plugins in Zsh
 [plugins.zsh-defer]
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
-#
 # Autoloading of Functions in Zsh
-#
-
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
 
-#[plugins.custom-commands]
-#inline = 'autoload -Uz dev cdgwq cdw'
-
+# Fuzzy finder
 [plugins.fzf]
 github = 'junegunn/fzf'
 apply = ['fzf-install']
@@ -59,65 +64,49 @@ hooks.post = '''
 export FZF_DEFAULT_OPTS="--reverse"
 '''
 
-#
-# Zsh-related Plugins
-#
-
-#[plugins.zsh-autosuggestions]
-#github = 'zsh-users/zsh-autosuggestions'
-#apply = ['defer']
-
+# ZSH Completions
 [plugins.zsh-completions]
 github = 'zsh-users/zsh-completions'
 apply = ['defer']
 
+# Syntax highlighting
 [plugins.zsh-syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
 apply = ['defer']
 
-#[plugins.zsh-autopair]
-#github = 'hlissner/zsh-autopair'
-#apply = ['defer']
+# History substring search
+[plugins.zsh-history-substring-search]
+github = 'zsh-users/zsh-history-substring-search'
+apply = ['defer']
 
-#[plugins.zsh-history-on-success]
-#github = 'nyoungstudios/zsh-history-on-success'
-
+# oh-my-zsh
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
 use = [
-    #
     # Load necessary functions first
-    #
     'lib/functions.zsh',
-    #
     # Load other useful libraries
-    #
     'lib/completion.zsh',
     'lib/history.zsh',
     'lib/termsupport.zsh',
-    #
     # Load some plugins
-    #
+    'plugins/eza/eza.plugin.zsh',
     'plugins/fzf/fzf.plugin.zsh',
+    'plugins/macos/macos.plugin.zsh',
+    'plugins/mise/mise.plugin.zsh',
+    'plugins/starship/starship.plugin.zsh',
 ]
 
-#[plugins.zsh-history-shell-options]
-#inline = '''
-#setopt INC_APPEND_HISTORY_TIME
-#setopt INC_APPEND_HISTORY
-#'''
+# Zoxide
+[plugins.zoxide]
+github = "ajeetdsouza/zoxide"
 
-#
-# Mise for managing multiple versions of tools
-#
+# Syntax highlighting
+[plugins.zsh-bd]
+github = 'Tarrasch/zsh-bd'
+apply = ['defer']
 
-[plugins.mise]
-inline = 'eval "$(~/.local/bin/mise activate zsh)"'
-
-#
-# Language-related plugins
-#
-
+# Set language
 [plugins.lang]
 inline = '''
 function _lang() {
@@ -126,21 +115,19 @@ function _lang() {
 zsh-defer _lang
 '''
 
-#[plugins.go]
-#inline = '''
-#function _go() {
-    #export GOPATH="${HOME}/ghq"
-    #export GOROOT=$(go env GOROOT)
+[plugins.go]
+inline = '''
+function _go() {
+    export GOPATH="${HOME}/ghq"
 
-    #typeset -gU path
-    #path=(
-        #$path
-        #${GOPATH}/bin(N-/)
-        #${HOME}/.go/bin(N-/)
-    #)
-#}
-#zsh-defer _go
-#'''
+    typeset -gU path
+    path=(
+        $path
+        ${GOPATH}/bin(N-/)
+    )
+}
+zsh-defer _go
+'''
 
 [plugins.rust]
 inline = '''
@@ -167,18 +154,11 @@ path+=(
 [ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
 '''
 
-#
 # Aliases
-#
-
 [plugins.common-alias]
 local = '~/.config/alias'
 use = ['common.sh']
 apply = ['source']
-
-#
-# GPG
-#
 
 [plugins.gpg]
 inline = '''
@@ -188,16 +168,9 @@ function _gpg() {
 zsh-defer _gpg
 '''
 
-#
 # Prompt
-#
-
-[plugins.starship]
-inline = 'eval "$(starship init zsh)"'
-
-#
-# Git related plugins
-#
+# [plugins.starship]
+# inline = 'eval "$(starship init zsh)"'
 
 [plugins.git-open]
 github = "paulirish/git-open"
@@ -233,28 +206,3 @@ function _macos_browser() {
 }
 zsh-defer _macos_browser
 '''
-
-#################
-#  ZIM Modules  #
-#################
-
-# Official Zim modules
-#zmodule environment
-#zmodule git
-#zmodule input
-#zmodule termtitle
-#zmodule utility
-#zmodule run-help
-#zmodule archive
-#zmodule direnv
-#zmodule fzf
-#zmodule magic-enter
-#zmodule ssh
-#zmodule homebrew
-
-# Third-party ZSH modules
-#zmodule zsh-users/zsh-completions --fpath src
-#zmodule zsh-users/zsh-syntax-highlighting
-#zmodule zsh-users/zsh-history-substring-search
-#zmodule kiesman99/zim-zoxide  # zoxide integration for Zim (provides the `z` command)
-#zmodule Tarrasch/zsh-bd --source bd.zsh

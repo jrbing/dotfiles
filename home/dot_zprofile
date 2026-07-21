@@ -3,14 +3,6 @@
 #
 
 #
-# Browser
-#
-
-if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
-
-#
 # Editors
 #
 
