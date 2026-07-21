@@ -74,6 +74,23 @@ apply = ['defer']
 github = 'zsh-users/zsh-syntax-highlighting'
 apply = ['defer']
 
+[plugins.macos-path]
+inline = '''
+function _macos_path() {
+    typeset -gU path
+    path=(
+        $path
+        /opt/{homebrew,local}/{,s}bin(N-/)
+    )
+}
+zsh-defer _macos_path
+'''
+
+
+# mise
+[plugins.mise]
+github = "wintermi/zsh-mise"
+
 # oh-my-zsh
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
@@ -85,30 +102,25 @@ use = [
     'lib/history.zsh',
     'lib/termsupport.zsh',
     # Load some plugins
-    'plugins/fzf/fzf.plugin.zsh',
     'plugins/macos/macos.plugin.zsh',
+    'plugins/fzf/fzf.plugin.zsh',
     'plugins/starship/starship.plugin.zsh'
 ]
 
-# eza
+# EZA
 [plugins.eza]
 github = "z-shell/zsh-eza"
-apply = ['defer']
-
-# mise
-[plugins.mise]
-github = "wintermi/zsh-mise"
 apply = ['defer']
 
 # Zoxide
 [plugins.zoxide]
 github = "ajeetdsouza/zoxide"
-apply = ['defer']
+apply = ['defer-more']
 
 # Syntax highlighting
 [plugins.bd]
 github = 'Tarrasch/zsh-bd'
-apply = ['defer']
+apply = ['defer-more']
 
 # History substring search
 [plugins.zsh-history-substring-search]
@@ -169,7 +181,7 @@ path+=(
 [plugins.common-alias]
 local = '~/.config/alias'
 use = ['common.sh']
-apply = ['defer']
+apply = ['source']
 
 [plugins.gpg]
 inline = '''
@@ -190,18 +202,6 @@ function _homebrew() {
     export HOMEBREW_FORBIDDEN_FORMULAE="node python python3 pip npm pnpm yarn claude"
 }
 zsh-defer _homebrew
-'''
-
-[plugins.macos-path]
-inline = '''
-function _macos_path() {
-    typeset -gU path
-    path=(
-        $path
-        /opt/{homebrew,local}/{,s}bin(N-/)
-    )
-}
-zsh-defer _macos_path
 '''
 
 [plugins.macos-browser]
