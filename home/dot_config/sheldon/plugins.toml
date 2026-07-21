@@ -88,18 +88,30 @@ use = [
     'plugins/eza/eza.plugin.zsh',
     'plugins/fzf/fzf.plugin.zsh',
     'plugins/macos/macos.plugin.zsh',
-    'plugins/mise/mise.plugin.zsh',
     'plugins/starship/starship.plugin.zsh'
 ]
+
+# mise
+[plugins.mise]
+github = "wintermi/zsh-mise"
+apply = ['defer']
 
 # Zoxide
 [plugins.zoxide]
 github = "ajeetdsouza/zoxide"
+apply = ['defer']
 
 # Syntax highlighting
 [plugins.bd]
 github = 'Tarrasch/zsh-bd'
 apply = ['defer']
+
+# History substring search
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+use = ["{{ name }}.zsh"]
+apply = ["defer-more"]
+hooks.post = "bindkey '^[[A' history-substring-search-up; bindkey '^[[B' history-substring-search-down; export HISTORY_SUBSTRING_SEARCH_FUZZY=1"
 
 # Set language
 [plugins.lang]
@@ -163,10 +175,6 @@ function _gpg() {
 zsh-defer _gpg
 '''
 
-# Prompt
-# [plugins.starship]
-# inline = 'eval "$(starship init zsh)"'
-
 [plugins.git-open]
 github = "paulirish/git-open"
 apply = ["defer"]
@@ -201,10 +209,3 @@ function _macos_browser() {
 }
 zsh-defer _macos_browser
 '''
-
-# History substring search
-[plugins.zsh-history-substring-search]
-github = "zsh-users/zsh-history-substring-search"
-use = ["{{ name }}.zsh"]
-apply = ["defer-more"]
-hooks.post = "bindkey '^[[A' history-substring-search-up; bindkey '^[[B' history-substring-search-down"
