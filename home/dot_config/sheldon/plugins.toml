@@ -165,7 +165,7 @@ path+=(
 [plugins.common-alias]
 local = '~/.config/alias'
 use = ['common.sh']
-apply = ['source']
+apply = ['defer']
 
 [plugins.gpg]
 inline = '''
