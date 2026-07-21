@@ -85,11 +85,15 @@ use = [
     'lib/history.zsh',
     'lib/termsupport.zsh',
     # Load some plugins
-    'plugins/eza/eza.plugin.zsh',
     'plugins/fzf/fzf.plugin.zsh',
     'plugins/macos/macos.plugin.zsh',
     'plugins/starship/starship.plugin.zsh'
 ]
+
+# eza
+[plugins.eza]
+github = "z-shell/zsh-eza"
+apply = ['defer']
 
 # mise
 [plugins.mise]
