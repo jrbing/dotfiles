@@ -15,7 +15,10 @@
 {{-   $system = promptString "System (client or server)" -}}
 {{- end -}}
 
-data:
-    email: {{ $email | quote }}
-    system: {{ $system | quote }}
+git:
+  autoCommit: true
+  autoPush: true
 
+data:
+  email: {{ $email | quote }}
+  system: {{ $system | quote }}
