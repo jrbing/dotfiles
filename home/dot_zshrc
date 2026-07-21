@@ -16,6 +16,15 @@ fpath=(
     ${HOME}/.local/bin/common(N-/)
 )
 
+# Initialize zsh's completion system
+if type brew &>/dev/null; then
+  # Fix for homebrew installed zsh on Apple Silicon Macs
+  fpath=("$(brew --prefix)/zsh/functions" $fpath)
+  autoload -Uz compinit && compinit -u
+else
+  autoload -Uz +X compinit && compinit -u
+fi
+
 ############################
 #  Sheldon Initialization  #
 ############################

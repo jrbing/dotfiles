@@ -74,11 +74,6 @@ apply = ['defer']
 github = 'zsh-users/zsh-syntax-highlighting'
 apply = ['defer']
 
-# History substring search
-[plugins.zsh-history-substring-search]
-github = 'zsh-users/zsh-history-substring-search'
-apply = ['defer']
-
 # oh-my-zsh
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
@@ -102,7 +97,7 @@ use = [
 github = "ajeetdsouza/zoxide"
 
 # Syntax highlighting
-[plugins.zsh-bd]
+[plugins.bd]
 github = 'Tarrasch/zsh-bd'
 apply = ['defer']
 
@@ -206,3 +201,10 @@ function _macos_browser() {
 }
 zsh-defer _macos_browser
 '''
+
+# History substring search
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+use = ["{{ name }}.zsh"]
+apply = ["defer-more"]
+hooks.post = "bindkey '^[[A' history-substring-search-up; bindkey '^[[B' history-substring-search-down"
