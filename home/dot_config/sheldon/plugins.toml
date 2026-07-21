@@ -89,7 +89,7 @@ use = [
     'plugins/fzf/fzf.plugin.zsh',
     'plugins/macos/macos.plugin.zsh',
     'plugins/mise/mise.plugin.zsh',
-    'plugins/starship/starship.plugin.zsh',
+    'plugins/starship/starship.plugin.zsh'
 ]
 
 # Zoxide
