@@ -213,3 +213,13 @@ function _macos_browser() {
 }
 zsh-defer _macos_browser
 '''
+
+[plugins.atuin]
+inline = '''
+function _atuin() {
+    if [[ $commands[atuin] ]]; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+    fi
+}
+zsh-defer _atuin
+'''
