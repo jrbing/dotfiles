@@ -86,7 +86,6 @@ function _macos_path() {
 zsh-defer _macos_path
 '''
 
-
 # mise
 [plugins.mise]
 github = "wintermi/zsh-mise"
