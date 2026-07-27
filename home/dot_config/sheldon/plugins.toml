@@ -115,7 +115,7 @@ apply = ['defer']
 # Zoxide
 [plugins.zoxide]
 github = "ajeetdsouza/zoxide"
-apply = ['defer-more']
+apply = ['defer']
 
 # Syntax highlighting
 [plugins.bd]
