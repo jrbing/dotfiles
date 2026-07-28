@@ -107,9 +107,9 @@ use = [
 ]
 
 # EZA
-[plugins.eza]
-github = "z-shell/zsh-eza"
-apply = ['defer']
+# [plugins.eza]
+# github = "z-shell/zsh-eza"
+# apply = ['defer']
 
 # Zoxide
 [plugins.zoxide]
