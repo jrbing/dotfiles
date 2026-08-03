@@ -194,15 +194,6 @@ zsh-defer _gpg
 github = "paulirish/git-open"
 apply = ["defer"]
 
-[plugins.homebrew]
-inline = '''
-function _homebrew() {
-    # Disable installing certain formulae
-    export HOMEBREW_FORBIDDEN_FORMULAE="node python python3 pip npm pnpm yarn claude"
-}
-zsh-defer _homebrew
-'''
-
 [plugins.macos-browser]
 inline = '''
 function _macos_browser() {
