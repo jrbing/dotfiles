@@ -16,18 +16,13 @@ case $(uname) in
     [[ -d "/usr/local/bin" ]] && export PATH="/usr/local/bin:$PATH"                # Ensure /usr/local/bin is in path
     [[ -d "/opt/homebrew/bin" ]] && export PATH="/opt/homebrew/bin:$PATH"                # Ensure /opt/homebrew/bin is in path
     [[ -d "/usr/texbin" ]] && export PATH="$PATH:/usr/texbin"                      # Tex
+    [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"                # Ensure /usr/local/bin is in path
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
 
     #
     # Aliases
     #
-    alias z='fasd_cd -d'                                  # Alias for FASD
     alias flush-dns="sudo killall -HUP mDNSResponder"     # Flush DNS
-    alias ans=ansible
-    alias apb=ansible-playbook
-    alias agx=ansible-galaxy
-    alias anv=ansible-vault
-    alias mux=tmuxinator
     if [[ $TERM != "dumb" ]]; then
         [[ -d "/opt/oracle/client" ]] && alias sqlplus="DYLD_LIBRARY_PATH=/opt/oracle/client/lib /usr/local/bin/rlwrap -iIp red -f ~/.dotfiles/sql/sqlplus_completions -H ~/.sqlplus_history -s 30000 /opt/oracle/client/bin/sqlplus"
       else
