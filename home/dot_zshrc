@@ -7,9 +7,9 @@
 typeset -gU path fpath
 path=(
     $path
-    /usr/local/{,s}bin(N-/)
     ${HOME}/.local/bin(N-/)
     ${HOME}/.local/bin/common(N-/)
+    /usr/local/{,s}bin(N-/)
 )
 fpath=(
     $fpath
