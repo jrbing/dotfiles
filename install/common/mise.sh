@@ -19,12 +19,7 @@ readonly DEFAULT_NPM_MIN_RELEASE_AGE_DAYS=7
 #
 function install_mise() {
     # https://mise.run
-    local version="v2026.3.7"
-    local url="https://raw.githubusercontent.com/jdx/mise/refs/tags/${version}/packaging/standalone/install.envsubst"
-
-    export MISE_CURRENT_VERSION="${version}"
-    curl "${url}" | sh
-    unset MISE_CURRENT_VERSION
+    curl https://mise.run | sh
 
     eval "$(~/.local/bin/mise activate bash)"
 }
