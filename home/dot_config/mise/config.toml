@@ -2,7 +2,7 @@
 go = "latest"
 node = "lts"
 rust = "latest"
-python = "3.11"
+python = "3.14"
 #ruby = "latest"
 
 age = "latest"
