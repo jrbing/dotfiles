@@ -106,17 +106,12 @@ use = [
     'plugins/starship/starship.plugin.zsh'
 ]
 
-# EZA
-# [plugins.eza]
-# github = "z-shell/zsh-eza"
-# apply = ['defer']
-
 # Zoxide
 [plugins.zoxide]
 github = "ajeetdsouza/zoxide"
 apply = ['defer']
 
-# Syntax highlighting
+# bd
 [plugins.bd]
 github = 'Tarrasch/zsh-bd'
 apply = ['defer-more']
@@ -189,10 +184,6 @@ function _gpg() {
 }
 zsh-defer _gpg
 '''
-
-[plugins.git-open]
-github = "paulirish/git-open"
-apply = ["defer"]
 
 [plugins.macos-browser]
 inline = '''
