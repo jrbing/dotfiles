@@ -20,6 +20,7 @@ yazi = "latest"
 
 "github:d-kuro/gwq" = "latest"
 "github:cli/cli" = "latest"
+"github:googleworkspace/cli" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python","ruby"]
