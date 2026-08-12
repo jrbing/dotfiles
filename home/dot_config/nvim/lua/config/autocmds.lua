@@ -31,3 +31,10 @@
     -- end
   -- end,
 -- })
+
+-- Ported from home/dot_vimrc: Makefiles use tabs
+autocmd("FileType", {
+  group = augroup("ft_make", { clear = true }),
+  pattern = "make",
+  command = "setlocal noexpandtab",
+})
