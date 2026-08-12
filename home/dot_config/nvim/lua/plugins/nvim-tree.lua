@@ -1,4 +1,11 @@
 -- Ported from home/dot_vimrc: NERDTree section (lines 796-804) + <F9> (lines 440-441)
+-- Open nvim-tree automatically at startup
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.cmd("NvimTreeOpen")
+  end,
+})
+
 return {
   {
     "nvim-tree/nvim-tree.lua",
@@ -8,7 +15,7 @@ return {
       filters = {
         custom = {
           "\\.py[cd]$",
-          "~$",
+          "\\~$",
           "\\.swo$",
           "\\.swp$",
           "^\\.git$",
