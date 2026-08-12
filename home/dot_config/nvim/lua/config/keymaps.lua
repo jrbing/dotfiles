@@ -4,7 +4,7 @@
 
 local utils = require("config.utils")
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+map({ "n", "v" }, ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 -- Bubble lines up/down
@@ -24,8 +24,8 @@ map("n", "<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Edit in c
 map("n", "<leader>v", "V`]", { desc = "Re-select last paste" })
 
 -- Telescope in place of CtrlP
-map("n", "<leader>b", telescope.buffers, { desc = "Buffers (CtrlPBuffer)" })
-map("n", "<A-t>", telescope.find_files, { desc = "Find files" })
+map("n", "<leader>b", function() require("telescope.builtin").buffers() end, { desc = "Buffers (CtrlPBuffer)" })
+map("n", "<A-t>", function() require("telescope.builtin").find_files() end, { desc = "Find files" })
 
 -- Window sizing
 -- map("n", "<leader>=", "<C-w>=", { desc = "Equalize splits" })
