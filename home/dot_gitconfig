@@ -4,9 +4,6 @@
 	editor = vim
 	signingkey = 1DB141D9
 
-[commit]
-	gpgsign = true
-
 [fetch]
 	prune = true
 
