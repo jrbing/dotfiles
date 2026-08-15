@@ -1,22 +1,16 @@
 #!/bin/bash
 
-export DOTFILES=$HOME/.dotfiles
-
 #
 # OS Specific Settings
 #
 case $(uname) in
   (Darwin)
-    eval "$("$HOME"/.dotfiles/bin/valet init -)"
-    #JAVA_HOME="$(/usr/libexec/java_home)"; export JAVA_HOME
     export EDITOR='vim'
     export VISUAL='mvim -f'
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
     [[ -d "/usr/local/bin" ]] && export PATH="/usr/local/bin:$PATH"                # Ensure /usr/local/bin is in path
-    [[ -d "/opt/homebrew/bin" ]] && export PATH="/opt/homebrew/bin:$PATH"                # Ensure /opt/homebrew/bin is in path
-    [[ -d "/usr/texbin" ]] && export PATH="$PATH:/usr/texbin"                      # Tex
-    [[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"                # Ensure /usr/local/bin is in path
+    [[ -d "/opt/homebrew/bin" ]] && export PATH="/opt/homebrew/bin:$PATH"          # Ensure /opt/homebrew/bin is in path
     [[ -d "/opt/go" ]] && export GOPATH=/opt/go && export PATH="$PATH:/opt/go/bin" # GOPATH
 
     #
@@ -31,24 +25,12 @@ case $(uname) in
   ;;
   (Linux)
     [[ $TERM == xterm ]] && export TERM="xterm-256color"
-    # Test if the system python version is >= 3.7 or if python3 is in the path
-    #if [[ $(python -c 'import sys; print("%i" % (sys.hexversion<0x03070000))') -eq 0 || $(hash python3 2>/dev/null) ]]; then
-    #  eval "$("$HOME"/.dotfiles/bin/valet init -)"
-    #fi
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
     export PATH=$PATH:/sbin:/usr/sbin
-    alias mux=tmuxinator
-  ;;
-  (SunOS)
-    export DISABLE_LS_COLORS=true
-    export PATH=$PATH:/usr/cluster/bin
-    export PATH=$PATH:/sbin
-  ;;
-  (CYGWIN*)
-    alias vim="/c/Program\ Files/vim/vim74/gvim.exe &"
-    alias exp="explorer"
   ;;
 esac
+
+[[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:$PATH"                # Ensure ~/local/bin is in path
 
 #
 # Less
@@ -118,23 +100,6 @@ if [[ $TERM != "dumb" ]]; then
     # Local Session
     PS1="\[$BASE0\]\W\[$BASE0\]\[$ORANGE\] ❯ \[$RESET\]"
   fi
-fi
-
-#
-# Additional Tools
-#
-export SQLPATH="$DOTFILES/sql/oracle" # SQL script path for sqlplus
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# direnv
-if hash direnv 2>/dev/null; then
-  eval "$(direnv hook bash)"
-fi
-
-# asdf
-if hash asdf 2>/dev/null; then
-  #source <(asdf completion bash)
-  eval "$(asdf completion bash)"
 fi
 
 #
