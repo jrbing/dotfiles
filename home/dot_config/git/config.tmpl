@@ -2,7 +2,7 @@
 	name = JR Bing
 	email = jrbing@users.noreply.github.com
 	editor = vim
-	signingkey = 1DB141D9
+	signingkey = ~/.ssh/id_ed25519.pub
 
 [color]
 	ui = auto
@@ -12,6 +12,9 @@
 
 [commit]
 	gpgsign = true
+
+[gpg]
+	format = ssh
 
 [fetch]
 	prune = true
@@ -23,7 +26,7 @@
 	quotepath = false
 	pager = delta
 	editor = vim
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.config/git/ignore
 	whitespace = warn
 
 [init]
