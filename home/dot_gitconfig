@@ -2,7 +2,6 @@
 	name = JR Bing
 	email = jrbing@users.noreply.github.com
 	editor = vim
-	signingkey = 1DB141D9
 
 [fetch]
 	prune = true
