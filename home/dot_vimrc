@@ -571,7 +571,7 @@
     " Automatically reload the vimrc file when changed
     augroup myvimrc
       autocmd!
-      autocmd BufWritePost ~/.dotfiles/vim/vimrc source $MYVIMRC
+      autocmd BufWritePost ~/.vim/vimrc source $MYVIMRC
     augroup END
   "}}}
 
@@ -1013,7 +1013,7 @@
     let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom/snippets']
 
     " Set custom snippet directory for use with UltiSnipsEdit
-    let g:UltiSnipsSnippetsDir='~/.dotfiles/vim/custom/snippets'
+    let g:UltiSnipsSnippetsDir='~/.vim/custom/snippets'
 
     " Define how the edit window is opened when :UltiSnipsEdit is called
     let g:UltiSnipsEditSplit='vertical'
