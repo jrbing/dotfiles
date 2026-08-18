@@ -19,7 +19,7 @@ readonly CURDIR=$(pwd)
 LISTONLY=false
 
 # shellcheck source=/dev/null
-source "~/.local/lib/bash/bash-functions.sh"
+source "${HOME}/.local/lib/bash/bash-functions.sh"
 
 while getopts ":l" opt; do
   case $opt in
