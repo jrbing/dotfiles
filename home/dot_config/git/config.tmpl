@@ -86,6 +86,7 @@
 {{ if eq .chezmoi.os "macos" -}}
 [credential]
 	helper = osxkeychain
+	gitHubAccountFiltering = false
 {{ end -}}
 {{ if eq .chezmoi.os "linux" -}}
 [credential]
