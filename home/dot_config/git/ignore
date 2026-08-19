@@ -302,3 +302,4 @@ Session.vim
 .netrwhist
 *~
 *.un~
+**/.claude/settings.local.json
