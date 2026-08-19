@@ -1,0 +1,23 @@
+/*
+ * vim: softtabstop=2 shiftwidth=2 expandtab fenc=utf-8 spelllang=en ft=sql
+ * <%= @script_name %>.sql
+ * JR Bing
+ *
+ * description...
+ */
+
+
+set echo off
+set lines 3000
+set long 200000
+set feedback off
+set heading on
+set timing on
+set serveroutput on size 1000000
+set tab off
+--set flagger FULL
+-- {OFF|ENTRY|INTERMED[IATE]|FULL} Checks to make sure that SQL statements conform to the ANSI/ISO SQL92 standard
+
+select name
+  from v$database;
+/

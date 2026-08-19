@@ -1,0 +1,57 @@
+#===============================================================================
+# vim: softtabstop=2 shiftwidth=2 noexpandtab fenc=utf-8 spelllang=en nolist
+#===============================================================================
+# Cheat Sheet - http://www.cheatography.com/bavo-van-achte/cheat-sheets/gnumake/
+# Refcard - http://www.schacherer.de/frank/technology/tools/make.html
+
+# Automatic Variables
+# -------------------
+# $@ – the target filename
+# $< – the filename of the first prerequisite
+# $? – space-delimited list of all prerequisites
+
+MAKEFLAGS += --warn-undefined-variables
+SHELL := /bin/bash
+#.SHELLFLAGS := -eu -o pipefail
+.DEFAULT_GOAL := build
+
+PHONY: *
+
+currentdir   := $(shell pwd)
+remoteuser   = jeffery
+remotehost   = lebowski.com
+remotedir    = /the/dude/abides
+syncswitches = --checksum --archive
+syncmessage  = 'Synchronizing local files to remote host'
+
+all: update submodules
+
+setup: ## Setup necessary project prerequisites
+	mkdir vendor
+	mkdir lib
+
+submodules: ## Update git submodules
+	@git submodule foreach 'git fetch origin; \
+		git checkout master; \
+		git reset --hard origin/master; \
+		git submodule update --recursive; \
+		git clean -dfx'
+
+update: ## Pull the most recent project changes from origin
+	git pull --rebase
+
+drysync:
+	@echo "DRY RUN: $(syncmessage)"
+	rsync --dry-run $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)/
+	@echo
+
+sync:
+	@echo "$(syncmessage)"
+	rsync $(syncswitches) $(currentdir)/ $(remoteuser)@$(remotehost):$(remotedir)/
+	@echo
+
+test:
+	@echo "$(currentdir)"
+
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

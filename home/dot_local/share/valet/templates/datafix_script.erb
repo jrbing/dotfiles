@@ -1,0 +1,20 @@
+-- Datafix <%= @datafix_name %>
+-- Created on: <%= @date %>
+set echo on
+set term on
+set feedback on
+set sqlformat ansiconsole
+set sqlprompt ' _user@_connect_identifier > '
+
+spool <%= @datafix_name %>.log;
+
+-- Environment Information
+select dbname
+     , ownerid
+     , to_char(sysdate,'YYYY/MM/DD HH:MI:SS')
+  from psdbowner;
+
+-- Insert sql inserts/updates/deletes here
+update ...;
+
+spool off;

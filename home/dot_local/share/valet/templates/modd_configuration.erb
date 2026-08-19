@@ -1,0 +1,55 @@
+# An example modd.conf configuration for syncing files
+# See https://github.com/cortesi/modd for more information
+
+@target = user@hostname:/path/to/directory
+#@targetdir = /path/to/directory
+
+@blink = "
+  blink1-tool \
+  --rgb=green \
+  --blink 1 \
+  --quiet
+"
+@syncflags = "
+  --checksum \
+  --archive \
+  --delete \
+  --human-readable \
+  --omit-dir-times \
+  --progress \
+  --whole-file
+"
+#--verbose \
+
+@ntsyncflags = "
+  --inplace \
+  --no-owner \
+  --no-group \
+  --no-perms
+"
+
+@excludeflags = "
+  --exclude \"archive\" \
+  --exclude \".git\" \
+  --exclude \"node_modules\" \
+  --exclude \"bower_components\" \
+  --exclude \".sass-cache\" \
+  --exclude \".direnv\" \
+  --exclude \".vagrant\" \
+  --exclude \".DS_Store\" \
+  --exclude \".vagrant\"
+"
+
+# Empty match patterns are executed only once at startup
+{
+  prep: echo "rsync @syncflags @excludeflags ./ @target/"
+  prep: "rsync @syncflags @excludeflags ./ @target/"
+}
+
+# Adding the "+onchange" skips the initial run and executes only when there is a
+# detected change
+**/*.* {
+  prep +onchange: echo rsync @syncflags @excludeflags @dirmods/ @target/@dirmods/
+  prep +onchange: rsync @syncflags @excludeflags @dirmods/ @target/@dirmods/
+  prep: @blink
+}

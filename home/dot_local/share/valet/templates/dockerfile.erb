@@ -1,0 +1,59 @@
+# https://example.com
+#
+# vim:set et ft=Dockerfile sw=2 ts=2 tw=80:
+#
+# To build:
+#   docker build --build-arg BUILD_ARG_ONE=${BUILD_ARG_ONE} BUILD_ARG_TWO=${BUILD_ARG_TWO} -t image-name .
+#
+# To run:
+#   docker run --rm \
+#     -it \
+#     -v ${PWD}/config:/config:ro \
+#     image-name
+
+FROM alpine:latest
+
+LABEL maintainer="JR Bing <jr@jrbing.com>" \
+      base.image="alpine:latest" \
+      version="1.0"
+
+ARG BUILD_ARG_ONE
+ARG BUILD_ARG_TWO
+
+ENV BUILD_ARG_ONE=${BUILD_ARG_ONE} \
+    BUILD_ARG_TWO=${BUILD_ARG_TWO}
+
+VOLUME ["/some_directory"]
+
+HEALTHCHECK --interval=5m --timeout=3s CMD curl --fail http://localhost || exit 1
+
+EXPOSE 80
+
+# Base Packages
+RUN apk -U update && \
+    apk -U upgrade && \
+    apk -U add --no-cache \
+        bash \
+        coreutils \
+        ca-certificates \
+        shadow \
+        curl \
+        unzip
+
+# S6 Overlay
+#    https://github.com/just-containers/s6-overlay
+ENV S6_OVERLAY_VERSION v1.22.1.0
+
+RUN curl -L \
+    https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz \
+    | tar -xzC /
+
+RUN groupadd -g 1000 appuser && \
+    useradd -u 1000 -g appuser -d /app -s /bin/false appuser && \
+    mkdir -p \
+      /app \
+      /config
+
+COPY rootfs /
+
+ENTRYPOINT [ "/init" ]

@@ -1,0 +1,47 @@
+---
+# https://taskfile.dev
+
+# With the flags --watch or -w task will watch for file changes and run the task
+# again. This requires the sources attribute to be given, so task knows which
+# files to watch.
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+
+  default:
+    deps:
+      - task: print
+        vars: {TEXT: foo}
+      - task: print
+        vars: {TEXT: bar}
+      - task: print
+        vars: {TEXT: baz}
+
+  print:
+    cmds:
+      - echo "{{.TEXT}}"
+    prefix: "print-{{.TEXT}}"
+    silent: true
+
+  assets:
+    deps: [js, css]
+
+  js:
+    cmds:
+      - minify -o public/script.js src/js
+    sources:
+      - src/js/**/*.js
+    generates:
+      - public/script.js
+
+  css:
+    cmds:
+      - minify -o public/style.css src/css
+    sources:
+      - src/css/**/*.css
+    generates:
+      - public/style.css

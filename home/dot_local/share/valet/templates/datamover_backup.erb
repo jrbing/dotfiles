@@ -1,0 +1,8 @@
+-- Datafix <%= @datafix_name %>
+-- Created on: <%= @date %>
+
+SET OUTPUT <%= @record %>_backup.dat;
+SET LOG <%= @record %>_backup.log;
+
+EXPORT <%= @record %>
+WHERE ... ;
