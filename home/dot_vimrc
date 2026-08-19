@@ -84,15 +84,6 @@
   Plug 'Raimondi/delimitMate'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'mattn/webapi-vim'
-  Plug 'github/copilot.vim'
-
-  "Plug 'lambdalisue/fern.vim'
-  "Plug 'lambdalisue/nerdfont.vim'
-  "Plug 'lambdalisue/fern-ssh'
-  "Plug 'lambdalisue/fern-renderer-nerdfont.vim'
-  "Plug 'lambdalisue/fern-bookmark.vim'
-  "Plug 'LumaKernel/fern-mapping-reload-all.vim'
-  "Plug 'tpope/vim-bundler', { 'for': ['ruby'] }
 
   " Colorschemes
   Plug 'altercation/vim-colors-solarized'
