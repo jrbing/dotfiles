@@ -17,6 +17,9 @@
       "models": {
         "bing/best-free": {
           "name": "Bing Best Free"
+        },
+        "bing/best": {
+          "name": "Bing Best"
         }
       }
     }
