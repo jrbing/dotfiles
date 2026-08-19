@@ -6,6 +6,21 @@
     "superpowers@git+https://github.com/obra/superpowers.git",
     "@dietrichgebert/ponytail"
   ],
+  "provider": {
+    "bing": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Bing Industries Omniroute",
+      "options": {
+        "baseURL": "https://omniroute.bingindustries.com/v1",
+        "apiKey": "{env:OMNIROUTE_API_KEY}"
+      },
+      "models": {
+        "bing/best-free": {
+          "name": "Bing Best Free"
+        }
+      }
+    }
+  },
   "mcp": {
     "playwright": {
       "type": "local",
