@@ -211,7 +211,7 @@ zsh-defer _atuin
 inline = '''
 function _kubectl() {
     if [[ $commands[kubectl] ]]; then
-        source <(kubectl completion zsh)
+        eval "$(kubectl completion zsh)"
     fi
 }
 zsh-defer _atuin
