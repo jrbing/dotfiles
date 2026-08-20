@@ -28,7 +28,7 @@
       "name": "oMLX",
       "options": {
         "baseURL": "http://127.0.0.1:8989/v1",
-        "apiKey": "sk-omlx-Bkzzh3IwxjqYNaaI10b6bIxw"
+        "apiKey": ""
       },
       "models": {
         "Qwen3.8-27B-4bit": {
