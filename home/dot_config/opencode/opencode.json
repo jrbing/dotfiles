@@ -15,10 +15,10 @@
         "apiKey": "{env:OMNIROUTE_API_KEY}"
       },
       "models": {
-        "bing/best-free": {
+        "best-free": {
           "name": "Bing Best Free"
         },
-        "bing/best": {
+        "best": {
           "name": "Bing Best"
         }
       }
