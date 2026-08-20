@@ -135,7 +135,7 @@ zsh-defer _lang
 [plugins.go]
 inline = '''
 function _go() {
-    export GOPATH="${HOME}/ghq"
+    export GOPATH="/opt/go"
 
     typeset -gU path
     path=(
@@ -160,29 +160,31 @@ zsh-defer _rust
 
 [plugins.bun]
 inline = '''
-export BUN_INSTALL="$HOME/.bun"
+function _bun() {
+    export BUN_INSTALL="$HOME/.bun"
 
-typeset -gU path
-path+=(
-    $BUN_INSTALL/bin(N-/)
-)
+    typeset -gU path
+    path+=(
+        $BUN_INSTALL/bin(N-/)
+    )
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
+    # bun completions
+    [ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
+}
+zsh-defer _bun
 '''
 
-# Aliases
-[plugins.common-alias]
-local = '~/.config/alias'
-use = ['common.sh']
-apply = ['source']
-
-[plugins.gpg]
+[plugins.krew]
 inline = '''
-function _gpg() {
-    export GPG_TTY=$(tty)
+function _krew() {
+    export KREW_ROOT="$HOME/.krew"
+
+    typeset -gU path
+    path+=(
+        $KREW_ROOT/bin(N-/)
+    )
 }
-zsh-defer _gpg
+zsh-defer _krew
 '''
 
 [plugins.macos-browser]
@@ -199,8 +201,25 @@ zsh-defer _macos_browser
 inline = '''
 function _atuin() {
     if [[ $commands[atuin] ]]; then
-    eval "$(atuin init zsh --disable-up-arrow)"
+        eval "$(atuin init zsh --disable-up-arrow)"
     fi
 }
 zsh-defer _atuin
 '''
+
+[plugins.kubectl]
+inline = '''
+function _kubectl() {
+    if [[ $commands[kubectl] ]]; then
+        source <(kubectl completion zsh)
+    fi
+}
+zsh-defer _atuin
+'''
+
+# Aliases
+[plugins.common-alias]
+local = '~/.config/alias'
+use = ['common.sh']
+apply = ['source']
+
