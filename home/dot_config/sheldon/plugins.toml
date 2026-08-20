@@ -129,7 +129,6 @@ use = [
     'plugins/rust/rust.plugin.zsh',
     'plugins/bun/bun.plugin.zsh'
 ]
-apply = ['defer']
 
 # Zoxide
 # [plugins.zoxide]
