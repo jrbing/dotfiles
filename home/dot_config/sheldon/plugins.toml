@@ -17,6 +17,7 @@ shell = "zsh"
 #
 
 [templates]
+
 defer = """
 {{ hooks?.pre | nl }}
 {% for file in files %}
@@ -52,23 +53,6 @@ fzf-source = "source <(fzf --zsh)"
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
-# Setup the ZSH_CACHE_DIR used by ohmyzsh plugins
-[plugins.zsh-cache-dir]
-inline = '''
-function _zsh-cache-dir() {
-    # Make sure $ZSH_CACHE_DIR is writable, otherwise use a directory in $HOME
-    if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
-        ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
-    fi
-
-    # Create cache and completions dir and add to $fpath
-    mkdir -p "$ZSH_CACHE_DIR/completions"
-    (( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
-}
-zsh-defer _zsh-cache-dir
-'''
-# apply = ['source']
-
 # Autoloading of Functions in Zsh
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
@@ -103,9 +87,18 @@ function _macos_path() {
 zsh-defer _macos_path
 '''
 
-# mise
-# [plugins.mise]
-# github = "wintermi/zsh-mise"
+# Setup the ZSH_CACHE_DIR used by ohmyzsh plugins
+[plugins.zsh-cache-dir]
+inline = '''
+# Make sure $ZSH_CACHE_DIR is writable, otherwise use a directory in $HOME
+if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
+    ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
+fi
+
+# Create cache and completions dir and add to $fpath
+mkdir -p "$ZSH_CACHE_DIR/completions"
+(( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+'''
 
 # oh-my-zsh
 [plugins.oh-my-zsh]
@@ -130,11 +123,6 @@ use = [
     'plugins/bun/bun.plugin.zsh'
 ]
 
-# Zoxide
-# [plugins.zoxide]
-# github = "ajeetdsouza/zoxide"
-# apply = ['defer']
-
 # bd
 [plugins.bd]
 github = 'Tarrasch/zsh-bd'
@@ -155,48 +143,6 @@ function _lang() {
 }
 zsh-defer _lang
 '''
-
-# [plugins.go]
-# inline = '''
-# function _go() {
-    # export GOPATH="/opt/go"
-
-    # typeset -gU path
-    # path=(
-        # $path
-        # ${GOPATH}/bin(N-/)
-    # )
-# }
-# zsh-defer _go
-# '''
-
-# [plugins.rust]
-# inline = '''
-# function _rust() {
-    # typeset -gU path
-    # path=(
-        # $path
-        # ${HOME}/.cargo/bin(N-/)
-    # )
-# }
-# zsh-defer _rust
-# '''
-
-# [plugins.bun]
-# inline = '''
-# function _bun() {
-    # export BUN_INSTALL="$HOME/.bun"
-
-    # typeset -gU path
-    # path+=(
-        # $BUN_INSTALL/bin(N-/)
-    # )
-
-    # # bun completions
-    # [ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
-# }
-# zsh-defer _bun
-# '''
 
 [plugins.krew]
 inline = '''
