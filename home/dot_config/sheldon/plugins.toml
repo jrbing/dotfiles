@@ -103,7 +103,8 @@ use = [
     # Load some plugins
     'plugins/macos/macos.plugin.zsh',
     'plugins/fzf/fzf.plugin.zsh',
-    'plugins/starship/starship.plugin.zsh'
+    'plugins/starship/starship.plugin.zsh',
+    'plugins/kubectl/kubectl.plugin.zsh'
 ]
 
 # Zoxide
@@ -202,16 +203,6 @@ inline = '''
 function _atuin() {
     if [[ $commands[atuin] ]]; then
         eval "$(atuin init zsh --disable-up-arrow)"
-    fi
-}
-zsh-defer _atuin
-'''
-
-[plugins.kubectl]
-inline = '''
-function _kubectl() {
-    if [[ $commands[kubectl] ]]; then
-        eval "$(kubectl completion zsh)"
     fi
 }
 zsh-defer _atuin
