@@ -52,6 +52,23 @@ fzf-source = "source <(fzf --zsh)"
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
+# Setup the ZSH_CACHE_DIR used by ohmyzsh plugins
+[plugins.zsh-cache-dir]
+inline = '''
+function _zsh-cache-dir() {
+    # Make sure $ZSH_CACHE_DIR is writable, otherwise use a directory in $HOME
+    if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
+        ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
+    fi
+
+    # Create cache and completions dir and add to $fpath
+    mkdir -p "$ZSH_CACHE_DIR/completions"
+    (( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
+}
+zsh-defer _zsh-cache-dir
+'''
+# apply = ['source']
+
 # Autoloading of Functions in Zsh
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
@@ -87,8 +104,8 @@ zsh-defer _macos_path
 '''
 
 # mise
-[plugins.mise]
-github = "wintermi/zsh-mise"
+# [plugins.mise]
+# github = "wintermi/zsh-mise"
 
 # oh-my-zsh
 [plugins.oh-my-zsh]
@@ -104,13 +121,20 @@ use = [
     'plugins/macos/macos.plugin.zsh',
     'plugins/fzf/fzf.plugin.zsh',
     'plugins/starship/starship.plugin.zsh',
-    'plugins/kubectl/kubectl.plugin.zsh'
+    'plugins/kubectl/kubectl.plugin.zsh',
+    'plugins/kubectl/kubectx.plugin.zsh',
+    'plugins/mise/mise.plugin.zsh',
+    'plugins/zoxide/zoxide.plugin.zsh',
+    'plugins/golang/golang.plugin.zsh',
+    'plugins/rust/rust.plugin.zsh',
+    'plugins/bun/bun.plugin.zsh'
 ]
+apply = ['defer']
 
 # Zoxide
-[plugins.zoxide]
-github = "ajeetdsouza/zoxide"
-apply = ['defer']
+# [plugins.zoxide]
+# github = "ajeetdsouza/zoxide"
+# apply = ['defer']
 
 # bd
 [plugins.bd]
@@ -133,47 +157,47 @@ function _lang() {
 zsh-defer _lang
 '''
 
-[plugins.go]
-inline = '''
-function _go() {
-    export GOPATH="/opt/go"
+# [plugins.go]
+# inline = '''
+# function _go() {
+    # export GOPATH="/opt/go"
 
-    typeset -gU path
-    path=(
-        $path
-        ${GOPATH}/bin(N-/)
-    )
-}
-zsh-defer _go
-'''
+    # typeset -gU path
+    # path=(
+        # $path
+        # ${GOPATH}/bin(N-/)
+    # )
+# }
+# zsh-defer _go
+# '''
 
-[plugins.rust]
-inline = '''
-function _rust() {
-    typeset -gU path
-    path=(
-        $path
-        ${HOME}/.cargo/bin(N-/)
-    )
-}
-zsh-defer _rust
-'''
+# [plugins.rust]
+# inline = '''
+# function _rust() {
+    # typeset -gU path
+    # path=(
+        # $path
+        # ${HOME}/.cargo/bin(N-/)
+    # )
+# }
+# zsh-defer _rust
+# '''
 
-[plugins.bun]
-inline = '''
-function _bun() {
-    export BUN_INSTALL="$HOME/.bun"
+# [plugins.bun]
+# inline = '''
+# function _bun() {
+    # export BUN_INSTALL="$HOME/.bun"
 
-    typeset -gU path
-    path+=(
-        $BUN_INSTALL/bin(N-/)
-    )
+    # typeset -gU path
+    # path+=(
+        # $BUN_INSTALL/bin(N-/)
+    # )
 
-    # bun completions
-    [ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
-}
-zsh-defer _bun
-'''
+    # # bun completions
+    # [ -s "$HOME/.bun/_bun" ] && zsh-defer "$HOME/.bun/_bun"
+# }
+# zsh-defer _bun
+# '''
 
 [plugins.krew]
 inline = '''
@@ -213,4 +237,3 @@ zsh-defer _atuin
 local = '~/.config/alias'
 use = ['common.sh']
 apply = ['source']
-
