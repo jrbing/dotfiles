@@ -3,7 +3,7 @@
   "lsp": true,
   "formatter": true,
   "plugin": [
-    "superpowers@git+https://github.com/obra/superpowers.git",
+    "mattpocock-skills@git+https://github.com/mattpocock/skills",
     "@dietrichgebert/ponytail"
   ],
   "provider": {
