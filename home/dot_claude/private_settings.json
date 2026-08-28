@@ -1,9 +1,9 @@
 {
-  "model": "opus[1m]",
   "attribution": {
     "commit": "",
     "pr": ""
   },
+  "model": "opus[1m]",
   "enabledPlugins": {
     "claude-code-setup@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
@@ -46,5 +46,6 @@
       }
     }
   },
+  "effortLevel": "high",
   "theme": "dark-daltonized"
 }
