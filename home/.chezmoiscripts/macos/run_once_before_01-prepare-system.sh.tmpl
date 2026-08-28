@@ -1,2 +1,2 @@
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (default .chezmoi.os (get . "os")) "darwin" -}}
 {{ end -}}
