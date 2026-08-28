@@ -5,11 +5,23 @@
 {{-   $email = promptString "Email address" -}}
 {{- end -}}
 
+{{- $os := env "DOTFILES_OS" -}}
+{{- if eq $os "" -}}
+{{-   $os = default .chezmoi.os (get . "os") -}}
+{{- end -}}
+{{- $arch := env "DOTFILES_ARCH" -}}
+{{- if eq $arch "" -}}
+{{-   $arch = default .chezmoi.arch (get . "arch") -}}
+{{- end -}}
+{{- if eq $arch "amd64" -}}
+{{-   $arch = "x86_64" -}}
+{{- end -}}
+
 {{- $system := "" -}}
 {{- if hasKey . "system" -}}
 {{-   $system = .system -}}
 {{- /* Set client to the MacOS default system */ -}}
-{{- else if eq .chezmoi.os "darwin" -}}
+{{- else if eq $os "darwin" -}}
 {{    $system = "client" -}}
 {{- else -}}
 {{-   $system = promptString "System (client or server)" -}}
@@ -22,3 +34,5 @@ git:
 data:
   email: {{ $email | quote }}
   system: {{ $system | quote }}
+  os: {{ $os | quote }}
+  arch: {{ $arch | quote }}

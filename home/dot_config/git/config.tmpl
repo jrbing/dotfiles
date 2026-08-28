@@ -83,12 +83,12 @@
 [rebase]
 	autoStash = true
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq (default .chezmoi.os (get . "os")) "darwin" -}}
 [credential]
 	helper = osxkeychain
 	gitHubAccountFiltering = false
 {{ end -}}
-{{ if eq .chezmoi.os "linux" -}}
+{{ if eq (default .chezmoi.os (get . "os")) "linux" -}}
 [credential]
 	credentialStore = cache
 {{ end -}}

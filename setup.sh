@@ -51,8 +51,26 @@ function at_exit() {
     trap "${AT_EXIT}" EXIT
 }
 
-function get_os_type() {
-    uname
+function get_platform() {
+    local os_type arch_type
+    os_type="$(uname -s)"
+    arch_type="$(uname -m)"
+
+    case "${os_type}" in
+    Darwin) os_type="darwin" ;;
+    Linux) os_type="linux" ;;
+    *)
+        echo "Invalid OS type: ${os_type}" >&2
+        return 1
+        ;;
+    esac
+
+    case "${arch_type}" in
+    arm64 | aarch64) arch_type="arm64" ;;
+    amd64 | x86_64) arch_type="x86_64" ;;
+    esac
+
+    printf '%s %s\n' "${os_type}" "${arch_type}"
 }
 
 function keepalive_sudo_linux() {
@@ -100,18 +118,25 @@ function keepalive_sudo_macos() {
 }
 
 function keepalive_sudo() {
-
-    local ostype
-    ostype="$(get_os_type)"
-
-    if [ "${ostype}" == "Darwin" ]; then
+    if [ "${DOTFILES_OS:-}" == "darwin" ]; then
         keepalive_sudo_macos
-    elif [ "${ostype}" == "Linux" ]; then
+    elif [ "${DOTFILES_OS:-}" == "linux" ]; then
         keepalive_sudo_linux
     else
-        echo "Invalid OS type: ${ostype}" >&2
+        echo "Invalid OS type: ${DOTFILES_OS:-}" >&2
         exit 1
     fi
+}
+
+function get_homebrew_bin() {
+    case "${DOTFILES_ARCH:-}" in
+    arm64) printf '%s\n' "/opt/homebrew/bin/brew" ;;
+    x86_64) printf '%s\n' "/usr/local/bin/brew" ;;
+    *)
+        echo "Invalid CPU arch: ${DOTFILES_ARCH:-}" >&2
+        return 1
+        ;;
+    esac
 }
 
 function initialize_os_macos() {
@@ -125,14 +150,9 @@ function initialize_os_macos() {
     fi
 
     # Setup Homebrew envvars.
-    if [[ $(arch) == "arm64" ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [[ $(arch) == "i386" ]]; then
-        eval "$(/usr/local/bin/brew shellenv)"
-    else
-        echo "Invalid CPU arch: $(arch)" >&2
-        exit 1
-    fi
+    local brew_bin
+    brew_bin="$(get_homebrew_bin)"
+    eval "$("${brew_bin}" shellenv)"
 }
 
 function initialize_os_linux() {
@@ -140,15 +160,19 @@ function initialize_os_linux() {
 }
 
 function initialize_os_env() {
-    local ostype
-    ostype="$(get_os_type)"
+    local platform os_type arch_type
+    if ! platform="$(get_platform)"; then
+        exit 1
+    fi
+    read -r os_type arch_type <<<"${platform}"
+    export DOTFILES_OS="${os_type}" DOTFILES_ARCH="${arch_type}"
 
-    if [ "${ostype}" == "Darwin" ]; then
+    if [ "${DOTFILES_OS}" == "darwin" ]; then
         initialize_os_macos
-    elif [ "${ostype}" == "Linux" ]; then
+    elif [ "${DOTFILES_OS}" == "linux" ]; then
         initialize_os_linux
     else
-        echo "Invalid OS type: ${ostype}" >&2
+        echo "Invalid OS type: ${DOTFILES_OS}" >&2
         exit 1
     fi
 }
@@ -204,4 +228,6 @@ function main() {
     initialize_dotfiles
 }
 
-main
+if [[ "${BASH_SOURCE[0]:-}" == "$0" || -z "${BASH_SOURCE[0]:-}" ]]; then
+    main
+fi
