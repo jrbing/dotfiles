@@ -12,6 +12,11 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
     set -x
 fi
 
+if ! declare -F install_apt_packages >/dev/null 2>&1; then
+    # shellcheck source=apt.sh
+    source "${BASH_SOURCE[0]%/*}/apt.sh"
+fi
+
 readonly PACKAGES=(
     docker-ce
     docker-ce-cli
@@ -31,8 +36,8 @@ function uninstall_old_docker() {
         "runc"
     )
     for package in "${packages[@]}"; do
-        if dpkg -s "${package}" > /dev/null 2>&1; then
-            sudo apt-get remove -y "${package}"
+        if dpkg -s "${package}" >/dev/null 2>&1; then
+            uninstall_apt_packages "${package}"
         fi
     done
 }
@@ -43,8 +48,8 @@ function uninstall_old_docker() {
 function setup_repository() {
 
     # Update the apt package index and install packages to allow apt to use a repository over HTTPS:
-    sudo apt-get update
-    sudo apt-get install -y \
+    run_apt_get update
+    install_apt_packages \
         ca-certificates \
         curl \
         gnupg \
@@ -57,7 +62,7 @@ function setup_repository() {
     # Use the following command to set up the repository:
     echo \
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 }
 
 #
@@ -65,10 +70,10 @@ function setup_repository() {
 #
 function install_docker_engine() {
     # Update the apt package index:
-    sudo apt-get update
+    run_apt_get update
 
     # Install Docker Engine, containerd, and Docker Compose.
-    sudo apt-get install -y "${PACKAGES[@]}"
+    install_apt_packages "${PACKAGES[@]}"
 
 }
 
@@ -76,7 +81,7 @@ function install_docker_engine() {
 # @description Remove the configured Docker Engine packages.
 #
 function uninstall_docker_engine() {
-    sudo apt-get remove -y "${PACKAGES[@]}"
+    uninstall_apt_packages "${PACKAGES[@]}"
 }
 
 #

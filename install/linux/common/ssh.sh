@@ -12,6 +12,11 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
     set -x
 fi
 
+if ! declare -F install_apt_packages >/dev/null 2>&1; then
+    # shellcheck source=apt.sh
+    source "${BASH_SOURCE[0]%/*}/apt.sh"
+fi
+
 readonly PACKAGES=(
     openssh-client
 )
@@ -20,14 +25,14 @@ readonly PACKAGES=(
 # @description Install the OpenSSH client package.
 #
 function install_openssh() {
-    sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y "${PACKAGES[@]}"
+    install_apt_packages "${PACKAGES[@]}"
 }
 
 #
 # @description Remove the OpenSSH client package.
 #
 function uninstall_openssh() {
-    sudo apt-get remove -y "${PACKAGES[@]}"
+    uninstall_apt_packages "${PACKAGES[@]}"
 }
 
 #

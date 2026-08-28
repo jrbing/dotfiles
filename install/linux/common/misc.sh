@@ -12,6 +12,11 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
     set -x
 fi
 
+if ! declare -F install_apt_packages >/dev/null 2>&1; then
+    # shellcheck source=apt.sh
+    source "${BASH_SOURCE[0]%/*}/apt.sh"
+fi
+
 readonly PACKAGES=(
     guake
     gparted
@@ -21,14 +26,14 @@ readonly PACKAGES=(
 # @description Install the optional Linux client packages.
 #
 function install_misc() {
-    sudo apt-get install -y "${PACKAGES[@]}"
+    install_apt_packages "${PACKAGES[@]}"
 }
 
 #
 # @description Remove the optional Linux client packages.
 #
 function uninstall_misc() {
-    sudo apt-get remove -y "${PACKAGES[@]}"
+    uninstall_apt_packages "${PACKAGES[@]}"
 }
 
 #
