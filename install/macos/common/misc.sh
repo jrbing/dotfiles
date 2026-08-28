@@ -12,6 +12,10 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
 	set -x
 fi
 
+if ! declare -F install_brew_packages &>/dev/null; then
+	source "$(dirname "${BASH_SOURCE[0]}")/brew_packages.sh"
+fi
+
 readonly BREW_PACKAGES=(
 	aria2
 	atuin
@@ -78,16 +82,6 @@ readonly CASK_PACKAGES=(
 )
 
 #
-# @description Check whether a brew package or cask is already installed.
-# @arg $1 string Package or cask name.
-#
-function is_brew_package_installed() {
-	local package="$1"
-
-	brew list "${package}" &>/dev/null
-}
-
-#
 # @description Check whether a brew tap is already configured.
 # @arg $1 string Tap name.
 #
@@ -122,54 +116,12 @@ function install_brew_taps() {
 }
 
 #
-# @description Install every missing package from `BREW_PACKAGES`.
-#
-function install_brew_packages() {
-	local missing_packages=()
-
-	for package in "${BREW_PACKAGES[@]}"; do
-		if ! is_brew_package_installed "${package}"; then
-			missing_packages+=("${package}")
-		fi
-	done
-
-	if [[ ${#missing_packages[@]} -gt 0 ]]; then
-		if "${CI:-false}"; then
-			brew info "${missing_packages[@]}"
-		else
-			brew install --force "${missing_packages[@]}"
-		fi
-	fi
-}
-
-#
-# @description Install every missing cask from `CASK_PACKAGES`.
-#
-function install_brew_cask_packages() {
-	local missing_packages=()
-
-	for package in "${CASK_PACKAGES[@]}"; do
-		if ! is_brew_package_installed "${package}"; then
-			missing_packages+=("${package}")
-		fi
-	done
-
-	if [[ ${#missing_packages[@]} -gt 0 ]]; then
-		if "${CI:-false}"; then
-			brew info --cask "${missing_packages[@]}"
-		else
-			brew install --cask --force "${missing_packages[@]}"
-		fi
-	fi
-}
-
-#
 # @description Install the configured optional macOS packages and casks.
 #
 function main() {
 	# install_brew_taps
-	install_brew_packages
-	install_brew_cask_packages
+	install_brew_packages formula "${BREW_PACKAGES[@]}"
+	install_brew_packages cask "${CASK_PACKAGES[@]}"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
