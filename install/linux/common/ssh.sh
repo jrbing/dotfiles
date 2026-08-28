@@ -14,7 +14,11 @@ fi
 
 if ! declare -F install_apt_packages >/dev/null 2>&1; then
     # shellcheck source=apt.sh
-    source "${BASH_SOURCE[0]%/*}/apt.sh"
+    if [[ "${BASH_SOURCE[0]}" == */* ]]; then
+        source "${BASH_SOURCE[0]%/*}/apt.sh"
+    else
+        source "./apt.sh"
+    fi
 fi
 
 readonly PACKAGES=(

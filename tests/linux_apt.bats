@@ -96,6 +96,38 @@ EOF
     [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y openssh-client\napt-get install -y openssh-client\nsudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get remove -y openssh-client\napt-get remove -y openssh-client' ]
 }
 
+@test "package caller executes when invoked by a bare filename" {
+    install_sudo_stub
+
+    run /bin/bash -c 'cd "$1" && /bin/bash tmux.sh' _ "${BATS_TEST_DIRNAME}/../install/linux/common"
+
+    [ "${status}" -eq 0 ]
+    [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y tmux\napt-get install -y tmux' ]
+}
+
+@test "Linux dependency installation filters commands already on PATH" {
+    install_sudo_stub
+    /bin/ln -s /bin/true "${TEST_BIN}/curl"
+    /bin/ln -s /bin/true "${TEST_BIN}/git"
+    source "${BATS_TEST_DIRNAME}/../install/linux/common/dependencies.sh"
+
+    run install_linux_dependencies
+
+    [ "${status}" -eq 0 ]
+    [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh\napt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh' ]
+}
+
+@test "misc package caller executes through the adapter" {
+    install_sudo_stub
+    source "${BATS_TEST_DIRNAME}/../install/linux/common/misc.sh"
+
+    run install_misc
+    [ "${status}" -eq 0 ]
+    run uninstall_misc
+    [ "${status}" -eq 0 ]
+    [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y guake gparted\napt-get install -y guake gparted\nsudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get remove -y guake gparted\napt-get remove -y guake gparted' ]
+}
+
 @test "Docker package caller executes through the adapter" {
     install_sudo_stub
     source "${BATS_TEST_DIRNAME}/../install/linux/common/docker.sh"
