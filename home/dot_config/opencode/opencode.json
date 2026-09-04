@@ -3,7 +3,6 @@
   "lsp": true,
   "formatter": true,
   "plugin": [
-    "mattpocock-skills@git+https://github.com/mattpocock/skills",
     "@dietrichgebert/ponytail"
   ],
   "provider": {
