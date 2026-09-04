@@ -47,5 +47,6 @@
     }
   },
   "effortLevel": "high",
-  "theme": "dark-daltonized"
+  "theme": "dark-daltonized",
+  "hooks": {"SessionStart":[{"matcher":"*","hooks":[{"type":"command","command":"bash '/Users/jrbing/.claude/hooks/herdr-agent-state.sh' session","timeout":10}]}]}
 }
