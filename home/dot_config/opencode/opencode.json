@@ -68,6 +68,5 @@
         "kubernetes-mcp-server@latest"
       ]
     }
-  },
-  "model": "omlx/Qwen3.8-27B-4bit"
+  }
 }
