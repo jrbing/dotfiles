@@ -64,7 +64,7 @@ name = "gruvbox"
 # Named punctuation such as minus, comma, ampersand, plus, and backtick is also accepted.
 # Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
-prefix = "ctrl+b"
+prefix = "ctrl+f"
 
 # Prefix-mode actions
 # help = "prefix+?"
@@ -87,15 +87,16 @@ prefix = "ctrl+b"
 # focus_agent = ""        # optional indexed binding, e.g. "prefix+alt+1..9"
 # remote_image_paste = "ctrl+v" # only active in herdr --remote; empty disables raw-key image paste
 # new_tab = "prefix+c"
-# rename_tab = "prefix+shift+t"
-# previous_tab = "prefix+p"
-# next_tab = "prefix+n"
-# move_tab_previous = ""   # optional, e.g. "alt+shift+left" moves the tab toward the front
-# move_tab_next = ""       # optional, e.g. "alt+shift+right" moves the tab toward the back
+rename_tab = "prefix+n"
+previous_tab = "prefix+comma"
+next_tab = "prefix+."
+move_tab_previous = "prefix+<"
+move_tab_next = "prefix+>"
 # switch_tab = "prefix+1..9"
 # switch_workspace = ""   # optional indexed binding, e.g. "prefix+shift+1..9"
 # close_tab = "prefix+shift+x"
 # rename_pane = "prefix+shift+p"
+copy_mode = ["prefix+[", "prefix+esc", "prefix+up", "prefix+backtick"]
 # edit_scrollback = "prefix+e"
 # focus_pane_left = "prefix+h"
 # focus_pane_down = "prefix+j"
@@ -104,15 +105,15 @@ prefix = "ctrl+b"
 # cycle_pane_next = "prefix+tab"
 # cycle_pane_previous = "prefix+shift+tab"
 # last_pane = ""          # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
-# split_vertical = "prefix+v"
+split_vertical = ["prefix+|", "prefix+\\"]
 # split_horizontal = "prefix+minus"
 # close_pane = "prefix+x"
 # zoom = "prefix+z"       # legacy alias: fullscreen
 # resize_mode = "prefix+r"
-# resize_pane_left = ""   # optional, e.g. "ctrl+shift+alt+left" resizes without entering resize mode
-# resize_pane_down = ""   # optional, e.g. "ctrl+shift+alt+down"
-# resize_pane_up = ""     # optional, e.g. "ctrl+shift+alt+up"
-# resize_pane_right = ""  # optional, e.g. "ctrl+shift+alt+right"
+resize_pane_left = "prefix+ctrl+j"
+resize_pane_down = "prefix+ctrl+k"
+resize_pane_up = "prefix+ctrl+i"
+resize_pane_right = "prefix+ctrl+l"
 # toggle_sidebar = "prefix+b"
 
 # Navigate-mode movement. These local shortcuts win while navigate mode is open.
@@ -181,7 +182,7 @@ prefix = "ctrl+b"
 # Automatically copy text selected with the mouse.
 # Set false to retain drag or double-click word selection until Ctrl+C,
 # or Cmd+C when the host forwards it, copies and clears it.
-# copy_on_select = true
+copy_on_select = false
 
 # Host cursor policy: "auto", "native", or "drawn".
 # "auto" draws Herdr's own cursor on native Windows builds and WSL to avoid ConPTY cursor flicker, and uses the native terminal cursor elsewhere.
@@ -205,7 +206,7 @@ prefix = "ctrl+b"
 
 # Ask for a tab name before creating a new tab.
 # Set false to create tabs immediately with generated names.
-# prompt_new_tab_name = true
+prompt_new_tab_name = false
 
 # Ask for a workspace name before interactive creation.
 # prompt_new_workspace_name = false
@@ -215,14 +216,14 @@ prefix = "ctrl+b"
 
 # Draw borders along the outside edge of the pane area.
 # Disable for tmux-style internal splitters without an outside frame.
-# pane_outer_borders = true
+pane_outer_borders = false
 
 # Draw interactive scrollbars beside terminal panes.
 # Set false to reclaim the scrollbar column and keep it out of terminal-native selections.
-# pane_scrollbars = true
+pane_scrollbars = false
 
 # Keep split panes visually separated instead of sharing divider borders.
-# pane_gaps = true
+pane_gaps = false
 
 # Show detected/reported agent labels in split pane borders when no manual pane name is set.
 # show_agent_labels_on_pane_borders = false
@@ -232,13 +233,16 @@ prefix = "ctrl+b"
 # hide_tab_bar_when_single_tab = false
 
 # Desktop tab row placement: "top" or "bottom".
-# tab_bar_position = "top"
+tab_bar_position = "bottom"
 
 # Ordered status entries at the right edge of the desktop tab bar.
 # Supported types: zoom, hostname, datetime, text, and command.
 # Hostname, datetime, and command entries resolve on the Herdr server.
-# tab_bar_right = []
-# tab_bar_right_separator = " "
+tab_bar_right = [
+  { type = "command", command = "/bin/bash ~/.tmux/kube.tmux", interval_seconds = 60, timeout_seconds = 2 },
+  { type = "hostname" },
+]
+tab_bar_right_separator = " | "
 
 # Title Herdr writes to the terminal it runs in, which is what window managers
 # show in title, tab, and group bars. Tokens are {hostname}, {workspace}, {tab},
@@ -246,7 +250,7 @@ prefix = "ctrl+b"
 # The title renders on the Herdr server, so {hostname} names the host the panes
 # run on even when attaching from a remote client.
 # Set to "" to leave the outer terminal title alone.
-# window_title = "{hostname}: {workspace}"
+window_title = "{hostname} ❐ {workspace} ● {tab}"
 
 # Agent panel ordering: "spaces" (grouped by space) or "priority" (attention queue).
 # "workspaces" is accepted as an alias for "spaces".
