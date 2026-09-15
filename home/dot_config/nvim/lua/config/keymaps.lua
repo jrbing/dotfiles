@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 local utils = require("config.utils")
+local map = LazyVim.safe_keymap_set
 
 map({ "n", "v" }, ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")

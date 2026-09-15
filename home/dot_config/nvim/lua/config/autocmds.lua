@@ -33,8 +33,8 @@
 -- })
 
 -- Ported from home/dot_vimrc: Makefiles use tabs
-autocmd("FileType", {
-  group = augroup("ft_make", { clear = true }),
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("ft_make", { clear = true }),
   pattern = "make",
   command = "setlocal noexpandtab",
 })
