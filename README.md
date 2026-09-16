@@ -14,6 +14,13 @@ Bootstrap a macOS or Linux box from bare OS to a configured shell environment in
 - 20+ custom utility scripts in `~/.local/bin`
 - Vim, tmux, and git configuration included
 
+### Editor support
+
+Vim and Neovim are both supported through separate configurations. Vim uses
+`~/.vimrc`; Neovim uses `~/.config/nvim` with LazyVim. Their plugins and
+customizations are not shared automatically, so changes to one configuration
+must be ported deliberately when equivalent behavior is wanted in the other.
+
 ## Prerequisites
 
 - macOS (Sonoma+) or Linux (Ubuntu 22.04+)
