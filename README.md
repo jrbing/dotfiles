@@ -103,8 +103,9 @@ make reset    # Reset chezmoi script state
 
 `chezmoi apply` keeps managed files in sync, but bootstrap package scripts run
 only once after succeeding. Run `make doctor` to find drift. Use `make update`
-for managed-file drift, `mise install` for missing Mise tools, or
-`make reset && make update` to deliberately replay one-time bootstrap scripts.
+for managed-file drift, `mise install --before 7d` for missing Mise tools,
+`make bootstrap-mise` or `make bootstrap-sheldon` for a missing bootstrap
+binary, or `make reset && make update` to deliberately replay one-time scripts.
 
 ### VM testing (macOS Apple Silicon)
 

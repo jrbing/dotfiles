@@ -2,14 +2,15 @@
 
 set -Eeuo pipefail
 
-missing=()
-for tool in mise sheldon; do
-	command -v "${tool}" >/dev/null 2>&1 || missing+=("${tool}")
-done
+if ! command -v mise >/dev/null 2>&1; then
+	printf 'Missing bootstrap tool: mise\n' >&2
+	printf 'Repair it with: make bootstrap-mise\n' >&2
+	exit 1
+fi
 
-if [ "${#missing[@]}" -gt 0 ]; then
-	printf 'Missing bootstrap tools: %s\n' "${missing[*]}" >&2
-	printf 'Repair them with: make reset && make update\n' >&2
+if ! command -v sheldon >/dev/null 2>&1; then
+	printf 'Missing bootstrap tool: sheldon\n' >&2
+	printf 'Repair it with: make bootstrap-sheldon\n' >&2
 	exit 1
 fi
 
@@ -19,8 +20,11 @@ fi
 
 if [ -n "${missing_mise_tools}" ]; then
 	printf 'Missing Mise tools:\n%s\n' "${missing_mise_tools}" >&2
-	printf 'Repair them with: mise install\n' >&2
+	printf 'Repair them with: mise install --before 7d\n' >&2
 	exit 1
 fi
 
-mise exec -- chezmoi verify
+if ! mise exec -- chezmoi verify; then
+	printf 'Repair managed-file drift with: make update\n' >&2
+	exit 1
+fi

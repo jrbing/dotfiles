@@ -21,6 +21,8 @@ From the repo root:
 | `make init` | `chezmoi init --apply --verbose` from this repo |
 | `make update` | `chezmoi apply --verbose` after editing source |
 | `make doctor` | Verify managed files and bootstrap tooling; reports the recovery command for drift |
+| `make bootstrap-mise` | Restore Mise without requiring Mise or Chezmoi |
+| `make bootstrap-sheldon` | Restore Sheldon without requiring Chezmoi |
 | `make watch` | Re-apply on change via `watchexec` (sets `DOTFILES_DEBUG=1`) |
 | `make reset` | Wipe chezmoi `scriptState` bucket when run-scripts mis-fire |
 | `make reset-config` | Wipe chezmoi config (`chezmoi init --data=false`) |
