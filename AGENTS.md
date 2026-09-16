@@ -9,7 +9,7 @@ Dotfiles repo managed by [chezmoi](https://chezmoi.io). Bootstrapped via `setup.
   - `executable_*` marks scripts that get `+x` (see `home/dot_local/bin/`)
   - directories like `dot_config/` map to `~/.config/`
 - Do **not** edit files at the repo root expecting them to land in `$HOME` — they won't.
-- `install/{common,macos,linux}/` hold chezmoi `run_onchange_` / `run_` scripts executed during `chezmoi apply` (Homebrew, tmux, mise, sheldon, etc.).
+- `install/{common,macos,linux}/` are included by chezmoi scripts. Most are `run_once_` bootstrap scripts; only `run_onchange_after_03-install-agent-skills.sh.tmpl` reruns when its content changes.
 - Tool chain on a fresh machine: `setup.sh` → chezmoi applies dotfiles → `mise` (runs at shell startup, installs sheldon) → `sheldon` (installs zsh plugins). Don't replicate this wiring manually.
 
 ## Common commands
@@ -20,6 +20,7 @@ From the repo root:
 |---|---|
 | `make init` | `chezmoi init --apply --verbose` from this repo |
 | `make update` | `chezmoi apply --verbose` after editing source |
+| `make doctor` | Verify managed files and bootstrap tooling; reports the recovery command for drift |
 | `make watch` | Re-apply on change via `watchexec` (sets `DOTFILES_DEBUG=1`) |
 | `make reset` | Wipe chezmoi `scriptState` bucket when run-scripts mis-fire |
 | `make reset-config` | Wipe chezmoi config (`chezmoi init --data=false`) |
@@ -40,5 +41,5 @@ Target a single chezmoi path: `chezmoi apply ~/.zshrc` or `chezmoi edit ~/.zshrc
 ## Conventions
 
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`, etc. Optional scope: `fix(vim): ...`. Imperative, present-tense subject, body wrapped at 72.
-- No test suite, linter, or typecheck is wired up — the Dockerfile installs `bats`/`kcov` but no `.bats` files exist. Verification is `make vm-test` (full boot) or `chezmoi diff` + `make update` locally.
-- Keep run-scripts under `install/` idempotent — they re-fire on `chezmoi apply` whenever their content hash changes.
+- Run `make check` before changes; it runs Bats, shell syntax, optional ShellCheck/shfmt, and Chezmoi template rendering. Use `make vm-test` for a full macOS bootstrap.
+- `run_once_` scripts do not rerun after a successful apply. Keep them idempotent so `make reset && make update` can deliberately replay bootstrap work; use `make doctor` first to identify the needed recovery path.

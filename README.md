@@ -95,10 +95,16 @@ chezmoi diff
 make init      # chezmoi init --apply --verbose
 make update   # chezmoi apply --verbose
 make check    # Run shell, template, and Bats validation checks
+make doctor   # Verify managed files and bootstrap tooling
 make watch    # Auto-reapply on file changes (watchexec)
 make docker   # Run in Ubuntu Docker container
 make reset    # Reset chezmoi script state
 ```
+
+`chezmoi apply` keeps managed files in sync, but bootstrap package scripts run
+only once after succeeding. Run `make doctor` to find drift. Use `make update`
+for managed-file drift, `mise install` for missing Mise tools, or
+`make reset && make update` to deliberately replay one-time bootstrap scripts.
 
 ### VM testing (macOS Apple Silicon)
 

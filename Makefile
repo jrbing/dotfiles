@@ -46,7 +46,7 @@ VM_NAME ?= dotfiles-test
 VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-base:latest
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
-.PHONY: check vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
+.PHONY: check doctor vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
 
 # ponytail: skip legacy bash-functions.sh; shfmt cannot parse its let syntax, while bash -n still validates it.
 check:  ## Run shell, template, and Bats validation checks
@@ -75,6 +75,9 @@ check:  ## Run shell, template, and Bats validation checks
 			--promptString system=client \
 			--file "$$template" >/dev/null; \
 	done < <(git ls-files -z -- '*.tmpl')
+
+doctor:  ## Verify managed files and bootstrap tooling
+	@bash scripts/doctor.sh
 
 vm-clone:  ## Clone a macOS Tahoe VM image for testing (one-time, ~25GB download)
 	tart clone $(VM_IMAGE) $(VM_NAME)
@@ -112,4 +115,4 @@ vm-test:  ## Automated test: boot VM, run dotfiles setup, then clean up
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: help docker vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test reset-config reset watch update init check
+.PHONY: help docker vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test reset-config reset watch update init check doctor
