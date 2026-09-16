@@ -5,21 +5,21 @@ readonly ROOT_DIR="$(cd "${BATS_TEST_DIRNAME}/.." && pwd)"
 @test "package managers bootstrap Mise and Mise owns managed CLIs" {
     local package
 
-    /bin/grep -qx $'\tmise' "${ROOT_DIR}/install/macos/common/dependencies.sh"
-    /bin/grep -q 'install_apt_packages mise' "${ROOT_DIR}/install/linux/common/dependencies.sh"
-    ! /bin/grep -q 'mise.run' "${ROOT_DIR}/install/common/mise.sh"
+    grep -qx $'\tmise' "${ROOT_DIR}/install/macos/common/dependencies.sh"
+    grep -q 'install_apt_packages mise' "${ROOT_DIR}/install/linux/common/dependencies.sh"
+    ! grep -q 'mise.run' "${ROOT_DIR}/install/common/mise.sh"
 
     for package in gh go kubernetes-cli node opencode starship topgrade; do
-        ! /bin/grep -Eq "^[[:space:]]*${package}$" "${ROOT_DIR}/install/macos/common/misc.sh"
+        ! grep -Eq "^[[:space:]]*${package}$" "${ROOT_DIR}/install/macos/common/misc.sh"
     done
 
-    /bin/grep -q '^go = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    /bin/grep -q '^node = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    /bin/grep -q '^kubectl = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    /bin/grep -q '^opencode = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    /bin/grep -q '^starship = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    /bin/grep -q '^topgrade = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    /bin/grep -q '^"github:cli/cli" = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^go = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^node = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^kubectl = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^opencode = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^starship = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^topgrade = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^"github:cli/cli" = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
 
     [ ! -e "${ROOT_DIR}/install/linux/common/starship.sh" ]
     [ ! -e "${ROOT_DIR}/home/.chezmoiscripts/linux/run_once_10-install-starship.sh.tmpl" ]

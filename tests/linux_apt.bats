@@ -4,6 +4,11 @@ setup() {
     export TEST_BIN="${BATS_TEST_TMPDIR}/bin"
     export CALL_LOG="${BATS_TEST_TMPDIR}/calls"
 
+    # Resolved before PATH is clobbered below: tool locations vary by platform
+    # (macOS has no /bin/grep or /bin/true). type -P skips shell builtins.
+    export GREP="$(type -P grep)"
+    export TRUE="$(type -P true)"
+
     /bin/mkdir -p "${TEST_BIN}"
     /bin/ln -s /bin/rm "${TEST_BIN}/rm"
     : > "${CALL_LOG}"
@@ -66,9 +71,9 @@ EOF
         "${BATS_TEST_DIRNAME}/../install/linux/common/tmux.sh" \
         "${BATS_TEST_DIRNAME}/../install/linux/common/misc.sh" \
         "${BATS_TEST_DIRNAME}/../install/linux/common/docker.sh"; do
-        /bin/grep -q 'install_apt_packages' "${caller}"
-        /bin/grep -q 'uninstall_apt_packages' "${caller}"
-        ! /bin/grep -Eq 'sudo( --preserve-env=[^ ]+)? apt-get' "${caller}"
+        "${GREP}" -q 'install_apt_packages' "${caller}"
+        "${GREP}" -q 'uninstall_apt_packages' "${caller}"
+        ! "${GREP}" -Eq 'sudo( --preserve-env=[^ ]+)? apt-get' "${caller}"
     done
 }
 
@@ -81,7 +86,7 @@ EOF
         "${BATS_TEST_DIRNAME}/../home/.chezmoiscripts/linux/run_once_08-install-tmux.sh.tmpl" \
         "${BATS_TEST_DIRNAME}/../home/.chezmoiscripts/linux/run_once_10-install-docker.sh.tmpl" \
         "${BATS_TEST_DIRNAME}/../home/.chezmoiscripts/linux/run_once_50-install-misc.sh.tmpl"; do
-        /bin/grep -q 'include "../install/linux/common/apt.sh"' "${template}"
+        "${GREP}" -q 'include "../install/linux/common/apt.sh"' "${template}"
     done
 }
 
@@ -107,9 +112,9 @@ EOF
 
 @test "Linux dependency installation filters commands already on PATH" {
     install_sudo_stub
-    /bin/ln -s /bin/true "${TEST_BIN}/curl"
-    /bin/ln -s /bin/true "${TEST_BIN}/git"
-    /bin/ln -s /bin/true "${TEST_BIN}/mise"
+    /bin/ln -s "${TRUE}" "${TEST_BIN}/curl"
+    /bin/ln -s "${TRUE}" "${TEST_BIN}/git"
+    /bin/ln -s "${TRUE}" "${TEST_BIN}/mise"
     source "${BATS_TEST_DIRNAME}/../install/linux/common/dependencies.sh"
 
     run install_linux_dependencies
@@ -139,10 +144,10 @@ EOF
     run install_mise
 
     [ "${status}" -eq 0 ]
-    /bin/grep -q 'apt-get install -y ca-certificates' "${CALL_LOG}"
-    /bin/grep -q 'curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub' "${CALL_LOG}"
-    /bin/grep -q 'install -dm 755 /etc/apt/keyrings' "${CALL_LOG}"
-    /bin/grep -q 'apt-get install -y mise' "${CALL_LOG}"
+    "${GREP}" -q 'apt-get install -y ca-certificates' "${CALL_LOG}"
+    "${GREP}" -q 'curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub' "${CALL_LOG}"
+    "${GREP}" -q 'install -dm 755 /etc/apt/keyrings' "${CALL_LOG}"
+    "${GREP}" -q 'apt-get install -y mise' "${CALL_LOG}"
 }
 
 @test "misc package caller executes through the adapter" {

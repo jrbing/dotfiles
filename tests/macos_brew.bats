@@ -23,7 +23,7 @@ EOF2
         source '${BATS_TEST_DIRNAME}/../install/macos/common/brew_packages.sh'
         install_brew_packages formula aria2"
     [ "$status" -eq 0 ]
-    /usr/bin/grep -qx 'brew install --force aria2' "${CALL_LOG}"
+    grep -qx 'brew install --force aria2' "${CALL_LOG}"
 }
 
 @test "cask install still passes --cask" {
@@ -31,5 +31,5 @@ EOF2
         source '${BATS_TEST_DIRNAME}/../install/macos/common/brew_packages.sh'
         install_brew_packages cask alfred"
     [ "$status" -eq 0 ]
-    /usr/bin/grep -qx 'brew install --cask --force alfred' "${CALL_LOG}"
+    grep -qx 'brew install --cask --force alfred' "${CALL_LOG}"
 }
