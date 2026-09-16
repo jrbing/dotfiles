@@ -58,7 +58,7 @@ check:  ## Run shell, template, and Bats validation checks
 	@while IFS= read -r -d '' script; do bash -n "$$script"; done < <(git ls-files -z -- '*.sh')
 	@if command -v shellcheck >/dev/null; then \
 		echo "Running ShellCheck..."; \
-		git ls-files -z -- '*.sh' | xargs -0 -r shellcheck --severity=error; \
+		git ls-files -z -- '*.sh' | xargs -0 shellcheck --severity=error; \
 	else \
 		echo "ShellCheck not installed; skipping"; \
 	fi

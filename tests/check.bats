@@ -9,6 +9,8 @@ readonly ROOT_DIR="$(cd "${BATS_TEST_DIRNAME}/.." && pwd)"
     [[ "${output}" == *"bats tests"* ]]
     [[ "${output}" == *"bash -n"* ]]
     [[ "${output}" == *"shellcheck"* ]]
+    [[ "${output}" == *"xargs -0 shellcheck"* ]]
+    [[ "${output}" != *"xargs -0 -r"* ]]
     [[ "${output}" == *"shfmt"* ]]
     [[ "${output}" == *"chezmoi execute-template --init --source home"* ]]
 }
