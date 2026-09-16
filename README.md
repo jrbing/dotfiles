@@ -59,6 +59,7 @@ chezmoi diff
 ```bash
 make init      # chezmoi init --apply --verbose
 make update   # chezmoi apply --verbose
+make check    # Run shell, template, and Bats validation checks
 make watch    # Auto-reapply on file changes (watchexec)
 make docker   # Run in Ubuntu Docker container
 make reset    # Reset chezmoi script state
