@@ -132,3 +132,67 @@ load_setup() {
     [ "$status" -eq 1 ]
     [[ "$output" == *"Invalid OS type:"* ]]
 }
+
+@test "closed-stdin bootstrap supplies non-interactive Chezmoi inputs" {
+    load_setup
+    export HOME="${BATS_TEST_TMPDIR}/home"
+    export CHEZMOI_ARGS="${BATS_TEST_TMPDIR}/chezmoi-args"
+    export CHEZMOI_INSTALL_ARGS="${BATS_TEST_TMPDIR}/chezmoi-install-args"
+    export DOTFILES_EMAIL="ci@example.com"
+    unset DOTFILES_SYSTEM
+    DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
+    BRANCH_NAME="main"
+    CHEZMOI_VERSION="v2.72.2"
+    export FAKE_CHEZMOI_INSTALLER="${BATS_TEST_TMPDIR}/installer"
+
+    cat >"${FAKE_CHEZMOI_INSTALLER}" <<'EOF'
+#!/bin/sh
+if [ -n "${CHEZMOI_INSTALLER_SENTINEL:-}" ]; then
+    : >"${CHEZMOI_INSTALLER_SENTINEL}"
+fi
+printf '%s\n' "$@" >"${CHEZMOI_INSTALL_ARGS}"
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --) shift ;;
+        -b) bin_dir="$2"; shift 2 ;;
+        *) shift ;;
+    esac
+done
+mkdir -p "${bin_dir}"
+cat >"${bin_dir}/chezmoi" <<'CHEZMOI'
+#!/bin/sh
+printf '%s\n' "$@" >>"${CHEZMOI_ARGS}"
+CHEZMOI
+chmod +x "${bin_dir}/chezmoi"
+EOF
+
+    CHEZMOI_INSTALLER_SHA256="$(sha256_file "${FAKE_CHEZMOI_INSTALLER}")"
+    curl() {
+        local output
+        while [ "$#" -gt 0 ]; do
+            case "$1" in
+            --output)
+                output="$2"
+                shift 2
+                ;;
+            *) shift ;;
+            esac
+        done
+        cp "${FAKE_CHEZMOI_INSTALLER}" "${output}"
+    }
+
+    run_chezmoi </dev/null >/dev/null
+
+    chezmoi_args="$(<"${CHEZMOI_ARGS}")"
+    install_args="$(<"${CHEZMOI_INSTALL_ARGS}")"
+    [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nemail=ci@example.com\n--promptString\nsystem=client'* ]]
+    [[ "$install_args" == *$'-t\nv2.72.2'* ]]
+
+    export CHEZMOI_INSTALLER_SENTINEL="${BATS_TEST_TMPDIR}/checksum-installer-ran"
+    CHEZMOI_INSTALLER_SHA256="invalid"
+    if run_chezmoi </dev/null >/dev/null 2>"${BATS_TEST_TMPDIR}/checksum-error"; then
+        false
+    fi
+    [[ "$(<"${BATS_TEST_TMPDIR}/checksum-error")" == *"Chezmoi installer checksum mismatch"* ]]
+    [ ! -e "${CHEZMOI_INSTALLER_SENTINEL}" ]
+}

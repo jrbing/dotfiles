@@ -27,6 +27,10 @@ declare -r DOTFILES_LOGO='
 # declare -r DOTFILES_REPO_URL="git@github.com:jrbing/dotfiles.git"
 declare -r DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
 declare -r BRANCH_NAME="${BRANCH_NAME:-main}"
+declare -r DOTFILES_REVISION="${DOTFILES_REVISION:-}"
+declare -r HOMEBREW_INSTALL_REVISION="d797f6b3d244abc548808fd75b879ca6860c653f"
+declare -r CHEZMOI_VERSION="v2.72.2"
+declare -r CHEZMOI_INSTALLER_SHA256="75de125a45a82b53c16546db7057052e98c11866ded27c4b6f95a51f59432e7b"
 
 function is_ci() {
     "${CI:-false}"
@@ -146,7 +150,7 @@ function initialize_os_macos() {
 
     # Instal Homebrew if needed.
     if ! is_homebrew_exists; then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/${HOMEBREW_INSTALL_REVISION}/install.sh")"
     fi
 
     # Setup Homebrew envvars.
@@ -177,34 +181,62 @@ function initialize_os_env() {
     fi
 }
 
+function sha256_file() {
+    if command -v sha256sum >/dev/null; then
+        sha256sum "$1" | cut -d ' ' -f 1
+    else
+        shasum -a 256 "$1" | cut -d ' ' -f 1
+    fi
+}
+
 function run_chezmoi() {
     local bin_dir="${HOME}/.local/bin"
+    local installer
+    local -a init_options=(--force --use-builtin-git true)
+    local -a source_options=(--branch "${BRANCH_NAME}")
+    local -a apply_options=()
     export PATH="${PATH}:${bin_dir}"
 
-    # download the chezmoi binary from the URL
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${bin_dir}"
+    installer="$(mktemp)"
+    if ! curl -fsLS --output "${installer}" https://get.chezmoi.io; then
+        rm -f "${installer}"
+        return 1
+    fi
+    if [ "$(sha256_file "${installer}")" != "${CHEZMOI_INSTALLER_SHA256}" ]; then
+        echo "Chezmoi installer checksum mismatch" >&2
+        rm -f "${installer}"
+        return 1
+    fi
+    if ! sh "${installer}" -- -b "${bin_dir}" -t "${CHEZMOI_VERSION}"; then
+        rm -f "${installer}"
+        return 1
+    fi
+    rm -f "${installer}"
     local chezmoi_cmd="${bin_dir}/chezmoi"
 
     if is_ci_or_not_tty; then
-        no_tty_option="--no-tty" # /dev/tty is not available (especially in the CI)
-    else
-        no_tty_option="" # /dev/tty is available OR not in the CI
+        # Supply template data because --no-tty makes promptString unavailable.
+        init_options+=(--no-tty --promptString "email=${DOTFILES_EMAIL:-}" --promptString "system=${DOTFILES_SYSTEM:-client}")
+        apply_options+=(--no-tty)
     fi
+
+    if [ -n "${DOTFILES_REVISION:-}" ]; then
+        source_options=(--revision "${DOTFILES_REVISION}")
+    fi
+
     # run `chezmoi init` to setup the source directory,
     # generate the config file, and optionally update the destination directory
     # to match the target state.
     "${chezmoi_cmd}" init "${DOTFILES_REPO_URL}" \
-        --force \
-        --branch "${BRANCH_NAME}" \
-        --use-builtin-git true \
-        ${no_tty_option}
+        "${init_options[@]}" \
+        "${source_options[@]}"
 
     # Add to PATH for installing the necessary binary files under `$HOME/.local/bin`.
     export PATH="${PATH}:${HOME}/.local/bin"
 
     # run `chezmoi apply` to ensure that targets... are in the target state,
     # updating them if necessary.
-    "${chezmoi_cmd}" apply ${no_tty_option}
+    "${chezmoi_cmd}" apply "${apply_options[@]}"
 
     # purge the binary of the chezmoi cmd
     rm -fv "${chezmoi_cmd}"

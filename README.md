@@ -27,6 +27,16 @@ Bootstrap a macOS or Linux box from bare OS to a configured shell environment in
 curl -fsSL https://raw.githubusercontent.com/jrbing/dotfiles/main/setup.sh | bash
 ```
 
+For a reproducible bootstrap, replace `main` with a reviewed commit and pass
+the same value to `DOTFILES_REVISION`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/jrbing/dotfiles/<commit>/setup.sh | DOTFILES_REVISION=<commit> bash
+```
+
+Piped and CI installs do not prompt. Set `DOTFILES_EMAIL` and, when needed,
+`DOTFILES_SYSTEM=server`; the default system is `client`.
+
 This will:
 
 1. Detect your OS (macOS/Linux)
