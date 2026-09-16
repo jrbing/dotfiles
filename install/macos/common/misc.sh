@@ -18,6 +18,7 @@ fi
 
 readonly BREW_PACKAGES=(
 	aria2
+	astyle
 	atuin
 	clipper
 	cmake

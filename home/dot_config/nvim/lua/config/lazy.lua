@@ -18,6 +18,9 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- render-markdown.nvim for avante's sidebar, plus markdown LSP/formatting.
+    -- Declared here rather than in lazyvim.json, which chezmoi does not track.
+    { import = "lazyvim.plugins.extras.lang.markdown" },
     -- import/override with your plugins
     { import = "plugins" },
   },

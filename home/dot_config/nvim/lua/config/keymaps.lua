@@ -8,11 +8,11 @@ local map = LazyVim.safe_keymap_set
 map({ "n", "v" }, ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
--- Bubble lines up/down
-map("n", "<C-Up>", "[e", { desc = "Bubble line up" })
-map("n", "<C-Down>", "]e", { desc = "Bubble line down" })
-map("v", "<C-Up>", "[egv", { desc = "Bubble selection up" })
-map("v", "<C-Down>", "]egv", { desc = "Bubble selection down" })
+-- Bubble lines up/down (vimrc used [e/]e from vim-unimpaired, which isn't installed)
+map("n", "<C-Up>", "<cmd>m .-2<cr>==", { desc = "Bubble line up" })
+map("n", "<C-Down>", "<cmd>m .+1<cr>==", { desc = "Bubble line down" })
+map("v", "<C-Up>", ":m '<-2<cr>gv=gv", { desc = "Bubble selection up" })
+map("v", "<C-Down>", ":m '>+1<cr>gv=gv", { desc = "Bubble selection down" })
 
 -- Split navigation
 map("n", "<C-J>", "<C-W>j<C-W>_", { desc = "Split down" })
@@ -24,9 +24,9 @@ map("n", "<C-H>", "<C-W>h<C-W>_", { desc = "Split left" })
 map("n", "<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Edit in current dir" })
 map("n", "<leader>v", "V`]", { desc = "Re-select last paste" })
 
--- Telescope in place of CtrlP
-map("n", "<leader>b", function() require("telescope.builtin").buffers() end, { desc = "Buffers (CtrlPBuffer)" })
-map("n", "<A-t>", function() require("telescope.builtin").find_files() end, { desc = "Find files" })
+-- Snacks picker in place of CtrlP (LazyVim ships snacks.picker, not telescope)
+map("n", "<leader>b", function() Snacks.picker.buffers() end, { desc = "Buffers (CtrlPBuffer)" })
+map("n", "<A-t>", function() Snacks.picker.files() end, { desc = "Find files" })
 
 -- Window sizing
 -- map("n", "<leader>=", "<C-w>=", { desc = "Equalize splits" })
@@ -49,8 +49,8 @@ map("n", "Y", "y$", { desc = "Yank to end of line" })
 map({ "n", "v" }, "zl", "zL", { desc = "Scroll right" })
 map({ "n", "v" }, "zh", "zH", { desc = "Scroll left" })
 
--- Clear search highlights
-map("n", "<leader><space>", "<cmd>noh<cr>", { desc = "Clear search" })
+-- Clear search highlights (vimrc used <leader><space>; LazyVim owns that for Find Files)
+map("n", "<Esc>", "<cmd>noh<cr>", { desc = "Clear search" })
 
 -- Keep search matches centered and pulse cursorline
 map("n", "n", function()
