@@ -16,6 +16,7 @@ case "$1" in
     ls) printf '%s\n' "${MISE_MISSING:-}" ;;
     exec)
         printf 'mise %s\n' "$*" >> "${CALL_LOG}"
+        printf '%s\n' "${MISE_VERIFY_OUTPUT:-}"
         [ "${MISE_VERIFY_FAIL:-}" != true ]
         ;;
 esac
@@ -95,10 +96,23 @@ EOF
     install_mise_stub
     install_sheldon_stub
 
-    run env HOME="${TEST_HOME}" PATH="${TEST_BIN}:/bin:/usr/bin" CALL_LOG="${CALL_LOG}" MISE_VERIFY_FAIL=true \
+    run env HOME="${TEST_HOME}" PATH="${TEST_BIN}:/bin:/usr/bin" CALL_LOG="${CALL_LOG}" MISE_VERIFY_FAIL=true MISE_VERIFY_OUTPUT='managed file mismatch' \
         make --no-print-directory -C "${BATS_TEST_DIRNAME}/.." doctor
 
     [ "${status}" -ne 0 ]
     [[ "${output}" == *'Repair managed-file drift with: make update'* ]]
+    [ "$(<"${CALL_LOG}")" = 'mise exec -- chezmoi verify' ]
+}
+
+@test "doctor reports configuration-template recovery separately" {
+    install_mise_stub
+    install_sheldon_stub
+
+    run env HOME="${TEST_HOME}" PATH="${TEST_BIN}:/bin:/usr/bin" CALL_LOG="${CALL_LOG}" MISE_VERIFY_FAIL=true MISE_VERIFY_OUTPUT='chezmoi: warning: config file template has changed, run chezmoi init to regenerate config file' \
+        make --no-print-directory -C "${BATS_TEST_DIRNAME}/.." doctor
+
+    [ "${status}" -ne 0 ]
+    [[ "${output}" == *'Repair configuration-template drift with: make init'* ]]
+    [[ "${output}" != *'Repair managed-file drift with: make update'* ]]
     [ "$(<"${CALL_LOG}")" = 'mise exec -- chezmoi verify' ]
 }

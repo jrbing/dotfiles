@@ -24,7 +24,12 @@ if [ -n "${missing_mise_tools}" ]; then
 	exit 1
 fi
 
-if ! mise exec -- chezmoi verify; then
-	printf 'Repair managed-file drift with: make update\n' >&2
+if ! verify_output="$(mise exec -- chezmoi verify 2>&1)"; then
+	printf '%s\n' "${verify_output}" >&2
+	if [[ "${verify_output}" == *'config file template has changed'* ]]; then
+		printf 'Repair configuration-template drift with: make init\n' >&2
+	else
+		printf 'Repair managed-file drift with: make update\n' >&2
+	fi
 	exit 1
 fi
