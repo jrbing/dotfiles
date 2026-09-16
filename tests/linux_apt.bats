@@ -1,5 +1,7 @@
 #!/usr/bin/env bats
 
+readonly CHEZMOI_BIN="$(command -v chezmoi)"
+
 setup() {
     export TEST_BIN="${BATS_TEST_TMPDIR}/bin"
     export CALL_LOG="${BATS_TEST_TMPDIR}/calls"
@@ -118,7 +120,7 @@ EOF
     [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh\napt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh' ]
 }
 
-@test "Linux dependencies migrate legacy binaries to the official Mise apt repository" {
+@test "Linux dependencies preserve legacy binaries while installing Mise from apt" {
     install_sudo_stub
     export HOME="${BATS_TEST_TMPDIR}/home"
     /bin/mkdir -p "${HOME}/.local/bin"
@@ -149,8 +151,21 @@ EOF
     /bin/grep -q 'curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub' "${CALL_LOG}"
     /bin/grep -q 'install -dm 755 /etc/apt/keyrings' "${CALL_LOG}"
     /bin/grep -q 'apt-get install -y mise' "${CALL_LOG}"
-    [ ! -e "${HOME}/.local/bin/mise" ]
-    [ ! -e "${HOME}/.local/bin/starship" ]
+    [ -e "${HOME}/.local/bin/mise" ]
+    [ -e "${HOME}/.local/bin/starship" ]
+}
+
+@test "Linux Mise migration renders as a run_onchange script" {
+    local template="${BATS_TEST_DIRNAME}/../home/.chezmoiscripts/linux/run_onchange_after_02-migrate-mise.sh.tmpl"
+
+    run "${CHEZMOI_BIN}" execute-template --init --source "${BATS_TEST_DIRNAME}/../home" \
+        --promptString email=test@example.com \
+        --promptString system=client \
+        --file "${template}"
+
+    [ "${status}" -eq 0 ]
+    [[ "${output}" == *"function install_mise"* ]]
+    [[ "${output}" == *"Legacy local %s found"* ]]
 }
 
 @test "misc package caller executes through the adapter" {

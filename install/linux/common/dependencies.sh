@@ -21,6 +21,11 @@ if ! declare -F install_apt_packages >/dev/null 2>&1; then
     fi
 fi
 
+if ! declare -F install_mise >/dev/null 2>&1; then
+    # shellcheck source=mise.sh
+    source "${BASH_SOURCE[0]%/*}/mise.sh"
+fi
+
 readonly PACKAGES=(
     busybox
     cmake
@@ -36,49 +41,6 @@ readonly PACKAGES=(
     wget
     zsh
 )
-readonly LEGACY_DOTFILES_BINARIES=(mise starship)
-
-#
-# @description Remove local binaries installed by older dotfiles revisions.
-#
-function remove_legacy_dotfiles_binaries() {
-    local binary
-
-    for binary in "${LEGACY_DOTFILES_BINARIES[@]}"; do
-        rm -f "${HOME}/.local/bin/${binary}"
-    done
-}
-
-#
-# @description Configure the official Mise apt repository when required.
-#
-function configure_mise_repository() {
-    install_apt_packages ca-certificates
-    sudo install -dm 755 /etc/apt/keyrings
-    curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub
-    sudo install -m 644 /tmp/mise-archive-keyring.asc /etc/apt/keyrings/mise-archive-keyring.asc
-    rm /tmp/mise-archive-keyring.asc
-    printf 'deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.asc arch=%s] https://mise.jdx.dev/deb stable main\n' "$(dpkg --print-architecture)" |
-        sudo tee /etc/apt/sources.list.d/mise.list >/dev/null
-    run_apt_get update
-}
-
-#
-# @description Install Mise from its official apt repository.
-#
-function install_mise() {
-    local legacy_mise="${HOME}/.local/bin/mise"
-
-    if [[ ! -e "${legacy_mise}" && ! -L "${legacy_mise}" ]] && command -v mise >/dev/null 2>&1; then
-        remove_legacy_dotfiles_binaries
-        return
-    fi
-
-    remove_legacy_dotfiles_binaries
-    configure_mise_repository
-    install_apt_packages mise
-}
-
 #
 # @description Install every missing Linux dependency package.
 #

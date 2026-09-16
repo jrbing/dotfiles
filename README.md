@@ -52,6 +52,18 @@ Homebrew and apt install operating-system prerequisites, including `mise`.
 Mise is the only owner of managed runtimes and developer CLIs; its manifest is
 `home/dot_config/mise/config.toml`.
 
+On upgraded Linux hosts, `chezmoi apply` installs apt-managed Mise but leaves
+existing `~/.local/bin/mise` and `starship` binaries unchanged. After verifying
+they came from an older dotfiles install, preserve them outside `PATH`:
+
+```bash
+mkdir -p ~/.local/bin/legacy-dotfiles
+for tool in mise starship; do
+  test -e "${HOME}/.local/bin/${tool}" || test -L "${HOME}/.local/bin/${tool}" || continue
+  mv "${HOME}/.local/bin/${tool}" ~/.local/bin/legacy-dotfiles/
+done
+```
+
 ## Usage
 
 ### Daily operations
