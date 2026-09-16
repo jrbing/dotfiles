@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
 setup() {
+    export CI=false
     export TEST_BIN="${BATS_TEST_TMPDIR}/bin"
     export CALL_LOG="${BATS_TEST_TMPDIR}/calls"
 
