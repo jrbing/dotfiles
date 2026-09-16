@@ -36,6 +36,18 @@ readonly PACKAGES=(
     wget
     zsh
 )
+readonly LEGACY_DOTFILES_BINARIES=(mise starship)
+
+#
+# @description Remove local binaries installed by older dotfiles revisions.
+#
+function remove_legacy_dotfiles_binaries() {
+    local binary
+
+    for binary in "${LEGACY_DOTFILES_BINARIES[@]}"; do
+        rm -f "${HOME}/.local/bin/${binary}"
+    done
+}
 
 #
 # @description Configure the official Mise apt repository when required.
@@ -55,10 +67,14 @@ function configure_mise_repository() {
 # @description Install Mise from its official apt repository.
 #
 function install_mise() {
-    if command -v mise >/dev/null 2>&1; then
-        return 0
+    local legacy_mise="${HOME}/.local/bin/mise"
+
+    if [[ ! -e "${legacy_mise}" && ! -L "${legacy_mise}" ]] && command -v mise >/dev/null 2>&1; then
+        remove_legacy_dotfiles_binaries
+        return
     fi
 
+    remove_legacy_dotfiles_binaries
     configure_mise_repository
     install_apt_packages mise
 }

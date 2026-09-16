@@ -118,8 +118,14 @@ EOF
     [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh\napt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh' ]
 }
 
-@test "Linux dependencies install Mise from its official apt repository" {
+@test "Linux dependencies migrate legacy binaries to the official Mise apt repository" {
     install_sudo_stub
+    export HOME="${BATS_TEST_TMPDIR}/home"
+    /bin/mkdir -p "${HOME}/.local/bin"
+    /bin/touch "${HOME}/.local/bin/mise" "${HOME}/.local/bin/starship"
+    /bin/chmod +x "${HOME}/.local/bin/mise"
+    PATH="${HOME}/.local/bin:${PATH}"
+    export PATH
     /bin/cat >"${TEST_BIN}/install" <<'EOF'
 #!/bin/bash
 exit 0
@@ -143,6 +149,8 @@ EOF
     /bin/grep -q 'curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub' "${CALL_LOG}"
     /bin/grep -q 'install -dm 755 /etc/apt/keyrings' "${CALL_LOG}"
     /bin/grep -q 'apt-get install -y mise' "${CALL_LOG}"
+    [ ! -e "${HOME}/.local/bin/mise" ]
+    [ ! -e "${HOME}/.local/bin/starship" ]
 }
 
 @test "misc package caller executes through the adapter" {
