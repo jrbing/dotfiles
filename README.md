@@ -46,6 +46,12 @@ This will:
 5. Apply all configurations to `$HOME`
 6. Purge the temporary chezmoi binary
 
+### Tool ownership
+
+Homebrew and apt install operating-system prerequisites, including `mise`.
+Mise is the only owner of managed runtimes and developer CLIs; its manifest is
+`home/dot_config/mise/config.toml`.
+
 ## Usage
 
 ### Daily operations

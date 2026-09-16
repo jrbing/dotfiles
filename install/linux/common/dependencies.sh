@@ -38,6 +38,32 @@ readonly PACKAGES=(
 )
 
 #
+# @description Configure the official Mise apt repository when required.
+#
+function configure_mise_repository() {
+    install_apt_packages ca-certificates
+    sudo install -dm 755 /etc/apt/keyrings
+    curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub
+    sudo install -m 644 /tmp/mise-archive-keyring.asc /etc/apt/keyrings/mise-archive-keyring.asc
+    rm /tmp/mise-archive-keyring.asc
+    printf 'deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.asc arch=%s] https://mise.jdx.dev/deb stable main\n' "$(dpkg --print-architecture)" |
+        sudo tee /etc/apt/sources.list.d/mise.list >/dev/null
+    run_apt_get update
+}
+
+#
+# @description Install Mise from its official apt repository.
+#
+function install_mise() {
+    if command -v mise >/dev/null 2>&1; then
+        return 0
+    fi
+
+    configure_mise_repository
+    install_apt_packages mise
+}
+
+#
 # @description Install every missing Linux dependency package.
 #
 function install_linux_dependencies() {
@@ -51,10 +77,12 @@ function install_linux_dependencies() {
     done
 
     if [ "${#missing_packages[@]}" -eq 0 ]; then
-        return 0
+        install_mise
+        return
     fi
 
     install_apt_packages "${missing_packages[@]}"
+    install_mise
 }
 
 #

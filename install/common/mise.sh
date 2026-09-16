@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # @file install/common/mise.sh
-# @brief Install and bootstrap `mise`.
+# @brief Install tools managed by `mise`.
 # @description
-#   Downloads a pinned standalone `mise` release and runs `mise install`.
+#   Assumes the OS package manager installed `mise`, then installs the tools
+#   declared in the managed Mise configuration.
 
 # set -Eeuo pipefail
 
@@ -11,18 +12,7 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
     set -x
 fi
 
-export MISE_INSTALL_PATH="${HOME}/.local/bin/mise"
 readonly DEFAULT_NPM_MIN_RELEASE_AGE_DAYS=7
-
-#
-# @description Install the pinned standalone `mise` binary and activate it.
-#
-function install_mise() {
-    # https://mise.run
-    curl https://mise.run | sh
-
-    eval "$(~/.local/bin/mise activate bash)"
-}
 
 #
 # @description Run `mise install` with the repository npm age gate.
@@ -34,17 +24,9 @@ function run_mise_install() {
 }
 
 #
-# @description Remove the standalone `mise` binary from the local bin dir.
-#
-function uninstall_mise() {
-    rm "${MISE_INSTALL_PATH}"
-}
-
-#
-# @description Install `mise` and the configured tools.
+# @description Install the configured Mise tools.
 #
 function main() {
-    install_mise
     run_mise_install
 }
 

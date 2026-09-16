@@ -28,11 +28,9 @@ readonly BREW_PACKAGES=(
 	docker-buildx
 	eza
 	ffmpeg
-	gh
 	git-delta
 	git-filter-repo
 	gnupg
-	go
 	go-task
 	helm
 	htop
@@ -41,20 +39,14 @@ readonly BREW_PACKAGES=(
 	just
 	krew
 	kubectx
-	kubernetes-cli
-	mise
 	mole
 	nmap
-	node
-	opencode
 	pinentry-mac
 	reattach-to-user-namespace
 	ripgrep
-	starship
 	stern
 	terminal-notifier
 	tmux
-	topgrade
 	watchexec
 	wget
 	yt-dlp

@@ -109,12 +109,40 @@ EOF
     install_sudo_stub
     /bin/ln -s /bin/true "${TEST_BIN}/curl"
     /bin/ln -s /bin/true "${TEST_BIN}/git"
+    /bin/ln -s /bin/true "${TEST_BIN}/mise"
     source "${BATS_TEST_DIRNAME}/../install/linux/common/dependencies.sh"
 
     run install_linux_dependencies
 
     [ "${status}" -eq 0 ]
     [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh\napt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh' ]
+}
+
+@test "Linux dependencies install Mise from its official apt repository" {
+    install_sudo_stub
+    /bin/cat >"${TEST_BIN}/install" <<'EOF'
+#!/bin/bash
+exit 0
+EOF
+    /bin/cat >"${TEST_BIN}/tee" <<'EOF'
+#!/bin/bash
+while IFS= read -r _; do :; done
+EOF
+    /bin/chmod +x "${TEST_BIN}/install" "${TEST_BIN}/tee"
+    source "${BATS_TEST_DIRNAME}/../install/linux/common/dependencies.sh"
+    curl() {
+        printf 'curl %s\n' "$*" >>"${CALL_LOG}"
+        : >"$2"
+    }
+    dpkg() { printf 'amd64\n'; }
+
+    run install_mise
+
+    [ "${status}" -eq 0 ]
+    /bin/grep -q 'apt-get install -y ca-certificates' "${CALL_LOG}"
+    /bin/grep -q 'curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub' "${CALL_LOG}"
+    /bin/grep -q 'install -dm 755 /etc/apt/keyrings' "${CALL_LOG}"
+    /bin/grep -q 'apt-get install -y mise' "${CALL_LOG}"
 }
 
 @test "misc package caller executes through the adapter" {

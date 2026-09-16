@@ -21,6 +21,7 @@ readonly BREW_PACKAGES=(
 	cmake
 	git
 	gpg
+	mise
 	pinentry-mac
 	vim
 	zsh
