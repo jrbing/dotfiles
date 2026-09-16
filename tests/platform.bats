@@ -147,6 +147,9 @@ load_setup() {
 
     cat >"${FAKE_CHEZMOI_INSTALLER}" <<'EOF'
 #!/bin/sh
+if [ -n "${CHEZMOI_INSTALLER_SENTINEL:-}" ]; then
+    : >"${CHEZMOI_INSTALLER_SENTINEL}"
+fi
 printf '%s\n' "$@" >"${CHEZMOI_INSTALL_ARGS}"
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -185,9 +188,11 @@ EOF
     [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nemail=ci@example.com\n--promptString\nsystem=client'* ]]
     [[ "$install_args" == *$'-t\nv2.72.2'* ]]
 
+    export CHEZMOI_INSTALLER_SENTINEL="${BATS_TEST_TMPDIR}/checksum-installer-ran"
     CHEZMOI_INSTALLER_SHA256="invalid"
     if run_chezmoi </dev/null >/dev/null 2>"${BATS_TEST_TMPDIR}/checksum-error"; then
         false
     fi
     [[ "$(<"${BATS_TEST_TMPDIR}/checksum-error")" == *"Chezmoi installer checksum mismatch"* ]]
+    [ ! -e "${CHEZMOI_INSTALLER_SENTINEL}" ]
 }
