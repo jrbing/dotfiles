@@ -139,17 +139,18 @@ load_setup() {
     export CHEZMOI_ARGS="${BATS_TEST_TMPDIR}/chezmoi-args"
     export CHEZMOI_INSTALL_ARGS="${BATS_TEST_TMPDIR}/chezmoi-install-args"
     export DOTFILES_EMAIL="ci@example.com"
-    export DOTFILES_SYSTEM="server"
+    unset DOTFILES_SYSTEM
     DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
     BRANCH_NAME="main"
     CHEZMOI_VERSION="v2.72.2"
+    export FAKE_CHEZMOI_INSTALLER="${BATS_TEST_TMPDIR}/installer"
 
-    curl() {
-        cat <<'EOF'
+    cat >"${FAKE_CHEZMOI_INSTALLER}" <<'EOF'
 #!/bin/sh
 printf '%s\n' "$@" >"${CHEZMOI_INSTALL_ARGS}"
 while [ "$#" -gt 0 ]; do
     case "$1" in
+        --) shift ;;
         -b) bin_dir="$2"; shift 2 ;;
         *) shift ;;
     esac
@@ -161,12 +162,32 @@ printf '%s\n' "$@" >>"${CHEZMOI_ARGS}"
 CHEZMOI
 chmod +x "${bin_dir}/chezmoi"
 EOF
+
+    CHEZMOI_INSTALLER_SHA256="$(sha256_file "${FAKE_CHEZMOI_INSTALLER}")"
+    curl() {
+        local output
+        while [ "$#" -gt 0 ]; do
+            case "$1" in
+            --output)
+                output="$2"
+                shift 2
+                ;;
+            *) shift ;;
+            esac
+        done
+        cp "${FAKE_CHEZMOI_INSTALLER}" "${output}"
     }
 
     run_chezmoi </dev/null >/dev/null
 
     chezmoi_args="$(<"${CHEZMOI_ARGS}")"
     install_args="$(<"${CHEZMOI_INSTALL_ARGS}")"
-    [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nemail=ci@example.com\n--promptString\nsystem=server'* ]]
+    [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nemail=ci@example.com\n--promptString\nsystem=client'* ]]
     [[ "$install_args" == *$'-t\nv2.72.2'* ]]
+
+    CHEZMOI_INSTALLER_SHA256="invalid"
+    if run_chezmoi </dev/null >/dev/null 2>"${BATS_TEST_TMPDIR}/checksum-error"; then
+        false
+    fi
+    [[ "$(<"${BATS_TEST_TMPDIR}/checksum-error")" == *"Chezmoi installer checksum mismatch"* ]]
 }
