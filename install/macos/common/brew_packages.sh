@@ -82,10 +82,10 @@ function install_brew_packages() {
 	fi
 
 	if "${CI:-false}" && ! "${install_in_ci}"; then
-		brew info "${brew_options[@]}" "${missing_packages[@]}"
+		brew info ${brew_options[@]:+"${brew_options[@]}"} "${missing_packages[@]}"
 	elif "${force}"; then
-		brew install "${brew_options[@]}" --force "${missing_packages[@]}"
+		brew install ${brew_options[@]:+"${brew_options[@]}"} --force "${missing_packages[@]}"
 	else
-		brew install "${brew_options[@]}" "${missing_packages[@]}"
+		brew install ${brew_options[@]:+"${brew_options[@]}"} "${missing_packages[@]}"
 	fi
 }
