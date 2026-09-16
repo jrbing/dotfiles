@@ -1,5 +1,7 @@
 #!/usr/bin/env bats
 
+readonly CHEZMOI_BIN="$(command -v chezmoi)"
+
 setup() {
     export TEST_BIN="${BATS_TEST_TMPDIR}/bin"
     export CALL_LOG="${BATS_TEST_TMPDIR}/calls"
@@ -123,8 +125,14 @@ EOF
     [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh\napt-get install -y busybox cmake gpg htop iproute2 iputils-ping unzip vim wget zsh' ]
 }
 
-@test "Linux dependencies install Mise from its official apt repository" {
+@test "Linux dependencies preserve legacy binaries while installing Mise from apt" {
     install_sudo_stub
+    export HOME="${BATS_TEST_TMPDIR}/home"
+    /bin/mkdir -p "${HOME}/.local/bin"
+    /bin/touch "${HOME}/.local/bin/mise" "${HOME}/.local/bin/starship"
+    /bin/chmod +x "${HOME}/.local/bin/mise"
+    PATH="${HOME}/.local/bin:${PATH}"
+    export PATH
     /bin/cat >"${TEST_BIN}/install" <<'EOF'
 #!/bin/bash
 exit 0
@@ -148,6 +156,21 @@ EOF
     "${GREP}" -q 'curl -fSso /tmp/mise-archive-keyring.asc https://mise.jdx.dev/gpg-key.pub' "${CALL_LOG}"
     "${GREP}" -q 'install -dm 755 /etc/apt/keyrings' "${CALL_LOG}"
     "${GREP}" -q 'apt-get install -y mise' "${CALL_LOG}"
+    [ -e "${HOME}/.local/bin/mise" ]
+    [ -e "${HOME}/.local/bin/starship" ]
+}
+
+@test "Linux Mise migration renders as a run_onchange script" {
+    local template="${BATS_TEST_DIRNAME}/../home/.chezmoiscripts/linux/run_onchange_after_02-migrate-mise.sh.tmpl"
+
+    run "${CHEZMOI_BIN}" execute-template --init --source "${BATS_TEST_DIRNAME}/../home" \
+        --promptString email=test@example.com \
+        --promptString system=client \
+        --file "${template}"
+
+    [ "${status}" -eq 0 ]
+    [[ "${output}" == *"function install_mise"* ]]
+    [[ "${output}" == *"Legacy local %s found"* ]]
 }
 
 @test "misc package caller executes through the adapter" {
