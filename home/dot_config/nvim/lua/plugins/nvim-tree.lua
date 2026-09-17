@@ -1,12 +1,13 @@
 -- Ported from home/dot_vimrc: NERDTree section (lines 787-795) + <F9> (lines 431-432)
 --
--- Startup auto-open (g:nerdtree_tabs_open_on_console_startup) is deliberately
--- NOT ported: it fired unconditionally, so it opened a tree next to gitcommit
--- buffers, piped stdin and `nvim -d` diffs. <leader>n opens it on demand.
+-- Startup auto-open (g:nerdtree_tabs_open_on_console_startup)
 return {
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
+    init = function()
+      vim.api.nvim_create_autocmd("VimEnter", { command = "NvimTreeOpen" })
+    end,
     opts = {
       -- g:NERDTreeIgnore -> filters.custom (vim regexes, escaped for Lua)
       filters = {
