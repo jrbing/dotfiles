@@ -2,6 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+vim.g.mapleader = ","
+
 -- Ported from home/dot_vimrc (only what LazyVim doesn't already set)
 vim.opt.relativenumber = false -- vimrc: norelativenumber (LazyVim enables relativenumber)
 vim.opt.swapfile = false -- vimrc: noswapfile
