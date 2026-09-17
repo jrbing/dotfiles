@@ -1,6 +1,7 @@
 {{ if eq (default .chezmoi.os (get . "os")) "linux" -}}
 {{   if eq .chezmoi.osRelease.idLike "debian" -}}
 {{     include "../install/linux/common/apt.sh" }}
+{{     include "../install/linux/common/mise.sh" }}
 {{     include "../install/linux/common/dependencies.sh" }}
 {{   else -}}
 {{     fail (printf "Invalid linux distribution: %s" .chezmoi.osRelease.id) }}

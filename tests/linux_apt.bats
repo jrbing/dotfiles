@@ -114,6 +114,8 @@ EOF
 
 @test "Linux dependency installation filters commands already on PATH" {
     install_sudo_stub
+    export HOME="${BATS_TEST_TMPDIR}/home"
+    /bin/mkdir -p "${HOME}"
     /bin/ln -s "${TRUE}" "${TEST_BIN}/curl"
     /bin/ln -s "${TRUE}" "${TEST_BIN}/git"
     /bin/ln -s "${TRUE}" "${TEST_BIN}/mise"
@@ -171,6 +173,29 @@ EOF
     [ "${status}" -eq 0 ]
     [[ "${output}" == *"function install_mise"* ]]
     [[ "${output}" == *"Legacy local %s found"* ]]
+}
+
+@test "common dependency template executes after including Mise" {
+    local template="${BATS_TEST_DIRNAME}/../home/.chezmoiscripts/linux/run_once_before_50-common-dependencies.sh.tmpl"
+    local generated="${BATS_TEST_TMPDIR}/common-dependencies.sh"
+    local package
+
+    install_sudo_stub
+    export HOME="${BATS_TEST_TMPDIR}/home"
+    /bin/mkdir -p "${HOME}"
+    for package in busybox cmake curl git gpg htop iproute2 iputils-ping mise unzip vim wget zsh; do
+        /bin/ln -s "${TRUE}" "${TEST_BIN}/${package}"
+    done
+
+    run "${CHEZMOI_BIN}" execute-template --init --source "${BATS_TEST_DIRNAME}/../home" \
+        --promptString email=test@example.com \
+        --promptString system=client \
+        --file "${template}"
+    [ "${status}" -eq 0 ]
+    printf '%s\n' "${output}" >"${generated}"
+
+    run /bin/bash "${generated}"
+    [ "${status}" -eq 0 ]
 }
 
 @test "misc package caller executes through the adapter" {
