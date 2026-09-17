@@ -21,7 +21,7 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       "folke/snacks.nvim",
-      "echasnovski/mini.icons",
+      "nvim-mini/mini.icons",
       "MeanderingProgrammer/render-markdown.nvim",
     },
     opts = {

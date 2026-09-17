@@ -76,4 +76,4 @@ map("n", "<leader>wo", "<cmd>Wipeout<CR>", { desc = "Close non-tab buffers" })
 map("n", "<leader>tv", utils.toggle_verbose, { desc = "Toggle verbose logging" })
 
 -- nvim-tree
-map("n", "<leader>n", ":NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
+vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree", silent = true })
