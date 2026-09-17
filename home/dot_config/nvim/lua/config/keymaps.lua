@@ -8,6 +8,11 @@ local map = LazyVim.safe_keymap_set
 map({ "n", "v" }, ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
+if vim.g.neovide then
+  map({ "n", "i", "v", "c", "t" }, "<D-t>", "<cmd>tabnew<cr>", { desc = "New tab" })
+  map({ "n", "i", "v", "c", "t" }, "<D-w>", "<cmd>tabclose<cr>", { desc = "Close tab" })
+end
+
 -- Bubble lines up/down (vimrc used [e/]e from vim-unimpaired, which isn't installed)
 map("n", "<C-Up>", "<cmd>m .-2<cr>==", { desc = "Bubble line up" })
 map("n", "<C-Down>", "<cmd>m .+1<cr>==", { desc = "Bubble line down" })
