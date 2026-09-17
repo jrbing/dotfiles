@@ -1,11 +1,5 @@
--- avante.nvim: AI coding sidebar.
---
--- Auth: the API key is read out of the macOS Keychain at request time via the
--- `cmd:` prefix, so it never lands in this repo, never lands in .zshrc, and
--- works regardless of how Neovide was launched (a GUI launch does not inherit
--- the shell environment). Add the key once with:
---
---   security add-generic-password -s ANTHROPIC_API_KEY -a "$USER" -w
+-- avante.nvim: AI coding sidebar using a GitHub Copilot subscription.
+-- Authenticate once with `:Copilot auth`.
 --
 -- build = "make" compiles the four Rust cdylibs from source with cargo. The
 -- alternative (bash build.sh) downloads a prebuilt tarball from GitHub
@@ -23,17 +17,14 @@ return {
       "folke/snacks.nvim",
       "nvim-mini/mini.icons",
       "MeanderingProgrammer/render-markdown.nvim",
+      {
+        "zbirenbaum/copilot.lua",
+        version = "v2.0.4", -- Avante requires the pre-v3 apps.json credential format.
+        opts = {},
+      },
     },
     opts = {
-      provider = "claude",
-      providers = {
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          auth_type = "api",
-          model = "claude-sonnet-5",
-          api_key_name = "cmd:security find-generic-password -s ANTHROPIC_API_KEY -w",
-        },
-      },
+      provider = "copilot",
     },
   },
 }
