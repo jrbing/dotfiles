@@ -20,7 +20,8 @@ return {
       {
         "zbirenbaum/copilot.lua",
         version = "v2.0.4", -- Avante requires the pre-v3 apps.json credential format.
-        opts = {},
+        build = "mkdir -p copilot",
+        opts = { server = { type = "binary" } },
       },
     },
     opts = {
