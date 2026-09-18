@@ -173,6 +173,7 @@ EOF
     [ "${status}" -eq 0 ]
     [[ "${output}" == *"function install_mise"* ]]
     [[ "${output}" == *"Legacy local %s found"* ]]
+    [[ "${output}" == *$'\ninstall_mise'* ]]
 }
 
 @test "common dependency template executes after including Mise" {
@@ -182,10 +183,29 @@ EOF
 
     install_sudo_stub
     export HOME="${BATS_TEST_TMPDIR}/home"
-    /bin/mkdir -p "${HOME}"
-    for package in busybox cmake curl git gpg htop iproute2 iputils-ping mise unzip vim wget zsh; do
+    /bin/mkdir -p "${HOME}/.local/bin"
+    /bin/touch "${HOME}/.local/bin/mise"
+    for package in busybox cmake git gpg htop iproute2 iputils-ping mise unzip vim wget zsh; do
         /bin/ln -s "${TRUE}" "${TEST_BIN}/${package}"
     done
+    /bin/cat >"${TEST_BIN}/curl" <<'EOF'
+#!/bin/bash
+printf 'curl %s\n' "$*" >>"${CALL_LOG}"
+: >"$2"
+EOF
+    /bin/cat >"${TEST_BIN}/dpkg" <<'EOF'
+#!/bin/bash
+printf 'amd64\n'
+EOF
+    /bin/cat >"${TEST_BIN}/install" <<'EOF'
+#!/bin/bash
+printf 'install %s\n' "$*" >>"${CALL_LOG}"
+EOF
+    /bin/cat >"${TEST_BIN}/tee" <<'EOF'
+#!/bin/bash
+while IFS= read -r _; do :; done
+EOF
+    /bin/chmod +x "${TEST_BIN}/curl" "${TEST_BIN}/dpkg" "${TEST_BIN}/install" "${TEST_BIN}/tee"
 
     run "${CHEZMOI_BIN}" execute-template --init --source "${BATS_TEST_DIRNAME}/../home" \
         --promptString email=test@example.com \
@@ -196,6 +216,8 @@ EOF
 
     run /bin/bash "${generated}"
     [ "${status}" -eq 0 ]
+    [ "$("${GREP}" -c 'curl -fSso /tmp/mise-archive-keyring.asc' "${CALL_LOG}")" -eq 1 ]
+    [ "$("${GREP}" -c 'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y mise' "${CALL_LOG}")" -eq 1 ]
 }
 
 @test "misc package caller executes through the adapter" {
