@@ -53,7 +53,3 @@ function install_mise() {
     configure_mise_repository
     install_apt_packages mise
 }
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    install_mise
-fi
