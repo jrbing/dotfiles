@@ -22,6 +22,7 @@ yazi = "latest"
 
 "github:cli/cli" = "latest"
 "github:googleworkspace/cli" = "latest"
+pre-commit = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python","ruby"]
