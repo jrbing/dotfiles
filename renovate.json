@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "platformAutomerge": false,
+  "packageRules": [
+    {
+      "description": "Automerge patch updates after seven days",
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "7 days",
+      "automerge": true
+    },
+    {
+      "description": "Automerge stable minor updates after seven days",
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "!/^0/",
+      "minimumReleaseAge": "7 days",
+      "automerge": true
+    }
+  ]
+}
