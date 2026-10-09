@@ -6,6 +6,8 @@ setup() {
     export CALL_LOG="${BATS_TEST_TMPDIR}/calls"
 
     /bin/mkdir -p "${TEST_BIN}" "${TEST_HOME}"
+    MAKE_BIN="$(type -P make)"
+    /bin/ln -s /bin/bash "${TEST_BIN}/bash"
     : > "${CALL_LOG}"
 }
 
@@ -43,8 +45,8 @@ EOF
 }
 
 @test "doctor identifies missing Mise" {
-    run env HOME="${TEST_HOME}" PATH="${TEST_BIN}:/bin:/usr/bin" \
-        make --no-print-directory -C "${BATS_TEST_DIRNAME}/.." doctor
+    run env HOME="${TEST_HOME}" PATH="${TEST_BIN}" \
+        "${MAKE_BIN}" --no-print-directory -C "${BATS_TEST_DIRNAME}/.." doctor
 
     [ "${status}" -ne 0 ]
     [[ "${output}" == *'Missing bootstrap tool: mise'* ]]

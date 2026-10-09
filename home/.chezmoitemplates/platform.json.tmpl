@@ -1,0 +1,13 @@
+{{- $os := default (default .chezmoi.os (get . "os")) (env "DOTFILES_OS") -}}
+{{- $release := default dict (get .chezmoi "osRelease") -}}
+{{- $id := default (default "" (get $release "id")) (env "DOTFILES_DISTRO") -}}
+{{- $like := default (default "" (get $release "idLike")) (env "DOTFILES_DISTRO_LIKE") -}}
+{{- $family := "" -}}
+{{- if eq $os "linux" -}}
+{{-   if or (eq $id "debian") (eq $id "ubuntu") (has "debian" (splitList " " $like)) -}}
+{{-     $family = "debian" -}}
+{{-   else if or (eq $id "arch") (eq $id "omarchy") (has "arch" (splitList " " $like)) -}}
+{{-     $family = "arch" -}}
+{{-   end -}}
+{{- end -}}
+{{- dict "os" $os "distribution" $id "family" $family "omarchy" (and (eq $os "linux") (eq $id "omarchy")) | toJson -}}

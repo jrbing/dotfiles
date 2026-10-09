@@ -3,6 +3,8 @@
 readonly CHEZMOI_BIN="$(command -v chezmoi)"
 
 setup() {
+    # Exercise Ubuntu independently of the distribution running the test suite.
+    export DOTFILES_OS=linux DOTFILES_DISTRO=ubuntu DOTFILES_DISTRO_LIKE=debian
     export TEST_BIN="${BATS_TEST_TMPDIR}/bin"
     export CALL_LOG="${BATS_TEST_TMPDIR}/calls"
 

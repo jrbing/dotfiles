@@ -1,0 +1,4 @@
+{{- $platform := includeTemplate "platform.json.tmpl" . | fromJson -}}
+{{- if not $platform.omarchy }}
+.config/hypr
+{{- end }}

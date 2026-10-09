@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+# This bootstrap uses portable shell syntax; the rest of Omarchy's Bash rc does not.
+if [[ -r /usr/share/omarchy/default/bash/env-bootstrap ]]; then
+  source /usr/share/omarchy/default/bash/env-bootstrap
+fi
+
 #
 # Use .localrc for local system specific settings
 #

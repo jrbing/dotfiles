@@ -1,9 +1,12 @@
-{{ if eq (default .chezmoi.os (get . "os")) "linux" -}}
-{{   if eq .chezmoi.osRelease.idLike "debian" -}}
+{{- $platform := includeTemplate "platform.json.tmpl" . | fromJson -}}
+{{ if eq $platform.os "linux" -}}
+{{   if eq $platform.family "debian" -}}
 {{     include "../install/linux/common/apt.sh" }}
 {{     include "../install/linux/common/mise.sh" }}
 {{     include "../install/linux/common/dependencies.sh" }}
+{{   else if $platform.omarchy -}}
+{{     include "../install/linux/omarchy/dependencies.sh" }}
 {{   else -}}
-{{     fail (printf "Invalid linux distribution: %s" .chezmoi.osRelease.id) }}
+{{     fail (printf "Invalid linux distribution: %s" $platform.distribution) }}
 {{   end -}}
 {{- end }}
