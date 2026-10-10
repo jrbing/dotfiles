@@ -1,8 +1,4 @@
-#!/bin/bash
-
-# Keep Omarchy commands and Mise shims available to SSH/non-interactive shells.
-# shellcheck source=/dev/null
-[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
+#!/usr/bin/env bash
 
 [[ $- != *i* ]] && return
 
@@ -40,6 +36,9 @@ case $(uname) in
     fi
   ;;
   (Linux)
+    # Keep Omarchy commands and Mise shims available to SSH/non-interactive shells.
+    # shellcheck source=/dev/null
+    [[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
     [[ $TERM == xterm ]] && export TERM="xterm-256color"
     export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD # Set colors for ls
     export PATH=$PATH:/sbin:/usr/sbin
