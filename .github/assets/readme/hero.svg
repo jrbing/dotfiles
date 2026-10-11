@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="heroTitle heroDesc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', PingFang SC, sans-serif">
+  <title id="heroTitle">dotfiles</title>
+  <desc id="heroDesc">dotfiles — bootstrap a bare macOS or Linux box into a configured zsh, vim, tmux and git environment with one command, managed by chezmoi, mise and Sheldon. A terminal card shows the real setup pipeline.</desc>
+
+  <!--
+    INTENTIONAL hardcoded palette and hand-tuned coordinates.
+    Theme: gritty cyberpunk with vaporwave accents; rat-fink chroma-split wordmark,
+    and a dominant CRT terminal panel filling the right side.
+    Do NOT refactor these hex values into theme variables — the aesthetic IS the design.
+    Animation is decorative and degrades to a complete static first frame (GitHub does not
+    play animation embedded in SVG; the static frame is what renders there).
+  -->
+
+  <defs>
+    <linearGradient id="sunset" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#25e6ff" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#ff2d95" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#25e6ff" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#25e6ff" stop-opacity="0.5"/>
+      <stop offset="0.6" stop-color="#ff2d95" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ff2d95" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="term" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#161020"/>
+      <stop offset="1" stop-color="#0c0914"/>
+    </linearGradient>
+    <pattern id="scanlines" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect width="1200" height="1" fill="#f3edff" opacity="0.045"/>
+    </pattern>
+    <clipPath id="frame"><rect width="1200" height="360" rx="24"/></clipPath>
+    <clipPath id="termbody"><rect x="636" y="40" width="520" height="292" rx="14"/></clipPath>
+  </defs>
+
+  <style>
+    .cursor{animation:blink 1.05s steps(1) infinite}
+    @keyframes blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+    .scan{animation:scan 5s linear infinite;opacity:0}
+    @keyframes scan{0%{transform:translateY(0);opacity:0}12%{opacity:.45}88%{opacity:.45}100%{transform:translateY(240px);opacity:0}}
+    .aura{animation:aura 5s ease-in-out infinite;opacity:.45}
+    @keyframes aura{0%,100%{opacity:.32}50%{opacity:.62}}
+    .word{animation:halo 6s ease-in-out infinite}
+    @keyframes halo{0%,100%{opacity:.85}50%{opacity:1}}
+    @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+  </style>
+
+  <rect width="1200" height="360" rx="24" fill="#0b0910"/>
+
+  <g clip-path="url(#frame)">
+    <!-- vaporwave horizon: perspective grid, deliberately faint -->
+    <g stroke="url(#sunset)" stroke-width="1.4" fill="none" opacity="0.5">
+      <path d="M0 300 H1200 M0 318 H1200 M0 340 H1200"/>
+      <path d="M905 300 L640 360 M905 300 L820 360 M905 300 L1010 360 M905 300 L1170 360"/>
+    </g>
+    <rect width="1200" height="360" fill="url(#scanlines)"/>
+
+    <!-- title block -->
+    <g>
+      <text x="56" y="98" font-family="ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace" font-size="20" letter-spacing="3" fill="#25e6ff">CHEZMOI &#183; MISE &#183; SHELDON</text>
+
+      <g class="word">
+        <text x="59" y="192" font-size="96" font-weight="800" letter-spacing="1" fill="#ff2d95" opacity="0.85">dotfiles</text>
+        <text x="53" y="192" font-size="96" font-weight="800" letter-spacing="1" fill="#25e6ff" opacity="0.85">dotfiles</text>
+        <text x="56" y="192" font-size="96" font-weight="800" letter-spacing="1" fill="#f3edff">dotfiles</text>
+      </g>
+      <path d="M56 206 L120 200 L190 208 L262 200 L336 208 L408 200 L478 208 L536 202" fill="none" stroke="#b8ff2e" stroke-width="3" stroke-linejoin="round" opacity="0.9"/>
+
+      <text x="58" y="248" font-size="24" fill="#f3edff">Bootstrap a bare macOS or Linux box</text>
+      <text x="58" y="278" font-size="24" fill="#8b81a6">into a configured shell &#8212; one command.</text>
+
+      <g font-family="ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace" font-size="17">
+        <rect x="56" y="300" width="52" height="30" rx="7" fill="#1b1428" stroke="#25e6ff" stroke-opacity="0.6"/>
+        <text x="70" y="320" fill="#25e6ff">MIT</text>
+      </g>
+    </g>
+
+    <!-- soft aura behind the terminal -->
+    <ellipse class="aura" cx="896" cy="186" rx="300" ry="190" fill="url(#aura)" opacity="0.45"/>
+
+    <!-- CRT terminal: real bootstrap output, vaporwave voice (option 2) -->
+    <g>
+      <rect x="636" y="40" width="520" height="292" rx="14" fill="url(#term)" stroke="#2a2140" stroke-width="1.5"/>
+      <rect x="636" y="40" width="520" height="30" rx="14" fill="#1d1630"/>
+      <rect x="636" y="56" width="520" height="14" fill="#1d1630"/>
+      <circle cx="660" cy="55" r="5" fill="#ff2d95"/>
+      <circle cx="678" cy="55" r="5" fill="#ffb020"/>
+      <circle cx="696" cy="55" r="5" fill="#b8ff2e"/>
+      <text x="1012" y="59" font-family="ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace" font-size="14" fill="#6b6480">bash &#8212; 80&#215;24</text>
+
+      <g clip-path="url(#termbody)" font-family="ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace">
+        <text x="660" y="110" font-size="22" fill="#f3edff">&#10095; curl -fsSL .../setup.sh | bash</text>
+        <text x="660" y="140" font-size="20" fill="#8b81a6">&#9656; scanning      <tspan fill="#25e6ff">macOS &#183; Apple Silicon</tspan></text>
+        <text x="660" y="170" font-size="20" fill="#8b81a6">&#9656; spinning up   <tspan fill="#25e6ff">homebrew &#183; apt</tspan></text>
+        <text x="660" y="200" font-size="20" fill="#8b81a6">&#9656; materializing <tspan fill="#25e6ff">140 files via chezmoi</tspan></text>
+        <text x="660" y="230" font-size="20" fill="#8b81a6">&#9656; summoning     <tspan fill="#25e6ff">node go rust python ruby</tspan></text>
+        <text x="660" y="260" font-size="20" fill="#8b81a6">&#9656; threading     <tspan fill="#25e6ff">sheldon + oh-my-zsh</tspan></text>
+        <text x="660" y="290" font-size="20" fill="#8b81a6">&#9656; aligning      <tspan fill="#25e6ff">zsh &#183; tmux &#183; vim &#183; git</tspan></text>
+        <text x="660" y="320" font-size="20" fill="#b8ff2e">&#10095; system nominal <tspan class="cursor" fill="#b8ff2e">&#9608;</tspan></text>
+        <rect class="scan" x="640" y="76" width="512" height="26" fill="#25e6ff" opacity="0"/>
+      </g>
+    </g>
+
+  </g>
+
+  <rect x="0.75" y="0.75" width="1198.5" height="358.5" rx="24" fill="none" stroke="#25e6ff" stroke-opacity="0.35" stroke-width="1.5"/>
+</svg>
