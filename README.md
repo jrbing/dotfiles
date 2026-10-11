@@ -10,7 +10,6 @@ Bootstrap a macOS or Linux box from bare OS to a configured shell environment in
 - Runtime tool versioning with [mise](https://mise.jdx.dev)
 - Package management via [Homebrew](https://brew.sh) (macOS), apt (Ubuntu), and Omarchy's package commands
 - Cross-platform: macOS, Ubuntu, and installed Omarchy 4.x systems
-- Automated VM testing with Apple Silicon Tart VMs
 - 20+ custom utility scripts in `~/.local/bin`
 - Vim, tmux, and git configuration included
 
@@ -174,14 +173,6 @@ For rendering tests, `DOTFILES_OS`, `DOTFILES_DISTRO`, and
 `DOTFILES_DISTRO_LIKE` can override platform detection. Leave these unset during
 normal application. Detection otherwise uses chezmoi's OS data and distribution
 ID/`ID_LIKE` tokens. See `tests/omarchy.bats` for the platform matrix.
-
-### VM testing (macOS Apple Silicon)
-
-```bash
-make vm-clone          # One-time ~25GB image download
-make vm-run            # Boot VM with GUI
-make vm-test           # Automated: boot → setup.sh → verify → cleanup
-```
 
 ## License
 
