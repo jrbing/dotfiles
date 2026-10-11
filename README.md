@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/readme/hero.svg" width="100%" alt="dotfiles — bootstrap a bare macOS or Linux box into a configured shell environment in one command, managed by chezmoi, mise and Sheldon">
+  <img src="./.github/assets/readme/hero.svg" width="100%" alt="dotfiles — bootstrap a bare macOS or Linux box into a configured shell environment in one command, managed by chezmoi, mise and Sheldon">
 </p>
 
 # dotfiles
@@ -27,7 +27,7 @@ must be ported deliberately when equivalent behavior is wanted in the other.
 ## How it works
 
 <p align="center">
-  <img src="./assets/readme/pipeline.svg" width="100%" alt="Bootstrap pipeline: bare OS → setup.sh → chezmoi apply → configured shell, with mise and sheldon configured from home/">
+  <img src="./.github/assets/readme/pipeline.svg" width="100%" alt="Bootstrap pipeline: bare OS → setup.sh → chezmoi apply → configured shell, with mise and sheldon configured from home/">
 </p>
 
 ## Prerequisites
