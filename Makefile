@@ -44,15 +44,11 @@ bootstrap-sheldon:  ## Install Sheldon without requiring Chezmoi
 reset-config:  ## Reset chezmoi configuration (removes all stored configuration data)
 	chezmoi init --data=false
 
-#############
-#  VM Test  #
-#############
+###############
+#  Validation #
+###############
 
-VM_NAME ?= dotfiles-test
-VM_IMAGE ?= ghcr.io/cirruslabs/macos-tahoe-base:latest
-ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-
-.PHONY: bootstrap-mise bootstrap-sheldon check doctor vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test
+.PHONY: bootstrap-mise bootstrap-sheldon check doctor
 
 # ponytail: skip legacy bash-functions.sh; shfmt cannot parse its let syntax, while bash -n still validates it.
 check:  ## Run shell, template, and Bats validation checks
@@ -85,35 +81,6 @@ check:  ## Run shell, template, and Bats validation checks
 doctor:  ## Verify managed files and bootstrap tooling
 	@bash scripts/doctor.sh
 
-vm-clone:  ## Clone a macOS Tahoe VM image for testing (one-time, ~25GB download)
-	tart clone $(VM_IMAGE) $(VM_NAME)
-
-vm-run:  ## Run the VM with a graphical console window
-	tart run --dir=dotfiles:$(ROOT_DIR) $(VM_NAME)
-
-vm-run-headless:  ## Run the VM in headless mode (no GUI)
-	tart run --no-graphics $(VM_NAME)
-
-vm-ip:  ## Show the VM's IP address
-	@tart ip $(VM_NAME) 2>/dev/null || { echo "VM '$(VM_NAME)' is not running"; exit 1; }
-
-vm-stop:  ## Gracefully shut down the VM
-	@IP=$$(tart ip $(VM_NAME) 2>/dev/null) && \
-		ssh admin@$$IP "sudo shutdown -h now" 2>/dev/null || \
-		echo "VM '$(VM_NAME)' is not running or unreachable"
-
-vm-delete:  ## Delete the VM
-	@tart delete $(VM_NAME) 2>/dev/null || echo "VM '$(VM_NAME)' not found"
-
-vm-list:  ## List all Tart VMs
-	tart list
-
-vm-prune:  ## Prune all base images
-	tart prune --space-budget=0
-
-vm-test:  ## Automated test: boot VM, run dotfiles setup, then clean up
-	@bash scripts/vm-test.sh
-
 ##########
 #  Misc  #
 ##########
@@ -121,4 +88,4 @@ vm-test:  ## Automated test: boot VM, run dotfiles setup, then clean up
 help:  ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: help docker bootstrap-mise bootstrap-sheldon vm-clone vm-run vm-run-headless vm-ip vm-stop vm-delete vm-list vm-test reset-config reset watch update init check doctor
+.PHONY: help docker bootstrap-mise bootstrap-sheldon reset-config reset watch update init check doctor
