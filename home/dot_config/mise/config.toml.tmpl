@@ -1,3 +1,4 @@
+{{- $platform := includeTemplate "platform.json.tmpl" . | fromJson -}}
 [tools]
 go = "latest"
 node = "lts"
@@ -23,6 +24,9 @@ yazi = "latest"
 "github:cli/cli" = "latest"
 "github:googleworkspace/cli" = "latest"
 pre-commit = "latest"
-
+{{ if eq $platform.system "client" }}
+claude = "latest"
+codex = "latest"
+{{ end }}
 [settings]
 idiomatic_version_file_enable_tools = ["python","ruby"]
