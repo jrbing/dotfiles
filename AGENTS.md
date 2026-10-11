@@ -11,6 +11,7 @@ Dotfiles repo managed by [chezmoi](https://chezmoi.io). Bootstrapped via `setup.
 - Do **not** edit files at the repo root expecting them to land in `$HOME` — they won't.
 - `install/{common,macos,linux}/` are included by chezmoi scripts. Most are `run_once_` bootstrap scripts; only `run_onchange_after_03-install-agent-skills.sh.tmpl` reruns when its content changes.
 - Tool chain on a fresh machine: `setup.sh` → chezmoi applies dotfiles → `mise` (runs at shell startup, installs sheldon) → `sheldon` (installs zsh plugins). Don't replicate this wiring manually.
+- Claude Code and Codex config (`home/dot_agents/`, `home/dot_claude/`, `home/dot_codex/`) and their Mise declarations are **client-only**: `home/.chezmoiignore` drops them on `system=server`, and `home/dot_config/mise/config.toml.tmpl` gates the CLI entries. Shared guidance lives in `home/dot_agents/AGENTS.md`; Claude imports it and Codex symlinks to it — don't duplicate the content.
 
 ## Common commands
 

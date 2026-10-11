@@ -10,4 +10,5 @@
 {{-     $family = "arch" -}}
 {{-   end -}}
 {{- end -}}
-{{- dict "os" $os "distribution" $id "family" $family "omarchy" (and (eq $os "linux") (eq $id "omarchy")) | toJson -}}
+{{- $system := default (default "client" (get . "system")) (env "DOTFILES_SYSTEM") -}}
+{{- dict "os" $os "distribution" $id "family" $family "omarchy" (and (eq $os "linux") (eq $id "omarchy")) "system" $system | toJson -}}

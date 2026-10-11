@@ -66,7 +66,7 @@ This will:
 
 Homebrew, apt, and Omarchy install operating-system prerequisites, including `mise`.
 Mise is the only owner of managed runtimes and developer CLIs; its manifest is
-`home/dot_config/mise/config.toml`.
+`home/dot_config/mise/config.toml.tmpl`.
 
 On upgraded Linux hosts, `chezmoi apply` installs apt-managed Mise but leaves
 existing `~/.local/bin/mise` and `starship` binaries unchanged. After verifying
@@ -79,6 +79,20 @@ for tool in mise starship; do
   mv "${HOME}/.local/bin/${tool}" ~/.local/bin/legacy-dotfiles/
 done
 ```
+
+### Claude Code and Codex (clients only)
+
+Claude Code and Codex are installed by Mise on client systems only; a server
+apply neither installs their CLIs nor writes their configuration. Shared
+personal guidance lives in `~/.agents/AGENTS.md`. Claude reads it through an
+import in `~/.claude/CLAUDE.md`, and Codex reads it through a symlinked
+`~/.codex/AGENTS.md`. Tool preferences are limited to `~/.claude/settings.json`
+and `~/.codex/config.toml`.
+
+Credentials, histories, sessions, logs, caches, generated plugin state, and
+project-local overrides are deliberately unmanaged. Update preferences with
+`chezmoi update` (or `make update`), update the CLIs with `mise upgrade`, and
+review pending changes with `chezmoi diff` or `make doctor`.
 
 ## Usage
 

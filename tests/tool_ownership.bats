@@ -18,13 +18,13 @@ readonly ROOT_DIR="$(cd "${BATS_TEST_DIRNAME}/.." && pwd)"
         ! grep -Eq "^[[:space:]]*${package}$" "${ROOT_DIR}/install/macos/common/misc.sh"
     done
 
-    grep -q '^go = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    grep -q '^node = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    grep -q '^kubectl = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    grep -q '^opencode = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    grep -q '^starship = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    grep -q '^topgrade = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
-    grep -q '^"github:cli/cli" = ' "${ROOT_DIR}/home/dot_config/mise/config.toml"
+    grep -q '^go = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
+    grep -q '^node = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
+    grep -q '^kubectl = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
+    grep -q '^opencode = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
+    grep -q '^starship = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
+    grep -q '^topgrade = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
+    grep -q '^"github:cli/cli" = ' "${ROOT_DIR}/home/dot_config/mise/config.toml.tmpl"
 
     [ ! -e "${ROOT_DIR}/install/linux/common/starship.sh" ]
     [ ! -e "${ROOT_DIR}/home/.chezmoiscripts/linux/run_once_10-install-starship.sh.tmpl" ]

@@ -2,3 +2,8 @@
 {{- if not $platform.omarchy }}
 .config/hypr
 {{- end }}
+{{- if eq $platform.system "server" }}
+.agents
+.claude
+.codex
+{{- end }}
