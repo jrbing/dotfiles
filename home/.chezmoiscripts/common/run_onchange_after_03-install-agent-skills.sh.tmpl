@@ -1,1 +1,4 @@
+{{- $platform := includeTemplate "platform.json.tmpl" . | fromJson -}}
+{{ if eq $platform.system "client" -}}
 {{ include "../install/common/agent-skills.sh" }}
+{{- end -}}

@@ -11,7 +11,7 @@ readonly ROOT_DIR="$(cd "${BATS_TEST_DIRNAME}/.." && pwd)"
     grep -q 'left unchanged' "${ROOT_DIR}/install/linux/common/mise.sh"
     ! grep -q '\.local/bin/mise' "${ROOT_DIR}/install/common/agent-skills.sh"
     ! grep -q '\.local/bin/mise' "${ROOT_DIR}/home/dot_bashrc"
-    grep -q '^mise exec ' "${ROOT_DIR}/install/common/agent-skills.sh"
+    grep -Eq '^[[:space:]]*mise exec ' "${ROOT_DIR}/install/common/agent-skills.sh"
     grep -q '$(mise activate bash)' "${ROOT_DIR}/home/dot_bashrc"
 
     for package in gh go kubernetes-cli node opencode starship topgrade; do
