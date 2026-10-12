@@ -94,6 +94,16 @@ project-local overrides are deliberately unmanaged. Update preferences with
 `chezmoi update` (or `make update`), update the CLIs with `mise upgrade`, and
 review pending changes with `chezmoi diff` or `make doctor`.
 
+Client applies subscribe to the `mattpocock/skills` and `jrbing/agent-skills`
+repositories through the `skills` CLI, installing every skill for Claude Code,
+Codex, and OpenCode. The CLI owns the generated per-agent directories and
+links, so chezmoi never manages them. The subscriptions only re-run when their
+declaration changes; refresh skill content with:
+
+```bash
+mise exec -- npx --yes skills@latest update --global --yes
+```
+
 ## Usage
 
 ### Daily operations
