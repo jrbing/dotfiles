@@ -13,7 +13,7 @@ setup() {
 @test "is_mas_installed is false when mas is absent" {
     run /bin/bash -c "export PATH='${TEST_BIN}'; source '${SCRIPT_PATH}'; is_mas_installed"
 
-    [ "${status}" -ne 0 ]
+    [ "${status}" -eq 1 ]
 }
 
 @test "is_mas_installed is true when mas is on PATH" {
