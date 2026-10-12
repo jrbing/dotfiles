@@ -216,8 +216,8 @@ function run_chezmoi() {
     local chezmoi_cmd="${bin_dir}/chezmoi"
 
     if is_ci_or_not_tty; then
-        # Supply template data because --no-tty makes promptString unavailable.
-        init_options+=(--no-tty --promptString "email=${DOTFILES_EMAIL:-}" --promptString "system=${DOTFILES_SYSTEM:-client}")
+        # Chezmoi matches prefilled answers by prompt text, not data keys.
+        init_options+=(--no-tty --promptString "Email address=${DOTFILES_EMAIL:-}" --promptString "System (client or server)=${DOTFILES_SYSTEM:-client}")
         apply_options+=(--no-tty)
     fi
 

@@ -139,6 +139,11 @@ load_setup() {
     export CHEZMOI_ARGS="${BATS_TEST_TMPDIR}/chezmoi-args"
     export CHEZMOI_INSTALL_ARGS="${BATS_TEST_TMPDIR}/chezmoi-install-args"
     export CHEZMOI_DOWNLOAD_ARGS="${BATS_TEST_TMPDIR}/chezmoi-download-args"
+    export REAL_CHEZMOI="$(command -v chezmoi)"
+    export CHEZMOI_TEST_SOURCE="${BATS_TEST_TMPDIR}/source"
+    export CHEZMOI_TEST_CONFIG="${BATS_TEST_TMPDIR}/chezmoi.yaml"
+    mkdir -p "${CHEZMOI_TEST_SOURCE}" "${HOME}"
+    cp "${BATS_TEST_DIRNAME}/../home/.chezmoi.yaml.tmpl" "${CHEZMOI_TEST_SOURCE}/.chezmoi.yaml.tmpl"
     export DOTFILES_EMAIL="ci@example.com"
     unset DOTFILES_SYSTEM
     DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
@@ -161,8 +166,21 @@ while [ "$#" -gt 0 ]; do
 done
 mkdir -p "${bin_dir}"
 cat >"${bin_dir}/chezmoi" <<'CHEZMOI'
-#!/bin/sh
+#!/usr/bin/env bash
 printf '%s\n' "$@" >>"${CHEZMOI_ARGS}"
+if [ "$1" = init ]; then
+    shift 2 # init and remote repository; use the isolated local source instead.
+    options=()
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+        --branch | --revision) shift 2 ;;
+        *) options+=("$1"); shift ;;
+        esac
+    done
+    exec "${REAL_CHEZMOI}" init --data=false \
+        --source "${CHEZMOI_TEST_SOURCE}" --destination "${HOME}" \
+        --config "${CHEZMOI_TEST_CONFIG}" "${options[@]}"
+fi
 CHEZMOI
 chmod +x "${bin_dir}/chezmoi"
 EOF
@@ -187,10 +205,18 @@ EOF
 
     chezmoi_args="$(<"${CHEZMOI_ARGS}")"
     install_args="$(<"${CHEZMOI_INSTALL_ARGS}")"
-    [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nemail=ci@example.com\n--promptString\nsystem=client'* ]]
+    [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nEmail address=ci@example.com\n--promptString\nSystem (client or server)=client'* ]]
+    [[ "$(<"${CHEZMOI_TEST_CONFIG}")" == *'email: "ci@example.com"'* ]]
+    [[ "$(<"${CHEZMOI_TEST_CONFIG}")" == *'system: "client"'* ]]
     [[ "$install_args" == *$'-t\nv2.72.2'* ]]
     [[ "$install_args" == $'-b\n'* ]]
     [[ "$(<"${CHEZMOI_DOWNLOAD_ARGS}")" == *"https://raw.githubusercontent.com/twpayne/chezmoi/${CHEZMOI_VERSION}/assets/scripts/install.sh"* ]]
+
+    unset DOTFILES_EMAIL
+    export DOTFILES_SYSTEM=server
+    printf '' | run_chezmoi >/dev/null
+    [[ "$(<"${CHEZMOI_TEST_CONFIG}")" == *'email: ""'* ]]
+    [[ "$(<"${CHEZMOI_TEST_CONFIG}")" == *'system: "server"'* ]]
 
     export CHEZMOI_INSTALLER_SENTINEL="${BATS_TEST_TMPDIR}/checksum-installer-ran"
     CHEZMOI_INSTALLER_SHA256="invalid"
