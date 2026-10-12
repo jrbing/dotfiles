@@ -29,33 +29,21 @@ function install_brew_packages() {
 
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
-		formula | --formula)
+		formula)
 			package_type="formula"
 			shift
 			;;
-		cask | --cask)
+		cask)
 			package_type="cask"
-			shift
-			;;
-		--force)
-			force=true
-			shift
-			;;
-		--no-force)
-			force=false
 			shift
 			;;
 		--install-in-ci)
 			install_in_ci=true
 			shift
 			;;
-		--)
+		--no-force)
+			force=false
 			shift
-			break
-			;;
-		-*)
-			printf 'Unknown Homebrew installer option: %s\n' "$1" >&2
-			return 2
 			;;
 		*)
 			break

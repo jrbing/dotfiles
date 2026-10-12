@@ -7,31 +7,6 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
--- Last location restore, resize, autosave on focus lost
--- augroup("miscellaneous", { clear = true })
-
--- autocmd("FocusLost", {
-  -- group = "miscellaneous",
-  -- pattern = "*",
-  -- command = "silent! wall",
--- })
--- autocmd("VimResized", {
-  -- group = "miscellaneous",
-  -- pattern = "*",
-  -- command = "wincmd =",
--- })
-
--- autocmd("BufReadPost", {
-  -- group = "miscellaneous",
-  -- pattern = "*",
-  -- callback = function()
-    -- local line = vim.fn.line "'\""
-    -- if line > 0 and line <= vim.fn.line "$" then
-      -- vim.cmd [[normal! g`"zvzz]]
-    -- end
-  -- end,
--- })
-
 -- Ported from home/dot_vimrc: Makefiles use tabs
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("ft_make", { clear = true }),
