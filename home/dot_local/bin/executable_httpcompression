@@ -58,9 +58,10 @@ headers="$( curl --connect-timeout $maxConTime \
     if [ -n "$dicts" ]; then
 
       availDicts=""
-      dict=""
 
       for i in $dicts; do
+
+        dict=""
 
         # Check If the dictionary location is specified as a path,
         # and if so, construct it's URL from the host name of the
