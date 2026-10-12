@@ -1,176 +1,109 @@
 #!/usr/bin/env ruby
-# Usage: valet template <type>
-# Summary: Create script from template
-# Help: Creates script files based on predefined templates
+# Usage: valet template <type> [name]
+# Summary: Create a file from a bundled ERB template
+# Help: Renders one of the templates in ~/.local/share/valet/templates into the
+# current directory. Run with no <type> to list the available types.
 
+require 'erb'
 require 'fileutils'
-require 'thor'
-require 'thor/actions'
-require 'securerandom'
-require_relative '../share/valet/util'
 
-TEMPLATE_DIRECTORY = File.expand_path('~/.local/share/valet/templates')
+TEMPLATES = File.expand_path('~/.local/share/valet/templates')
 
-class Template < Thor
+# ponytail: replaces the Thor-based generator; ERB and FileUtils are stdlib, so
+# no gem is needed. [template, output ('%s' = name), chmod mode, name ivar]
+RECIPES = {
+  'sqlplus'       => ['sqlplus_script.erb',     '%s.sql',             nil,   :script_name],
+  'datamover'     => ['datamover_script.erb',   '%s.dms',             nil,   :script_name],
+  'bash'          => ['bash_script.erb',        '%s.sh',              0o755, :script_name],
+  'envrc'         => ['envrc.erb',              '.envrc',             nil,   nil],
+  'mise'          => ['mise.erb',               '.mise.toml',         nil,   nil],
+  'thorfile'      => ['thor_script.erb',        'Thorfile',           0o755, nil],
+  'batch'         => ['batch_script.erb',       '%s.bat',             nil,   :script_name],
+  'powershell'    => ['powershell.erb',         '%s.ps1',             nil,   :script_name],
+  'make'          => ['makefile.erb',           'Makefile',           nil,   nil],
+  'task'          => ['taskfile.erb',           'Taskfile.yml',       nil,   nil],
+  'editorconfig'  => ['editorconfig.erb',       '.editorconfig',      nil,   nil],
+  'readme'        => ['readme.erb',             'README.md',          nil,   :project_name],
+  'python'        => ['python_script.erb',      '%s.py',              0o755, :script_name],
+  'dockerfile'    => ['dockerfile.erb',         'Dockerfile',         nil,   nil],
+  'dockercompose' => ['dockercompose.erb',      'docker-compose.yml', nil,   nil],
+  'vrc'           => ['vrc.erb',                '%s.rest',            nil,   :script_name],
+  'modd'          => ['modd_configuration.erb', 'modd.conf',          nil,   nil],
+  'markdown'      => ['markdown.erb',           '%s.md',              nil,   :file_name],
+  'mutagen'       => ['mutagen.erb',            'mutagen.yml',        nil,   nil],
+}.freeze
 
-  include Thor::Actions
-  include Valet
+DOS = %w[datamover batch powershell].freeze
 
-  self.source_root(TEMPLATE_DIRECTORY)
-
-  # sqlplus script
-  desc "sqlplus [NAME]", "Creates a basic sqlplus script from template"
-  def sqlplus(script_name=nil)
-    @script_name = get_script_name(script_name)
-    @date = Time.now.localtime.strftime("%m/%d/%Y")
-    create_from_template("sqlplus_script.erb", "#{@script_name}.sql")
+# Holds the template's @ivars so ERB can render against them.
+class Vars
+  def initialize(values)
+    values.each { |key, value| instance_variable_set("@#{key}", value) }
   end
-
-  # datamover script
-  desc "datamover [NAME]", "Creates a basic datamover script from template"
-  def datamover(script_name=nil)
-    @script_name = get_script_name(script_name)
-    create_from_template("datamover_script.erb", "#{@script_name}.dms")
-    run "unix2dos #{@script_name}.dms"
-  end
-
-  # bash script
-  desc "bash [NAME]", "Creates a basic bash script from template"
-  def bash(script_name=nil)
-    @script_name = get_script_name(script_name)
-    chmod(create_from_template("bash_script.erb", "#{@script_name}.sh"), 0755)
-  end
-
-  # envrc
-  desc "envrc", "Creates a basic .envrc file in the current directory"
-  def envrc
-    create_from_template("envrc.erb", ".envrc")
-  end
-
-  # mise
-  desc "mise", "Creates a basic mise.toml file in the current directory"
-  def mise
-    create_from_template("mise.erb", ".mise.toml")
-  end
-
-  # thorfile
-  desc "thorfile", "Creates a basic Thorfile"
-  def thorfile(script_name=nil)
-    chmod(create_from_template("thor_script.erb", "Thorfile"), 0755)
-  end
-
-  # windows batch script
-  desc "batch [NAME]", "Creates a basic dos batch script file"
-  def batch(script_name=nil)
-    @script_name = get_script_name(script_name)
-    create_from_template("batch_script.erb", "#{@script_name}.bat")
-    run "unix2dos #{@script_name}.bat"
-  end
-
-  # datafix
-  desc "datafix [NAME]", "Creates datafix files and directories"
-  def datafix(datafix_name=nil)
-    @datafix_name = get_datafix_name(datafix_name)
-    records = ask("Records to be affected: ").upcase.split(' ').uniq
-    @date = Time.now.localtime.strftime("%m/%d/%Y")
-
-    # Create the datafix directory
-    @datafix_base_directory = create_datafix_directory(@datafix_name)
-    create_from_template("datafix_script.erb", "#{@datafix_name}.sql")
-
-    # Create the datamover export files for all records
-    records.each do |record|
-      @record = record
-      create_from_template("sqlcl_backup_insert.erb", "#{@record}_backup_script.sql")
-      #create_from_template("sqlcl_backup.erb", "#{@record}_backup_script.sql")
-      #create_from_template("datamover_backup.erb", "#{@record}.dms")
-    end
-    run "unix2dos #{@datafix_base_directory}/*"
-  end
-
-  # windows powershell script
-  desc "powershell [NAME]", "Creates a basic powershell script"
-  def powershell(script_name=nil)
-    @script_name = get_script_name(script_name)
-    @guid = SecureRandom.uuid
-    create_from_template("powershell.erb", "#{@script_name}.ps1")
-    run "unix2dos #{@script_name}.ps1"
-  end
-
-  # makefile
-  desc "make", "Creates a basic makefile"
-  def make
-    create_from_template("makefile.erb", "Makefile")
-  end
-
-  # Taskfile
-  desc "task", "Creates a basic taskfile"
-  def task
-    create_from_template("taskfile.erb", "Taskfile.yml")
-  end
-
-  # editorconfig configuration file
-  desc "editorconfig", "Creates a basic editorconfig file"
-  def editorconfig
-    create_from_template("editorconfig.erb", ".editorconfig")
-  end
-
-  # README.md file
-  desc "readme", "Creates a basic readme file"
-  def readme(project_name=nil)
-    @project_name = get_project_name(project_name)
-    create_from_template("readme.erb", "README.md")
-  end
-
-  # python script
-  desc "python [NAME]", "Creates a python script"
-  def python(script_name=nil)
-    @script_name = get_script_name(script_name)
-    @date = Time.now.localtime.strftime("%m/%d/%Y")
-    chmod(create_from_template("python_script.erb", "#{@script_name}.py"), 0755)
-  end
-
-  # dockerfile
-  desc "dockerfile", "Creates a sample Dockerfile"
-  def dockerfile
-    create_from_template("dockerfile.erb", "Dockerfile")
-    #@source = File.expand_path('~/.dotfiles/share/valet/templates/s6/rootfs')
-    #directory(@source, "rootfs")
-  end
-
-  # dockercompose
-  desc "dockercompose", "Creates a sample Docker Compose file"
-  def dockercompose
-    create_from_template("dockercompose.erb", "docker-compose.yml")
-  end
-
-  # vim rest console
-  desc "vrc [NAME]", "Creates a sample Vim REST Console file"
-  def vrc(script_name=nil)
-    @script_name = get_script_name(script_name)
-    create_from_template("vrc.erb", "#{@script_name}.rest")
-  end
-
-  # modd configuration
-  desc "modd", "Creates a sample modd configuration file"
-  def modd
-    create_from_template("modd_configuration.erb", "modd.conf")
-  end
-
-  # markdown file
-  desc "markdown [NAME]", "Creates a basic markdown file from template"
-  def markdown(file_name=nil)
-    @file_name = get_file_name(file_name)
-    create_from_template("markdown.erb", "#{@file_name}.md")
-  end
-
-  # mutagen configuration
-  desc "mutagen", "Creates a sample mutagen project file"
-  def mutagen
-    create_from_template("mutagen.erb", "mutagen.yml")
-  end
-
-
 end
 
-Template.start(ARGV)
+def prompt(message)
+  $stdout.print(message)
+  $stdout.flush
+  $stdin.gets&.strip
+end
+
+def render(template, output, values)
+  context = Vars.new(values)
+  source = File.read(File.join(TEMPLATES, template))
+  File.write(output, ERB.new(source).result(context.instance_eval { binding }))
+  output
+end
+
+def to_dos(*paths)
+  return if paths.empty?
+  return unless system('sh', '-c', 'command -v unix2dos >/dev/null 2>&1')
+
+  system('unix2dos', *paths)
+end
+
+def make_datafix(name)
+  name = prompt('Name: ') if name.nil? || name.empty?
+  abort 'valet template: a name is required' if name.nil? || name.empty?
+
+  records = prompt('Records to be affected: ').to_s.upcase.split.uniq
+  values = { datafix_name: name, date: Time.now.localtime.strftime('%m/%d/%Y') }
+  directory = File.join(Dir.pwd, name)
+  FileUtils.mkdir_p(directory)
+
+  render('datafix_script.erb', File.join(directory, "#{name}.sql"), values)
+  records.each do |record|
+    render('sqlcl_backup_insert.erb', File.join(directory, "#{record}_backup_script.sql"),
+           values.merge(record: record))
+  end
+  to_dos(*Dir.glob(File.join(directory, '*')))
+end
+
+type = ARGV.shift
+
+if type.nil? || %w[-h --help help].include?(type)
+  puts 'Usage: valet template <type> [name]'
+  puts
+  puts "Types: #{RECIPES.keys.sort.join(', ')}, datafix"
+  exit 0
+end
+
+if type == 'datafix'
+  make_datafix(ARGV.shift)
+  exit 0
+end
+
+recipe = RECIPES[type] or abort "valet template: unknown type `#{type}'"
+template, output, mode, attr = recipe
+
+name = ARGV.shift
+name = prompt('Name: ') if name.nil? && attr
+abort 'valet template: a name is required' if attr && (name.nil? || name.empty?)
+
+values = { date: Time.now.localtime.strftime('%m/%d/%Y') }
+values[attr] = name if attr
+output = format(output, name) if output.include?('%s')
+
+render(template, output, values)
+File.chmod(mode, output) if mode
+to_dos(output) if DOS.include?(type)
