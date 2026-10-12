@@ -53,10 +53,6 @@ readonly BREW_PACKAGES=(
 	zoxide
 )
 
-# readonly BREW_TAPS=(
-# #manaflow-ai/cmux
-# )
-
 readonly CASK_PACKAGES=(
 	1password
 	1password-cli
@@ -75,44 +71,9 @@ readonly CASK_PACKAGES=(
 )
 
 #
-# @description Check whether a brew tap is already configured.
-# @arg $1 string Tap name.
-#
-function is_brew_tap_installed() {
-	local tap="$1"
-
-	brew tap | grep --fixed-strings --line-regexp --quiet "${tap}"
-}
-
-#
-# @description Install every missing tap from `BREW_TAPS` unless running in CI.
-#
-function install_brew_taps() {
-	if "${CI:-false}"; then
-		return 0
-	fi
-
-	local missing_taps=()
-	local tap
-
-	for tap in "${BREW_TAPS[@]}"; do
-		if ! is_brew_tap_installed "${tap}"; then
-			missing_taps+=("${tap}")
-		fi
-	done
-
-	if [[ ${#missing_taps[@]} -gt 0 ]]; then
-		for tap in "${missing_taps[@]}"; do
-			brew tap "${tap}"
-		done
-	fi
-}
-
-#
 # @description Install the configured optional macOS packages and casks.
 #
 function main() {
-	# install_brew_taps
 	install_brew_packages formula "${BREW_PACKAGES[@]}"
 	install_brew_packages cask "${CASK_PACKAGES[@]}"
 }

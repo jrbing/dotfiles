@@ -47,7 +47,6 @@
   Plug 'ervandew/supertab'
   Plug 'godlygeek/tabular'
   Plug 'mattmartini/vim-nerdtree-tabs'
-  "Plug 'jistr/vim-nerdtree-tabs'
   Plug 'jphustman/SQLUtilities', { 'for': ['sql', 'plsql'] }
   Plug 'junegunn/fzf'
   Plug 'justinmk/vim-sneak'
@@ -117,8 +116,6 @@
   Plug 'gianarb/vim-flux', { 'for': ['flux'] }
   Plug 'omer/vim-sparql', { 'for': ['sparql'] }
   Plug 'terrastruct/d2-vim'
-  "Plug '~/.vim/custom/plugins/vim-kubernetes', { 'for': ['yaml'] }
-  "Plug 'ap/vim-css-color'
 
   let g:polyglot_disabled = ['go', 'markdown']
 
@@ -127,9 +124,6 @@
     Plug 'dense-analysis/ale'
     Plug 'vim-voom/VOoM'
     Plug 'metakirby5/codi.vim'
-    " if !g:VIMR()
-      " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
-    " endif
   endif
 
   call plug#end()

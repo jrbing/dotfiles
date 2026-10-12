@@ -33,18 +33,6 @@ map("n", "<leader>v", "V`]", { desc = "Re-select last paste" })
 map("n", "<leader>b", function() Snacks.picker.buffers() end, { desc = "Buffers (CtrlPBuffer)" })
 map("n", "<A-t>", function() Snacks.picker.files() end, { desc = "Find files" })
 
--- Window sizing
--- map("n", "<leader>=", "<C-w>=", { desc = "Equalize splits" })
--- map("i", "<leader>=", "<Esc><C-w>=", { desc = "Equalize splits" })
-
--- Alignment helpers
---map("n", "<leader>Al", ":left<cr>", { desc = "Align left" })
---map("n", "<leader>Ac", ":center<cr>", { desc = "Align center" })
---map("n", "<leader>Ar", ":right<cr>", { desc = "Align right" })
---map("v", "<leader>Al", ":left<cr>", { desc = "Align left" })
---map("v", "<leader>Ac", ":center<cr>", { desc = "Align center" })
---map("v", "<leader>Ar", ":right<cr>", { desc = "Align right" })
-
 map("n", ",gf", ":vertical botright wincmd f<CR>", { desc = "Open file in vsplit" })
 
 -- Yank to EOL for consistency with C/D

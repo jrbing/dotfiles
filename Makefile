@@ -48,8 +48,6 @@ reset-config:  ## Reset chezmoi configuration (removes all stored configuration 
 #  Validation #
 ###############
 
-.PHONY: bootstrap-mise bootstrap-sheldon check doctor
-
 # ponytail: skip legacy bash-functions.sh; shfmt cannot parse its let syntax, while bash -n still validates it.
 check:  ## Run shell, template, and Bats validation checks
 	@command -v bats >/dev/null || { echo "bats is required for make check" >&2; exit 1; }

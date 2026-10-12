@@ -29,32 +29,10 @@ function install_mas() {
 }
 
 #
-# @description Install a Mac App Store application by its numeric identifier.
-# @arg $1 string Mac App Store application identifier.
-#
-function run_mas_install() {
-    local app_id="$1"
-    mas install "${app_id}"
-}
-
-#
-# @description Install Xcode from the Mac App Store.
-#
-function install_xcode() {
-    local app_id="497799835"
-    run_mas_install "${app_id}"
-}
-
-#
 # @description Install the configured Mac App Store applications.
 #
 function main() {
     install_mas
-
-    if ! "${CI:-false}"; then
-        :
-        # install_xcode
-    fi
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
