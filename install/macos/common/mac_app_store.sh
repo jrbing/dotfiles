@@ -16,7 +16,7 @@ fi
 # @description Check whether the `mas` CLI is available.
 #
 function is_mas_installed() {
-    common -v mas &> /dev/null
+    command -v mas &> /dev/null
 }
 
 #
