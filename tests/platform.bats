@@ -138,6 +138,7 @@ load_setup() {
     export HOME="${BATS_TEST_TMPDIR}/home"
     export CHEZMOI_ARGS="${BATS_TEST_TMPDIR}/chezmoi-args"
     export CHEZMOI_INSTALL_ARGS="${BATS_TEST_TMPDIR}/chezmoi-install-args"
+    export CHEZMOI_DOWNLOAD_ARGS="${BATS_TEST_TMPDIR}/chezmoi-download-args"
     export DOTFILES_EMAIL="ci@example.com"
     unset DOTFILES_SYSTEM
     DOTFILES_REPO_URL="https://github.com/jrbing/dotfiles"
@@ -169,6 +170,7 @@ EOF
     CHEZMOI_INSTALLER_SHA256="$(sha256_file "${FAKE_CHEZMOI_INSTALLER}")"
     curl() {
         local output
+        printf '%s\n' "$@" >"${CHEZMOI_DOWNLOAD_ARGS}"
         while [ "$#" -gt 0 ]; do
             case "$1" in
             --output)
@@ -187,6 +189,8 @@ EOF
     install_args="$(<"${CHEZMOI_INSTALL_ARGS}")"
     [[ "$chezmoi_args" == *$'--no-tty\n--promptString\nemail=ci@example.com\n--promptString\nsystem=client'* ]]
     [[ "$install_args" == *$'-t\nv2.72.2'* ]]
+    [[ "$install_args" == $'-b\n'* ]]
+    [[ "$(<"${CHEZMOI_DOWNLOAD_ARGS}")" == *"https://raw.githubusercontent.com/twpayne/chezmoi/${CHEZMOI_VERSION}/assets/scripts/install.sh"* ]]
 
     export CHEZMOI_INSTALLER_SENTINEL="${BATS_TEST_TMPDIR}/checksum-installer-ran"
     CHEZMOI_INSTALLER_SHA256="invalid"

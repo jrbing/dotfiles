@@ -198,7 +198,8 @@ function run_chezmoi() {
     export PATH="${PATH}:${bin_dir}"
 
     installer="$(mktemp)"
-    if ! curl -fsLS --output "${installer}" https://get.chezmoi.io; then
+    # Keep the installer pinned to the release that its checksum verifies.
+    if ! curl -fsLS --output "${installer}" "https://raw.githubusercontent.com/twpayne/chezmoi/${CHEZMOI_VERSION}/assets/scripts/install.sh"; then
         rm -f "${installer}"
         return 1
     fi
@@ -207,7 +208,7 @@ function run_chezmoi() {
         rm -f "${installer}"
         return 1
     fi
-    if ! sh "${installer}" -- -b "${bin_dir}" -t "${CHEZMOI_VERSION}"; then
+    if ! sh "${installer}" -b "${bin_dir}" -t "${CHEZMOI_VERSION}"; then
         rm -f "${installer}"
         return 1
     fi
