@@ -6,22 +6,6 @@
     "@dietrichgebert/ponytail"
   ],
   "provider": {
-    "bing": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Bing Industries Omniroute",
-      "options": {
-        "baseURL": "https://omniroute.bingindustries.com/v1",
-        "apiKey": "{env:OMNIROUTE_API_KEY}"
-      },
-      "models": {
-        "best-free": {
-          "name": "Bing Best Free"
-        },
-        "best": {
-          "name": "Bing Best"
-        }
-      }
-    },
     "omlx": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "oMLX",
