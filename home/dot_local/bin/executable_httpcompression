@@ -86,8 +86,8 @@ headers="$( curl --connect-timeout $maxConTime \
                          cut -c 1-8 |
                          sed -e 's/\+/-/' -e 's/\//_/' )"
 
-        [ -n $availDicts ] && availDicts="$adics,$dictClientID" \
-                           || availDicts="$dictClientID"
+        [ -n "$availDicts" ] && availDicts="$availDicts,$dictClientID" \
+                             || availDicts="$dictClientID"
 
       done
 

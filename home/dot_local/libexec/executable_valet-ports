@@ -6,7 +6,4 @@
 
 set -e
 
-# Source generic bash functions
-source "$DOTFILES/share/lib/bash-functions.sh"
-
 exec lsof -iTCP -sTCP:LISTEN -P "$@"

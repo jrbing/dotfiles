@@ -114,6 +114,13 @@ EOF
     [ "$(<"${CALL_LOG}")" = $'sudo --preserve-env=http_proxy,https_proxy,no_proxy apt-get install -y tmux\napt-get install -y tmux' ]
 }
 
+@test "sourcing the SSH caller does not run its installation flow" {
+    run /bin/bash -c "source '${BATS_TEST_DIRNAME}/../install/linux/common/ssh.sh'"
+
+    [ "${status}" -eq 0 ]
+    [ ! -s "${CALL_LOG}" ]
+}
+
 @test "Linux dependency installation filters commands already on PATH" {
     install_sudo_stub
     export HOME="${BATS_TEST_TMPDIR}/home"
