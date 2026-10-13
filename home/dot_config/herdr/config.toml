@@ -1,3 +1,7 @@
+
+[terminal]
+default_shell = "/bin/bash"
+
 onboarding = false
 
 [theme]
@@ -37,5 +41,15 @@ tab_bar_right_separator = " | "
 
 window_title = "{hostname} ❐ {workspace} ● {tab}"
 
+[ui.toast]
+delivery = "system"
+delay_seconds = 1
+
 [experimental]
 pane_history = false
+
+[worktrees]
+directory = "~/.herdr/worktrees"
+
+[remote]
+manage_ssh_config = true
