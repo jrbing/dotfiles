@@ -1,8 +1,8 @@
 
+onboarding = false
+
 [terminal]
 default_shell = "/bin/bash"
-
-onboarding = false
 
 [theme]
 name = "solarized"
