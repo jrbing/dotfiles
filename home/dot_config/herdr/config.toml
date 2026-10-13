@@ -26,12 +26,12 @@ resize_pane_up = "prefix+ctrl+i"
 resize_pane_right = "prefix+ctrl+l"
 
 [ui]
-copy_on_select = false
-prompt_new_tab_name = false
-pane_outer_borders = false
-pane_scrollbars = false
-pane_gaps = false
-tab_bar_position = "bottom"
+copy_on_select = true
+prompt_new_tab_name = true
+pane_outer_borders = true
+pane_scrollbars = true
+pane_gaps = true
+tab_bar_position = "top"
 
 tab_bar_right = [
   { type = "command", command = "/bin/bash ~/.tmux/kube.tmux", interval_seconds = 60, timeout_seconds = 2 },
