@@ -15,6 +15,8 @@ render() {
     [[ "$output" == *$'\nclaude = "latest"'* ]]
     [[ "$output" == *$'\ncodex = "latest"'* ]]
     [[ "$output" == *$'\nopencode = "latest"'* ]]
+    [[ "$output" == *$'\nminimum_release_age = "7d"'* ]]
+    [[ "$output" == *'minimum_release_age_excludes = ["claude", "codex"]'* ]]
 }
 
 @test "server Mise config omits the Claude and Codex CLIs" {

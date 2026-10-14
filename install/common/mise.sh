@@ -5,6 +5,11 @@
 # @description
 #   Assumes the OS package manager installed `mise`, then installs the tools
 #   declared in the managed Mise configuration.
+#
+#   The minimum release age is configured in the managed Mise config
+#   (`settings.minimum_release_age`), which exempts the Codex and Claude CLIs
+#   via `settings.minimum_release_age_excludes`. Passing `--before` here would
+#   override those per-tool exemptions, so the cutoff stays in the config.
 
 # set -Eeuo pipefail
 
@@ -12,15 +17,13 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
     set -x
 fi
 
-readonly DEFAULT_NPM_MIN_RELEASE_AGE_DAYS=7
-
 #
 # @description Install the configured Mise tools.
 #
 function main() {
     # `MISE_CURRENT_VERSION` is interpreted by mise as a tool env override for `current`.
     unset MISE_CURRENT_VERSION
-    mise install --before "${DEFAULT_NPM_MIN_RELEASE_AGE_DAYS}d"
+    mise install
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

@@ -82,7 +82,7 @@ EOF
     [[ "${output}" == *'make bootstrap-sheldon'* ]]
 }
 
-@test "doctor identifies missing Mise tools with the bootstrap age gate" {
+@test "doctor identifies missing Mise tools" {
     install_mise_stub
     install_sheldon_stub
 
@@ -91,7 +91,7 @@ EOF
 
     [ "${status}" -ne 0 ]
     [[ "${output}" == *'Missing Mise tools:'* ]]
-    [[ "${output}" == *'mise install --before 7d'* ]]
+    [[ "${output}" == *'Repair them with: mise install'* ]]
 }
 
 @test "doctor reports a managed-file recovery when verification fails" {
