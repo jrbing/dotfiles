@@ -6,10 +6,16 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
 	set -x
 fi
 
+readonly REPOS=(
+    mattpocock/skills
+    jrbing/agent-skills
+    DietrichGebert/ponytail
+)
+
 # Repository subscriptions only. Refresh installed skill content explicitly with
 # `mise exec -- npx --yes skills@latest update --global --yes`.
-for source in mattpocock/skills jrbing/agent-skills DietrichGebert/ponytail; do
-	mise exec -- npx --yes skills@latest add "${source}" \
+for repo in "${REPOS[@]}"; do
+	mise exec -- npx --yes skills@latest add "${repo}" \
 		--global --agent claude-code --agent codex --agent opencode \
 		--skill '*' --yes
 done
