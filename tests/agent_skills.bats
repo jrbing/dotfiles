@@ -28,11 +28,11 @@ render_and_run() {
         --promptString email=test@example.com --file "${TEMPLATE}" | bash
 }
 
-@test "client installs both declared sources for all three agents" {
+@test "client installs all declared sources for all three agents" {
     run render_and_run client
 
     [ "${status}" -eq 0 ]
-    [ "$(cat "${MISE_LOG}")" = $'exec -- npx --yes skills@latest add mattpocock/skills --global --agent claude-code --agent codex --agent opencode --skill * --yes\nexec -- npx --yes skills@latest add jrbing/agent-skills --global --agent claude-code --agent codex --agent opencode --skill * --yes' ]
+    [ "$(cat "${MISE_LOG}")" = $'exec -- npx --yes skills@latest add mattpocock/skills --global --agent claude-code --agent codex --agent opencode --skill * --yes\nexec -- npx --yes skills@latest add jrbing/agent-skills --global --agent claude-code --agent codex --agent opencode --skill * --yes\nexec -- npx --yes skills@latest add DietrichGebert/ponytail --global --agent claude-code --agent codex --agent opencode --skill * --yes' ]
 }
 
 @test "server applies install no agent skills" {
