@@ -8,8 +8,9 @@ fi
 
 readonly REPOS=(
     mattpocock/skills
-    jrbing/agent-skills
+    obra/superpowers
     DietrichGebert/ponytail
+    jrbing/agent-skills
 )
 
 # Repository subscriptions only. Refresh installed skill content explicitly with
