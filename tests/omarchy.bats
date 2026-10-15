@@ -78,7 +78,7 @@ render() {
         export DOTFILES_OS="$os" DOTFILES_DISTRO=ubuntu DOTFILES_DISTRO_LIKE=debian
         run render home/dot_config/ghostty/config.tmpl
         [ "$status" -eq 0 ]
-        [[ "$output" == *'theme = Gruvbox Dark'* ]]
+        [[ "$output" == *'theme = iTerm2 Solarized Dark'* ]]
         [[ "$output" != *'~/.local/state/omarchy'* ]]
         run render home/.chezmoiignore
         [ "$status" -eq 0 ]
