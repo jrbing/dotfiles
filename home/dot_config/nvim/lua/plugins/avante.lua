@@ -14,6 +14,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      { "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
       "folke/snacks.nvim",
       "nvim-mini/mini.icons",
       "MeanderingProgrammer/render-markdown.nvim",
@@ -26,6 +27,11 @@ return {
     },
     opts = {
       provider = "copilot",
+      providers = {
+        -- Avante's default (gpt-4o-2024-11-20) is a legacy model hidden from
+        -- Copilot's picker. Switch at runtime with :AvanteModels.
+        copilot = { model = "claude-sonnet-5.5" },
+      },
     },
   },
 }
