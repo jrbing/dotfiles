@@ -23,7 +23,7 @@ resize_pane_up = "prefix+ctrl+i"
 resize_pane_right = "prefix+ctrl+l"
 
 [[keys.command]]
-key = "prefix+k"
+key = "prefix+K"
 type = "plugin_action"
 command = "herdr-bar.open"
 description = "command bar"
