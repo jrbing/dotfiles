@@ -20,7 +20,7 @@ fi
 
 if [ -n "${missing_mise_tools}" ]; then
 	printf 'Missing Mise tools:\n%s\n' "${missing_mise_tools}" >&2
-	printf 'Repair them with: mise install --before 7d\n' >&2
+	printf 'Repair them with: mise install\n' >&2
 	exit 1
 fi
 
