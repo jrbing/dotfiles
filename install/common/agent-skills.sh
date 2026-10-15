@@ -10,6 +10,7 @@ readonly REPOS=(
     mattpocock/skills
     obra/superpowers
     DietrichGebert/ponytail
+    samber/cc-skills-golang
     jrbing/agent-skills
 )
 
