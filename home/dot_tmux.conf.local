@@ -39,31 +39,31 @@ tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border='#282828'
-tmux_conf_theme_pane_active_border='#282828'
+tmux_conf_theme_pane_border='#002b36'
+tmux_conf_theme_pane_active_border='#002b36'
 
 # pane indicator colours
 tmux_conf_theme_pane_indicator='#00afff'                # light blue
 tmux_conf_theme_pane_active_indicator='#00afff'         # light blue
 
 # status line style
-tmux_conf_theme_message_fg='#282828'
-tmux_conf_theme_message_bg='#ebdbb2'
+tmux_conf_theme_message_fg='#002b36'
+tmux_conf_theme_message_bg='#eee8d5'
 tmux_conf_theme_message_attr='bold'
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg='#282828'            # bg
-tmux_conf_theme_message_command_bg='#ebdbb2'            # fg
+tmux_conf_theme_message_command_fg='#002b36'            # base03
+tmux_conf_theme_message_command_bg='#eee8d5'            # base2
 #tmux_conf_theme_message_command_attr='bold'
 
 # window modes style
-tmux_conf_theme_mode_fg='#282828'                        # bg
-tmux_conf_theme_mode_bg='#ebdbb2'                        # fg
+tmux_conf_theme_mode_fg='#002b36'                        # base03
+tmux_conf_theme_mode_bg='#eee8d5'                        # base2
 #tmux_conf_theme_mode_attr='bold'
 
 # status line style
-tmux_conf_theme_status_fg='#a89984'                      # fg4
-tmux_conf_theme_status_bg='#282828'                      # bg
+tmux_conf_theme_status_fg='#839496'                      # base0
+tmux_conf_theme_status_bg='#002b36'                      # base03
 #tmux_conf_theme_status_attr='none'
 
 # terminal title
@@ -84,8 +84,8 @@ tmux_conf_theme_terminal_title='#h ❐ #S ● #I #W'
 #     - #{hostname_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_fg='#a89984'               # fg4
-tmux_conf_theme_window_status_bg='#282828'               # bg
+tmux_conf_theme_window_status_fg='#839496'               # base0
+tmux_conf_theme_window_status_bg='#002b36'               # base03
 tmux_conf_theme_window_status_attr='none'
 tmux_conf_theme_window_status_format=' #I #W '
 #tmux_conf_theme_window_status_format='#{circled_window_index} #W'
@@ -99,8 +99,8 @@ tmux_conf_theme_window_status_format=' #I #W '
 #     - #{hostname_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_current_fg='#ebdbb2'       # fg
-tmux_conf_theme_window_status_current_bg='#cc241d'       # red
+tmux_conf_theme_window_status_current_fg='#eee8d5'       # base2
+tmux_conf_theme_window_status_current_bg='#dc322f'       # red
 tmux_conf_theme_window_status_current_attr='bold'
 tmux_conf_theme_window_status_current_format=' #I ★  #W '
 #tmux_conf_theme_window_status_current_format='#{circled_window_index} #W'
@@ -158,13 +158,13 @@ tmux_conf_theme_status_left=' ❐ #S |  | '
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} |  | #(/bin/bash ~/.tmux/kube.tmux) | #{hostname} '
 
 # status left style
-tmux_conf_theme_status_left_fg='#d5c4a1,#d79921,#282828'  # fg2, yellow, bg0
-tmux_conf_theme_status_left_bg='#665c54,#d79921,#282828'  # bg2, yellow, bg0
+tmux_conf_theme_status_left_fg='#93a1a1,#b58900,#002b36'  # base1, yellow, base03
+tmux_conf_theme_status_left_bg='#073642,#b58900,#002b36'  # base02, yellow, base03
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
-tmux_conf_theme_status_right_fg='#ebdbb2,#ebdbb2,#ebdbb2,#ebdbb2'  # fg, fg, fg
-tmux_conf_theme_status_right_bg='#282828,#d65d0e,#cc241d,#458588'  # bg, orange, red,blue
+tmux_conf_theme_status_right_fg='#eee8d5,#eee8d5,#eee8d5,#eee8d5'  # base2, base2, base2, base2
+tmux_conf_theme_status_right_bg='#002b36,#cb4b16,#dc322f,#268bd2'  # base03, orange, red, blue
 tmux_conf_theme_status_right_attr='none,none,none,bold'
 
 # pairing indicator
@@ -214,6 +214,26 @@ tmux_conf_battery_status_discharging='↓'    # U+2193
 # clock style
 tmux_conf_theme_clock_colour='#00afff'  # light blue
 tmux_conf_theme_clock_style='12'
+
+# Gruvbox colours (disabled) - uncomment to switch back from Solarized
+#tmux_conf_theme_pane_border='#282828'
+#tmux_conf_theme_pane_active_border='#282828'
+#tmux_conf_theme_message_fg='#282828'
+#tmux_conf_theme_message_bg='#ebdbb2'
+#tmux_conf_theme_message_command_fg='#282828'            # bg
+#tmux_conf_theme_message_command_bg='#ebdbb2'            # fg
+#tmux_conf_theme_mode_fg='#282828'                        # bg
+#tmux_conf_theme_mode_bg='#ebdbb2'                        # fg
+#tmux_conf_theme_status_fg='#a89984'                      # fg4
+#tmux_conf_theme_status_bg='#282828'                      # bg
+#tmux_conf_theme_window_status_fg='#a89984'               # fg4
+#tmux_conf_theme_window_status_bg='#282828'               # bg
+#tmux_conf_theme_window_status_current_fg='#ebdbb2'       # fg
+#tmux_conf_theme_window_status_current_bg='#cc241d'       # red
+#tmux_conf_theme_status_left_fg='#d5c4a1,#d79921,#282828'  # fg2, yellow, bg0
+#tmux_conf_theme_status_left_bg='#665c54,#d79921,#282828'  # bg2, yellow, bg0
+#tmux_conf_theme_status_right_fg='#ebdbb2,#ebdbb2,#ebdbb2,#ebdbb2'  # fg, fg, fg
+#tmux_conf_theme_status_right_bg='#282828,#d65d0e,#cc241d,#458588'  # bg, orange, red,blue
 
 
 ################################################################################
