@@ -39,8 +39,8 @@ tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border='#002b36'
-tmux_conf_theme_pane_active_border='#002b36'
+tmux_conf_theme_pane_border='#586e75'               # base01
+tmux_conf_theme_pane_active_border='#268bd2'        # blue
 
 # pane indicator colours
 tmux_conf_theme_pane_indicator='#00afff'                # light blue
@@ -63,7 +63,7 @@ tmux_conf_theme_mode_bg='#eee8d5'                        # base2
 
 # status line style
 tmux_conf_theme_status_fg='#839496'                      # base0
-tmux_conf_theme_status_bg='#002b36'                      # base03
+tmux_conf_theme_status_bg='#073642'                      # base02
 #tmux_conf_theme_status_attr='none'
 
 # terminal title
@@ -85,7 +85,7 @@ tmux_conf_theme_terminal_title='#h ❐ #S ● #I #W'
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_window_status_fg='#839496'               # base0
-tmux_conf_theme_window_status_bg='#002b36'               # base03
+tmux_conf_theme_window_status_bg='#073642'               # base02
 tmux_conf_theme_window_status_attr='none'
 tmux_conf_theme_window_status_format=' #I #W '
 #tmux_conf_theme_window_status_format='#{circled_window_index} #W'
@@ -158,13 +158,13 @@ tmux_conf_theme_status_left=' ❐ #S |  | '
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} |  | #(/bin/bash ~/.tmux/kube.tmux) | #{hostname} '
 
 # status left style
-tmux_conf_theme_status_left_fg='#93a1a1,#b58900,#002b36'  # base1, yellow, base03
-tmux_conf_theme_status_left_bg='#073642,#b58900,#002b36'  # base02, yellow, base03
+tmux_conf_theme_status_left_fg='#eee8d5,#b58900,#073642'  # base2, yellow, base02
+tmux_conf_theme_status_left_bg='#586e75,#b58900,#073642'  # base01, yellow, base02
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
 tmux_conf_theme_status_right_fg='#eee8d5,#eee8d5,#eee8d5,#eee8d5'  # base2, base2, base2, base2
-tmux_conf_theme_status_right_bg='#002b36,#cb4b16,#dc322f,#268bd2'  # base03, orange, red, blue
+tmux_conf_theme_status_right_bg='#073642,#cb4b16,#dc322f,#268bd2'  # base02, orange, red, blue
 tmux_conf_theme_status_right_attr='none,none,none,bold'
 
 # pairing indicator
@@ -279,6 +279,7 @@ set-environment -gu DIRENV_LAYOUT
 #set-window-option -g window-status-attr bold
 #set-window-option -g aggressive-resize on
 set-option -g mouse on
+set-option -g history-limit 50000
 set-option -g status-interval 60     # redraw status line every 60 seconds
 
 #################
@@ -356,7 +357,7 @@ if-shell -b '[ $SHELL == /bin/bash ]' \
   'set-option -g default-command "exec /bin/bash"'
 
 if-shell -b '[ $SHELL == /bin/zsh ]' \
-  'set-option -g default-shell "${SHELL}" \ set-option -g default-command "reattach-to-user-namespace -l zsh"'
+  'set-option -g default-shell "${SHELL}" ; set-option -g default-command "reattach-to-user-namespace -l zsh"'
 
 # Install tmux-resurrect plugin
 set -g @plugin 'tmux-plugins/tmux-resurrect'
