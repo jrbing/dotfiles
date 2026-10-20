@@ -51,10 +51,6 @@
         "-y",
         "kubernetes-mcp-server@latest"
       ]
-    },
-    "paperclip": {
-      "type": "remote",
-      "url": "https://paperclip.bingindustries.com/mcp/paperclip"
     }
   }
 }
