@@ -2,12 +2,7 @@
 onboarding = false
 
 [theme]
-name = "solarized"
-
-# Built-in solarized draws dividers in the background color; lift them to be visible.
-[theme.custom]
-surface_dim = "#657b83" # sidebar edge and agents/spaces divider (base00)
-overlay0 = "#839496"    # unfocused pane borders (base0)
+name = "gruvbox"
 
 [keys]
 prefix = "ctrl+f"
