@@ -14,11 +14,11 @@ chezmoi = "latest"
 {{ if eq $platform.system "client" }}
 claude = "latest"
 codex = "latest"
+opencode = "latest"
 {{ end }}
 crane = "latest"
 jq = "latest"
 kubectl = "latest"
-opencode = "latest"
 pre-commit = "latest"
 shellcheck = "latest"
 shfmt = "latest"
@@ -32,5 +32,5 @@ yazi = "latest"
 
 [settings]
 minimum_release_age = "7d"
-minimum_release_age_excludes = ["claude", "codex", "topgrade"]
+minimum_release_age_excludes = ["claude", "codex", "topgrade", "opencode"]
 idiomatic_version_file_enable_tools = ["python","ruby"]
